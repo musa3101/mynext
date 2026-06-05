@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <title>Digital Architecture Plans - MYNEXT</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Outfit para títulos, Inter para lectura -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --brand-dark: #000000;
+            --brand-cyan: #06b6d4;
+            --brand-blue: #0284c7;
+            --card-bg: rgba(15, 23, 42, 0.45);
+            --card-border: rgba(51, 65, 85, 0.4);
+            --brand-orange: #f97316;
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+        }
+
+        .logo-font { font-family: 'Outfit', sans-serif; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--brand-dark); 
+            color: var(--text-primary); 
+            scroll-behavior: smooth;
+        }
+
+        /* Fondo Neon Premium */
+        .neon-glow-bg {
+            background-color: #000000;
+            background-image: 
+                radial-gradient(circle at 50% -10%, rgba(6, 182, 212, 0.18) 0%, rgba(0,0,0,0) 60%),
+                radial-gradient(circle at 10% 40%, rgba(2, 132, 199, 0.08) 0%, rgba(0,0,0,0) 40%),
+                radial-gradient(circle at 90% 70%, rgba(6, 182, 212, 0.08) 0%, rgba(0,0,0,0) 45%);
+        }
+
+        /* ==================== ANIMACIÓN Y LOGO INTERACTIVO ==================== */
+        @keyframes logoPulse {
+            0% { 
+                filter: drop-shadow(0 0 15px rgba(6, 182, 212, 0.3)) brightness(0.95); 
+                transform: scale(1); 
+            }
+            50% { 
+                filter: drop-shadow(0 0 35px rgba(6, 182, 212, 0.6)) brightness(1.1); 
+                transform: scale(1.03); 
+            }
+            100% { 
+                filter: drop-shadow(0 0 15px rgba(6, 182, 212, 0.3)) brightness(0.95); 
+                transform: scale(1); 
+            }
+        }
+
+        .logo-interactive {
+            animation: logoPulse 4s infinite ease-in-out;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+        }
+
+        .logo-interactive:hover {
+            animation: none;
+            transform: scale(1.08) translateY(-6px) rotate(-1deg);
+            filter: drop-shadow(0 0 50px rgba(6, 182, 212, 0.95)) brightness(1.25);
+        }
+
+        /* Anillo Cyber-Glass para enmarcar el logo */
+        .logo-ring {
+            position: relative;
+            padding: 1.5rem;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(15, 23, 42, 0.5) 0%, rgba(0, 0, 0, 0.8) 100%);
+            border: 1px solid rgba(6, 182, 212, 0.15);
+            box-shadow: inset 0 0 25px rgba(6, 182, 212, 0.1), 0 0 40px rgba(6, 182, 212, 0.05);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .logo-ring:hover {
+            border-color: rgba(6, 182, 212, 0.5);
+            box-shadow: inset 0 0 35px rgba(6, 182, 212, 0.2), 0 0 60px rgba(6, 182, 212, 0.25);
+        }
+
+        /* ==================== DISEÑO GENERAL ==================== */
+        .plan-card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            background-color: var(--card-bg);
+            border: 1px solid rgba(6, 182, 212, 0.25);
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        .plan-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(6, 182, 212, 0.6);
+            box-shadow: 0 20px 45px -10px rgba(6, 182, 212, 0.35);
+        }
+        .plan-card-featured {
+            border: 2px solid var(--brand-cyan);
+            box-shadow: 0 0 30px rgba(6, 182, 212, 0.15);
+        }
+        .plan-card-featured:hover {
+            border-color: #22d3ee;
+            box-shadow: 0 20px 50px -10px rgba(6, 182, 212, 0.45);
+        }
+        .plan-card { cursor: pointer; }
+
+        .modal-animate {
+            animation: modalFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes shineSweep {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        
+        .shine-text {
+            background: linear-gradient(90deg, #fbbf24 0%, #fffbeb 45%, #ffffff 50%, #fffbeb 55%, #fbbf24 100%);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shineSweep 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background-color: white !important; color: black !important; }
+            .main-container { padding: 0 !important; transform: scale(0.95); }
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+        }
+    </style>
+</head>
+
+<body class="antialiased neon-glow-bg">
+
+
+
+    <!-- Contenedor Principal -->
+    <div class="main-container min-h-screen flex flex-col items-center py-10 md:py-16 px-4 md:px-6 relative">
+        
+        <!-- Selector de Idioma -->
+        <div class="absolute top-6 right-6 md:right-12 z-50 flex items-center gap-1.5 sm:gap-3 text-[9px] sm:text-[10px] md:text-[11px] font-black tracking-[0.1em] md:tracking-[0.2em] no-print">
+            <a href="index.html" class="text-white/60 hover:text-cyan-400 transition-colors font-semibold">ES</a>
+            <span class="text-white/30">|</span>
+            <span class="text-cyan-400 cursor-default">EN</span>
+        </div>
+        
+        <!-- Hero / Header con Logo Interactivo -->
+        <div class="mb-16 flex flex-col items-center text-center max-w-4xl" id="planes">
+            <div class="mb-8 relative flex items-center justify-center">
+                <!-- Aura de Luz de Fondo -->
+                <div class="absolute w-64 h-64 bg-cyan-500/5 blur-[80px] rounded-full scale-125"></div>
+                
+                <!-- Anillo Cyber-Glass e Imagen del Logo -->
+                <div class="logo-ring">
+                    <img onclick="window.location.href='../index-en.html'" src="assets/logo_new.png" alt="MYNEXT Logo" class="w-36 md:w-48 h-auto logo-interactive">
+                </div>
+            </div>
+            
+            <h1 class="px-4">
+                <span class="block logo-font text-2xl md:text-5xl lg:text-6xl text-white tracking-[0.1em] font-black uppercase leading-none mb-3">
+                    WEB DESIGN PLANS
+                </span>
+                <span class="block logo-font text-xl md:text-4xl lg:text-5xl text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-cyan-300 to-blue-500 tracking-[0.3em] font-light uppercase">
+                    PROFESSIONAL & CUSTOM
+                </span>
+                <div class="w-32 md:w-96 h-[2px] bg-gradient-to-r from-transparent via-[#06b6d4] to-transparent mx-auto mt-8 opacity-75"></div>
+            </h1>
+            <p class="text-xs md:text-sm tracking-[0.1em] text-slate-300 font-extrabold mt-6 max-w-2xl leading-relaxed">
+                We create impactful, fast, and optimized websites to help your business stand out online and attract more customers.
+            </p>
+        </div>
+
+        <!-- Banner de Urgencia -->
+        <div class="mb-8 lg:mb-12 bg-gradient-to-r from-orange-500/10 via-amber-500/20 to-orange-500/10 border border-amber-500/30 rounded-full px-6 py-2 shadow-[0_0_20px_rgba(249,115,22,0.15)] mx-auto w-fit">
+            <span class="text-[11px] md:text-xs font-black tracking-[0.2em] uppercase shine-text">
+                💎 LAUNCH OFFER - UNTIL JULY 1ST
+            </span>
+        </div>
+
+        <!-- Parrilla de Planes (1 col en móvil, 2 en Mac/iPad) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 w-full max-w-5xl mb-16 items-stretch mx-auto">
+
+            <!-- Plan ESSENTIAL -->
+            <div onclick="openContactOptions('ESSENTIAL')" class="rounded-[2rem] p-8 flex flex-col mx-auto w-full max-w-[22rem] lg:scale-95 bg-slate-900/40 backdrop-blur-xl border border-slate-700/50 hover:border-cyan-500/50 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(6,182,212,0.2)] transition-all duration-400 cursor-pointer">
+                <div class="text-center h-full flex flex-col">
+                    <h3 class="logo-font text-xl tracking-[0.2em] font-black mb-6 uppercase text-white">
+                        <span class="relative inline-block pb-2">
+                            ESSENTIAL
+                            <div class="absolute bottom-0 left-0 w-full h-[2px] bg-slate-700 rounded-full"></div>
+                        </span>
+                    </h3>
+                    <div class="text-4xl md:text-5xl font-extrabold text-white mb-6 md:mb-10 flex items-center justify-center gap-3">
+                        <del class="text-slate-500 text-2xl md:text-3xl font-medium">200€</del>
+                        <span class="text-cyan-400">190€</span>
+                    </div>
+                    
+                    <ul class="space-y-4 flex-grow text-[14px] md:text-[15px] text-slate-300 font-semibold text-left mx-auto w-fit">
+                        <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 bg-rose-500 shadow-[0_0_8px_#f43f5e] rounded-full shrink-0"></span> Professional web design (2-3 sections)</li>
+                        <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 bg-rose-500 shadow-[0_0_8px_#f43f5e] rounded-full shrink-0"></span> Google Maps Integration</li>
+                        <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 bg-rose-500 shadow-[0_0_8px_#f43f5e] rounded-full shrink-0"></span> Domain & Basic Hosting Included</li>
+                        <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 bg-rose-500 shadow-[0_0_8px_#f43f5e] rounded-full shrink-0"></span> Basic Local SEO Optimization</li>
+                    </ul>
+                    
+                    <div class="mt-8 md:mt-12 pt-6 border-t border-slate-800">
+                        <span class="text-lg font-black uppercase tracking-widest text-cyan-400">50€ PER FIX</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Plan ELITE (Destacado) -->
+            <div onclick="openContactOptions('ELITE')" class="group rounded-[2rem] p-8 md:p-12 flex flex-col relative z-10 mx-auto w-full max-w-[24rem] lg:scale-105 bg-slate-900/60 backdrop-blur-xl border border-amber-500/30 hover:border-amber-400/60 shadow-[0_0_40px_rgba(245,158,11,0.15)] hover:shadow-[0_20px_50px_-10px_rgba(245,158,11,0.3)] hover:-translate-y-2 transition-all duration-400 cursor-pointer">
+                <!-- Tag Más Solicitado -->
+                <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-orange-500 to-amber-500 text-black px-8 py-2 rounded-full text-[11px] font-black tracking-[0.2em] shadow-[0_0_20px_rgba(249,115,22,0.4)] whitespace-nowrap">
+                    <span class="inline-block transition-all duration-500 group-hover:text-white group-hover:scale-150 group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)] mr-1">★</span> MOST POPULAR
+                </div>
+                <div class="text-center h-full flex flex-col pt-4">
+                    <h3 class="logo-font text-2xl tracking-[0.2em] font-black mb-6 uppercase text-white">
+                        <span class="relative inline-block pb-2">
+                            ELITE
+                            <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"></div>
+                        </span>
+                    </h3>
+                    <div class="text-4xl md:text-5xl font-extrabold text-white mb-4 md:mb-6 flex items-center justify-center gap-3">
+                        <del class="text-slate-500 text-2xl md:text-3xl font-medium">300€</del>
+                        <span class="text-amber-400">290€</span>
+                    </div>
+                    
+                    <ul class="space-y-4 flex-grow text-[14px] md:text-[15px] text-slate-200 font-semibold text-left mx-auto w-fit mt-4">
+                        <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 bg-rose-500 shadow-[0_0_8px_#f43f5e] rounded-full shrink-0"></span> Everything included in the Essential Plan</li>
+                        <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 bg-rose-500 shadow-[0_0_8px_#f43f5e] rounded-full shrink-0"></span> Professional Profile Strategy <span class="text-cyan-400 font-bold ml-0.5">*<sup class="text-[10px]">3</sup></span></li>
+                        <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 bg-rose-500 shadow-[0_0_8px_#f43f5e] rounded-full shrink-0"></span> Comprehensive Domain Management <span class="text-cyan-400 font-bold ml-0.5">*<sup class="text-[10px]">1</sup></span></li>
+                        <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 bg-rose-500 shadow-[0_0_8px_#f43f5e] rounded-full shrink-0"></span> Priority Technical Support 24/7</li>
+                    </ul>
+                    
+                    <div class="mt-8 md:mt-12 pt-6 border-t border-slate-800">
+                        <span class="text-lg font-black uppercase tracking-widest text-cyan-300 flex items-center justify-center">INCLUDED <span class="text-cyan-400 font-bold ml-1.5">*<sup class="text-[11px]">2</sup></span></span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Notas Informativas -->
+        <div class="w-full max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-8 mb-24 px-4 mx-auto">
+            <div class="border-l-2 border-slate-800 pl-6">
+                <h4 class="text-[10px] font-black tracking-[0.1em] uppercase text-cyan-400 mb-2 flex items-center"><span class="text-cyan-400 font-bold mr-1.5 text-sm">*<sup class="text-[9px]">1</sup></span> DOMAIN MANAGEMENT</h4>
+                <p class="text-[11px] text-slate-400 font-normal leading-relaxed">The annual domain renewal cost will be paid by the client. MYNEXT handles all technical management.</p>
+            </div>
+            <div class="border-l-2 border-slate-800 pl-6">
+                <h4 class="text-[10px] font-black tracking-[0.1em] uppercase text-cyan-400 mb-2 flex items-center"><span class="text-cyan-400 font-bold mr-1.5 text-sm">*<sup class="text-[9px]">2</sup></span> INCLUDED FIXES</h4>
+                <p class="text-[11px] text-slate-400 font-normal leading-relaxed">Covers quick modifications (e.g., changing texts or images, 15-20 minute tasks). If the request requires more development time, it will be billed at 20€/hour.</p>
+            </div>
+            <div class="border-l-2 border-slate-800 pl-6">
+                <h4 class="text-[10px] font-black tracking-[0.1em] uppercase text-cyan-400 mb-2 flex items-center"><span class="text-cyan-400 font-bold mr-1.5 text-sm">*<sup class="text-[9px]">3</sup></span> PRO PROFILE STRATEGY</h4>
+                <p class="text-[11px] text-slate-400 font-normal leading-relaxed">Includes a deep business analysis. The website can be extended to more than 3 pages (expandable up to a maximum of 6 pages) according to the specific needs detected in each case.</p>
+            </div>
+        </div>
+
+        <!-- Tarjeta de Contacto Premium (Glassmorphism) -->
+        <div id="contacto" class="w-full max-w-3xl bg-gradient-to-br from-slate-900/60 via-slate-950/80 to-black border border-slate-800/80 rounded-[2.5rem] md:rounded-[4rem] p-8 md:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-xl no-print text-center flex flex-col items-center gap-10 mx-auto">
+            <div>
+                <h2 class="logo-font text-3xl md:text-5xl font-black mb-4 tracking-[0.15em] uppercase text-white">MUSA</h2>
+                <p class="text-[12px] md:text-sm tracking-[0.5em] text-cyan-400 font-black uppercase">CONSULTING & WEB DESIGN</p>
+            </div>
+            
+            <div class="flex flex-col gap-6 w-full max-w-md mx-auto">
+                <!-- WhatsApp Button -->
+                <a href="https://wa.me/34673109486?text=%C2%A1Hola!%20Vengo%20desde%20la%20web%20de%20MYNEXT.%20Me%20gustar%C3%ADa%20recibir%20informaci%C3%B3n%20sobre%20vuestros%20servicios%20de%20dise%C3%B1o%20y%20arquitectura%20digital%20para%20mi%20negocio.%20%C2%A1Gracias!" target="_blank" class="flex items-center gap-5 bg-emerald-950/20 hover:bg-emerald-950/40 border border-emerald-500/20 hover:border-emerald-500/60 px-8 py-5 rounded-2xl transition-all duration-300 group hover:-translate-y-1 shadow-[0_0_15px_rgba(16,185,129,0.05)] hover:shadow-[0_0_25px_rgba(16,185,129,0.15)] text-left w-full cursor-pointer">
+                    <div class="text-[#25d366] shrink-0 transition-transform group-hover:scale-110">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="block text-[10px] tracking-[0.2em] uppercase font-bold text-slate-400">Direct Line</span>
+                        <span class="block text-sm md:text-base font-extrabold text-white mt-1 group-hover:text-emerald-400 transition-colors">Open WhatsApp &rarr;</span>
+                    </div>
+                </a>
+
+                <!-- Email Button -->
+                <a href="mailto:musaabdul97@icloud.com?subject=Nuevo%20Proyecto%20Digital%20%7C%20MYNEXT&body=Hola%2C%20Musa.%0A%0AHe%20estado%20revisando%20tu%20porfolio%20en%20MYNEXT%20y%20me%20interesa%20el%20enfoque%20de%20Arquitectura%20Digital%20para%20mi%20negocio.%20Me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20tus%20servicios%20y%20tarifas.%0A%0AUn%20saludo." class="flex items-center gap-5 bg-cyan-950/20 hover:bg-cyan-950/40 border border-cyan-500/20 hover:border-cyan-500/60 px-8 py-5 rounded-2xl transition-all duration-300 group hover:-translate-y-1 shadow-[0_0_15px_rgba(6,182,212,0.05)] hover:shadow-[0_0_25px_rgba(6,182,212,0.15)] text-left w-full cursor-pointer">
+                    <div class="text-[#d44638] shrink-0 transition-transform group-hover:scale-110">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 4.5v15c0 .85-.65 1.5-1.5 1.5H21V7.38l-9 5.65-9-5.65V21H1.5c-.85 0-1.5-.65-1.5-1.5v-15c0-.4.15-.75.45-1.05.3-.3.65-.45 1.05-.45H3.3l8.7 5.47 8.7-5.47h1.85c.4 0 .75.15 1.05.45.3.3.45.65.45 1.05z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="block text-[10px] tracking-[0.2em] uppercase font-bold text-slate-400">HQ Inquiries</span>
+                        <span class="block text-sm md:text-base font-extrabold text-white mt-1 group-hover:text-cyan-400 transition-colors">Send Email &rarr;</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="py-20 text-center flex flex-col items-center gap-4">
+            <p class="logo-font text-[11px] md:text-[13px] uppercase flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 opacity-80">
+                <span class="text-white font-black tracking-[0.5em]">MYNEXT</span>
+                <span class="hidden md:block text-cyan-500 scale-150">•</span>
+                <span class="text-slate-400 font-light tracking-[0.8em]">SINCE 2026</span>
+            </p>
+            <div class="text-[10px] tracking-[0.25em] text-white/30 uppercase font-headline">
+                Made by <a href="https://mynextbymusa.pages.dev" class="text-white hover:text-cyan-400 transition-colors duration-300 font-bold border-b border-white/20 hover:border-cyan-400">MYNEXT</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- SELECTOR DE PLANES / CONTACTO INTEGRADO -->
+    <div id="planSelector" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 backdrop-blur-md p-6">
+        <div class="bg-slate-950 w-full max-w-md rounded-[3rem] p-10 shadow-2xl modal-animate border border-slate-800">
+            <h3 id="modalTitle" class="logo-font text-xl text-center font-black mb-8 tracking-widest uppercase text-white">Select your plan</h3>
+            
+            <div id="planButtons" class="flex flex-col gap-4">
+                <button onclick="selectPlan('ESSENTIAL')" class="w-full py-5 rounded-2xl border border-slate-800 text-white hover:border-cyan-500 hover:bg-slate-900/50 transition-all font-black logo-font tracking-widest uppercase text-sm">Plan ESSENTIAL</button>
+                <button onclick="selectPlan('ELITE')" class="w-full py-5 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:opacity-90 transition-all font-black logo-font tracking-widest uppercase text-sm shadow-xl shadow-cyan-500/10">Plan ELITE</button>
+            </div>
+
+            <div id="contactButtons" class="hidden flex flex-col gap-4">
+                <button onclick="executeContact('whatsapp')" class="w-full py-5 rounded-2xl bg-[#25d366] text-white hover:opacity-90 transition-all font-black logo-font tracking-widest uppercase text-sm flex items-center justify-center gap-3">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    WhatsApp
+                </button>
+                <button onclick="executeContact('email')" class="w-full py-5 rounded-2xl bg-[#d44638] text-white hover:opacity-90 transition-all font-black logo-font tracking-widest uppercase text-sm flex items-center justify-center gap-3">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.5v15c0 .85-.65 1.5-1.5 1.5H21V7.38l-9 5.65-9-5.65V21H1.5c-.85 0-1.5-.65-1.5-1.5v-15c0-.4.15-.75.45-1.05.3-.3.65-.45 1.05-.45H3.3l8.7 5.47 8.7-5.47h1.85c.4 0 .75.15 1.05.45.3.3.45.65.45 1.05z"/></svg>
+                    Email
+                </button>
+            </div>
+            
+            <button onclick="closeSelector()" class="mt-8 w-full text-slate-500 font-bold text-[10px] tracking-[0.3em] uppercase hover:text-white transition-colors">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        let currentMethod = '';
+        let currentPlan = '';
+
+        function openSelector(method) {
+            currentMethod = method;
+            currentPlan = '';
+            document.getElementById('modalTitle').innerText = 'Select your Plan';
+            document.getElementById('planButtons').classList.remove('hidden');
+            document.getElementById('contactButtons').classList.add('hidden');
+            showModal();
+        }
+
+        function openContactOptions(planName) {
+            currentPlan = planName;
+            currentMethod = '';
+            document.getElementById('modalTitle').innerText = `Inquire Plan ${planName}`;
+            document.getElementById('planButtons').classList.add('hidden');
+            document.getElementById('contactButtons').classList.remove('hidden');
+            showModal();
+        }
+
+        function showModal() {
+            document.getElementById('planSelector').classList.remove('hidden');
+            document.getElementById('planSelector').classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSelector() {
+            document.getElementById('planSelector').classList.add('hidden');
+            document.getElementById('planSelector').classList.remove('flex');
+            document.body.style.overflow = 'auto';
+        }
+
+        function selectPlan(planName) {
+            currentPlan = planName;
+            executeContact(currentMethod);
+        }
+
+        function executeContact(method) {
+            const phone = "34673109486";
+            const email = "mynextbymusa@gmail.com";
+            const plan = currentPlan || 'PERSONALIZADO';
+            
+            if (method === 'whatsapp') {
+                const message = `Hello, I am interested in the ${plan} plan`;
+                window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+            } else {
+                const subject = `Inquiry about ${plan} plan`;
+                window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}`;
+            }
+            closeSelector();
+        }
+
+        window.onclick = function(e) {
+            if (e.target == document.getElementById('planSelector')) closeSelector();
+        }
+    </script>
+
+</body>
+</html>

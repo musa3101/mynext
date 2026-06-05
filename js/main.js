@@ -113,39 +113,187 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, { threshold: 0.3 });
     if (processTrigger) glowObserver.observe(processTrigger);
-
-    // --- 5. Planes Modal (Coming Soon) ---
-    const openPlanesModalBtn = document.getElementById('open-planes-modal');
-    const planesModal = document.getElementById('planes-modal');
-    const planesModalCard = document.getElementById('planes-modal-card');
-    const closePlanesModalBtn = document.getElementById('close-planes-modal-btn');
-    const closePlanesModalBg = document.getElementById('close-planes-modal-bg');
-
-    function openModal() {
-        if (!planesModal || !planesModalCard) return;
-        planesModal.classList.remove('pointer-events-none', 'opacity-0');
-        planesModalCard.classList.remove('scale-90');
-        planesModalCard.classList.add('scale-100');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal() {
-        if (!planesModal || !planesModalCard) return;
-        planesModal.classList.add('pointer-events-none', 'opacity-0');
-        planesModalCard.classList.remove('scale-100');
-        planesModalCard.classList.add('scale-90');
-        document.body.style.overflow = '';
-    }
-
-    if (openPlanesModalBtn) {
-        openPlanesModalBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            openModal();
+    
+    // --- 5. Toggle Expandable Projects ---
+    const toggleProjectsBtn = document.getElementById('toggle-more-projects');
+    const moreProjectsContainer = document.getElementById('more-projects');
+    
+    if (toggleProjectsBtn && moreProjectsContainer) {
+        toggleProjectsBtn.addEventListener('click', () => {
+            const isExpanded = moreProjectsContainer.classList.contains('expanded');
+            const textSpan = document.getElementById('toggle-text');
+            const iconSpan = document.getElementById('toggle-icon');
+            
+            if (isExpanded) {
+                // Collapse section
+                moreProjectsContainer.classList.remove('expanded');
+                if (textSpan) textSpan.innerText = toggleProjectsBtn.getAttribute('data-text-more');
+                if (iconSpan) {
+                    iconSpan.classList.remove('rotate-180');
+                }
+                
+                // Scroll back to portfolio header smoothly
+                const portfolioHeader = document.getElementById('portfolio');
+                if (portfolioHeader) {
+                    portfolioHeader.scrollIntoView({ behavior: 'smooth' });
+                }
+            } else {
+                // Expand section
+                moreProjectsContainer.classList.add('expanded');
+                if (textSpan) textSpan.innerText = toggleProjectsBtn.getAttribute('data-text-less');
+                if (iconSpan) {
+                    iconSpan.classList.add('rotate-180');
+                }
+                
+                // Trigger reveal active class for the newly shown cards
+                setTimeout(() => {
+                    const newReveals = moreProjectsContainer.querySelectorAll('.reveal');
+                    newReveals.forEach(r => r.classList.add('active'));
+                }, 200);
+            }
         });
     }
 
-    if (closePlanesModalBtn) closePlanesModalBtn.addEventListener('click', closeModal);
-    if (closePlanesModalBg) closePlanesModalBg.addEventListener('click', closeModal);
+    // --- 6. Legal Modals Logic ---
+    const modalWrappers = document.querySelectorAll('.modal-wrapper');
+    const modalTriggers = document.querySelectorAll('[data-modal]');
+    const closeButtons = document.querySelectorAll('.modal-close');
+
+    modalTriggers.forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            const modalId = trigger.getAttribute('data-modal');
+            const targetModal = document.getElementById(modalId);
+            if (targetModal) {
+                targetModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    });
+
+    function closeModal(modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    closeButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const modal = btn.closest('.modal-wrapper');
+            if (modal) closeModal(modal);
+        });
+    });
+
+    modalWrappers.forEach(modal => {
+        modal.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal-overlay')) {
+                closeModal(modal);
+            }
+        });
+    });
+
+    // Close on ESC key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const activeModal = document.querySelector('.modal-wrapper.active');
+            if (activeModal) closeModal(activeModal);
+        }
+    });
+
+    // --- 7. Cookie Banner Logic ---
+    const cookieBanner = document.getElementById('cookie-banner');
+    const acceptAllBtn = document.getElementById('cookie-accept-all');
+    const rejectBtn = document.getElementById('cookie-reject');
+    const configureBtn = document.getElementById('cookie-configure');
+
+    // Show cookie banner if preference not set in localStorage
+    if (cookieBanner && !localStorage.getItem('cookie-preference')) {
+        setTimeout(() => {
+            cookieBanner.classList.add('active');
+        }, 2000);
+    }
+
+    function saveCookiePreference(pref) {
+        localStorage.setItem('cookie-preference', pref);
+        if (cookieBanner) {
+            cookieBanner.classList.add('slide-down');
+            setTimeout(() => {
+                cookieBanner.classList.remove('active', 'slide-down');
+            }, 500);
+        }
+    }
+
+    if (acceptAllBtn) {
+        acceptAllBtn.addEventListener('click', () => {
+            saveCookiePreference('accepted-all');
+        });
+    }
+
+    if (rejectBtn) {
+        rejectBtn.addEventListener('click', () => {
+            saveCookiePreference('rejected-non-essential');
+        });
+    }
+
+    if (configureBtn) {
+        configureBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Open cookies configuration modal (reuses the cookies legal modal)
+            const cookiesModal = document.getElementById('cookies');
+            if (cookiesModal) {
+                cookiesModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    }
+
+    // --- 8. Social Icons Action (Instagram Alert) ---
+    const instagramBtns = document.querySelectorAll('.instagram-trigger');
+    instagramBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            showCustomToast();
+        });
+    });
+
+    function showCustomToast() {
+        // Check if toast already exists
+        let toast = document.getElementById('custom-toast');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.id = 'custom-toast';
+            toast.className = 'fixed bottom-4 left-4 right-4 md:left-auto md:bottom-8 md:right-8 z-50 px-6 py-4 rounded-2xl bg-black/85 border border-[#8A733E]/40 backdrop-blur-xl shadow-[0_10px_50px_rgba(0,0,0,0.5)] text-white flex items-center gap-3 transition-all duration-500 translate-y-20 opacity-0 pointer-events-none';
+            document.body.appendChild(toast);
+        }
+        
+        const isEnglish = document.documentElement.lang === 'en' || window.location.pathname.includes('-en');
+        const title = isEnglish ? 'Instagram MYNEXT' : 'Instagram MYNEXT';
+        const message = isEnglish ? 'We are working on this page, we will launch it very soon.' : 'Estamos trabajando en la página, la lanzaremos muy pronto.';
+        
+        toast.innerHTML = `
+            <span class="material-symbols-outlined text-gradient-gold text-2xl">construction</span>
+            <div class="flex flex-col text-left">
+                <span class="font-headline font-bold text-xs tracking-wider uppercase text-[#e0c387]">${title}</span>
+                <span class="font-body text-white/70 text-xs mt-0.5">${message}</span>
+            </div>
+        `;
+
+        // Clear any active timeouts on the element
+        if (toast.timeoutId) {
+            clearTimeout(toast.timeoutId);
+        }
+        
+        // Show animation
+        setTimeout(() => {
+            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+            toast.classList.add('translate-y-0', 'opacity-100');
+        }, 50);
+
+        // Hide animation after 4 seconds
+        toast.timeoutId = setTimeout(() => {
+            toast.classList.remove('translate-y-0', 'opacity-100');
+            toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+        }, 4000);
+    }
 });
 
 // --- 4. Scroll Control ---

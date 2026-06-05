@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <!-- SEO & Metadata -->
+    <title>MYNEXT - Architecture Digital Premium | Musa</title>
+    <meta name="description"
+        content="Diseño y desarrollo de experiencias digitales exclusivas. Elevamos tu marca con arquitectura digital premium y diseño de alta fidelidad.">
+    <meta name="author" content="Musa">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="MYNEXT - Architecture Digital Premium">
+    <meta property="og:description" content="Transformamos tu visión en una identidad digital líquida y sofisticada.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="./assets/img/screen.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MYNEXT - Architecture Digital Premium">
+    <meta name="twitter:description"
+        content="Diseño y desarrollo de experiencias digitales exclusivas. Elevamos tu marca con arquitectura digital premium y diseño de alta fidelidad.">
+    <meta name="twitter:image" content="./assets/img/screen.png">
+
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+
+    <!-- Extracted CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- Animaciones Premium Hero -->
+    <style>
+        /* 1. Fondo Dinámico (Dark Mesh / Breathing Glow) */
+        @keyframes breathingGlow {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .animate-breathing-bg {
+            background: radial-gradient(circle at center, #0a0f18 0%, #050505 50%, #020810 100%);
+            background-size: 200% 200%;
+            animation: breathingGlow 18s ease-in-out infinite;
+        }
+
+        /* 2. Animación del Recuadro Central (Floating Effect) */
+        @keyframes floatPremium {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .animate-float-premium {
+            animation: floatPremium 6s ease-in-out infinite;
+        }
+
+        /* 3. Animación Alternativa del Logo (Fade Brillante) */
+        @keyframes logoReveal {
+            0% {
+                opacity: 0;
+                filter: brightness(2) drop-shadow(0 0 20px #00f2ff);
+            }
+
+            100% {
+                opacity: 1;
+                filter: brightness(1) drop-shadow(0 0 0px transparent);
+            }
+        }
+
+        .animate-logo-reveal {
+            animation: logoReveal 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        /* Animación sutil de las esquinas arquitectónicas */
+        @keyframes cornersFade {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .animate-corners {
+            animation: cornersFade 2s ease-out 1s forwards;
+            opacity: 0;
+        }
+
+        /* 4. Text Shine Premium (Para el título de Nosotros) */
+        @keyframes textShine {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            100% {
+                background-position: 200% 50%;
+            }
+        }
+
+        .text-shine-premium {
+            background: linear-gradient(90deg, #0066ff, #00f2ff, #0066ff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textShine 4s linear infinite;
+        }
+
+        /* 5. Plakata Scale Animation (Scroll Reveal) */
+        .reveal.scale-pop {
+            transform: scale(0.6);
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .reveal.scale-pop.active {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        /* 6. EST 2026 Premium Reveal & Shine */
+        @keyframes estReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes estShine {
+            0% {
+                background-position: -200% center;
+            }
+
+            100% {
+                background-position: 200% center;
+            }
+        }
+
+        .animate-est-premium {
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.3) 0%, rgba(0, 242, 255, 0.9) 50%, rgba(255, 255, 255, 0.3) 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0;
+            animation: estReveal 1.5s cubic-bezier(0.4, 0, 0.2, 1) 1.5s forwards, estShine 4s cubic-bezier(0.4, 0, 0.2, 1) 2s forwards;
+        }
+    </style>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary-container": "#00f2ff",
+                        "surface": "#050505",
+                        "background": "#050505",
+                        "void-black": "#050505",
+                        "electric-cyan": "#00F2FF",
+                        "on-surface": "#ffffff",
+                        "on-surface-variant": "#b9cacb",
+                        "surface-glass": "rgba(255, 255, 255, 0.03)",
+                        "outline": "#849495"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "margin-mobile": "20px",
+                        "margin-desktop": "80px",
+                        "container-max": "1440px"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk", "sans-serif"],
+                        "body": ["Urbanist", "sans-serif"],
+                        "space-grotesk": ["Space Grotesk", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body
+    class="bg-void-black text-on-surface font-body selection:bg-electric-cyan selection:text-void-black overflow-x-hidden">
+
+    <!-- 0. NAVIGATION -->
+    <header id="main-header" class="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
+        <nav id="nav-container"
+            class="group flex items-center gap-2 sm:gap-6 md:gap-16 lg:gap-20 px-3 sm:px-8 md:px-20 py-2 rounded-full bg-[#050505]/80 backdrop-blur-2xl border border-electric-cyan/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] hover:border-electric-cyan/50 hover:bg-electric-cyan/[0.05] hover:shadow-[0_0_30px_rgba(0,242,255,0.15)] transition-all ease-in-out opacity-0 pointer-events-auto"
+            style="transition-duration: 1600ms;">
+
+            <!-- Left Navigation -->
+            <div id="nav-left"
+                class="flex items-center gap-2.5 sm:gap-6 md:gap-12 ease-in-out -translate-x-[150%] translate-y-1"
+                style="transition: transform 1600ms cubic-bezier(0.77, 0, 0.175, 1);">
+                <a class="text-[9px] sm:text-xs md:text-[13px] font-headline font-bold uppercase tracking-[0.1em] sm:tracking-[0.2em] md:tracking-[0.3em] text-white/85 hover:text-electric-cyan transition-all duration-300 ease-out"
+                    href="#inicio">Home</a>
+                <a class="text-[9px] sm:text-xs md:text-[13px] font-headline font-bold uppercase tracking-[0.1em] sm:tracking-[0.2em] md:tracking-[0.3em] text-white/85 hover:text-electric-cyan transition-all duration-300 ease-out"
+                    href="#nosotros">ABOUT</a>
+            </div>
+
+            <!-- Central Branding -->
+            <div id="nav-logo" class="relative group/logo ease-in-out -translate-y-[150%]"
+                style="transition: transform 1600ms cubic-bezier(0.77, 0, 0.175, 1);">
+                <!-- Aro difuminado exterior en rojo -->
+                <div
+                    class="absolute -inset-4 bg-red-600/20 rounded-full blur-2xl opacity-0 group-hover/logo:opacity-100 transition-opacity duration-700">
+                </div>
+                <!-- Borde rojo brillante -->
+                <div
+                    class="relative w-9 h-9 sm:w-12 md:w-16 md:h-16 rounded-full p-[1.5px] bg-gradient-to-tr from-red-600/60 via-white/20 to-red-600/60 shadow-[0_0_20px_rgba(220,38,38,0.2)] group-hover/logo:shadow-[0_0_30px_rgba(220,38,38,0.4)] transition-all duration-700">
+                    <div
+                        class="w-full h-full rounded-full bg-void-black flex items-center justify-center overflow-hidden p-1">
+                        <!-- Nuevo Logo de Máxima Calidad -->
+                        <img alt="Logo MYNEXT"
+                            class="w-full h-full object-contain group-hover/logo:scale-110 transition-transform duration-700"
+                            src="./assets/img/logo-m1-new.png">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Navigation -->
+            <div id="nav-right"
+                class="flex items-center gap-2.5 sm:gap-6 md:gap-12 ease-in-out translate-x-[150%] translate-y-1"
+                style="transition: transform 1600ms cubic-bezier(0.77, 0, 0.175, 1);">
+                <a class="text-[9px] sm:text-xs md:text-[13px] font-headline font-bold uppercase tracking-[0.1em] sm:tracking-[0.2em] md:tracking-[0.3em] text-white/85 hover:text-electric-cyan transition-all duration-300 ease-out"
+                    href="#portfolio">Portfolio</a>
+                <a class="text-[9px] sm:text-xs md:text-[13px] font-headline font-bold uppercase tracking-[0.1em] sm:tracking-[0.2em] md:tracking-[0.3em] text-white/85 hover:text-electric-cyan transition-all duration-300 ease-out"
+                    href="#contacto">Contact</a>
+                <!-- Language Toggle -->
+                <div
+                    class="flex items-center gap-1.5 sm:gap-3 text-[9px] sm:text-[10px] md:text-[11px] font-headline font-bold tracking-[0.1em] md:tracking-[0.2em] ml-2 sm:ml-6">
+                    <a href="index.html" class="text-white/60 hover:text-electric-cyan transition-colors">ES</a>
+                    <span class="text-white/30">|</span>
+                    <span class="text-electric-cyan cursor-default">EN</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="relative z-10">
+        <!-- INICIO HERO SECTION -->
+        <section
+            class="h-screen flex items-center justify-center relative bg-void-black overflow-hidden animate-breathing-bg"
+            id="inicio">
+
+            <div class="relative z-10 flex flex-col items-center px-margin-mobile">
+
+                <!-- Logo / Tarjeta de Presentación Premium -->
+                <div
+                    class="relative p-10 md:p-16 rounded-[2.5rem] bg-[#050505] border border-white/[0.05] shadow-[0_0_60px_rgba(0,242,255,0.15)] flex flex-col items-center justify-center overflow-hidden group animate-float-premium">
+
+                    <!-- Architectural Corners -->
+                    <div
+                        class="absolute top-6 left-6 w-3 h-3 border-t border-l border-electric-cyan/40 animate-corners">
+                    </div>
+                    <div
+                        class="absolute top-6 right-6 w-3 h-3 border-t border-r border-electric-cyan/40 animate-corners">
+                    </div>
+                    <div
+                        class="absolute bottom-6 left-6 w-3 h-3 border-b border-l border-electric-cyan/40 animate-corners">
+                    </div>
+                    <div
+                        class="absolute bottom-6 right-6 w-3 h-3 border-b border-r border-electric-cyan/40 animate-corners">
+                    </div>
+
+                    <!-- Metadata Labels (Movido debajo del logo) -->
+
+                    <!-- Light Sweep Effect -->
+                    <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+                        <div
+                            class="w-1/2 h-full bg-gradient-to-r from-transparent via-white/[0.03] to-transparent -skew-x-12 translate-x-[-150%] animate-sweep">
+                        </div>
+                    </div>
+
+                    <!-- Scanner Pulse -->
+                    <div class="absolute inset-0 z-0 pointer-events-none">
+                        <div class="w-full h-[1px] bg-electric-cyan/20 absolute top-0 animate-scanner"></div>
+                    </div>
+
+                    <!-- Logo Central Original Completo -->
+                    <img alt="MYNEXT Architecture Digital"
+                        class="w-64 h-64 md:w-[350px] md:h-[350px] object-contain relative z-10 transition-transform duration-1000 group-hover:scale-105 animate-logo-reveal"
+                        src="./assets/img/logo-hero.svg">
+
+                    <!-- EST 2026 Centrado (con animación premium de aparición y brillo) -->
+                    <div
+                        class="-mt-8 md:-mt-12 text-[9px] md:text-[11px] tracking-[0.6em] uppercase font-headline relative z-20 text-center ml-2 animate-est-premium">
+                        EST. 2026</div>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <a class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 group transition-all duration-300"
+                href="#nosotros">
+                <span
+                    class="font-headline text-[9px] md:text-[10px] tracking-[0.4em] uppercase text-white/50 group-hover:text-white transition-colors text-center">
+                    WHAT IS MYNEXT?<br>DISCOVER BELOW
+                </span>
+                <span
+                    class="material-symbols-outlined text-electric-cyan animate-scroll-bounce">keyboard_double_arrow_down</span>
+            </a>
+        </section>
+
+        <!-- 2. NOSOTROS SECTION -->
+        <section
+            class="min-h-screen flex flex-col items-center justify-center px-6 md:px-margin-desktop py-20 md:py-32 bg-void-black relative"
+            id="nosotros">
+            <div class="max-w-container-max w-full">
+                <div class="text-center mb-12 md:mb-16 reveal">
+                    <h2
+                        class="text-3xl md:text-6xl font-headline font-bold tracking-tight uppercase max-w-4xl mx-auto leading-tight mb-6 md:mb-8 text-shine-premium">
+                        THE DIGITAL ARCHITECTURE YOUR BUSINESS DESERVES
+                    </h2>
+                    <div
+                        class="font-body font-light text-white/80 max-w-[800px] mx-auto text-base md:text-xl leading-loose px-4 flex flex-col items-center">
+                        <p class="text-center w-full">At <span class="text-electric-cyan font-medium">MYNEXT</span>, we
+                            are dedicated to transforming your vision into a unique digital platform. We help your
+                            business stand out on the internet with a clean and modern design, crafted to attract more
+                            clients. We handle the entire technical process so your website is fast, efficient, and
+                            works for you flawlessly.</p>
+                    </div>
+                </div>
+
+                <!-- Redesigned Process: Bento Horizon -->
+                <div class="relative max-w-7xl mx-auto py-20" id="process-trigger">
+                    <!-- Título de Proceso Animado (Plakata) y Flecha Minimalista -->
+                    <div class="reveal scale-pop flex flex-col items-center mb-12 md:mb-16">
+                        <!-- Cuadro con borde hiperfino y brillo sutil (corte láser) -->
+                        <div
+                            class="px-6 py-2 border border-electric-cyan rounded-full bg-transparent shadow-[0_0_4px_rgba(0,242,255,0.4),inset_0_0_2px_rgba(0,242,255,0.4)] mb-4">
+                            <h3
+                                class="text-center text-xs md:text-sm font-headline font-bold text-white tracking-[0.4em] uppercase">
+                                OUR CREATIVE PROCESS</h3>
+                        </div>
+                        <!-- Línea conectora y flecha minimalista (SVG Unificado) -->
+                        <div class="flex flex-col items-center mt-2 animate-scroll-bounce">
+                            <svg width="16" height="48" viewBox="0 0 16 48" fill="none"
+                                xmlns="http://www.w3.org/2000/svg" class="drop-shadow-[0_0_3px_rgba(0,242,255,0.5)]">
+                                <!-- Línea descendente -->
+                                <path d="M8 0L8 46" stroke="#00F2FF" stroke-width="1.5" />
+                                <!-- Cabeza de flecha afilada -->
+                                <path d="M1 39L8 46L15 39" stroke="#00F2FF" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 relative z-10">
+                        <!-- Step 01 -->
+                        <div id="card-1"
+                            class="process-card group/bento relative overflow-hidden p-8 md:p-12 rounded-[2.5rem] bg-white/[0.02] border border-white/5 backdrop-blur-xl hover:border-electric-cyan/30 hover:bg-white/[0.04]">
+                            <div
+                                class="card-number absolute -right-4 -bottom-4 text-[12rem] font-headline font-black text-white/[0.02] group-hover/bento:text-electric-cyan/[0.05] transition-colors duration-700 leading-none">
+                                1</div>
+                            <div class="relative z-10 space-y-8">
+                                <div
+                                    class="w-16 h-16 rounded-2xl bg-electric-cyan/5 border border-electric-cyan/20 flex items-center justify-center group-hover/bento:border-electric-cyan/50 transition-all duration-500">
+                                    <span class="material-symbols-outlined text-3xl text-electric-cyan">hub</span>
+                                </div>
+                                <div class="space-y-4">
+                                    <h3
+                                        class="text-xl md:text-2xl font-headline font-bold text-white tracking-widest uppercase">
+                                        Consulting</h3>
+                                    <p class="text-white/40 text-sm md:text-base font-light leading-relaxed">We define
+                                        your project's DNA. We outline the technical and visual strategy so your brand
+                                        dominates its digital niche.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 02 -->
+                        <div id="card-2"
+                            class="process-card group/bento relative overflow-hidden p-8 md:p-12 rounded-[2.5rem] bg-white/[0.02] border border-white/5 backdrop-blur-xl hover:border-electric-cyan/30 hover:bg-white/[0.04]"
+                            style="transition-delay: 0.15s;">
+                            <div
+                                class="card-number absolute -right-4 -bottom-4 text-[12rem] font-headline font-black text-white/[0.02] group-hover/bento:text-electric-cyan/[0.05] transition-colors duration-700 leading-none">
+                                2</div>
+                            <div class="relative z-10 space-y-8">
+                                <div
+                                    class="w-16 h-16 rounded-2xl bg-electric-cyan/5 border border-electric-cyan/20 flex items-center justify-center group-hover/bento:border-electric-cyan/50 transition-all duration-500">
+                                    <span class="material-symbols-outlined text-3xl text-electric-cyan">layers</span>
+                                </div>
+                                <div class="space-y-4">
+                                    <h3
+                                        class="text-xl md:text-2xl font-headline font-bold text-white tracking-widest uppercase">
+                                        Architecture</h3>
+                                    <p class="text-white/40 text-sm md:text-base font-light leading-relaxed">We build
+                                        with surgical precision. Clean code and exclusive design merged into a high-end
+                                        experience.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 03 -->
+                        <div id="card-3"
+                            class="process-card group/bento relative overflow-hidden p-8 md:p-12 rounded-[2.5rem] bg-white/[0.02] border border-white/5 backdrop-blur-xl hover:border-electric-cyan/30 hover:bg-white/[0.04]"
+                            style="transition-delay: 0.3s;">
+                            <div
+                                class="card-number absolute -right-4 -bottom-4 text-[12rem] font-headline font-black text-white/[0.02] group-hover/bento:text-electric-cyan/[0.05] transition-colors duration-700 leading-none">
+                                3</div>
+                            <div class="relative z-10 space-y-8">
+                                <div
+                                    class="w-16 h-16 rounded-2xl bg-electric-cyan/5 border border-electric-cyan/20 flex items-center justify-center group-hover/bento:border-electric-cyan/50 transition-all duration-500">
+                                    <span
+                                        class="material-symbols-outlined text-3xl text-electric-cyan">auto_awesome</span>
+                                </div>
+                                <div class="space-y-4">
+                                    <h3
+                                        class="text-xl md:text-2xl font-headline font-bold text-white tracking-widest uppercase">
+                                        Launch</h3>
+                                    <p class="text-white/40 text-sm md:text-base font-light leading-relaxed">Launch and
+                                        continuous optimization. Your platform doesn't just launch; it evolves to
+                                        dominate the market.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-20 reveal">
+                    <p class="liquid-neon-text text-xl md:text-2xl font-headline font-bold tracking-wide px-4">Your
+                        digital presence is not just an option, it is your greatest asset.</p>
+                </div>
+            </div>
+
+            <a class="absolute bottom-12 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-3 group transition-all duration-300"
+                href="#portfolio">
+                <span
+                    class="font-headline text-[9px] md:text-[10px] tracking-[0.4em] uppercase text-white/50 group-hover:text-white transition-colors text-center">
+                    WANT TO SEE MY WORK?<br>DISCOVER IT BELOW
+                </span>
+                <span
+                    class="material-symbols-outlined text-electric-cyan animate-scroll-bounce">keyboard_double_arrow_down</span>
+            </a>
+        </section>
+
+        <!-- 3. PORTFOLIO SECTION -->
+        <section class="min-h-screen py-32 pb-40 md:pb-48 px-margin-mobile md:px-margin-desktop bg-void-black relative"
+            id="portfolio">
+            <div class="max-w-container-max mx-auto">
+                <div class="text-center mb-24 md:mb-32 reveal">
+                    <h2 class="text-3xl md:text-5xl font-headline font-bold text-white tracking-widest uppercase">My
+                        Work</h2>
+                    <div class="w-24 h-[1px] bg-electric-cyan mx-auto mt-8 opacity-50"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24">
+                    <!-- Project A -->
+                    <article class="reveal flex flex-col gap-8 group">
+                        <div
+                            class="relative aspect-[16/10] rounded-2xl overflow-hidden glass-panel border-white/5 transition-all duration-500 group-hover:border-electric-cyan/20 group-hover:shadow-[0_0_30px_rgba(0,242,255,0.1)]">
+                            <!-- Browser UI Mockup -->
+                            <div
+                                class="absolute top-0 left-0 right-0 h-8 bg-white/5 backdrop-blur-md flex items-center px-4 gap-2 z-30 border-b border-white/5">
+                                <div class="w-2.5 h-2.5 rounded-full bg-[#FF5F56]"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-[#27C93F]"></div>
+                            </div>
+                            <div
+                                class="absolute inset-0 bg-[#050505] flex items-center justify-center overflow-hidden p-6 md:p-10">
+                                <!-- Actual Project Image -->
+                                <img src="./assets/img/porfolio1.png" alt="Preview Blessed Barber Studio"
+                                    class="w-full h-full object-contain transition-transform duration-1000 group-hover:scale-105"
+                                    loading="lazy">
+
+                                <div
+                                    class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500">
+                                </div>
+
+                                <div
+                                    class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center z-20 backdrop-blur-sm">
+                                    <a href="https://blessedstudio.pages.dev/" target="_blank" rel="noopener noreferrer"
+                                        class="px-8 py-4 bg-white text-black font-headline font-bold text-[10px] tracking-[0.3em] uppercase rounded-full hover:bg-electric-cyan transition-all duration-500 shadow-xl">
+                                        View Website →
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-4 px-4">
+                            <h3
+                                class="text-2xl md:text-3xl font-bold text-gradient-cyan font-headline uppercase tracking-tight">
+                                Blessed Barber Studio</h3>
+                            <div class="relative pl-6 border-l-2 border-electric-cyan/30">
+                                <p class="text-lg text-white/70 italic font-body leading-relaxed mb-2">
+                                    "Musa perfectly understood the essence of our studio. He not only created a visually
+                                    stunning website, but managed to translate the luxury and precision of each of our
+                                    cuts into the digital world. He has elevated our brand to another level."
+                                </p>
+                                <span class="text-sm font-headline text-electric-cyan/60 uppercase tracking-widest">—
+                                    Gustavo, Dueño</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project B -->
+                    <article class="reveal flex flex-col gap-8 md:mt-32 group" style="transition-delay: 200ms;">
+                        <div
+                            class="relative aspect-[16/10] rounded-2xl overflow-hidden glass-panel border-white/5 transition-all duration-500 group-hover:border-electric-cyan/20 group-hover:shadow-[0_0_30px_rgba(0,242,255,0.1)]">
+                            <!-- Browser UI Mockup -->
+                            <div
+                                class="absolute top-0 left-0 right-0 h-8 bg-white/5 backdrop-blur-md flex items-center px-4 gap-2 z-30 border-b border-white/5">
+                                <div class="w-2.5 h-2.5 rounded-full bg-[#FF5F56]"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-[#27C93F]"></div>
+                            </div>
+                            <div
+                                class="absolute inset-0 bg-[#050505] flex items-center justify-center overflow-hidden p-6 md:p-10">
+                                <!-- Actual Project Image -->
+                                <img src="./assets/img/porfolio2.png" alt="Preview Bar Luna Llena"
+                                    class="w-full h-full object-contain transition-transform duration-1000 group-hover:scale-105"
+                                    loading="lazy">
+
+                                <div
+                                    class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500">
+                                </div>
+
+                                <div
+                                    class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center z-20 backdrop-blur-sm">
+                                    <a href="https://barlunallena.pages.dev" target="_blank" rel="noopener noreferrer"
+                                        class="px-8 py-4 bg-white text-black font-headline font-bold text-[10px] tracking-[0.3em] uppercase rounded-full hover:bg-electric-cyan transition-all duration-500 shadow-xl">
+                                        View Website →
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-4 px-4">
+                            <h3
+                                class="text-2xl md:text-3xl font-bold text-gradient-cyan font-headline uppercase tracking-tight">
+                                Bar Cafetería Luna Llena</h3>
+                            <div class="relative pl-6 border-l-2 border-electric-cyan/30">
+                                <p class="text-lg text-white/70 italic font-body leading-relaxed mb-2">
+                                    "Translating the essence and warmth of our venue to the digital environment seemed
+                                    like a challenge, but Musa made it look easy. He designed an impeccable and
+                                    sophisticated digital menu that is eye-catching and faithfully reflects who we are."
+                                </p>
+                                <span class="text-sm font-headline text-electric-cyan/60 uppercase tracking-widest">—
+                                    Shamira, Propietaria</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Desplegable de Más Proyectos -->
+                <div id="more-projects" class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24">
+                    <!-- Project C -->
+                    <article class="reveal flex flex-col gap-8 group">
+                        <div
+                            class="relative aspect-[16/10] rounded-2xl overflow-hidden glass-panel border-white/5 transition-all duration-500 group-hover:border-electric-cyan/20 group-hover:shadow-[0_0_30px_rgba(0,242,255,0.1)]">
+                            <!-- Browser UI Mockup -->
+                            <div
+                                class="absolute top-0 left-0 right-0 h-8 bg-white/5 backdrop-blur-md flex items-center px-4 gap-2 z-30 border-b border-white/5">
+                                <div class="w-2.5 h-2.5 rounded-full bg-[#FF5F56]"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-[#27C93F]"></div>
+                            </div>
+                            <div
+                                class="absolute inset-0 bg-[#050505] flex items-center justify-center overflow-hidden p-6 md:p-10">
+                                <img src="./assets/img/porfolio3.png" alt="Preview Ecuaplac"
+                                    class="w-full h-full object-contain transition-transform duration-1000 group-hover:scale-105"
+                                    loading="lazy">
+                                <div
+                                    class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500">
+                                </div>
+                                <div
+                                    class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center z-20 backdrop-blur-sm">
+                                    <a href="https://ecuaplac-v1.pages.dev" target="_blank" rel="noopener noreferrer"
+                                        class="px-8 py-4 bg-white text-black font-headline font-bold text-[10px] tracking-[0.3em] uppercase rounded-full hover:bg-electric-cyan transition-all duration-500 shadow-xl">
+                                        View Web →
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-4 px-4">
+                            <h3
+                                class="text-2xl md:text-3xl font-bold text-gradient-cyan font-headline uppercase tracking-tight">
+                                Ecuaplac</h3>
+                            <div class="relative pl-6 border-l-2 border-electric-cyan/30">
+                                <p class="text-lg text-white/70 italic font-body leading-relaxed mb-2">
+                                    "Ecuaplac redefines the concept of luxury renovations and drywalls for architecture
+                                    in Mallorca. A fusion of Nordic minimalism and ultra-fluid interactive transitions."
+                                </p>
+                                <span class="text-sm font-headline text-electric-cyan/60 uppercase tracking-widest">—
+                                    Renovations & Construction</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project D -->
+                    <article class="reveal flex flex-col gap-8 md:mt-32 group">
+                        <div
+                            class="relative aspect-[16/10] rounded-2xl overflow-hidden glass-panel border-white/5 transition-all duration-500 group-hover:border-electric-cyan/20 group-hover:shadow-[0_0_30px_rgba(0,242,255,0.1)]">
+                            <!-- Browser UI Mockup -->
+                            <div
+                                class="absolute top-0 left-0 right-0 h-8 bg-white/5 backdrop-blur-md flex items-center px-4 gap-2 z-30 border-b border-white/5">
+                                <div class="w-2.5 h-2.5 rounded-full bg-[#FF5F56]"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-[#27C93F]"></div>
+                            </div>
+                            <div
+                                class="absolute inset-0 bg-[#050505] flex items-center justify-center overflow-hidden p-6 md:p-10">
+                                <img src="./assets/img/porfolio4.png" alt="Preview RBARI Restaurant"
+                                    class="w-full h-full object-contain transition-transform duration-1000 group-hover:scale-105"
+                                    loading="lazy">
+                                <div
+                                    class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500">
+                                </div>
+                                <div
+                                    class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center z-20 backdrop-blur-sm">
+                                    <a href="https://rbari-v1.pages.dev" target="_blank" rel="noopener noreferrer"
+                                        class="px-8 py-4 bg-white text-black font-headline font-bold text-[10px] tracking-[0.3em] uppercase rounded-full hover:bg-electric-cyan transition-all duration-500 shadow-xl">
+                                        View Web →
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-4 px-4">
+                            <h3
+                                class="text-2xl md:text-3xl font-bold text-gradient-cyan font-headline uppercase tracking-tight">
+                                RBARI RESTAURANT</h3>
+                            <div class="relative pl-6 border-l-2 border-electric-cyan/30">
+                                <p class="text-lg text-white/70 italic font-body leading-relaxed mb-2">
+                                    "Immersive digital experience for an authentic Bangladeshi restaurant. A visually
+                                    rich design that conveys culture and flavors through a clean, high-contrast
+                                    interface and high-quality photography."
+                                </p>
+                                <span class="text-sm font-headline text-electric-cyan/60 uppercase tracking-widest">—
+                                    GASTRONOMIC WEB DESIGN</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project E -->
+                    <article class="reveal flex flex-col gap-8 group md:-mt-16">
+                        <div
+                            class="relative aspect-[16/10] rounded-2xl overflow-hidden glass-panel border-white/5 transition-all duration-500 group-hover:border-electric-cyan/20 group-hover:shadow-[0_0_30px_rgba(0,242,255,0.1)]">
+                            <!-- Browser UI Mockup -->
+                            <div
+                                class="absolute top-0 left-0 right-0 h-8 bg-white/5 backdrop-blur-md flex items-center px-4 gap-2 z-30 border-b border-white/5">
+                                <div class="w-2.5 h-2.5 rounded-full bg-[#FF5F56]"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-[#27C93F]"></div>
+                            </div>
+                            <div
+                                class="absolute inset-0 bg-[#050505] flex items-center justify-center overflow-hidden p-6 md:p-10">
+                                <img src="./assets/img/porfolio5.png" alt="Preview NEXT ERA Caps"
+                                    class="w-full h-full object-contain transition-transform duration-1000 group-hover:scale-105"
+                                    loading="lazy">
+                                <div
+                                    class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500">
+                                </div>
+                                <div
+                                    class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center z-20 backdrop-blur-sm">
+                                    <a href="https://nexterabymusa.pages.dev" target="_blank" rel="noopener noreferrer"
+                                        class="px-8 py-4 bg-white text-black font-headline font-bold text-[10px] tracking-[0.3em] uppercase rounded-full hover:bg-electric-cyan transition-all duration-500 shadow-xl">
+                                        View Web →
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-4 px-4">
+                            <h3
+                                class="text-2xl md:text-3xl font-bold text-gradient-cyan font-headline uppercase tracking-tight">
+                                NEXT ERA</h3>
+                            <div class="relative pl-6 border-l-2 border-electric-cyan/30">
+                                <p class="text-lg text-white/70 italic font-body leading-relaxed mb-2">
+                                    "Luxury caps and premium streetwear e-commerce. A high-contrast minimalist design
+                                    and interactive animations focused on conversion and brand exclusivity."
+                                </p>
+                                <span class="text-sm font-headline text-electric-cyan/60 uppercase tracking-widest">—
+                                    E-Commerce Prototype</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- View more projects Button -->
+                <div class="text-center mt-20 relative z-20">
+                    <button id="toggle-more-projects" data-text-more="View More Projects"
+                        data-text-less="View Less Projects"
+                        class="inline-flex items-center gap-3 px-10 py-5 bg-transparent text-white font-headline font-bold text-[11px] tracking-[0.3em] uppercase rounded-full border border-electric-cyan/30 hover:border-electric-cyan hover:shadow-[0_0_30px_rgba(0,242,255,0.2)] active:scale-95 transition-all duration-300 group">
+                        <span id="toggle-text">View More Projects</span>
+                        <span id="toggle-icon"
+                            class="material-symbols-outlined text-base group-hover:translate-y-0.5 transition-transform duration-300">keyboard_arrow_down</span>
+                    </button>
+                </div>
+            </div>
+
+            <a class="absolute bottom-10 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-3 group transition-all duration-300 mt-20"
+                href="#contacto">
+                <span
+                    class="font-headline text-[9px] md:text-[10px] tracking-[0.4em] uppercase text-white/50 group-hover:text-white transition-colors text-center">
+                    SHALL WE CONNECT YOUR NEXT STEP?<br>DISCOVER BELOW
+                </span>
+                <span
+                    class="material-symbols-outlined text-electric-cyan animate-scroll-bounce">keyboard_double_arrow_down</span>
+            </a>
+        </section>
+
+        <!-- 4. CONTACTO SECTION -->
+        <section
+            class="min-h-screen py-32 px-margin-mobile md:px-margin-desktop flex items-center justify-center relative bg-void-black"
+            id="contacto">
+            <div class="max-w-4xl w-full text-center">
+                <div class="mb-20 reveal">
+                    <!-- Glass Gold Badge -->
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#8A733E]/10 border border-[#8A733E]/30 text-[#e0c387] font-headline text-[9px] tracking-[0.3em] uppercase mb-8 backdrop-blur-md">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#e0c387] animate-pulse"></span>
+                        Exclusive Launch Edition
+                    </div>
+                    <h2
+                        class="text-3xl md:text-6xl font-body font-extrabold tracking-tight uppercase max-w-4xl mx-auto leading-tight mb-8 text-gradient-gold">
+                        TRANSFORM YOUR WEB TODAY AND LEAD YOUR SECTOR
+                    </h2>
+                    <p class="font-body font-light text-white/70 max-w-2xl mx-auto mt-4 text-lg px-4">
+                        Contact me now to discuss your vision and request a custom quote. Let's talk about your next
+                        step.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-12 max-w-4xl mx-auto reveal px-4">
+                    <!-- WhatsApp Card -->
+                    <a class="group relative block p-10 md:p-14 rounded-[2.5rem] bg-white/[0.02] border border-white/5 backdrop-blur-2xl hover:border-electric-cyan/30 transition-all duration-700 hover:-translate-y-3 overflow-hidden"
+                        href="https://wa.me/34673109486?text=Hello!%20I%20am%20coming%20from%20the%20MYNEXT%20website.%20I%20would%20like%20to%20receive%20information%20about%20your%20digital%20architecture%20and%20design%20services%20for%20my%20business.%20Thank%20you!"
+                        target="_blank" rel="noopener noreferrer">
+                        <div
+                            class="absolute -inset-px bg-gradient-to-br from-electric-cyan/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                        </div>
+                        <div class="relative z-10 flex flex-col items-center">
+                            <div class="relative mb-10">
+                                <div
+                                    class="absolute -inset-6 bg-electric-cyan/10 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                                </div>
+                                <div class="relative w-20 h-20 flex items-center justify-center">
+                                    <div
+                                        class="absolute inset-0 border-2 border-electric-cyan/10 rounded-full group-hover:border-electric-cyan/40 transition-all duration-700 group-hover:scale-125">
+                                    </div>
+                                    <div
+                                        class="absolute inset-2 border border-electric-cyan/5 rounded-full group-hover:border-electric-cyan/20 transition-all duration-700 group-hover:scale-110">
+                                    </div>
+                                    <svg class="w-10 h-10 text-electric-cyan fill-current filter drop-shadow-[0_0_8px_rgba(0,242,255,0.6)]"
+                                        viewBox="0 0 24 24">
+                                        <path
+                                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="space-y-4 text-center flex flex-col items-center">
+                                <span
+                                    class="text-white/30 text-[10px] tracking-[0.5em] uppercase block font-headline font-medium">Direct
+                                    Line</span>
+                                <span
+                                    class="inline-block px-6 py-3 bg-white text-black font-headline font-bold text-[9px] md:text-[10px] tracking-[0.25em] uppercase rounded-full group-hover:bg-electric-cyan transition-all duration-500 shadow-xl mt-2">
+                                    OPEN WHATSAPP →
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Email Card -->
+                    <a class="group relative block p-10 md:p-14 rounded-[2.5rem] bg-white/[0.02] border border-white/5 backdrop-blur-2xl hover:border-electric-cyan/30 transition-all duration-700 hover:-translate-y-3 overflow-hidden"
+                        href="mailto:mynextbymusa@gmail.com?subject=New%20Digital%20Project%20%7C%20MYNEXT&body=Hello%20Musa,%0A%0AI%20have%20been%20reviewing%20your%20portfolio%20on%20MYNEXT%20and%20I%20am%20interested%20in%20the%20Digital%20Architecture%20approach%20for%20my%20business.%20I%20would%20like%20to%20receive%20more%20information%20about%20your%20services%20and%20rates.%0A%0ABest%20regards.">
+                        <div
+                            class="absolute -inset-px bg-gradient-to-br from-electric-cyan/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                        </div>
+                        <div class="relative z-10 flex flex-col items-center">
+                            <div class="relative mb-10">
+                                <div
+                                    class="absolute -inset-6 bg-electric-cyan/10 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                                </div>
+                                <div class="relative w-20 h-20 flex items-center justify-center">
+                                    <div
+                                        class="absolute inset-0 border-2 border-electric-cyan/10 rounded-full group-hover:border-electric-cyan/40 transition-all duration-700 group-hover:scale-125">
+                                    </div>
+                                    <div
+                                        class="absolute inset-2 border border-electric-cyan/5 rounded-full group-hover:border-electric-cyan/20 transition-all duration-700 group-hover:scale-110">
+                                    </div>
+                                    <span
+                                        class="material-symbols-outlined text-4xl text-electric-cyan filter drop-shadow-[0_0_8px_rgba(0,242,255,0.6)]">mail</span>
+                                </div>
+                            </div>
+                            <div class="space-y-4 text-center flex flex-col items-center">
+                                <span
+                                    class="text-white/30 text-[10px] tracking-[0.5em] uppercase block font-headline font-medium">HQ
+                                    Inquiries</span>
+                                <span class="text-white/70 font-body text-xs mt-1 block">mynextbymusa@gmail.com</span>
+                                <span
+                                    class="inline-block px-6 py-3 bg-white text-black font-headline font-bold text-[9px] md:text-[10px] tracking-[0.25em] uppercase rounded-full group-hover:bg-electric-cyan transition-all duration-500 shadow-xl mt-2">
+                                    Send Email →
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4.5 PLANES SECTION/BANNER -->
+        <section
+            class="py-20 md:py-28 px-margin-mobile md:px-margin-desktop bg-void-black border-t border-white/[0.03] relative overflow-hidden"
+            id="planes-banner">
+            <div
+                class="absolute -inset-0 bg-[radial-gradient(circle_at_center,rgba(0,242,255,0.02)_0%,transparent_70%)] pointer-events-none">
+            </div>
+            <div class="max-w-4xl mx-auto text-center reveal relative z-10">
+                <div class="space-y-6">
+                    <span
+                        class="text-electric-cyan/60 text-[10px] tracking-[0.5em] uppercase font-headline font-medium block">Transparency
+                        & Results</span>
+                    <h3 class="text-2xl md:text-4xl font-headline font-bold text-white uppercase tracking-tight">
+                        Exclusive Designs with Custom Pricing</h3>
+                    <p class="text-white/50 text-sm md:text-base font-light max-w-xl mx-auto leading-relaxed">
+                        Discover our digital architecture plans and choose the perfect fit for your business goals.
+                    </p>
+                    <div class="pt-6">
+                        <a href="./planes/index-en.html"
+                            class="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-electric-cyan to-[#0066FF] text-white font-headline font-bold text-[11px] tracking-[0.3em] uppercase rounded-full hover:shadow-[0_0_50px_rgba(0,242,255,0.4)] hover:scale-105 active:scale-95 transition-all duration-500 border border-electric-cyan/30 group">
+                            2026 Plans
+                            <span
+                                class="material-symbols-outlined text-base group-hover:translate-x-1.5 transition-transform duration-300">arrow_forward</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 5. FOOTER -->
+    <footer class="py-16 px-6 md:px-margin-desktop bg-void-black border-t border-white/5 relative z-40">
+        <div class="max-w-container-max mx-auto flex flex-col gap-12">
+            <div class="flex flex-col md:flex-row justify-between items-center md:items-start gap-8">
+                <!-- Branding -->
+                <div class="flex flex-col items-center md:items-start text-center md:text-left gap-2">
+                    <span class="text-xl font-headline font-bold text-white tracking-widest uppercase">MYNEXT</span>
+                    <span class="text-[10px] font-headline text-electric-cyan tracking-[0.3em] uppercase">Architecture
+                        Digital</span>
+                </div>
+                <!-- Legal Links -->
+                <div class="flex flex-wrap justify-center gap-x-8 gap-y-4 text-xs font-body text-white/40">
+                    <a href="#" data-modal="aviso-legal"
+                        class="hover:text-white transition-colors duration-300 cursor-pointer">Legal Notice</a>
+                    <a href="#" data-modal="privacidad"
+                        class="hover:text-white transition-colors duration-300 cursor-pointer">Privacy Policy</a>
+                    <a href="#" data-modal="cookies"
+                        class="hover:text-white transition-colors duration-300 cursor-pointer">Cookies Policy</a>
+                    <a href="#" data-modal="terminos"
+                        class="hover:text-white transition-colors duration-300 cursor-pointer">Terms & Conditions</a>
+                </div>
+                <!-- Social -->
+                <div class="flex gap-4 items-center">
+                    <!-- TikTok Icon -->
+                    <a href="https://www.tiktok.com/@mynextbymusa?_r=1&_t=ZN-96wInTFqMqZ" target="_blank"
+                        rel="noopener noreferrer"
+                        class="group w-10 h-10 flex items-center justify-center rounded-full border border-white/10 hover:border-transparent transition-all duration-300 relative overflow-hidden"
+                        aria-label="TikTok">
+                        <!-- TikTok official brand background/glow on hover -->
+                        <div
+                            class="absolute inset-0 bg-[#010101] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        </div>
+                        <div
+                            class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-[#00f2fe]/20 to-[#fe0979]/20">
+                        </div>
+                        <svg class="w-5 h-5 fill-current text-white/40 group-hover:text-white relative z-10 transition-colors duration-300 filter group-hover:drop-shadow-[0_0_5px_rgba(0,242,255,0.8)]"
+                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.29 6.29 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.19 8.19 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z" />
+                        </svg>
+                    </a>
+                    <!-- Instagram Icon -->
+                    <a href="#"
+                        class="instagram-trigger group w-10 h-10 flex items-center justify-center rounded-full border border-white/10 hover:border-transparent transition-all duration-300 relative overflow-hidden"
+                        aria-label="Instagram">
+                        <!-- Instagram official brand gradient background on hover -->
+                        <div
+                            class="absolute inset-0 bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        </div>
+                        <svg class="w-5 h-5 fill-current text-white/40 group-hover:text-white relative z-10 transition-colors duration-300"
+                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4.162 4.162 0 1 1 0-8.324A4.162 4.162 0 0 1 12 16zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left text-white/30 text-[10px] font-light uppercase tracking-widest">
+                <div>© 2026 MYNEXT. All rights reserved.</div>
+                <div class="font-headline tracking-[0.25em] text-white/40">
+                    Made by <a href="https://mynextbymusa.pages.dev" class="text-white hover:text-electric-cyan transition-colors duration-300 font-bold border-b border-white/20 hover:border-electric-cyan">MYNEXT</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- COOKIES BANNER -->
+    <div id="cookie-banner" class="cookie-banner font-body">
+        <div class="space-y-3">
+            <h4 class="text-sm font-headline font-bold text-white uppercase tracking-wider">Privacy Control</h4>
+            <p class="text-xs text-white/60 leading-relaxed">
+                We use our own and third-party cookies to optimize the browsing experience, analyze site performance,
+                and offer services tailored to your preferences.
+            </p>
+        </div>
+        <div class="flex flex-col gap-2 mt-4 sm:flex-row sm:justify-end">
+            <button id="cookie-reject"
+                class="px-4 py-2 text-xs text-white/50 hover:text-white transition-colors duration-300 font-headline uppercase tracking-wider">
+                Reject non-essential
+            </button>
+            <button id="cookie-configure"
+                class="px-4 py-2 text-xs text-white/50 hover:text-white transition-colors duration-300 font-headline uppercase tracking-wider border border-white/10 rounded-lg hover:border-white/20">
+                Configure
+            </button>
+            <button id="cookie-accept-all"
+                class="px-4 py-2 text-xs bg-white text-black font-headline font-bold uppercase tracking-wider rounded-lg hover:bg-electric-cyan hover:text-black transition-all duration-300">
+                Accept all
+            </button>
+        </div>
+    </div>
+
+    <!-- LEGAL MODALS -->
+    <!-- Legal Notice -->
+    <div id="aviso-legal" class="modal-wrapper">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <button
+                class="modal-close absolute top-6 right-6 text-white/40 hover:text-white transition-colors duration-300"
+                aria-label="Close modal">
+                <span class="material-symbols-outlined text-2xl">close</span>
+            </button>
+            <h3 class="text-2xl font-headline font-bold text-gradient-cyan uppercase tracking-wider mb-6">Legal Notice
+            </h3>
+            <div class="space-y-4 text-sm text-white/70 font-body leading-relaxed">
+                <p class="font-bold text-white">1. General Information</p>
+                <p>In compliance with the information duties established in the current legislation, the general
+                    information details of this website are listed below:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li><strong>Owner:</strong> MYNEXT</li>
+                    <li><strong>Contact:</strong> <a href="mailto:mynextbymusa@gmail.com"
+                            class="text-electric-cyan hover:underline">mynextbymusa@gmail.com</a></li>
+                    <li><strong>Activity:</strong> Premium design and digital architecture services.</li>
+                </ul>
+                <p class="font-bold text-white mt-4">2. Intellectual Property</p>
+                <p>All intellectual property rights of the content of this website, its graphic design, source code, and
+                    logos are the exclusive property of MYNEXT. Any reproduction, distribution, or public communication
+                    without express authorization is prohibited.</p>
+                <p class="font-bold text-white mt-4">3. Limitation of Liability</p>
+                <p>The owner is not responsible for damages of any nature that could be caused by errors or omissions in
+                    the content, or the lack of availability of the web portal.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Policy -->
+    <div id="privacidad" class="modal-wrapper">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <button
+                class="modal-close absolute top-6 right-6 text-white/40 hover:text-white transition-colors duration-300"
+                aria-label="Close modal">
+                <span class="material-symbols-outlined text-2xl">close</span>
+            </button>
+            <h3 class="text-2xl font-headline font-bold text-gradient-cyan uppercase tracking-wider mb-6">Privacy Policy
+            </h3>
+            <div class="space-y-4 text-sm text-white/70 font-body leading-relaxed">
+                <p class="font-bold text-white">1. Data Controller</p>
+                <p>The controller for the processing of personal data collected on this website is MYNEXT, with contact
+                    email <a href="mailto:mynextbymusa@gmail.com"
+                        class="text-electric-cyan hover:underline">mynextbymusa@gmail.com</a>.</p>
+                <p class="font-bold text-white mt-4">2. Purpose of Data Processing</p>
+                <p>The personal data provided (mainly email address and name through direct inquiries or forms) will be
+                    used exclusively to reply to inquiries and requests sent by users.</p>
+                <p class="font-bold text-white mt-4">3. Data Retention</p>
+                <p>Personal data will be kept for the strictly necessary time to fulfill the purpose for which they were
+                    collected, or until the user requests their erasure.</p>
+                <p class="font-bold text-white mt-4">4. User Rights</p>
+                <p>Users can exercise their rights to access, rectification, erasure, and limitation of processing by
+                    sending an email to <a href="mailto:mynextbymusa@gmail.com"
+                        class="text-electric-cyan hover:underline">mynextbymusa@gmail.com</a>.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookies Policy -->
+    <div id="cookies" class="modal-wrapper">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <button
+                class="modal-close absolute top-6 right-6 text-white/40 hover:text-white transition-colors duration-300"
+                aria-label="Close modal">
+                <span class="material-symbols-outlined text-2xl">close</span>
+            </button>
+            <h3 class="text-2xl font-headline font-bold text-gradient-cyan uppercase tracking-wider mb-6">Cookies Policy
+            </h3>
+            <div class="space-y-4 text-sm text-white/70 font-body leading-relaxed">
+                <p class="font-bold text-white">1. What are cookies?</p>
+                <p>A cookie is a small text file stored in your browser when visiting almost any web page. Its utility
+                    is to allow the web to remember your visit when you navigate that page again.</p>
+                <p class="font-bold text-white mt-4">2. Cookies used on this website</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li><strong>Technical Cookies:</strong> Necessary for the proper functioning of the site, such as
+                        the cookie remembering your privacy preferences.</li>
+                    <li><strong>Personalization Cookies:</strong> Allow remembering the user's preferred language.</li>
+                </ul>
+                <p class="font-bold text-white mt-4">3. How to disable cookies</p>
+                <p>At any time, you can exercise your right to disable or delete cookies from this website through the
+                    settings of your web browser.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms & Conditions -->
+    <div id="terminos" class="modal-wrapper">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <button
+                class="modal-close absolute top-6 right-6 text-white/40 hover:text-white transition-colors duration-300"
+                aria-label="Close modal">
+                <span class="material-symbols-outlined text-2xl">close</span>
+            </button>
+            <h3 class="text-2xl font-headline font-bold text-gradient-cyan uppercase tracking-wider mb-6">Terms &
+                Conditions</h3>
+            <div class="space-y-4 text-sm text-white/70 font-body leading-relaxed">
+                <p class="font-bold text-white">1. Conditions of Use</p>
+                <p>The access and/or use of this portal attributes the condition of user, who accepts the general terms
+                    of use reflected here. These conditions will apply regardless of the general terms of contracting
+                    that may be mandatory.</p>
+                <p class="font-bold text-white mt-4">2. Use of the Portal</p>
+                <p>The website provides access to information, services, programs, or data on the Internet belonging to
+                    MYNEXT. The user assumes responsibility for the use of the portal.</p>
+                <p class="font-bold text-white mt-4">3. Modifications</p>
+                <p>MYNEXT reserves the right to carry out modifications it deems appropriate in its portal without prior
+                    notice, being able to change, delete, or add both contents and services provided through it and the
+                    way they are presented.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Extracted Scripts -->
+    <script src="./js/main.js" defer></script>
+</body>
+
+</html>

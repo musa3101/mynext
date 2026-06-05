@@ -127,12 +127,14 @@ header a, footer a {
     min-height: 32px;
 }
 
-/* Header compact state when scrolling up mid-page — ghost/invisible */
+/* Header compact state when scrolling up mid-page — clearly visible and readable */
 #nav-container.nav-compact {
-    background: rgba(5, 5, 5, 0.15) !important;
-    border-color: rgba(255, 255, 255, 0.06) !important;
-    box-shadow: none !important;
-    opacity: 0.5;
+    background: rgba(5, 5, 5, 0.85) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    border-color: rgba(0, 242, 255, 0.15) !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8) !important;
+    opacity: 1;
 }
 /* Header at-top state */
 #nav-container.nav-at-top {
@@ -156,3 +158,111 @@ header a, footer a {
 #nav-container {
     transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, opacity 1.4s ease !important;
 }
+
+/* Expandable Projects Section */
+#more-projects {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.6s ease-in-out,
+                margin-top 0.8s ease;
+}
+
+#more-projects.expanded {
+    max-height: 3000px;
+    opacity: 1;
+    margin-top: 4rem;
+}
+
+/* Legal Modals */
+.modal-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+.modal-wrapper.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+.modal-container {
+    position: relative;
+    width: 100%;
+    max-width: 650px;
+    max-height: 80vh;
+    margin: 1.5rem;
+    background: #08080a;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1.25rem;
+    padding: 2.5rem;
+    z-index: 10;
+    overflow-y: auto;
+    transform: scale(0.95);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 242, 255, 0.05);
+}
+.modal-wrapper.active .modal-container {
+    transform: scale(1);
+}
+/* Style for modal scrollbar */
+.modal-container::-webkit-scrollbar {
+    width: 6px;
+}
+.modal-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+.modal-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+.modal-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 242, 255, 0.3);
+}
+
+/* Cookies Banner */
+.cookie-banner {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    width: calc(100% - 3rem);
+    max-width: 400px;
+    background: rgba(8, 8, 10, 0.95);
+    border: 1px solid rgba(0, 242, 255, 0.15);
+    border-radius: 1.25rem;
+    padding: 1.75rem;
+    z-index: 90;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 242, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transform: translateY(120%);
+    opacity: 0;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+}
+.cookie-banner.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+.cookie-banner.slide-down {
+    transform: translateY(120%);
+    opacity: 0;
+}
+
