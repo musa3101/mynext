@@ -109,6 +109,10 @@
         }
 
         updatePipes() {
+            // Fade out previous drawings to create a trail effect and prevent saturation
+            this.ctx.a.fillStyle = 'rgba(5, 5, 5, 0.04)';
+            this.ctx.a.fillRect(0, 0, this.canvas.a.width, this.canvas.a.height);
+
             this.tick++;
             for (let i = 0; i < this.pipePropsLength; i += this.pipePropCount) {
                 this.updatePipe(i);
