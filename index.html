@@ -1744,17 +1744,17 @@
     </div>
 
     <!-- LANGUAGE_SELECTOR_START -->
-    <div class="fixed top-6 right-6 z-50 flex items-center gap-2 bg-[#050505]/60 backdrop-blur-md border border-white/10 p-1.5 rounded-full shadow-lg pointer-events-auto">
-        <a href="index.html" class="opacity-100 flex" title="Español">
-            <svg class="w-5 h-5 rounded-full overflow-hidden border border-electric-cyan/40 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+    <div class="fixed top-24 right-3 sm:top-6 sm:right-6 md:right-12 z-50 flex items-center gap-2 bg-[#050505]/60 backdrop-blur-md border border-white/10 p-1.5 rounded-full shadow-lg pointer-events-auto">
+        <a href="index.html" class="opacity-60 hover:opacity-100 transition-opacity flex" title="Español">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 rounded-full overflow-hidden border border-white/10 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
                 <rect width="30" height="7.5" fill="#c60b1e"/>
                 <rect y="7.5" width="30" height="15" fill="#ffc400"/>
                 <rect y="22.5" width="30" height="7.5" fill="#c60b1e"/>
             </svg>
         </a>
         <span class="w-[1px] h-3 bg-white/20"></span>
-        <a href="index-en.html" class="opacity-60 hover:opacity-100 transition-opacity flex" title="English">
-            <svg class="w-5 h-5 rounded-full overflow-hidden border border-white/10 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+        <a href="index-en.html" class="opacity-100 flex" title="English">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 rounded-full overflow-hidden border border-electric-cyan/40 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
                 <rect width="30" height="30" fill="#012169"/>
                 <path d="M0,0 L30,30 M30,0 L0,30" stroke="#fff" stroke-width="4"/>
                 <path d="M0,0 L30,30 M30,0 L0,30" stroke="#c8102e" stroke-width="1.5"/>
@@ -1766,31 +1766,31 @@
     <!-- LANGUAGE_SELECTOR_END -->
 
     <!-- 0. NAVIGATION -->
-    <header id="main-header" class="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
+    <header id="main-header" class="fixed top-4 sm:top-6 left-0 right-0 z-50 flex justify-center px-2 sm:px-4 pointer-events-none w-full">
         <nav id="nav-container"
-            class="group flex items-center gap-2 sm:gap-6 md:gap-16 lg:gap-20 px-3 sm:px-8 md:px-20 py-2 bg-transparent border-none transition-all ease-in-out opacity-0 pointer-events-auto"
+            class="group flex items-center justify-between sm:justify-center w-auto max-w-[98vw] gap-2 sm:gap-6 md:gap-16 lg:gap-20 px-4 sm:px-8 md:px-20 py-2 sm:py-3 bg-transparent border border-transparent rounded-[2rem] transition-all ease-in-out opacity-0 pointer-events-auto shadow-none"
             style="transition-duration: 2400ms;">
 
             <!-- Left Navigation -->
             <div id="nav-left"
-                class="flex items-center gap-2.5 sm:gap-6 md:gap-12 ease-in-out -translate-x-[150%] translate-y-1"
+                class="flex items-center gap-2 sm:gap-6 md:gap-12 ease-in-out -translate-x-[150%] translate-y-1"
                 style="transition: transform 2400ms cubic-bezier(0.16, 1, 0.3, 1);">
-                <a class="relative py-2 text-[9px] sm:text-xs md:text-[13px] font-headline font-semibold uppercase tracking-[0.2em] sm:tracking-[0.3em] md:tracking-[0.4em] text-white/85 hover:text-electric-cyan hover:scale-105 transition-all duration-300 ease-out group/link"
+                <a class="relative py-2 text-[8px] sm:text-xs md:text-[13px] font-headline font-semibold uppercase tracking-[0.15em] sm:tracking-[0.3em] md:tracking-[0.4em] text-white/85 hover:text-electric-cyan hover:scale-105 transition-all duration-300 ease-out group/link"
                     href="#inicio">Inicio<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-[1.5px] bg-electric-cyan transform scale-x-0 group-hover/link:scale-x-100 transition-transform duration-300 ease-out origin-center shadow-[0_0_8px_#00F2FF]"></span></a>
-                <a class="relative py-2 text-[9px] sm:text-xs md:text-[13px] font-headline font-semibold uppercase tracking-[0.2em] sm:tracking-[0.3em] md:tracking-[0.4em] text-white/85 hover:text-electric-cyan hover:scale-105 transition-all duration-300 ease-out group/link"
-                    href="#nosotros">Nosotros<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-[1.5px] bg-electric-cyan transform scale-x-0 group-hover/link:scale-x-100 transition-transform duration-300 ease-out origin-center shadow-[0_0_8px_#00F2FF]"></span></a>
+                <a class="relative py-2 text-[8px] sm:text-xs md:text-[13px] font-headline font-semibold uppercase tracking-[0.15em] sm:tracking-[0.3em] md:tracking-[0.4em] text-white/85 hover:text-electric-cyan hover:scale-105 transition-all duration-300 ease-out group/link"
+                    href="#nosotros">About<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-[1.5px] bg-electric-cyan transform scale-x-0 group-hover/link:scale-x-100 transition-transform duration-300 ease-out origin-center shadow-[0_0_8px_#00F2FF]"></span></a>
             </div>
 
             <!-- Central Branding -->
-            <div id="nav-logo" class="relative group/logo ease-in-out -translate-y-[150%]"
+            <div id="nav-logo" class="relative group/logo ease-in-out -translate-y-[150%] mx-1 sm:mx-0 shrink-0"
                 style="transition: transform 2400ms cubic-bezier(0.16, 1, 0.3, 1);">
                 <!-- Aro difuminado exterior en cyan -->
                 <div
-                    class="absolute -inset-4 bg-electric-cyan/20 rounded-full blur-2xl opacity-0 group-hover/logo:opacity-100 transition-opacity duration-700">
+                    class="absolute -inset-4 bg-electric-cyan/20 rounded-full blur-xl sm:blur-2xl opacity-0 group-hover/logo:opacity-100 transition-opacity duration-700">
                 </div>
                 <!-- Borde cyan brillante -->
                 <div
-                    class="relative w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full p-[1.5px] bg-gradient-to-tr from-electric-cyan/60 via-white/20 to-electric-cyan/60 shadow-[0_0_20px_rgba(0,242,255,0.2)] group-hover/logo:shadow-[0_0_30px_rgba(0,242,255,0.4)] transition-all duration-700">
+                    class="relative w-9 h-9 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full p-[1px] sm:p-[1.5px] bg-gradient-to-tr from-electric-cyan/60 via-white/20 to-electric-cyan/60 shadow-[0_0_20px_rgba(0,242,255,0.2)] group-hover/logo:shadow-[0_0_30px_rgba(0,242,255,0.4)] transition-all duration-700">
                     <div
                         class="w-full h-full rounded-full bg-void-black flex items-center justify-center overflow-hidden p-0">
                         <!-- Nuevo Logo de Máxima Calidad -->
@@ -1803,11 +1803,11 @@
 
             <!-- Right Navigation -->
             <div id="nav-right"
-                class="flex items-center gap-2.5 sm:gap-6 md:gap-12 ease-in-out translate-x-[150%] translate-y-1"
+                class="flex items-center gap-2 sm:gap-6 md:gap-12 ease-in-out translate-x-[150%] translate-y-1"
                 style="transition: transform 2400ms cubic-bezier(0.16, 1, 0.3, 1);">
-                <a class="relative py-2 text-[9px] sm:text-xs md:text-[13px] font-headline font-semibold uppercase tracking-[0.2em] sm:tracking-[0.3em] md:tracking-[0.4em] text-white/85 hover:text-electric-cyan hover:scale-105 transition-all duration-300 ease-out group/link"
+                <a class="relative py-2 text-[8px] sm:text-xs md:text-[13px] font-headline font-semibold uppercase tracking-[0.15em] sm:tracking-[0.3em] md:tracking-[0.4em] text-white/85 hover:text-electric-cyan hover:scale-105 transition-all duration-300 ease-out group/link"
                     href="#portfolio">Portfolio<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-[1.5px] bg-electric-cyan transform scale-x-0 group-hover/link:scale-x-100 transition-transform duration-300 ease-out origin-center shadow-[0_0_8px_#00F2FF]"></span></a>
-                <a class="relative py-2 text-[9px] sm:text-xs md:text-[13px] font-headline font-semibold uppercase tracking-[0.2em] sm:tracking-[0.3em] md:tracking-[0.4em] text-white/85 hover:text-electric-cyan hover:scale-105 transition-all duration-300 ease-out group/link"
+                <a class="relative py-2 text-[8px] sm:text-xs md:text-[13px] font-headline font-semibold uppercase tracking-[0.15em] sm:tracking-[0.3em] md:tracking-[0.4em] text-white/85 hover:text-electric-cyan hover:scale-105 transition-all duration-300 ease-out group/link"
                     href="#contacto">Contacto<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-[1.5px] bg-electric-cyan transform scale-x-0 group-hover/link:scale-x-100 transition-transform duration-300 ease-out origin-center shadow-[0_0_8px_#00F2FF]"></span></a>
             </div>
         </nav>
@@ -1822,7 +1822,7 @@
             <!-- Elegant Neon Circuit Background -->
             <div class="content--canvas absolute inset-0 w-full h-full pointer-events-none z-0"></div>
 
-            <div class="relative z-10 flex flex-col items-center px-margin-mobile">
+            <div class="relative z-10 flex flex-col items-center px-5 sm:px-8">
 
                 <!-- Logo / Tarjeta de Presentación Premium -->
                 <div
@@ -2007,7 +2007,7 @@
         </section>
 
         <!-- 3. PORTFOLIO SECTION -->
-         <section class="min-h-screen py-32 pb-40 md:pb-48 px-margin-mobile md:px-margin-desktop bg-void-black relative overflow-hidden"
+         <section class="min-h-screen py-32 pb-40 md:pb-48 px-5 sm:px-8 md:px-16 lg:px-24 bg-void-black relative overflow-hidden"
             id="portfolio">
             <!-- Stars Background -->
             <div class="stars-container">
@@ -2257,7 +2257,7 @@
 
         <!-- 4. CONTACTO SECTION -->
         <section
-            class="min-h-screen py-32 px-margin-mobile md:px-margin-desktop flex items-center justify-center relative bg-void-black"
+            class="min-h-screen py-32 px-5 sm:px-8 md:px-16 lg:px-24 flex items-center justify-center relative bg-void-black"
             id="contacto">
             <div class="max-w-4xl w-full text-center">
                 <div class="mb-20 reveal">
@@ -2379,7 +2379,7 @@
 
         <!-- 4.5 PLANES SECTION/BANNER -->
         <section
-            class="py-24 md:py-32 px-margin-mobile md:px-margin-desktop bg-void-black border-t border-white/[0.03] relative overflow-hidden"
+            class="py-24 md:py-32 px-5 sm:px-8 md:px-16 lg:px-24 bg-void-black border-t border-white/[0.03] relative overflow-hidden"
             id="planes-banner">
             <!-- Glowing Radial Background Elements -->
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-electric-cyan/5 blur-[120px] rounded-full pointer-events-none"></div>
