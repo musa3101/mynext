@@ -439,6 +439,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 8. Plans Button: Page Transition Overlay ---
     const overlay = document.getElementById('page-transition-overlay');
     if (overlay) {
+        // Ensure overlay is hidden on page load / return
+        overlay.classList.remove('active');
+        overlay.setAttribute('aria-hidden', 'true');
+
+        window.addEventListener('pageshow', function(event) {
+            overlay.classList.remove('active');
+            overlay.setAttribute('aria-hidden', 'true');
+        });
+
         // Select the plans button(s) - the animated-button that links to the planes page
         const plansBtns = document.querySelectorAll('a.animated-button[href*="planes"]');
         plansBtns.forEach(btn => {
