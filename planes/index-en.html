@@ -792,23 +792,25 @@
         
         <!-- Selector de Idioma -->
         <!-- LANGUAGE_SELECTOR_START -->
-        <div class="absolute top-24 right-3 sm:top-6 sm:right-6 md:right-12 z-50 flex items-center gap-2 bg-[#050505]/60 backdrop-blur-md border border-white/10 p-1.5 rounded-full shadow-lg pointer-events-auto no-print">
-            <a href="index.html" class="opacity-60 hover:opacity-100 transition-opacity flex" title="Español">
-                <svg class="w-5 h-5 sm:w-6 sm:h-6 rounded-full overflow-hidden border border-white/10 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+        <div class="absolute top-4 right-4 sm:top-6 sm:right-6 md:right-12 z-50 flex items-center gap-1.5 sm:gap-2 bg-[#050505]/60 backdrop-blur-md border border-white/10 p-1 px-2.5 sm:p-1.5 rounded-full shadow-lg pointer-events-auto no-print">
+            <a href="index.html" class="opacity-60 hover:opacity-100 transition-opacity flex items-center justify-center gap-1" title="Español">
+                <svg class="hidden sm:block w-5 h-5 rounded-full overflow-hidden border border-white/10 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
                     <rect width="30" height="7.5" fill="#c60b1e"/>
                     <rect y="7.5" width="30" height="15" fill="#ffc400"/>
                     <rect y="22.5" width="30" height="7.5" fill="#c60b1e"/>
                 </svg>
+                <span class="sm:hidden font-headline font-bold text-[9px] tracking-wider text-white">ES</span>
             </a>
-            <span class="w-[1px] h-3 bg-white/20"></span>
-            <a href="index-en.html" class="opacity-100 flex" title="English">
-                <svg class="w-5 h-5 sm:w-6 sm:h-6 rounded-full overflow-hidden border border-cyan-400/40 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+            <span class="w-[1px] h-2.5 sm:h-3 bg-white/20"></span>
+            <a href="index-en.html" class="opacity-100 flex items-center justify-center gap-1" title="English">
+                <svg class="hidden sm:block w-5 h-5 rounded-full overflow-hidden border border-cyan-400/40 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
                     <rect width="30" height="30" fill="#012169"/>
                     <path d="M0,0 L30,30 M30,0 L0,30" stroke="#fff" stroke-width="4"/>
                     <path d="M0,0 L30,30 M30,0 L0,30" stroke="#c8102e" stroke-width="1.5"/>
                     <path d="M15,0 V30 M0,15 H30" stroke="#fff" stroke-width="6"/>
                     <path d="M15,0 V30 M0,15 H30" stroke="#c8102e" stroke-width="4"/>
                 </svg>
+                <span class="sm:hidden font-headline font-bold text-[9px] tracking-wider text-electric-cyan">EN</span>
             </a>
         </div>
         <!-- LANGUAGE_SELECTOR_END -->
