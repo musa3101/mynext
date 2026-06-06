@@ -92,6 +92,7 @@ translations_index = {
     'Diseño y desarrollo de experiencias digitales exclusivas. Elevamos tu marca con arquitectura digital premium y diseño de alta fidelidad.': 'Diseño y desarrollo de experiencias digitales exclusivas. Elevamos tu marca con arquitectura digital premium y diseño de alta fidelidad.',
     'Home': 'Inicio',
     'ABOUT': 'Nosotros',
+    'About': 'Nosotros',
     'Portfolio': 'Portfolio',
     'Contact': 'Contacto',
 
