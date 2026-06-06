@@ -1766,14 +1766,14 @@
     <!-- LANGUAGE_SELECTOR_END -->
 
     <!-- 0. NAVIGATION -->
-    <header id="main-header" class="fixed top-4 sm:top-6 left-0 right-0 z-50 flex justify-center px-2 sm:px-4 pointer-events-none w-full">
+    <header id="main-header" class="fixed top-4 sm:top-6 left-0 right-0 z-50 flex flex-col items-center px-2 sm:px-4 pointer-events-none w-full">
         <nav id="nav-container"
             class="group flex items-center justify-between sm:justify-center w-auto max-w-[98vw] gap-2 sm:gap-6 md:gap-16 lg:gap-20 px-4 sm:px-8 md:px-20 py-2 sm:py-3 bg-transparent border border-transparent rounded-[2rem] transition-all ease-in-out opacity-0 pointer-events-auto shadow-none"
             style="transition-duration: 2400ms;">
 
             <!-- Left Navigation -->
             <div id="nav-left"
-                class="flex items-center gap-2 sm:gap-6 md:gap-12 ease-in-out -translate-x-[150%] translate-y-1"
+                class="hidden sm:flex items-center gap-2 sm:gap-6 md:gap-12 ease-in-out -translate-x-[150%] translate-y-1"
                 style="transition: transform 2400ms cubic-bezier(0.16, 1, 0.3, 1);">
                 <a class="relative py-2 text-[8px] sm:text-xs md:text-[13px] font-headline font-semibold uppercase tracking-[0.15em] sm:tracking-[0.3em] md:tracking-[0.4em] text-white/85 hover:text-electric-cyan hover:scale-105 transition-all duration-300 ease-out group/link"
                     href="#inicio">Inicio<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-[1.5px] bg-electric-cyan transform scale-x-0 group-hover/link:scale-x-100 transition-transform duration-300 ease-out origin-center shadow-[0_0_8px_#00F2FF]"></span></a>
@@ -1801,9 +1801,21 @@
                 </div>
             </div>
 
+            <!-- Mobile Menu Button (only visible on mobile) -->
+            <button id="mobile-menu-btn" class="sm:hidden btn-mobile-menu focus:outline-none">
+                <span class="icon">
+                    <svg viewBox="0 0 175 80" width="22" height="22">
+                        <rect width="80" height="15" fill="#00F2FF" rx="10"></rect>
+                        <rect y="30" width="80" height="15" fill="#00F2FF" rx="10"></rect>
+                        <rect y="60" width="80" height="15" fill="#00F2FF" rx="10"></rect>
+                    </svg>
+                </span>
+                <span class="text">MENU</span>
+            </button>
+
             <!-- Right Navigation -->
             <div id="nav-right"
-                class="flex items-center gap-2 sm:gap-6 md:gap-12 ease-in-out translate-x-[150%] translate-y-1"
+                class="hidden sm:flex items-center gap-2 sm:gap-6 md:gap-12 ease-in-out translate-x-[150%] translate-y-1"
                 style="transition: transform 2400ms cubic-bezier(0.16, 1, 0.3, 1);">
                 <a class="relative py-2 text-[8px] sm:text-xs md:text-[13px] font-headline font-semibold uppercase tracking-[0.15em] sm:tracking-[0.3em] md:tracking-[0.4em] text-white/85 hover:text-electric-cyan hover:scale-105 transition-all duration-300 ease-out group/link"
                     href="#portfolio">Portfolio<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-[1.5px] bg-electric-cyan transform scale-x-0 group-hover/link:scale-x-100 transition-transform duration-300 ease-out origin-center shadow-[0_0_8px_#00F2FF]"></span></a>
@@ -1811,6 +1823,14 @@
                     href="#contacto">Contacto<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-[1.5px] bg-electric-cyan transform scale-x-0 group-hover/link:scale-x-100 transition-transform duration-300 ease-out origin-center shadow-[0_0_8px_#00F2FF]"></span></a>
             </div>
         </nav>
+
+         <!-- Floating Mobile Dropdown Menu -->
+         <div id="mobile-dropdown" class="hidden w-[92vw] max-w-[320px] flex flex-col items-center gap-3 py-6 mt-3 bg-void-black/95 backdrop-blur-2xl border border-electric-cyan/20 rounded-[2rem] shadow-[0_20px_45px_rgba(0,0,0,0.85)] pointer-events-auto opacity-0 -translate-y-4">
+              <a class="py-2 text-[11px] font-headline font-bold uppercase tracking-[0.2em] text-white/85 hover:text-electric-cyan transition-colors duration-300" href="#inicio">Inicio</a>
+              <a class="py-2 text-[11px] font-headline font-bold uppercase tracking-[0.2em] text-white/85 hover:text-electric-cyan transition-colors duration-300" href="#nosotros">Nosotros</a>
+              <a class="py-2 text-[11px] font-headline font-bold uppercase tracking-[0.2em] text-white/85 hover:text-electric-cyan transition-colors duration-300" href="#portfolio">Portfolio</a>
+              <a class="py-2 text-[11px] font-headline font-bold uppercase tracking-[0.2em] text-white/85 hover:text-electric-cyan transition-colors duration-300" href="#contacto">Contacto</a>
+         </div>
     </header>
 
     <main class="relative z-10">

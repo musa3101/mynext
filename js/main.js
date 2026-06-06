@@ -466,4 +466,59 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // --- Mobile Menu Toggle ---
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileDropdown = document.getElementById('mobile-dropdown');
+    
+    if (mobileMenuBtn && mobileDropdown) {
+        mobileMenuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isHidden = mobileDropdown.classList.contains('hidden');
+            if (isHidden) {
+                // Show dropdown
+                mobileDropdown.classList.remove('hidden');
+                // Force layout reflow
+                mobileDropdown.offsetHeight;
+                mobileDropdown.classList.remove('opacity-0', '-translate-y-4');
+                mobileDropdown.classList.add('opacity-100', 'translate-y-0');
+            } else {
+                // Hide dropdown
+                mobileDropdown.classList.remove('opacity-100', 'translate-y-0');
+                mobileDropdown.classList.add('opacity-0', '-translate-y-4');
+                // Hide after transition
+                setTimeout(() => {
+                    if (mobileDropdown.classList.contains('opacity-0')) {
+                        mobileDropdown.classList.add('hidden');
+                    }
+                }, 300);
+            }
+        });
+        
+        // Close menu when clicking links
+        const links = mobileDropdown.querySelectorAll('a');
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileDropdown.classList.remove('opacity-100', 'translate-y-0');
+                mobileDropdown.classList.add('opacity-0', '-translate-y-4');
+                setTimeout(() => {
+                    mobileDropdown.classList.add('hidden');
+                }, 300);
+            });
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mobileDropdown.contains(e.target) && e.target !== mobileMenuBtn) {
+                mobileDropdown.classList.remove('opacity-100', 'translate-y-0');
+                mobileDropdown.classList.add('opacity-0', '-translate-y-4');
+                setTimeout(() => {
+                    if (mobileDropdown.classList.contains('opacity-0')) {
+                        mobileDropdown.classList.add('hidden');
+                    }
+                }, 300);
+            }
+        });
+    }
 });
+
