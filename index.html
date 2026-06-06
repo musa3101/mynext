@@ -167,12 +167,1510 @@
         }
 
         .animate-est-premium {
-            background: linear-gradient(90deg, rgba(255, 255, 255, 0.3) 0%, rgba(0, 242, 255, 0.9) 50%, rgba(255, 255, 255, 0.3) 100%);
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.6) 0%, rgba(0, 242, 255, 1.0) 50%, rgba(255, 255, 255, 0.6) 100%);
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             opacity: 0;
             animation: estReveal 1.5s cubic-bezier(0.4, 0, 0.2, 1) 1.5s forwards, estShine 4s cubic-bezier(0.4, 0, 0.2, 1) 2s forwards;
+        }
+
+        /* 7. Neon Viewport Frame */
+        #neon-frame {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        #neon-frame.neon-frame-active {
+            opacity: 0.55; /* Soft, subtle, blurred glow */
+        }
+
+        .neon-frame-line {
+            position: absolute;
+            z-index: 100;
+        }
+
+        /* Top Line */
+        .neon-frame-top {
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(to right, transparent 20%, #00f2ff 50%, transparent 80%);
+            background-size: 200% 100%;
+            filter: drop-shadow(0 0 6px rgba(0, 242, 255, 0.8));
+            animation: topGlow 6s linear infinite;
+        }
+
+        /* Bottom Line */
+        .neon-frame-bottom {
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(to left, transparent 20%, #00f2ff 50%, transparent 80%);
+            background-size: 200% 100%;
+            filter: drop-shadow(0 0 6px rgba(0, 242, 255, 0.8));
+            animation: bottomGlow 6s linear infinite;
+            animation-delay: 3s;
+        }
+
+        /* Left Line */
+        .neon-frame-left {
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 2px;
+            background: linear-gradient(to top, transparent 20%, #00f2ff 50%, transparent 80%);
+            background-size: 100% 200%;
+            filter: drop-shadow(0 0 6px rgba(0, 242, 255, 0.8));
+            animation: leftGlow 6s linear infinite;
+            animation-delay: 4.5s;
+        }
+
+        /* Right Line */
+        .neon-frame-right {
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent 20%, #00f2ff 50%, transparent 80%);
+            background-size: 100% 200%;
+            filter: drop-shadow(0 0 6px rgba(0, 242, 255, 0.8));
+            animation: rightGlow 6s linear infinite;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes topGlow {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        @keyframes rightGlow {
+            0% { background-position: 0 -200%; }
+            100% { background-position: 0 200%; }
+        }
+        @keyframes bottomGlow {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        @keyframes leftGlow {
+            0% { background-position: 0 200%; }
+            100% { background-position: 0 -200%; }
+        }
+
+        /* 8. Uiverse Animated Button (Planes 2026) */
+        .animated-button {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 18px 42px;
+            border: 2px solid rgba(0, 242, 255, 0.4);
+            font-size: 11px;
+            font-family: 'Space Grotesk', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            background-color: transparent;
+            border-radius: 100px;
+            font-weight: 700;
+            color: #00f2ff;
+            box-shadow: 0 0 12px rgba(0, 242, 255, 0.1);
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            text-decoration: none;
+            z-index: 10;
+        }
+
+        .animated-button svg {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            fill: #00f2ff;
+            z-index: 9;
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .animated-button .arr-1 {
+            right: 18px;
+        }
+
+        .animated-button .arr-2 {
+            left: -25%;
+        }
+
+        .animated-button .circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            background-color: #00f2ff;
+            border-radius: 50%;
+            opacity: 0;
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .animated-button .text {
+            position: relative;
+            z-index: 1;
+            transform: translateX(-10px);
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .animated-button:hover {
+            box-shadow: 0 0 0 12px transparent, 0 0 35px rgba(0, 242, 255, 0.5);
+            color: #050505;
+            border-color: #00f2ff;
+            border-radius: 100px;
+        }
+
+        .animated-button:hover .arr-1 {
+            right: -25%;
+        }
+
+        .animated-button:hover .arr-2 {
+            left: 18px;
+        }
+
+        .animated-button:hover .text {
+            transform: translateX(10px);
+        }
+
+        .animated-button:hover svg {
+            fill: #050505;
+        }
+
+        .animated-button:active {
+            scale: 0.95;
+            box-shadow: 0 0 0 4px rgba(0, 242, 255, 0.6);
+        }
+
+        .animated-button:hover .circle {
+            width: 280px;
+            height: 280px;
+            opacity: 1;
+        }
+
+        /* 9. Uiverse Input Wrapper & Subscribe Button */
+        .input-wrapper {
+            width: 100%;
+            max-width: 320px;
+            height: 44px;
+            border-radius: 100px;
+            padding: 4px;
+            box-sizing: content-box;
+            display: flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.02);
+            border: 1.5px solid rgba(255, 255, 255, 0.08);
+            transition: border-color 0.4s, box-shadow 0.4s;
+            position: relative;
+        }
+
+        .input-wrapper:focus-within {
+            border-color: rgba(0, 242, 255, 0.4);
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.1);
+        }
+
+        .icon-input {
+            width: 20px;
+            height: 20px;
+            fill: rgba(255, 255, 255, 0.4);
+            margin-left: 14px;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+
+        .input-wrapper:focus-within .icon-input {
+            fill: #00f2ff;
+            transform: scale(1.1);
+        }
+
+        .input-field {
+            width: 100%;
+            height: 100%;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            padding: 0 12px;
+            background-color: transparent !important;
+            color: white !important;
+            font-family: 'Urbanist', sans-serif;
+            font-size: 13px;
+        }
+
+        .input-field::placeholder {
+            color: rgba(255, 255, 255, 0.25);
+        }
+
+        .input-field:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0px 1000px #050505 inset !important;
+            -webkit-text-fill-color: #ffffff !important;
+        }
+
+        .Subscribe-btn {
+            height: 100%;
+            padding: 0 22px;
+            border: none;
+            border-radius: 100px;
+            color: #050505;
+            cursor: pointer;
+            background-color: #00f2ff;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+
+        .arrow {
+            position: absolute;
+            transform: translateX(-100px);
+            fill: #050505;
+            transition: all 0.3s;
+        }
+
+        .Subscribe-btn:hover {
+            color: transparent;
+        }
+
+        .Subscribe-btn:hover .arrow {
+            transform: translateX(0);
+            animation: jello-vertical 0.9s both;
+            transform-origin: right;
+        }
+
+        .Subscribe-btn:active {
+            transform: scale(0.95);
+        }
+
+        .Subscribe-btn:disabled {
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            color: rgba(255, 255, 255, 0.3) !important;
+            cursor: not-allowed;
+            border: none !important;
+        }
+
+        @keyframes jello-vertical {
+            0% { transform: scale3d(1, 1, 1); }
+            30% { transform: scale3d(0.75, 1.25, 1); }
+            40% { transform: scale3d(1.25, 0.75, 1); }
+            50% { transform: scale3d(0.85, 1.15, 1); }
+            65% { transform: scale3d(1.05, 0.95, 1); }
+            75% { transform: scale3d(0.95, 1.05, 1); }
+            100% { transform: scale3d(1, 1, 1); }
+        }
+
+        /* =============================================
+           PAGE TRANSITION OVERLAY (Uiverse by dexter-st, adapted for MYNEXT)
+           ============================================= */
+        #page-transition-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: #050505;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s ease;
+        }
+
+        #page-transition-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        #page-transition-overlay .loader-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 120px;
+            width: auto;
+            margin: 2rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.6em;
+            font-weight: 600;
+            user-select: none;
+            color: #00f2ff;
+            letter-spacing: 0.15em;
+            scale: 2;
+        }
+
+        #page-transition-overlay .loader {
+            position: absolute;
+            top: 0; left: 0;
+            height: 100%; width: 100%;
+            z-index: 1;
+            background-color: transparent;
+            mask: repeating-linear-gradient(
+                90deg,
+                transparent 0,
+                transparent 6px,
+                black 7px,
+                black 8px
+            );
+        }
+
+        #page-transition-overlay .loader::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                radial-gradient(circle at 50% 50%, #00f2ff 0%, transparent 50%),
+                radial-gradient(circle at 45% 45%, #0066ff 0%, transparent 45%),
+                radial-gradient(circle at 55% 55%, #00f2ff 0%, transparent 45%),
+                radial-gradient(circle at 45% 55%, #7b2fff 0%, transparent 45%),
+                radial-gradient(circle at 55% 45%, #0066ff 0%, transparent 45%);
+            mask: radial-gradient(
+                circle at 50% 50%,
+                transparent 0%,
+                transparent 10%,
+                black 25%
+            );
+            animation:
+                transform-animation 2s infinite alternate,
+                opacity-animation 4s infinite;
+            animation-timing-function: cubic-bezier(0.6, 0.8, 0.5, 1);
+        }
+
+        @keyframes transform-animation {
+            0%   { transform: translate(-55%); }
+            100% { transform: translate(55%); }
+        }
+
+        @keyframes opacity-animation {
+            0%, 100% { opacity: 0; }
+            15%       { opacity: 1; }
+            65%       { opacity: 0; }
+        }
+
+        #page-transition-overlay .loader-letter {
+            display: inline-block;
+            opacity: 0;
+            animation: loader-letter-anim 4s infinite linear;
+            z-index: 2;
+        }
+
+        #page-transition-overlay .loader-letter:nth-child(1)  { animation-delay: 0.1s; }
+        #page-transition-overlay .loader-letter:nth-child(2)  { animation-delay: 0.205s; }
+        #page-transition-overlay .loader-letter:nth-child(3)  { animation-delay: 0.31s; }
+        #page-transition-overlay .loader-letter:nth-child(4)  { animation-delay: 0.415s; }
+        #page-transition-overlay .loader-letter:nth-child(5)  { animation-delay: 0.521s; }
+        #page-transition-overlay .loader-letter:nth-child(6)  { animation-delay: 0.626s; }
+        #page-transition-overlay .loader-letter:nth-child(7)  { animation-delay: 0.731s; }
+        #page-transition-overlay .loader-letter:nth-child(8)  { animation-delay: 0.837s; }
+        #page-transition-overlay .loader-letter:nth-child(9)  { animation-delay: 0.942s; }
+        #page-transition-overlay .loader-letter:nth-child(10) { animation-delay: 1.047s; }
+
+        @keyframes loader-letter-anim {
+            0%   { opacity: 0; }
+            5%   { opacity: 1; text-shadow: 0 0 8px #00f2ff, 0 0 20px rgba(0,242,255,0.4); transform: scale(1.1) translateY(-2px); }
+            20%  { opacity: 0.2; }
+            100% { opacity: 0; }
+        }
+
+        /* Branding sub-text below the loader */
+        #page-transition-overlay .overlay-brand {
+            margin-top: 3rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            color: rgba(0, 242, 255, 0.3);
+        }
+
+        /* Stars Background for Portfolio */
+        .stars-container {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at bottom, #09121d 0%, #050505 100%);
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        #stars {
+            width: 1px;
+            height: 1px;
+            background: transparent;
+            box-shadow:
+                501px 811px #fff,
+                1450px 1324px #fff,
+                1093px 1780px #fff,
+                1469px 678px #fff,
+                904px 741px #fff,
+                1160px 781px #fff,
+                1841px 1962px #fff,
+                1630px 1667px #fff,
+                1788px 676px #fff,
+                367px 1734px #fff,
+                1343px 156px #fff,
+                1283px 1142px #fff,
+                1062px 378px #fff,
+                1395px 467px #fff,
+                1017px 1891px #fff,
+                137px 1114px #fff,
+                1767px 1403px #fff,
+                1543px 11px #fff,
+                1078px 181px #fff,
+                1189px 1574px #fff,
+                1697px 1551px #fff,
+                439px 472px #fff,
+                1491px 677px #fff,
+                1364px 599px #fff,
+                34px 382px #fff,
+                1221px 1584px #fff,
+                1266px 1499px #fff,
+                169px 1907px #fff,
+                1219px 1125px #fff,
+                659px 18px #fff,
+                1731px 1959px #fff,
+                332px 1216px #fff,
+                1913px 788px #fff,
+                80px 712px #fff,
+                326px 1605px #fff,
+                574px 1502px #fff,
+                473px 1653px #fff,
+                404px 975px #fff,
+                322px 1797px #fff,
+                425px 1321px #fff,
+                1121px 1797px #fff,
+                731px 647px #fff,
+                891px 1584px #fff,
+                1523px 109px #fff,
+                1379px 244px #fff,
+                865px 1064px #fff,
+                493px 956px #fff,
+                624px 1380px #fff,
+                440px 619px #fff,
+                1630px 767px #fff,
+                955px 1196px #fff,
+                62px 729px #fff,
+                126px 946px #fff,
+                1256px 896px #fff,
+                1444px 256px #fff,
+                661px 1628px #fff,
+                1078px 1716px #fff,
+                300px 737px #fff,
+                1734px 413px #fff,
+                1296px 129px #fff,
+                1771px 1678px #fff,
+                977px 1764px #fff,
+                1879px 549px #fff,
+                665px 1531px #fff,
+                89px 701px #fff,
+                1084px 1183px #fff,
+                1597px 1576px #fff,
+                1354px 1774px #fff,
+                554px 1471px #fff,
+                1469px 287px #fff,
+                887px 106px #fff,
+                1962px 766px #fff,
+                638px 805px #fff,
+                1651px 741px #fff,
+                1517px 1826px #fff,
+                24px 1152px #fff,
+                507px 558px #fff,
+                1262px 652px #fff,
+                246px 1048px #fff,
+                1077px 421px #fff,
+                1866px 1847px #fff,
+                1986px 1561px #fff,
+                704px 632px #fff,
+                1991px 1875px #fff,
+                1227px 395px #fff,
+                45px 1116px #fff,
+                247px 786px #fff,
+                890px 607px #fff,
+                787px 1235px #fff,
+                557px 524px #fff,
+                1582px 1285px #fff,
+                1725px 1366px #fff,
+                952px 747px #fff,
+                251px 458px #fff,
+                1500px 1250px #fff,
+                1999px 1734px #fff,
+                1336px 1955px #fff,
+                1705px 1464px #fff,
+                728px 697px #fff,
+                594px 510px #fff,
+                1345px 1990px #fff,
+                1919px 1803px #fff,
+                1117px 966px #fff,
+                1629px 97px #fff,
+                1046px 1196px #fff,
+                810px 1092px #fff,
+                722px 976px #fff,
+                406px 18px #fff,
+                1665px 1860px #fff,
+                1758px 1628px #fff,
+                1183px 463px #fff,
+                564px 239px #fff,
+                13px 1767px #fff,
+                1482px 1472px #fff,
+                1700px 347px #fff,
+                1362px 244px #fff,
+                1141px 1708px #fff,
+                22px 885px #fff,
+                374px 1309px #fff,
+                1034px 1037px #fff,
+                1725px 1086px #fff,
+                1343px 1921px #fff,
+                596px 903px #fff,
+                1061px 478px #fff,
+                18px 1409px #fff,
+                729px 1364px #fff,
+                264px 911px #fff,
+                677px 1442px #fff,
+                123px 33px #fff,
+                1303px 646px #fff,
+                1945px 792px #fff,
+                1305px 938px #fff,
+                918px 1536px #fff,
+                620px 948px #fff,
+                183px 646px #fff,
+                695px 687px #fff,
+                881px 272px #fff,
+                1521px 1212px #fff,
+                1423px 1022px #fff,
+                1545px 1271px #fff,
+                1393px 348px #fff,
+                685px 1910px #fff,
+                1446px 856px #fff,
+                73px 1201px #fff,
+                736px 999px #fff,
+                673px 796px #fff,
+                469px 850px #fff,
+                1912px 142px #fff,
+                1278px 664px #fff,
+                184px 1990px #fff,
+                1173px 1312px #fff,
+                782px 1879px #fff,
+                323px 1035px #fff,
+                611px 908px #fff,
+                565px 1449px #fff,
+                748px 1713px #fff,
+                1047px 490px #fff,
+                1040px 1872px #fff,
+                1818px 1659px #fff,
+                1806px 1327px #fff,
+                386px 575px #fff,
+                1550px 463px #fff,
+                148px 687px #fff,
+                651px 1683px #fff,
+                1588px 1194px #fff,
+                1831px 2px #fff,
+                581px 876px #fff,
+                1396px 1743px #fff,
+                1212px 1810px #fff,
+                421px 1920px #fff,
+                658px 1461px #fff,
+                1859px 1809px #fff,
+                1456px 388px #fff,
+                186px 1627px #fff,
+                1528px 1145px #fff,
+                171px 97px #fff,
+                674px 1072px #fff,
+                676px 1052px #fff,
+                1165px 1131px #fff,
+                1088px 781px #fff,
+                1231px 948px #fff,
+                330px 257px #fff,
+                426px 1046px #fff,
+                549px 652px #fff,
+                1338px 74px #fff,
+                1749px 364px #fff,
+                931px 369px #fff,
+                383px 1428px #fff,
+                1558px 389px #fff,
+                927px 133px #fff,
+                234px 1888px #fff,
+                1785px 1617px #fff,
+                556px 643px #fff,
+                401px 275px #fff,
+                406px 1644px #fff,
+                1253px 1852px #fff,
+                1599px 883px #fff,
+                744px 1721px #fff,
+                524px 1297px #fff,
+                1226px 1177px #fff,
+                1679px 55px #fff,
+                874px 1811px #fff,
+                838px 790px #fff,
+                1241px 430px #fff,
+                1676px 652px #fff,
+                1191px 568px #fff,
+                53px 1990px #fff,
+                1163px 237px #fff,
+                61px 223px #fff,
+                592px 456px #fff,
+                1844px 271px #fff,
+                1324px 1488px #fff,
+                1373px 717px #fff,
+                1822px 709px #fff,
+                1464px 941px #fff,
+                1445px 1118px #fff,
+                991px 1414px #fff,
+                1964px 1076px #fff,
+                108px 172px #fff,
+                641px 1722px #fff,
+                1539px 427px #fff,
+                1697px 45px #fff,
+                1301px 1353px #fff,
+                1060px 329px #fff,
+                967px 1396px #fff,
+                493px 301px #fff,
+                1228px 1406px #fff,
+                1211px 1653px #fff,
+                444px 1822px #fff,
+                1746px 353px #fff,
+                1449px 381px #fff,
+                671px 887px #fff,
+                650px 138px #fff,
+                30px 1839px #fff,
+                1094px 1405px #fff,
+                273px 796px #fff,
+                1618px 1964px #fff,
+                1045px 1849px #fff,
+                1472px 1155px #fff,
+                1529px 1312px #fff,
+                728px 448px #fff,
+                44px 1908px #fff,
+                691px 818px #fff,
+                254px 293px #fff,
+                1981px 1133px #fff,
+                1307px 375px #fff,
+                196px 316px #fff,
+                1241px 1975px #fff,
+                1138px 1706px #fff,
+                1769px 463px #fff,
+                1768px 1428px #fff,
+                1730px 590px #fff,
+                1780px 523px #fff,
+                1862px 1526px #fff,
+                1613px 909px #fff,
+                1266px 1781px #fff,
+                470px 352px #fff,
+                699px 1682px #fff,
+                1002px 614px #fff,
+                1209px 133px #fff,
+                1842px 518px #fff,
+                1422px 1836px #fff,
+                1720px 1901px #fff,
+                470px 1788px #fff,
+                1355px 1387px #fff,
+                146px 1162px #fff,
+                933px 80px #fff,
+                681px 1063px #fff,
+                313px 1341px #fff,
+                740px 1498px #fff,
+                168px 1014px #fff,
+                345px 1355px #fff,
+                1498px 1562px #fff,
+                1626px 1358px #fff,
+                890px 403px #fff,
+                663px 562px #fff,
+                1481px 168px #fff,
+                22px 719px #fff,
+                774px 1041px #fff,
+                1899px 829px #fff,
+                430px 158px #fff,
+                430px 361px #fff,
+                1592px 1334px #fff,
+                224px 323px #fff,
+                1639px 1131px #fff,
+                7px 271px #fff,
+                1646px 1514px #fff,
+                1605px 1444px #fff,
+                1820px 1665px #fff,
+                1549px 1641px #fff,
+                1609px 1377px #fff,
+                486px 1098px #fff,
+                229px 613px #fff,
+                542px 1694px #fff,
+                318px 256px #fff,
+                1861px 918px #fff,
+                889px 892px #fff,
+                442px 1524px #fff,
+                19px 422px #fff,
+                1935px 1908px #fff,
+                828px 109px #fff,
+                862px 1248px #fff,
+                1275px 560px #fff,
+                906px 63px #fff,
+                337px 1605px #fff,
+                1691px 918px #fff,
+                1414px 679px #fff,
+                1726px 749px #fff,
+                1540px 1149px #fff,
+                1337px 1466px #fff,
+                446px 430px #fff,
+                676px 1616px #fff,
+                840px 326px #fff,
+                976px 977px #fff,
+                1840px 642px #fff,
+                1273px 804px #fff,
+                1071px 928px #fff,
+                1292px 1675px #fff,
+                29px 1148px #fff,
+                1585px 135px #fff,
+                1007px 563px #fff,
+                1035px 78px #fff,
+                1174px 574px #fff,
+                120px 1304px #fff,
+                845px 1292px #fff,
+                861px 540px #fff,
+                234px 232px #fff,
+                1940px 1367px #fff,
+                759px 639px #fff,
+                1775px 1381px #fff,
+                906px 372px #fff,
+                1104px 1165px #fff,
+                1524px 911px #fff,
+                1882px 330px #fff,
+                1389px 700px #fff,
+                300px 1629px #fff,
+                220px 1614px #fff,
+                563px 140px #fff,
+                1611px 1586px #fff,
+                793px 1316px #fff,
+                325px 1070px #fff,
+                1722px 1462px #fff,
+                1406px 1120px #fff,
+                1169px 1768px #fff,
+                1956px 1053px #fff,
+                959px 1587px #fff,
+                585px 1566px #fff,
+                370px 204px #fff,
+                1606px 1416px #fff,
+                443px 1606px #fff,
+                1499px 1102px #fff,
+                1943px 105px #fff,
+                1121px 1594px #fff,
+                1512px 32px #fff,
+                871px 1425px #fff,
+                433px 100px #fff,
+                294px 1471px #fff,
+                1688px 1755px #fff,
+                1666px 591px #fff,
+                1034px 300px #fff,
+                734px 1178px #fff,
+                1342px 313px #fff,
+                1616px 1590px #fff,
+                1763px 1472px #fff,
+                632px 1935px #fff,
+                1708px 872px #fff,
+                1871px 915px #fff,
+                1829px 1020px #fff,
+                1599px 578px #fff,
+                42px 585px #fff,
+                1163px 1382px #fff,
+                1744px 1272px #fff,
+                984px 1426px #fff,
+                1786px 1584px #fff,
+                1813px 379px #fff,
+                1867px 1127px #fff,
+                97px 567px #fff,
+                626px 988px #fff,
+                1178px 79px #fff,
+                1703px 211px #fff,
+                961px 1785px #fff,
+                110px 975px #fff,
+                953px 1941px #fff,
+                1027px 1790px #fff,
+                1665px 107px #fff,
+                11px 964px #fff,
+                1718px 1147px #fff,
+                21px 1728px #fff,
+                1358px 1922px #fff,
+                872px 65px #fff,
+                1191px 1635px #fff,
+                762px 681px #fff,
+                1519px 1033px #fff,
+                906px 566px #fff,
+                1074px 657px #fff,
+                1093px 415px #fff,
+                51px 198px #fff,
+                1075px 1418px #fff,
+                1547px 1070px #fff,
+                225px 920px #fff,
+                850px 1974px #fff,
+                981px 595px #fff,
+                1425px 131px #fff,
+                460px 917px #fff,
+                56px 495px #fff,
+                714px 428px #fff,
+                920px 493px #fff,
+                470px 1521px #fff,
+                532px 821px #fff,
+                1905px 71px #fff,
+                883px 1501px #fff,
+                294px 196px #fff,
+                381px 1999px #fff,
+                332px 793px #fff,
+                1246px 408px #fff,
+                233px 149px #fff,
+                315px 231px #fff,
+                1594px 1302px #fff,
+                696px 1585px #fff,
+                791px 136px #fff,
+                479px 199px #fff,
+                1627px 1413px #fff,
+                1824px 924px #fff,
+                1631px 342px #fff,
+                1251px 1151px #fff,
+                284px 1781px #fff,
+                497px 1052px #fff,
+                204px 1161px #fff,
+                646px 1499px #fff,
+                1762px 558px #fff,
+                854px 1833px #fff,
+                883px 945px #fff,
+                44px 982px #fff,
+                1101px 834px #fff,
+                515px 1748px #fff,
+                1578px 1435px #fff,
+                819px 1258px #fff,
+                776px 670px #fff,
+                115px 385px #fff,
+                1478px 434px #fff,
+                885px 20px #fff,
+                192px 1513px #fff,
+                78px 1129px #fff,
+                1774px 1105px #fff,
+                955px 1149px #fff,
+                1817px 1929px #fff,
+                1106px 1832px #fff,
+                1107px 1997px #fff,
+                94px 23px #fff,
+                243px 982px #fff,
+                43px 1972px #fff,
+                1798px 673px #fff,
+                1131px 1589px #fff,
+                841px 14px #fff,
+                826px 345px #fff,
+                687px 56px #fff,
+                1084px 32px #fff,
+                1887px 1878px #fff,
+                153px 526px #fff,
+                1828px 253px #fff,
+                1947px 1105px #fff,
+                886px 700px #fff,
+                1307px 1723px #fff,
+                1274px 651px #fff,
+                1530px 837px #fff,
+                1699px 1637px #fff,
+                1703px 1331px #fff,
+                1929px 1557px #fff,
+                1763px 737px #fff,
+                1118px 1680px #fff,
+                1545px 692px #fff,
+                1462px 1092px #fff,
+                208px 1667px #fff,
+                1393px 859px #fff,
+                186px 1794px #fff,
+                351px 1199px #fff,
+                642px 1995px #fff,
+                1061px 1726px #fff,
+                1708px 115px #fff,
+                1233px 1305px #fff,
+                637px 1786px #fff,
+                1730px 603px #fff,
+                75px 1240px #fff,
+                1704px 1326px #fff,
+                584px 346px #fff,
+                438px 1554px #fff,
+                561px 513px #fff,
+                1382px 225px #fff,
+                467px 1674px #fff,
+                1403px 815px #fff,
+                1546px 1835px #fff,
+                127px 1119px #fff,
+                276px 591px #fff,
+                688px 1458px #fff,
+                765px 646px #fff,
+                474px 984px #fff,
+                171px 361px #fff,
+                94px 1480px #fff,
+                1962px 1666px #fff,
+                909px 1037px #fff,
+                1725px 222px #fff,
+                253px 1355px #fff,
+                1892px 1901px #fff,
+                275px 1847px #fff,
+                28px 1184px #fff,
+                1725px 1382px #fff,
+                882px 647px #fff,
+                1935px 1046px #fff,
+                10px 344px #fff,
+                292px 1328px #fff,
+                127px 1352px #fff,
+                752px 929px #fff,
+                1589px 384px #fff,
+                284px 1829px #fff,
+                381px 820px #fff,
+                1229px 1125px #fff,
+                777px 429px #fff,
+                1811px 1499px #fff,
+                1573px 287px #fff,
+                295px 756px #fff,
+                389px 616px #fff,
+                781px 41px #fff,
+                1092px 333px #fff,
+                794px 1588px #fff,
+                386px 1847px #fff,
+                1802px 710px #fff,
+                662px 60px #fff,
+                640px 264px #fff,
+                463px 746px #fff,
+                1859px 799px #fff,
+                763px 37px #fff,
+                639px 396px #fff,
+                357px 1071px #fff,
+                1190px 1430px #fff,
+                1814px 257px #fff,
+                1382px 235px #fff,
+                606px 1304px #fff,
+                1939px 1470px #fff,
+                1124px 349px #fff,
+                307px 1567px #fff,
+                310px 1323px #fff,
+                1145px 922px #fff,
+                1196px 1922px #fff,
+                1647px 544px #fff,
+                788px 1337px #fff,
+                257px 632px #fff,
+                1413px 414px #fff,
+                590px 620px #fff,
+                582px 794px #fff,
+                1702px 1481px #fff,
+                1055px 53px #fff,
+                157px 346px #fff,
+                50px 1901px #fff,
+                1038px 1369px #fff,
+                796px 1941px #fff,
+                215px 194px #fff,
+                1567px 1538px #fff,
+                367px 800px #fff,
+                1044px 489px #fff,
+                1109px 1712px #fff,
+                524px 327px #fff,
+                525px 1252px #fff,
+                1475px 1240px #fff,
+                529px 436px #fff,
+                795px 834px #fff,
+                122px 1371px #fff,
+                79px 482px #fff,
+                520px 1249px #fff,
+                336px 1878px #fff,
+                188px 944px #fff,
+                325px 1259px #fff,
+                1491px 1942px #fff,
+                620px 1054px #fff,
+                1606px 1153px #fff,
+                1448px 502px #fff,
+                53px 1381px #fff,
+                107px 1670px #fff,
+                1380px 618px #fff,
+                967px 1557px #fff,
+                1116px 1722px #fff,
+                1174px 1044px #fff,
+                1805px 717px #fff,
+                663px 394px #fff,
+                1848px 1007px #fff,
+                389px 802px #fff,
+                49px 392px #fff,
+                1650px 852px #fff,
+                1678px 1012px #fff,
+                335px 1009px #fff,
+                1818px 1631px #fff,
+                1568px 742px #fff,
+                1162px 1991px #fff,
+                52px 1190px #fff,
+                1401px 928px #fff,
+                119px 1549px #fff,
+                537px 1529px #fff,
+                2px 1709px #fff,
+                122px 387px #fff,
+                543px 2px #fff,
+                27px 1971px #fff,
+                507px 1377px #fff,
+                1362px 1080px #fff,
+                1031px 1544px #fff,
+                1631px 1174px #fff,
+                1603px 312px #fff,
+                1626px 1422px #fff,
+                1430px 615px #fff,
+                1958px 1431px #fff,
+                1946px 1412px #fff,
+                1848px 247px #fff,
+                984px 1808px #fff,
+                1396px 225px #fff,
+                319px 717px #fff,
+                1252px 875px #fff,
+                1619px 156px #fff,
+                951px 1971px #fff,
+                386px 355px #fff,
+                1406px 1151px #fff,
+                273px 1538px #fff,
+                844px 1570px #fff,
+                947px 151px #fff,
+                1363px 525px #fff,
+                209px 307px #fff,
+                1923px 1718px #fff,
+                993px 1741px #fff,
+                1513px 353px #fff,
+                1353px 61px #fff,
+                664px 352px #fff,
+                1382px 359px #fff,
+                1487px 1707px #fff,
+                657px 1045px #fff,
+                1107px 490px #fff,
+                1834px 1176px #fff,
+                837px 1438px #fff,
+                1947px 448px #fff,
+                1196px 333px #fff,
+                151px 555px #fff,
+                18px 992px #fff,
+                458px 748px #fff,
+                1801px 890px #fff,
+                1093px 1012px #fff,
+                315px 1101px #fff,
+                194px 323px #fff,
+                754px 292px #fff,
+                1737px 7px #fff,
+                40px 840px #fff,
+                1170px 805px #fff,
+                176px 1753px #fff,
+                805px 1148px #fff,
+                157px 1271px #fff,
+                367px 1494px #fff,
+                363px 1111px #fff,
+                1955px 243px #fff,
+                1451px 1093px #fff,
+                375px 617px #fff,
+                1223px 720px #fff,
+                1178px 13px #fff,
+                1456px 865px #fff,
+                1440px 49px #fff,
+                186px 1569px #fff,
+                320px 1853px #fff,
+                300px 539px #fff,
+                1559px 509px #fff,
+                1985px 1108px #fff,
+                1588px 828px #fff,
+                525px 1432px #fff,
+                831px 363px #fff,
+                141px 281px #fff,
+                1319px 402px #fff,
+                40px 456px #fff,
+                1955px 478px #fff,
+                1758px 818px #fff,
+                1924px 688px #fff,
+                1030px 953px #fff,
+                1982px 210px #fff,
+                917px 1401px #fff,
+                1051px 1837px #fff,
+                1045px 463px #fff,
+                1744px 573px #fff,
+                529px 1530px #fff,
+                542px 469px #fff,
+                1982px 324px #fff,
+                1902px 1422px #fff,
+                1968px 782px #fff,
+                1666px 1561px #fff,
+                955px 304px #fff,
+                323px 778px #fff,
+                272px 443px #fff,
+                485px 581px #fff,
+                1353px 1058px #fff,
+                1257px 131px #fff,
+                434px 98px #fff,
+                1587px 1953px #fff,
+                1749px 68px #fff,
+                1984px 839px #fff,
+                1518px 183px #fff,
+                1071px 855px #fff,
+                1662px 1994px #fff,
+                1111px 106px #fff,
+                1954px 838px #fff;
+            animation: animStar 50s linear infinite;
+        }
+
+        #stars2 {
+            width: 2px;
+            height: 2px;
+            background: transparent;
+            box-shadow:
+                1925px 1320px #fff,
+                693px 1778px #fff,
+                1016px 711px #fff,
+                1171px 563px #fff,
+                661px 1919px #fff,
+                1610px 44px #fff,
+                1275px 140px #fff,
+                1208px 1802px #fff,
+                1473px 1587px #fff,
+                11px 1117px #fff,
+                853px 1757px #fff,
+                1149px 937px #fff,
+                1353px 428px #fff,
+                270px 279px #fff,
+                258px 1404px #fff,
+                417px 1188px #fff,
+                286px 561px #fff,
+                393px 1765px #fff,
+                147px 881px #fff,
+                666px 1097px #fff,
+                1425px 1278px #fff,
+                806px 156px #fff,
+                1252px 561px #fff,
+                218px 52px #fff,
+                1371px 1980px #fff,
+                171px 745px #fff,
+                1424px 89px #fff,
+                137px 244px #fff,
+                939px 1922px #fff,
+                137px 1080px #fff,
+                1757px 50px #fff,
+                904px 536px #fff,
+                1938px 1001px #fff,
+                1172px 440px #fff,
+                72px 1475px #fff,
+                102px 121px #fff,
+                804px 1671px #fff,
+                1314px 270px #fff,
+                440px 1341px #fff,
+                1216px 511px #fff,
+                1061px 1523px #fff,
+                97px 274px #fff,
+                704px 1318px #fff,
+                52px 1872px #fff,
+                1962px 296px #fff,
+                111px 289px #fff,
+                1157px 1236px #fff,
+                1347px 1451px #fff,
+                820px 286px #fff,
+                1389px 1169px #fff,
+                644px 841px #fff,
+                1286px 522px #fff,
+                955px 659px #fff,
+                428px 1805px #fff,
+                237px 557px #fff,
+                1689px 1058px #fff,
+                636px 1882px #fff,
+                1349px 1664px #fff,
+                1548px 432px #fff,
+                1841px 504px #fff,
+                302px 252px #fff,
+                827px 1765px #fff,
+                620px 123px #fff,
+                207px 748px #fff,
+                1454px 1234px #fff,
+                1967px 1790px #fff,
+                542px 33px #fff,
+                742px 1214px #fff,
+                255px 1402px #fff,
+                74px 1772px #fff,
+                699px 475px #fff,
+                980px 1253px #fff,
+                534px 1676px #fff,
+                909px 202px #fff,
+                1498px 1251px #fff,
+                1796px 120px #fff,
+                1409px 1263px #fff,
+                1627px 995px #fff,
+                969px 710px #fff,
+                1674px 676px #fff,
+                1832px 759px #fff,
+                1623px 563px #fff,
+                251px 1790px #fff,
+                96px 1688px #fff,
+                886px 239px #fff,
+                778px 150px #fff,
+                1767px 430px #fff,
+                765px 1259px #fff,
+                1189px 877px #fff,
+                444px 1629px #fff,
+                1560px 324px #fff,
+                1952px 1097px #fff,
+                712px 1173px #fff,
+                541px 911px #fff,
+                827px 1420px #fff,
+                1233px 285px #fff,
+                784px 546px #fff,
+                645px 285px #fff,
+                1273px 1255px #fff,
+                1821px 174px #fff,
+                221px 1795px #fff,
+                1004px 456px #fff,
+                1298px 941px #fff,
+                274px 387px #fff,
+                174px 376px #fff,
+                1491px 258px #fff,
+                1489px 1946px #fff,
+                1134px 1382px #fff,
+                1289px 1145px #fff,
+                464px 358px #fff,
+                1249px 1842px #fff,
+                1665px 831px #fff,
+                1982px 84px #fff,
+                541px 774px #fff,
+                1994px 523px #fff,
+                762px 1644px #fff,
+                1730px 867px #fff,
+                1951px 1287px #fff,
+                911px 1691px #fff,
+                1454px 725px #fff,
+                1287px 1940px #fff,
+                70px 564px #fff,
+                1980px 638px #fff,
+                1674px 1774px #fff,
+                1720px 116px #fff,
+                1747px 182px #fff,
+                1040px 450px #fff,
+                1795px 375px #fff,
+                857px 1471px #fff,
+                1326px 1730px #fff,
+                915px 274px #fff,
+                1224px 358px #fff,
+                1808px 60px #fff,
+                43px 1870px #fff,
+                1810px 1536px #fff,
+                1564px 1719px #fff,
+                731px 1388px #fff,
+                1953px 1967px #fff,
+                1744px 1119px #fff,
+                794px 1384px #fff,
+                959px 714px #fff,
+                18px 1932px #fff,
+                1358px 1437px #fff,
+                355px 939px #fff,
+                1355px 1648px #fff,
+                608px 719px #fff,
+                383px 758px #fff,
+                1164px 1681px #fff,
+                1045px 253px #fff,
+                424px 1279px #fff,
+                1899px 359px #fff,
+                379px 488px #fff,
+                214px 465px #fff,
+                179px 905px #fff,
+                830px 1993px #fff,
+                448px 1077px #fff,
+                1880px 1354px #fff,
+                1973px 347px #fff,
+                745px 1025px #fff,
+                788px 1007px #fff,
+                1377px 883px #fff,
+                6px 290px #fff,
+                1312px 407px #fff,
+                1398px 622px #fff,
+                1405px 339px #fff,
+                1198px 1709px #fff,
+                988px 1226px #fff,
+                87px 1459px #fff,
+                1113px 1698px #fff,
+                997px 732px #fff,
+                708px 331px #fff,
+                1876px 1112px #fff,
+                1729px 1797px #fff,
+                719px 703px #fff,
+                1295px 522px #fff,
+                758px 1061px #fff,
+                1309px 1014px #fff,
+                1327px 1365px #fff,
+                854px 1317px #fff,
+                531px 1001px #fff,
+                1751px 1040px #fff,
+                1354px 190px #fff,
+                800px 1538px #fff,
+                88px 1455px #fff,
+                668px 39px #fff,
+                1379px 41px #fff,
+                892px 524px #fff,
+                54px 649px #fff,
+                1289px 730px #fff,
+                727px 488px #fff,
+                181px 842px #fff,
+                1230px 64px #fff,
+                3px 857px #fff,
+                292px 1201px #fff,
+                1343px 673px #fff,
+                1096px 1412px #fff,
+                1520px 292px #fff,
+                104px 1683px #fff,
+                934px 1387px #fff,
+                314px 739px #fff;
+            animation: animStar 100s linear infinite;
+        }
+
+        #stars3 {
+            width: 3px;
+            height: 3px;
+            background: transparent;
+            box-shadow:
+                200px 981px #fff,
+                1731px 521px #fff,
+                132px 1039px #fff,
+                1888px 1547px #fff,
+                899px 1226px #fff,
+                1887px 580px #fff,
+                1548px 1092px #fff,
+                1626px 689px #fff,
+                254px 1072px #fff,
+                1684px 1211px #fff,
+                672px 1267px #fff,
+                939px 668px #fff,
+                1969px 645px #fff,
+                1126px 983px #fff,
+                457px 568px #fff,
+                476px 876px #fff,
+                829px 1896px #fff,
+                1364px 1846px #fff,
+                1507px 1120px #fff,
+                936px 1948px #fff,
+                1833px 832px #fff,
+                1424px 285px #fff,
+                1377px 1596px #fff,
+                432px 153px #fff,
+                1348px 1410px #fff,
+                1529px 954px #fff,
+                1102px 387px #fff,
+                264px 297px #fff,
+                811px 977px #fff,
+                1931px 673px #fff,
+                1734px 978px #fff,
+                1772px 1567px #fff,
+                1197px 1400px #fff,
+                764px 282px #fff,
+                1103px 822px #fff,
+                872px 1803px #fff,
+                1057px 1763px #fff,
+                52px 1299px #fff,
+                1312px 1236px #fff,
+                235px 1082px #fff,
+                299px 1086px #fff,
+                1017px 1602px #fff,
+                1950px 626px #fff,
+                1306px 132px #fff,
+                1358px 1618px #fff,
+                1873px 1718px #fff,
+                1447px 940px #fff,
+                1888px 1195px #fff,
+                1704px 1765px #fff,
+                872px 1357px #fff,
+                1555px 1120px #fff,
+                250px 1415px #fff,
+                450px 415px #fff,
+                492px 901px #fff,
+                170px 1641px #fff,
+                56px 1129px #fff,
+                627px 1514px #fff,
+                1221px 500px #fff,
+                324px 1895px #fff,
+                1397px 1775px #fff,
+                1966px 598px #fff,
+                1550px 763px #fff,
+                326px 1605px #fff,
+                261px 969px #fff,
+                890px 281px #fff,
+                736px 544px #fff,
+                589px 1262px #fff,
+                1581px 368px #fff,
+                1900px 1132px #fff,
+                1914px 585px #fff,
+                1864px 1517px #fff,
+                241px 217px #fff,
+                859px 787px #fff,
+                996px 1729px #fff,
+                741px 121px #fff,
+                418px 414px #fff,
+                142px 967px #fff,
+                387px 896px #fff,
+                703px 562px #fff,
+                968px 1136px #fff,
+                1682px 332px #fff,
+                1287px 846px #fff,
+                256px 1427px #fff,
+                1885px 432px #fff,
+                1739px 1458px #fff,
+                345px 1769px #fff,
+                1140px 1612px #fff,
+                192px 1921px #fff,
+                920px 471px #fff,
+                834px 881px #fff,
+                917px 1803px #fff,
+                466px 1266px #fff,
+                483px 1108px #fff,
+                689px 986px #fff,
+                1279px 786px #fff,
+                458px 910px #fff,
+                1250px 870px #fff,
+                785px 1654px #fff,
+                1543px 1757px #fff,
+                287px 1272px #fff;
+            animation: animStar 150s linear infinite;
+        }
+
+        #stars:after {
+            content: " ";
+            position: absolute;
+            top: 2000px;
+            width: 1px;
+            height: 1px;
+            background: transparent;
+            box-shadow: inherit;
+        }
+
+        #stars2:after {
+            content: " ";
+            position: absolute;
+            top: 2000px;
+            width: 2px;
+            height: 2px;
+            background: transparent;
+            box-shadow: inherit;
+        }
+
+        #stars3:after {
+            content: " ";
+            position: absolute;
+            top: 2000px;
+            width: 3px;
+            height: 3px;
+            background: transparent;
+            box-shadow: inherit;
+        }
+
+        @keyframes animStar {
+            from {
+                transform: translateY(0px);
+            }
+            to {
+                transform: translateY(-2000px);
+            }
         }
     </style>
 
@@ -219,37 +1717,85 @@
 <body
     class="bg-void-black text-on-surface font-body selection:bg-electric-cyan selection:text-void-black overflow-x-hidden">
 
+    <!-- Neon Page Frame -->
+    <div id="neon-frame">
+        <div class="neon-frame-line neon-frame-top"></div>
+        <div class="neon-frame-line neon-frame-bottom"></div>
+        <div class="neon-frame-line neon-frame-left"></div>
+        <div class="neon-frame-line neon-frame-right"></div>
+    </div>
+
+    <!-- PAGE TRANSITION OVERLAY -->
+    <div id="page-transition-overlay" aria-hidden="true">
+        <div class="loader-wrapper">
+            <span class="loader-letter">L</span>
+            <span class="loader-letter">o</span>
+            <span class="loader-letter">a</span>
+            <span class="loader-letter">d</span>
+            <span class="loader-letter">i</span>
+            <span class="loader-letter">n</span>
+            <span class="loader-letter">g</span>
+            <span class="loader-letter">.</span>
+            <span class="loader-letter">.</span>
+            <span class="loader-letter">.</span>
+            <div class="loader"></div>
+        </div>
+        <p class="overlay-brand">MYNEXT · Arquitectura Digital</p>
+    </div>
+
+    <!-- LANGUAGE_SELECTOR_START -->
+    <div class="fixed top-6 right-6 z-50 flex items-center gap-2 bg-[#050505]/60 backdrop-blur-md border border-white/10 p-1.5 rounded-full shadow-lg pointer-events-auto">
+        <a href="index.html" class="opacity-100 flex" title="Español">
+            <svg class="w-5 h-5 rounded-full overflow-hidden border border-electric-cyan/40 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+                <rect width="30" height="7.5" fill="#c60b1e"/>
+                <rect y="7.5" width="30" height="15" fill="#ffc400"/>
+                <rect y="22.5" width="30" height="7.5" fill="#c60b1e"/>
+            </svg>
+        </a>
+        <span class="w-[1px] h-3 bg-white/20"></span>
+        <a href="index-en.html" class="opacity-60 hover:opacity-100 transition-opacity flex" title="English">
+            <svg class="w-5 h-5 rounded-full overflow-hidden border border-white/10 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+                <rect width="30" height="30" fill="#012169"/>
+                <path d="M0,0 L30,30 M30,0 L0,30" stroke="#fff" stroke-width="4"/>
+                <path d="M0,0 L30,30 M30,0 L0,30" stroke="#c8102e" stroke-width="1.5"/>
+                <path d="M15,0 V30 M0,15 H30" stroke="#fff" stroke-width="6"/>
+                <path d="M15,0 V30 M0,15 H30" stroke="#c8102e" stroke-width="4"/>
+            </svg>
+        </a>
+    </div>
+    <!-- LANGUAGE_SELECTOR_END -->
+
     <!-- 0. NAVIGATION -->
     <header id="main-header" class="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
         <nav id="nav-container"
-            class="group flex items-center gap-2 sm:gap-6 md:gap-16 lg:gap-20 px-3 sm:px-8 md:px-20 py-2 rounded-full bg-[#050505]/80 backdrop-blur-2xl border border-electric-cyan/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] hover:border-electric-cyan/50 hover:bg-electric-cyan/[0.05] hover:shadow-[0_0_30px_rgba(0,242,255,0.15)] transition-all ease-in-out opacity-0 pointer-events-auto"
-            style="transition-duration: 1600ms;">
+            class="group flex items-center gap-2 sm:gap-6 md:gap-16 lg:gap-20 px-3 sm:px-8 md:px-20 py-2 bg-transparent border-none transition-all ease-in-out opacity-0 pointer-events-auto"
+            style="transition-duration: 2400ms;">
 
             <!-- Left Navigation -->
             <div id="nav-left"
                 class="flex items-center gap-2.5 sm:gap-6 md:gap-12 ease-in-out -translate-x-[150%] translate-y-1"
-                style="transition: transform 1600ms cubic-bezier(0.77, 0, 0.175, 1);">
-                <a class="text-[9px] sm:text-xs md:text-[13px] font-headline font-bold uppercase tracking-[0.1em] sm:tracking-[0.2em] md:tracking-[0.3em] text-white/85 hover:text-electric-cyan transition-all duration-300 ease-out"
-                    href="#inicio">Inicio</a>
-                <a class="text-[9px] sm:text-xs md:text-[13px] font-headline font-bold uppercase tracking-[0.1em] sm:tracking-[0.2em] md:tracking-[0.3em] text-white/85 hover:text-electric-cyan transition-all duration-300 ease-out"
-                    href="#nosotros">Nosotros</a>
+                style="transition: transform 2400ms cubic-bezier(0.16, 1, 0.3, 1);">
+                <a class="relative py-2 text-[9px] sm:text-xs md:text-[13px] font-headline font-semibold uppercase tracking-[0.2em] sm:tracking-[0.3em] md:tracking-[0.4em] text-white/85 hover:text-electric-cyan hover:scale-105 transition-all duration-300 ease-out group/link"
+                    href="#inicio">Inicio<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-[1.5px] bg-electric-cyan transform scale-x-0 group-hover/link:scale-x-100 transition-transform duration-300 ease-out origin-center shadow-[0_0_8px_#00F2FF]"></span></a>
+                <a class="relative py-2 text-[9px] sm:text-xs md:text-[13px] font-headline font-semibold uppercase tracking-[0.2em] sm:tracking-[0.3em] md:tracking-[0.4em] text-white/85 hover:text-electric-cyan hover:scale-105 transition-all duration-300 ease-out group/link"
+                    href="#nosotros">Nosotros<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-[1.5px] bg-electric-cyan transform scale-x-0 group-hover/link:scale-x-100 transition-transform duration-300 ease-out origin-center shadow-[0_0_8px_#00F2FF]"></span></a>
             </div>
 
             <!-- Central Branding -->
             <div id="nav-logo" class="relative group/logo ease-in-out -translate-y-[150%]"
-                style="transition: transform 1600ms cubic-bezier(0.77, 0, 0.175, 1);">
-                <!-- Aro difuminado exterior en rojo -->
+                style="transition: transform 2400ms cubic-bezier(0.16, 1, 0.3, 1);">
+                <!-- Aro difuminado exterior en cyan -->
                 <div
-                    class="absolute -inset-4 bg-red-600/20 rounded-full blur-2xl opacity-0 group-hover/logo:opacity-100 transition-opacity duration-700">
+                    class="absolute -inset-4 bg-electric-cyan/20 rounded-full blur-2xl opacity-0 group-hover/logo:opacity-100 transition-opacity duration-700">
                 </div>
-                <!-- Borde rojo brillante -->
+                <!-- Borde cyan brillante -->
                 <div
-                    class="relative w-9 h-9 sm:w-12 md:w-16 md:h-16 rounded-full p-[1.5px] bg-gradient-to-tr from-red-600/60 via-white/20 to-red-600/60 shadow-[0_0_20px_rgba(220,38,38,0.2)] group-hover/logo:shadow-[0_0_30px_rgba(220,38,38,0.4)] transition-all duration-700">
+                    class="relative w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full p-[1.5px] bg-gradient-to-tr from-electric-cyan/60 via-white/20 to-electric-cyan/60 shadow-[0_0_20px_rgba(0,242,255,0.2)] group-hover/logo:shadow-[0_0_30px_rgba(0,242,255,0.4)] transition-all duration-700">
                     <div
-                        class="w-full h-full rounded-full bg-void-black flex items-center justify-center overflow-hidden p-1">
+                        class="w-full h-full rounded-full bg-void-black flex items-center justify-center overflow-hidden p-0">
                         <!-- Nuevo Logo de Máxima Calidad -->
                         <img alt="Logo MYNEXT"
-                            class="w-full h-full object-contain group-hover/logo:scale-110 transition-transform duration-700"
+                            class="w-full h-full object-contain scale-125 group-hover/logo:scale-[1.35] transition-transform duration-700"
                             src="./assets/img/logo-m1-new.png">
                     </div>
                 </div>
@@ -258,18 +1804,11 @@
             <!-- Right Navigation -->
             <div id="nav-right"
                 class="flex items-center gap-2.5 sm:gap-6 md:gap-12 ease-in-out translate-x-[150%] translate-y-1"
-                style="transition: transform 1600ms cubic-bezier(0.77, 0, 0.175, 1);">
-                <a class="text-[9px] sm:text-xs md:text-[13px] font-headline font-bold uppercase tracking-[0.1em] sm:tracking-[0.2em] md:tracking-[0.3em] text-white/85 hover:text-electric-cyan transition-all duration-300 ease-out"
-                    href="#portfolio">Portfolio</a>
-                <a class="text-[9px] sm:text-xs md:text-[13px] font-headline font-bold uppercase tracking-[0.1em] sm:tracking-[0.2em] md:tracking-[0.3em] text-white/85 hover:text-electric-cyan transition-all duration-300 ease-out"
-                    href="#contacto">Contacto</a>
-                <!-- Language Toggle -->
-                <div
-                    class="flex items-center gap-1.5 sm:gap-3 text-[9px] sm:text-[10px] md:text-[11px] font-headline font-bold tracking-[0.1em] md:tracking-[0.2em] ml-2 sm:ml-6">
-                    <span class="text-electric-cyan cursor-default">ES</span>
-                    <span class="text-white/30">|</span>
-                    <a href="index-en.html" class="text-white/60 hover:text-electric-cyan transition-colors">EN</a>
-                </div>
+                style="transition: transform 2400ms cubic-bezier(0.16, 1, 0.3, 1);">
+                <a class="relative py-2 text-[9px] sm:text-xs md:text-[13px] font-headline font-semibold uppercase tracking-[0.2em] sm:tracking-[0.3em] md:tracking-[0.4em] text-white/85 hover:text-electric-cyan hover:scale-105 transition-all duration-300 ease-out group/link"
+                    href="#portfolio">Portfolio<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-[1.5px] bg-electric-cyan transform scale-x-0 group-hover/link:scale-x-100 transition-transform duration-300 ease-out origin-center shadow-[0_0_8px_#00F2FF]"></span></a>
+                <a class="relative py-2 text-[9px] sm:text-xs md:text-[13px] font-headline font-semibold uppercase tracking-[0.2em] sm:tracking-[0.3em] md:tracking-[0.4em] text-white/85 hover:text-electric-cyan hover:scale-105 transition-all duration-300 ease-out group/link"
+                    href="#contacto">Contacto<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-[1.5px] bg-electric-cyan transform scale-x-0 group-hover/link:scale-x-100 transition-transform duration-300 ease-out origin-center shadow-[0_0_8px_#00F2FF]"></span></a>
             </div>
         </nav>
     </header>
@@ -277,8 +1816,11 @@
     <main class="relative z-10">
         <!-- INICIO HERO SECTION -->
         <section
-            class="h-screen flex items-center justify-center relative bg-void-black overflow-hidden animate-breathing-bg"
+            class="h-screen flex items-center justify-center relative bg-void-black overflow-hidden"
             id="inicio">
+
+            <!-- Elegant Neon Circuit Background -->
+            <div class="content--canvas absolute inset-0 w-full h-full pointer-events-none z-0"></div>
 
             <div class="relative z-10 flex flex-col items-center px-margin-mobile">
 
@@ -330,7 +1872,7 @@
             <a class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 group transition-all duration-300"
                 href="#nosotros">
                 <span
-                    class="font-headline text-[9px] md:text-[10px] tracking-[0.4em] uppercase text-white/50 group-hover:text-white transition-colors text-center">
+                    class="font-headline text-[9px] md:text-[10px] tracking-[0.4em] uppercase text-white/75 group-hover:text-white transition-colors text-center">
                     ¿QUÉ ES MYNEXT?<br>DESCÚBRELO ABAJO
                 </span>
                 <span
@@ -342,7 +1884,11 @@
         <section
             class="min-h-screen flex flex-col items-center justify-center px-6 md:px-margin-desktop py-20 md:py-32 bg-void-black relative"
             id="nosotros">
-            <div class="max-w-container-max w-full">
+
+            <!-- Elegant Neon Circuit Background -->
+            <div class="content--canvas absolute inset-0 w-full h-full pointer-events-none z-0"></div>
+
+            <div class="max-w-container-max w-full relative z-10">
                 <div class="text-center mb-12 md:mb-16 reveal">
                     <h2
                         class="text-3xl md:text-6xl font-headline font-bold tracking-tight uppercase max-w-4xl mx-auto leading-tight mb-6 md:mb-8 text-shine-premium transition-all duration-500 hover:scale-105 cursor-default select-none transform">
@@ -381,7 +1927,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 relative z-10">
                         <!-- Step 01 -->
                         <div id="card-1"
-                            class="process-card group/bento relative overflow-hidden p-8 md:p-12 rounded-[2.5rem] bg-white/[0.02] border border-white/5 backdrop-blur-xl hover:border-electric-cyan/30 hover:bg-white/[0.04]">
+                            class="process-card group/bento relative overflow-hidden p-8 md:p-12 rounded-[2.5rem] bg-[#050505]/75 border border-white/5 backdrop-blur-xl hover:border-electric-cyan/30 hover:bg-[#050505]/90">
                             <div
                                 class="card-number absolute -right-4 -bottom-4 text-[12rem] font-headline font-black text-white/[0.02] group-hover/bento:text-electric-cyan/[0.05] transition-colors duration-700 leading-none">
                                 1</div>
@@ -401,7 +1947,7 @@
 
                         <!-- Step 02 -->
                         <div id="card-2"
-                            class="process-card group/bento relative overflow-hidden p-8 md:p-12 rounded-[2.5rem] bg-white/[0.02] border border-white/5 backdrop-blur-xl hover:border-electric-cyan/30 hover:bg-white/[0.04]"
+                            class="process-card group/bento relative overflow-hidden p-8 md:p-12 rounded-[2.5rem] bg-[#050505]/75 border border-white/5 backdrop-blur-xl hover:border-electric-cyan/30 hover:bg-[#050505]/90"
                             style="transition-delay: 0.15s;">
                             <div
                                 class="card-number absolute -right-4 -bottom-4 text-[12rem] font-headline font-black text-white/[0.02] group-hover/bento:text-electric-cyan/[0.05] transition-colors duration-700 leading-none">
@@ -422,7 +1968,7 @@
 
                         <!-- Step 03 -->
                         <div id="card-3"
-                            class="process-card group/bento relative overflow-hidden p-8 md:p-12 rounded-[2.5rem] bg-white/[0.02] border border-white/5 backdrop-blur-xl hover:border-electric-cyan/30 hover:bg-white/[0.04]"
+                            class="process-card group/bento relative overflow-hidden p-8 md:p-12 rounded-[2.5rem] bg-[#050505]/75 border border-white/5 backdrop-blur-xl hover:border-electric-cyan/30 hover:bg-[#050505]/90"
                             style="transition-delay: 0.3s;">
                             <div
                                 class="card-number absolute -right-4 -bottom-4 text-[12rem] font-headline font-black text-white/[0.02] group-hover/bento:text-electric-cyan/[0.05] transition-colors duration-700 leading-none">
@@ -461,9 +2007,15 @@
         </section>
 
         <!-- 3. PORTFOLIO SECTION -->
-        <section class="min-h-screen py-32 pb-40 md:pb-48 px-margin-mobile md:px-margin-desktop bg-void-black relative"
+         <section class="min-h-screen py-32 pb-40 md:pb-48 px-margin-mobile md:px-margin-desktop bg-void-black relative overflow-hidden"
             id="portfolio">
-            <div class="max-w-container-max mx-auto">
+            <!-- Stars Background -->
+            <div class="stars-container">
+                <div id="stars"></div>
+                <div id="stars2"></div>
+                <div id="stars3"></div>
+            </div>
+            <div class="max-w-container-max mx-auto relative z-10">
                 <div class="text-center mb-24 md:mb-32 reveal">
                     <h2 class="text-3xl md:text-5xl font-headline font-bold text-white tracking-widest uppercase">Mi Trabajo</h2>
                     <div class="w-24 h-[1px] bg-electric-cyan mx-auto mt-8 opacity-50"></div>
@@ -484,9 +2036,8 @@
                             <div
                                 class="absolute inset-0 bg-[#050505] flex items-center justify-center overflow-hidden p-6 md:p-10">
                                 <!-- Actual Project Image -->
-                                <img src="./assets/img/porfolio1.png" alt="Preview Blessed Barber Studio"
-                                    class="w-full h-full object-contain transition-transform duration-1000 group-hover:scale-105"
-                                    loading="lazy">
+                                <img src="./assets/img/porfolio1.png" alt="Preview Blessed Barber Studio" loading="lazy"
+                                    class="w-full h-full object-contain transition-transform duration-1000 group-hover:scale-105">
 
                                 <div
                                     class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500">
@@ -528,9 +2079,8 @@
                             <div
                                 class="absolute inset-0 bg-[#050505] flex items-center justify-center overflow-hidden p-6 md:p-10">
                                 <!-- Actual Project Image -->
-                                <img src="./assets/img/porfolio2.png" alt="Preview Bar Luna Llena"
-                                    class="w-full h-full object-contain transition-transform duration-1000 group-hover:scale-105"
-                                    loading="lazy">
+                                <img src="./assets/img/porfolio2.png" alt="Preview Bar Luna Llena" loading="lazy"
+                                    class="w-full h-full object-contain transition-transform duration-1000 group-hover:scale-105">
 
                                 <div
                                     class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500">
@@ -574,9 +2124,8 @@
                             </div>
                             <div
                                 class="absolute inset-0 bg-[#050505] flex items-center justify-center overflow-hidden p-6 md:p-10">
-                                <img src="./assets/img/porfolio3.png" alt="Preview Ecuaplac"
-                                    class="w-full h-full object-contain transition-transform duration-1000 group-hover:scale-105"
-                                    loading="lazy">
+                                <img src="./assets/img/porfolio3.png" alt="Preview Ecuaplac" loading="lazy"
+                                    class="w-full h-full object-contain transition-transform duration-1000 group-hover:scale-105">
                                 <div
                                     class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500">
                                 </div>
@@ -615,9 +2164,8 @@
                             </div>
                             <div
                                 class="absolute inset-0 bg-[#050505] flex items-center justify-center overflow-hidden p-6 md:p-10">
-                                <img src="./assets/img/porfolio4.png" alt="Preview RBARI Restaurant"
-                                    class="w-full h-full object-contain transition-transform duration-1000 group-hover:scale-105"
-                                    loading="lazy">
+                                <img src="./assets/img/porfolio4.png" alt="Preview RBARI Restaurant" loading="lazy"
+                                    class="w-full h-full object-contain transition-transform duration-1000 group-hover:scale-105">
                                 <div
                                     class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500">
                                 </div>
@@ -656,9 +2204,8 @@
                             </div>
                             <div
                                 class="absolute inset-0 bg-[#050505] flex items-center justify-center overflow-hidden p-6 md:p-10">
-                                <img src="./assets/img/porfolio5.png" alt="Preview NEXT ERA Caps"
-                                    class="w-full h-full object-contain transition-transform duration-1000 group-hover:scale-105"
-                                    loading="lazy">
+                                <img src="./assets/img/porfolio5.png" alt="Preview NEXT ERA Caps" loading="lazy"
+                                    class="w-full h-full object-contain transition-transform duration-1000 group-hover:scale-105">
                                 <div
                                     class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500">
                                 </div>
@@ -731,7 +2278,7 @@
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-12 max-w-4xl mx-auto reveal px-4">
                     <!-- WhatsApp Card -->
-                    <a class="group relative block p-10 md:p-14 rounded-[2.5rem] bg-white/[0.02] border border-white/5 backdrop-blur-2xl hover:border-electric-cyan/30 transition-all duration-700 hover:-translate-y-3 overflow-hidden"
+                    <a class="group relative block p-8 md:p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/5 backdrop-blur-2xl hover:border-electric-cyan/30 transition-all duration-700 hover:-translate-y-3 overflow-hidden"
                         href="https://wa.me/34673109486?text=%C2%A1Hola!%20Vengo%20desde%20la%20web%20de%20MYNEXT.%20Me%20gustar%C3%ADa%20recibir%20informaci%C3%B3n%20sobre%20vuestros%20servicios%20de%20dise%C3%B1o%20y%20arquitectura%20digital%20para%20mi%20negocio.%20%C2%A1Gracias!"
                         target="_blank" rel="noopener noreferrer">
                         <div
@@ -768,7 +2315,7 @@
                     </a>
 
                     <!-- Email Card -->
-                    <a class="group relative block p-10 md:p-14 rounded-[2.5rem] bg-white/[0.02] border border-white/5 backdrop-blur-2xl hover:border-electric-cyan/30 transition-all duration-700 hover:-translate-y-3 overflow-hidden"
+                    <a class="group relative block p-8 md:p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/5 backdrop-blur-2xl hover:border-electric-cyan/30 transition-all duration-700 hover:-translate-y-3 overflow-hidden"
                         href="mailto:mynextbymusa@gmail.com?subject=Nuevo%20Proyecto%20Digital%20%7C%20MYNEXT&body=Hola%2C%20Musa.%0A%0AHe%20estado%20revisando%20tu%20porfolio%20en%20MYNEXT%20y%20me%20interesa%20el%20enfoque%20de%20Arquitectura%20Digital%20para%20mi%20negocio.%20Me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20tus%20servicios%20y%20tarifas.%0A%0AUn%20saludo.">
                         <div
                             class="absolute -inset-px bg-gradient-to-br from-electric-cyan/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700">
@@ -792,7 +2339,6 @@
                             <div class="space-y-4 text-center flex flex-col items-center">
                                 <span
                                     class="text-white/30 text-[10px] tracking-[0.5em] uppercase block font-headline font-medium">Consultas HQ</span>
-                                <span class="text-white/70 font-body text-xs mt-1 block">mynextbymusa@gmail.com</span>
                                 <span
                                     class="inline-block px-6 py-3 bg-white text-black font-headline font-bold text-[9px] md:text-[10px] tracking-[0.25em] uppercase rounded-full group-hover:bg-electric-cyan transition-all duration-500 shadow-xl mt-2">
                                     Enviar Email →
@@ -801,31 +2347,66 @@
                         </div>
                     </a>
                 </div>
+
+                <!-- Centered Subscription Boletín de Novedades Widget -->
+                <div class="flex flex-col items-center mt-20 reveal max-w-xl mx-auto text-center space-y-6">
+                    <div class="flex flex-col items-center">
+                        <span class="text-electric-cyan/60 text-[10px] tracking-[0.5em] uppercase block font-headline font-semibold">Boletín de Novedades</span>
+                        <span class="text-white/70 font-body text-xs mt-2 block">Suscríbete para recibir novedades e ideas digitales</span>
+                    </div>
+                    <form id="email-contact-form" action="https://formsubmit.co/ajax/mynextbymusa@gmail.com" method="POST" class="w-full flex justify-center pt-2">
+                        <div class="input-wrapper">
+                            <svg class="icon-input" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <g data-name="Layer 2">
+                                    <g data-name="inbox">
+                                        <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect>
+                                        <path d="M20.79 11.34l-3.34-6.68A3 3 0 0 0 14.76 3H9.24a3 3 0 0 0-2.69 1.66l-3.34 6.68a2 2 0 0 0-.21-.9V18a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3v-5.76a2 2 0 0 0-.21-.9zM8.34 5.55a1 1 0 0 1 .9-.55h5.52a1 1 0 0 1 .9.55L18.38 11H16a1 1 0 0 0-1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-2a1 1 0 0 0-1-1H5.62z"></path>
+                                    </g>
+                                </g>
+                            </svg>
+                            <input type="email" name="email" class="input-field" placeholder="tu@correo.com" required />
+                            <button type="submit" class="Subscribe-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="10" viewBox="0 0 38 15" class="arrow">
+                                    <path d="M10 7.519l-.939-.344h0l.939.344zm14.386-1.205l-.981-.192.981.192zm1.276 5.509l.537.843.148-.094.107-.139-.792-.611zm4.819-4.304l-.385-.923h0l.385.923zm7.227.707a1 1 0 0 0 0-1.414L31.343.448a1 1 0 0 0-1.414 0 1 1 0 0 0 0 1.414l5.657 5.657-5.657 5.657a1 1 0 0 0 1.414 1.414l6.364-6.364zM1 7.519l.554.833.029-.019.094-.061.361-.23 1.277-.77c1.054-.609 2.397-1.32 3.629-1.787.617-.234 1.17-.392 1.623-.455.477-.066.707-.008.788.034.025.013.031.021.039.034a.56.56 0 0 1 .058.235c.029.327-.047.906-.39 1.842l1.878.689c.383-1.044.571-1.949.505-2.705-.072-.815-.45-1.493-1.16-1.865-.627-.329-1.358-.332-1.993-.244-.659.092-1.367.305-2.056.566-1.381.523-2.833 1.297-3.921 1.925l-1.341.808-.385.245-.104.068-.028.018c-.011.007-.011.007.543.84zm8.061-.344c-.198.54-.328 1.038-.36 1.484-.032.441.024.94.325 1.364.319.45.786.64 1.21.697.403.054.824-.001 1.21-.09.775-.179 1.694-.566 2.633-1.014l3.023-1.554c2.115-1.122 4.107-2.168 5.476-2.524.329-.086.573-.117.742-.115s.195.038.161.014c-.15-.105.085-.139-.076.685l1.963.384c.192-.98.152-2.083-.74-2.707-.405-.283-.868-.37-1.28-.376s-.849.069-1.274.179c-1.65.43-3.888 1.621-5.909 2.693l-2.948 1.517c-.92.439-1.673.743-2.221.87-.276.064-.429.065-.492.057-.043-.006.066.003.155.127.07.099.024.131.038-.063.014-.187.078-.49.243-.94l-1.878-.689zm14.343-1.053c-.361 1.844-.474 3.185-.413 4.161.059.95.294 1.72.811 2.215.567.544 1.242.546 1.664.459a2.34 2.34 0 0 0 .502-.167l.15-.076.049-.028.018-.011c.013-.008.013-.008-.524-.852l-.536-.844.019-.012c-.038.018-.064.027-.084.032-.037.008.053-.013.125.056.021.02-.151-.135-.198-.895-.046-.734.034-1.887.38-3.652l-1.963-.384zm2.257 5.701l.791.611.024-.031.08-.101.311-.377 1.093-1.213c.922-.954 2.005-1.894 2.904-2.27l-.771-1.846c-1.31.547-2.637 1.758-3.572 2.725l-1.184 1.314-.341.414-.093.117-.025.032c-.01.013-.01.013.781.624zm5.204-3.381c.989-.413 1.791-.42 2.697-.307.871.108 2.083.385 3.437.385v-2c-1.197 0-2.041-.226-3.19-.369-1.114-.139-2.297-.146-3.715.447l.771 1.846z"></path>
+                                </svg>
+                                <span class="btn-text">Enviar</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </section>
 
         <!-- 4.5 PLANES SECTION/BANNER -->
         <section
-            class="py-20 md:py-28 px-margin-mobile md:px-margin-desktop bg-void-black border-t border-white/[0.03] relative overflow-hidden"
+            class="py-24 md:py-32 px-margin-mobile md:px-margin-desktop bg-void-black border-t border-white/[0.03] relative overflow-hidden"
             id="planes-banner">
-            <div
-                class="absolute -inset-0 bg-[radial-gradient(circle_at_center,rgba(0,242,255,0.02)_0%,transparent_70%)] pointer-events-none">
-            </div>
+            <!-- Glowing Radial Background Elements -->
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-electric-cyan/5 blur-[120px] rounded-full pointer-events-none"></div>
+            
             <div class="max-w-4xl mx-auto text-center reveal relative z-10">
                 <div class="space-y-6">
                     <span
                         class="text-electric-cyan/60 text-[10px] tracking-[0.5em] uppercase font-headline font-medium block">Transparencia & Resultados</span>
-                    <h3 class="text-2xl md:text-4xl font-headline font-bold text-white uppercase tracking-tight">
-                        Diseños Exclusivos con Tarifas a Tu Medida</h3>
+                    <h3 class="text-2xl md:text-5xl font-headline font-bold text-white uppercase tracking-tight">
+                        Diseños Exclusivos con <span class="text-gradient-cyan">Tarifas a Tu Medida</span></h3>
                     <p class="text-white/50 text-sm md:text-base font-light max-w-xl mx-auto leading-relaxed">
                         Descubre nuestros planes de arquitectura digital y elige la opción que mejor se adapte a los objetivos de tu negocio.
                     </p>
                     <div class="pt-6">
-                        <a href="./planes/index.html"
-                            class="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-electric-cyan to-[#0066FF] text-white font-headline font-bold text-[11px] tracking-[0.3em] uppercase rounded-full hover:shadow-[0_0_50px_rgba(0,242,255,0.4)] hover:scale-105 active:scale-95 transition-all duration-500 border border-electric-cyan/30 group">
-                            Planes 2026
-                            <span
-                                class="material-symbols-outlined text-base group-hover:translate-x-1.5 transition-transform duration-300">arrow_forward</span>
+                        <a href="./planes/index.html" class="animated-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="arr-2" viewBox="0 0 24 24">
+                                <path
+                                    d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+                                ></path>
+                            </svg>
+                            <span class="text">Planes 2026</span>
+                            <span class="circle"></span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="arr-1" viewBox="0 0 24 24">
+                                <path
+                                    d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+                                ></path>
+                            </svg>
                         </a>
                     </div>
                 </div>
@@ -834,91 +2415,124 @@
     </main>
 
     <!-- 5. FOOTER -->
-    <footer class="py-16 px-6 md:px-margin-desktop bg-void-black border-t border-white/5 relative z-40">
-        <div class="max-w-container-max mx-auto flex flex-col gap-12">
+    <footer class="py-20 px-6 md:px-margin-desktop bg-gradient-to-b from-void-black to-[#020205] border-t border-electric-cyan/10 shadow-[0_-20px_50px_rgba(0,242,255,0.06)] relative z-40 overflow-hidden">
+        <!-- Radial Glow behind footer -->
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[300px] h-[300px] bg-blue-600/5 blur-[100px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-container-max mx-auto flex flex-col gap-12 relative z-10">
+            <!-- Custom Elegant Divider Line -->
+            <div class="w-full h-[1.5px] bg-gradient-to-r from-transparent via-electric-cyan/40 to-transparent relative mb-6">
+                <div class="absolute left-1/2 -translate-x-1/2 -top-[2px] w-20 h-1 bg-electric-cyan shadow-[0_0_20px_#00f2ff] rounded-full"></div>
+            </div>
+
             <div class="flex flex-col md:flex-row justify-between items-center md:items-start gap-8">
                 <!-- Branding -->
                 <div class="flex flex-col items-center md:items-start text-center md:text-left gap-2">
-                    <span class="text-xl font-headline font-bold text-white tracking-widest uppercase">MYNEXT</span>
-                    <span class="text-[10px] font-headline text-electric-cyan tracking-[0.3em] uppercase">Arquitectura Digital</span>
+                    <a href="#inicio">
+                        <img src="./logoheddernew.jpg" alt="MYNEXT Logo"
+                            class="h-10 md:h-12 w-auto object-contain opacity-85 hover:opacity-100 transition-opacity duration-500"
+                            loading="lazy">
+                    </a>
+                    <span class="text-[9px] font-headline text-electric-cyan tracking-[0.3em] uppercase font-semibold">Arquitectura Digital</span>
                 </div>
                 <!-- Legal Links -->
                 <div class="flex flex-wrap justify-center gap-x-8 gap-y-4 text-xs font-body text-white/40">
                     <a href="#" data-modal="aviso-legal"
-                        class="hover:text-white transition-colors duration-300 cursor-pointer">Aviso Legal</a>
+                        class="hover:text-electric-cyan hover:underline underline-offset-4 transition-colors duration-300 cursor-pointer">Aviso Legal</a>
                     <a href="#" data-modal="privacidad"
-                        class="hover:text-white transition-colors duration-300 cursor-pointer">Política de Privacidad</a>
+                        class="hover:text-electric-cyan hover:underline underline-offset-4 transition-colors duration-300 cursor-pointer">Política de Privacidad</a>
                     <a href="#" data-modal="cookies"
-                        class="hover:text-white transition-colors duration-300 cursor-pointer">Política de Cookies</a>
+                        class="hover:text-electric-cyan hover:underline underline-offset-4 transition-colors duration-300 cursor-pointer">Política de Cookies</a>
                     <a href="#" data-modal="terminos"
-                        class="hover:text-white transition-colors duration-300 cursor-pointer">Términos y Condiciones</a>
+                        class="hover:text-electric-cyan hover:underline underline-offset-4 transition-colors duration-300 cursor-pointer">Términos y Condiciones</a>
+                    <a href="#" data-modal="gestion-tecnica"
+                        class="hover:text-electric-cyan hover:underline underline-offset-4 transition-colors duration-300 cursor-pointer">Gestión Técnica</a>
                 </div>
                 <!-- Social -->
                 <div class="flex gap-4 items-center">
-                    <!-- TikTok Icon -->
-                    <a href="https://www.tiktok.com/@mynextbymusa?_r=1&_t=ZN-96wInTFqMqZ" target="_blank"
-                        rel="noopener noreferrer"
-                        class="group w-10 h-10 flex items-center justify-center rounded-full border border-white/10 hover:border-transparent transition-all duration-300 relative overflow-hidden"
-                        aria-label="TikTok">
-                        <!-- TikTok official brand background/glow on hover -->
-                        <div
-                            class="absolute inset-0 bg-[#010101] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        </div>
-                        <div
-                            class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-[#00f2fe]/20 to-[#fe0979]/20">
-                        </div>
-                        <svg class="w-5 h-5 fill-current text-white/40 group-hover:text-white relative z-10 transition-colors duration-300 filter group-hover:drop-shadow-[0_0_5px_rgba(0,242,255,0.8)]"
-                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.29 6.29 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.19 8.19 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z" />
-                        </svg>
-                    </a>
-                    <!-- Instagram Icon -->
-                    <a href="#"
-                        class="instagram-trigger group w-10 h-10 flex items-center justify-center rounded-full border border-white/10 hover:border-transparent transition-all duration-300 relative overflow-hidden"
-                        aria-label="Instagram">
-                        <!-- Instagram official brand gradient background on hover -->
-                        <div
-                            class="absolute inset-0 bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        </div>
-                        <svg class="w-5 h-5 fill-current text-white/40 group-hover:text-white relative z-10 transition-colors duration-300"
-                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4.162 4.162 0 1 1 0-8.324A4.162 4.162 0 0 1 12 16zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
-                        </svg>
-                    </a>
+                    <!-- Premium Uiverse Socials Card -->
+                    <div class="social-card group">
+                        <div class="social-background"></div>
+                        <div class="social-logo">Socials</div>
+                        
+                        <!-- TikTok -->
+                        <a href="https://www.tiktok.com/@mynextbymusa?_r=1&_t=ZN-96wInTFqMqZ" target="_blank" rel="noopener noreferrer" class="social-box social-box1" aria-label="TikTok">
+                            <span class="social-icon">
+                                <svg class="social-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.29 6.29 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.19 8.19 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z" />
+                                </svg>
+                            </span>
+                        </a>
+
+                        <!-- Instagram -->
+                        <a href="#" class="social-box social-box2 instagram-trigger" aria-label="Instagram">
+                            <span class="social-icon">
+                                <svg class="social-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4.162 4.162 0 1 1 0-8.324A4.162 4.162 0 0 1 12 16zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+                                </svg>
+                            </span>
+                        </a>
+
+                        <!-- Google Maps -->
+                        <a href="https://maps.app.goo.gl/VE5ZqxShZFKaAs8M6" target="_blank" rel="noopener noreferrer" class="social-box social-box3" aria-label="Google Maps">
+                            <span class="social-icon">
+                                <svg class="social-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left text-white/30 text-[10px] font-light uppercase tracking-widest">
                 <div>© 2026 MYNEXT. Todos los derechos reservados.</div>
-                <div class="font-headline tracking-[0.25em] text-white/40">
-                    Hecho por <a href="https://mynextbymusa.pages.dev" class="text-white hover:text-electric-cyan transition-colors duration-300 font-bold border-b border-white/20 hover:border-electric-cyan">MYNEXT</a>
+                <div class="font-headline tracking-[0.2em] text-white/30 text-[9px] hover:text-white/50 transition-colors duration-500">
+                    Made by <a href="https://mynextbymusa.pages.dev" class="text-white/60 hover:text-electric-cyan transition-all duration-500 font-semibold border-b border-white/10 hover:border-electric-cyan/40 pb-0.5 tracking-[0.25em]">MYNEXT</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- COOKIES BANNER -->
+    <!-- COOKIES BANNER (Uiverse Inspired) -->
     <div id="cookie-banner" class="cookie-banner font-body">
-        <div class="space-y-3">
-            <h4 class="text-sm font-headline font-bold text-white uppercase tracking-wider">Control de Privacidad</h4>
-            <p class="text-xs text-white/60 leading-relaxed">
-                Utilizamos cookies propias y de terceros para optimizar la experiencia de navegación, analizar el rendimiento del sitio y ofrecer servicios adaptados a tus preferencias.
+        <div class="flex flex-col items-center justify-between pt-2 px-2 relative">
+            <!-- Cute SVG Cookie -->
+            <span class="relative mx-auto -mt-16 mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" height="46" width="65" class="filter drop-shadow-[0_0_15px_rgba(234,183,137,0.3)] hover:scale-110 transition-transform duration-500 cursor-pointer">
+                    <path stroke="#000" fill="#EAB789" d="M49.157 15.69L44.58.655l-12.422 1.96L21.044.654l-8.499 2.615-6.538 5.23-4.576 9.153v11.114l4.576 8.5 7.846 5.23 10.46 1.96 7.845-2.614 9.153 2.615 11.768-2.615 7.846-7.846 1.96-5.884.655-7.191-7.846-1.308-6.537-3.922z"></path>
+                    <path fill="#9C6750" d="M32.286 3.749c-6.94 3.65-11.69 11.053-11.69 19.591 0 8.137 4.313 15.242 10.724 19.052a20.513 20.513 0 01-8.723 1.937c-11.598 0-21-9.626-21-21.5 0-11.875 9.402-21.5 21-21.5 3.495 0 6.79.874 9.689 2.42z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                    <path fill="#634647" d="M64.472 20.305a.954.954 0 00-1.172-.824 4.508 4.508 0 01-3.958-.934.953.953 0 00-1.076-.11c-.46.252-.977.383-1.502.382a3.154 3.154 0 01-2.97-2.11.954.954 0 00-.833-.634 4.54 4.54 0 01-4.205-4.507c.002-.23.022-.46.06-.687a.952.952 0 00-.213-.767 3.497 3.497 0 01-.614-3.5.953.953 0 00-.382-1.138 3.522 3.522 0 01-1.5-3.992.951.951 0 00-.762-1.227A22.611 22.611 0 0032.3 2.16 22.41 22.41 0 0022.657.001a22.654 22.654 0 109.648 43.15 22.644 22.644 0 0032.167-22.847zM22.657 43.4a20.746 20.746 0 110-41.493c2.566-.004 5.11.473 7.501 1.407a22.64 22.64 0 00.003 38.682 20.6 20.6 0 01-7.504 1.404zm19.286 0a20.746 20.746 0 112.131-41.384 5.417 5.417 0 001.918 4.635 5.346 5.346 0 00-.133 1.182A5.441 5.441 0 0046.879 11a5.804 5.804 0 00-.028.568 6.456 6.456 0 005.38 6.345 5.053 5.053 0 006.378 2.472 6.412 6.412 0 004.05 1.12 20.768 20.768 0 01-20.716 21.897z"></path>
+                    <path fill="#644647" d="M54.962 34.3a17.719 17.719 0 01-2.602 2.378.954.954 0 001.14 1.53 19.637 19.637 0 002.884-2.634.955.955 0 00-1.422-1.274z"></path>
+                    <path stroke-width="1.8" stroke="#644647" fill="#845556" d="M44.5 32.829c-.512 0-1.574.215-2 .5-.426.284-.342.263-.537.736a2.59 2.59 0 104.98.99c0-.686-.458-1.241-.943-1.726-.485-.486-.814-.5-1.5-.5zm-30.916-2.5c-.296 0-.912.134-1.159.311-.246.177-.197.164-.31.459a1.725 1.725 0 00-.086.932c.058.312.2.6.41.825.21.226.477.38.768.442.291.062.593.03.867-.092s.508-.329.673-.594a1.7 1.7 0 00.253-.896c0-.428-.266-.774-.547-1.076-.281-.302-.471-.31-.869-.311zm17.805-11.375c-.143-.492-.647-1.451-1.04-1.78-.392-.33-.348-.255-.857-.31a2.588 2.588 0 10.441 5.06c.66-.194 1.064-.788 1.395-1.39.33-.601.252-.92.06-1.58zm-22 2c-.143-.492-.647-1.451-1.04-1.78-.391-.33-.347-.255-.856-.31a2.589 2.589 0 10.44 5.06c.66-.194 1.064-.788 1.395-1.39.33-.601.252-.92.06-1.58zM38.112 7.329c-.395 0-1.216.179-1.545.415-.328.236-.263.218-.415.611-.151.393-.19.826-.114 1.243.078.417.268.8.548 1.1.28.301.636.506 1.024.59.388.082.79.04 1.155-.123.366-.163.678-.438.898-.792.22-.354.337-.77.337-1.195 0-.57-.354-1.031-.73-1.434-.374-.403-.628-.415-1.158-.415zm-19.123.703c.023-.296-.062-.92-.219-1.18-.157-.26-.148-.21-.432-.347a1.726 1.726 0 00-.922-.159 1.654 1.654 0 00-.856.344 1.471 1.471 0 00-.501.73c-.085.285-.077.589.023.872.1.282.287.532.538.718a1.7 1.7 0 00.873.323c.427.033.793-.204 1.116-.46.324-.256.347-.445.38-.841z"></path>
+                    <path fill="#634647" d="M15.027 15.605a.954.954 0 00-1.553 1.108l1.332 1.863a.955.955 0 001.705-.77.955.955 0 00-.153-.34l-1.331-1.861z"></path>
+                    <path fill="#644647" d="M43.31 23.21a.954.954 0 101.553-1.11l-1.266-1.772a.954.954 0 10-1.552 1.11l1.266 1.772z"></path>
+                    <path fill="#634647" d="M19.672 35.374a.954.954 0 00-.954.953v2.363a.954.954 0 001.907 0v-2.362a.954.954 0 00-.953-.954z"></path>
+                    <path fill="#644647" d="M33.129 29.18l-2.803 1.065a.953.953 0 00-.053 1.764.957.957 0 00.73.022l2.803-1.065a.953.953 0 00-.677-1.783v-.003zm24.373-3.628l-2.167.823a.956.956 0 00-.054 1.764.954.954 0 00.73.021l2.169-.823a.954.954 0 10-.678-1.784v-.001z"></path>
+                </svg>
+            </span>
+
+            <h5 class="text-sm md:text-base font-headline font-bold text-center text-gradient-cyan uppercase tracking-wider mb-3">
+                Tu privacidad es importante para nosotros
+            </h5>
+
+            <p class="w-full mb-6 text-xs text-center text-white/60 leading-relaxed font-body">
+                Procesamos tu información personal para medir y mejorar nuestros sitios y servicios, para ayudar en nuestras campañas y para proporcionar contenido personalizado.
+                <br />
+                Para más información, consulta nuestra
+                <a class="cursor-pointer font-bold transition-colors text-electric-cyan hover:text-white underline underline-offset-4" data-modal="cookies">Política de Privacidad</a>
             </p>
-        </div>
-        <div class="flex flex-col gap-2 mt-4 sm:flex-row sm:justify-end">
-            <button id="cookie-reject"
-                class="px-4 py-2 text-xs text-white/50 hover:text-white transition-colors duration-300 font-headline uppercase tracking-wider">
-                Rechazar no esenciales
-            </button>
-            <button id="cookie-configure"
-                class="px-4 py-2 text-xs text-white/50 hover:text-white transition-colors duration-300 font-headline uppercase tracking-wider border border-white/10 rounded-lg hover:border-white/20">
-                Configurar
-            </button>
-            <button id="cookie-accept-all"
-                class="px-4 py-2 text-xs bg-white text-black font-headline font-bold uppercase tracking-wider rounded-lg hover:bg-electric-cyan hover:text-black transition-all duration-300">
-                Aceptar todas
-            </button>
+
+            <div class="flex flex-col sm:flex-row w-full gap-3 justify-center">
+                <button id="cookie-reject" class="flex-1 py-2 text-[10px] text-white/50 hover:text-white transition-colors duration-300 font-headline uppercase tracking-wider text-center">
+                    Rechazar
+                </button>
+                <button id="cookie-configure" class="flex-1 py-2.5 text-[10px] text-electric-cyan border border-electric-cyan/20 hover:bg-electric-cyan/10 transition-colors duration-300 font-headline uppercase tracking-wider rounded-lg text-center">
+                    Más Opciones
+                </button>
+                <button id="cookie-accept-all" class="flex-1 py-2.5 text-[10px] bg-electric-cyan text-black hover:bg-white hover:text-black font-headline font-bold uppercase tracking-wider rounded-lg transition-all duration-300 shadow-[0_0_15px_rgba(0,242,255,0.4)] text-center">
+                    Aceptar Todo
+                </button>
+            </div>
         </div>
     </div>
 
@@ -926,27 +2540,35 @@
     <!-- Aviso Legal -->
     <div id="aviso-legal" class="modal-wrapper">
         <div class="modal-overlay"></div>
-        <div class="modal-container">
+        <div class="modal-container border border-electric-cyan/20 bg-[#060608]/95 max-w-2xl">
             <button
-                class="modal-close absolute top-6 right-6 text-white/40 hover:text-white transition-colors duration-300"
+                class="modal-close absolute top-6 right-6 text-white/40 hover:text-electric-cyan hover:rotate-90 transition-all duration-300"
                 aria-label="Close modal">
                 <span class="material-symbols-outlined text-2xl">close</span>
             </button>
-            <h3 class="text-2xl font-headline font-bold text-gradient-cyan uppercase tracking-wider mb-6">Aviso Legal
-            </h3>
-            <div class="space-y-4 text-sm text-white/70 font-body leading-relaxed">
-                <p class="font-bold text-white">1. Información General</p>
-                <p>En cumplimiento del deber de información establecido en la legislación vigente, a continuación se detallan los datos de información general de este sitio web:</p>
-                <ul class="list-disc pl-5 space-y-1">
-                    <li><strong>Titular:</strong> MYNEXT</li>
-                    <li><strong>Contactoo:</strong> <a href="mailto:mynextbymusa@gmail.com"
-                            class="text-electric-cyan hover:underline">mynextbymusa@gmail.com</a></li>
-                    <li><strong>Actividad:</strong> Servicios de diseño y arquitectura digital premium.</li>
-                </ul>
-                <p class="font-bold text-white mt-4">2. Propiedad Intelectual</p>
-                <p>Todos los derechos de propiedad intelectual del contenido de este sitio web, su diseño gráfico, código fuente y logotipos son propiedad exclusiva de MYNEXT. Queda prohibida cualquier reproducción, distribución o comunicación pública sin autorización expresa.</p>
-                <p class="font-bold text-white mt-4">3. Limitación de Responsabilidad</p>
-                <p>El titular no se hace responsable de los daños y perjuicios de cualquier naturaleza que pudieran ocasionar errores u omisiones en los contenidos, o la falta de disponibilidad del portal web.</p>
+            <h3 class="text-2xl font-headline font-bold text-gradient-cyan uppercase tracking-widest mb-8 border-b border-white/5 pb-4">Aviso Legal</h3>
+            <div class="space-y-8 text-sm text-white/70 font-body leading-[1.7] tracking-wide">
+                
+                <div class="border-l-2 border-electric-cyan/30 pl-4 space-y-2">
+                    <h4 class="font-headline font-bold text-white uppercase tracking-wider text-xs md:text-sm">1. Información General</h4>
+                    <p class="text-white/60">En cumplimiento del deber de información establecido en la legislación vigente, a continuación se detallan los datos de información general de este sitio web:</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-2 text-white/50 text-xs">
+                        <li><strong>Titular:</strong> MYNEXT</li>
+                        <li><strong>Contactoo:</strong> <a href="mailto:mynextbymusa@gmail.com" class="text-electric-cyan hover:underline">mynextbymusa@gmail.com</a></li>
+                        <li><strong>Actividad:</strong> Servicios de diseño y arquitectura digital premium.</li>
+                    </ul>
+                </div>
+
+                <div class="border-l-2 border-electric-cyan/30 pl-4 space-y-2">
+                    <h4 class="font-headline font-bold text-white uppercase tracking-wider text-xs md:text-sm">2. Propiedad Intelectual</h4>
+                    <p class="text-white/60">Todos los derechos de propiedad intelectual del contenido de este sitio web, su diseño gráfico, código fuente y logotipos son propiedad exclusiva de MYNEXT. Queda prohibida cualquier reproducción, distribución o comunicación pública sin autorización expresa.</p>
+                </div>
+
+                <div class="border-l-2 border-electric-cyan/30 pl-4 space-y-2">
+                    <h4 class="font-headline font-bold text-white uppercase tracking-wider text-xs md:text-sm">3. Limitación de Responsabilidad</h4>
+                    <p class="text-white/60">El titular no se hace responsable de los daños y perjuicios de cualquier naturaleza que pudieran ocasionar errores u omisiones en los contenidos, o la falta de disponibilidad del portal web.</p>
+                </div>
+
             </div>
         </div>
     </div>
@@ -954,25 +2576,35 @@
     <!-- Política de Privacidad -->
     <div id="privacidad" class="modal-wrapper">
         <div class="modal-overlay"></div>
-        <div class="modal-container">
+        <div class="modal-container border border-electric-cyan/20 bg-[#060608]/95 max-w-2xl">
             <button
-                class="modal-close absolute top-6 right-6 text-white/40 hover:text-white transition-colors duration-300"
+                class="modal-close absolute top-6 right-6 text-white/40 hover:text-electric-cyan hover:rotate-90 transition-all duration-300"
                 aria-label="Close modal">
                 <span class="material-symbols-outlined text-2xl">close</span>
             </button>
-            <h3 class="text-2xl font-headline font-bold text-gradient-cyan uppercase tracking-wider mb-6">Política de Privacidad
-            </h3>
-            <div class="space-y-4 text-sm text-white/70 font-body leading-relaxed">
-                <p class="font-bold text-white">1. Responsable del Tratamiento</p>
-                <p>El responsable del tratamiento de los datos personales recogidos en este sitio web es MYNEXT, con correo de contacto <a href="mailto:mynextbymusa@gmail.com"
-                        class="text-electric-cyan hover:underline">mynextbymusa@gmail.com</a>.</p>
-                <p class="font-bold text-white mt-4">2. Finalidad del Tratamiento</p>
-                <p>Los datos personales facilitados (principalmente correo electrónico y nombre a través de consultas directas) serán utilizados exclusivamente para dar respuesta a las consultas y solicitudes enviadas por los usuarios.</p>
-                <p class="font-bold text-white mt-4">3. Conservación de los Datos</p>
-                <p>Los datos personales se conservarán durante el tiempo estrictamente necesario para cumplir con la finalidad para la que fueron recabados, o hasta que el usuario visite su supresión.</p>
-                <p class="font-bold text-white mt-4">4. Derechos del Usuario</p>
-                <p>Los usuarios pueden ejercer sus derechos de acceso, rectificación, supresión y limitación del tratamiento enviando un correo electrónico a <a href="mailto:mynextbymusa@gmail.com"
-                        class="text-electric-cyan hover:underline">mynextbymusa@gmail.com</a>.</p>
+            <h3 class="text-2xl font-headline font-bold text-gradient-cyan uppercase tracking-widest mb-8 border-b border-white/5 pb-4">Política de Privacidad</h3>
+            <div class="space-y-8 text-sm text-white/70 font-body leading-[1.7] tracking-wide">
+                
+                <div class="border-l-2 border-electric-cyan/30 pl-4 space-y-2">
+                    <h4 class="font-headline font-bold text-white uppercase tracking-wider text-xs md:text-sm">1. Responsable del Tratamiento</h4>
+                    <p class="text-white/60">El responsable del tratamiento de los datos personales recogidos en este sitio web es MYNEXT, con correo de contacto <a href="mailto:mynextbymusa@gmail.com" class="text-electric-cyan hover:underline">mynextbymusa@gmail.com</a>.</p>
+                </div>
+
+                <div class="border-l-2 border-electric-cyan/30 pl-4 space-y-2">
+                    <h4 class="font-headline font-bold text-white uppercase tracking-wider text-xs md:text-sm">2. Finalidad del Tratamiento</h4>
+                    <p class="text-white/60">Los datos personales facilitados (principalmente correo electrónico y nombre a través de consultas directas) serán utilizados exclusivamente para dar respuesta a las consultas y solicitudes enviadas por los usuarios.</p>
+                </div>
+
+                <div class="border-l-2 border-electric-cyan/30 pl-4 space-y-2">
+                    <h4 class="font-headline font-bold text-white uppercase tracking-wider text-xs md:text-sm">3. Conservación de los Datos</h4>
+                    <p class="text-white/60">Los datos personales se conservarán durante el tiempo estrictamente necesario para cumplir con la finalidad para la que fueron recabados, o hasta que el usuario solicite su supresión.</p>
+                </div>
+
+                <div class="border-l-2 border-electric-cyan/30 pl-4 space-y-2">
+                    <h4 class="font-headline font-bold text-white uppercase tracking-wider text-xs md:text-sm">4. Derechos del Usuario</h4>
+                    <p class="text-white/60">Los usuarios pueden ejercer sus derechos de acceso, rectificación, supresión y limitación del tratamiento enviando un correo electrónico a <a href="mailto:mynextbymusa@gmail.com" class="text-electric-cyan hover:underline">mynextbymusa@gmail.com</a>.</p>
+                </div>
+
             </div>
         </div>
     </div>
@@ -980,24 +2612,34 @@
     <!-- Política de Cookies -->
     <div id="cookies" class="modal-wrapper">
         <div class="modal-overlay"></div>
-        <div class="modal-container">
+        <div class="modal-container border border-electric-cyan/20 bg-[#060608]/95 max-w-2xl">
             <button
-                class="modal-close absolute top-6 right-6 text-white/40 hover:text-white transition-colors duration-300"
+                class="modal-close absolute top-6 right-6 text-white/40 hover:text-electric-cyan hover:rotate-90 transition-all duration-300"
                 aria-label="Close modal">
                 <span class="material-symbols-outlined text-2xl">close</span>
             </button>
-            <h3 class="text-2xl font-headline font-bold text-gradient-cyan uppercase tracking-wider mb-6">Política de Cookies
-            </h3>
-            <div class="space-y-4 text-sm text-white/70 font-body leading-relaxed">
-                <p class="font-bold text-white">1. ¿Qué son las cookies?</p>
-                <p>Una cookie es un pequeño archivo de texto que se almacena en su navegador al visitar casi cualquier página web. Su utilidad es permitir que la web recuerde su visita cuando vuelva a navegar por esa página.</p>
-                <p class="font-bold text-white mt-4">2. Cookies utilizadas en este sitio web</p>
-                <ul class="list-disc pl-5 space-y-1">
-                    <li><strong>Cookies Técnicas:</strong> Necesarias para el correcto funcionamiento del sitio, como la cookie que recuerda sus preferencias de privacidad.</li>
-                    <li><strong>Cookies de Personalización:</strong> Permiten recordar el idioma preferido del usuario.</li>
-                </ul>
-                <p class="font-bold text-white mt-4">3. Cómo desactivar las cookies</p>
-                <p>En cualquier momento puede ejercer su derecho a desactivar o eliminar las cookies de este sitio web a través de la configuración de su navegador web.</p>
+            <h3 class="text-2xl font-headline font-bold text-gradient-cyan uppercase tracking-widest mb-8 border-b border-white/5 pb-4">Política de Cookies</h3>
+            <div class="space-y-8 text-sm text-white/70 font-body leading-[1.7] tracking-wide">
+                
+                <div class="border-l-2 border-electric-cyan/30 pl-4 space-y-2">
+                    <h4 class="font-headline font-bold text-white uppercase tracking-wider text-xs md:text-sm">1. ¿Qué son las cookies?</h4>
+                    <p class="text-white/60">Una cookie es un pequeño archivo de texto que se almacena en su navegador al visitar casi cualquier página web. Su utilidad es permitir que la web recuerde su visita cuando vuelva a navegar por esa página.</p>
+                </div>
+
+                <div class="border-l-2 border-electric-cyan/30 pl-4 space-y-2">
+                    <h4 class="font-headline font-bold text-white uppercase tracking-wider text-xs md:text-sm">2. Cookies utilizadas en este sitio web</h4>
+                    <p class="text-white/60">We use the following types of cookies to guarantee a premium browsing experience:</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-2 text-white/50 text-xs">
+                        <li><strong>Cookies Técnicas:</strong> Necesarias para el correcto funcionamiento del sitio, como la cookie que recuerda sus preferencias de privacidad.</li>
+                        <li><strong>Cookies de Personalización:</strong> Permiten recordar el idioma preferido del usuario.</li>
+                    </ul>
+                </div>
+
+                <div class="border-l-2 border-electric-cyan/30 pl-4 space-y-2">
+                    <h4 class="font-headline font-bold text-white uppercase tracking-wider text-xs md:text-sm">3. Cómo desactivar las cookies</h4>
+                    <p class="text-white/60">En cualquier momento puede ejercer su derecho a desactivar o eliminar las cookies de este sitio web a través de la configuración de su navegador web.</p>
+                </div>
+
             </div>
         </div>
     </div>
@@ -1005,25 +2647,95 @@
     <!-- Términos y Condiciones -->
     <div id="terminos" class="modal-wrapper">
         <div class="modal-overlay"></div>
-        <div class="modal-container">
+        <div class="modal-container border border-electric-cyan/20 bg-[#060608]/95 max-w-2xl">
             <button
-                class="modal-close absolute top-6 right-6 text-white/40 hover:text-white transition-colors duration-300"
+                class="modal-close absolute top-6 right-6 text-white/40 hover:text-electric-cyan hover:rotate-90 transition-all duration-300"
                 aria-label="Close modal">
                 <span class="material-symbols-outlined text-2xl">close</span>
             </button>
-            <h3 class="text-2xl font-headline font-bold text-gradient-cyan uppercase tracking-wider mb-6">Términos y Condiciones</h3>
-            <div class="space-y-4 text-sm text-white/70 font-body leading-relaxed">
-                <p class="font-bold text-white">1. Condiciones de Uso</p>
-                <p>El acceso y/o uso de este portal atribuye la condición de usuario, que acepta las condiciones generales de uso aquí reflejadas. Estas condiciones serán de aplicación independientemente de las condiciones generales de contratación que en su caso resulten de obligado cumplimiento.</p>
-                <p class="font-bold text-white mt-4">2. Uso del Portal</p>
-                <p>El sitio web proporciona el acceso a informaciones, servicios, programas o datos en Internet pertenecientes a MYNEXT. El usuario asume la responsabilidad del uso del portal.</p>
-                <p class="font-bold text-white mt-4">3. Modificaciones</p>
-                <p>MYNEXT se reserva el derecho de efectuar sin previo aviso las modificaciones que considere oportunas en su portal, pudiendo cambiar, suprimir o añadir tanto los contenidos y servicios que se presten a través de la misma como la forma en la que éstos aparezcan presentados.</p>
+            <h3 class="text-2xl font-headline font-bold text-gradient-cyan uppercase tracking-widest mb-8 border-b border-white/5 pb-4">Términos y Condiciones</h3>
+            <div class="space-y-8 text-sm text-white/70 font-body leading-[1.7] tracking-wide">
+                
+                <div class="border-l-2 border-electric-cyan/30 pl-4 space-y-2">
+                    <h4 class="font-headline font-bold text-white uppercase tracking-wider text-xs md:text-sm">1. Propiedad Intelectual</h4>
+                    <p class="text-white/60">Todo el contenido, código fuente, estructura de arquitectura digital, procesos creativos y activos visuales son propiedad exclusiva de MYNEXT. La entrega al cliente otorga una licencia de uso perpetua y exclusiva sobre el producto final, pero no transfiere la propiedad intelectual sobre las herramientas, metodología, código base o plantillas de diseño desarrolladas por MYNEXT.</p>
+                </div>
+
+                <div class="border-l-2 border-electric-cyan/30 pl-4 space-y-2">
+                    <h4 class="font-headline font-bold text-white uppercase tracking-wider text-xs md:text-sm">2. Protección de Activos</h4>
+                    <p class="text-white/60">Queda estrictamente prohibida la ingeniería inversa, extracción de código o replicación de sistemas de navegación. Nuestros métodos, animaciones y flujos de trabajo premium están protegidos por derechos de autor. Cualquier uso no autorizado constituye una infracción a nuestra propiedad intelectual.</p>
+                </div>
+
+                <div class="border-l-2 border-electric-cyan/30 pl-4 space-y-2">
+                    <h4 class="font-headline font-bold text-white uppercase tracking-wider text-xs md:text-sm">3. Gestión Técnica</h4>
+                    <p class="text-white/60 text-xs md:text-sm">La infraestructura técnica, hosting y configuración son gestionados bajo la supervisión de MYNEXT para garantizar la excelencia y seguridad. La integridad operativa es responsabilidad exclusiva de MYNEXT.</p>
+                    <button data-modal="gestion-tecnica" class="mt-4 px-4 py-2 border border-electric-cyan/30 text-electric-cyan hover:bg-electric-cyan/10 transition-colors duration-300 text-[10px] md:text-xs uppercase tracking-wider font-headline rounded-lg cursor-pointer">Inspeccionar Gestión Técnica</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Gestión Técnica Modal -->
+    <div id="gestion-tecnica" class="modal-wrapper">
+        <div class="modal-overlay"></div>
+        <div class="modal-container border border-electric-cyan/20 bg-[#060608]/95 max-w-4xl">
+            <button
+                class="modal-close absolute top-6 right-6 text-white/40 hover:text-electric-cyan hover:rotate-90 transition-all duration-300"
+                aria-label="Close modal">
+                <span class="material-symbols-outlined text-2xl">close</span>
+            </button>
+            <h3 class="text-2xl font-headline font-bold text-gradient-cyan uppercase tracking-widest mb-8 border-b border-white/5 pb-4">Gestión Técnica</h3>
+            
+            <p class="text-sm text-white/60 mb-8 font-body leading-relaxed">
+                La infraestructura técnica, hosting y configuración son gestionados bajo la supervisión de MYNEXT para garantizar la excelencia y seguridad. Pasa el cursor sobre cada elemento para inspeccionar las métricas operativas:
+            </p>
+
+            <div class="flex flex-wrap gap-8 justify-center py-6">
+                <!-- Card 1: Infraestructura -->
+                <div class="tech-card">
+                    <div class="tech-card-align">
+                        <span class="tech-card-red"></span>
+                        <span class="tech-card-yellow"></span>
+                        <span class="tech-card-green"></span>
+                    </div>
+                    <h1>Infraestructura</h1>
+                    <p>
+                        Servidores cloud de alto rendimiento, redes CDN distribuidas globalmente y almacenamiento en caché perimetral optimizado para tiempos de carga ultra rápidos.
+                    </p>
+                </div>
+
+                <!-- Card 2: Security -->
+                <div class="tech-card">
+                    <div class="tech-card-align">
+                        <span class="tech-card-red"></span>
+                        <span class="tech-card-yellow"></span>
+                        <span class="tech-card-green"></span>
+                    </div>
+                    <h1>Seguridad & SSL</h1>
+                    <p>
+                        Monitoreo continuo de amenazas, renovación automática de certificados SSL, firewalls seguros y protocolos de encriptación de datos para proteger tus activos digitales.
+                    </p>
+                </div>
+
+                <!-- Card 3: Integrity -->
+                <div class="tech-card">
+                    <div class="tech-card-align">
+                        <span class="tech-card-red"></span>
+                        <span class="tech-card-yellow"></span>
+                        <span class="tech-card-green"></span>
+                    </div>
+                    <h1>Mantenimiento</h1>
+                    <p>
+                        Supervisión operativa constante, copias de seguridad periódicas de bases de datos, monitoreo de tiempo de actividad y parches de seguridad del sistema gestionados por MYNEXT.
+                    </p>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Extracted Scripts -->
+    <script src="./js/ambient.js" defer></script>
     <script src="./js/main.js" defer></script>
 </body>
 

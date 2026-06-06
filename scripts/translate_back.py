@@ -36,8 +36,53 @@ with open('index-en.html', 'r', encoding='utf-8') as f:
 
 # Replace language tags and toggle
 es_content = en_content.replace('lang="en"', 'lang="es"')
-es_content = es_content.replace('<span class="text-electric-cyan cursor-default">EN</span>', '<a href="index-en.html" class="text-white/60 hover:text-electric-cyan transition-colors">EN</a>')
-es_content = es_content.replace('<a href="index.html" class="text-white/60 hover:text-electric-cyan transition-colors">ES</a>', '<span class="text-electric-cyan cursor-default">ES</span>')
+
+# Translate Language Flag Selection Widget
+en_flag_widget = """    <!-- LANGUAGE_SELECTOR_START -->
+    <div class="fixed top-6 right-6 z-50 flex items-center gap-2 bg-[#050505]/60 backdrop-blur-md border border-white/10 p-1.5 rounded-full shadow-lg pointer-events-auto">
+        <a href="index.html" class="opacity-60 hover:opacity-100 transition-opacity flex" title="Español">
+            <svg class="w-5 h-5 rounded-full overflow-hidden border border-white/10 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+                <rect width="30" height="7.5" fill="#c60b1e"/>
+                <rect y="7.5" width="30" height="15" fill="#ffc400"/>
+                <rect y="22.5" width="30" height="7.5" fill="#c60b1e"/>
+            </svg>
+        </a>
+        <span class="w-[1px] h-3 bg-white/20"></span>
+        <a href="index-en.html" class="opacity-100 flex" title="English">
+            <svg class="w-5 h-5 rounded-full overflow-hidden border border-electric-cyan/40 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+                <rect width="30" height="30" fill="#012169"/>
+                <path d="M0,0 L30,30 M30,0 L0,30" stroke="#fff" stroke-width="4"/>
+                <path d="M0,0 L30,30 M30,0 L0,30" stroke="#c8102e" stroke-width="1.5"/>
+                <path d="M15,0 V30 M0,15 H30" stroke="#fff" stroke-width="6"/>
+                <path d="M15,0 V30 M0,15 H30" stroke="#c8102e" stroke-width="4"/>
+            </svg>
+        </a>
+    </div>
+    <!-- LANGUAGE_SELECTOR_END -->"""
+
+es_flag_widget = """    <!-- LANGUAGE_SELECTOR_START -->
+    <div class="fixed top-6 right-6 z-50 flex items-center gap-2 bg-[#050505]/60 backdrop-blur-md border border-white/10 p-1.5 rounded-full shadow-lg pointer-events-auto">
+        <a href="index.html" class="opacity-100 flex" title="Español">
+            <svg class="w-5 h-5 rounded-full overflow-hidden border border-electric-cyan/40 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+                <rect width="30" height="7.5" fill="#c60b1e"/>
+                <rect y="7.5" width="30" height="15" fill="#ffc400"/>
+                <rect y="22.5" width="30" height="7.5" fill="#c60b1e"/>
+            </svg>
+        </a>
+        <span class="w-[1px] h-3 bg-white/20"></span>
+        <a href="index-en.html" class="opacity-60 hover:opacity-100 transition-opacity flex" title="English">
+            <svg class="w-5 h-5 rounded-full overflow-hidden border border-white/10 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+                <rect width="30" height="30" fill="#012169"/>
+                <path d="M0,0 L30,30 M30,0 L0,30" stroke="#fff" stroke-width="4"/>
+                <path d="M0,0 L30,30 M30,0 L0,30" stroke="#c8102e" stroke-width="1.5"/>
+                <path d="M15,0 V30 M0,15 H30" stroke="#fff" stroke-width="6"/>
+                <path d="M15,0 V30 M0,15 H30" stroke="#c8102e" stroke-width="4"/>
+            </svg>
+        </a>
+    </div>
+    <!-- LANGUAGE_SELECTOR_END -->"""
+
+es_content = es_content.replace(en_flag_widget, es_flag_widget)
 
 # Translations dictionary for index page
 translations_index = {
@@ -113,10 +158,16 @@ translations_index = {
     'Send Email →': 'Enviar Email →',
     'Hello!%20I%20am%20coming%20from%20the%20MYNEXT%20website.%20I%20would%20like%20to%20receive%20information%20about%20your%20digital%20architecture%20and%20design%20services%20for%20my%20business.%20Thank%20you!': '%C2%A1Hola!%20Vengo%20desde%20la%20web%20de%20MYNEXT.%20Me%20gustar%C3%ADa%20recibir%20informaci%C3%B3n%20sobre%20vuestros%20servicios%20de%20dise%C3%B1o%20y%20arquitectura%20digital%20para%20mi%20negocio.%20%C2%A1Gracias!',
     'New%20Digital%20Project%20%7C%20MYNEXT&body=Hello%20Musa,%0A%0AI%20have%20been%20reviewing%20your%20portfolio%20on%20MYNEXT%20and%20I%20am%20interested%20in%20the%20Digital%20Architecture%20approach%20for%20my%20business.%20I%20would%20like%20to%20receive%20more%20information%20about%20your%20services%20and%20rates.%0A%0ABest%20regards.': 'Nuevo%20Proyecto%20Digital%20%7C%20MYNEXT&body=Hola%2C%20Musa.%0A%0AHe%20estado%20revisando%20tu%20porfolio%20en%20MYNEXT%20y%20me%20interesa%20el%20enfoque%20de%20Arquitectura%20Digital%20para%20mi%20negocio.%20Me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20tus%20servicios%20y%20tarifas.%0A%0AUn%20saludo.',
+    'Quick Message': 'Contacto Rápido',
+    'Leave your email to contact you': 'Deja tu correo para contactarte',
+    'placeholder="your@email.com"': 'placeholder="tu@correo.com"',
+    'Submit': 'Enviar',
+    'Newsletter': 'Boletín de Novedades',
+    'Subscribe to receive updates & digital insights': 'Suscríbete para recibir novedades e ideas digitales',
 
     # Planes Banner
     'Transparency & Results': 'Transparencia & Resultados',
-    'Exclusive Designs with Custom Pricing': 'Diseños Exclusivos con Tarifas a Tu Medida',
+    'Exclusive Designs with <span class="text-gradient-cyan">Custom Pricing</span>': 'Diseños Exclusivos con <span class="text-gradient-cyan">Tarifas a Tu Medida</span>',
     'Discover our digital architecture plans and choose the perfect fit for your business goals.': 'Descubre nuestros planes de arquitectura digital y elige la opción que mejor se adapte a los objetivos de tu negocio.',
     '2026 Plans': 'Planes 2026',
     'href="./planes/index-en.html"': 'href="./planes/index.html"',
@@ -128,14 +179,15 @@ translations_index = {
     'Cookies Policy': 'Política de Cookies',
     'Terms & Conditions': 'Términos y Condiciones',
     '© 2026 MYNEXT. All rights reserved.': '© 2026 MYNEXT. Todos los derechos reservados.',
-    'Made by': 'Hecho por',
+
 
     # Cookies Banner
-    'Privacy Control': 'Control de Privacidad',
-    'We use our own and third-party cookies to optimize the browsing experience, analyze site performance, and offer services tailored to your preferences.': 'Utilizamos cookies propias y de terceros para optimizar la experiencia de navegación, analizar el rendimiento del sitio y ofrecer servicios adaptados a tus preferencias.',
-    'Reject non-essential': 'Rechazar no esenciales',
-    'Configure': 'Configurar',
-    'Accept all': 'Aceptar todas',
+    'Your privacy is important to us': 'Tu privacidad es importante para nosotros',
+    'We process your personal information to measure and improve our sites and services, to assist our campaigns and to provide personalised content.': 'Procesamos tu información personal para medir y mejorar nuestros sitios y servicios, para ayudar en nuestras campañas y para proporcionar contenido personalizado.',
+    'For more information see our': 'Para más información, consulta nuestra',
+    'Reject': 'Rechazar',
+    'More Options': 'Más Opciones',
+    'Accept All': 'Aceptar Todo',
 
     # Legal Modals - General & Paragraphs
     'In compliance with the information duties established in the current legislation, the general information details of this website are listed below:': 'En cumplimiento del deber de información establecido en la legislación vigente, a continuación se detallan los datos de información general de este sitio web:',
@@ -143,7 +195,7 @@ translations_index = {
     'The owner is not responsible for damages of any nature that could be caused by errors or omissions in the content, or the lack of availability of the web portal.': 'El titular no se hace responsable de los daños y perjuicios de cualquier naturaleza que pudieran ocasionar errores u omisiones en los contenidos, o la falta de disponibilidad del portal web.',
     'The controller for the processing of personal data collected on this website is MYNEXT, with contact email': 'El responsable del tratamiento de los datos personales recogidos en este sitio web es MYNEXT, con correo de contacto',
     'The personal data provided (mainly email address and name through direct inquiries or forms) will be used exclusively to reply to inquiries and requests sent by users.': 'Los datos personales facilitados (principalmente correo electrónico y nombre a través de consultas directas) serán utilizados exclusivamente para dar respuesta a las consultas y solicitudes enviadas por los usuarios.',
-    'Personal data will be kept for the strictly necessary time to fulfill the purpose for which they were collected, or until the user requests their erasure.': 'Los datos personales se conservarán durante el tiempo estrictamente necesario para cumplir con la finalidad para la que fueron recabados, o hasta que el usuario visite su supresión.',
+    'Personal data will be kept for the strictly necessary time to fulfill the purpose for which they were collected, or until the user requests their erasure.': 'Los datos personales se conservarán durante el tiempo estrictamente necesario para cumplir con la finalidad para la que fueron recabados, o hasta que el usuario solicite su supresión.',
     'Users can exercise their rights to access, rectification, erasure, and limitation of processing by sending an email to': 'Los usuarios pueden ejercer sus derechos de acceso, rectificación, supresión y limitación del tratamiento enviando un correo electrónico a',
     'A cookie is a small text file stored in your browser when visiting almost any web page. Its utility is to allow the web to remember your visit when you navigate that page again.': 'Una cookie es un pequeño archivo de texto que se almacena en su navegador al visitar casi cualquier página web. Su utilidad es permitir que la web recuerde su visita cuando vuelva a navegar por esa página.',
     'Necessary for the proper functioning of the site, such as the cookie remembering your privacy preferences.': 'Necesarias para el correcto funcionamiento del sitio, como la cookie que recuerda sus preferencias de privacidad.',
@@ -172,6 +224,25 @@ translations_index = {
     '<strong>Technical Cookies:</strong>': '<strong>Cookies Técnicas:</strong>',
     '<strong>Personalization Cookies:</strong>': '<strong>Cookies de Personalización:</strong>',
     'Allow remembering the user\'s preferred language.': 'Permiten recordar el idioma preferido del usuario.',
+    
+    # New Premium Legal Terms
+    'All content, source code, digital architecture structure, creative processes, and visual assets are the exclusive property of MYNEXT. Delivery to the client grants a perpetual and exclusive license of use over the final product, but does not transfer intellectual property over the tools, methodology, codebase, or design templates developed by MYNEXT.': 'Todo el contenido, código fuente, estructura de arquitectura digital, procesos creativos y activos visuales son propiedad exclusiva de MYNEXT. La entrega al cliente otorga una licencia de uso perpetua y exclusiva sobre el producto final, pero no transfiere la propiedad intelectual sobre las herramientas, metodología, código base o plantillas de diseño desarrolladas por MYNEXT.',
+    'Reverse engineering, code extraction, or replication of navigation systems is strictly prohibited. Our premium methods, animations, and workflows are protected by copyright. Any unauthorized use constitutes an infringement of our intellectual property.': 'Queda estrictamente prohibida la ingeniería inversa, extracción de código o replicación de sistemas de navegación. Nuestros métodos, animaciones y flujos de trabajo premium están protegidos por derechos de autor. Cualquier uso no autorizado constituye una infracción a nuestra propiedad intelectual.',
+    'Technical infrastructure, hosting, and configuration are managed under the supervision of MYNEXT to ensure excellence and security. Operational integrity is the exclusive responsibility of MYNEXT.': 'La infraestructura técnica, hosting y configuración son gestionados bajo la supervisión de MYNEXT para garantizar la excelencia y seguridad. La integridad operativa es responsabilidad exclusiva de MYNEXT.',
+    '1. Intellectual Property': '1. Propiedad Intelectual',
+    '2. Asset Protection': '2. Protección de Activos',
+    '3. Technical Management': '3. Gestión Técnica',
+    
+    # Technical Management Modal & Uiverse Cards
+    'Technical Management': 'Gestión Técnica',
+    'Inspect Technical Management': 'Inspeccionar Gestión Técnica',
+    'Technical infrastructure, hosting, and configuration are managed under the supervision of MYNEXT to ensure excellence and security. Hover over each asset to inspect operational metrics:': 'La infraestructura técnica, hosting y configuración son gestionados bajo la supervisión de MYNEXT para garantizar la excelencia y seguridad. Pasa el cursor sobre cada elemento para inspeccionar las métricas operativas:',
+    'High-performance cloud servers, globally distributed CDN networks, and advanced edge caching optimized for ultra-fast load times.': 'Servidores cloud de alto rendimiento, redes CDN distribuidas globalmente y almacenamiento en caché perimetral optimizado para tiempos de carga ultra rápidos.',
+    'Continuous threat monitoring, automatic SSL certificate renewal, secure firewalls, and data encryption protocols protecting your digital assets.': 'Monitoreo continuo de amenazas, renovación automática de certificados SSL, firewalls seguros y protocolos de encriptación de datos para proteger tus activos digitales.',
+    'Constant operational supervision, regular database backups, uptime monitoring, and seamless framework security patches managed by MYNEXT.': 'Supervisión operativa constante, copias de seguridad periódicas de bases de datos, monitoreo de tiempo de actividad y parches de seguridad del sistema gestionados por MYNEXT.',
+    'Infrastructure': 'Infraestructura',
+    'Security & SSL': 'Seguridad & SSL',
+    'Maintenance': 'Mantenimiento',
 }
 
 # Sort keys by length descending to make sure longer sentences are replaced first
@@ -198,8 +269,55 @@ if os.path.exists('planes/index-en.html'):
 
     es_pln = en_pln.replace('lang="en"', 'lang="es"')
     es_pln = es_pln.replace('window.location.href=\'../index-en.html\'', 'window.location.href=\'../index.html\'')
-    es_pln = es_pln.replace('<span class="text-cyan-400 cursor-default">EN</span>', '<a href="index-en.html" class="text-white/60 hover:text-cyan-400 transition-colors font-semibold">EN</a>')
-    es_pln = es_pln.replace('<a href="index.html" class="text-white/60 hover:text-cyan-400 transition-colors font-semibold">ES</a>', '<span class="text-cyan-400 cursor-default">ES</span>')
+    
+    # Translate Planes Language Flag Selection Widget
+    en_pln_flag_widget = """        <!-- Selector de Idioma -->
+        <!-- LANGUAGE_SELECTOR_START -->
+        <div class="absolute top-6 right-6 md:right-12 z-50 flex items-center gap-2 bg-[#050505]/60 backdrop-blur-md border border-white/10 p-1.5 rounded-full shadow-lg pointer-events-auto no-print">
+            <a href="index.html" class="opacity-60 hover:opacity-100 transition-opacity flex" title="Español">
+                <svg class="w-5 h-5 rounded-full overflow-hidden border border-white/10 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="30" height="7.5" fill="#c60b1e"/>
+                    <rect y="7.5" width="30" height="15" fill="#ffc400"/>
+                    <rect y="22.5" width="30" height="7.5" fill="#c60b1e"/>
+                </svg>
+            </a>
+            <span class="w-[1px] h-3 bg-white/20"></span>
+            <a href="index-en.html" class="opacity-100 flex" title="English">
+                <svg class="w-5 h-5 rounded-full overflow-hidden border border-cyan-400/40 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="30" height="30" fill="#012169"/>
+                    <path d="M0,0 L30,30 M30,0 L0,30" stroke="#fff" stroke-width="4"/>
+                    <path d="M0,0 L30,30 M30,0 L0,30" stroke="#c8102e" stroke-width="1.5"/>
+                    <path d="M15,0 V30 M0,15 H30" stroke="#fff" stroke-width="6"/>
+                    <path d="M15,0 V30 M0,15 H30" stroke="#c8102e" stroke-width="4"/>
+                </svg>
+            </a>
+        </div>
+        <!-- LANGUAGE_SELECTOR_END -->"""
+
+    es_pln_flag_widget = """        <!-- Selector de Idioma -->
+        <!-- LANGUAGE_SELECTOR_START -->
+        <div class="absolute top-6 right-6 md:right-12 z-50 flex items-center gap-2 bg-[#050505]/60 backdrop-blur-md border border-white/10 p-1.5 rounded-full shadow-lg pointer-events-auto no-print">
+            <a href="index.html" class="opacity-100 flex" title="Español">
+                <svg class="w-5 h-5 rounded-full overflow-hidden border border-cyan-400/40 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="30" height="7.5" fill="#c60b1e"/>
+                    <rect y="7.5" width="30" height="15" fill="#ffc400"/>
+                    <rect y="22.5" width="30" height="7.5" fill="#c60b1e"/>
+                </svg>
+            </a>
+            <span class="w-[1px] h-3 bg-white/20"></span>
+            <a href="index-en.html" class="opacity-60 hover:opacity-100 transition-opacity flex" title="English">
+                <svg class="w-5 h-5 rounded-full overflow-hidden border border-white/10 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="30" height="30" fill="#012169"/>
+                    <path d="M0,0 L30,30 M30,0 L0,30" stroke="#fff" stroke-width="4"/>
+                    <path d="M0,0 L30,30 M30,0 L0,30" stroke="#c8102e" stroke-width="1.5"/>
+                    <path d="M15,0 V30 M0,15 H30" stroke="#fff" stroke-width="6"/>
+                    <path d="M15,0 V30 M0,15 H30" stroke="#c8102e" stroke-width="4"/>
+                </svg>
+            </a>
+        </div>
+        <!-- LANGUAGE_SELECTOR_END -->"""
+
+    es_pln = es_pln.replace(en_pln_flag_widget, es_pln_flag_widget)
     
     # Convert Pound prices back to Euro format for Spanish version
     es_pln = re.sub(r'£(\d+)', r'\1€', es_pln)

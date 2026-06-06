@@ -346,3 +346,115 @@ window.addEventListener('scroll', () => {
 
     lastScrollY = currentScrollY;
 }, { passive: true });
+
+// --- 9. Neon Viewport Frame Logic ---
+document.addEventListener('DOMContentLoaded', () => {
+    const neonFrame = document.getElementById('neon-frame');
+    if (neonFrame) {
+        // Initial intro fade-in
+        setTimeout(() => {
+            if (window.scrollY < 50) {
+                neonFrame.classList.add('neon-frame-active');
+            }
+        }, 1000);
+
+        // Scroll listener to toggle frame at top only
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const threshold = 50;
+            const isAtTop = scrollY < threshold;
+
+            if (isAtTop) {
+                neonFrame.classList.add('neon-frame-active');
+            } else {
+                neonFrame.classList.remove('neon-frame-active');
+            }
+        }, { passive: true });
+    }
+
+    // AJAX Email Form Submission
+    const contactForm = document.getElementById('email-contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const emailInput = contactForm.querySelector('input[name="email"]');
+            const submitBtn = contactForm.querySelector('.Subscribe-btn');
+            const btnText = submitBtn.querySelector('.btn-text');
+            
+            if (!emailInput.value) return;
+
+            // Save original styles/text
+            const originalText = btnText.textContent;
+            
+            // Disable and show sending state
+            submitBtn.disabled = true;
+            emailInput.disabled = true;
+            const isEs = document.documentElement.lang === 'es';
+            btnText.textContent = isEs ? 'Enviando...' : 'Sending...';
+
+            fetch(contactForm.action, {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({ 
+                    email: emailInput.value,
+                    _subject: 'New Subscription / Inquiry from MYNEXT Web'
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    btnText.textContent = isEs ? '¡Enviado! ✓' : 'Sent ✓';
+                    submitBtn.style.backgroundColor = '#00F2FF';
+                    submitBtn.style.boxShadow = '0 0 20px #00F2FF';
+                    emailInput.value = '';
+                    setTimeout(() => {
+                        btnText.textContent = originalText;
+                        submitBtn.disabled = false;
+                        emailInput.disabled = false;
+                        submitBtn.style.backgroundColor = '';
+                        submitBtn.style.boxShadow = '';
+                    }, 4000);
+                } else {
+                    btnText.textContent = 'Error';
+                    setTimeout(() => {
+                        btnText.textContent = originalText;
+                        submitBtn.disabled = false;
+                        emailInput.disabled = false;
+                    }, 2000);
+                }
+            })
+            .catch(error => {
+                btnText.textContent = 'Error';
+                setTimeout(() => {
+                    btnText.textContent = originalText;
+                    submitBtn.disabled = false;
+                    emailInput.disabled = false;
+                }, 2000);
+            });
+        });
+    }
+
+    // --- 8. Plans Button: Page Transition Overlay ---
+    const overlay = document.getElementById('page-transition-overlay');
+    if (overlay) {
+        // Select the plans button(s) - the animated-button that links to the planes page
+        const plansBtns = document.querySelectorAll('a.animated-button[href*="planes"]');
+        plansBtns.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const destination = this.getAttribute('href');
+
+                // Show the overlay
+                overlay.classList.add('active');
+                overlay.setAttribute('aria-hidden', 'false');
+
+                // After 2.5s navigate to the destination
+                setTimeout(() => {
+                    window.location.href = destination;
+                }, 2500);
+            });
+        });
+    }
+});
