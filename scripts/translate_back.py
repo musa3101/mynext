@@ -54,8 +54,8 @@ translations_index = {
     'WHAT IS MYNEXT?<br>DISCOVER BELOW': '¿QUÉ ES MYNEXT?<br>DESCÚBRELO ABAJO',
 
     # Nosotros Section
-    'THE DIGITAL ARCHITECTURE YOUR BUSINESS DESERVES': 'LA ARQUITECTURA DIGITAL QUE TU EMPRESA MERECE',
-    'At <span class="text-electric-cyan font-medium">MYNEXT</span>, we are dedicated to transforming your vision into a unique digital platform. We help your business stand out on the internet with a clean and modern design, crafted to attract more clients. We handle the entire technical process so your website is fast, efficient, and works for you flawlessly.': 'En <span class="text-electric-cyan font-medium">MYNEXT</span>, nos dedicamos a transformar tu visión en una plataforma digital única. Ayudamos a tu empresa a destacar en internet con un diseño limpio y moderno, diseñado para atraer a más clientes. Nos encargamos de todo el proceso técnico para que tu web sea rápida, eficiente y funcione para ti sin complicaciones.',
+    'PROFESSIONAL WEBSITES. CREATED BY MUSA, DESIGNED BY MYNEXT': 'PÁGINAS WEB PROFESIONALES. CREADAS POR MUSA, DISEÑADAS POR MYNEXT',
+    'Hello! I am Musa, the mind behind <span class="text-electric-cyan font-medium">MYNEXT</span>. More than an agency, I am your ally in the digital world. I specialize in designing and developing custom websites, focusing on a clean and professional style that turns your visitors into clients. You provide the vision; I handle the entire technical architecture so your business stands out, hassle-free and with maximum efficiency.': '¡Hola! Soy Musa, la mente detrás de <span class="text-electric-cyan font-medium">MYNEXT</span>. Más que una agencia, soy tu aliado en el mundo digital. Me dedico a diseñar y desarrollar páginas web a medida, enfocándome en un estilo limpio y profesional que convierta a tus visitantes en clientes. Tú pones la visión; yo me encargo de toda la arquitectura técnica para que tu negocio destaque, sin complicaciones y con la máxima eficiencia.',
     
     # Process
     'OUR CREATIVE PROCESS': 'NUESTRO PROCESO CREATIVO',
