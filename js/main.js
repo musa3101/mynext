@@ -378,19 +378,38 @@ document.addEventListener('DOMContentLoaded', () => {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const emailInput = contactForm.querySelector('input[name="email"]');
-            const submitBtn = contactForm.querySelector('.Subscribe-btn');
+            const messageInput = contactForm.querySelector('textarea[name="message"]');
+            const submitBtn = contactForm.querySelector('.form-submit-btn');
             const btnText = submitBtn.querySelector('.btn-text');
             
             if (!emailInput.value) return;
 
             // Save original styles/text
-            const originalText = btnText.textContent;
+            const originalText = btnText ? btnText.textContent : submitBtn.textContent;
             
             // Disable and show sending state
             submitBtn.disabled = true;
             emailInput.disabled = true;
+            if (messageInput) messageInput.disabled = true;
+            
             const isEs = document.documentElement.lang === 'es';
-            btnText.textContent = isEs ? 'Enviando...' : 'Sending...';
+            if (btnText) {
+                btnText.textContent = isEs ? 'Enviando...' : 'Sending...';
+            } else {
+                submitBtn.textContent = isEs ? 'Enviando...' : 'Sending...';
+            }
+
+            const subject = isEs ? '¡Te damos la bienvenida a MYNEXT!' : 'Welcome to MYNEXT!';
+            
+            // Compose the message containing the user's inquiry details
+            const messageDetails = messageInput ? messageInput.value : '';
+            const messageVal = isEs 
+                ? `Se ha registrado una nueva solicitud de contacto.\n\nCorreo del cliente: ${emailInput.value}\nDetalles / Mensaje:\n${messageDetails}`
+                : `A new contact request has been registered.\n\nClient Email: ${emailInput.value}\nDetails / Message:\n${messageDetails}`;
+            
+            const autorespondVal = isEs
+                ? `¡Hola! Gracias por contactar con MYNEXT y unirte a nuestra comunidad. Aquí tienes tu código de descuento del 10% para tu primer proyecto: MYNEXT10. Nos pondremos en contacto contigo lo antes posible para ver los detalles de tu consulta. ¡Disfrútalo!`
+                : `Hello! Thank you for contacting MYNEXT and joining our community. Here is your 10% discount code for your first project: MYNEXT10. We will get in touch with you as soon as possible to discuss the details of your inquiry. Enjoy!`;
 
             fetch(contactForm.action, {
                 method: 'POST',
@@ -400,37 +419,82 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 body: JSON.stringify({ 
                     email: emailInput.value,
-                    _subject: 'New Subscription / Inquiry from MYNEXT Web'
+                    _subject: subject,
+                    _autorespond: autorespondVal,
+                    message: messageVal
                 })
             })
             .then(response => {
                 if (response.ok) {
-                    btnText.textContent = isEs ? '¡Enviado! ✓' : 'Sent ✓';
+                    if (btnText) {
+                        btnText.textContent = isEs ? '¡Enviado! ✓' : 'Sent ✓';
+                    } else {
+                        submitBtn.textContent = isEs ? '¡Enviado! ✓' : 'Sent ✓';
+                    }
                     submitBtn.style.backgroundColor = '#00F2FF';
                     submitBtn.style.boxShadow = '0 0 20px #00F2FF';
+                    
                     emailInput.value = '';
-                    setTimeout(() => {
-                        btnText.textContent = originalText;
-                        submitBtn.disabled = false;
-                        emailInput.disabled = false;
-                        submitBtn.style.backgroundColor = '';
-                        submitBtn.style.boxShadow = '';
-                    }, 4000);
+                    if (messageInput) messageInput.value = '';
+                    
+                    // Hide the form cleanly with transition
+                    const formElement = contactForm;
+                    if (formElement) {
+                        formElement.style.transition = 'all 0.5s ease';
+                        formElement.style.opacity = '0';
+                        formElement.style.transform = 'scale(0.9)';
+                        setTimeout(() => {
+                            formElement.style.display = 'none';
+                            
+                            // Create and display the success message
+                            const successMsg = document.createElement('div');
+                            successMsg.className = 'text-electric-cyan font-headline text-sm md:text-base tracking-wider font-semibold animate-pulse mt-4 text-center px-4';
+                            successMsg.style.textShadow = '0 0 10px rgba(0, 242, 255, 0.4)';
+                            successMsg.textContent = isEs 
+                                ? 'Gracias por registrarte. Revisa tu Gmail, ¡tienes una grasa esperándote! 😏' 
+                                : 'Thanks for registering. Check your Gmail, something fire is waiting for you! 😏';
+                            
+
+                            
+                            const formParent = formElement.parentElement;
+                            if (formParent) {
+                                formParent.appendChild(successMsg);
+                            }
+                        }, 500);
+                    }
                 } else {
-                    btnText.textContent = 'Error';
+                    if (btnText) {
+                        btnText.textContent = 'Error';
+                    } else {
+                        submitBtn.textContent = 'Error';
+                    }
                     setTimeout(() => {
-                        btnText.textContent = originalText;
+                        if (btnText) {
+                            btnText.textContent = originalText;
+                        } else {
+                            submitBtn.textContent = originalText;
+                        }
                         submitBtn.disabled = false;
                         emailInput.disabled = false;
+                        if (messageInput) messageInput.disabled = false;
                     }, 2000);
                 }
             })
             .catch(error => {
-                btnText.textContent = 'Error';
+                if (btnText) {
+                    btnText.textContent = 'Error';
+                } else {
+                    submitBtn.textContent = 'Error';
+                }
                 setTimeout(() => {
-                    btnText.textContent = originalText;
+                    if (btnText) {
+                        btnText.textContent = originalText;
+                    } else {
+                        submitBtn.textContent = originalText;
+                    }
                     submitBtn.disabled = false;
                     emailInput.disabled = false;
+                    if (messageInput) messageInput.disabled = false;
                 }, 2000);
             });
         });
@@ -517,6 +581,45 @@ document.addEventListener('DOMContentLoaded', () => {
                         mobileDropdown.classList.add('hidden');
                     }
                 }, 300);
+            }
+        });
+    }
+
+    // --- 10. Shopping Cart Modal Logic ---
+    const cartBtn = document.getElementById('cart-btn');
+    const cartModal = document.getElementById('cart-modal');
+    const cartModalCard = document.getElementById('cart-modal-card');
+    const cartCloseBtn = document.getElementById('cart-close-btn');
+    const cartConfirmBtn = document.getElementById('cart-confirm-btn');
+
+    if (cartBtn && cartModal && cartModalCard) {
+        function openCartModal() {
+            cartModal.classList.remove('pointer-events-none', 'opacity-0');
+            cartModal.classList.add('opacity-100');
+            cartModalCard.classList.remove('scale-95', 'opacity-0');
+            cartModalCard.classList.add('scale-100', 'opacity-100');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCartModal() {
+            cartModal.classList.add('pointer-events-none', 'opacity-0');
+            cartModal.classList.remove('opacity-100');
+            cartModalCard.classList.add('scale-95', 'opacity-0');
+            cartModalCard.classList.remove('scale-100', 'opacity-100');
+            document.body.style.overflow = '';
+        }
+
+        cartBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openCartModal();
+        });
+
+        if (cartCloseBtn) cartCloseBtn.addEventListener('click', closeCartModal);
+        if (cartConfirmBtn) cartConfirmBtn.addEventListener('click', closeCartModal);
+
+        cartModal.addEventListener('click', (e) => {
+            if (e.target === cartModal) {
+                closeCartModal();
             }
         });
     }

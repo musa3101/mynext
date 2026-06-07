@@ -2,9 +2,11 @@
     font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
 
-html {
+html, body {
     scroll-behavior: smooth;
     background-color: #050505;
+    overflow-x: hidden;
+    max-width: 100%;
 }
 
 /* Glassmorphism Components */
@@ -41,10 +43,10 @@ html {
     100% { transform: skewX(-12deg) translateX(250%); }
 }
 @keyframes scanner {
-    0% { top: 0; opacity: 0; }
+    0% { transform: translateY(0); opacity: 0; }
     10% { opacity: 1; }
     90% { opacity: 1; }
-    100% { top: 100%; opacity: 0; }
+    100% { transform: translateY(100%); opacity: 0; }
 }
 .animate-sweep { animation: sweep 6s ease-in-out infinite; }
 .animate-scanner { animation: scanner 10s linear infinite; }
@@ -143,26 +145,26 @@ header a, footer a {
     background: rgba(5, 5, 5, 0.85) !important;
     backdrop-filter: blur(24px) !important;
     -webkit-backdrop-filter: blur(24px) !important;
-    border-color: rgba(0, 242, 255, 0.15) !important;
+    border-color: transparent !important;
     box-shadow: 0 10px 30px rgba(0,0,0,0.8) !important;
     opacity: 1;
 }
 /* Header at-top state */
 #nav-container.nav-at-top {
     background: rgba(5, 5, 5, 0.92) !important;
-    border-color: rgba(0, 242, 255, 0.2) !important;
+    border-color: transparent !important;
     box-shadow: 0 0 30px rgba(0, 242, 255, 0.08), 0 20px 50px rgba(0,0,0,0.5) !important;
     opacity: 1;
 }
 /* Hover glow override — fully readable on hover */
 #nav-container.nav-compact:hover {
     background: rgba(5, 5, 5, 0.92) !important;
-    border-color: rgba(0, 242, 255, 0.55) !important;
+    border-color: transparent !important;
     box-shadow: 0 0 40px rgba(0, 242, 255, 0.2), 0 20px 50px rgba(0,0,0,0.5) !important;
     opacity: 1;
 }
 #nav-container.nav-at-top:hover {
-    border-color: rgba(0, 242, 255, 0.55) !important;
+    border-color: transparent !important;
     background: rgba(0, 242, 255, 0.06) !important;
     box-shadow: 0 0 40px rgba(0, 242, 255, 0.2), 0 20px 50px rgba(0,0,0,0.5) !important;
 }
@@ -219,7 +221,7 @@ header a, footer a {
     position: relative;
     width: 100%;
     max-width: 650px;
-    max-height: 80vh;
+    max-height: 80dvh;
     margin: 1.5rem;
     background: #08080a;
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -496,19 +498,28 @@ header a, footer a {
 .social-box3:hover::before { opacity: 0.9; }
 .social-box3:hover .social-svg { filter: drop-shadow(0 0 5px white); }
 
-/* Hover Triggers */
-.social-card:hover {
-  transform: scale(1.05);
+/* Hover and Active Triggers */
+.social-card:hover,
+.social-card:active {
   border-color: rgba(0, 242, 255, 0.5);
 }
-.social-card:hover .social-background {
+.social-card:hover {
+  transform: scale(1.05);
+}
+.social-card:active {
+  transform: scale(0.98);
+}
+.social-card:hover .social-background,
+.social-card:active .social-background {
   opacity: 0.15;
 }
-.social-card:hover .social-box {
+.social-card:hover .social-box,
+.social-card:active .social-box {
   bottom: -1px;
   left: -1px;
 }
-.social-card:hover .social-logo {
+.social-card:hover .social-logo,
+.social-card:active .social-logo {
   transform: translate(50px, -20px);
   opacity: 0;
 }
@@ -553,19 +564,26 @@ header a, footer a {
   border-radius: 9999px;
 }
 
-.btn-view-more:hover {
+.btn-view-more:hover,
+.btn-view-more:active {
   color: #050505 !important;
   border-color: rgba(0, 242, 255, 1);
   box-shadow: 0 0 30px rgba(0, 242, 255, 0.4);
 }
 
-.btn-view-more:hover::before {
+.btn-view-more:hover::before,
+.btn-view-more:active::before {
   transform: translateX(0);
 }
 
-.btn-view-more:hover .material-symbols-outlined {
+.btn-view-more:hover .material-symbols-outlined,
+.btn-view-more:active .material-symbols-outlined {
   color: #050505 !important;
   transform: translateY(2px);
+}
+
+.btn-view-more:active {
+  transform: scale(0.96);
 }
 
 /* ========================================================
@@ -621,13 +639,15 @@ header a, footer a {
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.btn-mobile-menu:hover .icon {
+.btn-mobile-menu:hover .icon,
+.btn-mobile-menu:active .icon {
   width: 100%;
   background: rgba(0, 242, 255, 0.2);
   border-radius: 9999px;
 }
 
-.btn-mobile-menu:hover .text {
+.btn-mobile-menu:hover .text,
+.btn-mobile-menu:active .text {
   opacity: 0;
   transform: translateX(85px);
 }
@@ -637,3 +657,157 @@ header a, footer a {
 }
 
 
+/* Process Loader Animation Behind Cards */
+@keyframes processLoadingBar {
+  0%, 15% { transform: scaleX(0); }
+  35%, 50% { transform: scaleX(0.5); }
+  70%, 100% { transform: scaleX(1); }
+}
+
+@keyframes processCheck1 {
+  0%, 4% { transform: scale(0.75); background-color: #050505; border-color: rgba(255,255,255,0.05); box-shadow: none; }
+  5%, 98% { transform: scale(1); background-color: rgba(0, 242, 255, 0.1); border-color: #00f2ff; box-shadow: 0 0 15px rgba(0,242,255,0.4); }
+  99%, 100% { transform: scale(0.75); background-color: #050505; border-color: rgba(255,255,255,0.05); box-shadow: none; }
+}
+
+@keyframes processCheck2 {
+  0%, 34% { transform: scale(0.75); background-color: #050505; border-color: rgba(255,255,255,0.05); box-shadow: none; }
+  35%, 98% { transform: scale(1); background-color: rgba(0, 242, 255, 0.1); border-color: #00f2ff; box-shadow: 0 0 15px rgba(0,242,255,0.4); }
+  99%, 100% { transform: scale(0.75); background-color: #050505; border-color: rgba(255,255,255,0.05); box-shadow: none; }
+}
+
+@keyframes processCheck3 {
+  0%, 69% { transform: scale(0.75); background-color: #050505; border-color: rgba(255,255,255,0.05); box-shadow: none; }
+  70%, 98% { transform: scale(1); background-color: rgba(0, 242, 255, 0.1); border-color: #00f2ff; box-shadow: 0 0 15px rgba(0,242,255,0.4); }
+  99%, 100% { transform: scale(0.75); background-color: #050505; border-color: rgba(255,255,255,0.05); box-shadow: none; }
+}
+
+/* Premium Dark Social Icons Wrapper (Uiverse Inspired) */
+.social-buttons-wrapper {
+  display: inline-flex;
+  list-style: none;
+  height: 50px;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.social-buttons-wrapper .icon {
+  position: relative;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  margin: 0 8px;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.social-buttons-wrapper .icon a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.social-buttons-wrapper .tooltip {
+  position: absolute;
+  top: 0;
+  font-size: 11px;
+  background: #050505;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  white-space: nowrap;
+  letter-spacing: 0.05em;
+  z-index: 100;
+}
+
+.social-buttons-wrapper .tooltip::before {
+  position: absolute;
+  content: "";
+  height: 6px;
+  width: 6px;
+  background: #050505;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  bottom: -4px;
+  left: 50%;
+  transform: translate(-50%) rotate(45deg);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.social-buttons-wrapper .icon:hover .tooltip {
+  top: -38px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.social-buttons-wrapper .icon:hover {
+  color: #fff;
+  border-color: transparent;
+  transform: translateY(-2px);
+}
+
+/* TikTok Premium Glow */
+.social-buttons-wrapper .tiktok:hover {
+  background: #010101;
+  box-shadow: 0 0 15px rgba(255, 0, 80, 0.4), 0 0 2px rgba(0, 242, 255, 0.4);
+}
+.social-buttons-wrapper .tiktok:hover .tooltip {
+  background: #010101;
+  border-color: rgba(255, 0, 80, 0.4);
+}
+.social-buttons-wrapper .tiktok:hover .tooltip::before {
+  background: #010101;
+  border-right-color: rgba(255, 0, 80, 0.4);
+  border-bottom-color: rgba(255, 0, 80, 0.4);
+}
+
+/* Instagram Premium Glow */
+.social-buttons-wrapper .instagram:hover {
+  background: #e4405f;
+  box-shadow: 0 0 15px rgba(228, 64, 95, 0.5);
+}
+.social-buttons-wrapper .instagram:hover .tooltip,
+.social-buttons-wrapper .instagram:hover .tooltip::before {
+  background: #e4405f;
+  border-color: transparent;
+}
+
+/* Google Maps Premium Glow */
+.social-buttons-wrapper .google-maps:hover {
+  background: #4285f4;
+  box-shadow: 0 0 15px rgba(66, 133, 244, 0.5);
+}
+.social-buttons-wrapper .google-maps:hover .tooltip,
+.social-buttons-wrapper .google-maps:hover .tooltip::before {
+  background: #4285f4;
+  border-color: transparent;
+}
+
+/* Touch target accessibility expander */
+.touch-target {
+  position: relative;
+}
+.touch-target::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+  z-index: 2;
+}

@@ -35,6 +35,14 @@
     <!-- Extracted CSS -->
     <link rel="stylesheet" href="./css/style.css">
     <style>
+        @supports (height: 100dvh) {
+            .min-h-screen {
+                min-height: 100dvh !important;
+            }
+            .h-screen {
+                height: 100dvh !important;
+            }
+        }
         #particles-js-inicio, #particles-js-nosotros {
             position: absolute;
             top: 0;
@@ -369,121 +377,118 @@
             opacity: 1;
         }
 
-        /* 9. Uiverse Input Wrapper & Subscribe Button */
-        .input-wrapper {
+        /* 9. Uiverse Form Container */
+        .form-container {
             width: 100%;
-            max-width: 320px;
-            height: 44px;
-            border-radius: 100px;
-            padding: 4px;
-            box-sizing: content-box;
+            background: linear-gradient(#050505, #050505) padding-box,
+                        linear-gradient(145deg, transparent 35%, #00f2ff, #005f73) border-box;
+            border: 2px solid transparent;
+            padding: 32px 24px;
+            font-size: 14px;
+            color: white;
             display: flex;
-            align-items: center;
-            background-color: rgba(255, 255, 255, 0.02);
-            border: 1.5px solid rgba(255, 255, 255, 0.08);
-            transition: border-color 0.4s, box-shadow 0.4s;
-            position: relative;
+            flex-direction: column;
+            gap: 20px;
+            box-sizing: border-box;
+            border-radius: 20px;
+            backdrop-filter: blur(24px);
+            box-shadow: 0 10px 40px rgba(0, 242, 255, 0.03);
         }
 
-        .input-wrapper:focus-within {
-            border-color: rgba(0, 242, 255, 0.4);
-            box-shadow: 0 0 15px rgba(0, 242, 255, 0.1);
-        }
-
-        .icon-input {
-            width: 20px;
-            height: 20px;
-            fill: rgba(255, 255, 255, 0.4);
-            margin-left: 14px;
-            transition: all 0.3s;
-            flex-shrink: 0;
-        }
-
-        .input-wrapper:focus-within .icon-input {
-            fill: #00f2ff;
-            transform: scale(1.1);
-        }
-
-        .input-field {
-            width: 100%;
-            height: 100%;
-            border: none !important;
-            outline: none !important;
-            box-shadow: none !important;
-            padding: 0 12px;
-            background-color: transparent !important;
-            color: white !important;
-            font-family: 'Urbanist', sans-serif;
-            font-size: 13px;
-        }
-
-        .input-field::placeholder {
-            color: rgba(255, 255, 255, 0.25);
-        }
-
-        .input-field:-webkit-autofill {
-            -webkit-box-shadow: 0 0 0px 1000px #050505 inset !important;
-            -webkit-text-fill-color: #ffffff !important;
-        }
-
-        .Subscribe-btn {
-            height: 100%;
-            padding: 0 22px;
-            border: none;
-            border-radius: 100px;
-            color: #050505;
-            cursor: pointer;
-            background-color: #00f2ff;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            transition: all 0.3s;
-            flex-shrink: 0;
-        }
-
-        .arrow {
-            position: absolute;
-            transform: translateX(-100px);
-            fill: #050505;
-            transition: all 0.3s;
-        }
-
-        .Subscribe-btn:hover {
-            color: transparent;
-        }
-
-        .Subscribe-btn:hover .arrow {
-            transform: translateX(0);
-            animation: jello-vertical 0.9s both;
-            transform-origin: right;
-        }
-
-        .Subscribe-btn:active {
+        .form-container button:active {
             transform: scale(0.95);
         }
 
-        .Subscribe-btn:disabled {
+        .form-container .form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-container .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-container .form-group label {
+            display: block;
+            color: rgba(255, 255, 255, 0.6);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-align: left;
+        }
+
+        .form-container .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            color: #fff;
+            font-family: 'Urbanist', sans-serif;
+            background-color: rgba(255, 255, 255, 0.02) !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-container .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            resize: none;
+            color: #fff;
+            height: 120px;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            background-color: rgba(255, 255, 255, 0.02) !important;
+            font-family: 'Urbanist', sans-serif;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-container .form-group input::placeholder,
+        .form-container .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.25);
+        }
+
+        .form-container .form-group input:focus,
+        .form-container .form-group textarea:focus {
+            outline: none;
+            border-color: rgba(0, 242, 255, 0.4) !important;
+            box-shadow: 0 0 10px rgba(0, 242, 255, 0.1);
+        }
+
+        .form-container .form-submit-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            color: #050505;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            width: 100%;
+            background: #00f2ff;
+            border: none;
+            padding: 12px 16px;
+            font-size: 12px;
+            cursor: pointer;
+            border-radius: 100px;
+            transition: background-color 0.3s, box-shadow 0.3s, transform 0.2s;
+            box-shadow: 0 4px 20px rgba(0, 242, 255, 0.2);
+        }
+
+        .form-container .form-submit-btn:hover {
+            background-color: #ffffff;
+            color: #050505;
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.4);
+        }
+
+        .form-container .form-submit-btn:disabled {
             background-color: rgba(255, 255, 255, 0.1) !important;
             color: rgba(255, 255, 255, 0.3) !important;
             cursor: not-allowed;
-            border: none !important;
-        }
-
-        @keyframes jello-vertical {
-            0% { transform: scale3d(1, 1, 1); }
-            30% { transform: scale3d(0.75, 1.25, 1); }
-            40% { transform: scale3d(1.25, 0.75, 1); }
-            50% { transform: scale3d(0.85, 1.15, 1); }
-            65% { transform: scale3d(1.05, 0.95, 1); }
-            75% { transform: scale3d(0.95, 1.05, 1); }
-            100% { transform: scale3d(1, 1, 1); }
+            box-shadow: none !important;
         }
 
         /* =============================================
@@ -1755,26 +1760,36 @@
     </div>
 
     <!-- LANGUAGE_SELECTOR_START -->
-    <div class="fixed top-4 right-4 sm:top-6 sm:right-6 md:right-12 z-50 flex items-center gap-1.5 sm:gap-2 bg-[#050505]/60 backdrop-blur-md border border-white/10 p-1 px-2.5 sm:p-1.5 rounded-full shadow-lg pointer-events-auto">
-        <a href="index.html" class="opacity-60 hover:opacity-100 transition-opacity flex items-center justify-center gap-1" title="Español">
-            <svg class="hidden sm:block w-5 h-5 rounded-full overflow-hidden border border-white/10 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-                <rect width="30" height="7.5" fill="#c60b1e"/>
-                <rect y="7.5" width="30" height="15" fill="#ffc400"/>
-                <rect y="22.5" width="30" height="7.5" fill="#c60b1e"/>
-            </svg>
-            <span class="sm:hidden font-headline font-bold text-[9px] tracking-wider text-white">ES</span>
-        </a>
-        <span class="w-[1px] h-2.5 sm:h-3 bg-white/20"></span>
-        <a href="index-en.html" class="opacity-100 flex items-center justify-center gap-1" title="English">
-            <svg class="hidden sm:block w-5 h-5 rounded-full overflow-hidden border border-electric-cyan/40 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-                <rect width="30" height="30" fill="#012169"/>
-                <path d="M0,0 L30,30 M30,0 L0,30" stroke="#fff" stroke-width="4"/>
-                <path d="M0,0 L30,30 M30,0 L0,30" stroke="#c8102e" stroke-width="1.5"/>
-                <path d="M15,0 V30 M0,15 H30" stroke="#fff" stroke-width="6"/>
-                <path d="M15,0 V30 M0,15 H30" stroke="#c8102e" stroke-width="4"/>
-            </svg>
-            <span class="sm:hidden font-headline font-bold text-[9px] tracking-wider text-electric-cyan">EN</span>
-        </a>
+    <div class="fixed top-4 right-4 sm:top-6 sm:right-6 md:right-12 z-50 flex items-center gap-2 pointer-events-auto">
+        <!-- Language Selector -->
+        <div class="flex items-center gap-1.5 sm:gap-2 bg-[#050505]/60 backdrop-blur-md border border-white/10 p-1 px-2 sm:p-1.2 rounded-full shadow-lg">
+            <a href="index.html" class="opacity-60 hover:opacity-100 transition-opacity flex items-center justify-center gap-1 touch-target" title="Español">
+                <svg class="hidden sm:block w-3.5 h-3.5 rounded-full overflow-hidden border border-white/10 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="30" height="7.5" fill="#c60b1e"/>
+                    <rect y="7.5" width="30" height="15" fill="#ffc400"/>
+                    <rect y="22.5" width="30" height="7.5" fill="#c60b1e"/>
+                </svg>
+                <span class="sm:hidden font-headline font-bold text-[8px] tracking-wider text-white">ES</span>
+            </a>
+            <span class="w-[1px] h-2 sm:h-2.5 bg-white/20"></span>
+            <a href="index-en.html" class="opacity-100 flex items-center justify-center gap-1 touch-target" title="English">
+                <svg class="hidden sm:block w-3.5 h-3.5 rounded-full overflow-hidden border border-electric-cyan/40 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="30" height="30" fill="#012169"/>
+                    <path d="M0,0 L30,30 M30,0 L0,30" stroke="#fff" stroke-width="4"/>
+                    <path d="M0,0 L30,30 M30,0 L0,30" stroke="#c8102e" stroke-width="1.5"/>
+                    <path d="M15,0 V30 M0,15 H30" stroke="#fff" stroke-width="6"/>
+                    <path d="M15,0 V30 M0,15 H30" stroke="#c8102e" stroke-width="4"/>
+                </svg>
+                <span class="sm:hidden font-headline font-bold text-[8px] tracking-wider text-electric-cyan">EN</span>
+            </a>
+        </div>
+
+        <!-- Cart Button -->
+        <button id="cart-btn" class="relative flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#050505]/60 backdrop-blur-md border border-white/10 hover:border-electric-cyan/50 hover:text-electric-cyan transition-all duration-300 shadow-lg group touch-target" title="Shopping Cart">
+            <span class="material-symbols-outlined text-sm sm:text-base text-white/80 group-hover:text-electric-cyan transition-colors">shopping_cart</span>
+            <!-- Glow dot on hover -->
+            <span class="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-electric-cyan opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-[0_0_8px_#00F2FF]"></span>
+        </button>
     </div>
     <!-- LANGUAGE_SELECTOR_END -->
 
@@ -1789,9 +1804,9 @@
                 class="flex items-center gap-2 sm:gap-6 md:gap-12 ease-in-out -translate-x-[150%] translate-y-1"
                 style="transition: transform 2400ms cubic-bezier(0.16, 1, 0.3, 1);">
                 <a class="relative py-2 text-[8px] sm:text-xs md:text-[13px] font-headline font-semibold uppercase tracking-[0.15em] sm:tracking-[0.3em] md:tracking-[0.4em] text-white/85 hover:text-electric-cyan hover:scale-105 transition-all duration-300 ease-out group/link"
-                    href="#inicio">Home<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-[1.5px] bg-electric-cyan transform scale-x-0 group-hover/link:scale-x-100 transition-transform duration-300 ease-out origin-center shadow-[0_0_8px_#00F2FF]"></span></a>
-                <a class="relative py-2 text-[8px] sm:text-xs md:text-[13px] font-headline font-semibold uppercase tracking-[0.15em] sm:tracking-[0.3em] md:tracking-[0.4em] text-white/85 hover:text-electric-cyan hover:scale-105 transition-all duration-300 ease-out group/link"
                     href="#nosotros">About<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-[1.5px] bg-electric-cyan transform scale-x-0 group-hover/link:scale-x-100 transition-transform duration-300 ease-out origin-center shadow-[0_0_8px_#00F2FF]"></span></a>
+                <a class="relative py-2 text-[8px] sm:text-xs md:text-[13px] font-headline font-semibold uppercase tracking-[0.15em] sm:tracking-[0.3em] md:tracking-[0.4em] text-white/85 hover:text-electric-cyan hover:scale-105 transition-all duration-300 ease-out group/link"
+                    href="#portfolio">Portfolio<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-[1.5px] bg-electric-cyan transform scale-x-0 group-hover/link:scale-x-100 transition-transform duration-300 ease-out origin-center shadow-[0_0_8px_#00F2FF]"></span></a>
             </div>
 
             <!-- Central Branding -->
@@ -1820,7 +1835,7 @@
                 class="flex items-center gap-2 sm:gap-6 md:gap-12 ease-in-out translate-x-[150%] translate-y-1"
                 style="transition: transform 2400ms cubic-bezier(0.16, 1, 0.3, 1);">
                 <a class="relative py-2 text-[8px] sm:text-xs md:text-[13px] font-headline font-semibold uppercase tracking-[0.15em] sm:tracking-[0.3em] md:tracking-[0.4em] text-white/85 hover:text-electric-cyan hover:scale-105 transition-all duration-300 ease-out group/link"
-                    href="#portfolio">Portfolio<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-[1.5px] bg-electric-cyan transform scale-x-0 group-hover/link:scale-x-100 transition-transform duration-300 ease-out origin-center shadow-[0_0_8px_#00F2FF]"></span></a>
+                    href="#planes-banner">Plans<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-[1.5px] bg-electric-cyan transform scale-x-0 group-hover/link:scale-x-100 transition-transform duration-300 ease-out origin-center shadow-[0_0_8px_#00F2FF]"></span></a>
                 <a class="relative py-2 text-[8px] sm:text-xs md:text-[13px] font-headline font-semibold uppercase tracking-[0.15em] sm:tracking-[0.3em] md:tracking-[0.4em] text-white/85 hover:text-electric-cyan hover:scale-105 transition-all duration-300 ease-out group/link"
                     href="#contacto">Contact<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-[1.5px] bg-electric-cyan transform scale-x-0 group-hover/link:scale-x-100 transition-transform duration-300 ease-out origin-center shadow-[0_0_8px_#00F2FF]"></span></a>
             </div>
@@ -1866,13 +1881,13 @@
                     </div>
 
                     <!-- Scanner Pulse -->
-                    <div class="absolute inset-0 z-0 pointer-events-none">
-                        <div class="w-full h-[1px] bg-electric-cyan/20 absolute top-0 animate-scanner"></div>
+                    <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+                        <div class="w-full h-full absolute top-0 left-0 border-t border-electric-cyan/20 animate-scanner"></div>
                     </div>
 
                     <!-- Logo Central Original Completo -->
                     <img alt="MYNEXT Architecture Digital"
-                        class="w-64 h-64 md:w-[350px] md:h-[350px] object-contain relative z-10 transition-transform duration-1000 group-hover:scale-105 animate-logo-reveal"
+                        class="w-72 h-72 md:w-[380px] md:h-[380px] object-contain relative z-10 transition-transform duration-1000 group-hover:scale-105 animate-logo-reveal"
                         src="./assets/img/logo-hero.svg"
                         fetchpriority="high">
 
@@ -1943,6 +1958,22 @@
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 relative z-10">
+                        <!-- Process Loader Animation (Behind Cards, Desktop Only) -->
+                        <div class="hidden md:block absolute z-0 pointer-events-none rounded-full" style="top: 5rem; left: 16.666%; width: 66.666%; height: 2px; background-color: rgba(255,255,255,0.05);">
+                            <div class="absolute top-0 left-0 h-full rounded-full w-full" style="background-color: #00f2ff; box-shadow: 0 0 10px rgba(0,242,255,0.5); animation: processLoadingBar 6s ease-in-out infinite; transform-origin: left;"></div>
+                            <div class="absolute top-1/2 left-0 w-full -translate-y-1/2 flex justify-between items-center z-10">
+                                <div class="w-7 h-7 rounded-full border border-white/5 flex items-center justify-center transform scale-75" style="background-color: #050505; animation: processCheck1 6s linear infinite;">
+                                    <svg stroke="#00f2ff" stroke-width="3" viewBox="0 0 24 24" fill="none" class="w-3.5 h-3.5"><path d="m4.5 12.75 6 6 9-13.5" stroke-linejoin="round" stroke-linecap="round"></path></svg>
+                                </div>
+                                <div class="w-7 h-7 rounded-full border border-white/5 flex items-center justify-center transform scale-75" style="background-color: #050505; animation: processCheck2 6s linear infinite;">
+                                    <svg stroke="#00f2ff" stroke-width="3" viewBox="0 0 24 24" fill="none" class="w-3.5 h-3.5"><path d="m4.5 12.75 6 6 9-13.5" stroke-linejoin="round" stroke-linecap="round"></path></svg>
+                                </div>
+                                <div class="w-7 h-7 rounded-full border border-white/5 flex items-center justify-center transform scale-75" style="background-color: #050505; animation: processCheck3 6s linear infinite;">
+                                    <svg stroke="#00f2ff" stroke-width="3" viewBox="0 0 24 24" fill="none" class="w-3.5 h-3.5"><path d="m4.5 12.75 6 6 9-13.5" stroke-linejoin="round" stroke-linecap="round"></path></svg>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Step 01 -->
                         <div id="card-1"
                             class="process-card group/bento relative overflow-hidden p-8 md:p-12 rounded-[2.5rem] bg-[#050505]/75 border border-white/5 backdrop-blur-xl hover:border-electric-cyan/30 hover:bg-[#050505]/90">
@@ -2384,142 +2415,17 @@
             </div>
 
             <a class="absolute bottom-10 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-3 group transition-all duration-300 mt-20"
-                href="#contacto">
+                href="#planes-banner">
                 <span
                     class="font-headline text-[9px] md:text-[10px] tracking-[0.4em] uppercase text-white/50 group-hover:text-white transition-colors text-center">
-                    SHALL WE CONNECT YOUR NEXT STEP?<br>DISCOVER BELOW
+                    DO YOU KNOW OUR PLANS?<br>DISCOVER BELOW
                 </span>
                 <span
                     class="material-symbols-outlined text-electric-cyan animate-scroll-bounce">keyboard_double_arrow_down</span>
             </a>
         </section>
 
-        <!-- 4. CONTACTO SECTION -->
-        <section
-            class="min-h-screen py-32 px-5 sm:px-8 md:px-16 lg:px-24 flex items-center justify-center relative bg-void-black"
-            id="contacto">
-            <div class="max-w-4xl w-full text-center">
-                <div class="mb-20 reveal">
-                    <!-- Glass Gold Badge -->
-                    <div
-                        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#8A733E]/10 border border-[#8A733E]/30 text-[#e0c387] font-headline text-[9px] tracking-[0.3em] uppercase mb-8 backdrop-blur-md">
-                        <span class="w-1.5 h-1.5 rounded-full bg-[#e0c387] animate-pulse"></span>
-                        Exclusive Launch Edition
-                    </div>
-                    <h2
-                        class="text-3xl md:text-6xl font-body font-extrabold tracking-tight uppercase max-w-4xl mx-auto leading-tight mb-8 text-gradient-gold">
-                        TRANSFORM YOUR WEB TODAY AND LEAD YOUR SECTOR
-                    </h2>
-                    <p class="font-body font-light text-white/70 max-w-2xl mx-auto mt-4 text-lg px-4">
-                        Contact me now to discuss your vision and request a custom quote. Let's talk about your next
-                        step.
-                    </p>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-12 max-w-4xl mx-auto reveal px-4">
-                    <!-- WhatsApp Card -->
-                    <a class="group relative block p-8 md:p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/5 backdrop-blur-2xl hover:border-electric-cyan/30 transition-all duration-700 hover:-translate-y-3 overflow-hidden"
-                        href="https://wa.me/34673109486?text=Hello!%20I%20am%20coming%20from%20the%20MYNEXT%20website.%20I%20would%20like%20to%20receive%20information%20about%20your%20digital%20architecture%20and%20design%20services%20for%20my%20business.%20Thank%20you!"
-                        target="_blank" rel="noopener noreferrer">
-                        <div
-                            class="absolute -inset-px bg-gradient-to-br from-electric-cyan/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-                        </div>
-                        <div class="relative z-10 flex flex-col items-center">
-                            <div class="relative mb-10">
-                                <div
-                                    class="absolute -inset-6 bg-electric-cyan/10 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-                                </div>
-                                <div class="relative w-20 h-20 flex items-center justify-center">
-                                    <div
-                                        class="absolute inset-0 border-2 border-electric-cyan/10 rounded-full group-hover:border-electric-cyan/40 transition-all duration-700 group-hover:scale-125">
-                                    </div>
-                                    <div
-                                        class="absolute inset-2 border border-electric-cyan/5 rounded-full group-hover:border-electric-cyan/20 transition-all duration-700 group-hover:scale-110">
-                                    </div>
-                                    <svg class="w-10 h-10 text-electric-cyan fill-current filter drop-shadow-[0_0_8px_rgba(0,242,255,0.6)]"
-                                        viewBox="0 0 24 24">
-                                        <path
-                                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="space-y-4 text-center flex flex-col items-center">
-                                <span
-                                    class="text-white/30 text-[10px] tracking-[0.5em] uppercase block font-headline font-medium">Direct
-                                    Line</span>
-                                <span
-                                    class="inline-block px-6 py-3 bg-white text-black font-headline font-bold text-[9px] md:text-[10px] tracking-[0.25em] uppercase rounded-full group-hover:bg-electric-cyan transition-all duration-500 shadow-xl mt-2">
-                                    OPEN WHATSAPP →
-                                </span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Email Card -->
-                    <a class="group relative block p-8 md:p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/5 backdrop-blur-2xl hover:border-electric-cyan/30 transition-all duration-700 hover:-translate-y-3 overflow-hidden"
-                        href="mailto:mynextbymusa@gmail.com?subject=New%20Digital%20Project%20%7C%20MYNEXT&body=Hello%20Musa,%0A%0AI%20have%20been%20reviewing%20your%20portfolio%20on%20MYNEXT%20and%20I%20am%20interested%20in%20the%20Digital%20Architecture%20approach%20for%20my%20business.%20I%20would%20like%20to%20receive%20more%20information%20about%20your%20services%20and%20rates.%0A%0ABest%20regards.">
-                        <div
-                            class="absolute -inset-px bg-gradient-to-br from-electric-cyan/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-                        </div>
-                        <div class="relative z-10 flex flex-col items-center">
-                            <div class="relative mb-10">
-                                <div
-                                    class="absolute -inset-6 bg-electric-cyan/10 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-                                </div>
-                                <div class="relative w-20 h-20 flex items-center justify-center">
-                                    <div
-                                        class="absolute inset-0 border-2 border-electric-cyan/10 rounded-full group-hover:border-electric-cyan/40 transition-all duration-700 group-hover:scale-125">
-                                    </div>
-                                    <div
-                                        class="absolute inset-2 border border-electric-cyan/5 rounded-full group-hover:border-electric-cyan/20 transition-all duration-700 group-hover:scale-110">
-                                    </div>
-                                    <span
-                                        class="material-symbols-outlined text-4xl text-electric-cyan filter drop-shadow-[0_0_8px_rgba(0,242,255,0.6)]">mail</span>
-                                </div>
-                            </div>
-                            <div class="space-y-4 text-center flex flex-col items-center">
-                                <span
-                                    class="text-white/30 text-[10px] tracking-[0.5em] uppercase block font-headline font-medium">HQ
-                                    Inquiries</span>
-                                <span
-                                    class="inline-block px-6 py-3 bg-white text-black font-headline font-bold text-[9px] md:text-[10px] tracking-[0.25em] uppercase rounded-full group-hover:bg-electric-cyan transition-all duration-500 shadow-xl mt-2">
-                                    Send Email →
-                                </span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Centered Subscription Newsletter Widget -->
-                <div class="flex flex-col items-center mt-20 reveal max-w-xl mx-auto text-center space-y-6">
-                    <div class="flex flex-col items-center">
-                        <span class="text-electric-cyan/60 text-[10px] tracking-[0.5em] uppercase block font-headline font-semibold">Newsletter</span>
-                        <span class="text-white/70 font-body text-xs mt-2 block">Subscribe to receive updates & digital insights</span>
-                    </div>
-                    <form id="email-contact-form" action="https://formsubmit.co/ajax/mynextbymusa@gmail.com" method="POST" class="w-full flex justify-center pt-2">
-                        <div class="input-wrapper">
-                            <svg class="icon-input" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <g data-name="Layer 2">
-                                    <g data-name="inbox">
-                                        <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect>
-                                        <path d="M20.79 11.34l-3.34-6.68A3 3 0 0 0 14.76 3H9.24a3 3 0 0 0-2.69 1.66l-3.34 6.68a2 2 0 0 0-.21-.9V18a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3v-5.76a2 2 0 0 0-.21-.9zM8.34 5.55a1 1 0 0 1 .9-.55h5.52a1 1 0 0 1 .9.55L18.38 11H16a1 1 0 0 0-1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-2a1 1 0 0 0-1-1H5.62z"></path>
-                                    </g>
-                                </g>
-                            </svg>
-                            <input type="email" name="email" class="input-field" placeholder="your@email.com" required />
-                            <button type="submit" class="Subscribe-btn">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="10" viewBox="0 0 38 15" class="arrow">
-                                    <path d="M10 7.519l-.939-.344h0l.939.344zm14.386-1.205l-.981-.192.981.192zm1.276 5.509l.537.843.148-.094.107-.139-.792-.611zm4.819-4.304l-.385-.923h0l.385.923zm7.227.707a1 1 0 0 0 0-1.414L31.343.448a1 1 0 0 0-1.414 0 1 1 0 0 0 0 1.414l5.657 5.657-5.657 5.657a1 1 0 0 0 1.414 1.414l6.364-6.364zM1 7.519l.554.833.029-.019.094-.061.361-.23 1.277-.77c1.054-.609 2.397-1.32 3.629-1.787.617-.234 1.17-.392 1.623-.455.477-.066.707-.008.788.034.025.013.031.021.039.034a.56.56 0 0 1 .058.235c.029.327-.047.906-.39 1.842l1.878.689c.383-1.044.571-1.949.505-2.705-.072-.815-.45-1.493-1.16-1.865-.627-.329-1.358-.332-1.993-.244-.659.092-1.367.305-2.056.566-1.381.523-2.833 1.297-3.921 1.925l-1.341.808-.385.245-.104.068-.028.018c-.011.007-.011.007.543.84zm8.061-.344c-.198.54-.328 1.038-.36 1.484-.032.441.024.94.325 1.364.319.45.786.64 1.21.697.403.054.824-.001 1.21-.09.775-.179 1.694-.566 2.633-1.014l3.023-1.554c2.115-1.122 4.107-2.168 5.476-2.524.329-.086.573-.117.742-.115s.195.038.161.014c-.15-.105.085-.139-.076.685l1.963.384c.192-.98.152-2.083-.74-2.707-.405-.283-.868-.37-1.28-.376s-.849.069-1.274.179c-1.65.43-3.888 1.621-5.909 2.693l-2.948 1.517c-.92.439-1.673.743-2.221.87-.276.064-.429.065-.492.057-.043-.006.066.003.155.127.07.099.024.131.038-.063.014-.187.078-.49.243-.94l-1.878-.689zm14.343-1.053c-.361 1.844-.474 3.185-.413 4.161.059.95.294 1.72.811 2.215.567.544 1.242.546 1.664.459a2.34 2.34 0 0 0 .502-.167l.15-.076.049-.028.018-.011c.013-.008.013-.008-.524-.852l-.536-.844.019-.012c-.038.018-.064.027-.084.032-.037.008.053-.013.125.056.021.02-.151-.135-.198-.895-.046-.734.034-1.887.38-3.652l-1.963-.384zm2.257 5.701l.791.611.024-.031.08-.101.311-.377 1.093-1.213c.922-.954 2.005-1.894 2.904-2.27l-.771-1.846c-1.31.547-2.637 1.758-3.572 2.725l-1.184 1.314-.341.414-.093.117-.025.032c-.01.013-.01.013.781.624zm5.204-3.381c.989-.413 1.791-.42 2.697-.307.871.108 2.083.385 3.437.385v-2c-1.197 0-2.041-.226-3.19-.369-1.114-.139-2.297-.146-3.715.447l.771 1.846z"></path>
-                                </svg>
-                                <span class="btn-text">Submit</span>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </section>
-
-        <!-- 4.5 PLANES SECTION/BANNER -->
+        <!-- 4. PLANES SECTION/BANNER -->
         <section
             class="py-24 md:py-32 px-5 sm:px-8 md:px-16 lg:px-24 bg-void-black border-t border-white/[0.03] relative overflow-hidden"
             id="planes-banner">
@@ -2554,6 +2460,129 @@
                     </div>
                 </div>
             </div>
+            <a class="absolute bottom-10 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-3 group transition-all duration-300 mt-20"
+                href="#contacto">
+                <span
+                    class="font-headline text-[9px] md:text-[10px] tracking-[0.4em] uppercase text-white/50 group-hover:text-white transition-colors text-center">
+                    SHALL WE CONNECT YOUR NEXT STEP?<br>DISCOVER BELOW
+                </span>
+                <span
+                    class="material-symbols-outlined text-electric-cyan animate-scroll-bounce">keyboard_double_arrow_down</span>
+            </a>
+        </section>
+
+        <!-- 5. CONTACTO SECTION -->
+        <section
+            class="min-h-screen py-32 px-5 sm:px-8 md:px-16 lg:px-24 flex items-center justify-center relative bg-void-black"
+            id="contacto">
+            <div class="max-w-6xl w-full mx-auto px-4 sm:px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <!-- Columna Izquierda: Textos y Accesos Directos -->
+                    <div class="space-y-8 reveal text-left">
+                        <div>
+                            <!-- Glass Gold Badge -->
+                            <div
+                                class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#8A733E]/10 border border-[#8A733E]/30 text-[#e0c387] font-headline text-[9px] tracking-[0.3em] uppercase mb-6 backdrop-blur-md">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#e0c387] animate-pulse"></span>
+                                Exclusive Launch Edition
+                            </div>
+                            <h2
+                                class="text-3xl md:text-5xl font-body font-extrabold tracking-tight uppercase leading-tight mb-6 text-gradient-gold">
+                                TRANSFORM YOUR WEB TODAY AND LEAD YOUR SECTOR
+                            </h2>
+                            <p class="font-body font-light text-white/70 text-sm md:text-base leading-relaxed max-w-xl">
+                                Contact me now to discuss your vision and request a custom quote. Let's talk about your next step.
+                            </p>
+                        </div>
+
+                        <!-- WhatsApp & Email Cards (smaller, inline/flex layout) -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md">
+                            <!-- WhatsApp Card -->
+                            <a class="group relative block p-4 rounded-[1.5rem] bg-white/[0.02] border border-white/5 backdrop-blur-2xl hover:border-electric-cyan/30 transition-all duration-700 hover:-translate-y-1 overflow-hidden"
+                                href="https://wa.me/34673109486?text=Hello!%20I%20am%20coming%20from%20the%20MYNEXT%20website.%20I%20would%20like%20to%20receive%20information%20about%20your%20digital%20architecture%20and%20design%20services%20for%20my%20business.%20Thank%20you!"
+                                target="_blank" rel="noopener noreferrer">
+                                <div
+                                    class="absolute -inset-px bg-gradient-to-br from-electric-cyan/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                                </div>
+                                <div class="relative z-10 flex flex-col items-center">
+                                    <div class="relative mb-3">
+                                        <div
+                                            class="absolute -inset-3 bg-electric-cyan/10 blur-lg rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                                        </div>
+                                        <div class="relative w-10 h-10 flex items-center justify-center">
+                                            <div
+                                                class="absolute inset-0 border border-electric-cyan/10 rounded-full group-hover:border-electric-cyan/40 transition-all duration-700 group-hover:scale-110">
+                                            </div>
+                                            <svg class="w-5 h-5 text-electric-cyan fill-current filter drop-shadow-[0_0_8px_rgba(0,242,255,0.6)]"
+                                                viewBox="0 0 24 24">
+                                                <path
+                                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="space-y-1 text-center flex flex-col items-center">
+                                        <span
+                                            class="text-white/30 text-[8px] tracking-[0.4em] uppercase block font-headline font-medium">Direct Line</span>
+                                        <span
+                                            class="inline-block px-3 py-1.5 bg-white text-black font-headline font-bold text-[7px] md:text-[8px] tracking-[0.25em] uppercase rounded-full group-hover:bg-electric-cyan transition-all duration-500 shadow-xl mt-1">
+                                            WHATSAPP →
+                                        </span>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <!-- Email Card -->
+                            <a class="group relative block p-4 rounded-[1.5rem] bg-white/[0.02] border border-white/5 backdrop-blur-2xl hover:border-electric-cyan/30 transition-all duration-700 hover:-translate-y-1 overflow-hidden"
+                                href="mailto:mynextbymusa@gmail.com?subject=New%20Digital%20Project%20%7C%20MYNEXT&body=Hello%20Musa,%0A%0AI%20have%20been%20reviewing%20your%20portfolio%20on%20MYNEXT%20and%20I%20am%20interested%20in%20the%20Digital%20Architecture%20approach%20for%20my%20business.%20I%20would%20like%20to%20receive%20more%20information%20about%20your%20services%20and%20rates.%0A%0ABest%20regards.">
+                                <div
+                                    class="absolute -inset-px bg-gradient-to-br from-electric-cyan/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                                </div>
+                                <div class="relative z-10 flex flex-col items-center">
+                                    <div class="relative mb-3">
+                                        <div
+                                            class="absolute -inset-3 bg-electric-cyan/10 blur-lg rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                                        </div>
+                                        <div class="relative w-10 h-10 flex items-center justify-center">
+                                            <div
+                                                class="absolute inset-0 border border-electric-cyan/10 rounded-full group-hover:border-electric-cyan/40 transition-all duration-700 group-hover:scale-110">
+                                            </div>
+                                            <span
+                                                class="material-symbols-outlined text-xl text-electric-cyan filter drop-shadow-[0_0_8px_rgba(0,242,255,0.6)]">mail</span>
+                                        </div>
+                                    </div>
+                                    <div class="space-y-1 text-center flex flex-col items-center">
+                                        <span
+                                            class="text-white/30 text-[8px] tracking-[0.4em] uppercase block font-headline font-medium">HQ Inquiries</span>
+                                        <span
+                                            class="inline-block px-3 py-1.5 bg-white text-black font-headline font-bold text-[7px] md:text-[8px] tracking-[0.25em] uppercase rounded-full group-hover:bg-electric-cyan transition-all duration-500 shadow-xl mt-1">
+                                            Send Email →
+                                        </span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Columna Derecha: Formulario / Uiverse Component -->
+                    <div class="reveal flex justify-center lg:justify-end w-full">
+                        <div class="form-container w-full max-w-[420px]">
+                            <form id="email-contact-form" action="https://formsubmit.co/ajax/mynextbymusa@gmail.com" method="POST" class="form">
+                                <div class="form-group">
+                                    <label for="email">Contact Email</label>
+                                    <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="textarea">How can we help you?</label>
+                                    <textarea name="message" id="textarea" placeholder="Write the details of your inquiry..." required></textarea>
+                                </div>
+                                <button class="form-submit-btn" type="submit">
+                                    <span class="btn-text">Submit</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
@@ -2568,19 +2597,9 @@
                 <div class="absolute left-1/2 -translate-x-1/2 -top-[2px] w-20 h-1 bg-electric-cyan shadow-[0_0_20px_#00f2ff] rounded-full"></div>
             </div>
 
-            <div class="flex flex-col md:flex-row justify-between items-center md:items-start gap-8">
-                <!-- Branding -->
-                <div class="flex flex-col items-center md:items-start text-center md:text-left gap-2">
-                    <a href="#inicio">
-                        <img src="./assets/img/logoheddernew.jpg" alt="MYNEXT Logo"
-                            class="h-10 md:h-12 w-auto object-contain opacity-85 hover:opacity-100 transition-opacity duration-500"
-                            loading="lazy">
-                    </a>
-                    <span class="text-[9px] font-headline text-electric-cyan tracking-[0.3em] uppercase font-semibold">Architecture
-                        Digital</span>
-                </div>
-                <!-- Legal Links -->
-                <div class="flex flex-wrap justify-center gap-x-8 gap-y-4 text-xs font-body text-white/40">
+            <div class="grid grid-cols-1 md:grid-cols-3 items-center md:items-start gap-8">
+                <!-- Legal Links (stacked vertically on the left) -->
+                <div class="flex flex-col items-center md:items-start gap-3 text-xs font-body text-white/95 order-2 md:order-1">
                     <a href="#" data-modal="aviso-legal"
                         class="hover:text-electric-cyan hover:underline underline-offset-4 transition-colors duration-300 cursor-pointer">Legal Notice</a>
                     <a href="#" data-modal="privacidad"
@@ -2592,46 +2611,54 @@
                     <a href="#" data-modal="gestion-tecnica"
                         class="hover:text-electric-cyan hover:underline underline-offset-4 transition-colors duration-300 cursor-pointer">Technical Management</a>
                 </div>
-                <!-- Social -->
-                <div class="flex gap-4 items-center">
-                    <!-- Premium Uiverse Socials Card -->
-                    <div class="social-card group">
-                        <div class="social-background"></div>
-                        <div class="social-logo">Socials</div>
-                        
+
+                <!-- Branding (centered in the middle) -->
+                <div class="flex flex-col items-center text-center gap-2 order-1 md:order-2">
+                    <a href="#inicio">
+                        <img src="./assets/img/logoheddernew.jpg" alt="MYNEXT Logo"
+                            class="h-14 md:h-16 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-500"
+                            loading="lazy">
+                    </a>
+                    <span class="text-[10px] font-headline text-electric-cyan tracking-[0.3em] uppercase font-semibold">Digital Architecture</span>
+                </div>
+
+                <!-- Social (on the right) -->
+                <div class="flex justify-center md:justify-end items-center order-3">
+                    <ul class="social-buttons-wrapper">
                         <!-- TikTok -->
-                        <a href="https://www.tiktok.com/@mynextbymusa?_r=1&_t=ZN-96wInTFqMqZ" target="_blank" rel="noopener noreferrer" class="social-box social-box1" aria-label="TikTok">
-                            <span class="social-icon">
-                                <svg class="social-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <li class="icon tiktok">
+                            <span class="tooltip">TikTok</span>
+                            <a href="https://www.tiktok.com/@mynextbymusa?_r=1&_t=ZN-96wInTFqMqZ" target="_blank" rel="noopener noreferrer" class="w-full h-full flex items-center justify-center" style="color: inherit;" aria-label="TikTok">
+                                <svg viewBox="0 0 24 24" fill="currentColor" style="height: 1.2em;" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.29 6.29 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.19 8.19 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z" />
                                 </svg>
-                            </span>
-                        </a>
-
+                            </a>
+                        </li>
                         <!-- Instagram -->
-                        <a href="#" class="social-box social-box2 instagram-trigger" aria-label="Instagram">
-                            <span class="social-icon">
-                                <svg class="social-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4.162 4.162 0 1 1 0-8.324A4.162 4.162 0 0 1 12 16zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+                        <li class="icon instagram">
+                            <span class="tooltip">Instagram</span>
+                            <a href="https://www.instagram.com/mynextbymusa?igsh=MWx6d29jcW1peHV6NA%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="w-full h-full flex items-center justify-center" style="color: inherit;" aria-label="Instagram">
+                                <svg viewBox="0 0 16 16" fill="currentColor" style="height: 1.2em;" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z" />
                                 </svg>
-                            </span>
-                        </a>
-
+                            </a>
+                        </li>
                         <!-- Google Maps -->
-                        <a href="https://maps.app.goo.gl/VE5ZqxShZFKaAs8M6" target="_blank" rel="noopener noreferrer" class="social-box social-box3" aria-label="Google Maps">
-                            <span class="social-icon">
-                                <svg class="social-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                        <li class="icon google-maps">
+                            <span class="tooltip">Maps</span>
+                            <a href="https://maps.app.goo.gl/VE5ZqxShZFKaAs8M6" target="_blank" rel="noopener noreferrer" class="w-full h-full flex items-center justify-center" style="color: inherit;" aria-label="Google Maps">
+                                <svg viewBox="0 0 24 24" fill="currentColor" style="height: 1.2em;" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
                                 </svg>
-                            </span>
-                        </a>
-                    </div>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left text-white/30 text-[10px] font-light uppercase tracking-widest">
                 <div>© 2026 MYNEXT. All rights reserved.</div>
                 <div class="font-headline tracking-[0.2em] text-white/30 text-[9px] hover:text-white/50 transition-colors duration-500">
-                    Made by <a href="https://mynextbymusa.pages.dev" class="text-white/60 hover:text-electric-cyan transition-all duration-500 font-semibold border-b border-white/10 hover:border-electric-cyan/40 pb-0.5 tracking-[0.25em]">MYNEXT</a>
+                    Made by <a href="https://mynextbymusa.com" class="text-white/60 hover:text-electric-cyan transition-all duration-500 font-semibold border-b border-white/10 hover:border-electric-cyan/40 pb-0.5 tracking-[0.25em]">MYNEXT</a>
                 </div>
             </div>
         </div>
@@ -2874,6 +2901,48 @@
                         Constant operational supervision, regular database backups, uptime monitoring, and seamless framework security patches managed by MYNEXT.
                     </p>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CART POPUP MODAL -->
+    <div id="cart-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-void-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-500">
+        <!-- Modal Card -->
+        <div class="relative w-full max-w-md p-8 md:p-10 rounded-[2.5rem] bg-[#050505]/90 border border-white/10 shadow-[0_0_50px_rgba(0,242,255,0.15)] transform scale-95 opacity-0 transition-all duration-500 ease-out" id="cart-modal-card">
+            <!-- Background Glows -->
+            <div class="absolute -top-20 -left-20 w-40 h-40 bg-electric-cyan/10 blur-[80px] rounded-full pointer-events-none"></div>
+            <div class="absolute -bottom-20 -right-20 w-40 h-40 bg-[#8A733E]/15 blur-[80px] rounded-full pointer-events-none"></div>
+            
+            <!-- Close Button -->
+            <button id="cart-close-btn" class="absolute top-6 right-6 w-8 h-8 rounded-full bg-white/5 border border-white/10 hover:border-electric-cyan/50 flex items-center justify-center hover:text-electric-cyan transition-all duration-300">
+                <span class="material-symbols-outlined text-sm text-white">close</span>
+            </button>
+
+            <div class="text-center flex flex-col items-center space-y-6">
+                <!-- Cart Icon Circle -->
+                <div class="relative w-16 h-16 flex items-center justify-center rounded-full bg-electric-cyan/10 border border-electric-cyan/30 text-electric-cyan">
+                    <span class="material-symbols-outlined text-3xl filter drop-shadow-[0_0_8px_rgba(0,242,255,0.6)]">shopping_cart</span>
+                </div>
+
+                <!-- Content -->
+                <div class="space-y-3">
+                    <span class="text-electric-cyan/60 text-[10px] tracking-[0.5em] uppercase font-headline font-semibold block">Coming Soon</span>
+                    <h3 class="text-xl md:text-2xl font-headline font-bold text-white uppercase tracking-wider">Under Maintenance</h3>
+                    <p class="text-white/60 text-xs md:text-sm font-light leading-relaxed max-w-sm">
+                        We are designing an exclusive, secure payment gateway so you can purchase your digital architecture plans directly on our website.
+                    </p>
+                </div>
+
+                <!-- Badge -->
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#8A733E]/10 border border-[#8A733E]/30 text-[#e0c387] font-headline text-[9px] tracking-[0.2em] uppercase">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#e0c387] animate-pulse"></span>
+                    Direct purchases very soon
+                </div>
+
+                <!-- Accept button -->
+                <button id="cart-confirm-btn" class="w-full py-3 px-6 bg-white text-black font-headline font-bold text-[10px] tracking-[0.25em] uppercase rounded-full hover:bg-electric-cyan transition-all duration-300 shadow-lg">
+                    Understood
+                </button>
             </div>
         </div>
     </div>
