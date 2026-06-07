@@ -109,9 +109,12 @@
         }
 
         updatePipes() {
-            // Fade out previous drawings to create a trail effect and prevent saturation
-            this.ctx.a.fillStyle = 'rgba(5, 5, 5, 0.04)';
+            // Fade out previous drawings to transparency to support breathing background
+            this.ctx.a.save();
+            this.ctx.a.globalCompositeOperation = 'destination-out';
+            this.ctx.a.fillStyle = 'rgba(0, 0, 0, 0.06)';
             this.ctx.a.fillRect(0, 0, this.canvas.a.width, this.canvas.a.height);
+            this.ctx.a.restore();
 
             this.tick++;
             for (let i = 0; i < this.pipePropsLength; i += this.pipePropCount) {
@@ -168,13 +171,11 @@
         }
 
         render() {
-            this.ctx.b.save();
-            this.ctx.b.fillStyle = this.backgroundColor;
-            this.ctx.b.fillRect(0,0,this.canvas.b.width,this.canvas.b.height);
-            this.ctx.b.restore();
+            // Clear canvas b entirely to keep it transparent for the breathing background
+            this.ctx.b.clearRect(0, 0, this.canvas.b.width, this.canvas.b.height);
 
             this.ctx.b.save();
-            this.ctx.b.filter = 'blur(12px)'
+            this.ctx.b.filter = 'blur(12px)';
             this.ctx.b.drawImage(this.canvas.a, 0, 0);
             this.ctx.b.restore();
 
