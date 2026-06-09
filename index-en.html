@@ -1850,16 +1850,20 @@
                 </button>
             </div>
         </nav>
-        
-        <!-- Mobile Menu Panel -->
-        <div id="mobile-dropdown" class="mobile-menu-panel md:hidden" aria-hidden="true">
+        </div>
+
+        <!-- Mobile Menu Panel (outside shell for correct fixed positioning) -->
+        <div id="mobile-dropdown" class="mobile-menu-panel md:hidden pointer-events-auto" aria-hidden="true">
+            <!-- Close button inside overlay -->
+            <button id="mobile-menu-close" class="absolute top-4 left-4 w-11 h-11 rounded-full border border-white/15 bg-white/5 flex items-center justify-center text-white/80 hover:text-electric-cyan hover:border-electric-cyan/50 transition-all duration-300 z-10" aria-label="Close menu">
+                <span class="material-symbols-outlined text-xl">close</span>
+            </button>
             <div class="mobile-menu-panel__inner">
                 <a class="mobile-menu-link" href="#nosotros"><span class="mobile-menu-link__idx">01</span>About</a>
                 <a class="mobile-menu-link" href="#portfolio"><span class="mobile-menu-link__idx">02</span>Portfolio</a>
                 <a class="mobile-menu-link" href="#planes-banner"><span class="mobile-menu-link__idx">03</span>Plans</a>
                 <a class="mobile-menu-link" href="#contacto"><span class="mobile-menu-link__idx">04</span>Contact</a>
             </div>
-        </div>
         </div>
     </header>
 

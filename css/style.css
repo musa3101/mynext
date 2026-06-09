@@ -956,7 +956,7 @@ body.mobile-menu-open {
   inset: 0;
   width: 100vw;
   height: 100dvh;
-  z-index: 45;
+  z-index: 9999;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;

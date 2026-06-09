@@ -570,6 +570,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        // Close button inside the fullscreen overlay
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        if (mobileMenuClose) {
+            mobileMenuClose.addEventListener('click', (e) => {
+                e.stopPropagation();
+                closeMobileMenu();
+            });
+        }
+
         mobileDropdown.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', closeMobileMenu);
         });
