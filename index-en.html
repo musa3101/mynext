@@ -1742,20 +1742,179 @@
         <div class="neon-frame-line neon-frame-right"></div>
     </div>
 
-    <!-- PAGE TRANSITION OVERLAY -->
+    <!-- PAGE TRANSITION OVERLAY (Uiverse loader adapted) -->
     <div id="page-transition-overlay" aria-hidden="true">
         <div class="loader-wrapper">
-            <span class="loader-letter">L</span>
-            <span class="loader-letter">o</span>
-            <span class="loader-letter">a</span>
-            <span class="loader-letter">d</span>
-            <span class="loader-letter">i</span>
-            <span class="loader-letter">n</span>
-            <span class="loader-letter">g</span>
-            <span class="loader-letter">.</span>
-            <span class="loader-letter">.</span>
-            <span class="loader-letter">.</span>
-            <div class="loader"></div>
+            <svg
+                aria-label="loader being flipped clockwise and circled by three white curves fading in and out"
+                role="img"
+                viewBox="0 0 56 56"
+                class="loader"
+            >
+                <clipPath id="sand-mound-top">
+                    <path
+                        d="M 14.613 13.087 C 15.814 12.059 19.3 8.039 20.3 6.539 C 21.5 4.789 21.5 2.039 21.5 2.039 L 3 2.039 C 3 2.039 3 4.789 4.2 6.539 C 5.2 8.039 8.686 12.059 9.887 13.087 C 11 14.039 12.25 14.039 12.25 14.039 C 12.25 14.039 13.5 14.039 14.613 13.087 Z"
+                        class="loader__sand-mound-top"
+                    ></path>
+                </clipPath>
+                <clipPath id="sand-mound-bottom">
+                    <path
+                        d="M 14.613 20.452 C 15.814 21.48 19.3 25.5 20.3 27 C 21.5 28.75 21.5 31.5 21.5 31.5 L 3 31.5 C 3 31.5 3 28.75 4.2 27 C 5.2 25.5 8.686 21.48 9.887 20.452 C 11 19.5 12.25 19.5 12.25 19.5 C 12.25 19.5 13.5 19.5 14.613 20.452 Z"
+                        class="loader__sand-mound-bottom"
+                    ></path>
+                </clipPath>
+                <g transform="translate(2,2)">
+                    <g
+                        transform="rotate(-90,26,26)"
+                        stroke-linecap="round"
+                        stroke-dashoffset="153.94"
+                        stroke-dasharray="153.94 153.94"
+                        stroke="hsl(0,0%,100%)"
+                        fill="none"
+                    >
+                        <circle
+                            transform="rotate(0,26,26)"
+                            r="24.5"
+                            cy="26"
+                            cx="26"
+                            stroke-width="2.5"
+                            class="loader__motion-thick"
+                        ></circle>
+                        <circle
+                            transform="rotate(90,26,26)"
+                            r="24.5"
+                            cy="26"
+                            cx="26"
+                            stroke-width="1.75"
+                            class="loader__motion-medium"
+                        ></circle>
+                        <circle
+                            transform="rotate(180,26,26)"
+                            r="24.5"
+                            cy="26"
+                            cx="26"
+                            stroke-width="1"
+                            class="loader__motion-thin"
+                        ></circle>
+                    </g>
+                    <g transform="translate(13.75,9.25)" class="loader__model">
+                        <path
+                            d="M 1.5 2 L 23 2 C 23 2 22.5 8.5 19 12 C 16 15.5 13.5 13.5 13.5 16.75 C 13.5 20 16 18 19 21.5 C 22.5 25 23 31.5 23 31.5 L 1.5 31.5 C 1.5 31.5 2 25 5.5 21.5 C 8.5 18 11 20 11 16.75 C 11 13.5 8.5 15.5 5.5 12 C 2 8.5 1.5 2 1.5 2 Z"
+                            fill="hsl(var(--hue),90%,85%)"
+                        ></path>
+
+                        <g stroke-linecap="round" stroke="hsl(35,90%,90%)">
+                            <line
+                                y2="20.75"
+                                x2="12"
+                                y1="15.75"
+                                x1="12"
+                                stroke-dasharray="0.25 33.75"
+                                stroke-width="1"
+                                class="loader__sand-grain-left"
+                            ></line>
+                            <line
+                                y2="21.75"
+                                x2="12.5"
+                                y1="16.75"
+                                x1="12.5"
+                                stroke-dasharray="0.25 33.75"
+                                stroke-width="1"
+                                class="loader__sand-grain-right"
+                            ></line>
+                            <line
+                                y2="31.5"
+                                x2="12.25"
+                                y1="18"
+                                x1="12.25"
+                                stroke-dasharray="0.5 107.5"
+                                stroke-width="1"
+                                class="loader__sand-drop"
+                            ></line>
+                            <line
+                                y2="31.5"
+                                x2="12.25"
+                                y1="14.75"
+                                x1="12.25"
+                                stroke-dasharray="54 54"
+                                stroke-width="1.5"
+                                class="loader__sand-fill"
+                            ></line>
+                            <line
+                                y2="31.5"
+                                x2="12"
+                                y1="16"
+                                x1="12"
+                                stroke-dasharray="1 107"
+                                stroke-width="1"
+                                stroke="hsl(35,90%,83%)"
+                                class="loader__sand-line-left"
+                            ></line>
+                            <line
+                                y2="31.5"
+                                x2="12.5"
+                                y1="16"
+                                x1="12.5"
+                                stroke-dasharray="12 96"
+                                stroke-width="1"
+                                stroke="hsl(35,90%,83%)"
+                                class="loader__sand-line-right"
+                            ></line>
+
+                            <g stroke-width="0" fill="hsl(35,90%,90%)">
+                                <path
+                                    d="M 12.25 15 L 15.392 13.486 C 21.737 11.168 22.5 2 22.5 2 L 2 2.013 C 2 2.013 2.753 11.046 9.009 13.438 L 12.25 15 Z"
+                                    clip-path="url(#sand-mound-top)"
+                                ></path>
+                                <path
+                                    d="M 12.25 18.5 L 15.392 20.014 C 21.737 22.332 22.5 31.5 22.5 31.5 L 2 31.487 C 2 31.487 2.753 22.454 9.009 20.062 Z"
+                                    clip-path="url(#sand-mound-bottom)"
+                                ></path>
+                            </g>
+                        </g>
+
+                        <g stroke-width="2" stroke-linecap="round" opacity="0.7" fill="none">
+                            <path
+                                d="M 19.437 3.421 C 19.437 3.421 19.671 6.454 17.914 8.846 C 16.157 11.238 14.5 11.5 14.5 11.5"
+                                stroke="hsl(0,0%,100%)"
+                                class="loader__glare-top"
+                            ></path>
+                            <path
+                                transform="rotate(180,12.25,16.75)"
+                                d="M 19.437 3.421 C 19.437 3.421 19.671 6.454 17.914 8.846 C 16.157 11.238 14.5 11.5 14.5 11.5"
+                                stroke="hsla(0,0%,100%,0)"
+                                class="loader__glare-bottom"
+                            ></path>
+                        </g>
+
+                        <rect height="2" width="24.5" fill="hsl(var(--hue),90%,50%)"></rect>
+                        <rect
+                            height="1"
+                            width="19.5"
+                            y="0.5"
+                            x="2.5"
+                            ry="0.5"
+                            rx="0.5"
+                            fill="hsl(var(--hue),90%,57.5%)"
+                        ></rect>
+                        <rect
+                            height="2"
+                            width="24.5"
+                            y="31.5"
+                            fill="hsl(var(--hue),90%,50%)"
+                        ></rect>
+                        <rect
+                            height="1"
+                            width="19.5"
+                            y="32"
+                            x="2.5"
+                            ry="0.5"
+                            rx="0.5"
+                            fill="hsl(var(--hue),90%,57.5%)"
+                        ></rect>
+                    </g>
+                </g>
+            </svg>
         </div>
         <p class="overlay-brand">MYNEXT · Digital Architecture</p>
     </div>
@@ -1854,10 +2013,6 @@
 
         <!-- Mobile Menu Panel (outside shell for correct fixed positioning) -->
         <div id="mobile-dropdown" class="mobile-menu-panel md:hidden pointer-events-auto" aria-hidden="true">
-            <!-- Close button inside overlay -->
-            <button id="mobile-menu-close" class="absolute top-4 left-4 w-11 h-11 rounded-full border border-white/15 bg-white/5 flex items-center justify-center text-white/80 hover:text-electric-cyan hover:border-electric-cyan/50 transition-all duration-300 z-10" aria-label="Close menu">
-                <span class="material-symbols-outlined text-xl">close</span>
-            </button>
             <div class="mobile-menu-panel__inner">
                 <a class="mobile-menu-link" href="#nosotros"><span class="mobile-menu-link__idx">01</span>About</a>
                 <a class="mobile-menu-link" href="#portfolio"><span class="mobile-menu-link__idx">02</span>Portfolio</a>
@@ -2171,7 +2326,7 @@
                     </article>
 
                     <!-- Project B -->
-                    <article class="reveal flex flex-col gap-8 md:mt-32 group" style="transition-delay: 200ms;">
+                    <article class="reveal flex flex-col gap-8 group" style="transition-delay: 200ms;">
                         <div
                             class="relative aspect-[16/10] rounded-2xl overflow-hidden glass-panel border-white/5 transition-all duration-500 group-hover:border-electric-cyan/20 group-hover:shadow-[0_0_30px_rgba(0,242,255,0.1)]">
                             <!-- Browser UI Mockup (Uiverse style) -->
@@ -2639,9 +2794,9 @@
 
                 <!-- Branding (centered in the middle) -->
                 <div class="flex flex-col items-center text-center gap-2 order-1 md:order-2">
-                    <a href="index-en.html" title="Back to home" aria-label="MYNEXT Home">
+                    <a href="index-en.html" title="Back to home" aria-label="MYNEXT Home" class="footer-logo-ring">
                         <img src="./assets/img/logoheddernew.jpg" alt="MYNEXT Logo"
-                            class="h-14 md:h-16 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-500"
+                            class="footer-logo w-[100px] h-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-500"
                             loading="lazy" width="128" height="64">
                     </a>
                     <span class="text-[10px] font-headline text-electric-cyan tracking-[0.3em] uppercase font-semibold">Digital Architecture</span>
@@ -2976,13 +3131,14 @@
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         window.addEventListener("load", function() {
+            var isMobile = window.matchMedia("(max-width: 767px)").matches || /Mobi|Android|iPhone|iPad|iPod|Opera Mini|IEMobile/.test(navigator.userAgent);
             var config = {
                 "particles": {
                     "number": {
-                        "value": 150,
+                        "value": isMobile ? 25 : 150,
                         "density": {
                             "enable": true,
-                            "value_area": 500
+                            "value_area": isMobile ? 800 : 500
                         }
                     },
                     "color": {
@@ -2996,7 +3152,7 @@
                         }
                     },
                     "opacity": {
-                        "value": 0.5,
+                        "value": isMobile ? 0.45 : 0.5,
                         "random": false,
                         "anim": {
                             "enable": false,
@@ -3006,32 +3162,32 @@
                         }
                     },
                     "size": {
-                        "value": 5,
+                        "value": isMobile ? 3 : 5,
                         "random": true,
                         "anim": {
                             "enable": true,
-                            "speed": 15,
+                            "speed": isMobile ? 8 : 15,
                             "size_min": 0,
                             "sync": false
                         }
                     },
                     "line_linked": {
-                        "enable": true,
-                        "distance": 150,
+                        "enable": !isMobile,
+                        "distance": isMobile ? 100 : 150,
                         "color": "#00f2ff",
-                        "opacity": 0.25,
+                        "opacity": isMobile ? 0.15 : 0.25,
                         "width": 1
                     },
                     "move": {
                         "enable": true,
-                        "speed": 5,
+                        "speed": isMobile ? 1.5 : 5,
                         "direction": "none",
                         "random": false,
                         "straight": false,
                         "out_mode": "bounce",
                         "bounce": false,
                         "attract": {
-                            "enable": true,
+                            "enable": !isMobile,
                             "rotateX": 1200,
                             "rotateY": 1200
                         }
@@ -3041,11 +3197,11 @@
                     "detect_on": "window",
                     "events": {
                         "onhover": {
-                            "enable": true,
+                            "enable": !isMobile,
                             "mode": "bubble"
                         },
                         "onclick": {
-                            "enable": true,
+                            "enable": !isMobile,
                             "mode": "repulse"
                         },
                         "resize": true
@@ -3076,7 +3232,7 @@
                         }
                     }
                 },
-                "retina_detect": true
+                "retina_detect": !isMobile
             };
             particlesJS("particles-js-inicio", config);
             particlesJS("particles-js-nosotros", config);

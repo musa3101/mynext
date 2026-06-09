@@ -507,9 +507,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 8. Plans Button: Page Transition Overlay ---
     const overlay = document.getElementById('page-transition-overlay');
     if (overlay) {
-        // Ensure overlay is hidden on page load / return
-        overlay.classList.remove('active');
-        overlay.setAttribute('aria-hidden', 'true');
+        const navEntry = (performance.getEntriesByType && performance.getEntriesByType('navigation')?.[0]) || {};
+        const isReload = navEntry.type === 'reload' || (performance.navigation && performance.navigation.type === 1);
+
+        if (isReload) {
+            overlay.classList.add('active');
+            overlay.setAttribute('aria-hidden', 'false');
+        } else {
+            overlay.classList.remove('active');
+            overlay.setAttribute('aria-hidden', 'true');
+        }
+
+        window.addEventListener('load', function() {
+            if (isReload) {
+                setTimeout(() => {
+                    overlay.classList.remove('active');
+                    overlay.setAttribute('aria-hidden', 'true');
+                }, 1100);
+            }
+        });
 
         window.addEventListener('pageshow', function(event) {
             overlay.classList.remove('active');
@@ -533,6 +549,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 2500);
             });
         });
+
+        
     }
 
     // --- Mobile Menu Toggle ---

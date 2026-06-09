@@ -7,6 +7,10 @@ html, body {
     background-color: #050505;
     overflow-x: hidden;
     max-width: 100%;
+    padding-top: max(0px, env(safe-area-inset-top));
+    padding-bottom: max(0px, env(safe-area-inset-bottom));
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
 }
 
 main {
@@ -17,6 +21,29 @@ main {
 img, video, svg {
     max-width: 100%;
     height: auto;
+    display: block;
+}
+
+img[loading="lazy"] {
+    aspect-ratio: auto;
+}
+
+img:not([width]){
+    width: 100%;
+    height: auto;
+}
+
+img[width][height] {
+    aspect-ratio: auto;
+    object-fit: cover;
+    object-position: center;
+}
+
+picture img {
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
 }
 
 .min-h-screen {
@@ -217,6 +244,7 @@ footer a,
     opacity: 0;
     visibility: hidden;
     overflow: hidden;
+    max-height: 0;
     transform: translateY(-1rem);
     clip-path: inset(0 0 100% 0);
     pointer-events: none;
@@ -225,12 +253,15 @@ footer a,
         opacity 0.55s ease,
         transform 0.65s cubic-bezier(0.4, 0, 0.2, 1),
         clip-path 0.65s cubic-bezier(0.4, 0, 0.2, 1),
-        visibility 0s linear 0.65s;
+        visibility 0s linear 0.65s,
+        max-height 0.65s ease;
 }
 
 #more-projects.expanded {
     opacity: 1;
     visibility: visible;
+    overflow: visible;
+    max-height: 9999px;
     transform: translateY(0);
     clip-path: inset(0 0 0 0);
     pointer-events: auto;
@@ -239,7 +270,8 @@ footer a,
         opacity 0.55s ease,
         transform 0.65s cubic-bezier(0.4, 0, 0.2, 1),
         clip-path 0.65s cubic-bezier(0.4, 0, 0.2, 1),
-        visibility 0s linear 0s;
+        visibility 0s linear 0s,
+        max-height 0.65s ease;
 }
 
 /* Legal Modals */
@@ -691,6 +723,64 @@ footer a,
   align-items: center;
 }
 
+/* Footer logo neon ring */
+.footer-logo-ring {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.96);
+  border: 1px solid rgba(0, 242, 255, 0.35);
+  box-shadow: 0 0 35px rgba(0, 242, 255, 0.14);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.35s ease, border-color 0.35s ease;
+}
+
+.footer-logo-ring::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  box-shadow: 0 0 18px rgba(0, 242, 255, 0.25);
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+.footer-logo-ring::after {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+}
+
+.footer-logo-ring:hover {
+  transform: translateY(-3px);
+  border-color: rgba(0, 242, 255, 0.6);
+}
+
+.footer-logo {
+  position: relative;
+  z-index: 1;
+  max-height: 68px;
+}
+
+footer .footer-logo-ring + div {
+  max-width: 14rem;
+}
+
+footer .border-t {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+footer .text-white\/30 {
+  color: rgba(255, 255, 255, 0.3);
+}
+
 .social-buttons-wrapper .icon {
   position: relative;
   background: rgba(255, 255, 255, 0.02);
@@ -952,35 +1042,42 @@ body.mobile-menu-open {
 }
 
 .mobile-menu-panel {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100dvh;
-  z-index: 9999;
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  right: 0;
+  width: calc(100% - 1rem);
+  max-width: 100%;
+  margin-inline: auto;
+  z-index: 9998;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  background: rgba(5, 5, 5, 0.96);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  transform: translateY(-12px);
+  background: rgba(5, 5, 5, 0.94);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.75rem;
+  overflow: hidden;
+  max-height: calc(100dvh - 6rem);
   transition:
-    opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    visibility 0.4s linear;
+    opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0.35s linear,
+    transform 0.35s ease;
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.28), 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
 /* Premium blurred glassmorphism background elements */
 .mobile-menu-panel::before {
   content: '';
   position: absolute;
-  top: 15%;
-  left: -10%;
-  width: 250px;
-  height: 250px;
+  top: 12%;
+  left: -8%;
+  width: 180px;
+  height: 180px;
   background: radial-gradient(circle, rgba(0, 242, 255, 0.12) 0%, transparent 70%);
-  filter: blur(50px);
+  filter: blur(28px);
   pointer-events: none;
   z-index: -1;
 }
@@ -988,12 +1085,12 @@ body.mobile-menu-open {
 .mobile-menu-panel::after {
   content: '';
   position: absolute;
-  bottom: 15%;
-  right: -10%;
-  width: 250px;
-  height: 250px;
+  bottom: 12%;
+  right: -8%;
+  width: 180px;
+  height: 180px;
   background: radial-gradient(circle, rgba(138, 115, 62, 0.1) 0%, transparent 70%);
-  filter: blur(50px);
+  filter: blur(28px);
   pointer-events: none;
   z-index: -1;
 }
@@ -1002,9 +1099,11 @@ body.mobile-menu-open {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
+  transform: translateY(0);
   transition:
-    opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    visibility 0s linear 0s;
+    opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0.35s linear 0s,
+    transform 0.35s ease;
 }
 
 .mobile-menu-panel__inner {
@@ -1016,6 +1115,8 @@ body.mobile-menu-open {
   padding: 2rem;
   width: 100%;
   max-width: 400px;
+  max-height: calc(100dvh - 14rem);
+  overflow-y: auto;
 }
 
 .mobile-menu-link {
@@ -1087,22 +1188,35 @@ body.mobile-menu-open {
     width: 100% !important;
     max-width: 100% !important;
     padding: 0.55rem 0.75rem !important;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    border-radius: 0 !important;
+    background: rgba(5, 5, 5, 0.92) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22) !important;
+    border-radius: 1.5rem !important;
     opacity: 1 !important;
   }
 
   #nav-container.nav-at-top,
   #nav-container.nav-compact {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
+    background: rgba(5, 5, 5, 0.92) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22) !important;
   }
 
   #mobile-menu-btn {
     grid-area: toggle;
+  }
+
+  .mobile-nav-shell {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22) !important;
+    background: rgba(5, 5, 5, 0.9) !important;
+  }
+
+  .mobile-menu-panel {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
   }
 
   #nav-logo {
@@ -1133,6 +1247,14 @@ body.mobile-menu-open {
   #nav-logo .relative.w-9 {
     width: 2.75rem !important;
     height: 2.75rem !important;
+  }
+
+  .h-screen {
+    height: 100dvh !important;
+  }
+
+  .min-h-screen {
+    min-height: 100dvh !important;
   }
 }
 
@@ -1192,3 +1314,130 @@ body.mobile-menu-open {
     box-shadow: 0 0 16px rgba(0, 242, 255, 0.15);
   }
 }
+
+/* Subtle animated backgrounds for Planes and Contacto */
+#planes-banner,
+#contacto {
+  position: relative;
+  overflow: hidden;
+}
+
+#planes-banner::before,
+#contacto::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 18% 24%, rgba(0, 242, 255, 0.08), transparent 20%),
+    radial-gradient(circle at 84% 28%, rgba(255, 255, 255, 0.04), transparent 18%),
+    radial-gradient(circle at 52% 50%, rgba(0, 255, 208, 0.03), transparent 42%);
+  opacity: 1;
+  animation: softGlow 14s ease-in-out infinite;
+}
+
+#planes-banner::after,
+#contacto::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, transparent 30%, transparent 70%, rgba(255, 255, 255, 0.02) 100%);
+  background-size: 100% 220%;
+  animation: slowDrift 18s linear infinite;
+}
+
+#planes-banner > .max-w-4xl,
+#contacto > .max-w-6xl {
+  position: relative;
+  z-index: 10;
+}
+
+@keyframes softGlow {
+  0%, 100% {
+    transform: scale(0.98);
+    opacity: 0.95;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 1;
+  }
+}
+
+@keyframes slowDrift {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 0% 100%;
+  }
+}
+
+/* Page transition overlay (Uiverse loader) - global copy so other pages can use it */
+#page-transition-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: #050505;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+}
+
+#page-transition-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+#page-transition-overlay .loader-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90px;
+    height: 90px;
+    margin: 0;
+    padding: 0;
+}
+
+#page-transition-overlay .loader {
+    --dur: 2s;
+    display: block;
+    width: 90px;
+    height: 90px;
+    position: relative;
+    z-index: 1;
+}
+
+#page-transition-overlay .loader-letter { display: none; }
+
+#page-transition-overlay .overlay-brand {
+    margin-top: 1.75rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: rgba(0, 242, 255, 0.28);
+}
+
+/* Minimal animation keyframes used by the inline SVG animation */
+@keyframes loader-flip { from { transform: translate(13.75px, 9.25px) rotate(-180deg); } 24%, to { transform: translate(13.75px, 9.25px) rotate(0); } }
+@keyframes glare-top { from { stroke: rgba(255,255,255,0); } 24%, to { stroke: white; } }
+@keyframes glare-bottom { from { stroke: white; } 24%, to { stroke: rgba(255,255,255,0); } }
+@keyframes motion-thick { from { animation-timing-function: cubic-bezier(0.33,0,0.67,0); stroke: rgba(255,255,255,0); stroke-dashoffset:153.94; transform: rotate(0.67turn);} 20% { animation-timing-function: cubic-bezier(0.33,1,0.67,1); stroke: rgb(32,32,32); stroke-dashoffset:141.11; transform: rotate(1turn);} 40%, to { stroke: rgba(255,255,255,0); stroke-dashoffset:153.94; transform: rotate(1.33turn);} }
+@keyframes motion-medium { from,8% { animation-timing-function: cubic-bezier(0.33,0,0.67,0); stroke: rgba(255,255,255,0); stroke-dashoffset:153.94; transform: rotate(0.5turn);} 20% { animation-timing-function: cubic-bezier(0.33,1,0.67,1); stroke: white; stroke-dashoffset:147.53; transform: rotate(0.83turn);} 32%, to { stroke: rgba(255,255,255,0); stroke-dashoffset:153.94; transform: rotate(1.17turn);} }
+@keyframes motion-thin { from,4% { animation-timing-function: cubic-bezier(0.33,0,0.67,0); stroke: rgba(255,255,255,0); stroke-dashoffset:153.94; transform: rotate(0.33turn);} 24% { animation-timing-function: cubic-bezier(0.33,1,0.67,1); stroke: rgb(53,53,53); stroke-dashoffset:134.7; transform: rotate(0.67turn);} 44%, to { stroke: rgba(255,255,255,0); stroke-dashoffset:153.94; transform: rotate(1turn);} }
+@keyframes sand-drop { from,10% { animation-timing-function: cubic-bezier(0.12,0,0.39,0); stroke-dashoffset:1; } 70%, to { stroke-dashoffset:-107; } }
+@keyframes sand-fill { from,10% { animation-timing-function: cubic-bezier(0.12,0,0.39,0); stroke-dashoffset:55; } 70%, to { stroke-dashoffset:-54; } }
+@keyframes sand-grain-left { from,10% { animation-timing-function: cubic-bezier(0.12,0,0.39,0); stroke-dashoffset:29; } 70%, to { stroke-dashoffset:-22; } }
+@keyframes sand-grain-right { from,10% { animation-timing-function: cubic-bezier(0.12,0,0.39,0); stroke-dashoffset:27; } 70%, to { stroke-dashoffset:-24; } }
+@keyframes sand-line-left { from,10% { animation-timing-function: cubic-bezier(0.12,0,0.39,0); stroke-dashoffset:53; } 70%, to { stroke-dashoffset:-55; } }
+@keyframes sand-line-right { from,10% { animation-timing-function: cubic-bezier(0.12,0,0.39,0); stroke-dashoffset:14; } 70%, to { stroke-dashoffset:-24.5; } }
+@keyframes sand-mound-top { from,10% { animation-timing-function: linear; transform: translate(0,0);} 15% { animation-timing-function: cubic-bezier(0.12,0,0.39,0); transform: translate(0,1.5px);} 51%, to { transform: translate(0,13px);} }
+@keyframes sand-mound-bottom { from,31% { animation-timing-function: cubic-bezier(0.61,1,0.88,1); transform: scale(1,0);} 56%, to { transform: scale(1,1);} }
