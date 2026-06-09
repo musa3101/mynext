@@ -32,6 +32,53 @@
             background-color: var(--brand-dark); 
             color: var(--text-primary); 
             scroll-behavior: smooth;
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+
+        html {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+
+        .min-h-screen {
+            min-height: 100dvh;
+        }
+
+        .mynext-signature {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(0.5625rem, 1.8vw, 0.6875rem);
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.28);
+        }
+
+        .mynext-signature a {
+            color: rgba(255, 255, 255, 0.52);
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            padding-bottom: 0.125rem;
+            transition: color 0.4s ease, border-color 0.4s ease;
+        }
+
+        @media (hover: hover) {
+            .mynext-signature a:hover {
+                color: #06b6d4;
+                border-color: rgba(6, 182, 212, 0.45);
+            }
+        }
+
+        .mynext-signature a:active {
+            color: #06b6d4;
+        }
+
+        .touch-link {
+            min-width: 2.75rem;
+            min-height: 2.75rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* Fondo Neon Premium */
@@ -793,7 +840,7 @@
         <!-- Selector de Idioma -->
         <!-- LANGUAGE_SELECTOR_START -->
         <div class="absolute top-4 right-4 sm:top-6 sm:right-6 md:right-12 z-50 flex items-center gap-1.5 sm:gap-2 bg-[#050505]/60 backdrop-blur-md border border-white/10 p-1 px-2.5 sm:p-1.5 rounded-full shadow-lg pointer-events-auto no-print">
-            <a href="index.html" class="opacity-60 hover:opacity-100 transition-opacity flex items-center justify-center gap-1" title="Español">
+            <a href="index.html" class="opacity-60 hover:opacity-100 transition-opacity flex items-center justify-center gap-1 touch-link" title="Español">
                 <svg class="hidden sm:block w-5 h-5 rounded-full overflow-hidden border border-white/10 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
                     <rect width="30" height="7.5" fill="#c60b1e"/>
                     <rect y="7.5" width="30" height="15" fill="#ffc400"/>
@@ -802,7 +849,7 @@
                 <span class="sm:hidden font-headline font-bold text-[9px] tracking-wider text-white">ES</span>
             </a>
             <span class="w-[1px] h-2.5 sm:h-3 bg-white/20"></span>
-            <a href="index-en.html" class="opacity-100 flex items-center justify-center gap-1" title="English">
+            <a href="index-en.html" class="opacity-100 flex items-center justify-center gap-1 touch-link" title="English">
                 <svg class="hidden sm:block w-5 h-5 rounded-full overflow-hidden border border-cyan-400/40 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
                     <rect width="30" height="30" fill="#012169"/>
                     <path d="M0,0 L30,30 M30,0 L0,30" stroke="#fff" stroke-width="4"/>
@@ -823,7 +870,7 @@
                 
                 <!-- Anillo Cyber-Glass e Imagen del Logo -->
                 <div class="logo-ring">
-                    <img onclick="window.location.href='../index-en.html'" src="../assets/img/logo_new.png" alt="MYNEXT Logo" class="w-36 md:w-48 h-auto logo-interactive" fetchpriority="high">
+                    <img onclick="window.location.href='../index-en.html'" src="../assets/img/logo_new.png" alt="MYNEXT Logo" class="w-36 md:w-48 h-auto logo-interactive max-w-full" fetchpriority="high" width="192" height="192">
                 </div>
             </div>
             
@@ -935,7 +982,7 @@
             
             <div class="flex flex-col gap-6 w-full max-w-md mx-auto">
                 <!-- WhatsApp Button -->
-                <a href="https://wa.me/34673109486?text=%C2%A1Hola!%20Vengo%20desde%20la%20web%20de%20MYNEXT.%20Me%20gustar%C3%ADa%20recibir%20informaci%C3%B3n%20sobre%20vuestros%20servicios%20de%20dise%C3%B1o%20y%20arquitectura%20digital%20para%20mi%20negocio.%20%C2%A1Gracias!" target="_blank" class="flex items-center gap-5 bg-emerald-950/20 hover:bg-emerald-950/40 border border-emerald-500/20 hover:border-emerald-500/60 px-8 py-5 rounded-2xl transition-all duration-300 group hover:-translate-y-1 shadow-[0_0_15px_rgba(16,185,129,0.05)] hover:shadow-[0_0_25px_rgba(16,185,129,0.15)] text-left w-full cursor-pointer">
+                <a href="https://wa.me/34673109486?text=Hello!%20I%20came%20from%20the%20MYNEXT%20website.%20I%20would%20like%20to%20receive%20information%20about%20your%20design%20and%20digital%20architecture%20services%20for%20my%20business.%20Thank%20you!" target="_blank" rel="noopener noreferrer" class="flex items-center gap-5 bg-emerald-950/20 hover:bg-emerald-950/40 active:bg-emerald-950/50 border border-emerald-500/20 hover:border-emerald-500/60 px-8 py-5 rounded-2xl transition-all duration-300 group hover:-translate-y-1 active:scale-[0.98] shadow-[0_0_15px_rgba(16,185,129,0.05)] hover:shadow-[0_0_25px_rgba(16,185,129,0.15)] text-left w-full cursor-pointer min-h-[2.75rem]">
                     <div class="text-[#25d366] shrink-0 transition-transform group-hover:scale-110">
                         <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
@@ -948,7 +995,7 @@
                 </a>
 
                 <!-- Email Button -->
-                <a href="mailto:musaabdul97@icloud.com?subject=Nuevo%20Proyecto%20Digital%20%7C%20MYNEXT&body=Hola%2C%20Musa.%0A%0AHe%20estado%20revisando%20tu%20porfolio%20en%20MYNEXT%20y%20me%20interesa%20el%20enfoque%20de%20Arquitectura%20Digital%20para%20mi%20negocio.%20Me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20tus%20servicios%20y%20tarifas.%0A%0AUn%20saludo." class="flex items-center gap-5 bg-cyan-950/20 hover:bg-cyan-950/40 border border-cyan-500/20 hover:border-cyan-500/60 px-8 py-5 rounded-2xl transition-all duration-300 group hover:-translate-y-1 shadow-[0_0_15px_rgba(6,182,212,0.05)] hover:shadow-[0_0_25px_rgba(6,182,212,0.15)] text-left w-full cursor-pointer">
+                <a href="mailto:mynextbymusa@gmail.com?subject=New%20Digital%20Project%20%7C%20MYNEXT&body=Hello%20Musa,%0A%0AI%20have%20been%20reviewing%20your%20portfolio%20on%20MYNEXT%20and%20I%20am%20interested%20in%20the%20Digital%20Architecture%20approach%20for%20my%20business.%20I%20would%20like%20to%20receive%20more%20information%20about%20your%20services%20and%20rates.%0A%0ABest%20regards." class="flex items-center gap-5 bg-cyan-950/20 hover:bg-cyan-950/40 active:bg-cyan-950/50 border border-cyan-500/20 hover:border-cyan-500/60 px-8 py-5 rounded-2xl transition-all duration-300 group hover:-translate-y-1 active:scale-[0.98] shadow-[0_0_15px_rgba(6,182,212,0.05)] hover:shadow-[0_0_25px_rgba(6,182,212,0.15)] text-left w-full cursor-pointer min-h-[2.75rem]">
                     <div class="text-[#d44638] shrink-0 transition-transform group-hover:scale-110">
                         <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M24 4.5v15c0 .85-.65 1.5-1.5 1.5H21V7.38l-9 5.65-9-5.65V21H1.5c-.85 0-1.5-.65-1.5-1.5v-15c0-.4.15-.75.45-1.05.3-.3.65-.45 1.05-.45H3.3l8.7 5.47 8.7-5.47h1.85c.4 0 .75.15 1.05.45.3.3.45.65.45 1.05z"/>
@@ -975,8 +1022,8 @@
                     <span class="hidden md:block text-cyan-500 scale-150">•</span>
                     <span class="text-slate-400 font-light tracking-[0.8em]">SINCE 2026</span>
                 </p>
-                <div class="text-[9px] tracking-[0.2em] text-white/30 uppercase font-headline hover:text-white/50 transition-colors duration-500">
-                    Made by <a href="https://mynextbymusa.com" class="text-white/60 hover:text-cyan-400 transition-all duration-500 font-semibold border-b border-white/10 hover:border-cyan-400/40 pb-0.5 tracking-[0.25em]">MYNEXT</a>
+                <div class="mynext-signature">
+                    Made by <a href="https://mynextbymusa.com" target="_blank" rel="noopener noreferrer">MYNEXT</a>
                 </div>
             </div>
         </div>

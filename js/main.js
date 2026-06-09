@@ -1,3 +1,9 @@
+// --- 0. Always start at top on load ---
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+
 // --- 1. Reveal Animations ---
 document.addEventListener('DOMContentLoaded', () => {
     const reveals = document.querySelectorAll('.reveal');
@@ -20,11 +26,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const left = document.getElementById('nav-left');
         const center = document.getElementById('nav-logo');
         const right = document.getElementById('nav-right');
+        const controls = document.getElementById('nav-controls');
 
         if (nav) nav.classList.remove('opacity-0');
         if (left) left.classList.replace('-translate-x-[150%]', 'translate-x-0');
         if (center) center.classList.replace('-translate-y-[150%]', 'translate-y-0');
         if (right) right.classList.replace('translate-x-[150%]', 'translate-x-0');
+        if (controls) controls.classList.replace('translate-x-[150%]', 'translate-x-0');
     }, 800);
 
     // --- 3. Process Reveal: Bento Horizon ---
@@ -331,16 +339,12 @@ function hideNav() {
 
 window.addEventListener('scroll', () => {
     const currentScrollY = window.scrollY;
-    const isScrollingDown = currentScrollY > lastScrollY;
 
     if (currentScrollY < 80) {
         // At the top — full header
         setNavAtTop();
-    } else if (isScrollingDown) {
-        // Scrolling down — hide
-        hideNav();
     } else {
-        // Scrolling up mid-page — show compact, non-intrusive capsule
+        // Scrolling up or down mid-page — show compact, non-intrusive capsule
         setNavCompact();
     }
 
@@ -534,54 +538,52 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Mobile Menu Toggle ---
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileDropdown = document.getElementById('mobile-dropdown');
-    
+    const mobileNavShell = document.getElementById('mobile-nav-shell');
+
+    function openMobileMenu() {
+        if (!mobileDropdown || !mobileMenuBtn) return;
+        mobileDropdown.classList.add('is-open');
+        mobileNavShell?.classList.add('menu-open');
+        mobileMenuBtn.classList.add('is-active');
+        mobileMenuBtn.setAttribute('aria-expanded', 'true');
+        mobileDropdown.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('mobile-menu-open');
+    }
+
+    function closeMobileMenu() {
+        if (!mobileDropdown || !mobileMenuBtn) return;
+        mobileDropdown.classList.remove('is-open');
+        mobileNavShell?.classList.remove('menu-open');
+        mobileMenuBtn.classList.remove('is-active');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        mobileDropdown.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('mobile-menu-open');
+    }
+
     if (mobileMenuBtn && mobileDropdown) {
         mobileMenuBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            const isHidden = mobileDropdown.classList.contains('hidden');
-            if (isHidden) {
-                // Show dropdown
-                mobileDropdown.classList.remove('hidden');
-                // Force layout reflow
-                mobileDropdown.offsetHeight;
-                mobileDropdown.classList.remove('opacity-0', '-translate-y-4');
-                mobileDropdown.classList.add('opacity-100', 'translate-y-0');
+            if (mobileDropdown.classList.contains('is-open')) {
+                closeMobileMenu();
             } else {
-                // Hide dropdown
-                mobileDropdown.classList.remove('opacity-100', 'translate-y-0');
-                mobileDropdown.classList.add('opacity-0', '-translate-y-4');
-                // Hide after transition
-                setTimeout(() => {
-                    if (mobileDropdown.classList.contains('opacity-0')) {
-                        mobileDropdown.classList.add('hidden');
-                    }
-                }, 300);
+                openMobileMenu();
             }
         });
-        
-        // Close menu when clicking links
-        const links = mobileDropdown.querySelectorAll('a');
-        links.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileDropdown.classList.remove('opacity-100', 'translate-y-0');
-                mobileDropdown.classList.add('opacity-0', '-translate-y-4');
-                setTimeout(() => {
-                    mobileDropdown.classList.add('hidden');
-                }, 300);
-            });
+
+        mobileDropdown.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
         });
-        
-        // Close menu when clicking outside
+
         document.addEventListener('click', (e) => {
-            if (!mobileDropdown.contains(e.target) && e.target !== mobileMenuBtn) {
-                mobileDropdown.classList.remove('opacity-100', 'translate-y-0');
-                mobileDropdown.classList.add('opacity-0', '-translate-y-4');
-                setTimeout(() => {
-                    if (mobileDropdown.classList.contains('opacity-0')) {
-                        mobileDropdown.classList.add('hidden');
-                    }
-                }, 300);
+            if (!mobileDropdown.classList.contains('is-open')) return;
+            const target = e.target;
+            if (!mobileDropdown.contains(target) && !mobileMenuBtn.contains(target) && !mobileNavShell?.contains(target)) {
+                closeMobileMenu();
             }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeMobileMenu();
         });
     }
 
@@ -624,4 +626,3 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
-

@@ -3,31 +3,31 @@
 
 <head>
     <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
 
     <!-- SEO & Metadata -->
-    <title>MYNEXT - Architecture Digital Premium | Musa</title>
+    <title>MYNEXT - Digital Architecture Premium | Musa</title>
     <meta name="description"
         content="Diseño y desarrollo de experiencias digitales exclusivas. Elevamos tu marca con arquitectura digital premium y diseño de alta fidelidad.">
     <meta name="author" content="Musa">
     <meta name="robots" content="index, follow">
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:title" content="MYNEXT - Architecture Digital Premium">
+    <meta property="og:title" content="MYNEXT - Digital Architecture Premium">
     <meta property="og:description" content="Transformamos tu visión en una identidad digital líquida y sofisticada.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="./assets/img/screen.png">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="MYNEXT - Architecture Digital Premium">
+    <meta name="twitter:title" content="MYNEXT - Digital Architecture Premium">
     <meta name="twitter:description"
         content="Diseño y desarrollo de experiencias digitales exclusivas. Elevamos tu marca con arquitectura digital premium y diseño de alta fidelidad.">
     <meta name="twitter:image" content="./assets/img/screen.png">
 
     <!-- Fonts -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Modak&family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         rel="stylesheet">
@@ -49,6 +49,7 @@
             left: 0;
             width: 100%;
             height: 100%;
+            min-height: 100dvh;
             z-index: 0;
             pointer-events: none;
         }
@@ -1721,7 +1722,7 @@
                     },
                     fontFamily: {
                         "headline": ["Space Grotesk", "sans-serif"],
-                        "body": ["Urbanist", "sans-serif"],
+                        "body": ["Outfit", "sans-serif"],
                         "space-grotesk": ["Space Grotesk", "sans-serif"]
                     }
                 }
@@ -1756,52 +1757,28 @@
             <span class="loader-letter">.</span>
             <div class="loader"></div>
         </div>
-        <p class="overlay-brand">MYNEXT · Architecture Digital</p>
+        <p class="overlay-brand">MYNEXT · Digital Architecture</p>
     </div>
-
-    <!-- LANGUAGE_SELECTOR_START -->
-    <div class="fixed top-4 right-4 sm:top-6 sm:right-6 md:right-12 z-50 flex items-center gap-2 pointer-events-auto">
-        <!-- Language Selector -->
-        <div class="flex items-center gap-1.5 sm:gap-2 bg-[#050505]/60 backdrop-blur-md border border-white/10 p-1 px-2 sm:p-1.2 rounded-full shadow-lg">
-            <a href="index.html" class="opacity-60 hover:opacity-100 transition-opacity flex items-center justify-center gap-1 touch-target" title="Español">
-                <svg class="hidden sm:block w-3.5 h-3.5 rounded-full overflow-hidden border border-white/10 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="30" height="7.5" fill="#c60b1e"/>
-                    <rect y="7.5" width="30" height="15" fill="#ffc400"/>
-                    <rect y="22.5" width="30" height="7.5" fill="#c60b1e"/>
-                </svg>
-                <span class="sm:hidden font-headline font-bold text-[8px] tracking-wider text-white">ES</span>
-            </a>
-            <span class="w-[1px] h-2 sm:h-2.5 bg-white/20"></span>
-            <a href="index-en.html" class="opacity-100 flex items-center justify-center gap-1 touch-target" title="English">
-                <svg class="hidden sm:block w-3.5 h-3.5 rounded-full overflow-hidden border border-electric-cyan/40 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="30" height="30" fill="#012169"/>
-                    <path d="M0,0 L30,30 M30,0 L0,30" stroke="#fff" stroke-width="4"/>
-                    <path d="M0,0 L30,30 M30,0 L0,30" stroke="#c8102e" stroke-width="1.5"/>
-                    <path d="M15,0 V30 M0,15 H30" stroke="#fff" stroke-width="6"/>
-                    <path d="M15,0 V30 M0,15 H30" stroke="#c8102e" stroke-width="4"/>
-                </svg>
-                <span class="sm:hidden font-headline font-bold text-[8px] tracking-wider text-electric-cyan">EN</span>
-            </a>
-        </div>
-
-        <!-- Cart Button -->
-        <button id="cart-btn" class="relative flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#050505]/60 backdrop-blur-md border border-white/10 hover:border-electric-cyan/50 hover:text-electric-cyan transition-all duration-300 shadow-lg group touch-target" title="Shopping Cart">
-            <span class="material-symbols-outlined text-sm sm:text-base text-white/80 group-hover:text-electric-cyan transition-colors">shopping_cart</span>
-            <!-- Glow dot on hover -->
-            <span class="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-electric-cyan opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-[0_0_8px_#00F2FF]"></span>
-        </button>
-    </div>
-    <!-- LANGUAGE_SELECTOR_END -->
 
     <!-- 0. NAVIGATION -->
-    <header id="main-header" class="fixed top-4 sm:top-6 left-0 right-0 z-50 flex justify-center px-2 sm:px-4 pointer-events-none w-full">
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 pointer-events-none w-full">
+        <div id="mobile-nav-shell" class="mobile-nav-shell pointer-events-auto mx-3 mt-3 sm:mx-4 sm:mt-4 md:mx-auto md:mt-6 md:flex md:justify-center md:px-4 md:w-auto md:max-w-none">
         <nav id="nav-container"
-            class="group flex items-center justify-between sm:justify-center w-auto max-w-[98vw] gap-2 sm:gap-6 md:gap-16 lg:gap-20 px-4 sm:px-8 md:px-20 py-2 sm:py-3 bg-transparent border border-transparent rounded-[2rem] transition-all ease-in-out opacity-0 pointer-events-auto shadow-none"
+            class="group flex items-center justify-between w-full max-w-[95vw] md:w-auto md:max-w-[98vw] md:justify-center gap-4 sm:gap-6 md:gap-12 lg:gap-16 px-4 md:px-8 py-2 sm:py-3 bg-transparent border border-transparent rounded-[2rem] transition-all ease-in-out opacity-0 pointer-events-auto shadow-none"
             style="transition-duration: 2400ms;">
+            
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" class="mobile-menu-toggle md:hidden" type="button" aria-expanded="false" aria-controls="mobile-dropdown" title="Menu">
+                <span class="mobile-menu-toggle__box" aria-hidden="true">
+                    <span class="mobile-menu-toggle__line"></span>
+                    <span class="mobile-menu-toggle__line"></span>
+                    <span class="mobile-menu-toggle__line"></span>
+                </span>
+            </button>
 
             <!-- Left Navigation -->
             <div id="nav-left"
-                class="flex items-center gap-2 sm:gap-6 md:gap-12 ease-in-out -translate-x-[150%] translate-y-1"
+                class="hidden md:flex items-center gap-2 sm:gap-6 md:gap-12 ease-in-out -translate-x-[150%] translate-y-1"
                 style="transition: transform 2400ms cubic-bezier(0.16, 1, 0.3, 1);">
                 <a class="relative py-2 text-[8px] sm:text-xs md:text-[13px] font-headline font-semibold uppercase tracking-[0.15em] sm:tracking-[0.3em] md:tracking-[0.4em] text-white/85 hover:text-electric-cyan hover:scale-105 transition-all duration-300 ease-out group/link"
                     href="#nosotros">About<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-[1.5px] bg-electric-cyan transform scale-x-0 group-hover/link:scale-x-100 transition-transform duration-300 ease-out origin-center shadow-[0_0_8px_#00F2FF]"></span></a>
@@ -1812,6 +1789,7 @@
             <!-- Central Branding -->
             <div id="nav-logo" class="relative group/logo ease-in-out -translate-y-[150%] mx-1 sm:mx-0 shrink-0"
                 style="transition: transform 2400ms cubic-bezier(0.16, 1, 0.3, 1);">
+                <a href="index-en.html" title="Back to home" aria-label="MYNEXT Home" class="block">
                 <!-- Aro difuminado exterior en cyan -->
                 <div
                     class="absolute -inset-4 bg-electric-cyan/20 rounded-full blur-xl sm:blur-2xl opacity-0 group-hover/logo:opacity-100 transition-opacity duration-700">
@@ -1825,24 +1803,67 @@
                         <img alt="Logo MYNEXT"
                             class="w-full h-full object-contain scale-125 group-hover/logo:scale-[1.35] transition-transform duration-700"
                             src="./assets/img/logo-m1-new.png"
-                            fetchpriority="high">
+                            fetchpriority="high" width="56" height="56">
                     </div>
                 </div>
+                </a>
             </div>
 
             <!-- Right Navigation -->
             <div id="nav-right"
-                class="flex items-center gap-2 sm:gap-6 md:gap-12 ease-in-out translate-x-[150%] translate-y-1"
+                class="hidden md:flex items-center gap-2 sm:gap-6 md:gap-12 ease-in-out translate-x-[150%] translate-y-1"
                 style="transition: transform 2400ms cubic-bezier(0.16, 1, 0.3, 1);">
                 <a class="relative py-2 text-[8px] sm:text-xs md:text-[13px] font-headline font-semibold uppercase tracking-[0.15em] sm:tracking-[0.3em] md:tracking-[0.4em] text-white/85 hover:text-electric-cyan hover:scale-105 transition-all duration-300 ease-out group/link"
                     href="#planes-banner">Plans<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-[1.5px] bg-electric-cyan transform scale-x-0 group-hover/link:scale-x-100 transition-transform duration-300 ease-out origin-center shadow-[0_0_8px_#00F2FF]"></span></a>
                 <a class="relative py-2 text-[8px] sm:text-xs md:text-[13px] font-headline font-semibold uppercase tracking-[0.15em] sm:tracking-[0.3em] md:tracking-[0.4em] text-white/85 hover:text-electric-cyan hover:scale-105 transition-all duration-300 ease-out group/link"
                     href="#contacto">Contact<span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-[1.5px] bg-electric-cyan transform scale-x-0 group-hover/link:scale-x-100 transition-transform duration-300 ease-out origin-center shadow-[0_0_8px_#00F2FF]"></span></a>
             </div>
+
+            <!-- Controls (Language + Cart) inside Nav Container -->
+            <div class="flex items-center gap-2 md:gap-4 ease-in-out translate-x-[150%] translate-y-1" style="transition: transform 2400ms cubic-bezier(0.16, 1, 0.3, 1);" id="nav-controls">
+                <!-- Language Selector -->
+                <div class="flex items-center gap-1.5 sm:gap-2 border border-white/10 p-1 px-2 rounded-full hover:border-white/20 transition-colors">
+                    <a href="index.html" class="opacity-60 hover:opacity-100 transition-opacity flex items-center justify-center gap-1 touch-target" title="Spanish">
+                        <svg class="w-3.5 h-3.5 rounded-full overflow-hidden border border-white/10 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="30" height="7.5" fill="#c60b1e"/>
+                            <rect y="7.5" width="30" height="15" fill="#ffc400"/>
+                            <rect y="22.5" width="30" height="7.5" fill="#c60b1e"/>
+                        </svg>
+                    </a>
+                    <span class="w-[1px] h-2.5 bg-white/20"></span>
+                    <a href="index-en.html" class="opacity-100 flex items-center justify-center gap-1 touch-target" title="English">
+                        <svg class="w-3.5 h-3.5 rounded-full overflow-hidden border border-electric-cyan/40 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="30" height="30" fill="#012169"/>
+                            <path d="M0,0 L30,30 M30,0 L0,30" stroke="#fff" stroke-width="4"/>
+                            <path d="M0,0 L30,30 M30,0 L0,30" stroke="#c8102e" stroke-width="1.5"/>
+                            <path d="M15,0 V30 M0,15 H30" stroke="#fff" stroke-width="6"/>
+                            <path d="M15,0 V30 M0,15 H30" stroke="#c8102e" stroke-width="4"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Cart Button -->
+                <button id="cart-btn" class="relative flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-white/10 hover:border-electric-cyan/50 hover:text-electric-cyan transition-all duration-300 group touch-target" title="Shopping Cart">
+                    <span class="material-symbols-outlined text-sm sm:text-base text-white/80 group-hover:text-electric-cyan transition-colors">shopping_cart</span>
+                    <!-- Glow dot on hover -->
+                    <span class="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-electric-cyan opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-[0_0_8px_#00F2FF]"></span>
+                </button>
+            </div>
         </nav>
+        
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-dropdown" class="mobile-menu-panel md:hidden" aria-hidden="true">
+            <div class="mobile-menu-panel__inner">
+                <a class="mobile-menu-link" href="#nosotros"><span class="mobile-menu-link__idx">01</span>About</a>
+                <a class="mobile-menu-link" href="#portfolio"><span class="mobile-menu-link__idx">02</span>Portfolio</a>
+                <a class="mobile-menu-link" href="#planes-banner"><span class="mobile-menu-link__idx">03</span>Plans</a>
+                <a class="mobile-menu-link" href="#contacto"><span class="mobile-menu-link__idx">04</span>Contact</a>
+            </div>
+        </div>
+        </div>
     </header>
 
-    <main class="relative z-10">
+    <main class="relative z-10 overflow-x-hidden max-w-full">
         <!-- INICIO HERO SECTION -->
         <section
             class="h-screen flex items-center justify-center relative bg-void-black overflow-hidden animate-breathing-bg"
@@ -1855,7 +1876,7 @@
 
                 <!-- Logo / Tarjeta de Presentación Premium -->
                 <div
-                    class="relative p-10 md:p-16 rounded-[2.5rem] bg-[#050505] border border-white/[0.05] shadow-[0_0_60px_rgba(0,242,255,0.15)] flex flex-col items-center justify-center overflow-hidden group animate-float-premium">
+                    class="relative p-6 sm:p-10 md:p-16 rounded-[2rem] sm:rounded-[2.5rem] bg-[#050505] border border-white/[0.05] shadow-[0_0_60px_rgba(0,242,255,0.15)] flex flex-col items-center justify-center overflow-hidden group animate-float-premium">
 
                     <!-- Architectural Corners -->
                     <div
@@ -1886,10 +1907,10 @@
                     </div>
 
                     <!-- Logo Central Original Completo -->
-                    <img alt="MYNEXT Architecture Digital"
-                        class="w-72 h-72 md:w-[380px] md:h-[380px] object-contain relative z-10 transition-transform duration-1000 group-hover:scale-105 animate-logo-reveal"
+                    <img alt="MYNEXT Digital Architecture"
+                        class="w-52 h-52 sm:w-72 sm:h-72 md:w-[380px] md:h-[380px] object-contain relative z-10 transition-transform duration-1000 group-hover:scale-105 animate-logo-reveal"
                         src="./assets/img/logo-hero.svg"
-                        fetchpriority="high">
+                        fetchpriority="high" width="380" height="380">
 
                     <!-- EST 2026 Centrado (con animación premium de aparición y brillo) -->
                     <div
@@ -1921,17 +1942,18 @@
             <!-- Dark Blur Overlay for Readability -->
             <div class="absolute inset-0 bg-void-black/40 pointer-events-none z-0"></div>
 
-            <div class="max-w-container-max w-full relative z-10">
-                <div class="text-center mb-12 md:mb-16 reveal">
+            <div class="max-w-container-max w-full relative z-10 nosotros-overlay p-8 md:p-12">
+                <div class="text-center md:mb-12 reveal">
                     <h2
-                        class="text-3xl md:text-6xl font-headline font-bold tracking-tight uppercase max-w-4xl mx-auto leading-tight mb-6 md:mb-8 text-shine-premium transition-all duration-500 hover:scale-105 cursor-default select-none transform">
+                        class="text-3xl md:text-6xl font-headline font-bold tracking-tight uppercase max-w-4xl mx-auto leading-tight mb-6 md:mb-8 text-shine-premium title-glow-premium transition-all duration-500 hover:scale-105 cursor-default select-none transform">
                         PROFESSIONAL WEBSITES. CREATED BY MUSA, DESIGNED BY MYNEXT
                     </h2>
                     <div
-                        class="font-body font-light text-white/80 max-w-[800px] mx-auto text-base md:text-xl leading-loose px-4 flex flex-col items-center">
-                        <p class="text-center w-full">Hello! I am Musa, the mind behind <span class="text-electric-cyan font-medium">MYNEXT</span>. More than an agency, I am your ally in the digital world. I specialize in designing and developing custom websites, focusing on a clean and professional style that turns your visitors into clients. You provide the vision; I handle the entire technical architecture so your business stands out, hassle-free and with maximum efficiency.</p>
+                        class="font-body font-light text-white/90 max-w-[800px] mx-auto text-base md:text-xl leading-loose px-4 flex flex-col items-center">
+                        <p class="text-center w-full">Hi! I'm Musa, the mind behind <span class="text-electric-cyan font-medium">MYNEXT</span>. More than an agency, I'm your ally in the digital world. I design and develop custom websites, focusing on a clean and professional style that turns visitors into clients. You provide the vision; I handle all the technical architecture to make your business stand out, without complications and with maximum efficiency.</p>
                     </div>
                 </div>
+            </div>
 
                 <!-- Redesigned Process: Bento Horizon -->
                 <div class="relative max-w-7xl mx-auto py-20" id="process-trigger">
@@ -1941,8 +1963,8 @@
                         <div
                             class="px-6 py-2 border border-electric-cyan rounded-full bg-transparent shadow-[0_0_4px_rgba(0,242,255,0.4),inset_0_0_2px_rgba(0,242,255,0.4)] mb-4">
                             <h3
-                                class="text-center text-xs md:text-sm font-headline font-bold text-white tracking-[0.4em] uppercase">
-                                OUR CREATIVE PROCESS</h3>
+                                class="text-center font-puffy font-puffy-sm tracking-normal normal-case">
+                                Our Creative Process</h3>
                         </div>
                         <!-- Línea conectora y flecha minimalista (SVG Unificado) -->
                         <div class="flex flex-col items-center mt-2 animate-scroll-bounce">
@@ -1987,7 +2009,7 @@
                                 </div>
                                 <div class="space-y-4">
                                     <h3
-                                        class="text-xl md:text-2xl font-headline font-bold text-white tracking-widest uppercase">
+                                        class="font-puffy font-puffy-md tracking-normal normal-case">
                                         Consulting</h3>
                                     <p class="text-white/40 text-sm md:text-base font-light leading-relaxed">We define
                                         your project's DNA. We outline the technical and visual strategy so your brand
@@ -2010,7 +2032,7 @@
                                 </div>
                                 <div class="space-y-4">
                                     <h3
-                                        class="text-xl md:text-2xl font-headline font-bold text-white tracking-widest uppercase">
+                                        class="font-puffy font-puffy-md tracking-normal normal-case">
                                         Architecture</h3>
                                     <p class="text-white/40 text-sm md:text-base font-light leading-relaxed">We build
                                         with surgical precision. Clean code and exclusive design merged into a high-end
@@ -2034,7 +2056,7 @@
                                 </div>
                                 <div class="space-y-4">
                                     <h3
-                                        class="text-xl md:text-2xl font-headline font-bold text-white tracking-widest uppercase">
+                                        class="font-puffy font-puffy-md tracking-normal normal-case">
                                         Launch</h3>
                                     <p class="text-white/40 text-sm md:text-base font-light leading-relaxed">Launch and
                                         continuous optimization. Your platform doesn't just launch; it evolves to
@@ -2073,8 +2095,7 @@
             </div>
             <div class="max-w-container-max mx-auto relative z-10">
                 <div class="text-center mb-24 md:mb-32 reveal">
-                    <h2 class="text-3xl md:text-5xl font-headline font-bold text-white tracking-widest uppercase">My
-                        Work</h2>
+                    <h2 class="font-puffy font-puffy-lg tracking-normal normal-case">My Work</h2>
                     <div class="w-24 h-[1px] bg-electric-cyan mx-auto mt-8 opacity-50"></div>
                 </div>
 
@@ -2113,7 +2134,7 @@
                             <div
                                 class="absolute inset-0 bg-[#050505] flex items-center justify-center overflow-hidden pt-12 md:pt-14 pb-6 px-6 md:px-10">
                                 <!-- Actual Project Image -->
-                                <img src="./assets/img/porfolio1.png" alt="Preview Blessed Barber Studio" loading="lazy"
+                                <img src="./assets/img/porfolio1.png" alt="Preview Blessed Barber Studio" loading="lazy" width="800" height="450"
                                     class="w-full h-full object-contain transition-transform duration-1000 group-hover:scale-105">
 
                                 <div
@@ -2179,7 +2200,7 @@
                             <div
                                 class="absolute inset-0 bg-[#050505] flex items-center justify-center overflow-hidden pt-12 md:pt-14 pb-6 px-6 md:px-10">
                                 <!-- Actual Project Image -->
-                                <img src="./assets/img/porfolio2.png" alt="Preview Bar Luna Llena" loading="lazy"
+                                <img src="./assets/img/porfolio2.png" alt="Preview Bar Luna Llena" loading="lazy" width="800" height="450"
                                     class="w-full h-full object-contain transition-transform duration-1000 group-hover:scale-105">
 
                                 <div
@@ -2247,7 +2268,7 @@
                             </div>
                             <div
                                 class="absolute inset-0 bg-[#050505] flex items-center justify-center overflow-hidden pt-12 md:pt-14 pb-6 px-6 md:px-10">
-                                <img src="./assets/img/porfolio3.png" alt="Preview Ecuaplac" loading="lazy"
+                                <img src="./assets/img/porfolio3.png" alt="Preview Ecuaplac" loading="lazy" width="800" height="450"
                                     class="w-full h-full object-contain transition-transform duration-1000 group-hover:scale-105">
                                 <div
                                     class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500">
@@ -2309,7 +2330,7 @@
                             </div>
                             <div
                                 class="absolute inset-0 bg-[#050505] flex items-center justify-center overflow-hidden pt-12 md:pt-14 pb-6 px-6 md:px-10">
-                                <img src="./assets/img/porfolio4.png" alt="Preview RBARI Restaurant" loading="lazy"
+                                <img src="./assets/img/porfolio4.png" alt="Preview RBARI Restaurant" loading="lazy" width="800" height="450"
                                     class="w-full h-full object-contain transition-transform duration-1000 group-hover:scale-105">
                                 <div
                                     class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500">
@@ -2372,7 +2393,7 @@
                             </div>
                             <div
                                 class="absolute inset-0 bg-[#050505] flex items-center justify-center overflow-hidden pt-12 md:pt-14 pb-6 px-6 md:px-10">
-                                <img src="./assets/img/porfolio5.png" alt="Preview NEXT ERA Caps" loading="lazy"
+                                <img src="./assets/img/porfolio5.png" alt="Preview NEXT ERA Caps" loading="lazy" width="800" height="450"
                                     class="w-full h-full object-contain transition-transform duration-1000 group-hover:scale-105">
                                 <div
                                     class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500">
@@ -2614,10 +2635,10 @@
 
                 <!-- Branding (centered in the middle) -->
                 <div class="flex flex-col items-center text-center gap-2 order-1 md:order-2">
-                    <a href="#inicio">
+                    <a href="index-en.html" title="Back to home" aria-label="MYNEXT Home">
                         <img src="./assets/img/logoheddernew.jpg" alt="MYNEXT Logo"
                             class="h-14 md:h-16 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-500"
-                            loading="lazy">
+                            loading="lazy" width="128" height="64">
                     </a>
                     <span class="text-[10px] font-headline text-electric-cyan tracking-[0.3em] uppercase font-semibold">Digital Architecture</span>
                 </div>
@@ -2657,9 +2678,9 @@
             </div>
             <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left text-white/30 text-[10px] font-light uppercase tracking-widest">
                 <div>© 2026 MYNEXT. All rights reserved.</div>
-                <div class="font-headline tracking-[0.2em] text-white/30 text-[9px] hover:text-white/50 transition-colors duration-500">
-                    Made by <a href="https://mynextbymusa.com" class="text-white/60 hover:text-electric-cyan transition-all duration-500 font-semibold border-b border-white/10 hover:border-electric-cyan/40 pb-0.5 tracking-[0.25em]">MYNEXT</a>
-                </div>
+                <p class="mynext-signature">
+                    Made by <a href="https://mynextbymusa.com" target="_blank" rel="noopener noreferrer">MYNEXT</a>
+                </p>
             </div>
         </div>
     </footer>
