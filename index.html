@@ -32,8 +32,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         rel="stylesheet">
 
-    <!-- Extracted CSS -->
+    <!-- Core Styles -->
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/cursor.css">
     <style>
         @supports (height: 100dvh) {
             .min-h-screen {
@@ -1920,10 +1921,38 @@
             }
         }
     </script>
+
+    <!-- Typography System -->
+    <style type="text/tailwindcss">
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+        @layer components {
+            .text-h1 {
+                font-family: 'Playfair Display', serif;
+                @apply text-5xl md:text-7xl lg:text-[6rem] font-black tracking-tight leading-none;
+            }
+            .text-h2 {
+                font-family: 'Playfair Display', serif;
+                @apply text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-wide leading-tight;
+            }
+            .text-h3 {
+                @apply text-xl md:text-2xl font-bold tracking-normal;
+            }
+            .text-h4 {
+                @apply text-base md:text-lg font-normal leading-relaxed text-white/80;
+            }
+            .text-cta {
+                @apply text-[10px] sm:text-xs font-bold uppercase tracking-[0.25em];
+            }
+        }
+    </style>
 </head>
 
 <body
     class="bg-void-black text-on-surface font-body selection:bg-electric-cyan selection:text-void-black overflow-x-hidden">
+
+    <!-- Custom Liquid Cursor -->
+    <div id="liquid-cursor"></div>
+    <div id="cursor-dot"></div>
 
     <!-- Neon Page Frame -->
     <div id="neon-frame">
@@ -2171,33 +2200,12 @@
 
             <!-- Controls (Language + Cart) inside Nav Container -->
             <div class="flex items-center gap-2 md:gap-4 ease-in-out translate-x-[150%] translate-y-1" style="transition: transform 2400ms cubic-bezier(0.16, 1, 0.3, 1);" id="nav-controls">
-                <!-- Language Selector -->
-                <div class="flex items-center gap-1.5 sm:gap-2 border border-white/10 p-1 px-2 rounded-full hover:border-white/20 transition-colors">
-                    <a href="index.html" class="opacity-100 flex items-center justify-center gap-1 touch-target" title="Español">
-                        <svg class="w-3.5 h-3.5 rounded-full overflow-hidden border border-electric-cyan/40 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="30" height="7.5" fill="#c60b1e"/>
-                            <rect y="7.5" width="30" height="15" fill="#ffc400"/>
-                            <rect y="22.5" width="30" height="7.5" fill="#c60b1e"/>
-                        </svg>
-                    </a>
-                    <span class="w-[1px] h-2.5 bg-white/20"></span>
-                    <a href="index-en.html" class="opacity-60 hover:opacity-100 transition-opacity flex items-center justify-center gap-1 touch-target" title="English">
-                        <svg class="w-3.5 h-3.5 rounded-full overflow-hidden border border-white/10 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="30" height="30" fill="#012169"/>
-                            <path d="M0,0 L30,30 M30,0 L0,30" stroke="#fff" stroke-width="4"/>
-                            <path d="M0,0 L30,30 M30,0 L0,30" stroke="#c8102e" stroke-width="1.5"/>
-                            <path d="M15,0 V30 M0,15 H30" stroke="#fff" stroke-width="6"/>
-                            <path d="M15,0 V30 M0,15 H30" stroke="#c8102e" stroke-width="4"/>
-                        </svg>
-                    </a>
+                <!-- Language Selector (Text Only) -->
+                <div class="flex items-center gap-3 px-2">
+                    <a href="index.html" class="text-xs font-bold text-electric-cyan tracking-widest hover:scale-110 transition-transform">ES</a>
+                    <span class="w-[1px] h-3 bg-white/20"></span>
+                    <a href="index-en.html" class="text-xs font-bold text-white/50 hover:text-white tracking-widest hover:scale-110 transition-all">EN</a>
                 </div>
-
-                <!-- Cart Button -->
-                <button id="cart-btn" class="relative flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-white/10 hover:border-electric-cyan/50 hover:text-electric-cyan transition-all duration-300 group touch-target" title="Carrito de compras">
-                    <span class="material-symbols-outlined text-sm sm:text-base text-white/80 group-hover:text-electric-cyan transition-colors">shopping_cart</span>
-                    <!-- Glow dot on hover -->
-                    <span class="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-electric-cyan opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-[0_0_8px_#00F2FF]"></span>
-                </button>
             </div>
         </nav>
         </div>
@@ -2205,10 +2213,38 @@
         <!-- Mobile Menu Panel (outside shell for correct fixed positioning) -->
         <div id="mobile-dropdown" class="mobile-menu-panel md:hidden pointer-events-auto" aria-hidden="true">
             <div class="mobile-menu-panel__inner">
-                <a class="mobile-menu-link" href="#nosotros"><span class="mobile-menu-link__idx">01</span>Nosotros</a>
-                <a class="mobile-menu-link" href="#portfolio"><span class="mobile-menu-link__idx">02</span>Portfolio</a>
-                <a class="mobile-menu-link" href="#planes-banner"><span class="mobile-menu-link__idx">03</span>Planes</a>
-                <a class="mobile-menu-link" href="#contacto"><span class="mobile-menu-link__idx">04</span>Contacto</a>
+                <div class="flex flex-col items-center gap-5 w-full mb-2">
+                    <a class="mobile-menu-link" href="#nosotros">Nosotros</a>
+                    <a class="mobile-menu-link" href="#portfolio">Portfolio</a>
+                    <a class="mobile-menu-link" href="#planes-banner">Planes</a>
+                </div>
+
+                <!-- Botón de Contacto Desplegable Móvil -->
+                <div class="mobile-menu-contact flex flex-col items-center mt-6 w-full relative z-50">
+                    <button id="mobile-contact-trigger" class="flex items-center gap-2 px-5 py-2 rounded-full border border-electric-cyan/30 bg-electric-cyan/5 text-electric-cyan font-headline text-[10px] tracking-[0.2em] uppercase transition-all duration-300 hover:bg-electric-cyan/10 hover:border-electric-cyan/50 active:scale-95">
+                        <span>Contactar</span>
+                        <span class="material-symbols-outlined text-[12px] transition-transform duration-300" id="mobile-contact-arrow">keyboard_arrow_down</span>
+                    </button>
+                    
+                    <!-- Opciones de Contacto -->
+                    <div id="mobile-contact-options" class="mobile-contact-options">
+                        <!-- WhatsApp -->
+                        <a href="https://wa.me/34673109486?text=%C2%A1Hola!%20Vengo%20desde%20la%20web%20de%20MYNEXT.%20Me%20gustar%C3%ADa%20recibir%20informaci%C3%B3n%20sobre%20vuestros%20servicios%20de%20dise%C3%B1o%20y%20arquitectura%20digital%20para%20mi%20negocio.%20%C2%A1Gracias!"
+                           target="_blank" rel="noopener noreferrer"
+                           class="flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/5 border border-white/10 hover:border-electric-cyan/40 hover:bg-electric-cyan/5 transition-all text-white font-headline text-[9px] tracking-[0.15em] uppercase">
+                            <svg class="w-3.5 h-3.5 text-electric-cyan fill-current" viewBox="0 0 24 24">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                            </svg>
+                            <span>WhatsApp</span>
+                        </a>
+                        <!-- Gmail -->
+                        <a href="mailto:mynextbymusa@gmail.com?subject=Nuevo%20Proyecto%20Digital%20%7C%20MYNEXT&body=Hola%2C%20Musa.%0A%0AHe%20estado%20revisando%20tu%20portafolio%20en%20MYNEXT%20y%20me%20interesa%20el%20enfoque%20de%20Arquitectura%20Digital%20para%20mi%20negocio.%20Me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20tus%20servicios%20y%20tarifas.%0A%0AUn%20saludo."
+                           class="flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/5 border border-white/10 hover:border-electric-cyan/40 hover:bg-electric-cyan/5 transition-all text-white font-headline text-[9px] tracking-[0.15em] uppercase">
+                            <span class="material-symbols-outlined text-[13px] text-electric-cyan">mail</span>
+                            <span>Gmail</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -2260,7 +2296,6 @@
                     <img alt="MYNEXT Arquitectura Digital"
                         class="w-52 h-52 sm:w-72 sm:h-72 md:w-[380px] md:h-[380px] object-contain relative z-10 transition-transform duration-1000 group-hover:scale-105 animate-logo-reveal"
                         src="./assets/img/logos/logo-hero.svg"
-                        loading="lazy"
                         fetchpriority="high" width="380" height="380">
 
                     <!-- EST 2026 Centrado (con animación premium de aparición y brillo) -->
@@ -2296,12 +2331,12 @@
             <div class="max-w-container-max w-full relative z-10 nosotros-overlay p-8 md:p-12">
                 <div class="text-center md:mb-12 reveal">
                     <h2
-                        class="text-3xl md:text-6xl font-headline font-bold tracking-tight uppercase max-w-4xl mx-auto leading-tight mb-6 md:mb-8 text-shine-premium title-glow-premium transition-all duration-500 hover:scale-105 cursor-default select-none transform">
-                        PÁGINAS WEB PROFESIONALES. CREADAS POR MUSA, DISEÑADAS POR MYNEXT
+                        class="text-h2 text-shine-premium title-glow-premium max-w-4xl mx-auto mb-6 md:mb-8 transition-all duration-500 hover:scale-105 cursor-default select-none transform">
+                        Páginas Web Profesionales. Creadas por Musa, Diseñadas por MYNEXT.
                     </h2>
                     <div
                         class="font-body font-light text-white/90 max-w-[800px] mx-auto text-base md:text-xl leading-loose px-4 flex flex-col items-center">
-                        <p class="text-center w-full">¡Hola! Soy Musa, la mente detrás de <span class="text-electric-cyan font-medium">MYNEXT</span>. Más que una agencia, soy tu aliado en el mundo digital. Me dedico a diseñar y desarrollar páginas web a medida, enfocándome en un estilo limpio y profesional que convierta a tus visitantes en clientes. Tú pones la visión; yo me encargo de toda la arquitectura técnica para que tu negocio destaque, sin complicaciones y con la máxima eficiencia.</p>
+                        <p class="text-h4 text-center w-full">¡Hola! Soy Musa, la mente detrás de <span class="text-electric-cyan font-bold">MYNEXT</span>. Más que una agencia, soy tu aliado en el mundo digital. Me dedico a diseñar y desarrollar páginas web a medida, enfocándome en un estilo limpio y profesional que convierta a tus visitantes en clientes. Tú pones la visión; yo me encargo de toda la arquitectura técnica para que tu negocio destaque, sin complicaciones y con la máxima eficiencia.</p>
                     </div>
                 </div>
             </div>
@@ -2314,7 +2349,7 @@
                         <div
                             class="px-6 py-2 border border-electric-cyan rounded-full bg-transparent shadow-[0_0_4px_rgba(0,242,255,0.4),inset_0_0_2px_rgba(0,242,255,0.4)] mb-4">
                             <h3
-                                class="text-center font-puffy font-puffy-sm tracking-normal normal-case">
+                                class="text-h3 text-center text-cyan-400">
                                 Nuestro Proceso Creativo</h3>
                         </div>
                         <!-- Línea conectora y flecha minimalista (SVG Unificado) -->
@@ -2439,14 +2474,14 @@
             </div>
             <div class="max-w-container-max mx-auto relative z-10">
                 <div class="text-center mb-24 md:mb-32 reveal">
-                    <h2 class="font-puffy font-puffy-lg tracking-normal normal-case">Mi Trabajo</h2>
-                    <p class="mt-6 mx-auto max-w-2xl text-sm md:text-base text-white/60 leading-relaxed">
+                    <h2 class="text-h2 text-cyan-400">Mi Trabajo</h2>
+                    <p class="text-h4 mt-6 mx-auto max-w-2xl text-center">
                         Te muestro un poco de lo que he hecho: páginas web para barbería, cafetería, restaurante y una tienda eCommerce. Cada proyecto está pensado para atraer clientes, contar la historia de la marca y funcionar con estilo.
                     </p>
                     <div class="w-24 h-[1px] bg-electric-cyan mx-auto mt-8 opacity-50"></div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24">
+                <div id="featured-projects" class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24">
                     <!-- Project A -->
                     <article class="reveal flex flex-col gap-8 group">
                         <div
@@ -2479,7 +2514,7 @@
                                 </div>
                             </div>
                             <div
-                                class="absolute inset-0 bg-[#050505] flex items-center justify-center overflow-hidden pt-12 md:pt-14 pb-6 px-6 md:px-10">
+                                class="absolute inset-0 bg-[#050505] flex items-center justify-center overflow-hidden pt-10 sm:pt-12 md:pt-14 pb-2 sm:pb-6 px-2 sm:px-6 md:px-10">
                                 <!-- Actual Project Image -->
                                 <img src="./assets/img/portfolio/porfolio1.png" alt="Preview Blessed Barber Studio" loading="lazy" width="800" height="450"
                                     class="w-full h-full object-contain transition-transform duration-1000 group-hover:scale-105">
@@ -2542,7 +2577,7 @@
                                 </div>
                             </div>
                             <div
-                                class="absolute inset-0 bg-[#050505] flex items-center justify-center overflow-hidden pt-12 md:pt-14 pb-6 px-6 md:px-10">
+                                class="absolute inset-0 bg-[#050505] flex items-center justify-center overflow-hidden pt-10 sm:pt-12 md:pt-14 pb-2 sm:pb-6 px-2 sm:px-6 md:px-10">
                                 <!-- Actual Project Image -->
                                 <img src="./assets/img/portfolio/porfolio2.png" alt="Preview Bar Luna Llena" loading="lazy" width="800" height="450"
                                     class="w-full h-full object-contain transition-transform duration-1000 group-hover:scale-105">
@@ -2761,7 +2796,7 @@
                 <div class="text-center mt-20 relative z-20">
                     <button id="toggle-more-projects" data-text-more="Ver Más Proyectos"
                         data-text-less="Ver Menos Proyectos"
-                        class="btn-view-more active:scale-95 group">
+                        class="btn-view-more active:scale-95 group text-cta">
                         <span id="toggle-text" class="relative z-10 transition-colors duration-300">Ver Más Proyectos</span>
                         <span id="toggle-icon"
                             class="material-symbols-outlined text-base relative z-10 transition-all duration-300">keyboard_arrow_down</span>
@@ -2841,10 +2876,10 @@
                                 Edición Exclusiva Lanzamiento
                             </div>
                             <h2
-                                class="text-3xl md:text-5xl font-body font-extrabold tracking-tight uppercase leading-tight mb-6 text-gradient-gold">
-                                TRANSFORMA TU WEB HOY Y LIDERA TU SECTOR
+                                class="text-h2 text-gradient-gold mb-6">
+                                Transforma tu Web Hoy y Lidera tu Sector.
                             </h2>
-                            <p class="font-body font-light text-white/70 text-sm md:text-base leading-relaxed max-w-xl">
+                            <p class="text-h4 max-w-xl">
                                 Contáctame ahora para hablar de tu visión y solicitar un presupuesto a medida. Hablemos de tu siguiente paso.
                             </p>
                         </div>
@@ -2981,12 +3016,12 @@
                 <!-- Social (on the right) -->
                 <div class="flex justify-center md:justify-end items-center order-3">
                     <ul class="social-buttons-wrapper">
-                        <!-- TikTok -->
-                        <li class="icon tiktok">
-                            <span class="tooltip">TikTok</span>
-                            <a href="https://www.tiktok.com/@mynextbymusa?_r=1&_t=ZN-96wInTFqMqZ" target="_blank" rel="noopener noreferrer" class="w-full h-full flex items-center justify-center" style="color: inherit;" aria-label="TikTok">
+                        <!-- Twitter / X -->
+                        <li class="icon twitter">
+                            <span class="tooltip">X</span>
+                            <a href="https://x.com/mynextbymusa?s=11" target="_blank" rel="noopener noreferrer" class="w-full h-full flex items-center justify-center" style="color: inherit;" aria-label="X (Twitter)">
                                 <svg viewBox="0 0 24 24" fill="currentColor" style="height: 1.2em;" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.29 6.29 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.19 8.19 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z" />
+                                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                                 </svg>
                             </a>
                         </li>
@@ -3414,7 +3449,6 @@
             particlesJS("particles-js-nosotros", config);
         });
     </script>
-    <script src="./js/main.js" defer></script>
+    <script type="module" src="/src/main.ts"></script>
 </body>
-
 </html>

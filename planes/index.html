@@ -890,13 +890,13 @@
 
         <!-- Banner de Urgencia -->
         <div class="mb-8 lg:mb-12 bg-gradient-to-r from-orange-500/10 via-amber-500/20 to-orange-500/10 border border-amber-500/30 rounded-full px-6 py-2 shadow-[0_0_20px_rgba(249,115,22,0.15)] mx-auto w-fit">
-            <span class="text-[11px] md:text-xs font-black tracking-[0.2em] uppercase shine-text">
+            <span id="launch-banner-text" class="text-[11px] md:text-xs font-black tracking-[0.2em] uppercase shine-text">
                 💎 OFERTA DE LANZAMIENTO - HASTA EL 1 DE JULIO
             </span>
         </div>
 
         <!-- Parrilla de Planes (1 col en móvil, 2 en Mac/iPad) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 w-full max-w-5xl mb-16 items-stretch mx-auto">
+        <div id="services-container" class="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 w-full max-w-5xl mb-16 items-stretch mx-auto">
 
             <!-- Plan ESENCIAL -->
             <div onclick="openContactOptions('ESENCIAL')" class="premium-plan-card p-8 flex flex-col mx-auto w-full max-w-[22rem] lg:scale-95 border border-cyan-500/20 hover:border-cyan-500/50 hover:-translate-y-2 hover:shadow-[0_20px_45px_rgba(6,182,212,0.25)] hover:scale-[0.97] transition-all duration-400 cursor-pointer">
@@ -1055,64 +1055,7 @@
         </div>
     </div>
 
-    <script>
-        let currentMethod = '';
-        let currentPlan = '';
-
-        function openSelector(method) {
-            currentMethod = method;
-            currentPlan = '';
-            document.getElementById('modalTitle').innerText = 'Selecciona tu Plan';
-            document.getElementById('planButtons').classList.remove('hidden');
-            document.getElementById('contactButtons').classList.add('hidden');
-            showModal();
-        }
-
-        function openContactOptions(planName) {
-            currentPlan = planName;
-            currentMethod = '';
-            document.getElementById('modalTitle').innerText = `Consultar Plan ${planName}`;
-            document.getElementById('planButtons').classList.add('hidden');
-            document.getElementById('contactButtons').classList.remove('hidden');
-            showModal();
-        }
-
-        function showModal() {
-            document.getElementById('planSelector').classList.remove('hidden');
-            document.getElementById('planSelector').classList.add('flex');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeSelector() {
-            document.getElementById('planSelector').classList.add('hidden');
-            document.getElementById('planSelector').classList.remove('flex');
-            document.body.style.overflow = 'auto';
-        }
-
-        function selectPlan(planName) {
-            currentPlan = planName;
-            executeContact(currentMethod);
-        }
-
-        function executeContact(method) {
-            const phone = "34673109486";
-            const email = "mynextbymusa@gmail.com";
-            const plan = currentPlan || 'PERSONALIZADO';
-            
-            if (method === 'whatsapp') {
-                const message = `Hola, estoy interesado en el plan ${plan}`;
-                window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
-            } else {
-                const subject = `Consulta sobre el plan ${plan}`;
-                window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}`;
-            }
-            closeSelector();
-        }
-
-        window.onclick = function(e) {
-            if (e.target == document.getElementById('planSelector')) closeSelector();
-        }
-    </script>
+    <script type="module" src="/src/planes.ts"></script>
 
 </body>
 </html>

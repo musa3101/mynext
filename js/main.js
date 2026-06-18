@@ -523,7 +523,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                     overlay.classList.remove('active');
                     overlay.setAttribute('aria-hidden', 'true');
-                }, 1100);
+                }, 800);
             }
         });
 
@@ -543,10 +543,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 overlay.classList.add('active');
                 overlay.setAttribute('aria-hidden', 'false');
 
-                // After 2.5s navigate to the destination
+                // After 1.8s navigate to the destination
                 setTimeout(() => {
                     window.location.href = destination;
-                }, 2500);
+                }, 1800);
             });
         });
 
@@ -557,6 +557,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileDropdown = document.getElementById('mobile-dropdown');
     const mobileNavShell = document.getElementById('mobile-nav-shell');
+    const mobileContactTrigger = document.getElementById('mobile-contact-trigger');
+    const mobileContactOptions = document.getElementById('mobile-contact-options');
 
     function openMobileMenu() {
         if (!mobileDropdown || !mobileMenuBtn) return;
@@ -576,6 +578,10 @@ document.addEventListener('DOMContentLoaded', () => {
         mobileMenuBtn.setAttribute('aria-expanded', 'false');
         mobileDropdown.setAttribute('aria-hidden', 'true');
         document.body.classList.remove('mobile-menu-open');
+
+        // Reset contact trigger and options when mobile menu closes
+        if (mobileContactOptions) mobileContactOptions.classList.remove('is-active');
+        if (mobileContactTrigger) mobileContactTrigger.classList.remove('is-active');
     }
 
     if (mobileMenuBtn && mobileDropdown) {
@@ -600,6 +606,20 @@ document.addEventListener('DOMContentLoaded', () => {
         mobileDropdown.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', closeMobileMenu);
         });
+
+        if (mobileContactTrigger && mobileContactOptions) {
+            mobileContactTrigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isActive = mobileContactOptions.classList.contains('is-active');
+                if (isActive) {
+                    mobileContactOptions.classList.remove('is-active');
+                    mobileContactTrigger.classList.remove('is-active');
+                } else {
+                    mobileContactOptions.classList.add('is-active');
+                    mobileContactTrigger.classList.add('is-active');
+                }
+            });
+        }
 
         document.addEventListener('click', (e) => {
             if (!mobileDropdown.classList.contains('is-open')) return;
