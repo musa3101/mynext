@@ -225,12 +225,11 @@ async function initMain() {
           <h3 class="text-2xl md:text-3xl font-bold text-gradient-cyan font-headline uppercase tracking-tight">${proj.title}</h3>
           ${hasTestimonial ? `
             <div class="relative pl-6 border-l-2 border-electric-cyan/30">
-              <p class="text-lg text-white/70 italic font-body leading-relaxed mb-2">"${testimonialText}"</p>
-              <span class="text-sm font-headline text-electric-cyan/60 uppercase tracking-widest">— ${signature}</span>
+              <p class="text-lg text-white/70 italic font-body leading-relaxed mb-2">${testimonialText}</p>
             </div>
           ` : `
             <div class="relative pl-6 border-l-2 border-electric-cyan/30">
-              <p class="text-lg text-white/70 italic font-body leading-relaxed mb-2">"${getTranslation(proj.description, lang)}"</p>
+              <p class="text-lg text-white/70 italic font-body leading-relaxed mb-2">${getTranslation(proj.description, lang)}</p>
             </div>
           `}
         </div>

@@ -105,8 +105,8 @@ export const fallbackTestimonials = [
     role: JSON.stringify({ es: 'Dueño', en: 'Owner' }),
     company: 'Blessed Barber Studio',
     testimonial: JSON.stringify({
-      es: 'Musa entendió a la perfección la esencia de nuestro estudio. No solo creó una web visualmente imponente, sino que logró trasladar el lujo y la precisión de cada uno de nuestros cortes al mundo digital. Ha elevado nuestra marca a otro nivel.',
-      en: 'Musa perfectly understood the essence of our studio. He not only created a visually stunning website, but managed to translate the luxury and precision of each of our cuts into the digital world. He has elevated our brand to another level.'
+      es: 'Para Blessed Barber Studio, buscamos reflejar la elegancia y el detalle que ponen en cada corte. Creamos una web con una estética impecable que conecta con el cliente desde el primer vistazo, pero sin descuidar lo importante: un sistema de reservas directo y funcional. Logramos que la experiencia digital se sienta tan premium como visitar el estudio en persona.',
+      en: 'For Blessed Barber Studio, we sought to reflect the elegance and detail they put into every cut. We created a website with an impeccable aesthetic that connects with the client from the first glance, without neglecting what is important: a direct and functional booking system. We made the digital experience feel as premium as visiting the studio in person.'
     }),
     active: true
   },
@@ -116,8 +116,8 @@ export const fallbackTestimonials = [
     role: JSON.stringify({ es: 'Propietaria', en: 'Owner' }),
     company: 'Bar Cafetería Luna Llena',
     testimonial: JSON.stringify({
-      es: 'Llevar la esencia y la calidez de nuestro local al entorno digital parecía un reto, pero Musa lo hizo parecer fácil. Diseñó una carta digital impecable y sofisticada que entra por los ojos y refleja fielmente lo que somos.',
-      en: 'Translating the essence and warmth of our venue to the digital environment seemed like a challenge, but Musa made it look easy. He designed an impeccable and sophisticated digital menu that is eye-catching and faithfully reflects who we are.'
+      es: 'Con Luna Llena, el objetivo fue acercar su cocina al entorno digital. Integramos su carta de forma interactiva y un sistema de reservas ágil para que los clientes tengan toda la información a mano y puedan asegurar su mesa en un segundo. Es una web pensada para ser útil, moderna y, sobre todo, para facilitar la vida tanto al dueño como al cliente.',
+      en: 'With Luna Llena, the goal was to bring their cuisine to the digital environment. We integrated their menu interactively and an agile booking system so that customers have all the information at hand and can secure their table in a second. It is a website designed to be useful, modern and, above all, to make life easier for both the owner and the customer.'
     }),
     active: true
   },
@@ -127,8 +127,8 @@ export const fallbackTestimonials = [
     role: JSON.stringify({ es: 'Reformas & Construcción', en: 'Renovations & Construction' }),
     company: 'Ecuaplac',
     testimonial: JSON.stringify({
-      es: 'Ecuaplac redefine el concepto de reformas de lujo y tabiquería seca para la arquitectura en Mallorca. Una fusión de minimalismo nórdico y transiciones interactivas ultra-fluidas.',
-      en: 'Ecuaplac redefines the concept of luxury renovations and drywalls for architecture in Mallorca. A fusion of Nordic minimalism and ultra-fluid interactive transitions.'
+      es: 'Ecuaplac necesitaba una web que hiciera justicia a la calidad de sus reformas y tabiquería en Mallorca. Diseñamos un catálogo visual limpio y profesional que permite apreciar el detalle de cada obra, transmitiendo la seriedad, el orden y el minimalismo que definen su estilo de construcción.',
+      en: 'Ecuaplac needed a website that did justice to the quality of their renovations and drywall in Mallorca. We designed a clean and professional visual catalog that allows appreciating the detail of each work, conveying the seriousness, order, and minimalism that define their construction style.'
     }),
     active: true
   },
@@ -138,8 +138,8 @@ export const fallbackTestimonials = [
     role: JSON.stringify({ es: 'Web Gastronómica', en: 'GASTRONOMIC WEB DESIGN' }),
     company: 'RBARI RESTAURANT',
     testimonial: JSON.stringify({
-      es: 'Experiencia digital inmersiva para un auténtico restaurante de Bangladesh. Un diseño visualmente rico que transmite cultura y sabores a través de una interfaz limpia y de alto contraste.',
-      en: 'Immersive digital experience for an authentic Bangladeshi restaurant. A visually rich design that conveys culture and flavors through a clean, high-contrast interface.'
+      es: 'Con Rbari Restaurant, cruzamos fronteras para trabajar con un cliente en Birmingham, Reino Unido. Desarrollamos una solución integral que digitaliza la carta y facilita las reservas, combinando un diseño visualmente atractivo con una estructura pensada para convertir visitas online en clientes reales. Es el ejemplo perfecto de cómo una web bien diseñada puede potenciar un negocio local, sin importar la distancia.',
+      en: 'With Rbari Restaurant, we crossed borders to work with a client in Birmingham, United Kingdom. We developed a comprehensive solution that digitizes the menu and facilitates bookings, combining a visually attractive design with a structure designed to convert online visits into real customers. It is the perfect example of how a well-designed website can boost a local business, no matter the distance.'
     }),
     active: true
   },
