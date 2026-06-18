@@ -1,3 +1,4 @@
+import './style.css';
 import { supabase } from './lib/supabase';
 import {
   fallbackProjects,
@@ -59,8 +60,8 @@ if ('scrollRestoration' in history) {
 }
 window.scrollTo(0, 0);
 
-// Initialize all DOM contents on DOMContentLoaded
-document.addEventListener('DOMContentLoaded', async () => {
+// Initialize all DOM contents safely
+async function initMain() {
   // --- A. Dynamic Data Fetch & Render ---
   let projects = fallbackProjects;
   let testimonials = fallbackTestimonials;
@@ -624,18 +625,23 @@ document.addEventListener('DOMContentLoaded', async () => {
       transitionOverlay.setAttribute('aria-hidden', 'true');
     }
 
+    const hideOverlay = () => {
+      transitionOverlay.classList.remove('active');
+      transitionOverlay.setAttribute('aria-hidden', 'true');
+    };
+
     window.addEventListener('load', () => {
       if (isReload) {
-        setTimeout(() => {
-          transitionOverlay.classList.remove('active');
-          transitionOverlay.setAttribute('aria-hidden', 'true');
-        }, 800);
+        setTimeout(hideOverlay, 400);
       }
     });
 
+    if (isReload) {
+      setTimeout(hideOverlay, 2500);
+    }
+
     window.addEventListener('pageshow', () => {
-      transitionOverlay.classList.remove('active');
-      transitionOverlay.setAttribute('aria-hidden', 'true');
+      hideOverlay();
     });
 
     const plansBtns = document.querySelectorAll('a.animated-button[href*="planes"]');
@@ -650,7 +656,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         setTimeout(() => {
           window.location.href = destination;
-        }, 1800);
+        }, 800);
       });
     });
   }
@@ -773,7 +779,13 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     });
   }
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initMain);
+} else {
+  initMain();
+}
 
 // --- Scroll position navigation compact control ---
 let lastScrollY = window.scrollY;

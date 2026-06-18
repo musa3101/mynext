@@ -1,3 +1,4 @@
+import './style.css';
 import { supabase } from './lib/supabase';
 import { fallbackServices, fallbackSettings } from './lib/fallbackData';
 
@@ -101,8 +102,8 @@ window.onclick = function (e) {
   }
 };
 
-// Initialize Planes DOM
-document.addEventListener('DOMContentLoaded', async () => {
+// Initialize Planes DOM safely
+async function initPlanes() {
   let services = fallbackServices;
   let settings: Record<string, string> = fallbackSettings;
 
@@ -248,4 +249,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       servicesContainer.appendChild(card);
     });
   }
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initPlanes);
+} else {
+  initPlanes();
+}

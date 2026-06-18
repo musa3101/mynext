@@ -32,12 +32,10 @@
             background-color: var(--brand-dark); 
             color: var(--text-primary); 
             scroll-behavior: smooth;
-            overflow-x: hidden;
             max-width: 100%;
         }
 
         html {
-            overflow-x: hidden;
             max-width: 100%;
         }
 
@@ -778,9 +776,18 @@
             bottom: 8.12em;
         }
     </style>
+    <!-- Typography System -->
+
 </head>
 
 <body class="antialiased neon-glow-bg">
+    
+    <!-- Botón discreto Volver -->
+    <a href="javascript:history.back()" class="fixed top-4 left-4 md:top-8 md:left-8 z-[100] w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:border-cyan-400/50 hover:bg-white/10 text-white/70 hover:text-cyan-400 backdrop-blur-md transition-all duration-300 group no-print" title="Volver atrás">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+    </a>
 
     <!-- Speeder Background -->
     <div class="speeder-bg no-print">
@@ -839,26 +846,10 @@
         
         <!-- Selector de Idioma -->
         <!-- LANGUAGE_SELECTOR_START -->
-        <div class="absolute top-4 right-4 sm:top-6 sm:right-6 md:right-12 z-50 flex items-center gap-1.5 sm:gap-2 bg-[#050505]/60 backdrop-blur-md border border-white/10 p-1 px-2.5 sm:p-1.5 rounded-full shadow-lg pointer-events-auto no-print">
-            <a href="index.html" class="opacity-100 flex items-center justify-center gap-1 touch-link" title="Español">
-                <svg class="hidden sm:block w-5 h-5 rounded-full overflow-hidden border border-cyan-400/40 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="30" height="7.5" fill="#c60b1e"/>
-                    <rect y="7.5" width="30" height="15" fill="#ffc400"/>
-                    <rect y="22.5" width="30" height="7.5" fill="#c60b1e"/>
-                </svg>
-                <span class="sm:hidden font-headline font-bold text-[9px] tracking-wider text-electric-cyan">ES</span>
-            </a>
-            <span class="w-[1px] h-2.5 sm:h-3 bg-white/20"></span>
-            <a href="index-en.html" class="opacity-60 hover:opacity-100 transition-opacity flex items-center justify-center gap-1 touch-link" title="English">
-                <svg class="hidden sm:block w-5 h-5 rounded-full overflow-hidden border border-white/10 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="30" height="30" fill="#012169"/>
-                    <path d="M0,0 L30,30 M30,0 L0,30" stroke="#fff" stroke-width="4"/>
-                    <path d="M0,0 L30,30 M30,0 L0,30" stroke="#c8102e" stroke-width="1.5"/>
-                    <path d="M15,0 V30 M0,15 H30" stroke="#fff" stroke-width="6"/>
-                    <path d="M15,0 V30 M0,15 H30" stroke="#c8102e" stroke-width="4"/>
-                </svg>
-                <span class="sm:hidden font-headline font-bold text-[9px] tracking-wider text-white">EN</span>
-            </a>
+        <div class="absolute top-4 right-4 sm:top-6 sm:right-6 md:right-12 z-50 flex items-center gap-3 bg-[#050505]/60 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full shadow-lg pointer-events-auto no-print">
+            <a href="index.html" class="text-xs font-bold text-electric-cyan tracking-widest hover:scale-110 transition-transform">ES</a>
+            <span class="w-[1px] h-3 bg-white/20"></span>
+            <a href="index-en.html" class="text-xs font-bold text-white/50 hover:text-white tracking-widest hover:scale-110 transition-all">EN</a>
         </div>
         <!-- LANGUAGE_SELECTOR_END -->
         
@@ -875,16 +866,16 @@
             </div>
             
             <h1 class="px-4">
-                <span class="block logo-font text-2xl md:text-5xl lg:text-6xl text-white tracking-[0.1em] font-black uppercase leading-none mb-3">
-                    PLANES DE DISEÑO WEB
+                <span class="block text-h1 text-white mb-3">
+                    Planes de Diseño Web
                 </span>
-                <span class="block logo-font text-xl md:text-4xl lg:text-5xl text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-cyan-300 to-blue-500 tracking-[0.3em] font-light uppercase">
-                    PROFESIONAL Y A MEDIDA
+                <span class="block text-h2 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-cyan-300 to-blue-500">
+                    Profesional y a Medida
                 </span>
                 <div class="w-32 md:w-96 h-[2px] bg-gradient-to-r from-transparent via-[#06b6d4] to-transparent mx-auto mt-8 opacity-75"></div>
             </h1>
-            <p class="text-xs md:text-sm tracking-[0.1em] text-slate-300 font-extrabold mt-6 max-w-2xl leading-relaxed">
-                Creamos páginas web impactantes, rápidas y optimizadas para que tu negocio destaque en internet y consigas más clientes.
+            <p class="text-h4 mt-6 max-w-2xl leading-relaxed">
+                Dos opciones claras para que tu negocio tenga una web profesional sin volverte loco con la tecnología. Tú eliges, yo me encargo de todo.
             </p>
         </div>
 
@@ -911,12 +902,11 @@
                         <del class="text-slate-500 text-2xl md:text-3xl font-medium">200€</del>
                         <span class="text-cyan-400">190€</span>
                     </div>
-                    
-                    <ul class="space-y-4 flex-grow text-[14px] md:text-[15px] text-slate-300 font-semibold text-left mx-auto w-fit">
-                        <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 bg-rose-500 shadow-[0_0_8px_#f43f5e] rounded-full shrink-0"></span> Diseño web profesional (2-3 secciones)</li>
+                       <ul class="space-y-4 flex-grow text-[14px] md:text-[15px] text-slate-300 font-semibold text-left mx-auto w-fit">
+                        <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 bg-rose-500 shadow-[0_0_8px_#f43f5e] rounded-full shrink-0"></span> Web diseñada a tu medida (2-3 secciones)</li>
                         <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 bg-rose-500 shadow-[0_0_8px_#f43f5e] rounded-full shrink-0"></span> Vinculación con Google Maps</li>
                         <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 bg-rose-500 shadow-[0_0_8px_#f43f5e] rounded-full shrink-0"></span> Dominio & Hosting básico incluido</li>
-                        <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 bg-rose-500 shadow-[0_0_8px_#f43f5e] rounded-full shrink-0"></span> Optimización de SEO Local Básico</li>
+                        <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 bg-rose-500 shadow-[0_0_8px_#f43f5e] rounded-full shrink-0"></span> Posicionamiento local en Google (SEO básico)</li>
                     </ul>
                     
                     <div class="mt-8 md:mt-12 pt-6 border-t border-slate-800">
@@ -943,14 +933,14 @@
                     </div>
                     
                     <ul class="space-y-4 flex-grow text-[14px] md:text-[15px] text-slate-200 font-semibold text-left mx-auto w-fit mt-4">
-                        <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 bg-rose-500 shadow-[0_0_8px_#f43f5e] rounded-full shrink-0"></span> Todo lo incluido en el Plan Esencial</li>
-                        <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 bg-rose-500 shadow-[0_0_8px_#f43f5e] rounded-full shrink-0"></span> Estrategia de Perfil Profesional <span class="text-cyan-400 font-bold ml-0.5">*<sup class="text-[10px]">3</sup></span></li>
-                        <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 bg-rose-500 shadow-[0_0_8px_#f43f5e] rounded-full shrink-0"></span> Gestión integral de Dominio <span class="text-cyan-400 font-bold ml-0.5">*<sup class="text-[10px]">1</sup></span></li>
-                        <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 bg-rose-500 shadow-[0_0_8px_#f43f5e] rounded-full shrink-0"></span> Soporte Técnico Prioritario 24/7</li>
+                        <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 bg-rose-500 shadow-[0_0_8px_#f43f5e] rounded-full shrink-0"></span> Todo lo del plan Esencial, potenciado</li>
+                        <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 bg-rose-500 shadow-[0_0_8px_#f43f5e] rounded-full shrink-0"></span> Estrategia de marca y diseño a medida <span class="text-cyan-400 font-bold ml-0.5">*<sup class="text-[10px]">3</sup></span></li>
+                        <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 bg-rose-500 shadow-[0_0_8px_#f43f5e] rounded-full shrink-0"></span> Gestión total de tu dominio <span class="text-cyan-400 font-bold ml-0.5">*<sup class="text-[10px]">1</sup></span></li>
+                        <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 bg-rose-500 shadow-[0_0_8px_#f43f5e] rounded-full shrink-0"></span> Soporte prioritario cuando lo necesites</li>
                     </ul>
                     
                     <div class="mt-8 md:mt-12 pt-6 border-t border-slate-800">
-                        <span class="text-lg font-black uppercase tracking-widest text-cyan-300 flex items-center justify-center">INCLUIDO <span class="text-cyan-400 font-bold ml-1.5">*<sup class="text-[11px]">2</sup></span></span>
+                        <span class="text-lg font-black uppercase tracking-widest text-cyan-300 flex items-center justify-center">MANTENIMIENTO INCLUIDO <span class="text-cyan-400 font-bold ml-1.5">*<sup class="text-[11px]">2</sup></span></span>
                     </div>
                 </div>
             </div>
@@ -960,16 +950,16 @@
         <!-- Notas Informativas -->
         <div class="w-full max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-8 mb-24 px-4 mx-auto">
             <div class="border-l-2 border-slate-800 pl-6">
-                <h4 class="text-[10px] font-black tracking-[0.1em] uppercase text-cyan-400 mb-2 flex items-center"><span class="text-cyan-400 font-bold mr-1.5 text-sm">*<sup class="text-[9px]">1</sup></span> GESTIÓN DE DOMINIO</h4>
-                <p class="text-[11px] text-slate-400 font-normal leading-relaxed">El coste de renovación anual del dominio correrá a cargo del cliente. MYNEXT se encarga de toda la gestión técnica.</p>
+                <h4 class="text-[10px] font-black tracking-[0.1em] uppercase text-cyan-400 mb-2 flex items-center"><span class="text-cyan-400 font-bold mr-1.5 text-sm">*<sup class="text-[9px]">1</sup></span> GESTIÓN DEL DOMINIO</h4>
+                <p class="text-[11px] text-slate-400 font-normal leading-relaxed">El registro anual del dominio es externo (coste aprox. 10-15€/año). Yo me encargo de todo el laberinto técnico para que tú no tengas que tocar ni un solo botón.</p>
             </div>
             <div class="border-l-2 border-slate-800 pl-6">
-                <h4 class="text-[10px] font-black tracking-[0.1em] uppercase text-cyan-400 mb-2 flex items-center"><span class="text-cyan-400 font-bold mr-1.5 text-sm">*<sup class="text-[9px]">2</sup></span> MODIFICACIONES INCLUIDAS</h4>
-                <p class="text-[11px] text-slate-400 font-normal leading-relaxed">Cubre modificaciones rápidas (ej. cambiar textos o imágenes, tareas de 15-20 minutos). Si la solicitud requiere más tiempo de desarrollo, se facturará a 20€/hora.</p>
+                <h4 class="text-[10px] font-black tracking-[0.1em] uppercase text-cyan-400 mb-2 flex items-center"><span class="text-cyan-400 font-bold mr-1.5 text-sm">*<sup class="text-[9px]">2</sup></span> PEQUEÑOS AJUSTES</h4>
+                <p class="text-[11px] text-slate-400 font-normal leading-relaxed">Cualquier cambio puntual (textos, una foto nueva) está incluido si toma menos de 20 min. Si es un cambio mayor, nos sentamos y acordamos un precio justo.</p>
             </div>
             <div class="border-l-2 border-slate-800 pl-6">
-                <h4 class="text-[10px] font-black tracking-[0.1em] uppercase text-cyan-400 mb-2 flex items-center"><span class="text-cyan-400 font-bold mr-1.5 text-sm">*<sup class="text-[9px]">3</sup></span> ESTRATEGIA PERFIL PRO</h4>
-                <p class="text-[11px] text-slate-400 font-normal leading-relaxed">Incluye un análisis profundo del negocio. La web se puede ampliar a más de 3 páginas (ampliable hasta un máximo de 6 páginas) según las necesidades específicas detectadas.</p>
+                <h4 class="text-[10px] font-black tracking-[0.1em] uppercase text-cyan-400 mb-2 flex items-center"><span class="text-cyan-400 font-bold mr-1.5 text-sm">*<sup class="text-[9px]">3</sup></span> VISIÓN DE NEGOCIO</h4>
+                <p class="text-[11px] text-slate-400 font-normal leading-relaxed">No solo diseño webs, me meto en el ADN de tu marca para que tu web comunique exactamente lo que buscas. En este plan, la web crece hasta donde necesites.</p>
             </div>
         </div>
 
@@ -977,7 +967,7 @@
         <div id="contacto" class="w-full max-w-3xl bg-gradient-to-br from-slate-900/60 via-slate-950/80 to-black border border-slate-800/80 rounded-[2.5rem] md:rounded-[4rem] p-8 md:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-xl no-print text-center flex flex-col items-center gap-10 mx-auto">
             <div>
                 <h2 class="logo-font text-3xl md:text-5xl font-black mb-4 tracking-[0.15em] uppercase text-white">MUSA</h2>
-                <p class="text-[12px] md:text-sm tracking-[0.5em] text-cyan-400 font-black uppercase">CONSULTORÍA & DISEÑO WEB</p>
+                <p class="text-[12px] md:text-sm tracking-[0.5em] text-cyan-400 font-black uppercase">DISEÑO WEB & DESARROLLO</p>
             </div>
             
             <div class="flex flex-col gap-6 w-full max-w-md mx-auto">

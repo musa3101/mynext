@@ -32,12 +32,10 @@
             background-color: var(--brand-dark); 
             color: var(--text-primary); 
             scroll-behavior: smooth;
-            overflow-x: hidden;
             max-width: 100%;
         }
 
         html {
-            overflow-x: hidden;
             max-width: 100%;
         }
 
@@ -778,9 +776,18 @@
             bottom: 8.12em;
         }
     </style>
+    <!-- Typography System -->
+
 </head>
 
 <body class="antialiased neon-glow-bg">
+    
+    <!-- Discreet Go Back Button -->
+    <a href="javascript:history.back()" class="fixed top-4 left-4 md:top-8 md:left-8 z-[100] w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:border-cyan-400/50 hover:bg-white/10 text-white/70 hover:text-cyan-400 backdrop-blur-md transition-all duration-300 group no-print" title="Go Back">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+    </a>
 
     <!-- Speeder Background -->
     <div class="speeder-bg no-print">
@@ -839,26 +846,10 @@
         
         <!-- Selector de Idioma -->
         <!-- LANGUAGE_SELECTOR_START -->
-        <div class="absolute top-4 right-4 sm:top-6 sm:right-6 md:right-12 z-50 flex items-center gap-1.5 sm:gap-2 bg-[#050505]/60 backdrop-blur-md border border-white/10 p-1 px-2.5 sm:p-1.5 rounded-full shadow-lg pointer-events-auto no-print">
-            <a href="index.html" class="opacity-60 hover:opacity-100 transition-opacity flex items-center justify-center gap-1 touch-link" title="Español">
-                <svg class="hidden sm:block w-5 h-5 rounded-full overflow-hidden border border-white/10 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="30" height="7.5" fill="#c60b1e"/>
-                    <rect y="7.5" width="30" height="15" fill="#ffc400"/>
-                    <rect y="22.5" width="30" height="7.5" fill="#c60b1e"/>
-                </svg>
-                <span class="sm:hidden font-headline font-bold text-[9px] tracking-wider text-white">ES</span>
-            </a>
-            <span class="w-[1px] h-2.5 sm:h-3 bg-white/20"></span>
-            <a href="index-en.html" class="opacity-100 flex items-center justify-center gap-1 touch-link" title="English">
-                <svg class="hidden sm:block w-5 h-5 rounded-full overflow-hidden border border-cyan-400/40 hover:scale-110 transition-transform shadow-sm cursor-pointer" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="30" height="30" fill="#012169"/>
-                    <path d="M0,0 L30,30 M30,0 L0,30" stroke="#fff" stroke-width="4"/>
-                    <path d="M0,0 L30,30 M30,0 L0,30" stroke="#c8102e" stroke-width="1.5"/>
-                    <path d="M15,0 V30 M0,15 H30" stroke="#fff" stroke-width="6"/>
-                    <path d="M15,0 V30 M0,15 H30" stroke="#c8102e" stroke-width="4"/>
-                </svg>
-                <span class="sm:hidden font-headline font-bold text-[9px] tracking-wider text-electric-cyan">EN</span>
-            </a>
+        <div class="absolute top-4 right-4 sm:top-6 sm:right-6 md:right-12 z-50 flex items-center gap-3 bg-[#050505]/60 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full shadow-lg pointer-events-auto no-print">
+            <a href="index.html" class="text-xs font-bold text-white/50 hover:text-white tracking-widest hover:scale-110 transition-transform">ES</a>
+            <span class="w-[1px] h-3 bg-white/20"></span>
+            <a href="index-en.html" class="text-xs font-bold text-electric-cyan tracking-widest hover:scale-110 transition-all">EN</a>
         </div>
         <!-- LANGUAGE_SELECTOR_END -->
         
@@ -875,11 +866,11 @@
             </div>
             
             <h1 class="px-4">
-                <span class="block logo-font text-2xl md:text-5xl lg:text-6xl text-white tracking-[0.1em] font-black uppercase leading-none mb-3">
-                    WEB DESIGN PLANS
+                <span class="block text-h1 text-white mb-3">
+                    Web Design Plans
                 </span>
-                <span class="block logo-font text-xl md:text-4xl lg:text-5xl text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-cyan-300 to-blue-500 tracking-[0.3em] font-light uppercase">
-                    PROFESSIONAL & CUSTOM
+                <span class="block text-h2 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-cyan-300 to-blue-500">
+                    Professional & Tailored
                 </span>
                 <div class="w-32 md:w-96 h-[2px] bg-gradient-to-r from-transparent via-[#06b6d4] to-transparent mx-auto mt-8 opacity-75"></div>
             </h1>

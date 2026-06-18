@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 .material-symbols-outlined {
     font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
@@ -1475,3 +1477,23 @@ body.mobile-menu-open {
 @keyframes sand-line-right { from,10% { animation-timing-function: cubic-bezier(0.12,0,0.39,0); stroke-dashoffset:14; } 70%, to { stroke-dashoffset:-24.5; } }
 @keyframes sand-mound-top { from,10% { animation-timing-function: linear; transform: translate(0,0);} 15% { animation-timing-function: cubic-bezier(0.12,0,0.39,0); transform: translate(0,1.5px);} 51%, to { transform: translate(0,13px);} }
 @keyframes sand-mound-bottom { from,31% { animation-timing-function: cubic-bezier(0.61,1,0.88,1); transform: scale(1,0);} 56%, to { transform: scale(1,1);} }
+
+@layer components {
+    .text-h1 {
+        font-family: 'Playfair Display', serif;
+        @apply text-5xl md:text-7xl lg:text-[6rem] font-black tracking-tight leading-none;
+    }
+    .text-h2 {
+        font-family: 'Playfair Display', serif;
+        @apply text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-wide leading-tight;
+    }
+    .text-h3 {
+        @apply text-xl md:text-2xl font-bold tracking-normal;
+    }
+    .text-h4 {
+        @apply text-base md:text-lg font-normal leading-relaxed text-white/80;
+    }
+    .text-cta {
+        @apply text-[10px] sm:text-xs font-bold uppercase tracking-[0.25em];
+    }
+}
