@@ -47,7 +47,7 @@ export const fallbackProjects = [
       es: 'Carta digital y presencia web premium para bar-cafetería de especialidad.',
       en: 'Digital menu and premium web presence for specialty coffee shop & bar.'
     }),
-    image_url: './assets/img/portfolio/porfolio2-v2.png',
+    image_url: './assets/img/portfolio/porfolio2-v3.png',
     project_url: 'https://barlunallena.pages.dev',
     technologies: 'HTML, CSS, JS, Tailwind',
     featured: true,
