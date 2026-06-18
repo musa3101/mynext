@@ -1,5 +1,33 @@
 @import "tailwindcss";
 
+@theme {
+  --color-primary-container: #00f2ff;
+  --color-surface: #050505;
+  --color-background: #050505;
+  --color-void-black: #050505;
+  --color-electric-cyan: #00F2FF;
+  --color-deep-ocean: #001a2c;
+  --color-slate-gray: #8ba2b2;
+  --color-on-surface: #ffffff;
+  --color-on-surface-variant: #b9cacb;
+  --color-surface-glass: rgba(255, 255, 255, 0.03);
+  --color-outline: #849495;
+
+  --font-headline: "Space Grotesk", sans-serif;
+  --font-body: "Outfit", sans-serif;
+  --font-space-grotesk: "Space Grotesk", sans-serif;
+  --font-display: "Modak", cursive;
+
+  --radius-DEFAULT: 1rem;
+  --radius-lg: 2rem;
+  --radius-xl: 3rem;
+  --radius-full: 9999px;
+
+  --spacing-margin-mobile: 20px;
+  --spacing-margin-desktop: 80px;
+  --spacing-container-max: 1440px;
+}
+
 .material-symbols-outlined {
     font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
