@@ -605,14 +605,290 @@
             100% { opacity: 0; }
         }
 
-        /* Branding sub-text below the loader */
-        #page-transition-overlay .overlay-brand {
-            margin-top: 3rem;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.65rem;
-            letter-spacing: 0.5em;
+        /* New 3D Cube Loader spelling M Y N E X T . */
+        .wrapper-grid {
+            --animation-duration: 2.1s;
+            --cube-color: rgba(5, 5, 5, 0.4);
+            --highlight-color: #00F2FF;
+            --cube-width: 38px;
+            --cube-height: 38px;
+            --font-size: 1.3em;
+
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(7, var(--cube-width));
+            grid-template-rows: auto;
+            grid-gap: 0;
+
+            width: calc(7 * var(--cube-width));
+            height: var(--cube-height);
+            perspective: 350px;
+
+            font-family: "Outfit", "Space Grotesk", sans-serif;
+            font-size: var(--font-size);
+            font-weight: 800;
+            color: transparent;
+        }
+
+        @media (min-width: 480px) {
+            .wrapper-grid {
+                --cube-width: 48px;
+                --cube-height: 48px;
+                --font-size: 1.8em;
+            }
+        }
+
+        .cube {
+            position: relative;
+            transform-style: preserve-3d;
+            animation: translate-z var(--animation-duration) ease-in-out infinite;
+        }
+
+        .face {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: var(--cube-width);
+            height: var(--cube-height);
+            background-color: var(--cube-color);
+            border: 1px solid rgba(0, 242, 255, 0.08);
+            box-shadow:
+                inset 0 0 2px 1px rgba(0, 0, 0, 0.2),
+                inset 0 0 12px 1px rgba(255, 255, 255, 0.05);
+        }
+
+        .face-left,
+        .face-right,
+        .face-back,
+        .face-front {
+            box-shadow:
+                inset 0 0 2px 1px rgba(0,0,0,0.1),
+                inset 0 0 12px 1px rgba(255,255,255,0.03);
+        }
+
+        .face-front {
+            transform: rotateY(0deg) translateZ(calc(var(--cube-width) / 2));
+        }
+
+        .face-back {
+            transform: rotateY(180deg) translateZ(calc(var(--cube-width) / 2));
+            opacity: 0.6;
+        }
+
+        .face-left {
+            transform: rotateY(-90deg) translateZ(calc(var(--cube-width) / 2));
+            opacity: 0.6;
+        }
+
+        .face-right {
+            transform: rotateY(90deg) translateZ(calc(var(--cube-width) / 2));
+            opacity: 0.6;
+        }
+
+        .face-top {
+            height: var(--cube-width);
+            transform: rotateX(90deg) translateZ(calc(var(--cube-width) / 2));
+            opacity: 0.8;
+        }
+
+        .face-bottom {
+            height: var(--cube-width);
+            transform: rotateX(-90deg) translateZ(calc(var(--cube-height) - var(--cube-width) * 0.5));
+            opacity: 0.8;
+        }
+
+        .cube:nth-child(1) { z-index: 0; animation-delay: 0s; }
+        .cube:nth-child(2) { z-index: 1; animation-delay: 0.2s; }
+        .cube:nth-child(3) { z-index: 2; animation-delay: 0.4s; }
+        .cube:nth-child(4) { z-index: 3; animation-delay: 0.6s; }
+        .cube:nth-child(5) { z-index: 2; animation-delay: 0.8s; }
+        .cube:nth-child(6) { z-index: 1; animation-delay: 1s; }
+        .cube:nth-child(7) { z-index: 0; animation-delay: 1.2s; }
+
+        .cube .face {
+            animation:
+                face-color var(--animation-duration) ease-in-out infinite,
+                edge-glow var(--animation-duration) ease-in-out infinite;
+            animation-delay: inherit;
+        }
+
+        .cube .face.face-front {
+            animation:
+                face-color var(--animation-duration) ease-in-out infinite,
+                face-glow var(--animation-duration) ease-in-out infinite,
+                edge-glow var(--animation-duration) ease-in-out infinite;
+            animation-delay: inherit;
+        }
+
+        @keyframes translate-z {
+            0%, 40%, 100% {
+                transform: translateZ(-2px);
+            }
+            30% {
+                transform: translateZ(16px) translateY(-1px);
+            }
+        }
+
+        @keyframes face-color {
+            0%, 50%, 100% {
+                background-color: var(--cube-color);
+            }
+            10% {
+                background-color: rgba(0, 242, 255, 0.15);
+            }
+        }
+
+        @keyframes face-glow {
+            0%, 50%, 100% {
+                color: rgba(255, 255, 255, 0);
+                filter: none;
+                text-shadow: none;
+            }
+            30% {
+                color: #fff;
+                filter: drop-shadow(0 0 10px var(--highlight-color));
+                text-shadow: 0 0 8px var(--highlight-color);
+            }
+        }
+
+        @keyframes edge-glow {
+            0%, 40%, 100% {
+                box-shadow:
+                    inset 0 0 2px 1px rgba(0, 0, 0, 0.2),
+                    inset 0 0 12px 1px rgba(255, 255, 255, 0.05);
+                border-color: rgba(0, 242, 255, 0.08);
+            }
+            30% {
+                box-shadow: 0 0 8px 0px var(--highlight-color);
+                border-color: var(--highlight-color);
+            }
+        }
+
+        /* ── Hero Logo Container ── */
+        .logo-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-bottom: -12px;
+            transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+            z-index: 10;
+        }
+
+        @media (min-width: 640px) {
+            .logo-container {
+                width: 240px;
+                height: 240px;
+                margin-bottom: -20px;
+            }
+        }
+
+        .mnx-svg {
+            width: 100%;
+            height: auto;
+            clip-path: inset(0 100% 0 0);
+            animation: 
+                scanReveal 1.8s cubic-bezier(0.4, 0, 0.2, 1) 2.6s forwards,
+                svgg 4.5s ease-in-out 6.5s infinite;
+        }
+
+        @keyframes scanReveal {
+            to { clip-path: inset(0 0 0 0); }
+        }
+
+        @keyframes svgg {
+            0%,100%{ filter: drop-shadow(-6px 0 10px rgba(212, 168, 67, 0.16)) drop-shadow(6px 0 10px rgba(204, 43, 43, 0.16)) drop-shadow(0 0 12px rgba(0,242,255,.03)); }
+            50%    { filter: drop-shadow(-10px 0 18px rgba(212, 168, 67, 0.28)) drop-shadow(10px 0 18px rgba(204, 43, 43, 0.28)) drop-shadow(0 0 24px rgba(0,242,255,.08)); }
+        }
+
+        /* Laser scan line sweep with a glowing neon trail */
+        .scan-line {
+            position: absolute;
+            top: 10px;
+            bottom: 10px;
+            width: 12px;
+            background: linear-gradient(to right, transparent, rgba(0, 242, 255, 0.1) 40%, rgba(0, 242, 255, 0.6) 85%, #fff 100%);
+            box-shadow: 
+                0 0 12px rgba(0, 242, 255, 0.5), 
+                0 0 24px rgba(0, 242, 255, 0.2);
+            left: 0;
+            opacity: 0;
+            animation: scanLineMove 1.8s cubic-bezier(0.4, 0, 0.2, 1) 2.6s forwards;
+            z-index: 2;
+        }
+
+        @keyframes scanLineMove {
+            0% { left: 0%; opacity: 0; }
+            8% { opacity: 1; }
+            92% { opacity: 1; }
+            100% { left: 100%; opacity: 0; }
+        }
+
+        /* ── EST ── */
+        .h-est {
+            font-size: 7.5px !important;
+            letter-spacing: 0.42em !important;
             text-transform: uppercase;
-            color: rgba(0, 242, 255, 0.3);
+            color: rgba(255, 255, 255, 0);
+            font-weight: 500;
+            animation: eIn .8s ease 5.2s forwards;
+            margin-top: 18px;
+            z-index: 10;
+        }
+        @keyframes eIn {
+            to { color: rgba(255, 255, 255, 0.22); }
+        }
+
+        /* MYNEXT BADGE (HTML) */
+        .mnx-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 9px 28px;
+            border-radius: 100px;
+            background: rgba(5,5,5,0.95);
+            border: 1px solid rgba(201,168,76,.18);
+            opacity: 0;
+            animation: badgeIn .6s cubic-bezier(.2,.8,.2,1) 3.6s forwards;
+            margin-top: 6px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+            transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+            min-width: 140px;
+            z-index: 20;
+        }
+        @keyframes badgeIn {
+            from { opacity:0; transform:translateY(8px); }
+            to   { opacity:1; transform:translateY(0); }
+        }
+        .b-char {
+            display: inline-block;
+            font-size: 17px;
+            font-weight: 700;
+            letter-spacing: 0.25em;
+            opacity: 0;
+            transform: translateY(10px) scale(0.8);
+            animation: charIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            animation-delay: var(--delay);
+            font-family: "Plus Jakarta Sans", sans-serif;
+        }
+        .b-char:last-child {
+            letter-spacing: 0;
+        }
+        @keyframes charIn {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        @keyframes charOut {
+            to {
+                opacity: 0;
+                transform: translateY(-8px) scale(0.9);
+            }
         }
 
         /* Stars Background for Portfolio */
@@ -1708,181 +1984,72 @@
         <div class="neon-frame-line neon-frame-right"></div>
     </div>
 
-    <!-- PAGE TRANSITION OVERLAY (Uiverse loader adapted) -->
-    <div id="page-transition-overlay" aria-hidden="true">
-        <div class="loader-wrapper">
-            <svg
-                aria-label="loader being flipped clockwise and circled by three white curves fading in and out"
-                role="img"
-                viewBox="0 0 56 56"
-                class="loader"
-            >
-                <clipPath id="sand-mound-top">
-                    <path
-                        d="M 14.613 13.087 C 15.814 12.059 19.3 8.039 20.3 6.539 C 21.5 4.789 21.5 2.039 21.5 2.039 L 3 2.039 C 3 2.039 3 4.789 4.2 6.539 C 5.2 8.039 8.686 12.059 9.887 13.087 C 11 14.039 12.25 14.039 12.25 14.039 C 12.25 14.039 13.5 14.039 14.613 13.087 Z"
-                        class="loader__sand-mound-top"
-                    ></path>
-                </clipPath>
-                <clipPath id="sand-mound-bottom">
-                    <path
-                        d="M 14.613 20.452 C 15.814 21.48 19.3 25.5 20.3 27 C 21.5 28.75 21.5 31.5 21.5 31.5 L 3 31.5 C 3 31.5 3 28.75 4.2 27 C 5.2 25.5 8.686 21.48 9.887 20.452 C 11 19.5 12.25 19.5 12.25 19.5 C 12.25 19.5 13.5 19.5 14.613 20.452 Z"
-                        class="loader__sand-mound-bottom"
-                    ></path>
-                </clipPath>
-                <g transform="translate(2,2)">
-                    <g
-                        transform="rotate(-90,26,26)"
-                        stroke-linecap="round"
-                        stroke-dashoffset="153.94"
-                        stroke-dasharray="153.94 153.94"
-                        stroke="hsl(0,0%,100%)"
-                        fill="none"
-                    >
-                        <circle
-                            transform="rotate(0,26,26)"
-                            r="24.5"
-                            cy="26"
-                            cx="26"
-                            stroke-width="2.5"
-                            class="loader__motion-thick"
-                        ></circle>
-                        <circle
-                            transform="rotate(90,26,26)"
-                            r="24.5"
-                            cy="26"
-                            cx="26"
-                            stroke-width="1.75"
-                            class="loader__motion-medium"
-                        ></circle>
-                        <circle
-                            transform="rotate(180,26,26)"
-                            r="24.5"
-                            cy="26"
-                            cx="26"
-                            stroke-width="1"
-                            class="loader__motion-thin"
-                        ></circle>
-                    </g>
-                    <g transform="translate(13.75,9.25)" class="loader__model">
-                        <path
-                            d="M 1.5 2 L 23 2 C 23 2 22.5 8.5 19 12 C 16 15.5 13.5 13.5 13.5 16.75 C 13.5 20 16 18 19 21.5 C 22.5 25 23 31.5 23 31.5 L 1.5 31.5 C 1.5 31.5 2 25 5.5 21.5 C 8.5 18 11 20 11 16.75 C 11 13.5 8.5 15.5 5.5 12 C 2 8.5 1.5 2 1.5 2 Z"
-                            fill="hsl(var(--hue),90%,85%)"
-                        ></path>
+    <!-- PAGE TRANSITION OVERLAY -->
+    <div id="page-transition-overlay" class="active" aria-hidden="false">
+        <div class="wrapper-grid">
+            <div class="cube">
+                <div class="face face-front">M</div>
+                <div class="face face-back"></div>
+                <div class="face face-right"></div>
+                <div class="face face-left"></div>
+                <div class="face face-top"></div>
+                <div class="face face-bottom"></div>
+            </div>
 
-                        <g stroke-linecap="round" stroke="hsl(35,90%,90%)">
-                            <line
-                                y2="20.75"
-                                x2="12"
-                                y1="15.75"
-                                x1="12"
-                                stroke-dasharray="0.25 33.75"
-                                stroke-width="1"
-                                class="loader__sand-grain-left"
-                            ></line>
-                            <line
-                                y2="21.75"
-                                x2="12.5"
-                                y1="16.75"
-                                x1="12.5"
-                                stroke-dasharray="0.25 33.75"
-                                stroke-width="1"
-                                class="loader__sand-grain-right"
-                            ></line>
-                            <line
-                                y2="31.5"
-                                x2="12.25"
-                                y1="18"
-                                x1="12.25"
-                                stroke-dasharray="0.5 107.5"
-                                stroke-width="1"
-                                class="loader__sand-drop"
-                            ></line>
-                            <line
-                                y2="31.5"
-                                x2="12.25"
-                                y1="14.75"
-                                x1="12.25"
-                                stroke-dasharray="54 54"
-                                stroke-width="1.5"
-                                class="loader__sand-fill"
-                            ></line>
-                            <line
-                                y2="31.5"
-                                x2="12"
-                                y1="16"
-                                x1="12"
-                                stroke-dasharray="1 107"
-                                stroke-width="1"
-                                stroke="hsl(35,90%,83%)"
-                                class="loader__sand-line-left"
-                            ></line>
-                            <line
-                                y2="31.5"
-                                x2="12.5"
-                                y1="16"
-                                x1="12.5"
-                                stroke-dasharray="12 96"
-                                stroke-width="1"
-                                stroke="hsl(35,90%,83%)"
-                                class="loader__sand-line-right"
-                            ></line>
+            <div class="cube">
+                <div class="face face-front">Y</div>
+                <div class="face face-back"></div>
+                <div class="face face-right"></div>
+                <div class="face face-left"></div>
+                <div class="face face-top"></div>
+                <div class="face face-bottom"></div>
+            </div>
 
-                            <g stroke-width="0" fill="hsl(35,90%,90%)">
-                                <path
-                                    d="M 12.25 15 L 15.392 13.486 C 21.737 11.168 22.5 2 22.5 2 L 2 2.013 C 2 2.013 2.753 11.046 9.009 13.438 L 12.25 15 Z"
-                                    clip-path="url(#sand-mound-top)"
-                                ></path>
-                                <path
-                                    d="M 12.25 18.5 L 15.392 20.014 C 21.737 22.332 22.5 31.5 22.5 31.5 L 2 31.487 C 2 31.487 2.753 22.454 9.009 20.062 Z"
-                                    clip-path="url(#sand-mound-bottom)"
-                                ></path>
-                            </g>
-                        </g>
+            <div class="cube">
+                <div class="face face-front">N</div>
+                <div class="face face-back"></div>
+                <div class="face face-right"></div>
+                <div class="face face-left"></div>
+                <div class="face face-top"></div>
+                <div class="face face-bottom"></div>
+            </div>
 
-                        <g stroke-width="2" stroke-linecap="round" opacity="0.7" fill="none">
-                            <path
-                                d="M 19.437 3.421 C 19.437 3.421 19.671 6.454 17.914 8.846 C 16.157 11.238 14.5 11.5 14.5 11.5"
-                                stroke="hsl(0,0%,100%)"
-                                class="loader__glare-top"
-                            ></path>
-                            <path
-                                transform="rotate(180,12.25,16.75)"
-                                d="M 19.437 3.421 C 19.437 3.421 19.671 6.454 17.914 8.846 C 16.157 11.238 14.5 11.5 14.5 11.5"
-                                stroke="hsla(0,0%,100%,0)"
-                                class="loader__glare-bottom"
-                            ></path>
-                        </g>
+            <div class="cube">
+                <div class="face face-front">E</div>
+                <div class="face face-back"></div>
+                <div class="face face-right"></div>
+                <div class="face face-left"></div>
+                <div class="face face-top"></div>
+                <div class="face face-bottom"></div>
+            </div>
 
-                        <rect height="2" width="24.5" fill="hsl(var(--hue),90%,50%)"></rect>
-                        <rect
-                            height="1"
-                            width="19.5"
-                            y="0.5"
-                            x="2.5"
-                            ry="0.5"
-                            rx="0.5"
-                            fill="hsl(var(--hue),90%,57.5%)"
-                        ></rect>
-                        <rect
-                            height="2"
-                            width="24.5"
-                            y="31.5"
-                            fill="hsl(var(--hue),90%,50%)"
-                        ></rect>
-                        <rect
-                            height="1"
-                            width="19.5"
-                            y="32"
-                            x="2.5"
-                            ry="0.5"
-                            rx="0.5"
-                            fill="hsl(var(--hue),90%,57.5%)"
-                        ></rect>
-                    </g>
-                </g>
-            </svg>
+            <div class="cube">
+                <div class="face face-front">X</div>
+                <div class="face face-back"></div>
+                <div class="face face-right"></div>
+                <div class="face face-left"></div>
+                <div class="face face-top"></div>
+                <div class="face face-bottom"></div>
+            </div>
+
+            <div class="cube">
+                <div class="face face-front">T</div>
+                <div class="face face-back"></div>
+                <div class="face face-right"></div>
+                <div class="face face-left"></div>
+                <div class="face face-top"></div>
+                <div class="face face-bottom"></div>
+            </div>
+
+            <div class="cube">
+                <div class="face face-front">.</div>
+                <div class="face face-back"></div>
+                <div class="face face-right"></div>
+                <div class="face face-left"></div>
+                <div class="face face-top"></div>
+                <div class="face face-bottom"></div>
+            </div>
         </div>
-        <p class="overlay-brand">MYNEXT · Digital Architecture</p>
     </div>
 
     <!-- 0. NAVIGATION -->
@@ -1927,7 +2094,7 @@
                         <!-- Nuevo Logo de Máxima Calidad -->
                         <img alt="Logo MYNEXT"
                             class="w-full h-full object-contain scale-125 group-hover/logo:scale-[1.35] transition-transform duration-700"
-                            src="./assets/img/logos/logo-m1-new-v2.png"
+                            src="./assets/img/logos/logo-hero-v2-white.svg"
                             fetchpriority="high" width="56" height="56">
                     </div>
                 </div>
@@ -1948,9 +2115,9 @@
             <div class="flex items-center gap-2 md:gap-4 ease-in-out translate-x-[150%] translate-y-1" style="transition: transform 2400ms cubic-bezier(0.16, 1, 0.3, 1);" id="nav-controls">
                 <!-- Language Selector (Text Only) -->
                 <div class="flex items-center gap-3 px-2">
-                    <a href="index.html" class="text-xs font-bold text-white/50 hover:text-white tracking-widest hover:scale-110 transition-all">ES</a>
+                    <a href="index.html" aria-label="Cambiar idioma a español" class="text-xs font-bold text-white/50 hover:text-white tracking-widest hover:scale-110 transition-all">ES</a>
                     <span class="w-[1px] h-3 bg-white/20"></span>
-                    <a href="index-en.html" class="text-xs font-bold text-electric-cyan tracking-widest hover:scale-110 transition-transform">EN</a>
+                    <a href="index-en.html" aria-label="Switch language to English" class="text-xs font-bold text-electric-cyan tracking-widest hover:scale-110 transition-transform">EN</a>
                 </div>
             </nav>
         <!-- Mobile Menu Panel -->
@@ -1995,10 +2162,12 @@
             <div id="particles-js-inicio"></div>
 
             <div class="relative z-10 flex flex-col items-center px-5 sm:px-8">
+                <!-- Visually hidden main H1 for SEO compliance -->
+                <h1 class="sr-only">MYNEXT - Premium Digital Architecture | Musa</h1>
 
                 <!-- Logo / Tarjeta de Presentación Premium -->
                 <div
-                    class="relative p-6 sm:p-10 md:p-16 rounded-[2rem] sm:rounded-[2.5rem] bg-[#050505] border border-white/[0.05] shadow-[0_0_60px_rgba(0,242,255,0.15)] flex flex-col items-center justify-center overflow-hidden group animate-float-premium">
+                    class="relative p-5 sm:p-8 md:p-12 rounded-[2rem] sm:rounded-[2.5rem] bg-[#050505] border border-white/[0.05] shadow-[0_0_60px_rgba(0,242,255,0.15)] flex flex-col items-center justify-center overflow-hidden group animate-float-premium">
 
                     <!-- Architectural Corners -->
                     <div
@@ -2028,16 +2197,17 @@
                         <div class="w-full h-full absolute top-0 left-0 border-t border-electric-cyan/20 animate-scanner"></div>
                     </div>
 
-                    <!-- Logo Central Original Completo -->
-                    <img alt="MYNEXT Digital Architecture"
-                        class="w-52 h-52 sm:w-72 sm:h-72 md:w-[380px] md:h-[380px] object-contain relative z-10 transition-transform duration-1000 group-hover:scale-105 animate-logo-reveal"
-                        src="./assets/img/logos/logo-hero-v2.svg"
-                        fetchpriority="high" width="380" height="380">
+                    <!-- Logo Central Original Transparent con Escaneo Láser -->
+                    <div class="logo-container">
+                        <div class="scan-line"></div>
+                        <img class="mnx-svg" src="./assets/img/logos/logo-hero-v2.svg?v=3" alt="MYNEXT Logo" />
+                    </div>
 
-                    <!-- EST 2026 Centrado (con animación premium de aparición y brillo) -->
-                    <div
-                        class="-mt-8 md:-mt-12 text-[9px] md:text-[11px] tracking-[0.6em] uppercase font-headline relative z-20 text-center ml-2 animate-est-premium">
-                        EST. 2026</div>
+                    <!-- MYNEXT HTML/CSS BADGE — with dynamic multilingual typing animation -->
+                    <div class="mnx-badge" id="dyn-badge"></div>
+
+                    <!-- EST 2026 Centrado -->
+                    <div class="h-est">Est. 2026</div>
                 </div>
             </div>
 
@@ -3012,7 +3182,7 @@
                         <span class="tech-card-yellow"></span>
                         <span class="tech-card-green"></span>
                     </div>
-                    <h1>Infrastructure</h1>
+                    <h4>Infrastructure</h4>
                     <p>
                         High-performance cloud servers, globally distributed CDN networks, and advanced edge caching optimized for ultra-fast load times.
                     </p>
@@ -3025,7 +3195,7 @@
                         <span class="tech-card-yellow"></span>
                         <span class="tech-card-green"></span>
                     </div>
-                    <h1>Security & SSL</h1>
+                    <h4>Security & SSL</h4>
                     <p>
                         Continuous threat monitoring, automatic SSL certificate renewal, secure firewalls, and data encryption protocols protecting your digital assets.
                     </p>
@@ -3038,7 +3208,7 @@
                         <span class="tech-card-yellow"></span>
                         <span class="tech-card-green"></span>
                     </div>
-                    <h1>Maintenance</h1>
+                    <h4>Maintenance</h4>
                     <p>
                         Constant operational supervision, regular database backups, uptime monitoring, and seamless framework security patches managed by MYNEXT.
                     </p>
@@ -3198,6 +3368,156 @@
             };
             particlesJS("particles-js-inicio", config);
             particlesJS("particles-js-nosotros", config);
+
+            /* PARALLAX HOVER (FRAME FIXED, LOGO & BADGE MOBILE/WEB INTERACTION) */
+            var frame = document.querySelector('.group');
+            var logoContainer = document.querySelector('.logo-container');
+            var mnxBadge = document.querySelector('.mnx-badge');
+            var hg = document.getElementById('hg');
+
+            var targetX = 0, targetY = 0;
+            var currentX = 0, currentY = 0;
+            var hgTargetX = 0, hgTargetY = 0;
+            var hgCurrentX = 0, hgCurrentY = 0;
+            var rafActive = false;
+
+            var updateParallax = function() {
+                if (!logoContainer || !mnxBadge) {
+                    rafActive = false;
+                    return;
+                }
+
+                // Smooth linear interpolation (lerp) for a premium liquid feel
+                currentX += (targetX - currentX) * 0.085;
+                currentY += (targetY - currentY) * 0.085;
+                
+                logoContainer.style.transform = "translate3d(" + currentX + "px, " + currentY + "px, 0)";
+                
+                // Badge shifts slightly less (approx 6/14 or 43%)
+                var bx = currentX * 0.43;
+                var by = currentY * 0.43;
+                mnxBadge.style.transform = "translate3d(" + bx + "px, " + by + "px, 0)";
+
+                if (hg) {
+                    hgCurrentX += (hgTargetX - hgCurrentX) * 0.085;
+                    hgCurrentY += (hgTargetY - hgCurrentY) * 0.085;
+                    hg.style.transform = "translate3d(" + hgCurrentX + "px, " + hgCurrentY + "px, 0)";
+                }
+
+                // Continue loop if we haven't reached targets closely
+                var deltaLogo = Math.abs(targetX - currentX) + Math.abs(targetY - currentY);
+                var deltaHg = hg ? (Math.abs(hgTargetX - hgCurrentX) + Math.abs(hgTargetY - hgCurrentY)) : 0;
+
+                if (deltaLogo < 0.01 && deltaHg < 0.01) {
+                    // Snap to final values and stop loop to save CPU cycles
+                    logoContainer.style.transform = "translate3d(" + targetX + "px, " + targetY + "px, 0)";
+                    mnxBadge.style.transform = "translate3d(" + (targetX * 0.43) + "px, " + (targetY * 0.43) + "px, 0)";
+                    if (hg) hg.style.transform = "translate3d(" + hgTargetX + "px, " + hgTargetY + "px, 0)";
+                    rafActive = false;
+                } else {
+                    requestAnimationFrame(updateParallax);
+                }
+            };
+
+            var handleMove = function(clientX, clientY) {
+                if (!frame) return;
+                var rect = frame.getBoundingClientRect();
+                var x = clientX - rect.left - rect.width/2;
+                var y = clientY - rect.top - rect.height/2;
+
+                targetX = (x / (rect.width/2)) * 14; // Max 14px
+                targetY = (y / (rect.height/2)) * 14;
+
+                if (!rafActive) {
+                    rafActive = true;
+                    requestAnimationFrame(updateParallax);
+                }
+            };
+
+            var handleReset = function() {
+                targetX = 0;
+                targetY = 0;
+                hgTargetX = 0;
+                hgTargetY = 0;
+                if (!rafActive) {
+                    rafActive = true;
+                    requestAnimationFrame(updateParallax);
+                }
+            };
+
+            // Mouse events (Desktop)
+            document.addEventListener('mousemove', function(e) {
+                hgTargetX = (e.clientX / window.innerWidth  - .5) * 34;
+                hgTargetY = (e.clientY / window.innerHeight - .5) * 34;
+                handleMove(e.clientX, e.clientY);
+            });
+
+            document.addEventListener('mouseleave', function() {
+                handleReset();
+            });
+
+            // Touch events (Mobile finger drag)
+            document.addEventListener('touchmove', function(e) {
+                if (e.touches.length > 0) {
+                    handleMove(e.touches[0].clientX, e.touches[0].clientY);
+                }
+            }, { passive: true });
+
+            document.addEventListener('touchend', function() {
+                handleReset();
+            });
+
+            /* MULTILINGUAL TYPING ANIMATION CYCLE */
+            var words = ["WELCOME", "BIENVENIDO", "WILLKOMMEN", "MYNEXT"];
+            var badgeElement = document.getElementById("dyn-badge");
+            var wordIdx = 0;
+
+            function typeWord(word, isLast, delayOffset) {
+                if (!badgeElement) return;
+                badgeElement.innerHTML = "";
+                
+                // Create span for each character
+                for (var i = 0; i < word.length; i++) {
+                    var span = document.createElement("span");
+                    span.className = "b-char";
+                    span.textContent = word[i];
+                    // Alternating gold and white colors
+                    span.style.color = (i % 2 === 0) ? "#c5a880" : "#fff";
+                    
+                    // If there is an initial delay offset (e.g. 3.8s for the first word), use it.
+                    // Otherwise, start immediately with just the staggered letter delays.
+                    if (delayOffset > 0) {
+                        span.style.setProperty("--delay", "calc(" + delayOffset + "s + " + (i * 0.08) + "s)");
+                    } else {
+                        span.style.setProperty("--delay", (i * 0.08) + "s");
+                    }
+                    
+                    badgeElement.appendChild(span);
+                }
+
+                if (!isLast) {
+                    // Calculate how long to wait before starting the fade-out.
+                    // For the first word, we must wait for the initial delayOffset (3.8s) + the display duration (1.5s).
+                    var waitTime = (delayOffset > 0 ? (delayOffset * 1000) : 0) + 1500;
+                    
+                    setTimeout(function() {
+                        var chars = badgeElement.querySelectorAll(".b-char");
+                        chars.forEach(function(c) {
+                            c.style.animation = "charOut 0.4s ease forwards";
+                        });
+                        
+                        // Load the next word after the fade-out completes
+                        setTimeout(function() {
+                            wordIdx++;
+                            typeWord(words[wordIdx], wordIdx === words.length - 1, 0); // subsequent words have 0 delay offset
+                        }, 450);
+                        
+                    }, waitTime);
+                }
+            }
+
+            // Start the typing cycle immediately (the 3.8s delay offset is managed internally for the first word)
+            typeWord(words[0], false, 3.8);
         });
     </script>
     <script type="module" src="/src/main.ts"></script>

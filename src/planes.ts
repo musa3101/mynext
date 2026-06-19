@@ -76,7 +76,7 @@ function executeContact(method: string) {
   // Retrieve settings values or use defaults
   const phone = (window as any).contactPhone || '34673109486';
   const email = (window as any).contactEmail || 'mynextbymusa@gmail.com';
-  
+
   const plan = currentPlan || (isEnglish ? 'CUSTOM' : 'PERSONALIZADO');
 
   if (method === 'whatsapp') {
@@ -104,6 +104,7 @@ window.onclick = function (e) {
 
 // Initialize Planes DOM safely
 async function initPlanes() {
+  sessionStorage.setItem('from-planes', 'true');
   let services = fallbackServices;
   let settings: Record<string, string> = fallbackSettings;
 
@@ -170,7 +171,7 @@ async function initPlanes() {
       const description = getTranslation(service.description, lang);
       // Aumentamos 10 euros al precio base de la base de datos (Ej: 200 -> 210, 300 -> 310)
       const priceVal = Number(service.price) + 10;
-      
+
       const currencySymbol = isEnglish ? '£' : '€';
       const priceStr = isEnglish ? `${currencySymbol}${priceVal}` : `${priceVal}${currencySymbol}`;
 
@@ -184,63 +185,149 @@ async function initPlanes() {
         return `<li class="flex items-center gap-3"><span class="w-2.5 h-2.5 bg-rose-500 shadow-[0_0_8px_#f43f5e] rounded-full shrink-0"></span> ${text}</li>`;
       }).join('');
 
-      // Build card container div
+      // Build card container div with flip logic
       const card = document.createElement('div');
-      card.onclick = () => (window as any).openContactOptions(title);
+      card.className = service.featured
+        ? 'flip-container group mx-auto w-full max-w-[24rem] lg:scale-105 hover:-translate-y-2 transition-all duration-400 hover:shadow-[0_20px_50px_rgba(245,158,11,0.3)]'
+        : 'flip-container mx-auto w-full max-w-[22rem] lg:scale-95 hover:-translate-y-2 transition-all duration-400 hover:shadow-[0_20px_45px_rgba(6,182,212,0.25)]';
+
+      card.onclick = (e) => {
+        const target = e.target as HTMLElement;
+        if (target.closest('.no-flip')) return;
+        card.classList.toggle('flipped');
+      };
 
       if (service.featured) {
         // Plan ÉLITE / Featured Plan
-        card.className = 'group premium-plan-card p-8 md:p-12 flex flex-col mx-auto w-full max-w-[24rem] lg:scale-105 border border-amber-500/30 hover:border-amber-400/60 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(245,158,11,0.3)] hover:scale-[1.07] transition-all duration-400 cursor-pointer relative';
-        
         card.innerHTML = `
-          <!-- Popular Corner Ribbon -->
-          <div class="plan-ribbon-wrapper"></div>
-          <div class="text-center h-full flex flex-col pt-4">
-            <h3 class="logo-font text-2xl tracking-[0.2em] font-black mb-6 uppercase text-white">
-              <span class="relative inline-block pb-2">
-                ${title}
-                <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"></div>
-              </span>
-            </h3>
-            <div class="text-4xl md:text-5xl font-extrabold text-amber-400 mb-4 md:mb-6 flex items-center justify-center gap-3">
-              <span>${priceStr}</span>
+          <div class="flip-card-inner">
+            <!-- FRONT -->
+            <div class="flip-card-front premium-plan-card p-8 md:p-12 flex flex-col border border-amber-500/30">
+              <!-- Popular Corner Ribbon -->
+              <div class="plan-ribbon-wrapper"></div>
+              <div class="text-center h-full flex flex-col pt-4">
+                <h3 class="logo-font text-2xl tracking-[0.2em] font-black mb-6 uppercase text-white">
+                  <span class="relative inline-block pb-2">
+                    ${title}
+                    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"></div>
+                  </span>
+                </h3>
+                <div class="text-4xl md:text-5xl font-extrabold text-amber-400 mb-4 md:mb-6 flex items-center justify-center gap-3">
+                  <span>${priceStr}</span>
+                </div>
+                
+                <ul class="space-y-4 flex-grow text-[14px] md:text-[15px] text-slate-200 font-semibold text-left mx-auto w-fit mt-4">
+                  ${items}
+                </ul>
+                
+                <div class="mt-8 pt-4 border-t border-slate-800/80">
+                  <span class="text-[10px] uppercase tracking-[0.2em] text-amber-400 font-black animate-pulse">
+                    ${isEnglish ? '➔ CLICK TO READ MORE' : '➔ CLICK PARA SABER MÁS'}
+                  </span>
+                </div>
+              </div>
             </div>
             
-            <ul class="space-y-4 flex-grow text-[14px] md:text-[15px] text-slate-200 font-semibold text-left mx-auto w-fit mt-4">
-              ${items}
-            </ul>
-            
-            <div class="mt-8 md:mt-12 pt-6 border-t border-slate-800">
-              <span class="text-lg font-black uppercase tracking-widest text-cyan-300 flex items-center justify-center">
-                ${isEnglish ? 'INCLUDED' : 'INCLUIDO'} <span class="text-cyan-400 font-bold ml-1.5">*<sup class="text-[11px]">2</sup></span>
-              </span>
+            <!-- BACK -->
+            <div class="flip-card-back premium-plan-card p-8 md:p-12 flex flex-col border border-amber-500/40 text-center">
+              <div class="h-full flex flex-col justify-between pt-4">
+                <div>
+                  <h4 class="logo-font text-lg tracking-[0.15em] font-black text-amber-400 mb-6 uppercase">
+                    ${isEnglish ? 'EXCLUSIVE BENEFITS' : 'VENTAJAS EXCLUSIVAS'}
+                  </h4>
+                  <ul class="space-y-4 text-left text-xs text-slate-200 font-medium leading-relaxed">
+                    <li class="flex items-start gap-2">
+                      <span class="text-amber-400 mt-0.5">✦</span>
+                      <span><strong>${isEnglish ? 'Modern design:' : 'Diseño moderno:'}</strong> ${isEnglish ? 'Inspires trust from the very first moment.' : 'que transmite confianza desde el primer momento.'}</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-amber-400 mt-0.5">✦</span>
+                      <span><strong>${isEnglish ? 'All-inclusive:' : 'Todo incluido:'}</strong> ${isEnglish ? 'Domain, configuration, and maintenance.' : 'dominio, configuración y mantenimiento.'}</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-amber-400 mt-0.5">✦</span>
+                      <span><strong>${isEnglish ? 'Mobile-optimized:' : 'Web optimizada:'}</strong> ${isEnglish ? 'Fully responsive and ready to welcome new clients.' : 'para móviles y preparada para recibir nuevos clientes.'}</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-amber-400 mt-0.5">✦</span>
+                      <span><strong>${isEnglish ? 'Direct, close support:' : 'Soporte directo:'}</strong> ${isEnglish ? 'Personalized assistance whenever you need it.' : 'y cercano siempre que lo necesites.'}</span>
+                    </li>
+                  </ul>
+                </div>
+                
+                <div class="mt-6 pt-4 border-t border-slate-800/80 flex flex-col items-center">
+                  <button onclick="event.stopPropagation(); (window as any).openContactOptions('${title}');" class="no-flip w-full py-3 px-6 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-bold uppercase tracking-wider text-xs transition-colors shadow-[0_0_15px_rgba(245,158,11,0.4)]">
+                    ${isEnglish ? 'INQUIRE NOW' : 'SOLICITAR PLAN'}
+                  </button>
+                  <span class="text-[9px] uppercase tracking-widest text-slate-500 mt-3 hover:text-white transition-colors cursor-pointer">
+                    ${isEnglish ? '➔ Tap to flip back' : '➔ Toca para volver'}
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         `;
       } else {
         // Plan ESENCIAL / Non-featured Plan
-        card.className = 'premium-plan-card p-8 flex flex-col mx-auto w-full max-w-[22rem] lg:scale-95 border border-cyan-500/20 hover:border-cyan-500/50 hover:-translate-y-2 hover:shadow-[0_20px_45px_rgba(6,182,212,0.25)] hover:scale-[0.97] transition-all duration-400 cursor-pointer';
-        
         card.innerHTML = `
-          <div class="text-center h-full flex flex-col">
-            <h3 class="logo-font text-xl tracking-[0.2em] font-black mb-6 uppercase text-white">
-              <span class="relative inline-block pb-2">
-                ${title}
-                <div class="absolute bottom-0 left-0 w-full h-[2px] bg-slate-700 rounded-full"></div>
-              </span>
-            </h3>
-            <div class="text-4xl md:text-5xl font-extrabold text-cyan-400 mb-6 md:mb-10 flex items-center justify-center gap-3">
-              <span>${priceStr}</span>
+          <div class="flip-card-inner">
+            <!-- FRONT -->
+            <div class="flip-card-front premium-plan-card p-8 flex flex-col border border-cyan-500/20">
+              <div class="text-center h-full flex flex-col">
+                <h3 class="logo-font text-xl tracking-[0.2em] font-black mb-6 uppercase text-white">
+                  <span class="relative inline-block pb-2">
+                    ${title}
+                    <div class="absolute bottom-0 left-0 w-full h-[2px] bg-slate-700 rounded-full"></div>
+                  </span>
+                </h3>
+                <div class="text-4xl md:text-5xl font-extrabold text-cyan-400 mb-6 md:mb-10 flex items-center justify-center gap-3">
+                  <span>${priceStr}</span>
+                </div>
+                
+                <ul class="space-y-4 flex-grow text-[14px] md:text-[15px] text-slate-300 font-semibold text-left mx-auto w-fit">
+                  ${items}
+                </ul>
+                
+                <div class="mt-8 pt-4 border-t border-slate-800/80">
+                  <span class="text-[10px] uppercase tracking-[0.2em] text-cyan-400 font-black animate-pulse">
+                    ${isEnglish ? '➔ CLICK TO READ MORE' : '➔ CLICK PARA SABER MÁS'}
+                  </span>
+                </div>
+              </div>
             </div>
             
-            <ul class="space-y-4 flex-grow text-[14px] md:text-[15px] text-slate-300 font-semibold text-left mx-auto w-fit">
-              ${items}
-            </ul>
-            
-            <div class="mt-8 md:mt-12 pt-6 border-t border-slate-800">
-              <span class="text-lg font-black uppercase tracking-widest text-cyan-400">
-                ${isEnglish ? '£50 PER FIX' : '50€ POR MODIFICACIÓN'}
-              </span>
+            <!-- BACK -->
+            <div class="flip-card-back premium-plan-card p-8 flex flex-col border border-cyan-500/30 text-center">
+              <div class="h-full flex flex-col justify-between">
+                <div>
+                  <h4 class="logo-font text-base tracking-[0.15em] font-black text-cyan-400 mb-6 uppercase">
+                    ${isEnglish ? 'PLAN DETAILS' : 'DETALLES DEL PLAN'}
+                  </h4>
+                  <ul class="space-y-4 text-left text-xs text-slate-300 font-medium leading-relaxed">
+                    <li class="flex items-start gap-2">
+                      <span class="text-cyan-400 mt-0.5">✓</span>
+                      <span><strong>${isEnglish ? 'Smart Structure:' : 'Estructura inteligente:'}</strong> ${isEnglish ? 'Designed for fast conversions and visual clarity. Ideal for startups and local services.' : 'Pensada para conversión rápida y claridad de marca. Ideal para autónomos y negocios locales.'}</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-cyan-400 mt-0.5">✓</span>
+                      <span><strong>${isEnglish ? 'Zero Hassle:' : 'Cero complicaciones:'}</strong> ${isEnglish ? 'We handle hosting setup, DNS pointing, and server configurations from scratch.' : 'Nos encargamos de todo el registro, hosting y puesta a punto inicial sin dolores de cabeza.'}</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-cyan-400 mt-0.5">✓</span>
+                      <span><strong>${isEnglish ? 'SEO Launch:' : 'Lanzamiento SEO:'}</strong> ${isEnglish ? 'Full Google Profile and Maps optimization to attract nearby clients immediately.' : 'Optimización en Google Profile y Maps para captar clientes locales desde el primer día.'}</span>
+                    </li>
+                  </ul>
+                </div>
+                
+                <div class="mt-6 pt-4 border-t border-slate-800/80 flex flex-col items-center">
+                  <button onclick="event.stopPropagation(); (window as any).openContactOptions('${title}');" class="no-flip w-full py-3 px-6 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-black font-bold uppercase tracking-wider text-xs transition-colors shadow-[0_0_15px_rgba(6,182,212,0.3)]">
+                    ${isEnglish ? 'INQUIRE NOW' : 'SOLICITAR PLAN'}
+                  </button>
+                  <span class="text-[9px] uppercase tracking-widest text-slate-500 mt-3 hover:text-white transition-colors cursor-pointer">
+                    ${isEnglish ? '➔ Tap to flip back' : '➔ Toca para volver'}
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         `;

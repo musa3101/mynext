@@ -58,7 +58,10 @@ function initRevealAnimations() {
 if ('scrollRestoration' in history) {
   history.scrollRestoration = 'manual';
 }
-window.scrollTo(0, 0);
+const isFromPlanes = sessionStorage.getItem('from-planes');
+if (!isFromPlanes && !window.location.hash) {
+  window.scrollTo(0, 0);
+}
 
 // Initialize all DOM contents safely
 async function initMain() {
@@ -77,7 +80,24 @@ async function initMain() {
       ]);
 
       if (projectsRes.data && projectsRes.data.length > 0) {
-        projects = projectsRes.data;
+        const dbProjects = projectsRes.data;
+        const merged: any[] = [...dbProjects];
+        
+        fallbackProjects.forEach(localProj => {
+          const match = merged.find(p => p.title.toLowerCase().trim() === localProj.title.toLowerCase().trim() || p.id === localProj.id);
+          if (match) {
+            // Override with local image paths if the local fallback has updated versions
+            if (localProj.image_url.includes('porfolio2-v3') || localProj.image_url.includes('porfolio6')) {
+              match.image_url = localProj.image_url;
+            }
+          } else {
+            // Append locally added projects that are missing in the database
+            merged.push(localProj);
+          }
+        });
+        
+        merged.sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+        projects = merged;
       }
       if (testimonialsRes.data && testimonialsRes.data.length > 0) {
         testimonials = testimonialsRes.data;
@@ -613,29 +633,25 @@ async function initMain() {
   // --- H. Plans Button overlay transitions ---
   const transitionOverlay = document.getElementById('page-transition-overlay');
   if (transitionOverlay) {
-    const navEntry = (performance.getEntriesByType && performance.getEntriesByType('navigation')?.[0]) as any || {};
-    const isReload = navEntry.type === 'reload' || (performance.navigation && performance.navigation.type === 1);
-
-    if (isReload) {
-      transitionOverlay.classList.add('active');
-      transitionOverlay.setAttribute('aria-hidden', 'false');
-    } else {
-      transitionOverlay.classList.remove('active');
-      transitionOverlay.setAttribute('aria-hidden', 'true');
-    }
+    // Show overlay by default (and it starts with active class in HTML)
+    transitionOverlay.classList.add('active');
+    transitionOverlay.setAttribute('aria-hidden', 'false');
 
     const hideOverlay = () => {
       transitionOverlay.classList.remove('active');
       transitionOverlay.setAttribute('aria-hidden', 'true');
     };
 
-    if (isReload) {
-      // Hide exactly after 2.3 seconds (2300ms) to allow the cube loader animation to cycle fully
-      setTimeout(hideOverlay, 2300);
-    }
+    // Hide exactly after 3.5 seconds (3500ms) on page load
+    setTimeout(hideOverlay, 3500);
 
-    window.addEventListener('pageshow', () => {
-      hideOverlay();
+    window.addEventListener('pageshow', (e) => {
+      if (e.persisted) {
+        // If restored from back-forward cache, show it and hide after 3.5s
+        transitionOverlay.classList.add('active');
+        transitionOverlay.setAttribute('aria-hidden', 'false');
+        setTimeout(hideOverlay, 3500);
+      }
     });
 
     const plansBtns = document.querySelectorAll('a.animated-button[href*="planes"]');
@@ -772,6 +788,25 @@ async function initMain() {
         closeCartModal();
       }
     });
+  }
+
+  // Handle auto-scroll when coming back from plans
+  const fromPlanes = sessionStorage.getItem('from-planes');
+  if (fromPlanes) {
+    sessionStorage.removeItem('from-planes');
+    const planesSection = document.getElementById('planes-banner');
+    if (planesSection) {
+      setTimeout(() => {
+        planesSection.scrollIntoView({ behavior: 'instant', block: 'start' });
+      }, 100);
+    }
+  } else if (window.location.hash) {
+    const targetElement = document.getElementById(window.location.hash.substring(1));
+    if (targetElement) {
+      setTimeout(() => {
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
   }
 }
 
