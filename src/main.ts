@@ -629,14 +629,18 @@ async function initMain() {
       transitionOverlay.setAttribute('aria-hidden', 'true');
     };
 
+    const startTime = Date.now();
+
     window.addEventListener('load', () => {
       if (isReload) {
-        setTimeout(hideOverlay, 400);
+        const elapsedTime = Date.now() - startTime;
+        const remainingTime = Math.max(2500 - elapsedTime, 0);
+        setTimeout(hideOverlay, remainingTime);
       }
     });
 
     if (isReload) {
-      setTimeout(hideOverlay, 2500);
+      setTimeout(hideOverlay, 8000); // safety fallback
     }
 
     window.addEventListener('pageshow', () => {
