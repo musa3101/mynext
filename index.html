@@ -523,163 +523,286 @@
             pointer-events: all;
         }
 
-        /* New 3D Cube Loader spelling M Y N E X T . */
-        .wrapper-grid {
-            --animation-duration: 2.1s;
-            --cube-color: rgba(5, 5, 5, 0.4);
-            --highlight-color: #00F2FF;
-            --cube-width: 38px;
-            --cube-height: 38px;
-            --font-size: 1.3em;
-
+        #page-transition-overlay .loader-wrapper {
             position: relative;
-            display: grid;
-            grid-template-columns: repeat(7, var(--cube-width));
-            grid-template-rows: auto;
-            grid-gap: 0;
-
-            width: calc(7 * var(--cube-width));
-            height: var(--cube-height);
-            perspective: 350px;
-
-            font-family: "Outfit", "Space Grotesk", sans-serif;
-            font-size: var(--font-size);
-            font-weight: 800;
-            color: transparent;
-        }
-
-        @media (min-width: 480px) {
-            .wrapper-grid {
-                --cube-width: 48px;
-                --cube-height: 48px;
-                --font-size: 1.8em;
-            }
-        }
-
-        .cube {
-            position: relative;
-            transform-style: preserve-3d;
-            animation: translate-z var(--animation-duration) ease-in-out infinite;
-        }
-
-        .face {
-            position: absolute;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: var(--cube-width);
-            height: var(--cube-height);
-            background-color: var(--cube-color);
-            border: 1px solid rgba(0, 242, 255, 0.08);
-            box-shadow:
-                inset 0 0 2px 1px rgba(0, 0, 0, 0.2),
-                inset 0 0 12px 1px rgba(255, 255, 255, 0.05);
+            width: 90px;
+            height: 90px;
+            margin: 0;
+            padding: 0;
         }
 
-        .face-left,
-        .face-right,
-        .face-back,
-        .face-front {
-            box-shadow:
-                inset 0 0 2px 1px rgba(0,0,0,0.1),
-                inset 0 0 12px 1px rgba(255,255,255,0.03);
+        #page-transition-overlay .loader {
+            --dur: 2s;
+            display: block;
+            width: 90px;
+            height: 90px;
+            position: relative;
+            z-index: 1;
         }
 
-        .face-front {
-            transform: rotateY(0deg) translateZ(calc(var(--cube-width) / 2));
+        .loader__glare-top,
+        .loader__glare-bottom,
+        .loader__model,
+        .loader__motion-thick,
+        .loader__motion-medium,
+        .loader__motion-thin,
+        .loader__sand-drop,
+        .loader__sand-fill,
+        .loader__sand-grain-left,
+        .loader__sand-grain-right,
+        .loader__sand-line-left,
+        .loader__sand-line-right,
+        .loader__sand-mound-top,
+        .loader__sand-mound-bottom {
+            animation-duration: var(--dur);
+            animation-timing-function: cubic-bezier(0.83, 0, 0.17, 1);
+            animation-iteration-count: infinite;
+        }
+        .loader__glare-top {
+            animation-name: glare-top;
+        }
+        .loader__glare-bottom {
+            animation-name: glare-bottom;
+        }
+        .loader__model {
+            animation-name: loader-flip;
+            transform-origin: 12.25px 16.75px;
+        }
+        .loader__motion-thick,
+        .loader__motion-medium,
+        .loader__motion-thin {
+            transform-origin: 26px 26px;
+        }
+        .loader__motion-thick {
+            animation-name: motion-thick;
+        }
+        .loader__motion-medium {
+            animation-name: motion-medium;
+        }
+        .loader__motion-thin {
+            animation-name: motion-thin;
+        }
+        .loader__sand-drop {
+            animation-name: sand-drop;
+        }
+        .loader__sand-fill {
+            animation-name: sand-fill;
+        }
+        .loader__sand-grain-left {
+            animation-name: sand-grain-left;
+        }
+        .loader__sand-grain-right {
+            animation-name: sand-grain-right;
+        }
+        .loader__sand-line-left {
+            animation-name: sand-line-left;
+        }
+        .loader__sand-line-right {
+            animation-name: sand-line-right;
+        }
+        .loader__sand-mound-top {
+            animation-name: sand-mound-top;
+        }
+        .loader__sand-mound-bottom {
+            animation-name: sand-mound-bottom;
+            transform-origin: 12.25px 31.5px;
         }
 
-        .face-back {
-            transform: rotateY(180deg) translateZ(calc(var(--cube-width) / 2));
-            opacity: 0.6;
+        #page-transition-overlay .loader-letter {
+            display: none;
         }
 
-        .face-left {
-            transform: rotateY(-90deg) translateZ(calc(var(--cube-width) / 2));
-            opacity: 0.6;
+        #page-transition-overlay .overlay-brand {
+            margin-top: 1.75rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            color: rgba(0, 242, 255, 0.28);
         }
 
-        .face-right {
-            transform: rotateY(90deg) translateZ(calc(var(--cube-width) / 2));
-            opacity: 0.6;
-        }
-
-        .face-top {
-            height: var(--cube-width);
-            transform: rotateX(90deg) translateZ(calc(var(--cube-width) / 2));
-            opacity: 0.8;
-        }
-
-        .face-bottom {
-            height: var(--cube-width);
-            transform: rotateX(-90deg) translateZ(calc(var(--cube-height) - var(--cube-width) * 0.5));
-            opacity: 0.8;
-        }
-
-        .cube:nth-child(1) { z-index: 0; animation-delay: 0s; }
-        .cube:nth-child(2) { z-index: 1; animation-delay: 0.2s; }
-        .cube:nth-child(3) { z-index: 2; animation-delay: 0.4s; }
-        .cube:nth-child(4) { z-index: 3; animation-delay: 0.6s; }
-        .cube:nth-child(5) { z-index: 2; animation-delay: 0.8s; }
-        .cube:nth-child(6) { z-index: 1; animation-delay: 1s; }
-        .cube:nth-child(7) { z-index: 0; animation-delay: 1.2s; }
-
-        .cube .face {
-            animation:
-                face-color var(--animation-duration) ease-in-out infinite,
-                edge-glow var(--animation-duration) ease-in-out infinite;
-            animation-delay: inherit;
-        }
-
-        .cube .face.face-front {
-            animation:
-                face-color var(--animation-duration) ease-in-out infinite,
-                face-glow var(--animation-duration) ease-in-out infinite,
-                edge-glow var(--animation-duration) ease-in-out infinite;
-            animation-delay: inherit;
-        }
-
-        @keyframes translate-z {
-            0%, 40%, 100% {
-                transform: translateZ(-2px);
+        @keyframes loader-flip {
+            from {
+                transform: translate(13.75px, 9.25px) rotate(-180deg);
             }
-            30% {
-                transform: translateZ(16px) translateY(-1px);
+            24%,
+            to {
+                transform: translate(13.75px, 9.25px) rotate(0);
             }
         }
-
-        @keyframes face-color {
-            0%, 50%, 100% {
-                background-color: var(--cube-color);
+        @keyframes glare-top {
+            from {
+                stroke: rgba(255, 255, 255, 0);
             }
+            24%,
+            to {
+                stroke: white;
+            }
+        }
+        @keyframes glare-bottom {
+            from {
+                stroke: white;
+            }
+            24%,
+            to {
+                stroke: rgba(255, 255, 255, 0);
+            }
+        }
+        @keyframes motion-thick {
+            from {
+                animation-timing-function: cubic-bezier(0.33, 0, 0.67, 0);
+                stroke: rgba(255, 255, 255, 0);
+                stroke-dashoffset: 153.94;
+                transform: rotate(0.67turn);
+            }
+            20% {
+                animation-timing-function: cubic-bezier(0.33, 1, 0.67, 1);
+                stroke: rgb(32, 32, 32);
+                stroke-dashoffset: 141.11;
+                transform: rotate(1turn);
+            }
+            40%,
+            to {
+                stroke: rgba(255, 255, 255, 0);
+                stroke-dashoffset: 153.94;
+                transform: rotate(1.33turn);
+            }
+        }
+        @keyframes motion-medium {
+            from,
+            8% {
+                animation-timing-function: cubic-bezier(0.33, 0, 0.67, 0);
+                stroke: rgba(255, 255, 255, 0);
+                stroke-dashoffset: 153.94;
+                transform: rotate(0.5turn);
+            }
+            20% {
+                animation-timing-function: cubic-bezier(0.33, 1, 0.67, 1);
+                stroke: white;
+                stroke-dashoffset: 147.53;
+                transform: rotate(0.83turn);
+            }
+            32%,
+            to {
+                stroke: rgba(255, 255, 255, 0);
+                stroke-dashoffset: 153.94;
+                transform: rotate(1.17turn);
+            }
+        }
+        @keyframes motion-thin {
+            from,
+            4% {
+                animation-timing-function: cubic-bezier(0.33, 0, 0.67, 0);
+                stroke: rgba(255, 255, 255, 0);
+                stroke-dashoffset: 153.94;
+                transform: rotate(0.33turn);
+            }
+            24% {
+                animation-timing-function: cubic-bezier(0.33, 1, 0.67, 1);
+                stroke: rgb(53, 53, 53);
+                stroke-dashoffset: 134.7;
+                transform: rotate(0.67turn);
+            }
+            44%,
+            to {
+                stroke: rgba(255, 255, 255, 0);
+                stroke-dashoffset: 153.94;
+                transform: rotate(1turn);
+            }
+        }
+        @keyframes sand-drop {
+            from,
             10% {
-                background-color: rgba(0, 242, 255, 0.15);
+                animation-timing-function: cubic-bezier(0.12, 0, 0.39, 0);
+                stroke-dashoffset: 1;
+            }
+            70%,
+            to {
+                stroke-dashoffset: -107;
             }
         }
-
-        @keyframes face-glow {
-            0%, 50%, 100% {
-                color: rgba(255, 255, 255, 0);
-                filter: none;
-                text-shadow: none;
+        @keyframes sand-fill {
+            from,
+            10% {
+                animation-timing-function: cubic-bezier(0.12, 0, 0.39, 0);
+                stroke-dashoffset: 55;
             }
-            30% {
-                color: #fff;
-                filter: drop-shadow(0 0 10px var(--highlight-color));
-                text-shadow: 0 0 8px var(--highlight-color);
+            70%,
+            to {
+                stroke-dashoffset: -54;
             }
         }
-
-        @keyframes edge-glow {
-            0%, 40%, 100% {
-                box-shadow:
-                    inset 0 0 2px 1px rgba(0, 0, 0, 0.2),
-                    inset 0 0 12px 1px rgba(255, 255, 255, 0.05);
-                border-color: rgba(0, 242, 255, 0.08);
+        @keyframes sand-grain-left {
+            from,
+            10% {
+                animation-timing-function: cubic-bezier(0.12, 0, 0.39, 0);
+                stroke-dashoffset: 29;
             }
-            30% {
-                box-shadow: 0 0 8px 0px var(--highlight-color);
-                border-color: var(--highlight-color);
+            70%,
+            to {
+                stroke-dashoffset: -22;
+            }
+        }
+        @keyframes sand-grain-right {
+            from,
+            10% {
+                animation-timing-function: cubic-bezier(0.12, 0, 0.39, 0);
+                stroke-dashoffset: 27;
+            }
+            70%,
+            to {
+                stroke-dashoffset: -24;
+            }
+        }
+        @keyframes sand-line-left {
+            from,
+            10% {
+                animation-timing-function: cubic-bezier(0.12, 0, 0.39, 0);
+                stroke-dashoffset: 53;
+            }
+            70%,
+            to {
+                stroke-dashoffset: -55;
+            }
+        }
+        @keyframes sand-line-right {
+            from,
+            10% {
+                animation-timing-function: cubic-bezier(0.12, 0, 0.39, 0);
+                stroke-dashoffset: 14;
+            }
+            70%,
+            to {
+                stroke-dashoffset: -24.5;
+            }
+        }
+        @keyframes sand-mound-top {
+            from,
+            10% {
+                animation-timing-function: linear;
+                transform: translate(0, 0);
+            }
+            15% {
+                animation-timing-function: cubic-bezier(0.12, 0, 0.39, 0);
+                transform: translate(0, 1.5px);
+            }
+            51%,
+            to {
+                transform: translate(0, 13px);
+            }
+        }
+        @keyframes sand-mound-bottom {
+            from,
+            31% {
+                animation-timing-function: cubic-bezier(0.61, 1, 0.88, 1);
+                transform: scale(1, 0);
+            }
+            56%,
+            to {
+                transform: scale(1, 1);
             }
         }
 
@@ -1757,138 +1880,6 @@
                 transform: translateY(-2000px);
             }
         }
-
-        /* ═══════════════════════════════════════════
-           NUEVO HERO LOGO V2 — CANVA TRANSPARENT LOGO
-           WITH LASER SCAN REVEAL & MULTILINGUAL BADGE
-        ═══════════════════════════════════════════ */
-        :root {
-            --gold: #C9A84C;
-        }
-
-        .logo-container {
-            position: relative;
-            width: 250px;
-            height: 250px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            margin-bottom: -12px;
-            transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-
-        @media (min-width: 640px) {
-            .logo-container {
-                width: 300px;
-                height: 300px;
-                margin-bottom: -20px;
-            }
-        }
-
-        .mnx-svg {
-            width: 100%;
-            height: auto;
-            clip-path: inset(0 100% 0 0);
-            animation: 
-                scanReveal 1.8s cubic-bezier(0.4, 0, 0.2, 1) 2.6s forwards,
-                svgg 4.5s ease-in-out 6.5s infinite;
-        }
-
-        @keyframes scanReveal {
-            to { clip-path: inset(0 0 0 0); }
-        }
-
-        @keyframes svgg {
-            0%,100%{ filter: drop-shadow(-6px 0 10px rgba(212, 168, 67, 0.16)) drop-shadow(6px 0 10px rgba(204, 43, 43, 0.16)) drop-shadow(0 0 12px rgba(0,242,255,.03)); }
-            50%    { filter: drop-shadow(-10px 0 18px rgba(212, 168, 67, 0.28)) drop-shadow(10px 0 18px rgba(204, 43, 43, 0.28)) drop-shadow(0 0 24px rgba(0,242,255,.08)); }
-        }
-
-        /* Laser scan line sweep with a glowing neon trail */
-        .scan-line {
-            position: absolute;
-            top: 10px;
-            bottom: 10px;
-            width: 12px;
-            background: linear-gradient(to right, transparent, rgba(0, 242, 255, 0.1) 40%, rgba(0, 242, 255, 0.6) 85%, #fff 100%);
-            box-shadow: 
-                0 0 12px rgba(0, 242, 255, 0.5), 
-                0 0 24px rgba(0, 242, 255, 0.2);
-            left: 0;
-            opacity: 0;
-            animation: scanLineMove 1.8s cubic-bezier(0.4, 0, 0.2, 1) 2.6s forwards;
-            z-index: 2;
-        }
-
-        @keyframes scanLineMove {
-            0% { left: 0%; opacity: 0; }
-            8% { opacity: 1; }
-            92% { opacity: 1; }
-            100% { left: 100%; opacity: 0; }
-        }
-
-        /* ── EST ── */
-        .h-est {
-            font-size: 7.5px !important;
-            letter-spacing: 0.42em !important;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0);
-            font-weight: 500;
-            animation: eIn .8s ease 5.2s forwards;
-            margin-top: 18px;
-            z-index: 10;
-        }
-        @keyframes eIn {
-            to { color: rgba(255, 255, 255, 0.22); }
-        }
-
-        /* MYNEXT BADGE (HTML) */
-        .mnx-badge {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 9px 28px;
-            border-radius: 100px;
-            background: rgba(5,5,5,0.95);
-            border: 1px solid rgba(201,168,76,.18);
-            opacity: 0;
-            animation: badgeIn .6s cubic-bezier(.2,.8,.2,1) 3.6s forwards;
-            margin-top: 6px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.8);
-            transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
-            min-width: 140px;
-            z-index: 20;
-        }
-        @keyframes badgeIn {
-            from { opacity:0; transform:translateY(8px); }
-            to   { opacity:1; transform:translateY(0); }
-        }
-        .b-char {
-            display: inline-block;
-            font-size: 17px;
-            font-weight: 700;
-            letter-spacing: 0.25em;
-            opacity: 0;
-            transform: translateY(10px) scale(0.8);
-            animation: charIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-            animation-delay: var(--delay);
-            font-family: "Plus Jakarta Sans", sans-serif;
-        }
-        .b-char:last-child {
-            letter-spacing: 0;
-        }
-        @keyframes charIn {
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-        @keyframes charOut {
-            to {
-                opacity: 0;
-                transform: translateY(-8px) scale(0.9);
-            }
-        }
     </style>
 
         
@@ -1911,70 +1902,179 @@
 
     <!-- PAGE TRANSITION OVERLAY -->
     <div id="page-transition-overlay" aria-hidden="true">
-        <div class="wrapper-grid">
-            <div class="cube">
-                <div class="face face-front">M</div>
-                <div class="face face-back"></div>
-                <div class="face face-right"></div>
-                <div class="face face-left"></div>
-                <div class="face face-top"></div>
-                <div class="face face-bottom"></div>
-            </div>
+        <div class="loader-wrapper">
+            <svg
+                aria-label="loader being flipped clockwise and circled by three white curves fading in and out"
+                role="img"
+                viewBox="0 0 56 56"
+                class="loader"
+            >
+                <clipPath id="sand-mound-top">
+                    <path
+                        d="M 14.613 13.087 C 15.814 12.059 19.3 8.039 20.3 6.539 C 21.5 4.789 21.5 2.039 21.5 2.039 L 3 2.039 C 3 2.039 3 4.789 4.2 6.539 C 5.2 8.039 8.686 12.059 9.887 13.087 C 11 14.039 12.25 14.039 12.25 14.039 C 12.25 14.039 13.5 14.039 14.613 13.087 Z"
+                        class="loader__sand-mound-top"
+                    ></path>
+                </clipPath>
+                <clipPath id="sand-mound-bottom">
+                    <path
+                        d="M 14.613 20.452 C 15.814 21.48 19.3 25.5 20.3 27 C 21.5 28.75 21.5 31.5 21.5 31.5 L 3 31.5 C 3 31.5 3 28.75 4.2 27 C 5.2 25.5 8.686 21.48 9.887 20.452 C 11 19.5 12.25 19.5 12.25 19.5 C 12.25 19.5 13.5 19.5 14.613 20.452 Z"
+                        class="loader__sand-mound-bottom"
+                    ></path>
+                </clipPath>
+                <g transform="translate(2,2)">
+                    <g
+                        transform="rotate(-90,26,26)"
+                        stroke-linecap="round"
+                        stroke-dashoffset="153.94"
+                        stroke-dasharray="153.94 153.94"
+                        stroke="hsl(0,0%,100%)"
+                        fill="none"
+                    >
+                        <circle
+                            transform="rotate(0,26,26)"
+                            r="24.5"
+                            cy="26"
+                            cx="26"
+                            stroke-width="2.5"
+                            class="loader__motion-thick"
+                        ></circle>
+                        <circle
+                            transform="rotate(90,26,26)"
+                            r="24.5"
+                            cy="26"
+                            cx="26"
+                            stroke-width="1.75"
+                            class="loader__motion-medium"
+                        ></circle>
+                        <circle
+                            transform="rotate(180,26,26)"
+                            r="24.5"
+                            cy="26"
+                            cx="26"
+                            stroke-width="1"
+                            class="loader__motion-thin"
+                        ></circle>
+                    </g>
+                    <g transform="translate(13.75,9.25)" class="loader__model">
+                        <path
+                            d="M 1.5 2 L 23 2 C 23 2 22.5 8.5 19 12 C 16 15.5 13.5 13.5 13.5 16.75 C 13.5 20 16 18 19 21.5 C 22.5 25 23 31.5 23 31.5 L 1.5 31.5 C 1.5 31.5 2 25 5.5 21.5 C 8.5 18 11 20 11 16.75 C 11 13.5 8.5 15.5 5.5 12 C 2 8.5 1.5 2 1.5 2 Z"
+                            fill="hsl(var(--hue),90%,85%)"
+                        ></path>
 
-            <div class="cube">
-                <div class="face face-front">Y</div>
-                <div class="face face-back"></div>
-                <div class="face face-right"></div>
-                <div class="face face-left"></div>
-                <div class="face face-top"></div>
-                <div class="face face-bottom"></div>
-            </div>
+                        <g stroke-linecap="round" stroke="hsl(35,90%,90%)">
+                            <line
+                                y2="20.75"
+                                x2="12"
+                                y1="15.75"
+                                x1="12"
+                                stroke-dasharray="0.25 33.75"
+                                stroke-width="1"
+                                class="loader__sand-grain-left"
+                            ></line>
+                            <line
+                                y2="21.75"
+                                x2="12.5"
+                                y1="16.75"
+                                x1="12.5"
+                                stroke-dasharray="0.25 33.75"
+                                stroke-width="1"
+                                class="loader__sand-grain-right"
+                            ></line>
+                            <line
+                                y2="31.5"
+                                x2="12.25"
+                                y1="18"
+                                x1="12.25"
+                                stroke-dasharray="0.5 107.5"
+                                stroke-width="1"
+                                class="loader__sand-drop"
+                            ></line>
+                            <line
+                                y2="31.5"
+                                x2="12.25"
+                                y1="14.75"
+                                x1="12.25"
+                                stroke-dasharray="54 54"
+                                stroke-width="1.5"
+                                class="loader__sand-fill"
+                            ></line>
+                            <line
+                                y2="31.5"
+                                x2="12"
+                                y1="16"
+                                x1="12"
+                                stroke-dasharray="1 107"
+                                stroke-width="1"
+                                stroke="hsl(35,90%,83%)"
+                                class="loader__sand-line-left"
+                            ></line>
+                            <line
+                                y2="31.5"
+                                x2="12.5"
+                                y1="16"
+                                x1="12.5"
+                                stroke-dasharray="12 96"
+                                stroke-width="1"
+                                stroke="hsl(35,90%,83%)"
+                                class="loader__sand-line-right"
+                            ></line>
 
-            <div class="cube">
-                <div class="face face-front">N</div>
-                <div class="face face-back"></div>
-                <div class="face face-right"></div>
-                <div class="face face-left"></div>
-                <div class="face face-top"></div>
-                <div class="face face-bottom"></div>
-            </div>
+                            <g stroke-width="0" fill="hsl(35,90%,90%)">
+                                <path
+                                    d="M 12.25 15 L 15.392 13.486 C 21.737 11.168 22.5 2 22.5 2 L 2 2.013 C 2 2.013 2.753 11.046 9.009 13.438 L 12.25 15 Z"
+                                    clip-path="url(#sand-mound-top)"
+                                ></path>
+                                <path
+                                    d="M 12.25 18.5 L 15.392 20.014 C 21.737 22.332 22.5 31.5 22.5 31.5 L 2 31.487 C 2 31.487 2.753 22.454 9.009 20.062 Z"
+                                    clip-path="url(#sand-mound-bottom)"
+                                ></path>
+                            </g>
+                        </g>
 
-            <div class="cube">
-                <div class="face face-front">E</div>
-                <div class="face face-back"></div>
-                <div class="face face-right"></div>
-                <div class="face face-left"></div>
-                <div class="face face-top"></div>
-                <div class="face face-bottom"></div>
-            </div>
+                        <g stroke-width="2" stroke-linecap="round" opacity="0.7" fill="none">
+                            <path
+                                d="M 19.437 3.421 C 19.437 3.421 19.671 6.454 17.914 8.846 C 16.157 11.238 14.5 11.5 14.5 11.5"
+                                stroke="hsl(0,0%,100%)"
+                                class="loader__glare-top"
+                            ></path>
+                            <path
+                                transform="rotate(180,12.25,16.75)"
+                                d="M 19.437 3.421 C 19.437 3.421 19.671 6.454 17.914 8.846 C 16.157 11.238 14.5 11.5 14.5 11.5"
+                                stroke="hsla(0,0%,100%,0)"
+                                class="loader__glare-bottom"
+                            ></path>
+                        </g>
 
-            <div class="cube">
-                <div class="face face-front">X</div>
-                <div class="face face-back"></div>
-                <div class="face face-right"></div>
-                <div class="face face-left"></div>
-                <div class="face face-top"></div>
-                <div class="face face-bottom"></div>
-            </div>
-
-            <div class="cube">
-                <div class="face face-front">T</div>
-                <div class="face face-back"></div>
-                <div class="face face-right"></div>
-                <div class="face face-left"></div>
-                <div class="face face-top"></div>
-                <div class="face face-bottom"></div>
-            </div>
-
-            <div class="cube">
-                <div class="face face-front">.</div>
-                <div class="face face-back"></div>
-                <div class="face face-right"></div>
-                <div class="face face-left"></div>
-                <div class="face face-top"></div>
-                <div class="face face-bottom"></div>
-            </div>
+                        <rect height="2" width="24.5" fill="hsl(var(--hue),90%,50%)"></rect>
+                        <rect
+                            height="1"
+                            width="19.5"
+                            y="0.5"
+                            x="2.5"
+                            ry="0.5"
+                            rx="0.5"
+                            fill="hsl(var(--hue),90%,57.5%)"
+                        ></rect>
+                        <rect
+                            height="2"
+                            width="24.5"
+                            y="31.5"
+                            fill="hsl(var(--hue),90%,50%)"
+                        ></rect>
+                        <rect
+                            height="1"
+                            width="19.5"
+                            y="32"
+                            x="2.5"
+                            ry="0.5"
+                            rx="0.5"
+                            fill="hsl(var(--hue),90%,57.5%)"
+                        ></rect>
+                    </g>
+                </g>
+            </svg>
         </div>
+        <p class="overlay-brand">MYNEXT · Arquitectura Digital</p>
     </div>
 
     <!-- 0. NAVIGATION -->
@@ -2090,7 +2190,7 @@
 
                 <!-- Logo / Tarjeta de Presentación Premium -->
                 <div
-                    class="frame relative p-6 sm:p-10 md:p-16 rounded-[2rem] sm:rounded-[2.5rem] bg-[#050505] border border-white/[0.05] shadow-[0_0_60px_rgba(0,242,255,0.15)] flex flex-col items-center justify-center overflow-hidden group">
+                    class="relative p-6 sm:p-10 md:p-16 rounded-[2rem] sm:rounded-[2.5rem] bg-[#050505] border border-white/[0.05] shadow-[0_0_60px_rgba(0,242,255,0.15)] flex flex-col items-center justify-center overflow-hidden group animate-float-premium">
 
                     <!-- Architectural Corners -->
                     <div
@@ -2106,6 +2206,8 @@
                         class="absolute bottom-6 right-6 w-3 h-3 border-b border-r border-electric-cyan/40 animate-corners">
                     </div>
 
+                    <!-- Metadata Labels (Movido debajo del logo) -->
+
                     <!-- Light Sweep Effect -->
                     <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
                         <div
@@ -2118,17 +2220,16 @@
                         <div class="w-full h-full absolute top-0 left-0 border-t border-electric-cyan/20 animate-scanner"></div>
                     </div>
 
-                    <!-- Logo Central Original Transparent con Escaneo Láser -->
-                    <div class="logo-container">
-                        <div class="scan-line"></div>
-                        <img class="mnx-svg" src="./assets/img/logos/logo-hero-v2.svg?v=3" alt="MYNEXT Logo" />
-                    </div>
+                    <!-- Logo Central Original Completo -->
+                    <img alt="MYNEXT Arquitectura Digital"
+                        class="w-52 h-52 sm:w-72 sm:h-72 md:w-[380px] md:h-[380px] object-contain relative z-10 transition-transform duration-1000 group-hover:scale-105 animate-logo-reveal"
+                        src="./assets/img/logos/logo-hero-v2.svg"
+                        fetchpriority="high" width="380" height="380">
 
-                    <!-- MYNEXT HTML/CSS BADGE — with dynamic multilingual typing animation -->
-                    <div class="mnx-badge" id="dyn-badge"></div>
-
-                    <!-- EST 2026 Centrado -->
-                    <div class="h-est">Est. 2026</div>
+                    <!-- EST 2026 Centrado (con animación premium de aparición y brillo) -->
+                    <div
+                        class="-mt-8 md:-mt-12 text-[9px] md:text-[11px] tracking-[0.6em] uppercase font-headline relative z-20 text-center ml-2 animate-est-premium">
+                        EST. 2026</div>
                 </div>
             </div>
 
@@ -2613,63 +2714,6 @@
                                     "Prototipo de tienda online para una marca de gorras premium y streetwear. Diseño en blanco y negro con mucha actitud, pensado para que el producto sea el protagonista y la compra sea sencilla e intuitiva."
                                 </p>
                                 <span class="text-sm font-headline text-electric-cyan/60 uppercase tracking-widest">— Tienda Online / E-Commerce</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Project F (Mezquita Arrahma) -->
-                    <article class="reveal flex flex-col gap-8 group md:col-span-2" style="transition-delay: 200ms;">
-                        <div class="relative aspect-[16/10] sm:aspect-[21/9] rounded-2xl overflow-hidden glass-panel border-white/5 transition-all duration-500 group-hover:border-electric-cyan/20 group-hover:shadow-[0_0_30px_rgba(0,242,255,0.1)] flex flex-col sm:flex-row">
-                            
-                            <!-- Mac Mockup (Left Side) -->
-                            <div class="relative w-full sm:w-2/3 h-full border-b sm:border-b-0 sm:border-r border-white/5">
-                                <!-- Browser UI Mockup -->
-                                <div class="absolute top-0 left-0 right-0 h-10 bg-void-black/80 backdrop-blur-md flex items-center px-4 z-30 border-b border-white/5 select-none">
-                                    <div class="flex items-center gap-1.5 w-16"> 
-                                        <div class="w-2 h-2 rounded-full bg-[#FF5F56] shadow-sm"></div>
-                                        <div class="w-2 h-2 rounded-full bg-[#FFBD2E] shadow-sm"></div>
-                                        <div class="w-2 h-2 rounded-full bg-[#27C93F] shadow-sm"></div>
-                                    </div>
-                                    <div class="flex-grow flex items-center justify-between pl-2 md:pl-4">
-                                        <!-- Search Bar -->
-                                        <div class="flex-grow max-w-[400px] mx-auto relative border border-white/10 rounded-lg px-3 py-1 h-6 flex items-center justify-center text-[10px] text-slate-400 bg-white/5 font-sans select-all cursor-text tracking-wide shadow-inner">
-                                            <span>mezquita-arrahma.pages.dev</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="absolute top-10 left-0 right-0 bottom-0 bg-[#050505] overflow-hidden">
-                                    <img src="./assets/img/portfolio/mezquita-mac.png" alt="Mezquita Arrahma Desktop" loading="lazy" class="w-full h-full object-cover object-top transition-transform duration-1000 group-hover:scale-[1.03]">
-                                </div>
-                            </div>
-
-                            <!-- Mobile Mockup (Right Side) -->
-                            <div class="relative w-full sm:w-1/3 h-full bg-[#050505] flex items-center justify-center p-6 sm:p-8">
-                                <div class="relative w-full max-w-[200px] aspect-[9/19] rounded-[2rem] border-[6px] border-slate-800 bg-black overflow-hidden shadow-2xl transition-transform duration-1000 group-hover:scale-[1.05]">
-                                    <!-- Notch -->
-                                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[40%] h-[18px] bg-slate-800 rounded-b-xl z-30"></div>
-                                    <!-- Mobile Screen -->
-                                    <img src="./assets/img/portfolio/mezquita-mobile.png" alt="Mezquita Arrahma Mobile" loading="lazy" class="w-full h-full object-cover object-top">
-                                </div>
-                            </div>
-
-                            <!-- Hover Overlay -->
-                            <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500 z-40 pointer-events-none"></div>
-                            <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center z-50 backdrop-blur-sm">
-                                <a href="https://mezquita-arrahma.pages.dev" target="_blank" rel="noopener noreferrer"
-                                    class="px-8 py-4 bg-white text-black font-headline font-bold text-[10px] tracking-[0.3em] uppercase rounded-full hover:bg-electric-cyan transition-all duration-500 shadow-xl pointer-events-auto">
-                                    Ver Web →
-                                </a>
-                            </div>
-                        </div>
-                        <div class="space-y-4 px-4">
-                            <h3 class="text-2xl md:text-3xl font-bold text-gradient-cyan font-headline uppercase tracking-tight">
-                                Mezquita Arrahma
-                            </h3>
-                            <div class="relative pl-6 border-l-2 border-electric-cyan/30">
-                                <p class="text-lg text-white/70 italic font-body leading-relaxed mb-2">
-                                    "Diseño web y desarrollo integral creado como donación solidaria para la Mezquita Arrahma de Palma de Mallorca. Un espacio digital respetuoso, limpio y accesible, con horarios de rezos e información esencial para la comunidad."
-                                </p>
-                                <span class="text-sm font-headline text-electric-cyan/60 uppercase tracking-widest">— Donación Benéfica de MYNEXT</span>
                             </div>
                         </div>
                     </article>
@@ -3330,156 +3374,6 @@
             };
             particlesJS("particles-js-inicio", config);
             particlesJS("particles-js-nosotros", config);
-
-            /* PARALLAX HOVER (FRAME FIXED, LOGO & BADGE MOBILE/WEB INTERACTION) */
-            var frame = document.querySelector('.frame');
-            var logoContainer = document.querySelector('.logo-container');
-            var mnxBadge = document.querySelector('.mnx-badge');
-            var hg = document.getElementById('hg');
-
-            var targetX = 0, targetY = 0;
-            var currentX = 0, currentY = 0;
-            var hgTargetX = 0, hgTargetY = 0;
-            var hgCurrentX = 0, hgCurrentY = 0;
-            var rafActive = false;
-
-            var updateParallax = function() {
-                if (!logoContainer || !mnxBadge) {
-                    rafActive = false;
-                    return;
-                }
-
-                // Smooth linear interpolation (lerp) for a premium liquid feel
-                currentX += (targetX - currentX) * 0.085;
-                currentY += (targetY - currentY) * 0.085;
-                
-                logoContainer.style.transform = "translate3d(" + currentX + "px, " + currentY + "px, 0)";
-                
-                // Badge shifts slightly less (approx 6/14 or 43%)
-                var bx = currentX * 0.43;
-                var by = currentY * 0.43;
-                mnxBadge.style.transform = "translate3d(" + bx + "px, " + by + "px, 0)";
-
-                if (hg) {
-                    hgCurrentX += (hgTargetX - hgCurrentX) * 0.085;
-                    hgCurrentY += (hgTargetY - hgCurrentY) * 0.085;
-                    hg.style.transform = "translate3d(" + hgCurrentX + "px, " + hgCurrentY + "px, 0)";
-                }
-
-                // Continue loop if we haven't reached targets closely
-                var deltaLogo = Math.abs(targetX - currentX) + Math.abs(targetY - currentY);
-                var deltaHg = hg ? (Math.abs(hgTargetX - hgCurrentX) + Math.abs(hgTargetY - hgCurrentY)) : 0;
-
-                if (deltaLogo < 0.01 && deltaHg < 0.01) {
-                    // Snap to final values and stop loop to save CPU cycles
-                    logoContainer.style.transform = "translate3d(" + targetX + "px, " + targetY + "px, 0)";
-                    mnxBadge.style.transform = "translate3d(" + (targetX * 0.43) + "px, " + (targetY * 0.43) + "px, 0)";
-                    if (hg) hg.style.transform = "translate3d(" + hgTargetX + "px, " + hgTargetY + "px, 0)";
-                    rafActive = false;
-                } else {
-                    requestAnimationFrame(updateParallax);
-                }
-            };
-
-            var handleMove = function(clientX, clientY) {
-                if (!frame) return;
-                var rect = frame.getBoundingClientRect();
-                var x = clientX - rect.left - rect.width/2;
-                var y = clientY - rect.top - rect.height/2;
-
-                targetX = (x / (rect.width/2)) * 14; // Max 14px
-                targetY = (y / (rect.height/2)) * 14;
-
-                if (!rafActive) {
-                    rafActive = true;
-                    requestAnimationFrame(updateParallax);
-                }
-            };
-
-            var handleReset = function() {
-                targetX = 0;
-                targetY = 0;
-                hgTargetX = 0;
-                hgTargetY = 0;
-                if (!rafActive) {
-                    rafActive = true;
-                    requestAnimationFrame(updateParallax);
-                }
-            };
-
-            // Mouse events (Desktop)
-            document.addEventListener('mousemove', function(e) {
-                hgTargetX = (e.clientX / window.innerWidth  - .5) * 34;
-                hgTargetY = (e.clientY / window.innerHeight - .5) * 34;
-                handleMove(e.clientX, e.clientY);
-            });
-
-            document.addEventListener('mouseleave', function() {
-                handleReset();
-            });
-
-            // Touch events (Mobile finger drag)
-            document.addEventListener('touchmove', function(e) {
-                if (e.touches.length > 0) {
-                    handleMove(e.touches[0].clientX, e.touches[0].clientY);
-                }
-            }, { passive: true });
-
-            document.addEventListener('touchend', function() {
-                handleReset();
-            });
-
-            /* MULTILINGUAL TYPING ANIMATION CYCLE */
-            var words = ["WELCOME", "BIENVENIDO", "WILLKOMMEN", "MYNEXT"];
-            var badgeElement = document.getElementById("dyn-badge");
-            var wordIdx = 0;
-
-            function typeWord(word, isLast, delayOffset) {
-                if (!badgeElement) return;
-                badgeElement.innerHTML = "";
-                
-                // Create span for each character
-                for (var i = 0; i < word.length; i++) {
-                    var span = document.createElement("span");
-                    span.className = "b-char";
-                    span.textContent = word[i];
-                    // Alternating gold and white colors
-                    span.style.color = (i % 2 === 0) ? "var(--gold)" : "#fff";
-                    
-                    // If there is an initial delay offset (e.g. 3.8s for the first word), use it.
-                    // Otherwise, start immediately with just the staggered letter delays.
-                    if (delayOffset > 0) {
-                        span.style.setProperty("--delay", "calc(" + delayOffset + "s + " + (i * 0.08) + "s)");
-                    } else {
-                        span.style.setProperty("--delay", (i * 0.08) + "s");
-                    }
-                    
-                    badgeElement.appendChild(span);
-                }
-
-                if (!isLast) {
-                    // Calculate how long to wait before starting the fade-out.
-                    // For the first word, we must wait for the initial delayOffset (3.8s) + the display duration (1.5s).
-                    var waitTime = (delayOffset > 0 ? (delayOffset * 1000) : 0) + 1500;
-                    
-                    setTimeout(function() {
-                        var chars = badgeElement.querySelectorAll(".b-char");
-                        chars.forEach(function(c) {
-                            c.style.animation = "charOut 0.4s ease forwards";
-                        });
-                        
-                        // Load the next word after the fade-out completes
-                        setTimeout(function() {
-                            wordIdx++;
-                            typeWord(words[wordIdx], wordIdx === words.length - 1, 0); // subsequent words have 0 delay offset
-                        }, 450);
-                        
-                    }, waitTime);
-                }
-            }
-
-            // Start the typing cycle immediately (the 3.8s delay offset is managed internally for the first word)
-            typeWord(words[0], false, 3.8);
         });
     </script>
     <script type="module" src="/src/main.ts"></script>

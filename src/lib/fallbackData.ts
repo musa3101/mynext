@@ -95,6 +95,20 @@ export const fallbackProjects = [
     featured: false,
     active: true,
     sort_order: 5
+  },
+  {
+    id: 6,
+    title: 'Mezquita Arrahma',
+    description: JSON.stringify({
+      es: 'Arquitectura Digital solidaria para la Mezquita Arrahma de Palma de Mallorca.',
+      en: 'Solidary Digital Architecture for Arrahma Mosque in Palma de Mallorca.'
+    }),
+    image_url: './assets/img/portfolio/porfolio6.png',
+    project_url: 'https://mezquita-arrahma.pages.dev',
+    technologies: 'HTML, CSS, JS, Tailwind',
+    featured: false,
+    active: true,
+    sort_order: 6
   }
 ];
 
@@ -151,6 +165,17 @@ export const fallbackTestimonials = [
     testimonial: JSON.stringify({
       es: 'Catálogo virtual interactivo para marca exclusiva de gorras. Excelente navegación y animaciones muy fluidas que enganchan al cliente en la compra.',
       en: 'Luxury caps and premium streetwear e-commerce. A high-contrast minimalist design and interactive animations focused on conversion and brand exclusivity.'
+    }),
+    active: true
+  },
+  {
+    id: 6,
+    client_name: '',
+    role: JSON.stringify({ es: 'Donación · Arquitectura Digital Solidaria', en: 'Donation · Solidary Digital Architecture' }),
+    company: 'Mezquita Arrahma',
+    testimonial: JSON.stringify({
+      es: 'Un proyecto especial y solidario. Donamos nuestra Arquitectura Digital a la Mezquita Arrahma de Palma para modernizar su presencia online. Diseñamos una web con horarios de rezo en tiempo real, consulta al Imán y sistema de donaciones, todo con una estética que respeta la identidad y tradición de la comunidad.',
+      en: 'A special and solidary project. We donated our Digital Architecture to the Arrahma Mosque in Palma to modernize their online presence. We designed a website with real-time prayer schedules, Imam consultation and donation system, all with an aesthetic that respects the identity and tradition of the community.'
     }),
     active: true
   }
