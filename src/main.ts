@@ -208,10 +208,10 @@ async function initMain() {
               </div>
             </div>
           </div>
-          <div class="absolute inset-0 bg-[#050505] flex items-center justify-center overflow-hidden pt-12 md:pt-14 pb-6 px-6 md:px-10">
+          <div class="absolute top-10 left-0 right-0 bottom-0 bg-[#050505] overflow-hidden">
             <!-- Actual Project Image -->
-            <img src="${proj.image_url}" alt="Preview ${proj.title}" loading="lazy" width="800" height="450"
-              class="w-full h-full object-contain transition-transform duration-1000 group-hover:scale-105">
+            <img src="${proj.image_url}" alt="Preview ${proj.title}" loading="lazy"
+              class="w-full h-full object-cover object-top transition-transform duration-1000 group-hover:scale-[1.03]">
             <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500"></div>
             <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center z-20 backdrop-blur-sm">
               <a href="${proj.project_url}" target="_blank" rel="noopener noreferrer"
