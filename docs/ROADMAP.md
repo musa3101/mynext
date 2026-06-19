@@ -1,17 +1,19 @@
 # Roadmap del Proyecto
 
 ## Tareas completadas
-- Optimización y desactivación del parallax del logo del Hero en resoluciones móviles.
-- Consistencia del menú hamburguesa móvil para la versión en inglés (`index-en.html`).
-- Captura interactiva de nombre y negocio en el flujo de WhatsApp ("Solicitar Plan").
-- Adición de un botón de cerrar ("X") visual en el menú móvil para mejorar la navegación.
-- Migración de la terminología de "Nosotros" a "Sobre Mí" ("About Me") para enfocar la marca a freelance/personal brand.
-- Diseño minimalista, limpio y premium del selector de idioma (ES / EN) en formato texto con tipografía de alta fidelidad.
-- Creación de un medallón circular premium tipo Cyber-Glass con máscara de recorte y borde degradado cian brillante para el logo en la página de planes, ocultando las esquinas del archivo original.
-- Integración y configuración de la base de datos (Supabase).
+- Desactivación del efecto de movimiento (parallax) del logo en dispositivos móviles.
+- Consistencia del menú móvil y centrado de textos en las versiones ES e EN.
+- Botón de cerrar ("X") visual en la esquina superior izquierda del menú móvil.
+- Rediseño y alineación del selector de idioma (ES / EN) en cabecera y planes.
+- Cambios de texto de "Nosotros" a "Sobre Mí" para enfocar la web a marca personal.
+- Flujo interactivo con prompts de nombre y negocio en el botón de WhatsApp.
+- Enmarcado circular estilo cyber-glass para el logo de la cabecera en los planes.
+- Configuración de la base de datos (Supabase) para almacenar planes y configuraciones.
+- Compilación del bundle y subida de todos los archivos a producción mediante Git.
 
 ## Tareas en progreso
-- Preparación del entorno de producción y compilación de dist.
+- Propagación del despliegue automático de Cloudflare Pages.
 
 ## Próximas mejoras prioritarias
-- Ejecutar el despliegue final (deploy) al servidor o plataforma de hosting en producción.
+- Monitoreo del sitio en vivo y pruebas de rendimiento móvil (Core Web Vitals).
+- Integración de analíticas de visitas y conversiones una vez desplegado.

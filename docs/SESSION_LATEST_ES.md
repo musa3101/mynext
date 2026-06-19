@@ -1,20 +1,27 @@
 # Resumen de Sesión
 
 ## Qué se ha hecho hoy
-- Desactivación definitiva del efecto de movimiento del logo ('follow-cursor' / parallax) en dispositivos móviles (pantallas de ancho <= 768px) en `index.html` e `index-en.html`.
-- Corrección de la posición del menú desplegable móvil en la versión en inglés, moviendo `#mobile-dropdown` fuera de la etiqueta `<header>` para solucionar problemas de contexto de apilamiento (z-index).
-- Implementación de la solicitud de Nombre y Nombre del Negocio mediante `window.prompt` antes de redirigir a WhatsApp en el botón "Solicitar Plan" de la sección de planes en `src/planes.ts`.
-- Adición de un botón de cerrar (**"X"**) arriba a la izquierda del menú móvil en español e inglés para cerrar la navegación cómodamente.
-- Cambio estratégico del enlace **"NOSOTROS"** a **"SOBRE MÍ"** (y **"ABOUT ME"** en la versión inglesa) en los menús móviles y de escritorio, adaptando la web a una marca personal/freelancer.
-- Rediseño estilizado y premium del selector de idioma **ES / EN** en formato texto (sin botones gruesos). Se ha aplicado una tipografía corporativa de alta fidelidad, mayor espaciado (`tracking`), barra diagonal limpia y sutiles efectos de escala y color interactivos.
-- Rediseño del contenedor del logo de cabecera en las páginas de planes (`planes/index.html`, etc.), creando un **medallón premium circular de tipo "Cyber-Glass"** con borde degradado cian/blanco de alta fidelidad, sombra de resplandor interior y exterior, y máscara perfecta que oculta el formato cuadrado de la imagen del logo, logrando consistencia absoluta con el header de la página principal.
+- Desactivación del efecto parallax (movimiento al pasar el cursor) en el logo en móviles.
+- Rediseño y reposicionamiento del menú móvil en la versión en inglés.
+- Adición de un botón de cerrar ("X") en la esquina superior izquierda del menú móvil.
+- Implementación de prompts interactivos (petición de nombre y negocio) en el botón de WhatsApp "Solicitar Plan".
+- Reemplazo de "Nosotros" por "Sobre Mí" en toda la web para adaptarlo a una marca personal.
+- Rediseño del selector de idioma (ES / EN) a un formato de texto más elegante y minimalista.
+- Rediseño del logo en la página de planes dentro de un marco circular cyber-glass premium.
+- Subida de todos los cambios al repositorio de Git para su despliegue en producción.
 
 ## Archivos modificados
-- [index.html](file:///Users/musa/Downloads/proyectos%20recientes/RECUPERAR%20MYNEXT WEB✔️/mynext-V3✔️/index.html)
-- [index-en.html](file:///Users/musa/Downloads/proyectos%20recientes/RECUPERAR%20MYNEXT WEB✔️/mynext-V3✔️/index-en.html)
-- [planes/index.html](file:///Users/musa/Downloads/proyectos%20recientes/RECUPERAR%20MYNEXT WEB✔️/mynext-V3✔️/planes/index.html)
-- [planes/index-en.html](file:///Users/musa/Downloads/proyectos%20recientes/RECUPERAR%20MYNEXT WEB✔️/mynext-V3✔️/planes/index-en.html)
-- [planes/index-en-build.html](file:///Users/musa/Downloads/proyectos%20recientes/RECUPERAR%20MYNEXT WEB✔️/mynext-V3✔️/planes/index-en-build.html)
+- `index.html` e `index-en.html` (menú móvil, "Sobre Mí", selector de idioma, parallax móvil).
+- `planes/index.html`, `planes/index-en.html` y `planes/index-en-build.html` (medallón del logo, selector de idioma).
+- `src/planes.ts` (lógica del prompt de WhatsApp y enlace de redirección).
+- `docs/SESSION_LATEST_ES.md` y `docs/ROADMAP.md` (documentación).
+
+## Problemas solucionados
+- Movimientos erráticos del logo en dispositivos táctiles.
+- Desalineación y corte del menú móvil en inglés.
+- Redirección directa a WhatsApp sin recopilar el nombre y negocio del interesado.
+- Esquinas cuadradas del logo visibles en la página de planes.
+- Bloqueos de permisos de archivos de macOS durante el proceso de compilación (`EPERM`).
 
 ## Qué queda pendiente
-- Despliegue final y pruebas de producción.
+- Validar el correcto funcionamiento de las redirecciones una vez que el despliegue automático de Cloudflare termine de propagarse.
