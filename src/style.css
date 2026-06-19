@@ -1589,3 +1589,201 @@ body.mobile-menu-open {
         @apply text-[10px] sm:text-xs font-bold uppercase tracking-[0.25em];
     }
 }
+
+/* PLANS TRANSITION OVERLAY (Love, Death & Robots) */
+.plans-loader-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: #000000 !important;
+  z-index: 99999;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.plans-loader-overlay.active {
+  display: flex !important;
+  opacity: 1;
+}
+
+.love-death-robots-loader {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  height: 55px;
+  width: 200px;
+  overflow: hidden;
+}
+
+.container-ldr {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  position: relative;
+  align-items: center;
+}
+
+.carousel-ldr {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  position: absolute;
+  width: 100%;
+  transform-origin: center;
+}
+
+.love-death-robots-loader .container-ldr:nth-child(3) {
+  justify-content: flex-start;
+  animation: scroll-up-ldr 4s infinite ease-in-out;
+}
+
+.love-death-robots-loader .container-ldr:nth-child(2) {
+  justify-content: flex-end;
+  animation: scroll-down-ldr 4s infinite ease-in-out;
+}
+
+.love-death-robots-loader .container-ldr:nth-child(1) {
+  justify-content: flex-end;
+  animation: scroll-down-ldr 3s infinite ease-in-out;
+}
+
+.love {
+  background: red;
+  display: flex;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  left: 8px;
+  margin: 0.8rem 4px;
+  transform: rotate(45deg);
+}
+
+.love::before, .love::after {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: red;
+}
+
+.love::before {
+  left: -16px;
+}
+
+.love::after {
+  top: -16px;
+}
+
+.death {
+  display: flex;
+  width: 100%;
+  height: 55px;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  animation: rotation-ldr 3s infinite ease-in-out;
+}
+
+.death:after {
+  content: '';
+  height: 63px;
+  position: absolute;
+  border-left: 12px solid red;
+  transform: rotate(45deg);
+  border-radius: 8px;
+  top: -4px;
+}
+
+.death:before {
+  content: '';
+  height: 60px;
+  position: absolute;
+  border-left: 12px solid red;
+  transform: rotate(-45deg);
+}
+
+.robots {
+  display: flex;
+  width: 100%;
+  height: 55px;
+  justify-content: space-between;
+  background-color: #ff0000;
+  border-radius: 0 8px 8px;
+  padding: 8px;
+  position: relative;
+}
+
+.robots::after {
+  content: '';
+  width: 12px;
+  height: 12px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  animation: blink-ldr 0.5s 2 forwards;
+}
+
+.robots::before {
+  content: '';
+  width: 12px;
+  height: 12px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  animation: blink-ldr 0.5s 2 forwards;
+}
+
+@keyframes scroll-up-ldr {
+  0% {
+    transform: translateY(0);
+    filter: blur(0);
+  }
+  30% {
+    transform: translateY(-150%);
+    filter: blur(10px);
+  }
+  60% {
+    transform: translateY(0);
+    filter: blur(0px);
+  }
+}
+
+@keyframes scroll-down-ldr {
+  0% {
+    transform: translateY(0);
+    filter: blur(0);
+  }
+  30% {
+    transform: translateY(150%);
+    filter: blur(10px);
+  }
+  60% {
+    transform: translateY(0);
+    filter: blur(0px);
+  }
+}
+
+@keyframes rotation-ldr {
+  20%, 100% {
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes blink-ldr {
+  0% {
+    height: 0;
+  }
+  20% {
+    height: 12px;
+  }
+  100% {
+    height: 12px;
+  }
+}
+

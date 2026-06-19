@@ -646,6 +646,11 @@ async function initMain() {
     setTimeout(hideOverlay, 3500);
 
     window.addEventListener('pageshow', (e) => {
+      if (plansTransitionOverlay) {
+        plansTransitionOverlay.classList.remove('active');
+        plansTransitionOverlay.setAttribute('aria-hidden', 'true');
+      }
+      
       if (e.persisted) {
         // If restored from back-forward cache, show it and hide after 3.5s
         transitionOverlay.classList.add('active');
@@ -655,18 +660,26 @@ async function initMain() {
     });
 
     const plansBtns = document.querySelectorAll('a.animated-button[href*="planes"]');
+    const plansTransitionOverlay = document.getElementById('plans-transition-overlay');
+    
     plansBtns.forEach(btn => {
       btn.addEventListener('click', function(this: HTMLElement, e) {
         e.preventDefault();
         const destination = this.getAttribute('href');
         if (!destination) return;
 
-        transitionOverlay.classList.add('active');
-        transitionOverlay.setAttribute('aria-hidden', 'false');
+        if (plansTransitionOverlay) {
+          plansTransitionOverlay.classList.add('active');
+          plansTransitionOverlay.setAttribute('aria-hidden', 'false');
+        } else {
+          transitionOverlay.classList.add('active');
+          transitionOverlay.setAttribute('aria-hidden', 'false');
+        }
 
+        // Delay navigation for about 4 seconds to let the Love, Death & Robots animation play out
         setTimeout(() => {
           window.location.href = destination;
-        }, 800);
+        }, 4000);
       });
     });
   }
