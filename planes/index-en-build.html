@@ -108,26 +108,50 @@
             cursor: pointer;
         }
 
-        .logo-interactive:hover {
-            animation: none;
-            transform: scale(1.08) translateY(-6px) rotate(-1deg);
-            filter: drop-shadow(0 0 50px rgba(6, 182, 212, 0.95)) brightness(1.25);
-        }
-
-        /* Anillo Cyber-Glass para enmarcar el logo */
+        /* Anillo Cyber-Glass Premium para enmarcar el logo */
         .logo-ring {
             position: relative;
-            padding: 1.5rem;
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(15, 23, 42, 0.5) 0%, rgba(0, 0, 0, 0.8) 100%);
-            border: 1px solid rgba(6, 182, 212, 0.15);
-            box-shadow: inset 0 0 25px rgba(6, 182, 212, 0.1), 0 0 40px rgba(6, 182, 212, 0.05);
+            padding: 2.5px;
+            background: linear-gradient(135deg, rgba(0, 242, 255, 0.6) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(0, 242, 255, 0.6) 100%);
+            box-shadow: 0 0 25px rgba(0, 242, 255, 0.2), inset 0 0 15px rgba(255, 255, 255, 0.1);
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            cursor: pointer;
         }
         
         .logo-ring:hover {
-            border-color: rgba(6, 182, 212, 0.5);
-            box-shadow: inset 0 0 35px rgba(6, 182, 212, 0.2), 0 0 60px rgba(6, 182, 212, 0.25);
+            transform: scale(1.05) translateY(-4px);
+            background: linear-gradient(135deg, rgba(0, 242, 255, 0.9) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(0, 242, 255, 0.9) 100%);
+            box-shadow: 0 0 45px rgba(0, 242, 255, 0.45), inset 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .logo-ring-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #050505;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .logo-ring-inner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.25);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .logo-ring:hover .logo-ring-inner img {
+            transform: scale(1.35);
         }
 
         /* ==================== DISEÑO GENERAL ==================== */
@@ -889,10 +913,10 @@
         
         <!-- Selector de Idioma -->
         <!-- LANGUAGE_SELECTOR_START -->
-        <div class="absolute top-4 right-4 sm:top-6 sm:right-6 md:right-12 z-50 flex items-center gap-3 bg-[#050505]/60 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full shadow-lg pointer-events-auto no-print">
-            <a href="index.html" aria-label="Cambiar idioma a español" class="text-xs font-bold text-white/50 hover:text-white tracking-widest hover:scale-110 transition-transform">ES</a>
-            <span class="w-[1px] h-3 bg-white/20"></span>
-            <a href="index-en.html" aria-label="Switch language to English" class="text-xs font-bold text-electric-cyan tracking-widest hover:scale-110 transition-all">EN</a>
+        <div class="absolute top-4 right-4 sm:top-6 sm:right-6 md:right-12 z-50 flex items-center gap-2.5 px-3 py-2 bg-[#050505]/40 backdrop-blur-md border border-white/10 rounded-full shadow-lg pointer-events-auto no-print font-headline text-[10px] tracking-[0.2em] font-extrabold uppercase select-none">
+            <a href="index.html" aria-label="Cambiar idioma a español" class="text-white/40 hover:text-white transition-all duration-300 hover:scale-110">ES</a>
+            <span class="text-white/20 font-light">/</span>
+            <a href="index-en.html" aria-label="Switch language to English" class="text-electric-cyan hover:opacity-100 transition-all duration-300 hover:scale-110">EN</a>
         </div>
         <!-- LANGUAGE_SELECTOR_END -->
         
@@ -904,7 +928,9 @@
                 
                 <!-- Anillo Cyber-Glass e Imagen del Logo -->
                 <div class="logo-ring">
-                    <img onclick="sessionStorage.removeItem('from-planes'); window.location.href='../index-en.html'" src="../assets/img/logos/logo-hero-v2-white.svg" alt="MYNEXT Logo" class="w-36 md:w-48 h-auto logo-interactive max-w-full" fetchpriority="high" width="192" height="192">
+                    <div class="logo-ring-inner">
+                        <img onclick="sessionStorage.removeItem('from-planes'); window.location.href='../index-en.html'" src="../assets/img/logos/logo-hero-v2-white.svg" alt="MYNEXT Logo" fetchpriority="high" width="192" height="192">
+                    </div>
                 </div>
             </div>
             

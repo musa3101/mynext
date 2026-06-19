@@ -1,33 +1,20 @@
-# Resumen de la Sesión: 19 de Junio de 2026
+# Resumen de Sesión
 
-## 1. Qué se ha hecho hoy
-- **Auditoría Pre-lanzamiento (QA)**: Evaluada la accesibilidad, SEO y rendimiento del sitio antes de su despliegue final.
-- **Optimización Mobile-First**: Corrección del comportamiento de las tarjetas de "Gestión Técnica" en dispositivos móviles y táctiles.
-- **Mejora de Transición a Planes**: Integración de una animación de carga estilo *Love, Death & Robots* (Uiverse) con fondo negro cuando el usuario navega a la sección de planes.
-- **Automatización del Despliegue**: Simplificación del script de compilación para solucionar fallos en los builds automáticos de Cloudflare Pages.
+## Qué se ha hecho hoy
+- Desactivación definitiva del efecto de movimiento del logo ('follow-cursor' / parallax) en dispositivos móviles (pantallas de ancho <= 768px) en `index.html` e `index-en.html`.
+- Corrección de la posición del menú desplegable móvil en la versión en inglés, moviendo `#mobile-dropdown` fuera de la etiqueta `<header>` para solucionar problemas de contexto de apilamiento (z-index).
+- Implementación de la solicitud de Nombre y Nombre del Negocio mediante `window.prompt` antes de redirigir a WhatsApp en el botón "Solicitar Plan" de la sección de planes en `src/planes.ts`.
+- Adición de un botón de cerrar (**"X"**) arriba a la izquierda del menú móvil en español e inglés para cerrar la navegación cómodamente.
+- Cambio estratégico del enlace **"NOSOTROS"** a **"SOBRE MÍ"** (y **"ABOUT ME"** en la versión inglesa) en los menús móviles y de escritorio, adaptando la web a una marca personal/freelancer.
+- Rediseño estilizado y premium del selector de idioma **ES / EN** en formato texto (sin botones gruesos). Se ha aplicado una tipografía corporativa de alta fidelidad, mayor espaciado (`tracking`), barra diagonal limpia y sutiles efectos de escala y color interactivos.
+- Rediseño del contenedor del logo de cabecera en las páginas de planes (`planes/index.html`, etc.), creando un **medallón premium circular de tipo "Cyber-Glass"** con borde degradado cian/blanco de alta fidelidad, sombra de resplandor interior y exterior, y máscara perfecta que oculta el formato cuadrado de la imagen del logo, logrando consistencia absoluta con el header de la página principal.
 
-## 2. Archivos Modificados
-- `vite.config.ts`: Modificados los puntos de entrada para añadir la compilación oficial de `planes/index-en.html`.
-- `package.json`: Simplificado el script `"build"` eliminando comandos redundantes.
-- `src/style.css`: 
-  - Añadida la clase `.sr-only` para accesibilidad.
-  - Implementada la visualización adaptativa para las tarjetas `.tech-card` en móviles (desactivado el skew y activada la opacidad por defecto).
-  - Añadidos los estilos y animaciones del cargador *Love, Death & Robots*.
-- `index.html` e `index-en.html`:
-  - Añadido el título `<h1>` invisible para mejorar el SEO.
-  - Corregida la jerarquía de títulos de `<h1>` a `<h4>` en las tarjetas técnicas.
-  - Insertado el contenedor HTML del cargador *Love, Death & Robots* (`#plans-transition-overlay`).
-  - Añadidas etiquetas `aria-label` descriptivas a los enlaces de idioma (ES/EN).
-- `src/main.ts`:
-  - Ajustado el evento de clic en el botón de planes para mostrar el cargador personalizado con un retraso controlado de 4 segundos.
-  - Añadida limpieza de caché en el evento `pageshow` para evitar pantallas negras al retroceder.
-- `public/robots.txt` y `public/sitemap.xml`: Creados desde cero para configuración de motores de búsqueda.
+## Archivos modificados
+- [index.html](file:///Users/musa/Downloads/proyectos%20recientes/RECUPERAR%20MYNEXT WEB✔️/mynext-V3✔️/index.html)
+- [index-en.html](file:///Users/musa/Downloads/proyectos%20recientes/RECUPERAR%20MYNEXT WEB✔️/mynext-V3✔️/index-en.html)
+- [planes/index.html](file:///Users/musa/Downloads/proyectos%20recientes/RECUPERAR%20MYNEXT WEB✔️/mynext-V3✔️/planes/index.html)
+- [planes/index-en.html](file:///Users/musa/Downloads/proyectos%20recientes/RECUPERAR%20MYNEXT WEB✔️/mynext-V3✔️/planes/index-en.html)
+- [planes/index-en-build.html](file:///Users/musa/Downloads/proyectos%20recientes/RECUPERAR%20MYNEXT WEB✔️/mynext-V3✔️/planes/index-en-build.html)
 
-## 3. Problemas Solucionados
-- **Lectura en móviles en el footer**: Las tarjetas técnicas requerían un toque o click en móviles para mostrar el texto y permanecían inclinadas. Ahora se muestran rectas y legibles por defecto en pantallas táctiles.
-- **Fallo en Cloudflare Build**: Se producía un error de compilación por un comando `mv` obsoleto en `package.json`. El build ahora es 100% estándar e integrado con Vite.
-- **Mismo cargador repetido**: La transición a los planes volvía a mostrar el loader corporativo de `MYNEXT`. Se ha sustituido por la animación Love, Death & Robots en negro y rojo.
-
-## 4. Qué queda pendiente
-- **Monitorear producción**: Verificar que Cloudflare Pages termine la compilación del último commit sin incidencias.
-- **Revisión final**: Comprobar en un dispositivo móvil real el comportamiento de la transición de 4 segundos a la página de planes.
+## Qué queda pendiente
+- Despliegue final y pruebas de producción.

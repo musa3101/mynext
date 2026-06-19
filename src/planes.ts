@@ -38,15 +38,26 @@ let currentPlan = '';
 };
 
 (window as any).openContactOptions = function (planName: string) {
-  currentPlan = planName;
-  currentMethod = '';
-  const titleEl = document.getElementById('modalTitle');
-  if (titleEl) {
-    titleEl.innerText = isEnglish ? `Inquire Plan ${planName}` : `Consultar Plan ${planName}`;
+  const isEnglishLocal = window.location.pathname.includes('-en');
+  
+  const nameLabel = isEnglishLocal ? "Please enter your name:" : "Por favor, ingresa tu nombre:";
+  const businessLabel = isEnglishLocal ? "Please enter your business/project name:" : "Por favor, ingresa el nombre de tu negocio/proyecto:";
+  
+  const userName = window.prompt(nameLabel);
+  if (!userName) return; // User cancelled or entered empty
+  
+  const businessName = window.prompt(businessLabel);
+  if (!businessName) return; // User cancelled or entered empty
+  
+  let msg = '';
+  if (isEnglishLocal) {
+     msg = `Hi, I would like to request information about the ${planName} plan for my business [${businessName}]. My name is [${userName}].`;
+  } else {
+     msg = `Hola, me gustaría solicitar información sobre el plan ${planName} para mi negocio [${businessName}]. Soy [${userName}].`;
   }
-  document.getElementById('planButtons')?.classList.add('hidden');
-  document.getElementById('contactButtons')?.classList.remove('hidden');
-  showModal();
+  
+  const waUrl = `https://wa.me/34673109486?text=${encodeURIComponent(msg)}`;
+  window.open(waUrl, '_blank');
 };
 
 function showModal() {
@@ -256,7 +267,7 @@ async function initPlanes() {
                 </div>
                 
                 <div class="mt-6 pt-4 border-t border-slate-800/80 flex flex-col items-center">
-                  <button onclick="event.stopPropagation(); (window as any).openContactOptions('${title}');" class="no-flip w-full py-3 px-6 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-bold uppercase tracking-wider text-xs transition-colors shadow-[0_0_15px_rgba(245,158,11,0.4)]">
+                  <button onclick="event.stopPropagation(); window.openContactOptions('${title}');" class="no-flip w-full py-3 px-6 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-bold uppercase tracking-wider text-xs transition-colors shadow-[0_0_15px_rgba(245,158,11,0.4)]">
                     ${isEnglish ? 'INQUIRE NOW' : 'SOLICITAR PLAN'}
                   </button>
                   <span class="text-[9px] uppercase tracking-widest text-slate-500 mt-3 hover:text-white transition-colors cursor-pointer">
@@ -320,7 +331,7 @@ async function initPlanes() {
                 </div>
                 
                 <div class="mt-6 pt-4 border-t border-slate-800/80 flex flex-col items-center">
-                  <button onclick="event.stopPropagation(); (window as any).openContactOptions('${title}');" class="no-flip w-full py-3 px-6 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-black font-bold uppercase tracking-wider text-xs transition-colors shadow-[0_0_15px_rgba(6,182,212,0.3)]">
+                  <button onclick="event.stopPropagation(); window.openContactOptions('${title}');" class="no-flip w-full py-3 px-6 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-black font-bold uppercase tracking-wider text-xs transition-colors shadow-[0_0_15px_rgba(6,182,212,0.3)]">
                     ${isEnglish ? 'INQUIRE NOW' : 'SOLICITAR PLAN'}
                   </button>
                   <span class="text-[9px] uppercase tracking-widest text-slate-500 mt-3 hover:text-white transition-colors cursor-pointer">
