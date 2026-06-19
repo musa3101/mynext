@@ -629,18 +629,9 @@ async function initMain() {
       transitionOverlay.setAttribute('aria-hidden', 'true');
     };
 
-    const startTime = Date.now();
-
-    window.addEventListener('load', () => {
-      if (isReload) {
-        const elapsedTime = Date.now() - startTime;
-        const remainingTime = Math.max(2500 - elapsedTime, 0);
-        setTimeout(hideOverlay, remainingTime);
-      }
-    });
-
     if (isReload) {
-      setTimeout(hideOverlay, 8000); // safety fallback
+      // Hide exactly after 2.3 seconds (2300ms) to allow the cube loader animation to cycle fully
+      setTimeout(hideOverlay, 2300);
     }
 
     window.addEventListener('pageshow', () => {
