@@ -19,6 +19,7 @@ export default defineConfig({
         main: path.resolve(__dirname, 'index.html'),
         en: path.resolve(__dirname, 'index-en.html'),
         planes: path.resolve(__dirname, 'planes/index.html'),
+        'planes-en': path.resolve(__dirname, 'planes/index-en.html'),
       }
     }
   }
