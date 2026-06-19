@@ -1689,6 +1689,137 @@
                 transform: translateY(-2000px);
             }
         }
+
+        /* ═══════════════════════════════════════════
+           NUEVO HERO LOGO V2 — CANVA TRANSPARENT LOGO
+           WITH LASER SCAN REVEAL & MULTILINGUAL BADGE
+           ═══════════════════════════════════════════ */
+        :root {
+            --gold: #C9A84C;
+        }
+        .logo-container {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-bottom: -12px;
+            transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        @media (min-width: 640px) {
+            .logo-container {
+                width: 300px;
+                height: 300px;
+                margin-bottom: -20px;
+            }
+        }
+
+        .mnx-svg {
+            width: 100%;
+            height: auto;
+            clip-path: inset(0 100% 0 0);
+            animation: 
+                scanReveal 1.8s cubic-bezier(0.4, 0, 0.2, 1) 2.6s forwards,
+                svgg 4.5s ease-in-out 6.5s infinite;
+        }
+
+        @keyframes scanReveal {
+            to { clip-path: inset(0 0 0 0); }
+        }
+
+        @keyframes svgg {
+            0%,100%{ filter: drop-shadow(-6px 0 10px rgba(212, 168, 67, 0.16)) drop-shadow(6px 0 10px rgba(204, 43, 43, 0.16)) drop-shadow(0 0 12px rgba(0,242,255,.03)); }
+            50%    { filter: drop-shadow(-10px 0 18px rgba(212, 168, 67, 0.28)) drop-shadow(10px 0 18px rgba(204, 43, 43, 0.28)) drop-shadow(0 0 24px rgba(0,242,255,.08)); }
+        }
+
+        /* Laser scan line sweep with a glowing neon trail */
+        .scan-line {
+            position: absolute;
+            top: 10px;
+            bottom: 10px;
+            width: 12px;
+            background: linear-gradient(to right, transparent, rgba(0, 242, 255, 0.1) 40%, rgba(0, 242, 255, 0.6) 85%, #fff 100%);
+            box-shadow: 
+                0 0 12px rgba(0, 242, 255, 0.5), 
+                0 0 24px rgba(0, 242, 255, 0.2);
+            left: 0;
+            opacity: 0;
+            animation: scanLineMove 1.8s cubic-bezier(0.4, 0, 0.2, 1) 2.6s forwards;
+            z-index: 2;
+        }
+
+        @keyframes scanLineMove {
+            0% { left: 0%; opacity: 0; }
+            8% { opacity: 1; }
+            92% { opacity: 1; }
+            100% { left: 100%; opacity: 0; }
+        }
+
+        /* ── EST ── */
+        .h-est {
+            font-size: 7.5px !important;
+            letter-spacing: 0.42em !important;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0);
+            font-weight: 500;
+            animation: eIn .8s ease 5.2s forwards;
+            margin-top: 18px;
+            z-index: 10;
+        }
+        @keyframes eIn {
+            to { color: rgba(255, 255, 255, 0.22); }
+        }
+
+        /* MYNEXT BADGE (HTML) */
+        .mnx-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 9px 28px;
+            border-radius: 100px;
+            background: rgba(5,5,5,0.95);
+            border: 1px solid rgba(201,168,76,.18);
+            opacity: 0;
+            animation: badgeIn .6s cubic-bezier(.2,.8,.2,1) 3.6s forwards;
+            margin-top: 6px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+            transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+            min-width: 140px;
+            z-index: 20;
+        }
+        @keyframes badgeIn {
+            from { opacity:0; transform:translateY(8px); }
+            to   { opacity:1; transform:translateY(0); }
+        }
+        .b-char {
+            display: inline-block;
+            font-size: 17px;
+            font-weight: 700;
+            letter-spacing: 0.25em;
+            opacity: 0;
+            transform: translateY(10px) scale(0.8);
+            animation: charIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            animation-delay: var(--delay);
+            font-family: "Plus Jakarta Sans", sans-serif;
+        }
+        .b-char:last-child {
+            letter-spacing: 0;
+        }
+        @keyframes charIn {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        @keyframes charOut {
+            to {
+                opacity: 0;
+                transform: translateY(-8px) scale(0.9);
+            }
+        }
     </style>
 
 
@@ -1998,7 +2129,7 @@
 
                 <!-- Logo / Tarjeta de Presentación Premium -->
                 <div
-                    class="relative p-6 sm:p-10 md:p-16 rounded-[2rem] sm:rounded-[2.5rem] bg-[#050505] border border-white/[0.05] shadow-[0_0_60px_rgba(0,242,255,0.15)] flex flex-col items-center justify-center overflow-hidden group animate-float-premium">
+                    class="frame relative p-6 sm:p-10 md:p-16 rounded-[2rem] sm:rounded-[2.5rem] bg-[#050505] border border-white/[0.05] shadow-[0_0_60px_rgba(0,242,255,0.15)] flex flex-col items-center justify-center overflow-hidden group">
 
                     <!-- Architectural Corners -->
                     <div
@@ -2014,8 +2145,6 @@
                         class="absolute bottom-6 right-6 w-3 h-3 border-b border-r border-electric-cyan/40 animate-corners">
                     </div>
 
-                    <!-- Metadata Labels (Movido debajo del logo) -->
-
                     <!-- Light Sweep Effect -->
                     <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
                         <div
@@ -2028,16 +2157,17 @@
                         <div class="w-full h-full absolute top-0 left-0 border-t border-electric-cyan/20 animate-scanner"></div>
                     </div>
 
-                    <!-- Logo Central Original Completo -->
-                    <img alt="MYNEXT Digital Architecture"
-                        class="w-52 h-52 sm:w-72 sm:h-72 md:w-[380px] md:h-[380px] object-contain relative z-10 transition-transform duration-1000 group-hover:scale-105 animate-logo-reveal"
-                        src="./assets/img/logos/logo-hero-v2.svg"
-                        fetchpriority="high" width="380" height="380">
+                    <!-- Logo Central Original Transparent con Escaneo Láser -->
+                    <div class="logo-container">
+                        <div class="scan-line"></div>
+                        <img class="mnx-svg" src="./assets/img/logos/logo-hero-v2.svg?v=3" alt="MYNEXT Logo" />
+                    </div>
 
-                    <!-- EST 2026 Centrado (con animación premium de aparición y brillo) -->
-                    <div
-                        class="-mt-8 md:-mt-12 text-[9px] md:text-[11px] tracking-[0.6em] uppercase font-headline relative z-20 text-center ml-2 animate-est-premium">
-                        EST. 2026</div>
+                    <!-- MYNEXT HTML/CSS BADGE — with dynamic multilingual typing animation -->
+                    <div class="mnx-badge" id="dyn-badge"></div>
+
+                    <!-- EST 2026 Centrado -->
+                    <div class="h-est">Est. 2026</div>
                 </div>
             </div>
 
@@ -3255,6 +3385,156 @@
             };
             particlesJS("particles-js-inicio", config);
             particlesJS("particles-js-nosotros", config);
+
+            /* PARALLAX HOVER (FRAME FIXED, LOGO & BADGE MOBILE/WEB INTERACTION) */
+            var frame = document.querySelector('.frame');
+            var logoContainer = document.querySelector('.logo-container');
+            var mnxBadge = document.querySelector('.mnx-badge');
+            var hg = document.getElementById('hg');
+
+            var targetX = 0, targetY = 0;
+            var currentX = 0, currentY = 0;
+            var hgTargetX = 0, hgTargetY = 0;
+            var hgCurrentX = 0, hgCurrentY = 0;
+            var rafActive = false;
+
+            var updateParallax = function() {
+                if (!logoContainer || !mnxBadge) {
+                    rafActive = false;
+                    return;
+                }
+
+                // Smooth linear interpolation (lerp) for a premium liquid feel
+                currentX += (targetX - currentX) * 0.085;
+                currentY += (targetY - currentY) * 0.085;
+                
+                logoContainer.style.transform = "translate3d(" + currentX + "px, " + currentY + "px, 0)";
+                
+                // Badge shifts slightly less (approx 6/14 or 43%)
+                var bx = currentX * 0.43;
+                var by = currentY * 0.43;
+                mnxBadge.style.transform = "translate3d(" + bx + "px, " + by + "px, 0)";
+
+                if (hg) {
+                    hgCurrentX += (hgTargetX - hgCurrentX) * 0.085;
+                    hgCurrentY += (hgTargetY - hgCurrentY) * 0.085;
+                    hg.style.transform = "translate3d(" + hgCurrentX + "px, " + hgCurrentY + "px, 0)";
+                }
+
+                // Continue loop if we haven't reached targets closely
+                var deltaLogo = Math.abs(targetX - currentX) + Math.abs(targetY - currentY);
+                var deltaHg = hg ? (Math.abs(hgTargetX - hgCurrentX) + Math.abs(hgTargetY - hgCurrentY)) : 0;
+
+                if (deltaLogo < 0.01 && deltaHg < 0.01) {
+                    // Snap to final values and stop loop to save CPU cycles
+                    logoContainer.style.transform = "translate3d(" + targetX + "px, " + targetY + "px, 0)";
+                    mnxBadge.style.transform = "translate3d(" + (targetX * 0.43) + "px, " + (targetY * 0.43) + "px, 0)";
+                    if (hg) hg.style.transform = "translate3d(" + hgTargetX + "px, " + hgTargetY + "px, 0)";
+                    rafActive = false;
+                } else {
+                    requestAnimationFrame(updateParallax);
+                }
+            };
+
+            var handleMove = function(clientX, clientY) {
+                if (!frame) return;
+                var rect = frame.getBoundingClientRect();
+                var x = clientX - rect.left - rect.width/2;
+                var y = clientY - rect.top - rect.height/2;
+
+                targetX = (x / (rect.width/2)) * 14; // Max 14px
+                targetY = (y / (rect.height/2)) * 14;
+
+                if (!rafActive) {
+                    rafActive = true;
+                    requestAnimationFrame(updateParallax);
+                }
+            };
+
+            var handleReset = function() {
+                targetX = 0;
+                targetY = 0;
+                hgTargetX = 0;
+                hgTargetY = 0;
+                if (!rafActive) {
+                    rafActive = true;
+                    requestAnimationFrame(updateParallax);
+                }
+            };
+
+            // Mouse events (Desktop)
+            document.addEventListener('mousemove', function(e) {
+                hgTargetX = (e.clientX / window.innerWidth  - .5) * 34;
+                hgTargetY = (e.clientY / window.innerHeight - .5) * 34;
+                handleMove(e.clientX, e.clientY);
+            });
+
+            document.addEventListener('mouseleave', function() {
+                handleReset();
+            });
+
+            // Touch events (Mobile finger drag)
+            document.addEventListener('touchmove', function(e) {
+                if (e.touches.length > 0) {
+                    handleMove(e.touches[0].clientX, e.touches[0].clientY);
+                }
+            }, { passive: true });
+
+            document.addEventListener('touchend', function() {
+                handleReset();
+            });
+
+            /* MULTILINGUAL TYPING ANIMATION CYCLE */
+            var words = ["WELCOME", "BIENVENIDO", "WILLKOMMEN", "MYNEXT"];
+            var badgeElement = document.getElementById("dyn-badge");
+            var wordIdx = 0;
+
+            function typeWord(word, isLast, delayOffset) {
+                if (!badgeElement) return;
+                badgeElement.innerHTML = "";
+                
+                // Create span for each character
+                for (var i = 0; i < word.length; i++) {
+                    var span = document.createElement("span");
+                    span.className = "b-char";
+                    span.textContent = word[i];
+                    // Alternating gold and white colors
+                    span.style.color = (i % 2 === 0) ? "var(--gold)" : "#fff";
+                    
+                    // If there is an initial delay offset (e.g. 3.8s for the first word), use it.
+                    // Otherwise, start immediately with just the staggered letter delays.
+                    if (delayOffset > 0) {
+                        span.style.setProperty("--delay", "calc(" + delayOffset + "s + " + (i * 0.08) + "s)");
+                    } else {
+                        span.style.setProperty("--delay", (i * 0.08) + "s");
+                    }
+                    
+                    badgeElement.appendChild(span);
+                }
+
+                if (!isLast) {
+                    // Calculate how long to wait before starting the fade-out.
+                    // For the first word, we must wait for the initial delayOffset (3.8s) + the display duration (1.5s).
+                    var waitTime = (delayOffset > 0 ? (delayOffset * 1000) : 0) + 1500;
+                    
+                    setTimeout(function() {
+                        var chars = badgeElement.querySelectorAll(".b-char");
+                        chars.forEach(function(c) {
+                            c.style.animation = "charOut 0.4s ease forwards";
+                        });
+                        
+                        // Load the next word after the fade-out completes
+                        setTimeout(function() {
+                            wordIdx++;
+                            typeWord(words[wordIdx], wordIdx === words.length - 1, 0); // subsequent words have 0 delay offset
+                        }, 450);
+                        
+                    }, waitTime);
+                }
+            }
+
+            // Start the typing cycle immediately (the 3.8s delay offset is managed internally for the first word)
+            typeWord(words[0], false, 3.8);
         });
     </script>
     <script type="module" src="/src/main.ts"></script>
