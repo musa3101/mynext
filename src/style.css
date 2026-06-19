@@ -517,6 +517,17 @@ footer a,
   transform: translateY(0);
 }
 
+/* Ensure technical specs cards are straight and text is fully readable on touch devices and small viewports */
+@media (max-width: 768px), (hover: none) {
+  .tech-card {
+    transform: skewX(0deg) !important;
+  }
+  .tech-card p {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+}
+
 /* Premium Uiverse-inspired Socials Footer Card */
 .social-card {
   position: relative;
