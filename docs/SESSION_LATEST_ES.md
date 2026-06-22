@@ -1,18 +1,18 @@
 # Resumen de la Sesión
 
 ## Qué se ha hecho hoy
-- Se implementó la nueva sección "Preguntas Frecuentes" (FAQ) justo debajo de la sección de Contacto y encima del Footer, manteniendo la identidad visual y el estilo premium/minimalista de MYNEXT.
-- Se mejoró el logotipo principal del Hero, eliminando el resplandor naranja y aplicando un contraste y nitidez superior. Se le añadió una sutil luz exterior cian para enfatizar el tono tecnológico.
-- Todos los cambios se aplicaron tanto en la versión en español (`index.html`) como en inglés (`index-en.html`).
+- Se implementó la nueva sección "Preguntas Frecuentes" (FAQ) en ambas páginas, manteniendo la estética premium y minimalista del sitio.
+- Se optimizó visualmente el logotipo principal del Hero en español e inglés. Se eliminó el halo naranja anterior y se configuraron nuevos filtros de contraste, nitidez y un brillo cian exterior.
+- Se detectó y resolvió un fallo de sintaxis HTML crítico (etiquetas `<div>` y `<header>` desalineadas en el panel móvil) que impedía la compilación del sitio en Cloudflare durante el despliegue de Vite.
 
 ## Qué archivos se han modificado
-- `index.html`
-- `index-en.html`
+- `index.html` (Español)
+- `index-en.html` (Inglés)
 
 ## Qué problemas se han solucionado
-- Se resolvió la apariencia borrosa y el halo poco profesional del logotipo del Hero.
-- Se cubrió la necesidad informativa de los usuarios mediante el nuevo bloque de FAQ con menús desplegables (acordeones), mejorando la conversión y reduciendo fricción.
+- La apariencia original del logotipo, que era borrosa y poco profesional.
+- La ausencia de una sección de dudas recurrentes para mejorar la conversión de la web.
+- El error silencioso en Cloudflare Pages ocasionado por etiquetas de cierre `</div>` sobrantes o faltantes en el HTML que rompía el proceso de compilación (`npm run build`).
 
 ## Qué queda pendiente
-- Subir los cambios finales al repositorio en GitHub (que desplegará en Cloudflare automáticamente).
-- Monitorear que la web siga siendo completamente responsive (móvil y tablet) tras las modificaciones visuales.
+- Los últimos ajustes realizados (limpieza final del index-en.html) están listos en la rama principal local. Solo requieren un `git push` estándar la próxima vez que se trabaje.
