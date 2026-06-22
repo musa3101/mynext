@@ -870,12 +870,12 @@
         /* ── Hero Logo Container ── */
         .logo-container {
             position: relative;
-            width: 210px;
-            height: 210px;
+            width: 230px;
+            height: 230px;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
+            overflow: visible;
             margin-bottom: -15px;
             transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
             z-index: 10;
@@ -883,8 +883,8 @@
 
         @media (min-width: 640px) {
             .logo-container {
-                width: 260px;
-                height: 260px;
+                width: 270px;
+                height: 270px;
                 margin-bottom: -25px;
             }
         }
@@ -937,17 +937,21 @@
 
         /* ── EST ── */
         .h-est {
-            font-size: 7.5px !important;
-            letter-spacing: 0.42em !important;
+            font-size: 8px !important;
+            letter-spacing: 0.45em !important;
             text-transform: uppercase;
             color: rgba(255, 255, 255, 0);
-            font-weight: 500;
-            animation: eIn .8s ease 5.2s forwards;
+            font-weight: 600;
+            text-shadow: 0 0 0px rgba(0, 242, 255, 0);
+            animation: eIn 1.5s cubic-bezier(0.4, 0, 0.2, 1) 4.5s forwards;
             margin-top: 18px;
             z-index: 10;
         }
         @keyframes eIn {
-            to { color: rgba(255, 255, 255, 0.22); }
+            to { 
+                color: rgba(255, 255, 255, 0.65); 
+                text-shadow: 0 0 12px rgba(0, 242, 255, 0.35);
+            }
         }
 
         /* MYNEXT BADGE (HTML) */
@@ -2084,13 +2088,7 @@
     <div id="liquid-cursor"></div>
     <div id="cursor-dot"></div>
 
-    <!-- Neon Page Frame -->
-    <div id="neon-frame">
-        <div class="neon-frame-line neon-frame-top"></div>
-        <div class="neon-frame-line neon-frame-bottom"></div>
-        <div class="neon-frame-line neon-frame-left"></div>
-        <div class="neon-frame-line neon-frame-right"></div>
-    </div>
+    <!-- Neon Page Frame removed -->
 
     <!-- PLANS TRANSITION OVERLAY -->
     <div id="plans-transition-overlay" class="plans-loader-overlay" aria-hidden="true">
@@ -2226,7 +2224,7 @@
             </div>
 
             <!-- Central Branding -->
-            <div id="nav-logo" class="relative group/logo ease-in-out -translate-y-[150%] mx-1 sm:mx-0 shrink-0"
+            <div id="nav-logo" class="hidden md:block relative group/logo ease-in-out -translate-y-[150%] mx-1 sm:mx-0 shrink-0"
                 style="transition: transform 2400ms cubic-bezier(0.16, 1, 0.3, 1);">
                 <a href="index.html" title="Volver al inicio" aria-label="Inicio MYNEXT" class="block">
                 <!-- Aro difuminado exterior en cyan -->
