@@ -782,15 +782,15 @@ footer a,
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 120px;
-  height: 120px;
+  width: 130px;
+  height: 130px;
   border-radius: 999px;
   background: rgba(0, 0, 0, 0.96);
-  border: 1px solid rgba(0, 242, 255, 0.35);
-  box-shadow: 0 0 35px rgba(0, 242, 255, 0.14);
+  border: 1.5px solid rgba(0, 242, 255, 0.5);
+  box-shadow: 0 0 45px rgba(0, 242, 255, 0.25);
   position: relative;
   overflow: hidden;
-  transition: transform 0.35s ease, border-color 0.35s ease;
+  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
 }
 
 .footer-logo-ring::before {
@@ -798,8 +798,8 @@ footer a,
   position: absolute;
   inset: 0;
   border-radius: 999px;
-  box-shadow: 0 0 18px rgba(0, 242, 255, 0.25);
-  opacity: 0.75;
+  box-shadow: 0 0 25px rgba(0, 242, 255, 0.4);
+  opacity: 0.85;
   pointer-events: none;
 }
 
@@ -814,13 +814,24 @@ footer a,
 
 .footer-logo-ring:hover {
   transform: translateY(-3px);
-  border-color: rgba(0, 242, 255, 0.6);
+  border-color: rgba(0, 242, 255, 0.8);
+  box-shadow: 0 0 55px rgba(0, 242, 255, 0.4);
 }
 
 .footer-logo {
   position: relative;
   z-index: 1;
-  max-height: 68px;
+  width: 90%;
+  height: auto;
+  max-height: 80px;
+  object-fit: contain;
+  border-radius: 0;
+  transform: scale(1.0); /* Adjust default zoom to prevent cropping */
+  transition: transform 0.5s ease;
+}
+
+.footer-logo-ring:hover .footer-logo {
+  transform: scale(1.08);
 }
 
 footer .footer-logo-ring + div {
@@ -1053,9 +1064,9 @@ body.mobile-menu-open {
 
 .mobile-menu-toggle:hover,
 .mobile-menu-toggle.is-active {
-  border-color: rgba(0, 242, 255, 0.45);
-  background: rgba(0, 242, 255, 0.08);
-  box-shadow: 0 0 16px rgba(0, 242, 255, 0.15);
+  border-color: rgba(232, 39, 40, 0.45);
+  background: rgba(232, 39, 40, 0.08);
+  box-shadow: 0 0 16px rgba(232, 39, 40, 0.15);
 }
 
 .mobile-menu-toggle__box {
@@ -1082,7 +1093,7 @@ body.mobile-menu-open {
 
 .mobile-menu-toggle.is-active .mobile-menu-toggle__line:nth-child(1) {
   transform: translateY(6px) rotate(45deg);
-  background: #00F2FF;
+  background: #e82728;
 }
 
 .mobile-menu-toggle.is-active .mobile-menu-toggle__line:nth-child(2) {
@@ -1092,7 +1103,7 @@ body.mobile-menu-open {
 
 .mobile-menu-toggle.is-active .mobile-menu-toggle__line:nth-child(3) {
   transform: translateY(6px) rotate(-45deg);
-  background: #00F2FF;
+  background: #e82728;
 }
 
 .mobile-menu-panel {
@@ -1437,9 +1448,9 @@ body.mobile-menu-open {
 
   .mobile-menu-toggle.is-active,
   .mobile-menu-toggle:active {
-    border-color: rgba(0, 242, 255, 0.45);
-    background: rgba(0, 242, 255, 0.08);
-    box-shadow: 0 0 16px rgba(0, 242, 255, 0.15);
+    border-color: rgba(232, 39, 40, 0.45);
+    background: rgba(232, 39, 40, 0.08);
+    box-shadow: 0 0 16px rgba(232, 39, 40, 0.15);
   }
 }
 
@@ -1787,3 +1798,97 @@ body.mobile-menu-open {
   }
 }
 
+/* ========================================================
+   UIVERSE CAPTAIN AMERICA BUTTON
+   ======================================================== */
+.cap-btn {
+  position: relative;
+  width: 210px;
+  height: 50px;
+  border: none;
+  background-color: #005f99;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 8px 8px 0px rgb(12, 12, 12);
+  transition-duration: .3s;
+  text-decoration: none;
+}
+
+.cap-layer {
+  width: 60px;
+  position: absolute;
+  left: -30px;
+  transition-duration: .3s;
+  animation: spin 5s linear infinite;
+}
+
+.cap-btn:hover {
+  transform: translateY(5px);
+  box-shadow: 3px 3px 0px black;
+  transition-duration: .3s;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.cap-btn:hover .cap-layer {
+  left: 0%;
+  width: 100%;
+  transition-duration: .3s;
+}
+
+.cap-text {
+  color: white;
+  font-weight: 600;
+  font-size: 1.1em;
+  position: absolute;
+  z-index: 2;
+  transition-duration: .1s;
+  font-family: Whitney, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+}
+
+.cap-btn:hover .cap-text {
+  color: transparent;
+  transition-duration: .3s;
+}
+
+/* svg colors */
+.cap-cls-1 { fill: #242021; }
+.cap-cls-2 { fill: #e82728; }
+.cap-cls-3 { fill: #fefefe; }
+.cap-cls-4 { fill: #e92728; }
+.cap-cls-5 { fill: #005f99; }
+.cap-cls-6 { fill: #fff; }
+
+/* FAQ Accordion Transition */
+.faq-content {
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease-out;
+  will-change: max-height, opacity;
+}
+
+/* Premium FAQ Accordion Styles */
+.faq-item {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.faq-item[data-open="true"] {
+  border-color: rgba(0, 242, 255, 0.25) !important;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.03) 0%, rgba(0, 242, 255, 0.01) 100%) !important;
+  box-shadow: 0 10px 30px rgba(0, 242, 255, 0.05);
+}
+.faq-item[data-open="true"] .faq-icon-wrapper {
+  border-color: rgba(0, 242, 255, 0.3) !important;
+  background-color: rgba(0, 242, 255, 0.08) !important;
+}
+.faq-item[data-open="true"] .faq-trigger span:first-child {
+  color: #00F2FF !important;
+}

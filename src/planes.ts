@@ -253,7 +253,11 @@ async function initPlanes() {
                     </li>
                     <li class="flex items-start gap-2">
                       <span class="text-amber-400 mt-0.5">✦</span>
-                      <span><strong>${isEnglish ? 'All-inclusive:' : 'Todo incluido:'}</strong> ${isEnglish ? 'Domain, configuration, and maintenance.' : 'dominio, configuración y mantenimiento.'}</span>
+                      <span><strong>${isEnglish ? 'Full Setup:' : 'Puesta a punto total:'}</strong> ${isEnglish ? 'Domain and server configuration ready to go.' : 'Configuración de dominio y hosting listas para arrancar.'}</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-amber-400 mt-0.5">✦</span>
+                      <span><strong>${isEnglish ? 'Maintenance Included:' : 'Mantenimiento incluido:'}</strong> ${isEnglish ? 'Minor adjustments covered at no extra cost' : 'Pequeños ajustes cubiertos sin coste extra'} <span class="text-cyan-400 font-bold ml-0.5">*<sup class="text-[10px]">2</sup></span>.</span>
                     </li>
                     <li class="flex items-start gap-2">
                       <span class="text-amber-400 mt-0.5">✦</span>
@@ -326,6 +330,10 @@ async function initPlanes() {
                     <li class="flex items-start gap-2">
                       <span class="text-cyan-400 mt-0.5">✓</span>
                       <span><strong>${isEnglish ? 'SEO Launch:' : 'Lanzamiento SEO:'}</strong> ${isEnglish ? 'Full Google Profile and Maps optimization to attract nearby clients immediately.' : 'Optimización en Google Profile y Maps para captar clientes locales desde el primer día.'}</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                      <span class="text-cyan-400 mt-0.5">✓</span>
+                      <span><strong>${isEnglish ? 'Maintenance & Updates:' : 'Mantenimiento y Ajustes:'}</strong> ${isEnglish ? 'Modifications are billed separately at 50€ per fix.' : 'Las modificaciones puntuales se facturan a 50€ por ajuste.'}</span>
                     </li>
                   </ul>
                 </div>

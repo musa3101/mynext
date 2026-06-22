@@ -25,6 +25,13 @@ function getTranslation(value: string | null | undefined, language: 'es' | 'en')
 
 // Utility to parse domain names from project URLs for browser bar
 function getDomainFromUrl(url: string): string {
+  if (url.includes('blessedstudio')) return 'blessedstudio.com';
+  if (url.includes('barlunallena')) return 'barlunallena.com';
+  if (url.includes('ecuapv2') || url.includes('ecuaplac')) return 'ecuaplac.com';
+  if (url.includes('rbari')) return 'rajbarikitchen.com';
+  if (url.includes('nexterabymusa')) return 'nextera.com';
+  if (url.includes('mezquita-arrahma')) return 'mezquita-arrahma.com';
+
   try {
     const parsed = new URL(url);
     let hostname = parsed.hostname;
@@ -52,6 +59,61 @@ function initRevealAnimations() {
   }, observerOptions);
 
   reveals.forEach(reveal => observer.observe(reveal));
+}
+
+// FAQ Accordion Logic
+function initFaqAccordion() {
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach(item => {
+    const trigger = item.querySelector('.faq-trigger');
+    const content = item.querySelector('.faq-content') as HTMLElement;
+    const icon = item.querySelector('.faq-icon');
+
+    if (!trigger || !content) return;
+
+    // Set initial heights based on data-open attribute
+    const isOpen = item.getAttribute('data-open') === 'true';
+    if (isOpen) {
+      content.style.maxHeight = content.scrollHeight + 'px';
+      content.style.opacity = '1';
+      if (icon) icon.classList.add('rotate-180');
+      trigger.setAttribute('aria-expanded', 'true');
+    } else {
+      content.style.maxHeight = '0px';
+      content.style.opacity = '0';
+      if (icon) icon.classList.remove('rotate-180');
+      trigger.setAttribute('aria-expanded', 'false');
+    }
+
+    trigger.addEventListener('click', () => {
+      const currentlyOpen = item.getAttribute('data-open') === 'true';
+      if (currentlyOpen) {
+        // Close it
+        content.style.maxHeight = '0px';
+        content.style.opacity = '0';
+        if (icon) icon.classList.remove('rotate-180');
+        trigger.setAttribute('aria-expanded', 'false');
+        item.setAttribute('data-open', 'false');
+      } else {
+        // Open it
+        content.style.maxHeight = content.scrollHeight + 'px';
+        content.style.opacity = '1';
+        if (icon) icon.classList.add('rotate-180');
+        trigger.setAttribute('aria-expanded', 'true');
+        item.setAttribute('data-open', 'true');
+      }
+    });
+  });
+
+  // Handle window resize to recalculate heights of open items
+  window.addEventListener('resize', () => {
+    faqItems.forEach(item => {
+      const content = item.querySelector('.faq-content') as HTMLElement;
+      if (content && item.getAttribute('data-open') === 'true') {
+        content.style.maxHeight = content.scrollHeight + 'px';
+      }
+    });
+  });
 }
 
 // 0. Scroll restoration logic
@@ -82,7 +144,7 @@ async function initMain() {
       if (projectsRes.data && projectsRes.data.length > 0) {
         const dbProjects = projectsRes.data;
         const merged: any[] = [...dbProjects];
-        
+
         fallbackProjects.forEach(localProj => {
           const match = merged.find(p => p.title.toLowerCase().trim() === localProj.title.toLowerCase().trim() || p.id === localProj.id);
           if (match) {
@@ -90,12 +152,16 @@ async function initMain() {
             if (localProj.image_url.includes('porfolio2-v3') || localProj.image_url.includes('porfolio6')) {
               match.image_url = localProj.image_url;
             }
+            // Override Ecuaplac project URL
+            if (localProj.title.toLowerCase() === 'ecuaplac') {
+              match.project_url = localProj.project_url;
+            }
           } else {
             // Append locally added projects that are missing in the database
             merged.push(localProj);
           }
         });
-        
+
         merged.sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
         projects = merged;
       }
@@ -180,7 +246,7 @@ async function initMain() {
 
       // Assemble card elements
       const article = document.createElement('article');
-      
+
       // Compute specific layout classes to match asymmetric design
       let cardClass = 'reveal flex flex-col gap-8 group';
       if (!proj.featured) {
@@ -228,10 +294,10 @@ async function initMain() {
               </div>
             </div>
           </div>
-          <div class="absolute top-10 left-0 right-0 bottom-0 bg-[#050505] overflow-hidden">
+          <div class="absolute top-10 left-0 right-0 bottom-0 bg-[#050505] overflow-hidden flex items-center justify-center p-2 md:p-6">
             <!-- Actual Project Image -->
             <img src="${proj.image_url}" alt="Preview ${proj.title}" loading="lazy"
-              class="w-full h-full object-cover object-top transition-transform duration-1000 group-hover:scale-[1.03]">
+              class="w-full h-full object-contain transition-transform duration-1000 group-hover:scale-[1.03]">
             <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500"></div>
             <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center z-20 backdrop-blur-sm">
               <a href="${proj.project_url}" target="_blank" rel="noopener noreferrer"
@@ -335,7 +401,7 @@ async function initMain() {
         if (!card) return;
         if (i > 0 && pItems[i - 1]) pItems[i - 1]!.classList.remove('card-lit');
         card.classList.add('card-lit');
-        
+
         if (i === pItems.length - 1) {
           const endT = setTimeout(() => {
             card.classList.remove('card-lit');
@@ -572,43 +638,43 @@ async function initMain() {
           message: messageVal
         })
       })
-      .then(response => {
-        if (response.ok) {
-          const successText = isEs ? '¡Enviado! ✓' : 'Sent ✓';
-          if (btnText) {
-            btnText.textContent = successText;
+        .then(response => {
+          if (response.ok) {
+            const successText = isEs ? '¡Enviado! ✓' : 'Sent ✓';
+            if (btnText) {
+              btnText.textContent = successText;
+            } else {
+              submitBtn.textContent = successText;
+            }
+            submitBtn.style.backgroundColor = '#00F2FF';
+            submitBtn.style.boxShadow = '0 0 20px #00F2FF';
+
+            emailInput.value = '';
+            if (messageInput) messageInput.value = '';
+
+            const formElement = contactForm;
+            formElement.style.transition = 'all 0.5s ease';
+            formElement.style.opacity = '0';
+            formElement.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+              formElement.style.display = 'none';
+              const successMsg = document.createElement('div');
+              successMsg.className = 'text-electric-cyan font-headline text-sm md:text-base tracking-wider font-semibold animate-pulse mt-4 text-center px-4';
+              successMsg.style.textShadow = '0 0 10px rgba(0, 242, 255, 0.4)';
+              successMsg.textContent = isEs
+                ? 'Gracias por registrarte. Revisa tu Gmail, ¡tienes una grasa esperándote! 😏'
+                : 'Thanks for registering. Check your Gmail, something fire is waiting for you! 😏';
+
+              const formParent = formElement.parentElement;
+              if (formParent) formParent.appendChild(successMsg);
+            }, 500);
           } else {
-            submitBtn.textContent = successText;
+            showErrorState();
           }
-          submitBtn.style.backgroundColor = '#00F2FF';
-          submitBtn.style.boxShadow = '0 0 20px #00F2FF';
-
-          emailInput.value = '';
-          if (messageInput) messageInput.value = '';
-
-          const formElement = contactForm;
-          formElement.style.transition = 'all 0.5s ease';
-          formElement.style.opacity = '0';
-          formElement.style.transform = 'scale(0.9)';
-          setTimeout(() => {
-            formElement.style.display = 'none';
-            const successMsg = document.createElement('div');
-            successMsg.className = 'text-electric-cyan font-headline text-sm md:text-base tracking-wider font-semibold animate-pulse mt-4 text-center px-4';
-            successMsg.style.textShadow = '0 0 10px rgba(0, 242, 255, 0.4)';
-            successMsg.textContent = isEs
-              ? 'Gracias por registrarte. Revisa tu Gmail, ¡tienes una grasa esperándote! 😏'
-              : 'Thanks for registering. Check your Gmail, something fire is waiting for you! 😏';
-
-            const formParent = formElement.parentElement;
-            if (formParent) formParent.appendChild(successMsg);
-          }, 500);
-        } else {
+        })
+        .catch(() => {
           showErrorState();
-        }
-      })
-      .catch(() => {
-        showErrorState();
-      });
+        });
 
       function showErrorState() {
         if (btnText) {
@@ -650,7 +716,7 @@ async function initMain() {
         plansTransitionOverlay.classList.remove('active');
         plansTransitionOverlay.setAttribute('aria-hidden', 'true');
       }
-      
+
       if (e.persisted) {
         // If restored from back-forward cache, show it and hide after 3.5s
         transitionOverlay.classList.add('active');
@@ -661,9 +727,9 @@ async function initMain() {
 
     const plansBtns = document.querySelectorAll('a.animated-button[href*="planes"]');
     const plansTransitionOverlay = document.getElementById('plans-transition-overlay');
-    
+
     plansBtns.forEach(btn => {
-      btn.addEventListener('click', function(this: HTMLElement, e) {
+      btn.addEventListener('click', function (this: HTMLElement, e) {
         e.preventDefault();
         const destination = this.getAttribute('href');
         if (!destination) return;
@@ -821,6 +887,9 @@ async function initMain() {
       }, 100);
     }
   }
+
+  // Initialize FAQ Accordion
+  initFaqAccordion();
 }
 
 if (document.readyState === 'loading') {
@@ -924,7 +993,7 @@ window.addEventListener('load', () => {
     window.addEventListener('scroll', () => {
       const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
-      
+
       panels.forEach((panel: any) => {
         const rect = panel.getBoundingClientRect();
         // check if in viewport
@@ -933,7 +1002,7 @@ window.addEventListener('load', () => {
           const img = panel.querySelector('img');
           if (img) {
             // translate Y by up to 15%
-            const yOffset = (progress * 15) - 7.5; 
+            const yOffset = (progress * 15) - 7.5;
             img.style.transform = `translateY(${yOffset}%) scale(1.05)`;
           }
         }

@@ -282,102 +282,6 @@
             100% { background-position: 0 -200%; }
         }
 
-        /* 8. Uiverse Animated Button (2026 Plans) */
-        .animated-button {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            padding: 18px 42px;
-            border: 2px solid rgba(0, 242, 255, 0.4);
-            font-size: 11px;
-            font-family: 'Space Grotesk', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 0.3em;
-            background-color: transparent;
-            border-radius: 100px;
-            font-weight: 700;
-            color: #00f2ff;
-            box-shadow: 0 0 12px rgba(0, 242, 255, 0.1);
-            cursor: pointer;
-            overflow: hidden;
-            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-            text-decoration: none;
-            z-index: 10;
-        }
-
-        .animated-button svg {
-            position: absolute;
-            width: 18px;
-            height: 18px;
-            fill: #00f2ff;
-            z-index: 9;
-            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .animated-button .arr-1 {
-            right: 18px;
-        }
-
-        .animated-button .arr-2 {
-            left: -25%;
-        }
-
-        .animated-button .circle {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 20px;
-            height: 20px;
-            background-color: #00f2ff;
-            border-radius: 50%;
-            opacity: 0;
-            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .animated-button .text {
-            position: relative;
-            z-index: 1;
-            transform: translateX(-10px);
-            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .animated-button:hover {
-            box-shadow: 0 0 0 12px transparent, 0 0 35px rgba(0, 242, 255, 0.5);
-            color: #050505;
-            border-color: #00f2ff;
-            border-radius: 100px;
-        }
-
-        .animated-button:hover .arr-1 {
-            right: -25%;
-        }
-
-        .animated-button:hover .arr-2 {
-            left: 18px;
-        }
-
-        .animated-button:hover .text {
-            transform: translateX(10px);
-        }
-
-        .animated-button:hover svg {
-            fill: #050505;
-        }
-
-        .animated-button:active {
-            scale: 0.95;
-            box-shadow: 0 0 0 4px rgba(0, 242, 255, 0.6);
-        }
-
-        .animated-button:hover .circle {
-            width: 280px;
-            height: 280px;
-            opacity: 1;
-        }
-
         /* 9. Uiverse Form Container */
         .form-container {
             width: 100%;
@@ -768,32 +672,27 @@
         /* ── Hero Logo Container ── */
         .logo-container {
             position: relative;
-            width: 200px;
-            height: 200px;
+            width: 210px;
+            height: 210px;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            margin-bottom: -12px;
-            transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
-            z-index: 10;
+            border-radius: 10px;
+            margin: 0 auto;
+            z-index: 2;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-
-        @media (min-width: 640px) {
+        
+        @media (min-width: 768px) {
             .logo-container {
-                width: 240px;
-                height: 240px;
-                margin-bottom: -20px;
+                width: 260px;
+                height: 260px;
             }
         }
 
         .mnx-svg {
             width: 100%;
-            height: auto;
-            clip-path: inset(0 100% 0 0);
-            animation: 
-                scanReveal 1.8s cubic-bezier(0.4, 0, 0.2, 1) 2.6s forwards,
-                svgg 4.5s ease-in-out 6.5s infinite;
         }
 
         @keyframes scanReveal {
@@ -801,8 +700,12 @@
         }
 
         @keyframes svgg {
-            0%,100%{ filter: drop-shadow(-6px 0 10px rgba(212, 168, 67, 0.16)) drop-shadow(6px 0 10px rgba(204, 43, 43, 0.16)) drop-shadow(0 0 12px rgba(0,242,255,.03)); }
-            50%    { filter: drop-shadow(-10px 0 18px rgba(212, 168, 67, 0.28)) drop-shadow(10px 0 18px rgba(204, 43, 43, 0.28)) drop-shadow(0 0 24px rgba(0,242,255,.08)); }
+            0%, 100% {
+                filter: contrast(1.1) brightness(1.05) drop-shadow(0 0 1.5px rgba(201, 168, 76, 0.65)) drop-shadow(0 0 15px rgba(0, 242, 255, 0.12));
+            }
+            50% {
+                filter: contrast(1.12) brightness(1.08) drop-shadow(0 0 1.5px rgba(201, 168, 76, 0.8)) drop-shadow(0 0 24px rgba(0, 242, 255, 0.20));
+            }
         }
 
         /* Laser scan line sweep with a glowing neon trail */
@@ -2265,13 +2168,12 @@
                     WHAT IS MYNEXT?<br>DISCOVER BELOW
                 </span>
                 <span
-                    class="material-symbols-outlined text-electric-cyan animate-scroll-bounce">keyboard_double_arrow_down</span>
+                    class="material-symbols-outlined text-[#e82728] animate-scroll-bounce">keyboard_double_arrow_down</span>
             </a>
         </section>
 
-        <!-- 2. NOSOTROS SECTION -->
         <section
-            class="min-h-screen flex flex-col items-center justify-center px-5 sm:px-8 md:px-16 lg:px-24 py-20 md:py-32 bg-void-black relative"
+            class="min-h-screen flex flex-col items-center justify-center px-5 sm:px-8 md:px-16 lg:px-24 pt-20 pb-36 md:pt-32 md:pb-48 bg-void-black relative"
             id="nosotros">
 
             <!-- particles.js container -->
@@ -2342,14 +2244,27 @@
                                 1</div>
                             <div class="relative z-10 space-y-8">
                                 <div
-                                    class="w-16 h-16 rounded-2xl bg-electric-cyan/5 border border-electric-cyan/20 flex items-center justify-center group-hover/bento:border-electric-cyan/50 transition-all duration-500">
-                                    <span class="material-symbols-outlined text-3xl text-electric-cyan">hub</span>
+                                    class="w-16 h-16 rounded-2xl bg-electric-cyan/5 border border-electric-cyan/20 flex items-center justify-center group-hover/bento:border-electric-cyan/50 transition-all duration-500 shadow-[inset_0_0_15px_rgba(0,242,255,0.05)] group-hover/bento:shadow-[inset_0_0_20px_rgba(0,242,255,0.15)]">
+                                    <div class="relative w-12 h-10 flex items-center justify-center group-hover/bento:scale-105 transition-transform duration-500">
+                                        <!-- Bubble 1 -->
+                                        <div class="absolute left-0 top-1 w-8 h-6 border-[1.5px] border-electric-cyan/60 rounded-xl rounded-bl-sm bg-[#050505] flex items-center justify-center shadow-[0_0_10px_rgba(0,242,255,0.2)] group-hover/bento:border-electric-cyan transition-colors">
+                                            <div class="flex gap-1 animate-pulse">
+                                                <div class="w-1 h-1 bg-electric-cyan rounded-full"></div>
+                                                <div class="w-1 h-1 bg-electric-cyan rounded-full" style="animation-delay: 0.2s"></div>
+                                                <div class="w-1 h-1 bg-electric-cyan rounded-full" style="animation-delay: 0.4s"></div>
+                                            </div>
+                                        </div>
+                                        <!-- Bubble 2 -->
+                                        <div class="absolute right-0 bottom-0 w-7 h-5 border border-cyan-400/40 rounded-lg rounded-br-sm bg-[#050505] flex items-center justify-center opacity-80 group-hover/bento:border-cyan-400/80 group-hover/bento:opacity-100 transition-all delay-75">
+                                            <span class="material-symbols-outlined text-[10px] text-cyan-400">done_all</span>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="space-y-4">
                                     <h3
                                         class="font-puffy font-puffy-md tracking-normal normal-case">
                                         Consulting</h3>
-                                    <p class="text-white/40 text-sm md:text-base font-light leading-relaxed">We define
+                                    <p class="text-slate-300 text-sm md:text-base font-light leading-relaxed">We define
                                         your project's DNA. We outline the technical and visual strategy so your brand
                                         dominates its digital niche.</p>
                                 </div>
@@ -2365,14 +2280,29 @@
                                 2</div>
                             <div class="relative z-10 space-y-8">
                                 <div
-                                    class="w-16 h-16 rounded-2xl bg-electric-cyan/5 border border-electric-cyan/20 flex items-center justify-center group-hover/bento:border-electric-cyan/50 transition-all duration-500">
-                                    <span class="material-symbols-outlined text-3xl text-electric-cyan">layers</span>
+                                    class="w-16 h-16 rounded-2xl bg-electric-cyan/5 border border-electric-cyan/20 flex items-center justify-center group-hover/bento:border-electric-cyan/50 transition-all duration-500 shadow-[inset_0_0_15px_rgba(0,242,255,0.05)] group-hover/bento:shadow-[inset_0_0_20px_rgba(0,242,255,0.15)]">
+                                    <div class="relative w-12 h-10 flex flex-col items-center justify-end group-hover/bento:scale-105 transition-transform duration-500">
+                                        <!-- Screen -->
+                                        <div class="w-10 h-7 border-[1.5px] border-electric-cyan/60 rounded-t-md bg-[#050505] flex items-center justify-center overflow-hidden relative group-hover/bento:border-electric-cyan transition-colors shadow-[0_0_10px_rgba(0,242,255,0.2)]">
+                                            <!-- Floating code lines -->
+                                            <div class="absolute top-1.5 left-1.5 flex flex-col gap-1 w-full opacity-70 group-hover/bento:animate-pulse">
+                                                <div class="h-0.5 w-4 bg-electric-cyan/80 rounded-full"></div>
+                                                <div class="h-0.5 w-6 bg-cyan-400/50 rounded-full ml-2"></div>
+                                                <div class="h-0.5 w-3 bg-cyan-400/50 rounded-full ml-2"></div>
+                                            </div>
+                                            <span class="material-symbols-outlined text-[12px] text-electric-cyan absolute bottom-1 right-1">design_services</span>
+                                        </div>
+                                        <!-- Keyboard -->
+                                        <div class="w-12 h-1.5 bg-electric-cyan/80 rounded-b-sm rounded-t-[1px] relative shadow-[0_2px_8px_rgba(0,242,255,0.4)]">
+                                            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-0.5 bg-black/30 rounded-b-sm"></div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="space-y-4">
                                     <h3
                                         class="font-puffy font-puffy-md tracking-normal normal-case">
                                         Architecture</h3>
-                                    <p class="text-white/40 text-sm md:text-base font-light leading-relaxed">We build
+                                    <p class="text-slate-300 text-sm md:text-base font-light leading-relaxed">We build
                                         with surgical precision. Clean code and exclusive design merged into a high-end
                                         experience.</p>
                                 </div>
@@ -2388,15 +2318,32 @@
                                 3</div>
                             <div class="relative z-10 space-y-8">
                                 <div
-                                    class="w-16 h-16 rounded-2xl bg-electric-cyan/5 border border-electric-cyan/20 flex items-center justify-center group-hover/bento:border-electric-cyan/50 transition-all duration-500">
-                                    <span
-                                        class="material-symbols-outlined text-3xl text-electric-cyan">auto_awesome</span>
+                                    class="w-16 h-16 rounded-2xl bg-electric-cyan/5 border border-electric-cyan/20 flex items-center justify-center group-hover/bento:border-electric-cyan/50 transition-all duration-500 shadow-[inset_0_0_15px_rgba(0,242,255,0.05)] group-hover/bento:shadow-[inset_0_0_20px_rgba(0,242,255,0.15)]">
+                                    <div class="relative w-14 h-10 border-[1.5px] border-electric-cyan/60 rounded-md bg-[#050505] flex flex-col overflow-hidden group-hover/bento:border-electric-cyan shadow-[0_0_10px_rgba(0,242,255,0.2)] group-hover/bento:shadow-[0_0_20px_rgba(0,242,255,0.4)] transition-all duration-500 group-hover/bento:scale-105">
+                                        <div class="h-2.5 border-b border-electric-cyan/30 flex items-center px-1.5 gap-1 bg-electric-cyan/10">
+                                            <div class="w-1 h-1 rounded-full bg-[#FF5F56]"></div>
+                                            <div class="w-1 h-1 rounded-full bg-[#FFBD2E]"></div>
+                                            <div class="w-1 h-1 rounded-full bg-[#27C93F]"></div>
+                                        </div>
+                                        <div class="flex-1 flex items-center justify-center relative overflow-hidden">
+                                            <!-- Default State: Rocket -->
+                                            <div class="flex flex-col items-center justify-center transform group-hover/bento:-translate-y-full transition-transform duration-500 absolute w-full h-full">
+                                                <span class="material-symbols-outlined text-[18px] text-electric-cyan animate-pulse">rocket_launch</span>
+                                            </div>
+                                            <!-- Hover State: www.tunegocio.com -->
+                                            <div class="flex flex-col items-center justify-center transform translate-y-full group-hover/bento:translate-y-0 transition-transform duration-500 absolute w-full h-full bg-electric-cyan/10">
+                                                <span class="text-[5px] sm:text-[6px] font-mono font-bold text-electric-cyan tracking-wider">WWW.</span>
+                                                <span class="text-[5px] sm:text-[6px] font-mono font-bold text-electric-cyan tracking-wider">TUNEGOCIO.</span>
+                                                <span class="text-[5px] sm:text-[6px] font-mono font-bold text-electric-cyan tracking-wider">COM</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="space-y-4">
                                     <h3
                                         class="font-puffy font-puffy-md tracking-normal normal-case">
                                         Launch</h3>
-                                    <p class="text-white/40 text-sm md:text-base font-light leading-relaxed">Launch and
+                                    <p class="text-slate-300 text-sm md:text-base font-light leading-relaxed">Launch and
                                         continuous optimization. Your platform doesn't just launch; it evolves to
                                         dominate the market.</p>
                                 </div>
@@ -2418,12 +2365,11 @@
                     WANT TO SEE MY WORK?<br>DISCOVER IT BELOW
                 </span>
                 <span
-                    class="material-symbols-outlined text-electric-cyan animate-scroll-bounce">keyboard_double_arrow_down</span>
+                    class="material-symbols-outlined text-[#e82728] animate-scroll-bounce">keyboard_double_arrow_down</span>
             </a>
         </section>
 
-        <!-- 3. PORTFOLIO SECTION -->
-         <section class="min-h-screen py-32 pb-40 md:pb-48 px-5 sm:px-8 md:px-16 lg:px-24 bg-void-black relative overflow-hidden"
+          <section class="min-h-screen py-32 pb-48 md:pb-60 px-5 sm:px-8 md:px-16 lg:px-24 bg-void-black relative overflow-hidden"
             id="portfolio">
             <!-- Stars Background -->
             <div class="stars-container">
@@ -2537,7 +2483,7 @@
                             </div>
                             <div class="absolute top-10 left-0 right-0 bottom-0 bg-[#050505] overflow-hidden group">
                                 <!-- Actual Project Image filling the browser window -->
-                                <img src="./assets/img/portfolio/porfolio2-v4.png" alt="Preview Bar Luna Llena" loading="lazy"
+                                <img src="./assets/img/portfolio/porfolio2-v3.png" alt="Preview Bar Luna Llena" loading="lazy"
                                     class="w-full h-full object-cover object-top transition-transform duration-1000 group-hover:scale-[1.03]">
 
                                 <div
@@ -2779,19 +2725,25 @@
                     DO YOU KNOW OUR PLANS?<br>DISCOVER BELOW
                 </span>
                 <span
-                    class="material-symbols-outlined text-electric-cyan animate-scroll-bounce">keyboard_double_arrow_down</span>
+                    class="material-symbols-outlined text-[#e82728] animate-scroll-bounce">keyboard_double_arrow_down</span>
             </a>
         </section>
 
         <!-- 4. PLANES SECTION/BANNER -->
         <section
-            class="py-24 md:py-32 px-5 sm:px-8 md:px-16 lg:px-24 bg-void-black border-t border-white/[0.03] relative overflow-hidden"
+            class="pt-24 pb-40 md:pt-32 md:pb-52 px-5 sm:px-8 md:px-16 lg:px-24 bg-void-black relative overflow-hidden"
             id="planes-banner">
             <!-- Glowing Radial Background Elements -->
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-electric-cyan/5 blur-[120px] rounded-full pointer-events-none"></div>
             
             <div class="max-w-4xl mx-auto text-center reveal relative z-10">
                 <div class="space-y-6">
+                    <!-- Glass Gold Badge -->
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#8A733E]/10 border border-[#8A733E]/30 text-[#e0c387] font-headline text-[9px] tracking-[0.3em] uppercase backdrop-blur-md mx-auto">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#e0c387] animate-pulse"></span>
+                        Exclusive Launch Edition
+                    </div>
                     <span
                         class="text-electric-cyan/60 text-[10px] tracking-[0.5em] uppercase font-headline font-medium block">Transparency
                         & Results</span>
@@ -2801,19 +2753,9 @@
                         Discover our digital architecture plans and choose the perfect fit for your business goals.
                     </p>
                     <div class="pt-6">
-                        <a href="./planes/index-en.html" class="animated-button">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="arr-2" viewBox="0 0 24 24">
-                                <path
-                                    d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
-                                ></path>
-                            </svg>
-                            <span class="text">2026 Plans</span>
-                            <span class="circle"></span>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="arr-1" viewBox="0 0 24 24">
-                                <path
-                                    d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
-                                ></path>
-                            </svg>
+                        <a href="./planes/index-en.html" class="cap-btn mx-auto">
+                            <svg class="cap-layer" viewBox="0 0 1095.66 1095.63"><path class="cap-cls-1" d="M1298,749.62c.4,300.41-243,548-548.1,547.9C446.23,1297.4,201.92,1051.2,202.29,749c.37-301.52,244.49-547.41,548.34-547.12C1055.43,202.18,1298.25,449.6,1298,749.62Z" transform="translate(-202.29 -201.89)"></path><path class="cap-cls-2" d="M1285.89,749.79c-.25,297.07-241.24,535.86-536.12,535.66-296.34-.21-537-241.72-535.29-539,1.68-293.16,240.83-534.18,539.15-532.37C1046.8,215.84,1285.62,453.88,1285.89,749.79Z" transform="translate(-202.29 -201.89)"></path><path class="cap-cls-3" d="M1195.29,749.56c.54,244.73-198.67,446.2-446.87,445.33C503.27,1194,304,994.53,304.93,748c.91-244.52,199.12-443.08,444.39-443.49C997.43,304,1195.74,505.59,1195.29,749.56Z" transform="translate(-202.29 -201.89)"></path><path class="cap-cls-4" d="M1097.23,749.87c.22,190.31-154.42,347.43-348,346.92-192-.5-346.48-156.44-346.17-347.7C403.33,558,558.18,402,751.08,402.55,944.62,403.09,1097.69,560.56,1097.23,749.87Z" transform="translate(-202.29 -201.89)"></path><path class="cap-cls-5" d="M1006.72,744.28c2.81,143.23-110.17,257.35-247.42,261.9C613.15,1011,498.22,895.93,493.71,758.88,488.93,613.71,603,498,740.69,493.28,886.73,488.24,1004,603.87,1006.72,744.28Z" transform="translate(-202.29 -201.89)"></path><path class="cap-cls-6" d="M607.55,553.77c5.13,3.72,10.28,7.42,15.4,11.15l124.12,90.24a8.57,8.57,0,0,1,1.2.84c1.26,1.27,2.35,1.09,3.77,0,6.36-4.74,12.82-9.35,19.24-14l118.23-85.89c1.07-.78,2.17-1.54,3.28-2.32.82,1.1,0,2-.27,2.77Q866.29,637.48,840,718.38c-1.11,3.42-1.13,3.42,1.81,5.56l136,98.81c1.17.86,2.33,1.74,3.79,2.83-1.48.73-2.79.45-4,.45q-84.07,0-168.16,0h-.73c-3.7,0-3.68,0-4.8,3.43q-26.1,80.4-52.23,160.78c-.4,1.21-.45,2.66-1.77,3.6L735,948.24q-19.34-59.52-38.68-119c-1-3.16-1-3.17-4.6-3.17q-84.27,0-168.53,0a10.57,10.57,0,0,1-4.24-.34,13.17,13.17,0,0,1,3.33-2.77q67.55-49.08,135.1-98.18c5-3.63,4.38-1.8,2.43-7.83q-25.94-80.07-52-160.11c-.3-.91-.57-1.83-.85-2.75Z" transform="translate(-202.29 -201.89)"></path></svg>
+                            <p class="cap-text uppercase tracking-widest text-[12px]">2026 Plans</p>
                         </a>
                     </div>
                 </div>
@@ -2825,25 +2767,19 @@
                     SHALL WE CONNECT YOUR NEXT STEP?<br>DISCOVER BELOW
                 </span>
                 <span
-                    class="material-symbols-outlined text-electric-cyan animate-scroll-bounce">keyboard_double_arrow_down</span>
+                    class="material-symbols-outlined text-[#e82728] animate-scroll-bounce">keyboard_double_arrow_down</span>
             </a>
         </section>
 
-        <!-- 5. CONTACTO SECTION -->
         <section
-            class="min-h-screen py-32 px-5 sm:px-8 md:px-16 lg:px-24 flex items-center justify-center relative bg-void-black"
+            class="min-h-screen pt-32 pb-48 md:pt-32 md:pb-60 px-5 sm:px-8 md:px-16 lg:px-24 flex items-center justify-center relative bg-void-black"
             id="contacto">
             <div class="max-w-6xl w-full mx-auto px-4 sm:px-6">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <!-- Columna Izquierda: Textos y Accesos Directos -->
                     <div class="space-y-8 reveal text-left">
                         <div>
-                            <!-- Glass Gold Badge -->
-                            <div
-                                class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#8A733E]/10 border border-[#8A733E]/30 text-[#e0c387] font-headline text-[9px] tracking-[0.3em] uppercase mb-6 backdrop-blur-md">
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#e0c387] animate-pulse"></span>
-                                Exclusive Launch Edition
-                            </div>
+
                             <h2
                                 class="text-3xl md:text-5xl font-body font-extrabold tracking-tight uppercase leading-tight mb-6 text-gradient-gold">
                                 TRANSFORM YOUR WEB TODAY AND LEAD YOUR SECTOR
@@ -2941,6 +2877,202 @@
                     </div>
                 </div>
             </div>
+            <a class="absolute bottom-12 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-3 group transition-all duration-300"
+                href="#faq">
+                <span
+                    class="font-headline text-[9px] md:text-[10px] tracking-[0.4em] uppercase text-white/50 group-hover:text-white transition-colors text-center">
+                    HAVE ANY QUESTIONS?<br>FREQUENTLY ASKED QUESTIONS
+                </span>
+                <span
+                    class="material-symbols-outlined text-[#e82728] animate-scroll-bounce">keyboard_double_arrow_down</span>
+            </a>
+        </section>
+
+        <!-- 6. FREQUENTLY ASKED QUESTIONS (FAQ) SECTION -->
+        <section
+            class="py-16 px-5 sm:px-8 md:px-16 lg:px-24 relative bg-void-black border-t border-white/5"
+            id="faq">
+            <div class="max-w-4xl w-full mx-auto px-4 sm:px-6 relative z-10">
+                
+                <!-- Section Header -->
+                <div class="text-center mb-12 reveal">
+                    <h2 class="text-3xl md:text-5xl font-body font-extrabold tracking-tight uppercase leading-tight mb-6 text-gradient-cyan">
+                        Frequently Asked Questions
+                    </h2>
+                    <p class="font-body font-light text-white/70 text-sm md:text-base leading-relaxed max-w-2xl mx-auto">
+                        Answers to the most common questions about the work process, web development, and how MyNext works.
+                    </p>
+                </div>
+
+                <!-- Accordions List -->
+                <div class="space-y-4 max-w-3xl mx-auto reveal">
+                    <!-- Item 1 -->
+                    <div class="faq-item group rounded-2xl bg-gradient-to-r from-white/[0.02] to-transparent border border-white/10 backdrop-blur-2xl hover:border-electric-cyan/30 transition-all duration-500 overflow-hidden" data-open="false">
+                        <button class="faq-trigger w-full flex items-center justify-between p-5 md:p-6 text-left focus:outline-none" aria-expanded="false">
+                            <span class="font-headline font-semibold text-sm md:text-base tracking-wide text-white/90 group-hover:text-electric-cyan transition-colors">
+                                1. What exactly is MyNext?
+                            </span>
+                            <div class="faq-icon-wrapper w-8 h-8 rounded-full border border-white/10 flex items-center justify-center bg-white/[0.02] group-hover:border-electric-cyan/30 group-hover:bg-electric-cyan/10 transition-all duration-300">
+                                <span class="faq-icon material-symbols-outlined text-white/50 group-hover:text-electric-cyan text-base transition-transform duration-300">
+                                    keyboard_arrow_down
+                                </span>
+                            </div>
+                        </button>
+                        <div class="faq-content overflow-hidden">
+                            <div class="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+                            <div class="px-5 py-6 md:px-6 md:py-8 text-xs md:text-sm text-white/60 leading-relaxed font-body">
+                                MyNext is an independent digital brand specializing in creating modern web pages for local businesses, ecommerce, landing pages, and custom digital experiences. Each project is developed from scratch, adapting to the identity, goals, and real needs of each business.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="faq-item group rounded-2xl bg-gradient-to-r from-white/[0.02] to-transparent border border-white/10 backdrop-blur-2xl hover:border-electric-cyan/30 transition-all duration-500 overflow-hidden" data-open="false">
+                        <button class="faq-trigger w-full flex items-center justify-between p-5 md:p-6 text-left focus:outline-none" aria-expanded="false">
+                            <span class="font-headline font-semibold text-sm md:text-base tracking-wide text-white/90 group-hover:text-electric-cyan transition-colors">
+                                2. Why choose MyNext instead of a traditional agency?
+                            </span>
+                            <div class="faq-icon-wrapper w-8 h-8 rounded-full border border-white/10 flex items-center justify-center bg-white/[0.02] group-hover:border-electric-cyan/30 group-hover:bg-electric-cyan/10 transition-all duration-300">
+                                <span class="faq-icon material-symbols-outlined text-white/50 group-hover:text-electric-cyan text-base transition-transform duration-300">
+                                    keyboard_arrow_down
+                                </span>
+                            </div>
+                        </button>
+                        <div class="faq-content overflow-hidden">
+                            <div class="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+                            <div class="px-5 py-6 md:px-6 md:py-8 text-xs md:text-sm text-white/60 leading-relaxed font-body">
+                                Because here you talk directly with the person who designs and develops your project. There are no intermediaries, endless email chains, or unnecessarily complex processes. This allows for closer communication, faster decisions, and a final result much more aligned with what you really need. In addition, by working independently, you get closer attention and a much more agile process, maintaining a quality level comparable to that of many agencies.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="faq-item group rounded-2xl bg-gradient-to-r from-white/[0.02] to-transparent border border-white/10 backdrop-blur-2xl hover:border-electric-cyan/30 transition-all duration-500 overflow-hidden" data-open="false">
+                        <button class="faq-trigger w-full flex items-center justify-between p-5 md:p-6 text-left focus:outline-none" aria-expanded="false">
+                            <span class="font-headline font-semibold text-sm md:text-base tracking-wide text-white/90 group-hover:text-electric-cyan transition-colors">
+                                3. How long does a website take to be ready?
+                            </span>
+                            <div class="faq-icon-wrapper w-8 h-8 rounded-full border border-white/10 flex items-center justify-center bg-white/[0.02] group-hover:border-electric-cyan/30 group-hover:bg-electric-cyan/10 transition-all duration-300">
+                                <span class="faq-icon material-symbols-outlined text-white/50 group-hover:text-electric-cyan text-base transition-transform duration-300">
+                                    keyboard_arrow_down
+                                </span>
+                            </div>
+                        </button>
+                        <div class="faq-content overflow-hidden">
+                            <div class="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+                            <div class="px-5 py-6 md:px-6 md:py-8 text-xs md:text-sm text-white/60 leading-relaxed font-body">
+                                It depends on the type of project, but most websites are usually completed in a few days. When the client provides the requested content from the beginning, the development can move forward very quickly and efficiently.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="faq-item group rounded-2xl bg-gradient-to-r from-white/[0.02] to-transparent border border-white/10 backdrop-blur-2xl hover:border-electric-cyan/30 transition-all duration-500 overflow-hidden" data-open="false">
+                        <button class="faq-trigger w-full flex items-center justify-between p-5 md:p-6 text-left focus:outline-none" aria-expanded="false">
+                            <span class="font-headline font-semibold text-sm md:text-base tracking-wide text-white/90 group-hover:text-electric-cyan transition-colors">
+                                4. Do you work only in Mallorca?
+                            </span>
+                            <div class="faq-icon-wrapper w-8 h-8 rounded-full border border-white/10 flex items-center justify-center bg-white/[0.02] group-hover:border-electric-cyan/30 group-hover:bg-electric-cyan/10 transition-all duration-300">
+                                <span class="faq-icon material-symbols-outlined text-white/50 group-hover:text-electric-cyan text-base transition-transform duration-300">
+                                    keyboard_arrow_down
+                                </span>
+                            </div>
+                        </button>
+                        <div class="faq-content overflow-hidden">
+                            <div class="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+                            <div class="px-5 py-6 md:px-6 md:py-8 text-xs md:text-sm text-white/60 leading-relaxed font-body">
+                                No. Although MyNext is based in Mallorca, I work with clients from any city or country. The entire process can be done through calls, video calls, and online communication, allowing us to collaborate comfortably regardless of location.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 5 -->
+                    <div class="faq-item group rounded-2xl bg-gradient-to-r from-white/[0.02] to-transparent border border-white/10 backdrop-blur-2xl hover:border-electric-cyan/30 transition-all duration-500 overflow-hidden" data-open="false">
+                        <button class="faq-trigger w-full flex items-center justify-between p-5 md:p-6 text-left focus:outline-none" aria-expanded="false">
+                            <span class="font-headline font-semibold text-sm md:text-base tracking-wide text-white/90 group-hover:text-electric-cyan transition-colors">
+                                5. Do you use artificial intelligence to create websites?
+                            </span>
+                            <div class="faq-icon-wrapper w-8 h-8 rounded-full border border-white/10 flex items-center justify-center bg-white/[0.02] group-hover:border-electric-cyan/30 group-hover:bg-electric-cyan/10 transition-all duration-300">
+                                <span class="faq-icon material-symbols-outlined text-white/50 group-hover:text-electric-cyan text-base transition-transform duration-300">
+                                    keyboard_arrow_down
+                                </span>
+                            </div>
+                        </button>
+                        <div class="faq-content overflow-hidden">
+                            <div class="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+                            <div class="px-5 py-6 md:px-6 md:py-8 text-xs md:text-sm text-white/60 leading-relaxed font-body">
+                                Artificial intelligence is part of my workflow as a support tool to research, generate ideas, analyze references, or create visual resources. However, the development of the web pages, the construction of the project, and the key decisions are made personally by me.<br><br>My goal is not to replace professional work with AI, but to leverage current tools to work more efficiently and deliver better results.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 6 -->
+                    <div class="faq-item group rounded-2xl bg-gradient-to-r from-white/[0.02] to-transparent border border-white/10 backdrop-blur-2xl hover:border-electric-cyan/30 transition-all duration-500 overflow-hidden" data-open="false">
+                        <button class="faq-trigger w-full flex items-center justify-between p-5 md:p-6 text-left focus:outline-none" aria-expanded="false">
+                            <span class="font-headline font-semibold text-sm md:text-base tracking-wide text-white/90 group-hover:text-electric-cyan transition-colors">
+                                6. Will the website be completely mine once the project is finished?
+                            </span>
+                            <div class="faq-icon-wrapper w-8 h-8 rounded-full border border-white/10 flex items-center justify-center bg-white/[0.02] group-hover:border-electric-cyan/30 group-hover:bg-electric-cyan/10 transition-all duration-300">
+                                <span class="faq-icon material-symbols-outlined text-white/50 group-hover:text-electric-cyan text-base transition-transform duration-300">
+                                    keyboard_arrow_down
+                                </span>
+                            </div>
+                        </button>
+                        <div class="faq-content overflow-hidden">
+                            <div class="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+                            <div class="px-5 py-6 md:px-6 md:py-8 text-xs md:text-sm text-white/60 leading-relaxed font-body">
+                                Yes. Once the project is delivered, the website, the content, and all associated assets belong to the client. My goal is for you to have total control over your project and the freedom to manage it as you prefer in the future.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 7 -->
+                    <div class="faq-item group rounded-2xl bg-gradient-to-r from-white/[0.02] to-transparent border border-white/10 backdrop-blur-2xl hover:border-electric-cyan/30 transition-all duration-500 overflow-hidden" data-open="false">
+                        <button class="faq-trigger w-full flex items-center justify-between p-5 md:p-6 text-left focus:outline-none" aria-expanded="false">
+                            <span class="font-headline font-semibold text-sm md:text-base tracking-wide text-white/90 group-hover:text-electric-cyan transition-colors">
+                                7. What happens once the website is delivered?
+                            </span>
+                            <div class="faq-icon-wrapper w-8 h-8 rounded-full border border-white/10 flex items-center justify-center bg-white/[0.02] group-hover:border-electric-cyan/30 group-hover:bg-electric-cyan/10 transition-all duration-300">
+                                <span class="faq-icon material-symbols-outlined text-white/50 group-hover:text-electric-cyan text-base transition-transform duration-300">
+                                    keyboard_arrow_down
+                                </span>
+                            </div>
+                        </button>
+                        <div class="faq-content overflow-hidden">
+                            <div class="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+                            <div class="px-5 py-6 md:px-6 md:py-8 text-xs md:text-sm text-white/60 leading-relaxed font-body">
+                                Delivery does not mean the end of the project. If in the future you need new features, improvements, content changes, or technical support, you can continue to count on me to help your website evolve along with your business.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 8 (Any questions left?) -->
+                    <div class="faq-item group rounded-2xl bg-gradient-to-r from-[#00F2FF]/[0.02] to-transparent border border-[#00F2FF]/15 backdrop-blur-2xl hover:border-electric-cyan/40 transition-all duration-500 overflow-hidden" data-open="false">
+                        <button class="faq-trigger w-full flex items-center justify-between p-5 md:p-6 text-left focus:outline-none" aria-expanded="false">
+                            <span class="font-headline font-semibold text-sm md:text-base tracking-wide text-electric-cyan group-hover:text-white transition-colors">
+                                8. Any questions left?
+                            </span>
+                            <div class="faq-icon-wrapper w-8 h-8 rounded-full border border-[#00F2FF]/20 flex items-center justify-center bg-white/[0.02] group-hover:border-electric-cyan/30 group-hover:bg-electric-cyan/10 transition-all duration-300">
+                                <span class="faq-icon material-symbols-outlined text-electric-cyan group-hover:text-white text-base transition-transform duration-300">
+                                    keyboard_arrow_down
+                                </span>
+                            </div>
+                        </button>
+                        <div class="faq-content overflow-hidden">
+                            <div class="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+                            <div class="px-5 py-6 md:px-6 md:py-8 text-xs md:text-sm text-white/70 leading-relaxed font-body">
+                                If you haven't found the answer you were looking for, you can write to me directly.<br><br>
+                                <a href="https://wa.me/34673109486?text=Hello%20Musa%2C%20I%20was%20checking%20the%20FAQ%20on%20MyNext%20and%20I%20have%20a%20question%20related%20to%20my%20project."
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   class="inline-flex items-center text-xs font-headline font-bold text-electric-cyan hover:underline transition-colors duration-300">
+                                    Resolve a question →
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
@@ -2957,7 +3089,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 items-center md:items-start gap-8">
                 <!-- Legal Links (stacked vertically on the left) -->
-                <div class="flex flex-col items-center md:items-start gap-3 text-xs font-body text-white/95 order-2 md:order-1">
+                <div class="flex flex-col items-center md:items-start gap-4 text-sm font-headline tracking-wide text-white/95 order-2 md:order-1">
                     <a href="#" data-modal="aviso-legal"
                         class="hover:text-electric-cyan hover:underline underline-offset-4 transition-colors duration-300 cursor-pointer">Legal Notice</a>
                     <a href="#" data-modal="privacidad"
@@ -2980,8 +3112,8 @@
                     <span class="text-[10px] font-headline text-electric-cyan tracking-[0.3em] uppercase font-semibold">Digital Architecture</span>
                 </div>
 
-                <!-- Social (on the right) -->
-                <div class="flex justify-center md:justify-end items-center order-3">
+                <!-- Social & Navigation (on the right) -->
+                <div class="flex flex-col items-center md:items-end gap-6 order-3">
                     <ul class="social-buttons-wrapper">
                         <!-- Twitter / X -->
                         <li class="icon twitter">
@@ -3011,6 +3143,14 @@
                             </a>
                         </li>
                     </ul>
+
+                    <!-- Compact Navigation Bar -->
+                    <nav class="flex flex-col items-center md:items-end gap-4 text-sm font-headline tracking-wide text-white/50">
+                        <a href="#sobre-mi" class="hover:text-electric-cyan transition-colors duration-300">About Me</a>
+                        <a href="#portfolio" class="hover:text-electric-cyan transition-colors duration-300">Portfolio</a>
+                        <a href="planes/index-en.html" class="hover:text-electric-cyan transition-colors duration-300">Plans</a>
+                        <a href="#contacto" class="hover:text-electric-cyan transition-colors duration-300">Contact</a>
+                    </nav>
                 </div>
             </div>
             <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left text-white/30 text-[10px] font-light uppercase tracking-widest">
@@ -3492,16 +3632,13 @@
                 }
             };
 
-            // Mouse events (Desktop)
+            // Mouse events (Desktop) - DISABLED GLOBALLY
             document.addEventListener('mousemove', function(e) {
-                if (window.innerWidth <= 768) return;
-                hgTargetX = (e.clientX / window.innerWidth  - .5) * 34;
-                hgTargetY = (e.clientY / window.innerHeight - .5) * 34;
-                handleMove(e.clientX, e.clientY);
+                // Parallax is disabled on all devices
             });
 
             document.addEventListener('mouseleave', function() {
-                handleReset();
+                // Parallax is disabled on all devices
             });
 
             // Touch events (Mobile finger drag) - DISABLED FOR MOBILE

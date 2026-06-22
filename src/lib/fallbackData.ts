@@ -62,7 +62,7 @@ export const fallbackProjects = [
       en: 'Drywall and luxury renovations in Mallorca.'
     }),
     image_url: './assets/img/portfolio/porfolio3.png',
-    project_url: 'https://ecuaplac-v1.pages.dev',
+    project_url: 'https://ecuapv2.pages.dev/',
     technologies: 'HTML, CSS, JS, Tailwind',
     featured: false,
     active: true,
