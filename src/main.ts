@@ -311,8 +311,7 @@ async function initMain() {
             </div>
           </div>
           <div class="absolute top-10 left-0 right-0 bottom-0 bg-[#050505] overflow-hidden flex items-center justify-center p-4 sm:p-6 md:p-8">
-            <!-- Actual Project Image -->
-            <img src="${proj.image_url}" alt="Preview ${proj.title}" loading="lazy"
+            <img src="${proj.image_url}" alt="${lang === 'en' ? `Premium web design in Mallorca - Preview of ${proj.title}` : `Diseño web premium en Mallorca - Vista previa de ${proj.title}`}" loading="lazy"
               class="w-full h-full object-contain transition-transform duration-1000 group-hover:scale-[1.03]">
             <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500"></div>
             <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center z-20 backdrop-blur-sm">

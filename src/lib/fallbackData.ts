@@ -183,12 +183,12 @@ export const fallbackTestimonials = [
 
 export const fallbackSettings: Record<string, string> = {
   site_title: JSON.stringify({
-    es: 'MYNEXT - Arquitectura Digital Premium | Musa',
-    en: 'MYNEXT - Premium Digital Architecture | Musa'
+    es: 'Diseño Web en Palma de Mallorca | MYNEXT - Arquitectura Digital',
+    en: 'Premium Web Design in Palma de Mallorca | MYNEXT Digital Architecture'
   }),
   site_description: JSON.stringify({
-    es: 'Diseño y desarrollo de experiencias digitales exclusivas. Elevamos tu marca con arquitectura digital premium y diseño de alta fidelidad.',
-    en: 'Design and development of exclusive digital experiences. We elevate your brand with premium digital architecture and high-fidelity design.'
+    es: '¿Buscas diseño web en Palma de Mallorca? En MYNEXT creamos páginas web exclusivas, responsivas y optimizadas para SEO que impulsan tu negocio. ¡Contáctanos!',
+    en: 'Looking for premium web design in Palma de Mallorca? MYNEXT creates exclusive, responsive, and SEO-optimized websites to elevate your brand. Contact us!'
   }),
   contact_phone: '34673109486',
   contact_email: 'mynextbymusa@gmail.com',
