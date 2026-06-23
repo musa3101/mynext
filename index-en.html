@@ -695,8 +695,25 @@
             width: 100%;
         }
 
+        @media (max-width: 767px) {
+            .mnx-svg {
+                animation: 
+                    scanReveal 1.8s cubic-bezier(0.4, 0, 0.2, 1) 2.6s forwards,
+                    svgg-mobile 4.5s ease-in-out 6.5s infinite !important;
+            }
+        }
+
         @keyframes scanReveal {
             to { clip-path: inset(0 0 0 0); }
+        }
+
+        @keyframes svgg-mobile {
+            0%, 100% {
+                filter: contrast(1.1) brightness(1.1) drop-shadow(0 0 2px rgba(201, 168, 76, 0.8)) drop-shadow(0 0 15px rgba(0, 242, 255, 0.15));
+            }
+            50% {
+                filter: contrast(1.15) brightness(1.12) drop-shadow(0 0 3px rgba(201, 168, 76, 1)) drop-shadow(0 0 24px rgba(0, 242, 255, 0.22));
+            }
         }
 
         @keyframes svgg {
@@ -2068,7 +2085,7 @@
     <!-- Mobile Menu Panel -->
     <div id="mobile-dropdown" class="mobile-menu-panel md:hidden" aria-hidden="true">
         <!-- Close Button (X) top-left -->
-        <button id="mobile-menu-close" class="absolute top-6 left-6 text-white/50 hover:text-white transition-colors cursor-pointer z-10 flex items-center justify-center p-2" aria-label="Close menu" title="Close">
+        <button id="mobile-menu-close" class="absolute top-6 left-6 text-[#e82728] hover:text-red-500 transition-colors cursor-pointer z-10 flex items-center justify-center p-2" aria-label="Close menu" title="Close">
             <span class="material-symbols-outlined !text-3xl">close</span>
         </button>
         <div class="mobile-menu-panel__inner">

@@ -764,6 +764,10 @@ async function initMain() {
     mobileMenuBtn.classList.add('is-active');
     mobileMenuBtn.setAttribute('aria-expanded', 'true');
     mobileDropdown.setAttribute('aria-hidden', 'false');
+    const currentScrollY = window.scrollY;
+    document.body.style.top = `-${currentScrollY}px`;
+    document.body.style.position = 'fixed';
+    document.body.style.width = '100%';
     document.body.classList.add('mobile-menu-open');
   }
 
@@ -774,7 +778,13 @@ async function initMain() {
     mobileMenuBtn.classList.remove('is-active');
     mobileMenuBtn.setAttribute('aria-expanded', 'false');
     mobileDropdown.setAttribute('aria-hidden', 'true');
+    
+    const scrollY = document.body.style.top;
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
     document.body.classList.remove('mobile-menu-open');
+    window.scrollTo(0, parseInt(scrollY || '0') * -1);
 
     // Reset contact trigger and options when mobile menu closes
     if (mobileContactOptions) mobileContactOptions.classList.remove('is-active');
