@@ -207,11 +207,24 @@ async function initPlanes() {
   (window as any).contactPhone = phoneVal;
   (window as any).contactEmail = emailVal;
 
+  // Check if current date is on or after July 1, 2026
+  const now = new Date();
+  const isOfferOver = now >= new Date('2026-07-01T00:00:00');
+
   // Update banner text
   const launchBannerText = settingsMap.get('launch_banner_text');
   const bannerEl = document.getElementById('launch-banner-text');
-  if (bannerEl && launchBannerText) {
-    bannerEl.innerText = getTranslation(launchBannerText, lang);
+  if (bannerEl) {
+    if (isOfferOver) {
+      const bannerContainer = bannerEl.closest('.bg-gradient-to-r');
+      if (bannerContainer) {
+        bannerContainer.classList.add('hidden');
+      } else {
+        bannerEl.classList.add('hidden');
+      }
+    } else if (launchBannerText) {
+      bannerEl.innerText = getTranslation(launchBannerText, lang);
+    }
   }
 
   // Update contact links on the plans page (if any exist in the markup)
@@ -235,11 +248,26 @@ async function initPlanes() {
     services.forEach((service) => {
       const title = getTranslation(service.title, lang);
       const description = getTranslation(service.description, lang);
-      // Aumentamos 10 euros al precio base de la base de datos (Ej: 200 -> 210, 300 -> 310)
-      const priceVal = Number(service.price) + 10;
+      
+      // Offer price is database base price + 10 (190 -> 200, 290 -> 300)
+      const offerPrice = Number(service.price) + 10;
+      // Original price is offer price + 50 (200 -> 250, 300 -> 350)
+      const originalPrice = offerPrice + 50;
 
       const currencySymbol = isEnglish ? '£' : '€';
-      const priceStr = isEnglish ? `${currencySymbol}${priceVal}` : `${priceVal}${currencySymbol}`;
+      
+      let priceHTML = '';
+      if (isOfferOver) {
+        const priceStr = isEnglish ? `${currencySymbol}${originalPrice}` : `${originalPrice}${currencySymbol}`;
+        priceHTML = `<span>${priceStr}</span>`;
+      } else {
+        const origPriceStr = isEnglish ? `${currencySymbol}${originalPrice}` : `${originalPrice}${currencySymbol}`;
+        const offerPriceStr = isEnglish ? `${currencySymbol}${offerPrice}` : `${offerPrice}${currencySymbol}`;
+        priceHTML = `
+          <del class="text-slate-500 text-2xl md:text-3xl font-medium mr-2">${origPriceStr}</del>
+          <span class="${service.featured ? 'text-amber-400' : 'text-cyan-400'}">${offerPriceStr}</span>
+        `;
+      }
 
       // Process description list items
       const items = description.split(',').map((item) => {
@@ -278,8 +306,8 @@ async function initPlanes() {
                     <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"></div>
                   </span>
                 </h3>
-                <div class="text-4xl md:text-5xl font-extrabold text-amber-400 mb-4 md:mb-6 flex items-center justify-center gap-3">
-                  <span>${priceStr}</span>
+                <div class="text-4xl md:text-5xl font-extrabold text-white mb-4 md:mb-6 flex items-center justify-center gap-3">
+                  ${priceHTML}
                 </div>
                 
                 <ul class="space-y-4 flex-grow text-[14px] md:text-[15px] text-slate-200 font-semibold text-left mx-auto w-fit mt-4">
@@ -350,8 +378,8 @@ async function initPlanes() {
                     <div class="absolute bottom-0 left-0 w-full h-[2px] bg-slate-700 rounded-full"></div>
                   </span>
                 </h3>
-                <div class="text-4xl md:text-5xl font-extrabold text-cyan-400 mb-6 md:mb-10 flex items-center justify-center gap-3">
-                  <span>${priceStr}</span>
+                <div class="text-4xl md:text-5xl font-extrabold text-white mb-6 md:mb-10 flex items-center justify-center gap-3">
+                  ${priceHTML}
                 </div>
                 
                 <ul class="space-y-4 flex-grow text-[14px] md:text-[15px] text-slate-300 font-semibold text-left mx-auto w-fit">
