@@ -8,12 +8,15 @@
 - [x] Inyección e integración local del FAQ de 8 items en las páginas de planes (español e inglés).
 - [x] Lógica de acordeones interactivos localizados en `src/planes.ts` para habilitar el toggle de dudas inline.
 - [x] QA estético y optimización de paddings de tarjetas de contacto para pantallas móviles estrechas (320px).
-- [x] Revisión general de interacciones y micro-animaciones en dispositivos móviles (Añadido `:active` state y `@media (hover: hover)` en CSS).
-- [x] Optimización de imágenes del portafolio (Validado el uso generalizado de `loading="lazy"` para prevenir bloqueos de renderizado).
+- [x] Textos y animaciones continuas de flotación/pulso/oscilación en la sección de "Cómo Trabajo".
+- [x] Cambio de reseñas de Blessed Barber y Luna Llena por descripciones reales en primera persona sin comillas.
+- [x] Aumento de ancho máximo de formulario a 500px para pantallas grandes y medianas.
+- [x] Automatización por fecha en Javascript para cambiar precios y ocultar banner de oferta el 1 de julio de 2026.
+- [x] Creación de script de migración y sincronización de datos a Supabase (`sync_supabase.mjs`).
+- [x] Vinculación del repositorio remoto de GitLab y push de respaldo de todo el proyecto.
 
 ## Tareas en Progreso
-- [ ] Monitoreo del diseño responsive tras el despliegue de las nuevas páginas de planes actualizadas.
-- [ ] Aseguramiento del rendimiento del CDN con los recientes cambios aplicados.
+- [ ] Monitoreo del diseño responsivo y la interactividad fluida tras el despliegue automático.
 
 ## Próximas Mejoras Prioritarias
-- [ ] Migración de imágenes a formatos de nueva generación (WebP/AVIF) al añadir nuevos ítems al portfolio.
+- [ ] Implementación de compresión y formatos modernos (WebP/AVIF) en nuevos recursos gráficos agregados al portfolio.
