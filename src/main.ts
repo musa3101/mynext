@@ -156,6 +156,10 @@ async function initMain() {
             if (localProj.title.toLowerCase() === 'ecuaplac') {
               match.project_url = localProj.project_url;
             }
+            // Override NEXT ERA description to keep it in sync with local file updates
+            if (localProj.title.toLowerCase() === 'next era') {
+              match.description = localProj.description;
+            }
           } else {
             // Append locally added projects that are missing in the database
             merged.push(localProj);
@@ -167,6 +171,18 @@ async function initMain() {
       }
       if (testimonialsRes.data && testimonialsRes.data.length > 0) {
         testimonials = testimonialsRes.data;
+        // Override NEXT ERA testimonial dynamically
+        const nextEraTestimonial = testimonials.find(
+          (t) => t.company.toLowerCase().trim() === 'next era'
+        );
+        if (nextEraTestimonial) {
+          const localNextEra = fallbackTestimonials.find(
+            (t) => t.company.toLowerCase().trim() === 'next era'
+          );
+          if (localNextEra) {
+            nextEraTestimonial.testimonial = localNextEra.testimonial;
+          }
+        }
       }
       if (settingsRes.data && settingsRes.data.length > 0) {
         const dbSettings: Record<string, string> = {};
@@ -294,7 +310,7 @@ async function initMain() {
               </div>
             </div>
           </div>
-          <div class="absolute top-10 left-0 right-0 bottom-0 bg-[#050505] overflow-hidden flex items-center justify-center p-2 md:p-6">
+          <div class="absolute top-10 left-0 right-0 bottom-0 bg-[#050505] overflow-hidden flex items-center justify-center p-4 sm:p-6 md:p-8">
             <!-- Actual Project Image -->
             <img src="${proj.image_url}" alt="Preview ${proj.title}" loading="lazy"
               class="w-full h-full object-contain transition-transform duration-1000 group-hover:scale-[1.03]">

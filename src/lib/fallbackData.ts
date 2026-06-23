@@ -86,8 +86,8 @@ export const fallbackProjects = [
     id: 5,
     title: 'NEXT ERA',
     description: JSON.stringify({
-      es: 'Catálogo virtual interactivo para marca exclusiva de gorras.',
-      en: 'Interactive virtual catalog for exclusive cap brand.'
+      es: 'Prototipo de tienda online para una marca de gorras premium y streetwear.',
+      en: 'Online store prototype for a premium and streetwear cap brand.'
     }),
     image_url: './assets/img/portfolio/porfolio5.png',
     project_url: 'https://nexterabymusa.pages.dev',
@@ -163,7 +163,7 @@ export const fallbackTestimonials = [
     role: JSON.stringify({ es: 'Prototipo E-Commerce', en: 'E-Commerce Prototype' }),
     company: 'NEXT ERA',
     testimonial: JSON.stringify({
-      es: 'Catálogo virtual interactivo para marca exclusiva de gorras. Excelente navegación y animaciones muy fluidas que enganchan al cliente en la compra.',
+      es: 'Prototipo de tienda online para una marca de gorras premium y streetwear. Diseño en blanco y negro con mucha actitud, pensado para que el producto sea el protagonista y la compra sea sencilla e intuitiva.',
       en: 'Luxury caps and premium streetwear e-commerce. A high-contrast minimalist design and interactive animations focused on conversion and brand exclusivity.'
     }),
     active: true

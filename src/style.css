@@ -1905,3 +1905,12 @@ body.mobile-menu-open {
 .faq-item[data-open="true"] .faq-trigger span:first-child {
   color: #00F2FF !important;
 }
+
+/* Portfolio Mockup Image Fixes */
+.glass-panel img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  object-position: center !important;
+}
+
