@@ -1914,3 +1914,41 @@ body.mobile-menu-open {
   object-position: center !important;
 }
 
+/* FAQ Button Premium Glow (jello-vertical animation and cyan-blue gradient) */
+.social-buttons-wrapper .faq-btn:hover {
+  background: linear-gradient(135deg, #00F2FF 0%, #0066FF 74%) !important;
+  box-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
+  border-color: transparent !important;
+  animation: jello-vertical 1s both;
+}
+.social-buttons-wrapper .faq-btn:hover .tooltip,
+.social-buttons-wrapper .faq-btn:hover .tooltip::before {
+  background: linear-gradient(135deg, #00F2FF 0%, #0066FF 74%) !important;
+  border-color: transparent !important;
+}
+
+@keyframes jello-vertical {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+  30% {
+    transform: scale3d(0.75, 1.25, 1);
+  }
+  40% {
+    transform: scale3d(1.25, 0.75, 1);
+  }
+  50% {
+    transform: scale3d(0.85, 1.15, 1);
+  }
+  65% {
+    transform: scale3d(1.05, 0.95, 1);
+  }
+  75% {
+    transform: scale3d(0.95, 1.05, 1);
+  }
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+
