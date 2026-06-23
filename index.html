@@ -2517,6 +2517,25 @@
                             </div>
                         </div>
 
+                        <style>
+                            @keyframes floatSubtle {
+                                0%, 100% { transform: translateY(0); }
+                                50% { transform: translateY(-4px); }
+                            }
+                            @keyframes swapOut {
+                                0%, 35% { transform: translateY(0); opacity: 1; }
+                                45%, 85% { transform: translateY(-100%); opacity: 0; }
+                                95%, 100% { transform: translateY(0); opacity: 1; }
+                            }
+                            @keyframes swapIn {
+                                0%, 35% { transform: translateY(100%); opacity: 0; }
+                                45%, 85% { transform: translateY(0); opacity: 1; }
+                                95%, 100% { transform: translateY(100%); opacity: 0; }
+                            }
+                            .animate-float-subtle { animation: floatSubtle 4s ease-in-out infinite; }
+                            .animate-swap-out { animation: swapOut 6s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+                            .animate-swap-in { animation: swapIn 6s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+                        </style>
                         <!-- Step 01 -->
                         <div id="card-1"
                             class="process-card group/bento relative overflow-hidden p-8 md:p-12 rounded-[2.5rem] bg-[#050505]/75 border border-white/5 backdrop-blur-xl hover:border-electric-cyan/30 hover:bg-[#050505]/90">
@@ -2525,7 +2544,7 @@
                                 1</div>
                             <div class="relative z-10 space-y-8">
                                 <div
-                                    class="w-16 h-16 rounded-2xl bg-electric-cyan/5 border border-electric-cyan/20 flex items-center justify-center group-hover/bento:border-electric-cyan/50 transition-all duration-500 shadow-[inset_0_0_15px_rgba(0,242,255,0.05)] group-hover/bento:shadow-[inset_0_0_20px_rgba(0,242,255,0.15)]">
+                                    class="w-16 h-16 rounded-2xl bg-electric-cyan/5 border border-electric-cyan/20 flex items-center justify-center group-hover/bento:border-electric-cyan/50 transition-all duration-500 shadow-[inset_0_0_15px_rgba(0,242,255,0.05)] group-hover/bento:shadow-[inset_0_0_20px_rgba(0,242,255,0.15)] animate-float-subtle">
                                     <div class="relative w-12 h-10 flex items-center justify-center group-hover/bento:scale-105 transition-transform duration-500">
                                         <!-- Bubble 1 -->
                                         <div class="absolute left-0 top-1 w-8 h-6 border-[1.5px] border-electric-cyan/60 rounded-xl rounded-bl-sm bg-[#050505] flex items-center justify-center shadow-[0_0_10px_rgba(0,242,255,0.2)] group-hover/bento:border-electric-cyan transition-colors">
@@ -2559,12 +2578,12 @@
                                 2</div>
                             <div class="relative z-10 space-y-8">
                                 <div
-                                    class="w-16 h-16 rounded-2xl bg-electric-cyan/5 border border-electric-cyan/20 flex items-center justify-center group-hover/bento:border-electric-cyan/50 transition-all duration-500 shadow-[inset_0_0_15px_rgba(0,242,255,0.05)] group-hover/bento:shadow-[inset_0_0_20px_rgba(0,242,255,0.15)]">
+                                    class="w-16 h-16 rounded-2xl bg-electric-cyan/5 border border-electric-cyan/20 flex items-center justify-center group-hover/bento:border-electric-cyan/50 transition-all duration-500 shadow-[inset_0_0_15px_rgba(0,242,255,0.05)] group-hover/bento:shadow-[inset_0_0_20px_rgba(0,242,255,0.15)] animate-float-subtle" style="animation-delay: 1s;">
                                     <div class="relative w-12 h-10 flex flex-col items-center justify-end group-hover/bento:scale-105 transition-transform duration-500">
                                         <!-- Screen -->
                                         <div class="w-10 h-7 border-[1.5px] border-electric-cyan/60 rounded-t-md bg-[#050505] flex items-center justify-center overflow-hidden relative group-hover/bento:border-electric-cyan transition-colors shadow-[0_0_10px_rgba(0,242,255,0.2)]">
                                             <!-- Floating code lines -->
-                                            <div class="absolute top-1.5 left-1.5 flex flex-col gap-1 w-full opacity-70 group-hover/bento:animate-pulse">
+                                            <div class="absolute top-1.5 left-1.5 flex flex-col gap-1 w-full opacity-80 animate-pulse">
                                                 <div class="h-0.5 w-4 bg-electric-cyan/80 rounded-full"></div>
                                                 <div class="h-0.5 w-6 bg-cyan-400/50 rounded-full ml-2"></div>
                                                 <div class="h-0.5 w-3 bg-cyan-400/50 rounded-full ml-2"></div>
@@ -2595,7 +2614,7 @@
                                 3</div>
                             <div class="relative z-10 space-y-8">
                                 <div
-                                    class="w-16 h-16 rounded-2xl bg-electric-cyan/5 border border-electric-cyan/20 flex items-center justify-center group-hover/bento:border-electric-cyan/50 transition-all duration-500 shadow-[inset_0_0_15px_rgba(0,242,255,0.05)] group-hover/bento:shadow-[inset_0_0_20px_rgba(0,242,255,0.15)]">
+                                    class="w-16 h-16 rounded-2xl bg-electric-cyan/5 border border-electric-cyan/20 flex items-center justify-center group-hover/bento:border-electric-cyan/50 transition-all duration-500 shadow-[inset_0_0_15px_rgba(0,242,255,0.05)] group-hover/bento:shadow-[inset_0_0_20px_rgba(0,242,255,0.15)] animate-float-subtle" style="animation-delay: 2s;">
                                     <div class="relative w-14 h-10 border-[1.5px] border-electric-cyan/60 rounded-md bg-[#050505] flex flex-col overflow-hidden group-hover/bento:border-electric-cyan shadow-[0_0_10px_rgba(0,242,255,0.2)] group-hover/bento:shadow-[0_0_20px_rgba(0,242,255,0.4)] transition-all duration-500 group-hover/bento:scale-105">
                                         <div class="h-2.5 border-b border-electric-cyan/30 flex items-center px-1.5 gap-1 bg-electric-cyan/10">
                                             <div class="w-1 h-1 rounded-full bg-[#FF5F56]"></div>
@@ -2604,11 +2623,11 @@
                                         </div>
                                         <div class="flex-1 flex items-center justify-center relative overflow-hidden">
                                             <!-- Default State: Rocket -->
-                                            <div class="flex flex-col items-center justify-center transform group-hover/bento:-translate-y-full transition-transform duration-500 absolute w-full h-full">
+                                            <div class="flex flex-col items-center justify-center absolute w-full h-full animate-swap-out">
                                                 <span class="material-symbols-outlined text-[18px] text-electric-cyan animate-pulse">rocket_launch</span>
                                             </div>
                                             <!-- Hover State: www.tunegocio.com -->
-                                            <div class="flex flex-col items-center justify-center transform translate-y-full group-hover/bento:translate-y-0 transition-transform duration-500 absolute w-full h-full bg-electric-cyan/10">
+                                            <div class="flex flex-col items-center justify-center absolute w-full h-full bg-electric-cyan/10 animate-swap-in">
                                                 <span class="text-[5px] sm:text-[6px] font-mono font-bold text-electric-cyan tracking-wider">WWW.</span>
                                                 <span class="text-[5px] sm:text-[6px] font-mono font-bold text-electric-cyan tracking-wider">TUNEGOCIO.</span>
                                                 <span class="text-[5px] sm:text-[6px] font-mono font-bold text-electric-cyan tracking-wider">COM</span>
