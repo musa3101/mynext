@@ -113,6 +113,61 @@ window.onclick = function (e) {
   }
 };
 
+// FAQ Accordion Logic
+function initFaqAccordion() {
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach(item => {
+    const trigger = item.querySelector('.faq-trigger');
+    const content = item.querySelector('.faq-content') as HTMLElement;
+    const icon = item.querySelector('.faq-icon');
+
+    if (!trigger || !content) return;
+
+    // Set initial heights based on data-open attribute
+    const isOpen = item.getAttribute('data-open') === 'true';
+    if (isOpen) {
+      content.style.maxHeight = content.scrollHeight + 'px';
+      content.style.opacity = '1';
+      if (icon) icon.classList.add('rotate-180');
+      trigger.setAttribute('aria-expanded', 'true');
+    } else {
+      content.style.maxHeight = '0px';
+      content.style.opacity = '0';
+      if (icon) icon.classList.remove('rotate-180');
+      trigger.setAttribute('aria-expanded', 'false');
+    }
+
+    trigger.addEventListener('click', () => {
+      const currentlyOpen = item.getAttribute('data-open') === 'true';
+      if (currentlyOpen) {
+        // Close it
+        content.style.maxHeight = '0px';
+        content.style.opacity = '0';
+        if (icon) icon.classList.remove('rotate-180');
+        trigger.setAttribute('aria-expanded', 'false');
+        item.setAttribute('data-open', 'false');
+      } else {
+        // Open it
+        content.style.maxHeight = content.scrollHeight + 'px';
+        content.style.opacity = '1';
+        if (icon) icon.classList.add('rotate-180');
+        trigger.setAttribute('aria-expanded', 'true');
+        item.setAttribute('data-open', 'true');
+      }
+    });
+  });
+
+  // Handle window resize to recalculate heights of open items
+  window.addEventListener('resize', () => {
+    faqItems.forEach(item => {
+      const content = item.querySelector('.faq-content') as HTMLElement;
+      if (content && item.getAttribute('data-open') === 'true') {
+        content.style.maxHeight = content.scrollHeight + 'px';
+      }
+    });
+  });
+}
+
 // Initialize Planes DOM safely
 async function initPlanes() {
   sessionStorage.setItem('from-planes', 'true');
@@ -355,6 +410,9 @@ async function initPlanes() {
       servicesContainer.appendChild(card);
     });
   }
+
+  // Initialize local FAQ accordion
+  initFaqAccordion();
 }
 
 if (document.readyState === 'loading') {
