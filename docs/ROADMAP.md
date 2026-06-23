@@ -8,11 +8,12 @@
 - [x] Inyección e integración local del FAQ de 8 items en las páginas de planes (español e inglés).
 - [x] Lógica de acordeones interactivos localizados en `src/planes.ts` para habilitar el toggle de dudas inline.
 - [x] QA estético y optimización de paddings de tarjetas de contacto para pantallas móviles estrechas (320px).
+- [x] Revisión general de interacciones y micro-animaciones en dispositivos móviles (Añadido `:active` state y `@media (hover: hover)` en CSS).
+- [x] Optimización de imágenes del portafolio (Validado el uso generalizado de `loading="lazy"` para prevenir bloqueos de renderizado).
 
 ## Tareas en Progreso
 - [ ] Monitoreo del diseño responsive tras el despliegue de las nuevas páginas de planes actualizadas.
 - [ ] Aseguramiento del rendimiento del CDN con los recientes cambios aplicados.
 
 ## Próximas Mejoras Prioritarias
-- [ ] Revisión general de interacciones y micro-animaciones en dispositivos móviles.
-- [ ] Optimización de la velocidad de carga de las imágenes del portafolio mediante migración a formatos modernos si se introducen más ítems.
+- [ ] Migración de imágenes a formatos de nueva generación (WebP/AVIF) al añadir nuevos ítems al portfolio.

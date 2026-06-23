@@ -1915,15 +1915,24 @@ body.mobile-menu-open {
 }
 
 /* FAQ Button Premium Glow (jello-vertical animation and cyan-blue gradient) */
-.social-buttons-wrapper .faq-btn:hover {
-  background: linear-gradient(135deg, #00F2FF 0%, #0066FF 74%) !important;
-  box-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
-  border-color: transparent !important;
-  animation: jello-vertical 1s both;
+@media (hover: hover) {
+  .social-buttons-wrapper .faq-btn:hover {
+    background: linear-gradient(135deg, #00F2FF 0%, #0066FF 74%) !important;
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
+    border-color: transparent !important;
+    animation: jello-vertical 1s both;
+  }
+  .social-buttons-wrapper .faq-btn:hover .tooltip,
+  .social-buttons-wrapper .faq-btn:hover .tooltip::before {
+    background: linear-gradient(135deg, #00F2FF 0%, #0066FF 74%) !important;
+    border-color: transparent !important;
+  }
 }
-.social-buttons-wrapper .faq-btn:hover .tooltip,
-.social-buttons-wrapper .faq-btn:hover .tooltip::before {
+
+.social-buttons-wrapper .faq-btn:active {
+  transform: scale(0.92);
   background: linear-gradient(135deg, #00F2FF 0%, #0066FF 74%) !important;
+  box-shadow: 0 0 10px rgba(0, 242, 255, 0.6);
   border-color: transparent !important;
 }
 
