@@ -740,7 +740,7 @@ async function initMain() {
       }
     });
 
-    const plansBtns = document.querySelectorAll('a.animated-button[href*="planes"]');
+    const plansBtns = document.querySelectorAll('a.animated-button[href*="planes"], a.cap-btn[href*="planes"]');
     const plansTransitionOverlay = document.getElementById('plans-transition-overlay');
 
     plansBtns.forEach(btn => {

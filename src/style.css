@@ -1816,32 +1816,32 @@ body.mobile-menu-open {
    ======================================================== */
 .cap-btn {
   position: relative;
-  width: 210px;
-  height: 50px;
+  width: 170px;
+  height: 42px;
   border: none;
   background-color: #005f99;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border-radius: 30px;
+  border-radius: 25px;
   cursor: pointer;
-  box-shadow: 8px 8px 0px rgb(12, 12, 12);
+  box-shadow: 6px 6px 0px rgb(12, 12, 12);
   transition-duration: .3s;
   text-decoration: none;
 }
 
 .cap-layer {
-  width: 60px;
+  width: 48px;
   position: absolute;
-  left: -30px;
+  left: -24px;
   transition-duration: .3s;
   animation: spin 5s linear infinite;
 }
 
 .cap-btn:hover {
-  transform: translateY(5px);
-  box-shadow: 3px 3px 0px black;
+  transform: translateY(4px);
+  box-shadow: 2px 2px 0px black;
   transition-duration: .3s;
 }
 
@@ -1863,7 +1863,7 @@ body.mobile-menu-open {
 .cap-text {
   color: white;
   font-weight: 600;
-  font-size: 1.1em;
+  font-size: 0.9em;
   position: absolute;
   z-index: 2;
   transition-duration: .1s;
