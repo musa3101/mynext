@@ -86,8 +86,8 @@ export const fallbackProjects = [
     id: 5,
     title: 'NEXT ERA',
     description: JSON.stringify({
-      es: 'Prototipo de tienda online para una marca de gorras premium y streetwear.',
-      en: 'Online store prototype for a premium and streetwear cap brand.'
+      es: 'Prototipo de tienda e-commerce premium adaptable para marcas exclusivas.',
+      en: 'Premium e-commerce store prototype adaptable for exclusive brands.'
     }),
     image_url: './assets/img/portfolio/porfolio5.png',
     project_url: 'https://nexterabymusa.pages.dev',
@@ -163,8 +163,8 @@ export const fallbackTestimonials = [
     role: JSON.stringify({ es: 'Prototipo E-Commerce', en: 'E-Commerce Prototype' }),
     company: 'NEXT ERA',
     testimonial: JSON.stringify({
-      es: 'Prototipo de tienda online para una marca de gorras premium y streetwear. Diseño en blanco y negro con mucha actitud, pensado para que el producto sea el protagonista y la compra sea sencilla e intuitiva.',
-      en: 'Luxury caps and premium streetwear e-commerce. A high-contrast minimalist design and interactive animations focused on conversion and brand exclusivity.'
+      es: 'Este proyecto no es una marca real. Es un prototipo de tienda e-commerce premium que he creado yo mismo! He diseñado esta plantilla para ser totalmente adaptable y funcional para marcas exclusivas. Si te gusta la estética y el flujo, puedes adquirir esta plantilla para tu propia marca. Plantilla disponible. Contáctame si necesitas integrarla o si tienes preguntas.',
+      en: 'This project is not a real brand. It is a premium e-commerce store prototype that I created myself! I designed this template to be fully adaptable and functional for exclusive brands. If you like the aesthetics and flow, you can purchase this template for your own brand. Template available. Contact me if you need to integrate it or if you have any questions.'
     }),
     active: true
   },
