@@ -5,6 +5,10 @@ import {
   fallbackTestimonials,
   fallbackSettings
 } from './lib/fallbackData';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 // Determine language based on html lang attribute
 const lang = (document.documentElement.lang === 'en' || window.location.pathname.includes('-en')) ? 'en' : 'es';
@@ -21,6 +25,20 @@ function getTranslation(value: string | null | undefined, language: 'es' | 'en')
     // Return raw string if parsing fails
   }
   return value;
+}
+
+// Utility to apply dynamic settings from Supabase to HTML elements
+function applyDynamicSettings(settingsMap: Record<string, string>, currentLang: 'es' | 'en') {
+  const elements = document.querySelectorAll<HTMLElement>('[data-sb-content]');
+  elements.forEach(el => {
+    const key = el.getAttribute('data-sb-content');
+    if (key && settingsMap[key]) {
+      const translation = getTranslation(settingsMap[key], currentLang);
+      if (translation) {
+        el.innerHTML = translation;
+      }
+    }
+  });
 }
 
 // Utility to parse domain names from project URLs for browser bar
@@ -44,21 +62,71 @@ function getDomainFromUrl(url: string): string {
   }
 }
 
-// Global reveal animations trigger
+// Global reveal animations trigger — GSAP-powered blur-reveal + stagger
 function initRevealAnimations() {
+  // Classic reveals (keep class toggle for CSS-only fallback)
   const reveals = document.querySelectorAll('.reveal');
-  const observerOptions = { threshold: 0.15 };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('active');
-        observer.unobserve(entry.target);
+  reveals.forEach(reveal => {
+    gsap.fromTo(reveal, 
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1, y: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        force3D: true,
+        scrollTrigger: {
+          trigger: reveal,
+          start: 'top 90%',
+          end: 'bottom 10%',
+          toggleActions: 'play reverse play reverse',
+          onEnter: () => (reveal as HTMLElement).classList.add('active'),
+        },
       }
-    });
-  }, observerOptions);
+    );
+  });
 
-  reveals.forEach(reveal => observer.observe(reveal));
+  // Stagger groups — any parent with [data-stagger] will animate children in sequence
+  const staggerGroups = document.querySelectorAll('[data-stagger]');
+  staggerGroups.forEach(group => {
+    const items = group.querySelectorAll('.stagger-item');
+    if (items.length === 0) return;
+    gsap.fromTo(items,
+      { opacity: 0, y: 24 },
+      {
+        opacity: 1, y: 0,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: 'power3.out',
+        force3D: true,
+        scrollTrigger: {
+          trigger: group,
+          start: 'top 90%',
+          end: 'bottom 10%',
+          toggleActions: 'play reverse play reverse',
+        },
+      }
+    );
+  });
+
+  // Blur-reveal for section headings (optimized: no actual blur to save GPU)
+  const blurHeadings = document.querySelectorAll('.blur-reveal');
+  blurHeadings.forEach(heading => {
+    gsap.fromTo(heading,
+      { opacity: 0, y: 16 },
+      {
+        opacity: 1, y: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        force3D: true,
+        scrollTrigger: {
+          trigger: heading,
+          start: 'top 90%',
+          end: 'bottom 10%',
+          toggleActions: 'play reverse play reverse',
+        },
+      }
+    );
+  });
 }
 
 // FAQ Accordion Logic
@@ -191,6 +259,10 @@ async function initMain() {
         });
         settings = dbSettings;
       }
+
+      // Apply any dynamic HTML content automatically
+      applyDynamicSettings(settings, lang as 'es' | 'en');
+
     } catch (err) {
       console.error('Error fetching Supabase data, using local fallback:', err);
     }
@@ -228,18 +300,14 @@ async function initMain() {
     link.setAttribute('href', `mailto:${email}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`);
   });
 
-  // Render Projects Grid
-  const featuredGrid = document.getElementById('featured-projects');
-  const moreGrid = document.getElementById('more-projects');
+  // Render Portfolio Carousel
+  const portfolioCarousel = document.getElementById('portfolio-carousel');
 
-  if (featuredGrid && moreGrid) {
-    featuredGrid.innerHTML = '';
-    moreGrid.innerHTML = '';
+  if (portfolioCarousel) {
+    portfolioCarousel.innerHTML = '';
 
-    let featuredIndex = 0;
-    let nonFeaturedIndex = 0;
-
-    projects.forEach((proj) => {
+    const infiniteProjects = [...projects, ...projects, ...projects, ...projects];
+    infiniteProjects.forEach((proj) => {
       // Find matching testimonial where company equals project title
       const matchingTestimonial = testimonials.find(
         (t) => t.company.trim().toLowerCase() === proj.title.trim().toLowerCase()
@@ -247,52 +315,25 @@ async function initMain() {
 
       const hasTestimonial = !!matchingTestimonial;
       const testimonialText = hasTestimonial ? getTranslation(matchingTestimonial.testimonial, lang) : '';
-      const clientName = hasTestimonial ? matchingTestimonial.client_name : '';
-      const clientRole = hasTestimonial ? getTranslation(matchingTestimonial.role, lang) : '';
-
-      // Build signature string
-      let signature = '';
-      if (clientName && clientRole) {
-        signature = `${clientName}, ${clientRole}`;
-      } else if (clientName) {
-        signature = clientName;
-      } else if (clientRole) {
-        signature = clientRole;
-      }
 
       // Assemble card elements
       const article = document.createElement('article');
+      article.className = 'flex-none w-[80vw] md:w-[45vw] lg:w-[35vw] xl:w-[30vw] snap-center flex flex-col gap-6 transition-transform duration-500';
 
-      // Compute specific layout classes to match asymmetric design
-      let cardClass = 'reveal flex flex-col gap-8 group';
-      if (!proj.featured) {
-        if (nonFeaturedIndex === 1) {
-          cardClass += ' md:mt-32';
-        } else if (nonFeaturedIndex === 2) {
-          cardClass += ' md:-mt-16';
-        }
-        nonFeaturedIndex++;
-      } else {
-        if (featuredIndex === 1) {
-          article.style.transitionDelay = '200ms';
-        }
-        featuredIndex++;
-      }
-      article.className = cardClass;
-
-      const domain = getDomainFromUrl(proj.project_url);
+      const domain = getDomainFromUrl(proj.project_url) || 'View Case Study';
+      const projectUrl = `project.html?slug=${proj.slug || ''}`;
+      const btnText = lang === 'en' ? 'More Info →' : 'Más Info →';
 
       article.innerHTML = `
-        <div class="relative aspect-[16/10] rounded-2xl overflow-hidden glass-panel border-white/5 transition-all duration-500 group-hover:border-electric-cyan/20 group-hover:shadow-[0_0_30px_rgba(0,242,255,0.1)]">
+        <div class="group relative aspect-[16/10] rounded-3xl overflow-hidden glass-panel border-white/5 transition-all duration-500 hover:border-electric-cyan/30 hover:shadow-[0_0_40px_rgba(0,242,255,0.15)]">
           <!-- Browser UI Mockup -->
           <div class="absolute top-0 left-0 right-0 h-10 bg-void-black/80 backdrop-blur-md flex items-center px-4 z-30 border-b border-white/5 select-none">
             <div class="flex items-center gap-1.5 w-16"> 
-              <div class="w-2 h-2 rounded-full bg-[#FF5F56] shadow-sm"></div>
-              <div class="w-2 h-2 rounded-full bg-[#FFBD2E] shadow-sm"></div>
-              <div class="w-2 h-2 rounded-full bg-[#27C93F] shadow-sm"></div>
+              <div class="w-3 h-3 rounded-full bg-[#FF5F56] shadow-sm"></div>
+              <div class="w-3 h-3 rounded-full bg-[#FFBD2E] shadow-sm"></div>
+              <div class="w-3 h-3 rounded-full bg-[#27C93F] shadow-sm"></div>
             </div>
             <div class="flex-grow flex items-center justify-between pl-2 md:pl-4">
-              <!-- Chevrons -->
               <div class="hidden sm:flex items-center gap-2 mr-4 text-slate-400">
                 <svg viewBox="0 0 20 20" height="12" width="12" fill="currentColor">
                   <path transform="translate(6.25 3.75)" d="M0,6.25,6.25,0l.875.875L1.75,6.25l5.375,5.375L6.25,12.5Z"></path>
@@ -301,47 +342,115 @@ async function initMain() {
                   <path transform="translate(6.625 3.75)" d="M7.125,6.25.875,12.5,0,11.625,5.375,6.25,0,.875.875,0Z"></path>
                 </svg>
               </div>
-              <!-- Search Bar -->
-              <div class="flex-grow max-w-[400px] mx-auto relative border border-white/10 rounded-lg px-3 py-1 h-6 flex items-center justify-center text-[10px] text-slate-400 bg-white/5 font-sans select-all cursor-text tracking-wide shadow-inner">
-                <svg class="absolute left-2.5 text-slate-500" xmlns="http://www.w3.org/2000/svg" width="7.5" height="7.5" viewBox="0 0 16.89 16.887" fill="currentColor">
-                  <path d="M16.006,16.887h0l-4.743-4.718a6.875,6.875,0,1,1,.906-.906l4.719,4.744-.88.88ZM6.887,1.262a5.625,5.625,0,1,0,5.625,5.625A5.631,5.631,0,0,0,6.887,1.262Z" transform="translate(0.003 0)"></path>
-                </svg>
-                <span>${domain}</span>
+              <div class="flex-grow max-w-[400px] mx-auto relative border border-white/10 rounded-lg px-3 py-1 h-7 flex items-center justify-center text-xs text-slate-300 bg-white/5 font-sans cursor-pointer tracking-wide shadow-inner" onclick="window.location.href='${projectUrl}'">
+                ${domain}
               </div>
             </div>
           </div>
-          <div class="absolute top-10 left-0 right-0 bottom-0 bg-[#050505] overflow-hidden flex items-center justify-center p-4 sm:p-6 md:p-8">
+          <div class="absolute top-10 left-0 right-0 bottom-0 bg-[#050505] overflow-hidden flex items-center justify-center p-0 cursor-pointer" onclick="window.location.href='${projectUrl}'">
             <img src="${proj.image_url}" alt="${lang === 'en' ? `Premium web design in Mallorca - Preview of ${proj.title}` : `Diseño web premium en Mallorca - Vista previa de ${proj.title}`}" loading="lazy"
-              class="w-full h-full object-contain transition-transform duration-1000 group-hover:scale-[1.03]">
-            <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500"></div>
+              class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.05]">
+            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500"></div>
             <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center z-20 backdrop-blur-sm">
-              <a href="${proj.project_url}" target="_blank" rel="noopener noreferrer"
-                class="px-8 py-4 bg-white text-black font-headline font-bold text-[10px] tracking-[0.3em] uppercase rounded-full hover:bg-electric-cyan transition-all duration-500 shadow-xl">
-                ${lang === 'en' ? 'View Website →' : 'Ver Web →'}
+              <a href="${projectUrl}"
+                class="px-8 py-4 bg-white text-black font-headline font-bold text-xs tracking-[0.3em] uppercase rounded-full hover:bg-electric-cyan transition-all duration-500 shadow-2xl scale-90 group-hover:scale-100">
+                ${btnText}
               </a>
             </div>
           </div>
         </div>
-        <div class="space-y-4 px-4">
-          <h3 class="text-2xl md:text-3xl font-bold text-gradient-cyan font-headline uppercase tracking-tight">${proj.title}</h3>
+        <div class="space-y-4 px-2 mt-4 text-center md:text-left">
+          <h3 class="text-3xl md:text-4xl font-bold text-white font-headline tracking-tight">${proj.title}</h3>
           ${hasTestimonial ? `
-            <div class="relative pl-6 border-l-2 border-electric-cyan/30">
-              <p class="text-lg text-white/70 italic font-body leading-relaxed mb-2">${testimonialText}</p>
-            </div>
+            <p class="text-lg text-white/60 font-body leading-relaxed max-w-2xl line-clamp-2">${testimonialText}</p>
           ` : `
-            <div class="relative pl-6 border-l-2 border-electric-cyan/30">
-              <p class="text-lg text-white/70 italic font-body leading-relaxed mb-2">${getTranslation(proj.description, lang)}</p>
-            </div>
+            <p class="text-lg text-white/60 font-body leading-relaxed max-w-2xl line-clamp-2">${getTranslation(proj.description, lang)}</p>
           `}
         </div>
       `;
 
-      if (proj.featured) {
-        featuredGrid.appendChild(article);
-      } else {
-        moreGrid.appendChild(article);
-      }
+      portfolioCarousel.appendChild(article);
     });
+
+    // Auto-scroll logic
+    let autoScrollInterval: any;
+    const startScroll = () => {
+      autoScrollInterval = setInterval(() => {
+        if (!portfolioCarousel) return;
+        const card = portfolioCarousel.firstElementChild;
+        const scrollAmount = card ? card.clientWidth + 32 : 600; 
+        
+        // If we've scrolled past the 3rd set, silently jump back to the 2nd set to maintain the loop
+        if (portfolioCarousel.scrollLeft > scrollAmount * (projects.length * 2.5)) {
+            portfolioCarousel.scrollBy({ left: -(scrollAmount * projects.length), behavior: 'auto' });
+        }
+        
+        portfolioCarousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      }, 15000); // 15 seconds as user requested
+    };
+
+    const stopScroll = () => {
+      clearInterval(autoScrollInterval);
+    };
+
+    // Pause on hover or touch
+    portfolioCarousel.addEventListener('mouseenter', stopScroll);
+    portfolioCarousel.addEventListener('mouseleave', startScroll);
+    portfolioCarousel.addEventListener('touchstart', stopScroll);
+    portfolioCarousel.addEventListener('touchend', startScroll);
+
+    // Arrow controls
+    const btnPrev = document.getElementById('carousel-prev');
+    const btnNext = document.getElementById('carousel-next');
+
+    if (btnPrev && btnNext) {
+      btnPrev.addEventListener('click', () => {
+        stopScroll();
+        const card = portfolioCarousel.firstElementChild;
+        const scrollAmount = card ? card.clientWidth + 32 : 600;
+        
+        // If we scroll too far left, jump forward silently
+        if (portfolioCarousel.scrollLeft < scrollAmount) {
+            portfolioCarousel.scrollBy({ left: scrollAmount * projects.length, behavior: 'auto' });
+        }
+        
+        portfolioCarousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        startScroll();
+      });
+
+      btnNext.addEventListener('click', () => {
+        stopScroll();
+        const card = portfolioCarousel.firstElementChild;
+        const scrollAmount = card ? card.clientWidth + 32 : 600;
+        
+        // If we scroll too far right, jump back silently
+        if (portfolioCarousel.scrollLeft > scrollAmount * (projects.length * 2.5)) {
+            portfolioCarousel.scrollBy({ left: -(scrollAmount * projects.length), behavior: 'auto' });
+        }
+        
+        portfolioCarousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        startScroll();
+      });
+      
+      // Pause when hovering arrows
+      btnPrev.addEventListener('mouseenter', stopScroll);
+      btnPrev.addEventListener('mouseleave', startScroll);
+      btnNext.addEventListener('mouseenter', stopScroll);
+      btnNext.addEventListener('mouseleave', startScroll);
+    }
+
+    // Center the first item of the second set on load
+    setTimeout(() => {
+        if (portfolioCarousel.children.length > 0) {
+            const card = portfolioCarousel.children[projects.length] as HTMLElement;
+            if (card) {
+                const containerCenter = portfolioCarousel.clientWidth / 2;
+                const cardCenter = card.offsetLeft + (card.clientWidth / 2);
+                portfolioCarousel.scrollTo({ left: cardCenter - containerCenter, behavior: 'auto' });
+            }
+        }
+        startScroll(); // Initialize after centering
+    }, 100);
   }
 
   // Trigger animations now that elements are rendered in DOM
@@ -711,10 +820,9 @@ async function initMain() {
     });
   }
 
-  // --- H. Plans Button overlay transitions ---
+  // --- H. Plans Button overlay transitions (Intelligent Loader) ---
   const transitionOverlay = document.getElementById('page-transition-overlay');
   if (transitionOverlay) {
-    // Show overlay by default (and it starts with active class in HTML)
     transitionOverlay.classList.add('active');
     transitionOverlay.setAttribute('aria-hidden', 'false');
 
@@ -723,8 +831,32 @@ async function initMain() {
       transitionOverlay.setAttribute('aria-hidden', 'true');
     };
 
-    // Hide exactly after 3.5 seconds (3500ms) on page load
-    setTimeout(hideOverlay, 3500);
+    // Intelligent loader: min 1.2s (so the 3D cubes are seen), max 2.5s
+    const LOADER_MIN_MS = 1200;
+    const LOADER_MAX_MS = 2500;
+    const loaderStart = Date.now();
+    let pageLoaded = document.readyState === 'complete';
+
+    const tryHideOverlay = () => {
+      const elapsed = Date.now() - loaderStart;
+      if (elapsed >= LOADER_MIN_MS && pageLoaded) {
+        hideOverlay();
+      }
+    };
+
+    // If page already loaded, just wait the minimum
+    if (pageLoaded) {
+      setTimeout(tryHideOverlay, LOADER_MIN_MS);
+    } else {
+      window.addEventListener('load', () => {
+        pageLoaded = true;
+        const elapsed = Date.now() - loaderStart;
+        const remaining = Math.max(0, LOADER_MIN_MS - elapsed);
+        setTimeout(tryHideOverlay, remaining);
+      }, { once: true });
+    }
+    // Hard cap: never show loader longer than max
+    setTimeout(hideOverlay, LOADER_MAX_MS);
 
     window.addEventListener('pageshow', (e) => {
       if (plansTransitionOverlay) {
@@ -733,10 +865,9 @@ async function initMain() {
       }
 
       if (e.persisted) {
-        // If restored from back-forward cache, show it and hide after 3.5s
         transitionOverlay.classList.add('active');
         transitionOverlay.setAttribute('aria-hidden', 'false');
-        setTimeout(hideOverlay, 3500);
+        setTimeout(hideOverlay, LOADER_MIN_MS);
       }
     });
 
@@ -757,10 +888,10 @@ async function initMain() {
           transitionOverlay.setAttribute('aria-hidden', 'false');
         }
 
-        // Delay navigation for about 4 seconds to let the Love, Death & Robots animation play out
+        // Reduced from 4s to 1.5s — snappier transition
         setTimeout(() => {
           window.location.href = destination;
-        }, 4000);
+        }, 1500);
       });
     });
   }
@@ -1010,50 +1141,30 @@ if (liquidCursor && cursorDot) {
   });
 }
 
-// --- L. Vanilla JS Parallax Premium Animations ---
+// --- L. GSAP Parallax Premium Animations ---
 window.addEventListener('load', () => {
-  // Parallax using scroll event
-  const panels = document.querySelectorAll('article .glass-panel');
-  if (panels.length > 0) {
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      const windowHeight = window.innerHeight;
+  // Parallax removed due to backdrop-filter rendering lag on scroll
 
-      panels.forEach((panel: any) => {
-        const rect = panel.getBoundingClientRect();
-        // check if in viewport
-        if (rect.top < windowHeight && rect.bottom > 0) {
-          const progress = 1 - (rect.bottom / (windowHeight + rect.height)); // 0 to 1
-          const img = panel.querySelector('img');
-          if (img) {
-            // translate Y by up to 15%
-            const yOffset = (progress * 15) - 7.5;
-            img.style.transform = `translateY(${yOffset}%) scale(1.05)`;
-          }
-        }
-      });
-    }, { passive: true });
-  }
-
-  // Smooth reveal for text elements using IntersectionObserver
-  const headings = document.querySelectorAll('h1, h2, h3, p.lead');
-  if (headings.length > 0) {
-    const headingObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const el = entry.target as HTMLElement;
-          el.style.transition = 'opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1s cubic-bezier(0.2, 0.8, 0.2, 1)';
-          el.style.opacity = '1';
-          el.style.transform = 'translateY(0)';
-          headingObserver.unobserve(el);
-        }
-      });
-    }, { threshold: 0.1 });
-
-    headings.forEach((heading: any) => {
-      heading.style.opacity = '0';
-      heading.style.transform = 'translateY(30px)';
-      headingObserver.observe(heading);
-    });
+  // Process cards stagger reveal
+  const processCards = document.querySelectorAll('.process-card');
+  if (processCards.length > 0) {
+    gsap.fromTo(processCards,
+      { opacity: 0, x: -40 },
+      {
+        opacity: 1, x: 0,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: 'power3.out',
+        force3D: true,
+        scrollTrigger: {
+          trigger: processCards[0].parentElement,
+          start: 'top 85%',
+          end: 'bottom 15%',
+          toggleActions: 'play reverse play reverse',
+          onEnter: () => processCards.forEach(c => c.classList.add('in-view')),
+          onLeaveBack: () => processCards.forEach(c => c.classList.remove('in-view')),
+        },
+      }
+    );
   }
 });

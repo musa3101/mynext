@@ -1,24 +1,24 @@
 export const fallbackServices = [
   {
     id: 1,
-    title: JSON.stringify({ es: 'ESENCIAL', en: 'ESSENTIAL' }),
+    title: JSON.stringify({ es: 'BÁSICO', en: 'BASIC' }),
     description: JSON.stringify({
       es: 'Diseño web profesional (2-3 secciones), Vinculación con Google Maps, Dominio & Hosting básico incluido, Optimización de SEO Local Básico',
       en: 'Professional web design (2-3 sections), Google Maps Integration, Domain & Basic Hosting Included, Basic Local SEO Optimization'
     }),
-    price: '190',
+    price: '300',
     featured: false,
     active: true,
     sort_order: 1
   },
   {
     id: 2,
-    title: JSON.stringify({ es: 'ÉLITE', en: 'ELITE' }),
+    title: JSON.stringify({ es: 'BUSINESS', en: 'BUSINESS' }),
     description: JSON.stringify({
       es: 'Todo lo incluido en el Plan Esencial, Estrategia de Perfil Profesional *3, Gestión integral de Dominio *1, Soporte Técnico Prioritario 24/7',
       en: 'Everything included in the Essential Plan, Professional Profile Strategy *3, Comprehensive Domain Management *1, Priority Technical Support 24/7'
     }),
-    price: '290',
+    price: '400',
     featured: true,
     active: true,
     sort_order: 2
@@ -28,10 +28,15 @@ export const fallbackServices = [
 export const fallbackProjects = [
   {
     id: 1,
+    slug: 'blessed-barber-studio',
     title: 'Blessed Barber Studio',
     description: JSON.stringify({
       es: 'Diseño y desarrollo web premium para Barbería de Alta Gama en España.',
       en: 'Premium web design and development for High-End Barbershop in Spain.'
+    }),
+    full_description: JSON.stringify({
+      es: 'Para Blessed Barber Studio, buscamos reflejar la elegancia y el detalle que ponen en cada corte. Creamos una web con una estética impecable que conecta con el cliente desde el primer vistazo, integrando un sistema de reservas directo y funcional. La experiencia digital se siente tan premium como visitar el estudio en persona.',
+      en: 'For Blessed Barber Studio, we sought to reflect the elegance and detail they put into every cut. We created a website with an impeccable aesthetic that connects with the client from the first glance, integrating a direct and functional booking system. The digital experience feels as premium as visiting the studio in person.'
     }),
     image_url: './assets/img/portfolio/porfolio1.png',
     project_url: 'https://blessedstudio.pages.dev/',
@@ -42,10 +47,15 @@ export const fallbackProjects = [
   },
   {
     id: 2,
+    slug: 'bar-cafeteria-luna-llena',
     title: 'Bar Cafetería Luna Llena',
     description: JSON.stringify({
       es: 'Carta digital y presencia web premium para bar-cafetería de especialidad.',
       en: 'Digital menu and premium web presence for specialty coffee shop & bar.'
+    }),
+    full_description: JSON.stringify({
+      es: 'Con Luna Llena, el objetivo fue acercar su cocina al entorno digital. Integramos su carta de forma interactiva y un sistema de reservas ágil para que los clientes tengan toda la información a mano y puedan asegurar su mesa en un segundo. Una web útil, moderna y fácil de usar.',
+      en: 'With Luna Llena, the goal was to bring their cuisine to the digital environment. We integrated their menu interactively and an agile booking system so that customers have all the information at hand and can secure their table in a second. A useful, modern, and easy-to-use website.'
     }),
     image_url: './assets/img/portfolio/porfolio2-v3.png',
     project_url: 'https://barlunallena.pages.dev',
@@ -56,10 +66,15 @@ export const fallbackProjects = [
   },
   {
     id: 3,
+    slug: 'ecuaplac',
     title: 'Ecuaplac',
     description: JSON.stringify({
       es: 'Tabiquería seca y reformas de lujo en Mallorca.',
       en: 'Drywall and luxury renovations in Mallorca.'
+    }),
+    full_description: JSON.stringify({
+      es: 'Diseño corporativo y profesional para Ecuaplac, una empresa líder en tabiquería y reformas. La web destaca sus proyectos de lujo, servicios detallados y un formulario de contacto optimizado para la captación de leads en el sector de la construcción.',
+      en: 'Corporate and professional design for Ecuaplac, a leading company in drywall and renovations. The website highlights their luxury projects, detailed services, and a contact form optimized for lead generation in the construction sector.'
     }),
     image_url: './assets/img/portfolio/porfolio3.png',
     project_url: 'https://ecuapv2.pages.dev/',
@@ -70,10 +85,15 @@ export const fallbackProjects = [
   },
   {
     id: 4,
+    slug: 'rbari-restaurant',
     title: 'RBARI RESTAURANT',
     description: JSON.stringify({
       es: 'Experiencia inmersiva y menú digital para restaurante gastronómico.',
       en: 'Immersive experience and digital menu for gastronomic restaurant.'
+    }),
+    full_description: JSON.stringify({
+      es: 'Para RBARI, creamos una experiencia inmersiva que traduce la esencia de su gastronomía al mundo digital. Incorpora menú interactivo, fotografías de alta calidad y un sistema de reservas que optimiza la gestión del restaurante.',
+      en: 'For RBARI, we created an immersive experience that translates the essence of their gastronomy to the digital world. It incorporates an interactive menu, high-quality photography, and a booking system that optimizes restaurant management.'
     }),
     image_url: './assets/img/portfolio/porfolio4.png',
     project_url: 'https://rbari-v1.pages.dev',
@@ -84,10 +104,15 @@ export const fallbackProjects = [
   },
   {
     id: 5,
+    slug: 'next-era',
     title: 'NEXT ERA',
     description: JSON.stringify({
       es: 'Prototipo de tienda e-commerce premium adaptable para marcas exclusivas.',
       en: 'Premium e-commerce store prototype adaptable for exclusive brands.'
+    }),
+    full_description: JSON.stringify({
+      es: 'NEXT ERA es un concepto e-commerce de alto rendimiento. Desarrollado con una estética minimalista y tiempos de carga ultrarrápidos, está pensado para maximizar la conversión en marcas de moda o productos exclusivos.',
+      en: 'NEXT ERA is a high-performance e-commerce concept. Developed with a minimalist aesthetic and ultra-fast loading times, it is designed to maximize conversion for fashion brands or exclusive products.'
     }),
     image_url: './assets/img/portfolio/porfolio5.png',
     project_url: 'https://nexterabymusa.pages.dev',
@@ -98,10 +123,15 @@ export const fallbackProjects = [
   },
   {
     id: 6,
+    slug: 'mezquita-arrahma',
     title: 'Mezquita Arrahma',
     description: JSON.stringify({
       es: 'Arquitectura Digital solidaria para la Mezquita Arrahma de Palma de Mallorca.',
       en: 'Solidary Digital Architecture for Arrahma Mosque in Palma de Mallorca.'
+    }),
+    full_description: JSON.stringify({
+      es: 'Un proyecto solidario donde rediseñamos la presencia online de la Mezquita Arrahma. Una plataforma accesible e informativa para mantener a la comunidad conectada con horarios, eventos y donaciones.',
+      en: 'A solidary project where we redesigned the online presence of the Arrahma Mosque. An accessible and informative platform to keep the community connected with schedules, events, and donations.'
     }),
     image_url: './assets/img/portfolio/porfolio6.png',
     project_url: 'https://mezquita-arrahma.pages.dev',
@@ -109,6 +139,25 @@ export const fallbackProjects = [
     featured: false,
     active: true,
     sort_order: 6
+  },
+  {
+    id: 7,
+    slug: 'gran-marrakech',
+    title: 'Gran Marrakech',
+    description: JSON.stringify({
+      es: 'Web moderna y menú digital para Restaurante Marroquí en Palma de Mallorca.',
+      en: 'Modern website and digital menu for Moroccan Restaurant in Palma de Mallorca.'
+    }),
+    full_description: JSON.stringify({
+      es: 'Para Gran Marrakech, diseñamos una presencia online que captura la esencia y la rica cultura de la gastronomía marroquí. La web cuenta con un diseño inmersivo, integración de menú interactivo y un flujo de reservas optimizado para potenciar su negocio local en Palma de Mallorca.',
+      en: 'For Gran Marrakech, we designed an online presence that captures the essence and rich culture of Moroccan gastronomy. The website features an immersive design, interactive menu integration, and an optimized booking flow to boost their local business in Palma de Mallorca.'
+    }),
+    image_url: './assets/img/portfolio/porfolio7.png',
+    project_url: 'https://granmarrakech.pages.dev',
+    technologies: 'HTML, CSS, JS, Tailwind',
+    featured: true,
+    active: true,
+    sort_order: 7
   }
 ];
 
@@ -193,8 +242,8 @@ export const fallbackSettings: Record<string, string> = {
   contact_phone: '34673109486',
   contact_email: 'mynextbymusa@gmail.com',
   launch_banner_text: JSON.stringify({
-    es: '💎 OFERTA DE LANZAMIENTO - HASTA EL 1 DE JULIO',
-    en: '💎 LAUNCH OFFER - UNTIL JULY 1ST'
+    es: '💎 OFERTA DE LANZAMIENTO - HASTA EL 4 DE AGOSTO',
+    en: '💎 LAUNCH OFFER - UNTIL AUGUST 4TH'
   }),
   whatsapp_message_landing: JSON.stringify({
     es: '¡Hola! Vengo desde la web de MYNEXT. Me gustaría recibir información sobre vuestros servicios de diseño y arquitectura digital para mi negocio. ¡Gracias!',

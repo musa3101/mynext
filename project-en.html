@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MYNEXT - Case Study</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+</head>
+<body class="bg-[#080810] text-white antialiased overflow-x-hidden min-h-screen flex flex-col font-body">
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-6 flex justify-between items-center backdrop-blur-md bg-[#080810]/80 border-b border-white/5">
+        <a href="index-en.html" class="text-2xl font-headline font-bold text-white hover:text-[#00f2ff] transition-colors">MYNEXT</a>
+        <a href="index-en.html#portfolio" class="px-6 py-2 rounded-full border border-white/20 text-xs font-headline tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-all">Back</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow pt-32 pb-24 px-6 md:px-16 max-w-[1400px] mx-auto w-full flex flex-col items-center">
+        <div class="w-full max-w-6xl">
+            <!-- Project Image -->
+            <div class="relative w-full aspect-video md:aspect-[21/9] rounded-[2rem] overflow-hidden bg-white/5 border border-white/10 shadow-2xl mb-16 group">
+                <div class="absolute inset-0 bg-[#050505] flex items-center justify-center p-0">
+                    <img id="project-image" src="" alt="Project Image" class="w-full h-full object-cover opacity-90 transition-opacity duration-500 group-hover:opacity-100">
+                </div>
+            </div>
+
+            <!-- Project Details -->
+            <div class="text-left flex flex-col md:flex-row gap-16 items-start justify-between">
+                <div class="flex-grow md:max-w-3xl">
+                    <span class="text-[#00f2ff] font-headline text-sm tracking-[0.3em] uppercase mb-4 block">Case Study</span>
+                    <h1 id="project-title" class="text-5xl md:text-7xl font-headline font-bold text-white mb-8 leading-tight tracking-tight">Loading...</h1>
+                    <div class="w-16 h-1 bg-[#00f2ff] mb-10 opacity-50"></div>
+                    <p id="project-description" class="text-xl text-white/70 font-body leading-relaxed">
+                        Loading project information...
+                    </p>
+                </div>
+                
+                <div class="shrink-0 flex flex-col gap-6 w-full md:w-auto sticky top-32">
+                    <a id="project-link" href="#" target="_blank" rel="noopener noreferrer" class="px-10 py-5 bg-[#00f2ff] text-[#080810] font-headline font-bold tracking-[0.2em] uppercase rounded-full hover:bg-white hover:scale-105 transition-all text-center shadow-[0_0_20px_rgba(0,242,255,0.3)]">
+                        Visit Live Website
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-white/5 text-center">
+        <p class="text-white/40 font-body text-sm">&copy; 2026 MYNEXT. All rights reserved.</p>
+    </footer>
+
+    <script type="module" src="/src/project.ts"></script>
+</body>
+</html>

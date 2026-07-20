@@ -207,9 +207,9 @@ async function initPlanes() {
   (window as any).contactPhone = phoneVal;
   (window as any).contactEmail = emailVal;
 
-  // Check if current date is on or after July 1, 2026
+  // Check if current date is on or after August 5, 2026 (15 days from today)
   const now = new Date();
-  const isOfferOver = now >= new Date('2026-07-01T00:00:00');
+  const isOfferOver = now >= new Date('2026-08-05T00:00:00');
 
   // Update banner text
   const launchBannerText = settingsMap.get('launch_banner_text');
@@ -249,10 +249,10 @@ async function initPlanes() {
       const title = getTranslation(service.title, lang);
       const description = getTranslation(service.description, lang);
       
-      // Offer price is database base price + 10 (190 -> 200, 290 -> 300)
-      const offerPrice = Number(service.price) + 10;
-      // Original price is offer price + 50 (200 -> 250, 300 -> 350)
-      const originalPrice = offerPrice + 50;
+      // Original price is exactly the price from database (e.g. 300, 400)
+      const originalPrice = Number(service.price);
+      // Offer price (if active) is simply 20 less than the original price
+      const offerPrice = originalPrice - 20;
 
       const currencySymbol = isEnglish ? '£' : '€';
       

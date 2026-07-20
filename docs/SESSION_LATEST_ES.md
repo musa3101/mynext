@@ -1,26 +1,26 @@
-# Resumen de la Sesión
+# Resumen de Sesión - 20 Jul 2026
 
-## Qué se ha hecho hoy
-- **Sección Cómo Trabajo**: Se actualizaron los textos de la sección "Cómo Trabajo" e inyectaron animaciones continuas personalizadas (flotación, pulso, oscilación) en los iconos en ambas versiones (`index.html` e `index-en.html`).
-- **Descripción de Proyectos**: Se cambiaron las antiguas reseñas de clientes por descripciones detalladas del trabajo realizado en primera persona para **Blessed Barber Studio** y **Bar Cafetería Luna Llena** (en español e inglés).
-- **Agrandar Formulario de Contacto**: Se aumentó el ancho máximo del formulario de contacto de `420px` a `500px` en pantallas de tableta y ordenador en las dos páginas principales.
-- **Automatización de Precios por Fecha**: Se programó en `src/planes.ts` una lógica que detecta automáticamente si la fecha actual es posterior al 1 de julio de 2026. Al cumplirse, se oculta el banner de la oferta y se sustituyen los precios de lanzamiento (200€ / 300€) por los precios originales (250€ / 350€ o £250 / £300) sin tener que tocar código en el futuro.
-- **Sincronización con Supabase**: Se creó un script local (`sync_supabase.mjs`) que actualiza la base de datos de Supabase con las nuevas descripciones y desactiva las antiguas reseñas para que no se superpongan en la web.
-- **Respaldo en GitLab**: Se añadió un nuevo control remoto `gitlab` y se subió el proyecto completo como respaldo al nuevo repositorio en GitLab.
+## ¿Qué se ha hecho hoy?
+- Se generaron mockups premium (diseño de Mac) de alta calidad para el portfolio (Gran Marrakech y Mezquita Arrahma).
+- Se rediseñó por completo la sección de "Reviews" integrando las nuevas reseñas de Google Maps en un carrusel dinámico y elegante (animación marquee) para que fluyan infinitamente.
+- Se ha hecho una **auditoría completa (QA)** del código en español e inglés:
+  - Se corrigió un link roto en el footer que apuntaba a un ID inexistente (`#sobre-mi` arreglado a `#nosotros`).
+  - Se actualizó el enlace del proyecto de Gran Marrakech (apuntaba a `#` en vez de la URL real).
+  - Se comprobó que todo el código TypeScript compila correctamente.
+  - Se verificaron los overflows y la responsividad.
+- **Merge realizado:** Tras asegurar que todo el código está correcto, se hizo el *marriage* fusionando la rama `dev` en `main`.
 
 ## Archivos modificados
-- `index.html` (Cambios de textos en "Cómo Trabajo", Blessed Barber y Luna Llena, ancho de formulario).
-- `index-en.html` (Mismas modificaciones en inglés).
-- `src/planes.ts` (Lógica de fecha automática para precios y visibilidad del banner).
-- `planes/index.html`, `planes/index-en.html`, `planes/index-en-build.html`, `planes-fresh/index.html` (Actualización manual de precios base y tachados).
-- `sync_supabase.mjs` (Script de sincronización de base de datos con Supabase).
-- `docs/SESSION_LATEST_ES.md` (Este archivo).
-- `docs/ROADMAP.md` (Hoja de ruta).
+- `index.html` e `index-en.html` (Sección Reviews, Footer Links)
+- `src/lib/fallbackData.ts` (Datos de proyectos y enlaces)
+- `src/style.css` y `src/main.ts` (Scripts y estilos de animación y carruseles)
+- Mockups en `public/assets/img/portfolio/`
 
-## Qué problemas se han solucionado
-- **Error gramatical**: Corregida concordancia de género en "mediante otros aplicaciones" -> "mediante otras aplicaciones".
-- **Visualización del formulario**: Se le dio más espacio horizontal para que se lea y complete de manera más cómoda.
-- **Precios dinámicos/Supabase override**: Corregido el problema de que Supabase cargase los precios sin tachar el original; ahora se renderizan ambos con un diseño premium y se actualizan por fecha de forma totalmente automática.
+## Problemas solucionados
+- Enlaces internos rotos en el footer.
+- URLs vacías o placeholders (`#`) en proyectos.
+- El carrusel de reviews era muy básico y ahora tiene un estilo premium intercalado.
 
-## Qué queda pendiente
-- Ninguna tarea urgente pendiente para esta sesión. Todo el proyecto se encuentra sincronizado con Supabase y respaldado tanto en GitHub como en GitLab.
+## ¿Qué queda pendiente?
+- Queda pendiente una última reseña ("Luna Llena") que el usuario no llegó a enviar. Cuando esté, se puede agregar al carrusel.
+- Cualquier revisión futura visual en dispositivo móvil real si surge algún detalle de estilos.

@@ -2,9 +2,10 @@
 
 @theme {
   --color-primary-container: #00f2ff;
-  --color-surface: #050505;
-  --color-background: #050505;
-  --color-void-black: #050505;
+  --color-surface: #080810;
+  --color-background: #080810;
+  --color-void-black: #080810;
+  --color-surface-elevated: #0e0e1a;
   --color-electric-cyan: #00F2FF;
   --color-deep-ocean: #001a2c;
   --color-slate-gray: #8ba2b2;
@@ -34,13 +35,30 @@
 
 html, body {
     scroll-behavior: smooth;
-    background-color: #050505;
+    background-color: #080810;
+    font-family: var(--font-body);
+    color: var(--color-on-surface);
     overflow-x: hidden;
     max-width: 100%;
     padding-top: max(0px, env(safe-area-inset-top));
     padding-bottom: max(0px, env(safe-area-inset-bottom));
     padding-left: max(0px, env(safe-area-inset-left));
     padding-right: max(0px, env(safe-area-inset-right));
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
 }
 
 main {
@@ -90,6 +108,17 @@ picture img {
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
     border: 1px solid rgba(0, 242, 255, 0.15);
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+                border-color 0.35s ease,
+                box-shadow 0.35s ease;
+}
+
+@media (hover: hover) {
+    .glass-panel:hover {
+        transform: scale(1.01);
+        border-color: rgba(0, 242, 255, 0.3);
+        box-shadow: 0 8px 32px rgba(0, 242, 255, 0.08);
+    }
 }
 
 .text-gradient-cyan {
@@ -204,7 +233,7 @@ picture img {
     opacity: 0;
     transform: translateX(-80px);
     transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-                transform 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1),
                 background 0.8s ease,
                 border-color 0.8s ease,
                 box-shadow 0.8s ease;
@@ -212,6 +241,14 @@ picture img {
 .process-card.in-view {
     opacity: 1;
     transform: translateX(0);
+}
+
+@media (hover: hover) {
+    .process-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px rgba(0, 242, 255, 0.08), 0 4px 16px rgba(0, 0, 0, 0.4);
+        border-color: rgba(0, 242, 255, 0.2);
+    }
 }
 
 /* Optimization for better mobile tap targets — desktop nav + footer only */
@@ -1532,14 +1569,15 @@ body.mobile-menu-open {
     position: fixed;
     inset: 0;
     z-index: 99999;
-    background: #050505;
+    background: #080810;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.35s ease;
+    transition: opacity 0.5s ease-out;
+    will-change: opacity;
 }
 
 #page-transition-overlay.active {
@@ -1596,22 +1634,40 @@ body.mobile-menu-open {
 
 @layer components {
     .text-h1 {
-        font-family: 'Playfair Display', serif;
-        @apply text-5xl md:text-7xl lg:text-[6rem] font-black tracking-tight leading-none;
+        font-family: var(--font-headline);
+        @apply text-5xl md:text-7xl lg:text-[6rem] font-black leading-none;
+        letter-spacing: -0.03em;
+        text-wrap: balance;
     }
     .text-h2 {
-        font-family: 'Playfair Display', serif;
+        font-family: var(--font-headline);
         @apply text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-wide leading-tight;
+        text-wrap: balance;
     }
     .text-h3 {
         @apply text-xl md:text-2xl font-bold tracking-normal;
     }
     .text-h4 {
         @apply text-base md:text-lg font-normal leading-relaxed text-white/80;
+        max-width: 65ch;
     }
     .text-cta {
-        @apply text-[10px] sm:text-xs font-bold uppercase tracking-[0.25em];
+        @apply text-[10px] sm:text-xs font-bold uppercase;
+        letter-spacing: 0.3em;
     }
+}
+
+/* --- GSAP Motion Design Support Classes --- */
+.blur-reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    will-change: opacity, transform;
+}
+
+.stagger-item {
+    opacity: 0;
+    transform: translateY(24px);
+    will-change: opacity, transform;
 }
 
 /* PLANS TRANSITION OVERLAY (Love, Death & Robots) */
