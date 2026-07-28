@@ -193,6 +193,123 @@ if (!isFromPlanes && !window.location.hash) {
   window.scrollTo(0, 0);
 }
 
+// --- Draggable Marquee ---
+function initDraggableMarquee() {
+  const containers = document.querySelectorAll('.reviews-slider-container');
+  containers.forEach((container: any) => {
+    const slider = container.querySelector('.animate-marquee');
+    if (!slider) return;
+
+    let isDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+    let scrollSpeed = 0.5; // pixels per frame
+    let animationId = 0;
+    let isPaused = false;
+
+    // Reset loop when reaching the end (duplicate content creates seamless loop)
+    function autoScroll() {
+      if (!isPaused && !isDown) {
+        container.scrollLeft += scrollSpeed;
+        if (container.scrollLeft >= slider.scrollWidth / 2) {
+          container.scrollLeft = 0;
+        }
+      }
+      animationId = requestAnimationFrame(autoScroll);
+    }
+
+    // Start auto-scroll
+    animationId = requestAnimationFrame(autoScroll);
+
+    // Mouse events for drag
+    container.addEventListener('mousedown', (e: MouseEvent) => {
+      isDown = true;
+      isPaused = true;
+      container.classList.add('active-dragging');
+      startX = e.pageX - container.offsetLeft;
+      scrollLeft = container.scrollLeft;
+      container.style.scrollBehavior = 'auto'; // Disable smooth scroll while dragging
+    });
+
+    container.addEventListener('mouseleave', () => {
+      if (isDown) {
+        isDown = false;
+        isPaused = false;
+        container.classList.remove('active-dragging');
+      }
+    });
+
+    container.addEventListener('mouseup', () => {
+      if (isDown) {
+        isDown = false;
+        isPaused = false;
+        container.classList.remove('active-dragging');
+      }
+    });
+
+    container.addEventListener('mousemove', (e: MouseEvent) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - container.offsetLeft;
+      const walk = (x - startX) * 1.5; // Scroll speed multiplier
+      container.scrollLeft = scrollLeft - walk;
+      
+      // Wrap around scrolling
+      if (container.scrollLeft >= slider.scrollWidth / 2) {
+        container.scrollLeft = 0;
+        startX = e.pageX - container.offsetLeft;
+        scrollLeft = 0;
+      } else if (container.scrollLeft <= 0) {
+        container.scrollLeft = slider.scrollWidth / 2;
+        startX = e.pageX - container.offsetLeft;
+        scrollLeft = slider.scrollWidth / 2;
+      }
+    });
+
+    // Touch events for mobile swipe
+    container.addEventListener('touchstart', (e: TouchEvent) => {
+      isDown = true;
+      isPaused = true;
+      startX = e.touches[0].pageX - container.offsetLeft;
+      scrollLeft = container.scrollLeft;
+      container.style.scrollBehavior = 'auto';
+    }, { passive: true });
+
+    container.addEventListener('touchend', () => {
+      isDown = false;
+      isPaused = false;
+    });
+
+    container.addEventListener('touchmove', (e: TouchEvent) => {
+      if (!isDown) return;
+      const x = e.touches[0].pageX - container.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      container.scrollLeft = scrollLeft - walk;
+      
+      if (container.scrollLeft >= slider.scrollWidth / 2) {
+        container.scrollLeft = 0;
+        startX = e.touches[0].pageX - container.offsetLeft;
+        scrollLeft = 0;
+      } else if (container.scrollLeft <= 0) {
+        container.scrollLeft = slider.scrollWidth / 2;
+        startX = e.touches[0].pageX - container.offsetLeft;
+        scrollLeft = slider.scrollWidth / 2;
+      }
+    });
+
+    // Hover events to pause auto scroll
+    container.addEventListener('mouseenter', () => {
+      isPaused = true;
+    });
+
+    container.addEventListener('mouseleave', () => {
+      if (!isDown) {
+        isPaused = false;
+      }
+    });
+  });
+}
+
 // Initialize all DOM contents safely
 async function initMain() {
   // --- A. Dynamic Data Fetch & Render ---
@@ -1046,6 +1163,9 @@ async function initMain() {
 
   // Initialize FAQ Accordion
   initFaqAccordion();
+
+  // Initialize Draggable Marquee Reviews
+  initDraggableMarquee();
 }
 
 if (document.readyState === 'loading') {

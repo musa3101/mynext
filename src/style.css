@@ -51,14 +51,26 @@ html, body {
   100% { transform: translateX(-50%); }
 }
 
+.reviews-slider-container {
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.reviews-slider-container::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+.reviews-slider-container.active-dragging {
+  cursor: grabbing;
+}
+
 .animate-marquee {
   display: flex;
   width: max-content;
-  animation: marquee 30s linear infinite;
-}
-
-.animate-marquee:hover {
-  animation-play-state: paused;
+  will-change: transform;
 }
 
 main {
