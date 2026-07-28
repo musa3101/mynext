@@ -423,51 +423,39 @@ async function initMain() {
   if (portfolioCarousel) {
     portfolioCarousel.innerHTML = '';
 
+    // Render projects 4 times to create a dense, filled, infinite portfolio showcase
     const infiniteProjects = [...projects, ...projects, ...projects, ...projects];
     infiniteProjects.forEach((proj) => {
-      // Find matching testimonial where company equals project title
-      const matchingTestimonial = testimonials.find(
-        (t) => t.company.trim().toLowerCase() === proj.title.trim().toLowerCase()
-      );
-
-      const hasTestimonial = !!matchingTestimonial;
-      const testimonialText = hasTestimonial ? getTranslation(matchingTestimonial.testimonial, lang) : '';
-
       // Assemble card elements
       const article = document.createElement('article');
       article.className = 'flex-none w-[80vw] md:w-[45vw] lg:w-[35vw] xl:w-[30vw] snap-center flex flex-col gap-6 transition-transform duration-500';
 
-      const domain = getDomainFromUrl(proj.project_url) || 'View Case Study';
-      const projectUrl = `project.html?slug=${proj.slug || ''}`;
+      const projectSlug = proj.slug || proj.title.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+      const projectUrl = `project.html?slug=${projectSlug}`;
       const btnText = lang === 'en' ? 'More Info →' : 'Más Info →';
 
+      // Determine category label for the project
+      const getCategoryLabel = (p: any, l: string) => {
+        const t = (p.title || '').toLowerCase().trim();
+        const s = (p.slug || '').toLowerCase().trim();
+        if (t.includes('blessed') || s.includes('blessed')) return l === 'en' ? 'High-End Barbershop' : 'Barbería de Alta Gama';
+        if (t.includes('luna') || s.includes('luna')) return l === 'en' ? 'Specialty Coffee & Bar' : 'Bar & Cafetería de Especialidad';
+        if (t.includes('ecua') || s.includes('ecua')) return l === 'en' ? 'Luxury Renovations' : 'Reformas & Tabiquería';
+        if (t.includes('rbari') || s.includes('rbari')) return l === 'en' ? 'Gastronomic Restaurant' : 'Restaurante Gastronómico';
+        if (t.includes('next era') || s.includes('next-era')) return l === 'en' ? 'E-Commerce Store' : 'Tienda Online / E-Commerce';
+        if (t.includes('mezquita') || s.includes('mezquita') || t.includes('arrahma')) return l === 'en' ? 'Islamic Center' : 'Centro Islámico';
+        if (t.includes('marrakech') || s.includes('marrakech')) return l === 'en' ? 'Moroccan Restaurant' : 'Restaurante Marroquí';
+        return l === 'en' ? 'Web Design' : 'Diseño Web';
+      };
+
+      const categoryText = getCategoryLabel(proj, lang);
+
       article.innerHTML = `
-        <div class="group relative aspect-[16/10] rounded-3xl overflow-hidden glass-panel border-white/5 transition-all duration-500 hover:border-electric-cyan/30 hover:shadow-[0_0_40px_rgba(0,242,255,0.15)]">
-          <!-- Browser UI Mockup -->
-          <div class="absolute top-0 left-0 right-0 h-10 bg-void-black/80 backdrop-blur-md flex items-center px-4 z-30 border-b border-white/5 select-none">
-            <div class="flex items-center gap-1.5 w-16"> 
-              <div class="w-3 h-3 rounded-full bg-[#FF5F56] shadow-sm"></div>
-              <div class="w-3 h-3 rounded-full bg-[#FFBD2E] shadow-sm"></div>
-              <div class="w-3 h-3 rounded-full bg-[#27C93F] shadow-sm"></div>
-            </div>
-            <div class="flex-grow flex items-center justify-between pl-2 md:pl-4">
-              <div class="hidden sm:flex items-center gap-2 mr-4 text-slate-400">
-                <svg viewBox="0 0 20 20" height="12" width="12" fill="currentColor">
-                  <path transform="translate(6.25 3.75)" d="M0,6.25,6.25,0l.875.875L1.75,6.25l5.375,5.375L6.25,12.5Z"></path>
-                </svg>
-                <svg viewBox="0 0 20 20" height="12" width="12" fill="currentColor">
-                  <path transform="translate(6.625 3.75)" d="M7.125,6.25.875,12.5,0,11.625,5.375,6.25,0,.875.875,0Z"></path>
-                </svg>
-              </div>
-              <div class="flex-grow max-w-[400px] mx-auto relative border border-white/10 rounded-lg px-3 py-1 h-7 flex items-center justify-center text-xs text-slate-300 bg-white/5 font-sans cursor-pointer tracking-wide shadow-inner" onclick="window.location.href='${projectUrl}'">
-                ${domain}
-              </div>
-            </div>
-          </div>
-          <div class="absolute top-10 left-0 right-0 bottom-0 bg-[#050505] overflow-hidden flex items-center justify-center p-0 cursor-pointer" onclick="window.location.href='${projectUrl}'">
+        <div class="group relative aspect-[16/10] rounded-3xl overflow-hidden glass-panel border border-white/10 transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-[0_0_50px_rgba(0,242,255,0.2)]">
+          <div class="absolute inset-0 bg-[#06060c] overflow-hidden flex items-center justify-center cursor-pointer" onclick="window.location.href='${projectUrl}'">
             <img src="${proj.image_url}" alt="${lang === 'en' ? `Premium web design in Mallorca - Preview of ${proj.title}` : `Diseño web premium en Mallorca - Vista previa de ${proj.title}`}" loading="lazy"
               class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.05]">
-            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity duration-500"></div>
             <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center z-20 backdrop-blur-sm">
               <a href="${projectUrl}"
                 class="px-8 py-4 bg-white text-black font-headline font-bold text-xs tracking-[0.3em] uppercase rounded-full hover:bg-electric-cyan transition-all duration-500 shadow-2xl scale-90 group-hover:scale-100">
@@ -476,45 +464,64 @@ async function initMain() {
             </div>
           </div>
         </div>
-        <div class="space-y-4 px-2 mt-4 text-center md:text-left">
+        <div class="space-y-2 px-2 mt-4 text-center md:text-left">
           <h3 class="text-3xl md:text-4xl font-bold text-white font-headline tracking-tight">${proj.title}</h3>
-          ${hasTestimonial ? `
-            <p class="text-lg text-white/60 font-body leading-relaxed max-w-2xl line-clamp-2">${testimonialText}</p>
-          ` : `
-            <p class="text-lg text-white/60 font-body leading-relaxed max-w-2xl line-clamp-2">${getTranslation(proj.description, lang)}</p>
-          `}
+          <p class="text-sm font-headline font-semibold uppercase tracking-[0.25em] text-[#00f2ff] opacity-90">${categoryText}</p>
         </div>
       `;
 
       portfolioCarousel.appendChild(article);
     });
 
-    // Auto-scroll logic
+    // Auto-scroll logic (4-second autoplay + silent wrapping)
     let autoScrollInterval: any;
+    let isUserInteracting = false;
+
+    const checkAndWrapScroll = () => {
+      if (!portfolioCarousel || isUserInteracting) return;
+      const card = portfolioCarousel.firstElementChild;
+      if (!card) return;
+      const scrollAmount = card.clientWidth + 32;
+      const setWidth = scrollAmount * projects.length;
+      
+      // If we've scrolled into set 3, jump back to set 2 silently
+      if (portfolioCarousel.scrollLeft >= setWidth * 2.5) {
+        portfolioCarousel.scrollLeft -= setWidth;
+      }
+      // If we've scrolled before set 2, jump forward to set 2 silently
+      else if (portfolioCarousel.scrollLeft <= setWidth * 0.5) {
+        portfolioCarousel.scrollLeft += setWidth;
+      }
+    };
+
     const startScroll = () => {
+      stopScroll();
       autoScrollInterval = setInterval(() => {
-        if (!portfolioCarousel) return;
+        if (!portfolioCarousel || isUserInteracting) return;
         const card = portfolioCarousel.firstElementChild;
         const scrollAmount = card ? card.clientWidth + 32 : 600; 
         
-        // If we've scrolled past the 3rd set, silently jump back to the 2nd set to maintain the loop
-        if (portfolioCarousel.scrollLeft > scrollAmount * (projects.length * 2.5)) {
-            portfolioCarousel.scrollBy({ left: -(scrollAmount * projects.length), behavior: 'auto' });
-        }
-        
+        checkAndWrapScroll();
         portfolioCarousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-      }, 15000); // 15 seconds as user requested
+      }, 4000); // 4 seconds autoplay
     };
 
     const stopScroll = () => {
-      clearInterval(autoScrollInterval);
+      if (autoScrollInterval) clearInterval(autoScrollInterval);
     };
 
     // Pause on hover or touch
-    portfolioCarousel.addEventListener('mouseenter', stopScroll);
-    portfolioCarousel.addEventListener('mouseleave', startScroll);
-    portfolioCarousel.addEventListener('touchstart', stopScroll);
-    portfolioCarousel.addEventListener('touchend', startScroll);
+    portfolioCarousel.addEventListener('mouseenter', () => { isUserInteracting = true; stopScroll(); });
+    portfolioCarousel.addEventListener('mouseleave', () => { isUserInteracting = false; startScroll(); });
+    portfolioCarousel.addEventListener('touchstart', () => { isUserInteracting = true; stopScroll(); });
+    portfolioCarousel.addEventListener('touchend', () => { 
+      isUserInteracting = false; 
+      setTimeout(checkAndWrapScroll, 400);
+      startScroll(); 
+    });
+
+    // Silently wrap scroll when smooth scrolling ends
+    portfolioCarousel.addEventListener('scrollend', checkAndWrapScroll);
 
     // Arrow controls
     const btnPrev = document.getElementById('carousel-prev');
@@ -523,51 +530,40 @@ async function initMain() {
     if (btnPrev && btnNext) {
       btnPrev.addEventListener('click', () => {
         stopScroll();
+        checkAndWrapScroll();
         const card = portfolioCarousel.firstElementChild;
         const scrollAmount = card ? card.clientWidth + 32 : 600;
-        
-        // If we scroll too far left, jump forward silently
-        if (portfolioCarousel.scrollLeft < scrollAmount) {
-            portfolioCarousel.scrollBy({ left: scrollAmount * projects.length, behavior: 'auto' });
-        }
-        
         portfolioCarousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
         startScroll();
       });
 
       btnNext.addEventListener('click', () => {
         stopScroll();
+        checkAndWrapScroll();
         const card = portfolioCarousel.firstElementChild;
         const scrollAmount = card ? card.clientWidth + 32 : 600;
-        
-        // If we scroll too far right, jump back silently
-        if (portfolioCarousel.scrollLeft > scrollAmount * (projects.length * 2.5)) {
-            portfolioCarousel.scrollBy({ left: -(scrollAmount * projects.length), behavior: 'auto' });
-        }
-        
         portfolioCarousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
         startScroll();
       });
-      
-      // Pause when hovering arrows
+
       btnPrev.addEventListener('mouseenter', stopScroll);
       btnPrev.addEventListener('mouseleave', startScroll);
       btnNext.addEventListener('mouseenter', stopScroll);
       btnNext.addEventListener('mouseleave', startScroll);
     }
 
-    // Center the first item of the second set on load
+    // Center Set 2 on load so the carousel starts 100% FULL on both sides
     setTimeout(() => {
-        if (portfolioCarousel.children.length > 0) {
-            const card = portfolioCarousel.children[projects.length] as HTMLElement;
-            if (card) {
-                const containerCenter = portfolioCarousel.clientWidth / 2;
-                const cardCenter = card.offsetLeft + (card.clientWidth / 2);
-                portfolioCarousel.scrollTo({ left: cardCenter - containerCenter, behavior: 'auto' });
-            }
+      if (portfolioCarousel && portfolioCarousel.children.length > projects.length) {
+        const card = portfolioCarousel.children[projects.length] as HTMLElement;
+        if (card) {
+          const containerCenter = portfolioCarousel.clientWidth / 2;
+          const cardCenter = card.offsetLeft + (card.clientWidth / 2);
+          portfolioCarousel.scrollTo({ left: cardCenter - containerCenter, behavior: 'auto' });
         }
-        startScroll(); // Initialize after centering
-    }, 100);
+      }
+      startScroll();
+    }, 150);
   }
 
   // Trigger animations now that elements are rendered in DOM
