@@ -76,9 +76,8 @@ function initRevealAnimations() {
         force3D: true,
         scrollTrigger: {
           trigger: reveal,
-          start: 'top 90%',
-          end: 'bottom 10%',
-          toggleActions: 'play reverse play reverse',
+          start: 'top 92%',
+          once: true,
           onEnter: () => (reveal as HTMLElement).classList.add('active'),
         },
       }
@@ -100,9 +99,8 @@ function initRevealAnimations() {
         force3D: true,
         scrollTrigger: {
           trigger: group,
-          start: 'top 90%',
-          end: 'bottom 10%',
-          toggleActions: 'play reverse play reverse',
+          start: 'top 92%',
+          once: true,
         },
       }
     );
@@ -120,9 +118,8 @@ function initRevealAnimations() {
         force3D: true,
         scrollTrigger: {
           trigger: heading,
-          start: 'top 90%',
-          end: 'bottom 10%',
-          toggleActions: 'play reverse play reverse',
+          start: 'top 92%',
+          once: true,
         },
       }
     );
@@ -193,6 +190,77 @@ if (!isFromPlanes && !window.location.hash) {
   window.scrollTo(0, 0);
 }
 
+// --- Render Dynamic Google Reviews ---
+function renderDynamicGoogleReviews(reviewsList: any[]) {
+  if (!reviewsList || reviewsList.length === 0) return;
+  const marqueeTracks = document.querySelectorAll('.reviews-slider-container .animate-marquee');
+  if (!marqueeTracks || marqueeTracks.length === 0) return;
+
+  const buildCardHtml = (r: any) => {
+    const name = r.name || r.client_name || 'Cliente Verificado';
+    const rawContent = r.content || r.testimonial || '';
+    const content = getTranslation(rawContent, lang as 'es' | 'en');
+    const rawCompany = r.company || r.position || r.relative_time || 'Cliente MYNEXT';
+    const company = getTranslation(rawCompany, lang as 'es' | 'en');
+    const ratingStars = '★'.repeat(r.rating || 5);
+    const photo = r.author_photo || r.image_url;
+
+    const avatarHtml = (photo && photo.startsWith('http'))
+      ? `<img src="${photo}" alt="${name}" class="w-full h-full object-cover rounded-full" />`
+      : (name ? name.charAt(0).toUpperCase() : 'G');
+
+    return `
+      <div class="relative w-[360px] md:w-[450px] shrink-0 p-8 md:p-10 rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/10 backdrop-blur-2xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500">
+          <div class="absolute inset-0 bg-gradient-to-br from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <svg class="absolute top-6 right-6 w-12 h-12 text-white/3 group-hover:text-electric-cyan/10 transition-colors duration-500" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+              <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+          </svg>
+          <div class="relative z-10">
+              <div class="flex items-center justify-between mb-6">
+                  <div class="flex flex-col gap-1">
+                      <div class="flex text-yellow-400 text-lg drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]">${ratingStars}</div>
+                      <span class="text-[9px] text-emerald-400 font-headline uppercase tracking-widest font-bold flex items-center gap-1">
+                          <svg class="w-3.5 h-3.5 fill-emerald-400" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                          </svg>
+                          Reseña Verificada
+                      </span>
+                  </div>
+                  <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+                      <svg width="12" height="12" viewBox="0 0 24 24">
+                          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                      </svg>
+                      <span class="text-white/60 text-[9px] uppercase tracking-widest font-semibold font-headline">Google</span>
+                  </div>
+              </div>
+              <p class="text-[15px] md:text-[16px] text-slate-200 font-light mb-8 leading-relaxed italic">
+                  "${content}"
+              </p>
+              <div class="flex items-center gap-4 border-t border-white/5 pt-6">
+                  <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-cyan-500/20 to-purple-500/20 border border-electric-cyan/30 flex items-center justify-center text-electric-cyan font-bold font-headline text-sm overflow-hidden shrink-0">
+                      ${avatarHtml}
+                  </div>
+                  <div>
+                      <h4 class="text-white font-headline font-bold text-sm tracking-wide">${name}</h4>
+                      <p class="text-xs text-slate-400 font-headline uppercase tracking-wider">${company}</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+    `;
+  };
+
+  const cardsHtml = reviewsList.map(buildCardHtml).join('');
+  const fullHtml = cardsHtml + cardsHtml;
+
+  marqueeTracks.forEach(track => {
+    track.innerHTML = fullHtml;
+  });
+}
+
 // --- Draggable Marquee ---
 function initDraggableMarquee() {
   const containers = document.querySelectorAll('.reviews-slider-container');
@@ -207,9 +275,17 @@ function initDraggableMarquee() {
     let animationId = 0;
     let isPaused = false;
 
+    let isVisible = true;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        isVisible = entry.isIntersecting;
+      });
+    }, { threshold: 0.05 });
+    observer.observe(container);
+
     // Reset loop when reaching the end (duplicate content creates seamless loop)
     function autoScroll() {
-      if (!isPaused && !isDown) {
+      if (!isPaused && !isDown && isVisible) {
         container.scrollLeft += scrollSpeed;
         if (container.scrollLeft >= slider.scrollWidth / 2) {
           container.scrollLeft = 0;
@@ -356,17 +432,10 @@ async function initMain() {
       }
       if (testimonialsRes.data && testimonialsRes.data.length > 0) {
         testimonials = testimonialsRes.data;
-        // Override NEXT ERA testimonial dynamically
-        const nextEraTestimonial = testimonials.find(
-          (t) => t.company.toLowerCase().trim() === 'next era'
-        );
-        if (nextEraTestimonial) {
-          const localNextEra = fallbackTestimonials.find(
-            (t) => t.company.toLowerCase().trim() === 'next era'
-          );
-          if (localNextEra) {
-            nextEraTestimonial.testimonial = localNextEra.testimonial;
-          }
+        // Render only verified Google Maps reviews
+        const googleReviews = testimonials.filter((t: any) => t.source === 'google' || t.google_review_id);
+        if (googleReviews.length > 0) {
+          renderDynamicGoogleReviews(googleReviews);
         }
       }
       if (settingsRes.data && settingsRes.data.length > 0) {

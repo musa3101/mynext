@@ -8,17 +8,13 @@ keep_alive:
     - |
       URL="${SUPABASE_URL}"
       KEY="${SUPABASE_ANON_KEY}"
-      
-      # Fallback a credenciales públicas si no están definidas en variables del proyecto
       if [ -z "$URL" ]; then
         URL="https://elfdkbqlvawaprgidqhd.supabase.co"
       fi
       if [ -z "$KEY" ]; then
         KEY="sb_publishable_9qAEy3xuzB8HU2wSW1e36w_n051oO66"
       fi
-      
       echo "Pinging Supabase at $URL..."
       curl --fail -s -X GET "$URL/auth/v1/health" \
         -H "apikey: $KEY" > /dev/null
-      
       echo "Ping successful!"

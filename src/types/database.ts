@@ -33,15 +33,24 @@ export interface Database {
       };
       mynext_testimonials: {
         Row: {
-          id: number;
-          client_name: string;
-          role: string;
-          company: string;
-          testimonial: string;
+          id: string | number;
+          client_name?: string;
+          name?: string;
+          role?: string;
+          position?: string;
+          company?: string;
+          testimonial?: string;
+          content?: string;
+          rating?: number;
+          image_url?: string;
+          author_photo?: string;
+          google_review_id?: string;
+          relative_time?: string;
+          source?: string;
           active: boolean;
-          created_at: string;
+          created_at?: string;
         };
-        Insert: Omit<Database['public']['Tables']['mynext_testimonials']['Row'], 'id' | 'created_at'>;
+        Insert: Partial<Database['public']['Tables']['mynext_testimonials']['Row']>;
         Update: Partial<Database['public']['Tables']['mynext_testimonials']['Row']>;
       };
       mynext_settings: {

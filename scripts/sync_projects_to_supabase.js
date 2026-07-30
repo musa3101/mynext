@@ -1,31 +1,34 @@
-export const fallbackServices = [
-  {
-    id: 1,
-    title: JSON.stringify({ es: 'BÁSICO', en: 'BASIC' }),
-    description: JSON.stringify({
-      es: 'Diseño web profesional (2-3 secciones), Vinculación con Google Maps, Dominio & Hosting básico incluido, Optimización de SEO Local Básico',
-      en: 'Professional web design (2-3 sections), Google Maps Integration, Domain & Basic Hosting Included, Basic Local SEO Optimization'
-    }),
-    price: '300',
-    featured: false,
-    active: true,
-    sort_order: 1
-  },
-  {
-    id: 2,
-    title: JSON.stringify({ es: 'BUSINESS', en: 'BUSINESS' }),
-    description: JSON.stringify({
-      es: 'Todo lo incluido en el Plan Esencial, Estrategia de Perfil Profesional *3, Gestión integral de Dominio *1, Soporte Técnico Prioritario 24/7',
-      en: 'Everything included in the Essential Plan, Professional Profile Strategy *3, Comprehensive Domain Management *1, Priority Technical Support 24/7'
-    }),
-    price: '400',
-    featured: true,
-    active: true,
-    sort_order: 2
-  }
-];
+import { createClient } from '@supabase/supabase-js';
+import fs from 'fs';
+import path from 'path';
 
-export const fallbackProjects = [
+// Parse .env natively
+const envPath = path.resolve(process.cwd(), '.env');
+let envConfig = {};
+if (fs.existsSync(envPath)) {
+  const envContent = fs.readFileSync(envPath, 'utf8');
+  envContent.split('\n').forEach(line => {
+    const parts = line.split('=');
+    if (parts.length >= 2) {
+      const key = parts[0].trim();
+      const value = parts.slice(1).join('=').trim();
+      if (key) envConfig[key] = value;
+    }
+  });
+}
+
+const supabaseUrl = envConfig.VITE_SUPABASE_URL || process.env.VITE_SUPABASE_URL;
+const supabaseKey = envConfig.VITE_SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
+
+if (!supabaseUrl || !supabaseKey) {
+  console.error("❌ Missing Supabase credentials in .env file");
+  process.exit(1);
+}
+
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+// Fallback projects dataset to sync
+const projectsToSync = [
   {
     id: 1,
     slug: 'blessed-barber-studio',
@@ -54,14 +57,14 @@ export const fallbackProjects = [
     }),
     gallery: [
       {
-        url: './assets/img/portfolio/blessed-horario.jpg',
+        url: './assets/img/portfolio/blessed-horario.png',
         title: JSON.stringify({
           es: 'Cartel de Horarios Exterior con QR de Reserva Directa (Booksy & WhatsApp)',
           en: 'Exterior Business Hours Display with Direct Booking QR Code'
         })
       },
       {
-        url: './assets/img/portfolio/blessed-resena.jpg',
+        url: './assets/img/portfolio/blessed-resena.png',
         title: JSON.stringify({
           es: 'Expositor Físico con Código QR para Reseñas en Google Maps',
           en: 'Physical Google Maps Review Display with QR Code'
@@ -225,7 +228,6 @@ export const fallbackProjects = [
     id: 8,
     slug: 'tacos-marrakech',
     title: 'Tacos Marrakech',
-    category: 'RESTAURANTE MARROQUÍ',
     description: JSON.stringify({
       es: 'Experiencia digital moderna con carta online intuitiva, diseño responsive y menú multiidioma con códigos QR.',
       en: 'Modern digital experience featuring an intuitive online menu, responsive design, and multi-language QR access.'
@@ -250,119 +252,42 @@ export const fallbackProjects = [
     }),
     gallery: [
       {
-        url: './assets/img/portfolio/tacos-qr-1.jpg',
+        url: './assets/img/portfolio/tacos-qr-1.png',
         title: JSON.stringify({ es: 'Soporte con Código QR de Reseñas de Google', en: 'Google Reviews QR Display' })
       },
       {
-        url: './assets/img/portfolio/tacos-qr-2.jpg',
+        url: './assets/img/portfolio/tacos-qr-2.png',
         title: JSON.stringify({ es: 'Expositor de Menú QR para Mesas', en: 'Table QR Menu Display' })
       },
       {
-        url: './assets/img/portfolio/tacos-qr-3.jpg',
+        url: './assets/img/portfolio/tacos-qr-3.png',
         title: JSON.stringify({ es: 'Diseño e Impresión del Menú Digital', en: 'Digital Menu Print & Design' })
       },
       {
-        url: './assets/img/portfolio/tacos-qr-4.jpg',
+        url: './assets/img/portfolio/tacos-qr-4.png',
         title: JSON.stringify({ es: 'Presentación del Menú QR en Local', en: 'In-Store QR Display' })
       }
     ]
   }
 ];
 
-export const fallbackTestimonials = [
-  {
-    id: 1,
-    client_name: 'Gustavo',
-    role: JSON.stringify({ es: 'Dueño', en: 'Owner' }),
-    company: 'Blessed Barber Studio',
-    testimonial: JSON.stringify({
-      es: 'Para Blessed Barber Studio, buscamos reflejar la elegancia y el detalle que ponen en cada corte. Creamos una web con una estética impecable que conecta con el cliente desde el primer vistazo, pero sin descuidar lo importante: un sistema de reservas directo y funcional. Logramos que la experiencia digital se sienta tan premium como visitar el estudio en persona.',
-      en: 'For Blessed Barber Studio, we sought to reflect the elegance and detail they put into every cut. We created a website with an impeccable aesthetic that connects with the client from the first glance, without neglecting what is important: a direct and functional booking system. We made the digital experience feel as premium as visiting the studio in person.'
-    }),
-    active: true
-  },
-  {
-    id: 2,
-    client_name: 'Shamira',
-    role: JSON.stringify({ es: 'Propietaria', en: 'Owner' }),
-    company: 'Bar Cafetería Luna Llena',
-    testimonial: JSON.stringify({
-      es: 'Con Luna Llena, el objetivo fue acercar su cocina al entorno digital. Integramos su carta de forma interactiva y un sistema de reservas ágil para que los clientes tengan toda la información a mano y puedan asegurar su mesa en un segundo. Es una web pensada para ser útil, moderna y, sobre todo, para facilitar la vida tanto al dueño como al cliente.',
-      en: 'With Luna Llena, the goal was to bring their cuisine to the digital environment. We integrated their menu interactively and an agile booking system so that customers have all the information at hand and can secure their table in a second. It is a website designed to be useful, modern and, above all, to make life easier for both the owner and the customer.'
-    }),
-    active: true
-  },
-  {
-    id: 3,
-    client_name: '',
-    role: JSON.stringify({ es: 'Reformas & Construcción', en: 'Renovations & Construction' }),
-    company: 'Ecuaplac',
-    testimonial: JSON.stringify({
-      es: 'Ecuaplac necesitaba una web que hiciera justicia a la calidad de sus reformas y tabiquería en Mallorca. Diseñamos un catálogo visual limpio y profesional que permite apreciar el detalle de cada obra, transmitiendo la seriedad, el orden y el minimalismo que definen su estilo de construcción.',
-      en: 'Ecuaplac needed a website that did justice to the quality of their renovations and drywall in Mallorca. We designed a clean and professional visual catalog that allows appreciating the detail of each work, conveying the seriousness, order, and minimalism that define their construction style.'
-    }),
-    active: true
-  },
-  {
-    id: 4,
-    client_name: '',
-    role: JSON.stringify({ es: 'Web Gastronómica', en: 'GASTRONOMIC WEB DESIGN' }),
-    company: 'RBARI RESTAURANT',
-    testimonial: JSON.stringify({
-      es: 'Con Rbari Restaurant, cruzamos fronteras para trabajar con un cliente en Birmingham, Reino Unido. Desarrollamos una solución integral que digitaliza la carta y facilita las reservas, combinando un diseño visualmente atractivo con una estructura pensada para convertir visitas online en clientes reales. Es el ejemplo perfecto de cómo una web bien diseñada puede potenciar un negocio local, sin importar la distancia.',
-      en: 'With Rbari Restaurant, we crossed borders to work with a client in Birmingham, United Kingdom. We developed a comprehensive solution that digitizes the menu and facilitates bookings, combining a visually attractive design with a structure designed to convert online visits into real customers. It is the perfect example of how a well-designed website can boost a local business, no matter the distance.'
-    }),
-    active: true
-  },
-  {
-    id: 5,
-    client_name: '',
-    role: JSON.stringify({ es: 'Prototipo E-Commerce', en: 'E-Commerce Prototype' }),
-    company: 'NEXT ERA',
-    testimonial: JSON.stringify({
-      es: 'Este proyecto no es una marca real. Es un prototipo de tienda e-commerce premium que he creado yo mismo! He diseñado esta plantilla para ser totalmente adaptable y funcional para marcas exclusivas. Si te gusta la estética y el flujo, puedes adquirir esta plantilla para tu propia marca. Plantilla disponible. Contáctame si necesitas integrarla o si tienes preguntas.',
-      en: 'This project is not a real brand. It is a premium e-commerce store prototype that I created myself! I designed this template to be fully adaptable and functional for exclusive brands. If you like the aesthetics and flow, you can purchase this template for your own brand. Template available. Contact me if you need to integrate it or if you have any questions.'
-    }),
-    active: true
-  },
-  {
-    id: 6,
-    client_name: '',
-    role: JSON.stringify({ es: 'Donación · Arquitectura Digital Solidaria', en: 'Donation · Solidary Digital Architecture' }),
-    company: 'Mezquita Arrahma',
-    testimonial: JSON.stringify({
-      es: 'Un proyecto especial y solidario. Donamos nuestra Arquitectura Digital a la Mezquita Arrahma de Palma para modernizar su presencia online. Diseñamos una web con horarios de rezo en tiempo real, consulta al Imán y sistema de donaciones, todo con una estética que respeta la identidad y tradición de la comunidad.',
-      en: 'A special and solidary project. We donated our Digital Architecture to the Arrahma Mosque in Palma to modernize their online presence. We designed a website with real-time prayer schedules, Imam consultation and donation system, all with an aesthetic that respects the identity and tradition of the community.'
-    }),
-    active: true
-  }
-];
+async function syncProjects() {
+  console.log("🚀 Starting Supabase mynext_projects table sync...");
 
-export const fallbackSettings: Record<string, string> = {
-  site_title: JSON.stringify({
-    es: 'Diseño Web en Palma de Mallorca | MYNEXT - Arquitectura Digital',
-    en: 'Premium Web Design in Palma de Mallorca | MYNEXT Digital Architecture'
-  }),
-  site_description: JSON.stringify({
-    es: '¿Buscas diseño web en Palma de Mallorca? En MYNEXT creamos páginas web exclusivas, responsivas y optimizadas para SEO que impulsan tu negocio. ¡Contáctanos!',
-    en: 'Looking for premium web design in Palma de Mallorca? MYNEXT creates exclusive, responsive, and SEO-optimized websites to elevate your brand. Contact us!'
-  }),
-  contact_phone: '34673109486',
-  contact_email: 'mynextbymusa@gmail.com',
-  launch_banner_text: JSON.stringify({
-    es: '💎 OFERTA DE LANZAMIENTO - HASTA EL 4 DE AGOSTO',
-    en: '💎 LAUNCH OFFER - UNTIL AUGUST 4TH'
-  }),
-  whatsapp_message_landing: JSON.stringify({
-    es: '¡Hola! Vengo desde la web de MYNEXT. Me gustaría recibir información sobre vuestros servicios de diseño y arquitectura digital para mi negocio. ¡Gracias!',
-    en: 'Hello! I came from the MYNEXT website. I would like to receive information about your design and digital architecture services for my business. Thank you!'
-  }),
-  email_subject_landing: JSON.stringify({
-    es: 'Nuevo Proyecto Digital | MYNEXT',
-    en: 'New Digital Project | MYNEXT'
-  }),
-  email_body_landing: JSON.stringify({
-    es: 'Hola, Musa.\n\nHe estado revisando tu porfolio en MYNEXT y me interesa el enfoque de Arquitectura Digital para mi negocio. Me gustaría recibir más información sobre tus servicios y tarifas.\n\nUn saludo.',
-    en: 'Hello Musa,\n\nI have been reviewing your portfolio on MYNEXT and I am interested in the Digital Architecture approach for my business. I would like to receive more information about your services and rates.\n\nBest regards.'
-  })
-};
+  for (const proj of projectsToSync) {
+    console.log(`Syncing [${proj.id}] ${proj.title}...`);
+    const { data, error } = await supabase
+      .from('mynext_projects')
+      .upsert(proj, { onConflict: 'id' });
+
+    if (error) {
+      console.error(`❌ Error syncing ${proj.title}:`, error.message);
+    } else {
+      console.log(`✅ Successfully synced ${proj.title}`);
+    }
+  }
+
+  console.log("🎉 All projects successfully synchronized with Supabase!");
+}
+
+syncProjects();

@@ -5,13 +5,13 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "sync-reviews": "node scripts/sync_google_reviews.js",
+    "sync-projects": "node scripts/sync_projects_to_supabase.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.8",
-    "gsap": "^3.15.0",
-    "pg": "^8.22.0",
-    "puppeteer": "^25.4.0"
+    "gsap": "^3.15.0"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.1",

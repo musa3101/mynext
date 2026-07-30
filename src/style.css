@@ -34,7 +34,6 @@
 }
 
 html, body {
-    scroll-behavior: smooth;
     background-color: #080810;
     font-family: var(--font-body);
     color: var(--color-on-surface);
@@ -44,6 +43,12 @@ html, body {
     padding-bottom: max(0px, env(safe-area-inset-bottom));
     padding-left: max(0px, env(safe-area-inset-left));
     padding-right: max(0px, env(safe-area-inset-right));
+}
+
+.reveal, .stagger-item, .blur-reveal {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
 }
 
 @keyframes marquee {

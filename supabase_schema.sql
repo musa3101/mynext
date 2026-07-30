@@ -1,19 +1,23 @@
 -- Tabla de Proyectos
 CREATE TABLE IF NOT EXISTS mynext_projects (
-    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
+    slug TEXT UNIQUE,
     title TEXT NOT NULL,
     description TEXT,
+    full_description TEXT,
     image_url TEXT,
-    client_name TEXT,
     project_url TEXT,
-    category TEXT,
-    tags TEXT[],
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    technologies TEXT,
+    featured BOOLEAN DEFAULT true,
     active BOOLEAN DEFAULT true,
-    sort_order INTEGER DEFAULT 0
+    sort_order INTEGER DEFAULT 0,
+    gallery_title JSONB,
+    gallery_subtitle JSONB,
+    gallery JSONB,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
--- Tabla de Testimonios
+-- Tabla de Testimonios / Reseñas de Google Maps
 CREATE TABLE IF NOT EXISTS mynext_testimonials (
     id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
     name TEXT NOT NULL,
@@ -22,9 +26,20 @@ CREATE TABLE IF NOT EXISTS mynext_testimonials (
     content TEXT NOT NULL,
     rating INTEGER DEFAULT 5,
     image_url TEXT,
+    google_review_id TEXT UNIQUE,
+    author_photo TEXT,
+    relative_time TEXT,
+    source TEXT DEFAULT 'google',
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     active BOOLEAN DEFAULT true
 );
+
+-- Modificaciones seguras si la tabla ya existía
+ALTER TABLE mynext_testimonials ADD COLUMN IF NOT EXISTS google_review_id TEXT UNIQUE;
+ALTER TABLE mynext_testimonials ADD COLUMN IF NOT EXISTS author_photo TEXT;
+ALTER TABLE mynext_testimonials ADD COLUMN IF NOT EXISTS relative_time TEXT;
+ALTER TABLE mynext_testimonials ADD COLUMN IF NOT EXISTS source TEXT DEFAULT 'google';
+
 
 -- Tabla de Configuración General
 CREATE TABLE IF NOT EXISTS mynext_settings (
@@ -52,8 +67,11 @@ ALTER TABLE mynext_testimonials ENABLE ROW LEVEL SECURITY;
 ALTER TABLE mynext_settings ENABLE ROW LEVEL SECURITY;
 ALTER TABLE mynext_services ENABLE ROW LEVEL SECURITY;
 
--- Permitir lectura pública a las tablas activas
+-- Permitir lectura e inserción pública/sincronizada a las tablas activas
 CREATE POLICY "Lectura pública de proyectos" ON mynext_projects FOR SELECT USING (true);
+CREATE POLICY "Inserción y edición de proyectos" ON mynext_projects FOR ALL USING (true) WITH CHECK (true);
 CREATE POLICY "Lectura pública de testimonios" ON mynext_testimonials FOR SELECT USING (true);
+CREATE POLICY "Inserción de testimonios" ON mynext_testimonials FOR INSERT WITH CHECK (true);
+CREATE POLICY "Actualización de testimonios" ON mynext_testimonials FOR UPDATE USING (true);
 CREATE POLICY "Lectura pública de configuración" ON mynext_settings FOR SELECT USING (true);
 CREATE POLICY "Lectura pública de servicios" ON mynext_services FOR SELECT USING (true);
