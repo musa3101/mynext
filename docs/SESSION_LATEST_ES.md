@@ -1,31 +1,31 @@
-# Resumen de Sesión - 28 Jul 2026
+# Resumen de Sesión - 30 Jul 2026
 
 ## ¿Qué se ha hecho hoy?
-- **Vista previa OpenGraph Cuadrada (WhatsApp / Redes):** Configuración de la tarjeta social de WhatsApp/Facebook al estilo TKO Tacos, mostrando un recuadro cuadrado a la izquierda con el logo oficial de MYNEXT centrado sobre fondo oscuro `#06060c`.
-- **Generación Automática de Maquetas de Proyectos:** 
-  - Creación de script automatizado con **Puppeteer** (`scripts/capture_real_websites.js`) que captura las webs reales (móvil y escritorio) aplicando ocultación automática de carteles de cookies y eliminación de recuadros azules de foco.
-  - Creación de script con **Python/Pillow** (`scripts/generate_device_mockups.py`) que compone la maqueta de iMac + iPhone 15 Pro, aplicando luces radiales de estudio (cian y violeta) y marca de agua del logo MYNEXT al 3% de opacidad.
-- **Rediseño del Portfolio y Carrusel Infinito:**
-  - Eliminación de la barra superior de ventana de Safari en las tarjetas.
-  - Reemplazo de los textos largos de descripción por etiquetas estilizadas de categoría en cian eléctrico (ej: `RESTAURANTE MARROQUÍ`, `CENTRO ISLÁMICO`, `REFORMAS & TABIQUERÍA`).
-  - Ajuste del carrusel para que aparezca 100% lleno sin espacios vacíos a la izquierda, con autoplay cada 4 segundos y navegación ultra fluida sin saltos bruscos.
-- **Solución a Rutas de Detalle:** Implementación de generación dinámica de slug de respaldo en `src/main.ts` para evitar que la página de detalle falle o muestre *"Proyecto No Encontrado"* al recargar (`Cmd` + `R`).
-- **Fusión y Despliegue Oficial:** Realizado el commit y merge a `main`, subiendo todos los cambios a GitHub y GitLab.
+- **Actualización de Tacos Marrakech:** Integradas fotos reales del menú QR impreso y soportes de reseñas de Google Maps en la galería del proyecto.
+- **Integración de Blessed Barber Studio (x11):** Convertidas fotos de exposición de horarios con QR para reservas directas (Booksy y WhatsApp) y expositores de reseñas de Google Maps.
+- **Branding Completo de Ecuaplac:** Incorporadas fotos de vinilado de furgonetas con QR de acceso directo a la web y tarjetas de visita físicas corporativas.
+- **Nuevo Logo Monograma MN:** Procesado el nuevo isotipo de marca `MN` en PNG transparente de alta resolución y favicon oficial.
+- **Optimización de Rendimiento de Scroll:** Desactivados repaints innecesarios en GSAP ScrollTrigger (`once: true`), añadido `IntersectionObserver` al marquee y aceleración por GPU.
+- **Sincronización Total con Supabase:** Creado script ejecutable `npm run sync-projects` y migrada toda la información de los 8 proyectos a la base de datos de Supabase.
+- **Revisión de Traducción (Skill i18nstack):** Localización completa al inglés adaptativo en `index-en.html`, `project-en.html` y descripciones del portfolio.
+- **Compresión de Imágenes Pesadas:** Reducido el peso de las imágenes de galería de 120 MB a 2.7 MB (~400 KB/foto).
+- **Limpieza de Proyecto:** Eliminados archivos temporales, scripts de un solo uso y 40 paquetes npm innecesarios.
+- **Sitemap & SEO:** Actualizadas las fechas a hoy y agregadas las URLs de proyectos individuales.
+- **Fusión y Despliegue Git:** Realizado commit, merge de `dev` a `main` y push exitoso a **GitHub** y **GitLab**.
 
 ## Archivos modificados
-- `index.html` e `index-en.html` (Actualización de meta-etiquetas OpenGraph y Twitter en formato `summary` 512x512).
-- `src/main.ts` (Rediseño de tarjetas de portfolio, etiquetas de categoría, autoplay a 4s y eliminación de saltos de scroll).
-- `scripts/capture_real_websites.js` (Script Puppeteer para capturas reales sin cookies ni foco).
-- `scripts/generate_device_mockups.py` (Script Python para composiciones iMac + iPhone con iluminación ambient y marca de agua).
-- `public/assets/img/portfolio/*` (Actualización de las 7 imágenes de portada del portfolio).
-- `public/assets/img/og-share.png` y `screen.png` (Nuevas vistas previas para compartir).
+- `index.html` e `index-en.html` (Actualización de sección Sobre Mí, nuevo logo MN y optimización).
+- `project.html` y `project-en.html` (Restauración de cabecera original y galerías dinámicas).
+- `src/lib/fallbackData.ts` y `src/project.ts` (Galerías, bilingüismo y optimización de imágenes).
+- `public/sitemap.xml` (Actualización de fechas y URLs de proyectos).
+- `scripts/sync_projects_to_supabase.js` (Script de sincronización con Supabase).
+- `.github/workflows/sync-google-reviews.yml` (Workflow de sincronización de reseñas de Google).
 
 ## Problemas solucionados
-- **Tarjeta de WhatsApp Estilo TKO:** Ajustada la vista previa para que muestre el logo cuadrado centrado a la izquierda.
-- **Pantallas de Carga y Carteles de Cookies:** Puppeteer ahora espera 3.5 segundos e inyecta reglas CSS para ocultar ventanas de cookies antes de tomar la captura.
-- **Saltos Bruscos en Carrusel:** Eliminado el manejador que provocaba que el carrusel se devolviera al centro mientras el usuario arrastraba.
-- **Error "Proyecto No Encontrado":** Solucionado mediante slug fallback generado a partir del título del proyecto.
+- **Pesadez en Carga:** Comprimidas imágenes de galería de 120 MB a 2.7 MB.
+- **Lag al hacer Scroll:** Eliminados repaints de ScrollTrigger y pausado el marquee cuando no es visible.
+- **Títulos de Galería Harcodeados:** Hechos dinámicos según el proyecto (restaurante, barbería, construcción).
 
-## Qué queda pendiente para la próxima sesión
-1. **Google Business Profile & SEO Local:** Ficha de Google Maps y envío del sitemap a Google Search Console.
-2. **Sincronización Automática de Reseñas de Google:** Conectar Google Places API con Supabase para actualizar opiniones en tiempo real.
+## Qué queda pendiente
+1. Envío del sitemap actualizado a Google Search Console.
+2. Incorporar nuevos proyectos al portfolio a medida que se entreguen a clientes.
