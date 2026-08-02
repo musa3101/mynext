@@ -9,23 +9,17 @@
 - **Solución al Deslizamiento de Reseñas en Móvil (iOS):** Implementado *direction lock* con `passive: false` en los eventos táctiles (`touchmove`) para evitar que Safari "robe" el gesto de arrastrar.
 - **Rendimiento Extremo de Scroll (iOS/Móvil):** Reducido `backdrop-blur` innecesario en tarjetas móviles y pausado el dibujado de `particles.js` cuando las secciones están fuera de pantalla.
 - **Auditoría y Limpieza de Código:** Borrados archivos basura de prueba (`planes/hello.html`, `planes/index-en-build.html`) y agregadas reglas en `.gitignore` para ignorar vídeos pesados.
-- **Fix de Alertas Falsas en GitLab CI:** Corregido `.gitlab-ci.yml` con `workflow: rules:` para evitar correos de fallos en pipelines en pushes normales.
-- **Despliegue Oficial en Producción:** Todo el código integrado y subido exitosamente a los servidores de **GitHub**, **GitLab** y desplegado en **Cloudflare Pages**.
+- **Diagnóstico y Aclaración de Alerta de GitLab CI:** Auditada y explicada la notificación recibida por correo ("Failed pipeline for dev | 13288582"). Se aclaró el concepto de Pipeline (robot de automatización para el Keep-Alive de Supabase) y se confirmó que el proyecto y la web están al 100% operativos.
 
 ## Archivos modificados
-- `index.html` e `index-en.html` (Formulario estructurado de propuesta, estilos para select, favicon 192x192).
-- `src/main.ts` (Procesamiento de campos de formulario, plantilla HTML table, autoresponder dinámico, fix táctil).
-- `src/style.css` (Media query para rendimiento GPU/blur en dispositivos móviles).
-- `.gitlab-ci.yml` (Restricción de reglas de ejecución para evitar alertas falsas).
-- `.gitignore` (Exclusión de formatos de vídeo pesados).
+- `docs/SESSION_LATEST_ES.md`
+- `docs/ROADMAP.md`
 
 ## Problemas solucionados
-- **Correos feos y en Spam en Gmail:** Ahora llegan en formato de tabla HTML limpia con título descriptivo y plantilla profesional.
-- **Falta de información en solicitudes:** El cliente ahora especifica su negocio, teléfono, tipo de web y presupuesto.
-- **Falta de auto-respuesta:** El cliente recibe un email automático de MYNEXT confirmando la recepción.
-- **Favicon no aparecía en Google:** Corregido tamaño a 192x192 px con ruta absoluta.
-- **Reseñas no deslizaban en iPhone:** Corregidos eventos táctiles y scroll.
+- **Duda sobre correo de fallo en GitLab:** Aclarado en lenguaje sencillo que la alerta se debía a un push sin ejecuciones de cron (0 jobs) y que no existe ningún fallo en la web ni en Supabase.
 
 ## Qué queda pendiente
-1. Re-intentar la solicitud manual de indexación en Google Search Console si se desea acelerar (Google actualizará el favicon automáticamente).
-2. Incorporar nuevos proyectos al portfolio a medida que se entreguen a clientes.
+1. Opcional: añadir la regla `- when: never` en `.gitlab-ci.yml` si se desea silenciar completamente avisos de push en GitLab.
+2. Re-intentar la solicitud manual de indexación en Google Search Console si se desea acelerar (Google actualizará el favicon automáticamente).
+3. Incorporar nuevos proyectos al portfolio a medida que se entreguen a clientes.
+

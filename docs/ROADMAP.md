@@ -5,7 +5,7 @@
 - Configuración de plantilla HTML Table en FormSubmit para que los correos lleguen organizados y limpios a Gmail sin ir a Spam.
 - Implementación de correo de respuesta automática (Autoresponder) enviado al cliente al solicitar una propuesta.
 - Reactivación, restauración y migración de tablas al backend Supabase exclusivo (`mynext-WEB`).
-- Implementación de Keep-Alive automático en GitHub Actions y GitLab CI para prevenir pausado de bases de datos.
+- Implementación y aclaración técnica de Keep-Alive automático en GitHub Actions y GitLab CI (prevención de borrado por inactividad).
 - Favicon e isotipo oficial optimizado a 192x192 px con especificaciones exactas para Google Search.
 - Galería dinámica de proyectos con fotos físicas (menús QR, soportes de reseñas de Google Maps, vinilados de furgonetas y tarjetas de visita).
 - Sincronización automática de proyectos con Supabase (`npm run sync-projects`).
