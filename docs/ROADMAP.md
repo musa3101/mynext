@@ -4,12 +4,12 @@
 - Reactivación, restauración y migración de tablas al backend Supabase exclusivo (`mynext-WEB`).
 - Desactivación y pausado del proyecto antiguo de Supabase `musa3101's Project` liberando slots gratuitos.
 - Implementación de Keep-Alive automático en GitHub Actions y GitLab CI para prevenir pausado de bases de datos.
-- Favicon e isotipo oficial con el nuevo monograma geométrico `MN` de MYNEXT.
+- Favicon e isotipo oficial optimizado a 192x192 px con especificaciones exactas para Google Search.
 - Galería dinámica de proyectos con fotos físicas (menús QR, soportes de reseñas de Google Maps, vinilados de furgonetas y tarjetas de visita).
 - Sincronización automática de proyectos con Supabase (`npm run sync-projects`).
-- Optimización de rendimiento de scroll a 60–120 FPS y compresión de imágenes de galería (de 120 MB a 2.7 MB).
+- Optimización extrema de rendimiento de scroll a 60–120 FPS en iOS/móvil y fix del carrusel táctil de reseñas.
 - Revisión y traducción al inglés al 100% siguiendo la skill `i18nstack`.
-- Limpieza profunda de archivos temporales y depuración de dependencias npm.
+- Limpieza profunda de archivos temporales, código muerto y depuración de dependencias npm.
 - Sitemap.xml actualizado con URLs de detalle de proyectos.
 - Workflow de GitHub Actions para sincronización periódica de reseñas de Google Places API.
 - Fusión (Merge) de rama `dev` a `main` y despliegue oficial sincronizado a GitHub y GitLab.
