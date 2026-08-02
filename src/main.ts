@@ -198,7 +198,7 @@ function renderDynamicGoogleReviews(reviewsList: any[]) {
 
   const buildCardHtml = (r: any) => {
     const name = r.name || r.client_name || 'Cliente Verificado';
-    const rawContent = r.content || r.testimonial || '';
+    const rawContent = (lang === 'en' ? (r.content_en || r.content_es || r.content || r.testimonial) : (r.content_es || r.content || r.testimonial)) || '';
     const content = getTranslation(rawContent, lang as 'es' | 'en');
     const rawCompany = r.company || r.position || r.relative_time || 'Cliente MYNEXT';
     const company = getTranslation(rawCompany, lang as 'es' | 'en');
@@ -342,23 +342,50 @@ function initDraggableMarquee() {
       }
     });
 
-    // Touch events for mobile swipe
+    // Touch events for mobile swipe (direction-lock for iOS Safari)
+    let touchStartY = 0;
+    let directionLocked: 'horizontal' | 'vertical' | null = null;
+
     container.addEventListener('touchstart', (e: TouchEvent) => {
       isDown = true;
       isPaused = true;
       startX = e.touches[0].pageX - container.offsetLeft;
+      touchStartY = e.touches[0].pageY;
       scrollLeft = container.scrollLeft;
+      directionLocked = null;
       container.style.scrollBehavior = 'auto';
     }, { passive: true });
 
     container.addEventListener('touchend', () => {
       isDown = false;
       isPaused = false;
+      directionLocked = null;
     });
 
     container.addEventListener('touchmove', (e: TouchEvent) => {
       if (!isDown) return;
-      const x = e.touches[0].pageX - container.offsetLeft;
+
+      const currentX = e.touches[0].pageX;
+      const currentY = e.touches[0].pageY;
+
+      // Direction lock: decide once whether the gesture is horizontal or vertical
+      if (!directionLocked) {
+        const dx = Math.abs(currentX - (startX + container.offsetLeft));
+        const dy = Math.abs(currentY - touchStartY);
+        if (dx + dy > 10) { // threshold to decide
+          directionLocked = dx > dy ? 'horizontal' : 'vertical';
+        }
+      }
+
+      // If vertical, let the page scroll naturally
+      if (directionLocked === 'vertical') return;
+
+      // Horizontal: prevent page scroll and move the carousel
+      if (directionLocked === 'horizontal') {
+        e.preventDefault();
+      }
+
+      const x = currentX - container.offsetLeft;
       const walk = (x - startX) * 1.5;
       container.scrollLeft = scrollLeft - walk;
       
@@ -371,7 +398,7 @@ function initDraggableMarquee() {
         startX = e.touches[0].pageX - container.offsetLeft;
         scrollLeft = slider.scrollWidth / 2;
       }
-    });
+    }, { passive: false });
 
     // Hover events to pause auto scroll
     container.addEventListener('mouseenter', () => {
@@ -1295,11 +1322,11 @@ if (neonFrame) {
   }, { passive: true });
 }
 
-// --- K. Liquid Vanilla JS Cursor ---
+// --- K. Liquid Vanilla JS Cursor (desktop only — skip on touch devices) ---
 const liquidCursor = document.getElementById('liquid-cursor');
 const cursorDot = document.getElementById('cursor-dot');
 
-if (liquidCursor && cursorDot) {
+if (liquidCursor && cursorDot && window.matchMedia('(pointer: fine)').matches) {
   const pos = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
   const mouse = { x: pos.x, y: pos.y };
   const speed = 0.15;
@@ -1324,6 +1351,10 @@ if (liquidCursor && cursorDot) {
     el.addEventListener('mouseenter', () => liquidCursor.classList.add('hover'));
     el.addEventListener('mouseleave', () => liquidCursor.classList.remove('hover'));
   });
+} else if (liquidCursor) {
+  // Hide cursor elements on touch devices to avoid invisible DOM overhead
+  liquidCursor.style.display = 'none';
+  if (cursorDot) cursorDot.style.display = 'none';
 }
 
 // --- L. GSAP Parallax Premium Animations ---
@@ -1344,10 +1375,8 @@ window.addEventListener('load', () => {
         scrollTrigger: {
           trigger: processCards[0].parentElement,
           start: 'top 85%',
-          end: 'bottom 15%',
-          toggleActions: 'play reverse play reverse',
+          once: true,
           onEnter: () => processCards.forEach(c => c.classList.add('in-view')),
-          onLeaveBack: () => processCards.forEach(c => c.classList.remove('in-view')),
         },
       }
     );

@@ -2034,3 +2034,43 @@ body.mobile-menu-open {
 }
 
 
+/* ========================================================
+   MOBILE PERFORMANCE — GPU & SCROLL OPTIMIZATION (iOS)
+   Disable expensive backdrop-blur and reduce box-shadow
+   complexity on mobile to maintain 60fps scroll.
+   ======================================================== */
+@media (max-width: 767px) {
+  /* Review cards: kill backdrop-blur (biggest jank source on iOS) */
+  #reviews .backdrop-blur-2xl,
+  #reviews .backdrop-blur-xl,
+  #reviews .backdrop-blur-sm,
+  #reviews [class*="backdrop-blur"] {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    background: rgba(12, 12, 22, 0.85) !important;
+  }
+
+  /* Glass panels: simplify blur on scroll */
+  .glass-panel {
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+
+  /* Review cards: contain layout to avoid repaints spilling */
+  #reviews .shrink-0 {
+    contain: content;
+  }
+
+  /* Reduce heavy multi-layer box-shadows on cards */
+  .process-card,
+  .card-lit {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  /* Particles containers: limit compositing layers */
+  #particles-js-inicio canvas,
+  #particles-js-nosotros canvas {
+    will-change: auto !important;
+  }
+}
+

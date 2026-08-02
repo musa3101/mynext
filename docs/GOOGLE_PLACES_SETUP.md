@@ -51,3 +51,22 @@ npm run sync-reviews
 ```
 
 El script consultará las reseñas en Google Places API, filtrará las puntuaciones de 5 estrellas y las guardará/actualizará en tu base de datos Supabase, haciéndolas aparecer instantáneamente en el carrusel de tu web.
+
+---
+
+## ⚡ 5. Inyección Manual Express (Sin Tarjeta de Crédito)
+
+Si prefieres **no vincular tarjeta de crédito en Google Cloud**, puedes añadir cualquier reseña que recibas en Google Maps directamente ejecutando:
+
+```bash
+npm run add-review
+```
+
+O enviando parámetros directamente por comandos:
+
+```bash
+node scripts/add_google_review.js --name="Javier M." --content="Excelente servicio de web" --company="Barber Club Palma" --rating=5
+```
+
+La reseña se subirá al instante a Supabase con la etiqueta de reseña verificada de Google y aparecerá en el carrusel animado de tu web.
+

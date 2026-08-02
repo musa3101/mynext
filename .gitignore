@@ -5,3 +5,10 @@ dist/
 .env
 .env.local
 .env.*.local
+
+# Video recordings & heavy media
+*.mp4
+*.MP4
+*.mov
+*.webm
+

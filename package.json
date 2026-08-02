@@ -7,6 +7,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "sync-reviews": "node scripts/sync_google_reviews.js",
+    "add-review": "node scripts/add_google_review.js",
     "sync-projects": "node scripts/sync_projects_to_supabase.js"
   },
   "dependencies": {
