@@ -1,8 +1,10 @@
 # Roadmap MYNEXT
 
 ## Tareas Completadas
+- Rediseño del formulario de contacto con campos estructurados (Nombre, Email, Teléfono, Tipo de Proyecto, Presupuesto, Idea).
+- Configuración de plantilla HTML Table en FormSubmit para que los correos lleguen organizados y limpios a Gmail sin ir a Spam.
+- Implementación de correo de respuesta automática (Autoresponder) enviado al cliente al solicitar una propuesta.
 - Reactivación, restauración y migración de tablas al backend Supabase exclusivo (`mynext-WEB`).
-- Desactivación y pausado del proyecto antiguo de Supabase `musa3101's Project` liberando slots gratuitos.
 - Implementación de Keep-Alive automático en GitHub Actions y GitLab CI para prevenir pausado de bases de datos.
 - Favicon e isotipo oficial optimizado a 192x192 px con especificaciones exactas para Google Search.
 - Galería dinámica de proyectos con fotos físicas (menús QR, soportes de reseñas de Google Maps, vinilados de furgonetas y tarjetas de visita).
