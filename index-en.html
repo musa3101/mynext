@@ -423,15 +423,35 @@
             text-align: left;
         }
 
-        .form-container .form-group input {
+        .form-container .form-group input,
+        .form-container .form-group select {
             width: 100%;
             padding: 12px 16px;
             border-radius: 8px;
             color: #fff;
             font-family: 'Urbanist', sans-serif;
-            background-color: rgba(255, 255, 255, 0.02) !important;
-            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            font-size: 15px;
+            background-color: rgba(12, 16, 28, 0.95) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
             transition: border-color 0.3s, box-shadow 0.3s;
+            touch-action: manipulation;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .form-container .form-group select {
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300f2ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            background-size: 16px;
+            padding-right: 40px;
+            cursor: pointer;
+        }
+
+        .form-container .form-group select option {
+            background-color: #0c101c;
+            color: #ffffff;
+            padding: 12px;
         }
 
         .form-container .form-group textarea {
@@ -3629,17 +3649,48 @@
                         <div class="form-container w-full max-w-full md:max-w-[500px]">
                             <form id="email-contact-form" action="https://formsubmit.co/ajax/mynextbymusa@gmail.com"
                                 method="POST" class="form">
-                                <div class="form-group">
-                                    <label for="email">Contact Email</label>
-                                    <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div class="form-group">
+                                        <label for="name">Your Name / Business</label>
+                                        <input type="text" id="name" name="name" placeholder="e.g. John / Barber Studio" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Contact Email</label>
+                                        <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div class="form-group">
+                                        <label for="phone">Phone / WhatsApp</label>
+                                        <input type="tel" id="phone" name="phone" placeholder="+34 600 00 00 00">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="project_type">Web Project Type</label>
+                                        <select id="project_type" name="project_type">
+                                            <option value="Landing Page / Launch Web">Landing Page / Launch Page</option>
+                                            <option value="Corporate Web / Local Business">Corporate Web / Local Business</option>
+                                            <option value="Online Store (E-Commerce)">Online Store (E-Commerce)</option>
+                                            <option value="Redesign / Maintenance">Redesign / Maintenance</option>
+                                            <option value="Custom Project / Web App">100% Custom Web App</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="textarea">How can we help you?</label>
+                                    <label for="budget">Estimated Budget</label>
+                                    <select id="budget" name="budget">
+                                        <option value="500€ - 1.000€ (Essential Plan)">500€ – 1,000€ (Essential Plan)</option>
+                                        <option value="1.000€ - 2.500€ (Pro Plan)">1,000€ – 2,500€ (Pro Plan)</option>
+                                        <option value="Over 2.500€ (Elite / Custom)">Over 2,500€ (Elite / Custom)</option>
+                                        <option value="To be defined / Need advice">To be defined / Advice</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="textarea">Project Details / Idea</label>
                                     <textarea name="message" id="textarea"
-                                        placeholder="Write the details of your inquiry..." required></textarea>
+                                        placeholder="Tell us briefly about your business, your goals, or any references you like..." required></textarea>
                                 </div>
                                 <button class="form-submit-btn" type="submit">
-                                    <span class="btn-text">Submit</span>
+                                    <span class="btn-text">Request Free Proposal →</span>
                                 </button>
                             </form>
                         </div>

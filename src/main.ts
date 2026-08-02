@@ -928,35 +928,67 @@ async function initMain() {
   if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
+      const nameInput = contactForm.querySelector('input[name="name"]') as HTMLInputElement | null;
       const emailInput = contactForm.querySelector('input[name="email"]') as HTMLInputElement | null;
+      const phoneInput = contactForm.querySelector('input[name="phone"]') as HTMLInputElement | null;
+      const projectTypeSelect = contactForm.querySelector('select[name="project_type"]') as HTMLSelectElement | null;
+      const budgetSelect = contactForm.querySelector('select[name="budget"]') as HTMLSelectElement | null;
       const messageInput = contactForm.querySelector('textarea[name="message"]') as HTMLTextAreaElement | null;
       const submitBtn = contactForm.querySelector('.form-submit-btn') as HTMLButtonElement | null;
+
       if (!emailInput || !submitBtn || !emailInput.value) return;
 
       const btnText = submitBtn.querySelector('.btn-text');
       const originalText = btnText ? btnText.textContent : submitBtn.textContent;
 
+      const allInputs = contactForm.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('input, select, textarea');
+      allInputs.forEach(input => input.disabled = true);
       submitBtn.disabled = true;
-      emailInput.disabled = true;
-      if (messageInput) messageInput.disabled = true;
 
       const isEs = lang === 'es';
-      const statusText = isEs ? 'Enviando...' : 'Sending...';
+      const statusText = isEs ? 'Enviando Propuesta...' : 'Sending Proposal...';
       if (btnText) {
         btnText.textContent = statusText;
       } else {
         submitBtn.textContent = statusText;
       }
 
-      const subject = isEs ? '¡Te damos la bienvenida a MYNEXT!' : 'Welcome to MYNEXT!';
-      const messageDetails = messageInput ? messageInput.value : '';
-      const messageVal = isEs
-        ? `Se ha registrado una nueva solicitud de contacto.\n\nCorreo del cliente: ${emailInput.value}\nDetalles / Mensaje:\n${messageDetails}`
-        : `A new contact request has been registered.\n\nClient Email: ${emailInput.value}\nDetails / Message:\n${messageDetails}`;
+      const clientName = nameInput?.value || (isEs ? 'Cliente / Negocio' : 'Client / Business');
+      const clientEmail = emailInput.value;
+      const clientPhone = phoneInput?.value || (isEs ? 'No especificado' : 'Not specified');
+      const projectType = projectTypeSelect?.value || (isEs ? 'General' : 'General');
+      const budget = budgetSelect?.value || (isEs ? 'No especificado' : 'Not specified');
+      const messageDetails = messageInput?.value || '';
+
+      const subject = isEs
+        ? `🚀 Nueva Solicitud de Proyecto Web: ${clientName} (${projectType})`
+        : `🚀 New Web Project Request: ${clientName} (${projectType})`;
 
       const autorespondVal = isEs
-        ? `¡Hola! Gracias por contactar con MYNEXT y unirte a nuestra comunidad. Aquí tienes tu código de descuento del 10% para tu primer proyecto: MYNEXT10. Nos pondremos en contacto contigo lo antes posible para ver los detalles de tu consulta. ¡Disfrútalo!`
-        : `Hello! Thank you for contacting MYNEXT and joining our community. Here is your 10% discount code for your first project: MYNEXT10. We will get in touch with you as soon as possible to discuss the details of your inquiry. Enjoy!`;
+        ? `¡Hola ${clientName}!
+
+Muchas gracias por contactar con MYNEXT. Hemos recibido correctamente los detalles de tu consulta para tu proyecto web:
+
+• Tipo de Proyecto: ${projectType}
+• Presupuesto Estimado: ${budget}
+
+He revisado tu solicitud y en breve me pondré en contacto contigo directamente por correo o WhatsApp para agendar una breve llamada o enviarte la propuesta personalizada sin compromiso.
+
+Un saludo,
+Musa — MYNEXT Arquitectura Digital
+https://mynextbymusa.com`
+        : `Hello ${clientName}!
+
+Thank you very much for contacting MYNEXT. We have successfully received your inquiry details for your web project:
+
+• Project Type: ${projectType}
+• Estimated Budget: ${budget}
+
+I have reviewed your request and will contact you directly via email or WhatsApp shortly to schedule a brief call or send you a custom proposal with no obligation.
+
+Best regards,
+Musa — MYNEXT Digital Architecture
+https://mynextbymusa.com`;
 
       fetch(contactForm.action, {
         method: 'POST',
@@ -965,38 +997,41 @@ async function initMain() {
           'Accept': 'application/json'
         },
         body: JSON.stringify({
-          email: emailInput.value,
           _subject: subject,
+          _template: 'table',
+          _captcha: 'false',
           _autorespond: autorespondVal,
-          message: messageVal
+          "Cliente / Negocio": clientName,
+          "Email de Contacto": clientEmail,
+          "Teléfono / WhatsApp": clientPhone,
+          "Tipo de Proyecto": projectType,
+          "Presupuesto Estimado": budget,
+          "Detalles / Idea del Proyecto": messageDetails
         })
       })
         .then(response => {
           if (response.ok) {
-            const successText = isEs ? '¡Enviado! ✓' : 'Sent ✓';
+            const successText = isEs ? '¡Solicitud Enviada! ✓' : 'Proposal Sent! ✓';
             if (btnText) {
               btnText.textContent = successText;
             } else {
               submitBtn.textContent = successText;
             }
             submitBtn.style.backgroundColor = '#00F2FF';
-            submitBtn.style.boxShadow = '0 0 20px #00F2FF';
-
-            emailInput.value = '';
-            if (messageInput) messageInput.value = '';
+            submitBtn.style.boxShadow = '0 0 25px #00F2FF';
 
             const formElement = contactForm;
             formElement.style.transition = 'all 0.5s ease';
             formElement.style.opacity = '0';
-            formElement.style.transform = 'scale(0.9)';
+            formElement.style.transform = 'scale(0.95)';
             setTimeout(() => {
               formElement.style.display = 'none';
               const successMsg = document.createElement('div');
-              successMsg.className = 'text-electric-cyan font-headline text-sm md:text-base tracking-wider font-semibold animate-pulse mt-4 text-center px-4';
-              successMsg.style.textShadow = '0 0 10px rgba(0, 242, 255, 0.4)';
-              successMsg.textContent = isEs
-                ? 'Gracias por registrarte. Revisa tu Gmail, ¡tienes una grasa esperándote! 😏'
-                : 'Thanks for registering. Check your Gmail, something fire is waiting for you! 😏';
+              successMsg.className = 'text-electric-cyan font-headline text-sm md:text-base tracking-wider font-semibold animate-pulse mt-4 text-center px-4 leading-relaxed';
+              successMsg.style.textShadow = '0 0 12px rgba(0, 242, 255, 0.5)';
+              successMsg.innerHTML = isEs
+                ? `¡Gracias, ${clientName}! Hemos recibido tu propuesta.<br><span class="text-xs text-white/70 font-normal">Te hemos enviado un correo de confirmación a <strong>${clientEmail}</strong>. Nos pondremos en contacto contigo muy pronto.</span>`
+                : `Thank you, ${clientName}! We received your proposal.<br><span class="text-xs text-white/70 font-normal">We sent a confirmation email to <strong>${clientEmail}</strong>. We will get in touch with you very soon.</span>`;
 
               const formParent = formElement.parentElement;
               if (formParent) formParent.appendChild(successMsg);
@@ -1011,9 +1046,9 @@ async function initMain() {
 
       function showErrorState() {
         if (btnText) {
-          btnText.textContent = 'Error';
+          btnText.textContent = isEs ? 'Error al enviar' : 'Error sending';
         } else if (submitBtn) {
-          submitBtn.textContent = 'Error';
+          submitBtn.textContent = isEs ? 'Error al enviar' : 'Error sending';
         }
         setTimeout(() => {
           if (btnText) {
@@ -1021,10 +1056,9 @@ async function initMain() {
           } else if (submitBtn) {
             submitBtn.textContent = originalText;
           }
-          if (submitBtn) submitBtn.disabled = false;
-          if (emailInput) emailInput.disabled = false;
-          if (messageInput) messageInput.disabled = false;
-        }, 2000);
+          submitBtn!.disabled = false;
+          allInputs.forEach(input => input.disabled = false);
+        }, 3000);
       }
     });
   }
