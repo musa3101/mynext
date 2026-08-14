@@ -2,7 +2,11 @@
 
 ## ¿Qué se ha hecho hoy?
 - **Configuración de Google Places API:** Añadidas las credenciales oficiales de Google Places (`GOOGLE_PLACES_API_KEY` y `GOOGLE_PLACE_ID`) al archivo `.env` para la ficha oficial de **Mynext** en Palma de Mallorca.
-- **Auditoría de Reseñas Reales:** Corregida la lista de testimonios para incluir **exclusivamente las 6 de Google Maps** (Gustavo Coyo Quiñonez, Danna Delgado, Jhon Soliz, Juan, Ilyas Etaouriri, John Smith).
+- **Auditoría y Sincronización de Reseñas:**
+  - Sincronizada la tabla `mynext_testimonials` en Supabase para incluir **únicamente las 7 reseñas reales de Google Maps** (Gustavo, Danna, Jhon, Ilyas, John, Goyo y Anuar), solucionando el problema de datos obsoletos.
+  - Actualizado el script `seed_supabase_cms.js` para blindar las opiniones reales ante futuros volcados.
+- **Alineación de Base de Datos con la Web:**
+  - Sincronizadas todas las tablas de contenido en Supabase (`mynext_about`, `mynext_hero`, `mynext_services`, `mynext_faq` y `mynext_contact`) para que tengan exactamente la misma información, precios (Planes BÁSICO 280€ y BUSINESS 380€) y textos que la web actual.
 - **Auto-recuperación de Supabase (Keep-Alive):** 
   - Actualizados los archivos de configuración local de MCP con el nuevo Token de Supabase.
   - Subido el secreto `SUPABASE_ACCESS_TOKEN` a los secretos del repositorio de GitHub de forma segura (sin guardarlo en el código).
@@ -25,7 +29,8 @@
 - `docs/ROADMAP.md`
 
 ## Problemas solucionados
-- **Depuración de Reseñas:** Eliminación de datos mock o fallbacks antiguos. Se dejaron únicamente las opiniones reales.
+- **Discrepancia en Base de Datos:** Eliminación de datos mock/obsoletos en la base de datos de Supabase. Las tablas de contenido e información de contacto ahora reflejan exactamente la realidad de la web.
+- **Depuración de Reseñas:** Eliminación de datos mock o fallbacks antiguos. Se dejaron únicamente las opiniones reales de Google Maps.
 - **Caída de Supabase / DNS no resuelto:** El keep-alive fallaba porque la base de datos se pausaba y el DNS dejaba de responder. Ahora el flujo de trabajo detecta el fallo y auto-restaura el proyecto usando la API oficial de forma desatendida.
 
 ## Qué queda pendiente
