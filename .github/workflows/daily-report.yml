@@ -1,0 +1,191 @@
+name: Daily Status Report
+
+on:
+  schedule:
+    # Se ejecuta todos los días a las 07:00 UTC (9:00 AM hora local española)
+    - cron: '0 7 * * *'
+  workflow_dispatch: # Permite ejecución manual desde GitHub
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Status Check and Email Report
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+        run: |
+          # 1. Comprobar el estado del sitio web
+          WEB_URL="https://mynextbymusa.com"
+          echo "Comprobando estado del sitio web: $WEB_URL..."
+          WEB_STATUS=$(curl -o /dev/null -s -w "%{http_code}" "$WEB_URL")
+          
+          # 2. Comprobar el estado de la base de datos Supabase
+          DB_URL="https://elfdkbqlvawaprgidqhd.supabase.co"
+          DB_ANON_KEY="sb_publishable_9qAEy3xuzB8HU2wSW1e36w_n051oO66"
+          echo "Comprobando estado de la base de datos..."
+          DB_STATUS=$(curl -s -o /dev/null -w "%{http_code}" -X GET "$DB_URL/rest/v1/mynext_projects?select=id&limit=1" \
+            -H "apikey: $DB_ANON_KEY" \
+            -H "Authorization: Bearer $DB_ANON_KEY")
+          
+          # 3. Determinar badges HTML y estados
+          if [ "$WEB_STATUS" -eq 200 ] || [ "$WEB_STATUS" -eq 301 ] || [ "$WEB_STATUS" -eq 302 ]; then
+            WEB_TEXT="Activa ($WEB_STATUS)"
+            WEB_CLASS="active"
+            WEB_BADGE="🟢 ACTIVA"
+          else
+            WEB_TEXT="Caída ($WEB_STATUS)"
+            WEB_CLASS="inactive"
+            WEB_BADGE="🔴 CAÍDA"
+          fi
+          
+          if [ "$DB_STATUS" -eq 200 ]; then
+            DB_TEXT="Activa ($DB_STATUS)"
+            DB_CLASS="active"
+            DB_BADGE="🟢 ACTIVA"
+          else
+            DB_TEXT="Caída/Pausada ($DB_STATUS)"
+            DB_CLASS="inactive"
+            DB_BADGE="🔴 CAÍDA"
+          fi
+          
+          # 4. Asunto del correo (con alerta si algo falla)
+          if [ "$WEB_STATUS" -ne 200 ] && [ "$WEB_STATUS" -ne 301 ] && [ "$WEB_STATUS" -ne 302 ] || [ "$DB_STATUS" -ne 200 ]; then
+            SUBJECT="⚠️ ALERTA: Caída de servicio detectada en Mynext"
+          else
+            SUBJECT="🟢 Reporte Diario de Estado - Mynext (Todo OK)"
+          fi
+          
+          echo "Web: $WEB_BADGE, DB: $DB_BADGE"
+          
+          # 5. Construir HTML del correo con diseño ultra premium
+          HTML_BODY="<!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset='utf-8'>
+            <style>
+              body {
+                font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;
+                background-color: #030303;
+                color: #f3f4f6;
+                margin: 0;
+                padding: 40px 20px;
+              }
+              .container {
+                max-width: 600px;
+                margin: 0 auto;
+                background: linear-gradient(135deg, #0d0d1e 0%, #15152a 100%);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                border-radius: 24px;
+                padding: 32px;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+              }
+              .header {
+                text-align: center;
+                margin-bottom: 32px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                padding-bottom: 24px;
+              }
+              .logo {
+                font-size: 24px;
+                font-weight: 800;
+                letter-spacing: 1px;
+                background: linear-gradient(to right, #00f2ff, #a855f7);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+              }
+              .title {
+                font-size: 20px;
+                margin-top: 8px;
+                color: #ffffff;
+                font-weight: 600;
+              }
+              .status-card {
+                background: rgba(255, 255, 255, 0.03);
+                border: 1px solid rgba(255, 255, 255, 0.05);
+                border-radius: 16px;
+                padding: 20px;
+                margin-bottom: 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+              }
+              .status-name {
+                font-size: 15px;
+                font-weight: 600;
+                color: #e5e7eb;
+              }
+              .status-badge {
+                font-size: 13px;
+                padding: 6px 16px;
+                border-radius: 9999px;
+                font-weight: 700;
+                text-transform: uppercase;
+                display: inline-block;
+              }
+              .status-badge.active {
+                background-color: rgba(16, 185, 129, 0.15);
+                color: #10b981;
+                border: 1px solid rgba(16, 185, 129, 0.3);
+              }
+              .status-badge.inactive {
+                background-color: rgba(239, 68, 68, 0.15);
+                color: #ef4444;
+                border: 1px solid rgba(239, 68, 68, 0.3);
+              }
+              .footer {
+                text-align: center;
+                margin-top: 32px;
+                font-size: 11px;
+                color: #6b7280;
+                border-top: 1px solid rgba(255, 255, 255, 0.08);
+                padding-top: 24px;
+              }
+            </style>
+          </head>
+          <body>
+            <div class='container'>
+              <div class='header'>
+                <div class='logo'>MYNEXT</div>
+                <div class='title'>Reporte Diario de Estado</div>
+              </div>
+              
+              <div class='status-card'>
+                <span class='status-name'>🌐 Sitio Web (mynextbymusa.com)</span>
+                <span class='status-badge ${WEB_CLASS}'>${WEB_TEXT}</span>
+              </div>
+              
+              <div class='status-card'>
+                <span class='status-name'>⚡ Base de Datos (Supabase)</span>
+                <span class='status-badge ${DB_CLASS}'>${DB_TEXT}</span>
+              </div>
+              
+              <div class='footer'>
+                Este reporte fue generado de forma automática a las 09:00 AM (CEST).<br>
+                Google Antigravity Setup &copy; 2026
+              </div>
+            </div>
+          </body>
+          </html>"
+          
+          # Escapar comillas para JSON seguro
+          ESCAPED_HTML=$(echo "$HTML_BODY" | jq -aRs .)
+          
+          # 6. Enviar mediante API de Resend
+          if [ -z "$RESEND_API_KEY" ]; then
+            echo "❌ ERROR: RESEND_API_KEY no está configurado."
+            exit 1
+          fi
+          
+          echo "Enviando email a mynextbymusa@gmail.com..."
+          
+          RESPONSE_CODE=$(curl -s -o /dev/null -w "%{http_code}" -X POST "https://api.resend.com/emails" \
+            -H "Authorization: Bearer $RESEND_API_KEY" \
+            -H "Content-Type: application/json" \
+            -d "{\"from\": \"Mynext Status <onboarding@resend.dev>\", \"to\": [\"mynextbymusa@gmail.com\"], \"subject\": \"$SUBJECT\", \"html\": $ESCAPED_HTML}")
+          
+          if [ "$RESPONSE_CODE" -eq 200 ] || [ "$RESPONSE_CODE" -eq 201 ]; then
+            echo "¡Email enviado con éxito! Código HTTP: $RESPONSE_CODE"
+          else
+            echo "❌ ERROR: Falló el envío del email. Código HTTP: $RESPONSE_CODE"
+            exit 1
+          fi
