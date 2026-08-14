@@ -17,7 +17,7 @@ jobs:
           # 1. Comprobar el estado del sitio web
           WEB_URL="https://mynextbymusa.com"
           echo "Comprobando estado del sitio web: $WEB_URL..."
-          WEB_STATUS=$(curl -o /dev/null -s -w "%{http_code}" "$WEB_URL")
+          WEB_STATUS=$(curl -o /dev/null -s -w "%{http_code}" -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" "$WEB_URL")
           
           # 2. Comprobar el estado de la base de datos Supabase
           DB_URL="https://elfdkbqlvawaprgidqhd.supabase.co"
@@ -57,111 +57,120 @@ jobs:
           
           echo "Web: $WEB_BADGE, DB: $DB_BADGE"
           
-          # 5. Construir HTML del correo con diseño ultra premium
+          # 5. Construir HTML del correo con diseño ultra premium compatible con Gmail
           HTML_BODY="<!DOCTYPE html>
           <html>
           <head>
             <meta charset='utf-8'>
             <style>
               body {
-                font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;
-                background-color: #030303;
-                color: #f3f4f6;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+                background-color: #09090b;
+                color: #e4e4e7;
                 margin: 0;
-                padding: 40px 20px;
+                padding: 30px 15px;
+              }
+              .wrapper {
+                background-color: #09090b;
+                width: 100%;
+                padding: 30px 0;
               }
               .container {
-                max-width: 600px;
+                max-width: 500px;
                 margin: 0 auto;
-                background: linear-gradient(135deg, #0d0d1e 0%, #15152a 100%);
-                border: 1px solid rgba(255, 255, 255, 0.08);
-                border-radius: 24px;
-                padding: 32px;
-                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+                background-color: #121214;
+                border: 1px solid #27272a;
+                border-radius: 16px;
+                padding: 32px 24px;
               }
               .header {
                 text-align: center;
-                margin-bottom: 32px;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-                padding-bottom: 24px;
+                margin-bottom: 28px;
+                border-bottom: 1px solid #27272a;
+                padding-bottom: 20px;
               }
               .logo {
-                font-size: 24px;
+                font-size: 26px;
                 font-weight: 800;
-                letter-spacing: 1px;
-                background: linear-gradient(to right, #00f2ff, #a855f7);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-              }
-              .title {
-                font-size: 20px;
-                margin-top: 8px;
+                letter-spacing: 2px;
                 color: #ffffff;
-                font-weight: 600;
+                margin: 0;
               }
-              .status-card {
-                background: rgba(255, 255, 255, 0.03);
-                border: 1px solid rgba(255, 255, 255, 0.05);
-                border-radius: 16px;
-                padding: 20px;
-                margin-bottom: 20px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
+              .logo span {
+                color: #00f2ff;
               }
-              .status-name {
-                font-size: 15px;
+              .subtitle {
+                font-size: 13px;
+                color: #a1a1aa;
+                margin-top: 6px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+              }
+              .status-item {
+                background-color: #18181b;
+                border: 1px solid #27272a;
+                border-radius: 12px;
+                padding: 16px 20px;
+                margin-bottom: 16px;
+              }
+              .status-title {
+                font-size: 14px;
                 font-weight: 600;
-                color: #e5e7eb;
+                color: #f4f4f5;
+                display: inline-block;
+                vertical-align: middle;
               }
               .status-badge {
-                font-size: 13px;
-                padding: 6px 16px;
-                border-radius: 9999px;
+                float: right;
+                font-size: 11px;
                 font-weight: 700;
+                padding: 4px 12px;
+                border-radius: 20px;
                 text-transform: uppercase;
-                display: inline-block;
+                letter-spacing: 0.5px;
               }
               .status-badge.active {
-                background-color: rgba(16, 185, 129, 0.15);
-                color: #10b981;
-                border: 1px solid rgba(16, 185, 129, 0.3);
+                background-color: rgba(16, 185, 129, 0.1);
+                color: #34d399;
+                border: 1px solid rgba(16, 185, 129, 0.2);
               }
               .status-badge.inactive {
-                background-color: rgba(239, 68, 68, 0.15);
-                color: #ef4444;
-                border: 1px solid rgba(239, 68, 68, 0.3);
+                background-color: rgba(239, 68, 68, 0.1);
+                color: #f87171;
+                border: 1px solid rgba(239, 68, 68, 0.2);
               }
               .footer {
                 text-align: center;
-                margin-top: 32px;
+                margin-top: 28px;
                 font-size: 11px;
-                color: #6b7280;
-                border-top: 1px solid rgba(255, 255, 255, 0.08);
-                padding-top: 24px;
+                color: #71717a;
+                border-top: 1px solid #27272a;
+                padding-top: 20px;
               }
             </style>
           </head>
           <body>
-            <div class='container'>
-              <div class='header'>
-                <div class='logo'>MYNEXT</div>
-                <div class='title'>Reporte Diario de Estado</div>
-              </div>
-              
-              <div class='status-card'>
-                <span class='status-name'>🌐 Sitio Web (mynextbymusa.com)</span>
-                <span class='status-badge ${WEB_CLASS}'>${WEB_TEXT}</span>
-              </div>
-              
-              <div class='status-card'>
-                <span class='status-name'>⚡ Base de Datos (Supabase)</span>
-                <span class='status-badge ${DB_CLASS}'>${DB_TEXT}</span>
-              </div>
-              
-              <div class='footer'>
-                Este reporte fue generado de forma automática a las 09:00 AM (CEST).<br>
-                Google Antigravity Setup &copy; 2026
+            <div class='wrapper'>
+              <div class='container'>
+                <div class='header'>
+                  <h1 class='logo'>MY<span>NEXT</span></h1>
+                  <div class='subtitle'>Reporte Diario de Estado</div>
+                </div>
+                
+                <div class='status-item'>
+                  <span class='status-title'>🌐 Sitio Web (mynextbymusa.com)</span>
+                  <span class='status-badge ${WEB_CLASS}'>${WEB_TEXT}</span>
+                </div>
+                
+                <div class='status-item'>
+                  <span class='status-title'>⚡ Base de Datos (Supabase)</span>
+                  <span class='status-badge ${DB_CLASS}'>${DB_TEXT}</span>
+                </div>
+                
+                <div class='footer'>
+                  Este reporte fue generado de forma automática a las 09:00 AM (CEST).<br>
+                  Google Antigravity Setup &copy; 2026
+                </div>
               </div>
             </div>
           </body>
