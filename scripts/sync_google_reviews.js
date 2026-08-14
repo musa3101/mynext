@@ -96,28 +96,6 @@ const DEFAULT_GOOGLE_REVIEWS = [
   },
   {
     google_review_id: 'g_rev_6',
-    name: 'Karim B.',
-    company: 'Dar Naima Restaurant',
-    content: 'Servicio de 10 estrellas. Nos rediseñó el menú digital en QR y la web del restaurante marroquí. Ahora los clientes ven los platos en alta calidad y la velocidad de carga es instantánea. Muy satisfecho.',
-    rating: 5,
-    author_photo: '',
-    relative_time: 'Hace un mes',
-    source: 'google',
-    active: true
-  },
-  {
-    google_review_id: 'g_rev_7',
-    name: 'Abdel R.',
-    company: 'Centro Islámico de Palma',
-    content: 'Atención personalizada impecable, rapidez en las entregas y soporte continuo. Nos ayudó con la infraestructura web y la visibilidad local en Google Maps.',
-    rating: 5,
-    author_photo: '',
-    relative_time: 'Hace un mes',
-    source: 'google',
-    active: true
-  },
-  {
-    google_review_id: 'g_rev_8',
     name: 'John Smith',
     company: 'Cliente Verificado',
     content: 'Servicio altamente recomendado para negocios en Palma.',

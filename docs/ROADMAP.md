@@ -9,7 +9,7 @@
 - Favicon e isotipo oficial optimizado a 192x192 px con especificaciones exactas para Google Search.
 - Galería dinámica de proyectos con fotos físicas (menús QR, soportes de reseñas de Google Maps, vinilados y tarjetas de visita).
 - Sincronización automática de proyectos con Supabase (`npm run sync-projects`).
-- Integración y unificación canónica de las 8 reseñas reales de Google Maps (5,0 ⭐) en `fallbackData.ts` y scripts de sincronización con soporte bilingüe (ES/EN).
+- Integración y unificación canónica de las 6 reseñas reales de Google Maps (5,0 ⭐) en `fallbackData.ts` y scripts de sincronización con soporte bilingüe (ES/EN).
 - Optimización extrema de rendimiento de scroll a 60–120 FPS en iOS/móvil y fix del carrusel táctil de reseñas.
 - Revisión y traducción al inglés al 100% siguiendo la skill `i18nstack`.
 - Limpieza profunda de archivos temporales, código muerto y depuración de dependencias npm.
