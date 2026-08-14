@@ -7,11 +7,15 @@
   - Actualizados los archivos de configuración local de MCP con el nuevo Token de Supabase.
   - Subido el secreto `SUPABASE_ACCESS_TOKEN` a los secretos del repositorio de GitHub de forma segura (sin guardarlo en el código).
   - Reescrita la GitHub Action `keep-alive.yml` y el script de GitLab CI `.gitlab-ci.yml` para realizar consultas reales a la tabla `mynext_projects` (forzando actividad en Postgres) y llamar a la API de Supabase para **auto-restaurar el proyecto** si este es detectado como pausado.
+- **Reporte Diario por Correo (Resend):**
+  - Subido de forma segura el secreto `RESEND_API_KEY` a los secretos de tu repositorio de GitHub.
+  - Creado un nuevo workflow programado `daily-report.yml` que corre diariamente a las 9:00 AM hora local de España. Realiza pruebas de salud tanto a la base de datos como al sitio web y envía un correo en formato HTML de diseño premium a `mynextbymusa@gmail.com` usando la API de Resend. El asunto incluye alertas (`⚠️`) en caso de caídas.
 - **Compilación y Despliegue:** Proyecto compilado con Vite y TypeScript con 0 errores y sincronizado a los repositorios remotos en GitHub y GitLab.
 
 ## Archivos modificados
 - `.env`
 - `.github/workflows/keep-alive.yml`
+- `.github/workflows/daily-report.yml`
 - `.gitlab-ci.yml`
 - `src/lib/fallbackData.ts`
 - `src/main.ts`

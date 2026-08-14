@@ -6,6 +6,7 @@
 - Implementación de correo de respuesta automática (Autoresponder) enviado al cliente al solicitar una propuesta.
 - Reactivación, restauración y migración de tablas al backend Supabase exclusivo (`mynext-WEB`).
 - Implementación de Keep-Alive automático y auto-recuperación (self-healing) inteligente con restauración automática ante pausas en GitHub Actions y GitLab CI.
+- Implementación de Reporte Diario de Estado automatizado vía email (9:00 AM) usando la API de Resend y GitHub Actions.
 - Favicon e isotipo oficial optimizado a 192x192 px con especificaciones exactas para Google Search.
 - Galería dinámica de proyectos con fotos físicas (menús QR, soportes de reseñas de Google Maps, vinilados y tarjetas de visita).
 - Sincronización automática de proyectos con Supabase (`npm run sync-projects`).
