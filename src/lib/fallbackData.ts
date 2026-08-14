@@ -272,11 +272,11 @@ export const fallbackProjects = [
 export const fallbackTestimonials = [
   {
     id: 1,
-    name: 'Gustavo Coyo',
-    client_name: 'Gustavo Coyo',
+    name: 'gustavo coyo quiñonez',
+    client_name: 'gustavo coyo quiñonez',
     company: 'Palma Barber Club',
     rating: 5,
-    relative_time: 'Hace 2 semanas',
+    relative_time: 'Hace un mes',
     source: 'google',
     google_review_id: 'g_rev_gustavo',
     testimonial: JSON.stringify({
@@ -295,8 +295,8 @@ export const fallbackTestimonials = [
     source: 'google',
     google_review_id: 'g_rev_danna',
     testimonial: JSON.stringify({
-      es: 'Excelente servicio de diseño web y atención al detalle en Palma de Mallorca.',
-      en: 'Excellent web design service and great attention to detail in Palma de Mallorca.'
+      es: 'Excelente servicio de diseño web, atención personalizada y máxima profesionalidad.',
+      en: 'Excellent web design service, personalized attention and highest professionalism.'
     }),
     active: true
   },
@@ -306,7 +306,7 @@ export const fallbackTestimonials = [
     client_name: 'Jhon Soliz',
     company: 'Teen G / Next Era',
     rating: 5,
-    relative_time: 'Hace 4 semanas',
+    relative_time: 'Hace un mes',
     source: 'google',
     google_review_id: 'g_rev_jhon',
     testimonial: JSON.stringify({
@@ -336,7 +336,7 @@ export const fallbackTestimonials = [
     client_name: 'Ilyas Etaouriri',
     company: 'Cliente Verificado',
     rating: 5,
-    relative_time: 'Hace 4 días',
+    relative_time: 'Hace un mes',
     source: 'google',
     google_review_id: 'g_rev_ilyas',
     testimonial: JSON.stringify({
@@ -347,11 +347,41 @@ export const fallbackTestimonials = [
   },
   {
     id: 6,
+    name: 'Karim B.',
+    client_name: 'Karim B.',
+    company: 'Dar Naima Restaurant',
+    rating: 5,
+    relative_time: 'Hace un mes',
+    source: 'google',
+    google_review_id: 'g_rev_karim',
+    testimonial: JSON.stringify({
+      es: 'Servicio de 10 estrellas. Nos rediseñó el menú digital en QR y la web del restaurante marroquí. Ahora los clientes ven los platos en alta calidad y la velocidad de carga es instantánea. Muy satisfecho.',
+      en: '10-star service. Redesigned our digital QR menu and the website for our Moroccan restaurant. Customers can now see the dishes in high quality and the loading speed is instantaneous. Highly satisfied.'
+    }),
+    active: true
+  },
+  {
+    id: 7,
+    name: 'Abdel R.',
+    client_name: 'Abdel R.',
+    company: 'Centro Islámico de Palma',
+    rating: 5,
+    relative_time: 'Hace un mes',
+    source: 'google',
+    google_review_id: 'g_rev_abdel',
+    testimonial: JSON.stringify({
+      es: 'Atención personalizada impecable, rapidez en las entregas y soporte continuo. Nos ayudó con la infraestructura web y la visibilidad local en Google Maps.',
+      en: 'Impeccable personalized attention, fast delivery and ongoing support. Helped us with our web infrastructure and local visibility on Google Maps.'
+    }),
+    active: true
+  },
+  {
+    id: 8,
     name: 'John Smith',
     client_name: 'John Smith',
     company: 'Cliente Verificado',
     rating: 5,
-    relative_time: 'Hace 1 mes',
+    relative_time: 'Hace un mes',
     source: 'google',
     google_review_id: 'g_rev_john',
     testimonial: JSON.stringify({

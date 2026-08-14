@@ -970,7 +970,7 @@ async function initMain() {
 Muchas gracias por contactar con MYNEXT. Hemos recibido correctamente los detalles de tu consulta para tu proyecto web:
 
 • Tipo de Proyecto: ${projectType}
-• Presupuesto Estimado: ${budget}
+• Plan de Interés: ${budget}
 
 He revisado tu solicitud y en breve me pondré en contacto contigo directamente por correo o WhatsApp para agendar una breve llamada o enviarte la propuesta personalizada sin compromiso.
 
@@ -982,7 +982,7 @@ https://mynextbymusa.com`
 Thank you very much for contacting MYNEXT. We have successfully received your inquiry details for your web project:
 
 • Project Type: ${projectType}
-• Estimated Budget: ${budget}
+• Plan of Interest: ${budget}
 
 I have reviewed your request and will contact you directly via email or WhatsApp shortly to schedule a brief call or send you a custom proposal with no obligation.
 
@@ -1005,7 +1005,7 @@ https://mynextbymusa.com`;
           "Email de Contacto": clientEmail,
           "Teléfono / WhatsApp": clientPhone,
           "Tipo de Proyecto": projectType,
-          "Presupuesto Estimado": budget,
+          "Plan de Interés": budget,
           "Detalles / Idea del Proyecto": messageDetails
         })
       })
