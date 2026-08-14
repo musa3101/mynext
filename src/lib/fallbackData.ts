@@ -272,67 +272,91 @@ export const fallbackProjects = [
 export const fallbackTestimonials = [
   {
     id: 1,
-    client_name: 'Gustavo',
-    role: JSON.stringify({ es: 'Dueño', en: 'Owner' }),
-    company: 'Blessed Barber Studio',
+    name: 'Gustavo Coyo',
+    client_name: 'Gustavo Coyo',
+    company: 'Palma Barber Club',
+    rating: 5,
+    relative_time: 'Hace 2 semanas',
+    source: 'google',
+    google_review_id: 'g_rev_gustavo',
     testimonial: JSON.stringify({
-      es: 'Para Blessed Barber Studio, buscamos reflejar la elegancia y el detalle que ponen en cada corte. Creamos una web con una estética impecable que conecta con el cliente desde el primer vistazo, pero sin descuidar lo importante: un sistema de reservas directo y funcional. Logramos que la experiencia digital se sienta tan premium como visitar el estudio en persona.',
-      en: 'For Blessed Barber Studio, we sought to reflect the elegance and detail they put into every cut. We created a website with an impeccable aesthetic that connects with the client from the first glance, without neglecting what is important: a direct and functional booking system. We made the digital experience feel as premium as visiting the studio in person.'
+      es: 'Brutal el curro de MYNEXT con la web de la barbería. Ha clavado el diseño y además está genial porque se adapta perfecto al móvil y al ordenador, que para el tema de las citas nos viene de lujo. Nos ha dado muchísima visibilidad y reservas en el día a día. Si quieres llevar tu negocio a otro nivel, habla con él ya que te asesora en todo y es un crack. ¡Servicio recomendado para negocios en Palma de Mallorca!',
+      en: "Brutal work by MYNEXT on the barbershop's website. He nailed the design and it's also great because it adapts perfectly to mobile and desktop, which is fantastic for booking appointments. It has given us a lot of visibility and reservations on a daily basis. If you want to take your business to another level, talk to him as he advises you on everything and is brilliant. Highly recommended service for businesses in Palma de Mallorca!"
     }),
     active: true
   },
   {
     id: 2,
-    client_name: 'Shamira',
-    role: JSON.stringify({ es: 'Propietaria', en: 'Owner' }),
-    company: 'Bar Cafetería Luna Llena',
+    name: 'Danna Delgado',
+    client_name: 'Danna Delgado',
+    company: 'Cliente Verificado',
+    rating: 5,
+    relative_time: 'Hace 3 semanas',
+    source: 'google',
+    google_review_id: 'g_rev_danna',
     testimonial: JSON.stringify({
-      es: 'Con Luna Llena, el objetivo fue acercar su cocina al entorno digital. Integramos su carta de forma interactiva y un sistema de reservas ágil para que los clientes tengan toda la información a mano y puedan asegurar su mesa en un segundo. Es una web pensada para ser útil, moderna y, sobre todo, para facilitar la vida tanto al dueño como al cliente.',
-      en: 'With Luna Llena, the goal was to bring their cuisine to the digital environment. We integrated their menu interactively and an agile booking system so that customers have all the information at hand and can secure their table in a second. It is a website designed to be useful, modern and, above all, to make life easier for both the owner and the customer.'
+      es: 'Excelente servicio de diseño web y atención al detalle en Palma de Mallorca.',
+      en: 'Excellent web design service and great attention to detail in Palma de Mallorca.'
     }),
     active: true
   },
   {
     id: 3,
-    client_name: '',
-    role: JSON.stringify({ es: 'Reformas & Construcción', en: 'Renovations & Construction' }),
-    company: 'Ecuaplac',
+    name: 'Jhon Soliz',
+    client_name: 'Jhon Soliz',
+    company: 'Teen G / Next Era',
+    rating: 5,
+    relative_time: 'Hace 4 semanas',
+    source: 'google',
+    google_review_id: 'g_rev_jhon',
     testimonial: JSON.stringify({
-      es: 'Ecuaplac necesitaba una web que hiciera justicia a la calidad de sus reformas y tabiquería en Mallorca. Diseñamos un catálogo visual limpio y profesional que permite apreciar el detalle de cada obra, transmitiendo la seriedad, el orden y el minimalismo que definen su estilo de construcción.',
-      en: 'Ecuaplac needed a website that did justice to the quality of their renovations and drywall in Mallorca. We designed a clean and professional visual catalog that allows appreciating the detail of each work, conveying the seriousness, order, and minimalism that define their construction style.'
+      es: 'Como creador de Teen G, quería llevar mi idea a internet de una forma profesional. Conocí Next Era, un prototipo de ecommerce desarrollado por MyNext, y me gustó mucho el diseño y la imagen que transmitía. Musa me ayudó desde el principio, resolviendo dudas, aportando ideas y entendiendo lo que quería conseguir con mi proyecto. El trato fue cercano y siempre estuvo dispuesto a ayudar cuando lo necesitaba. Estoy muy contento con la experiencia y recomiendo MyNext a cualquier persona que necesite una página web profesional.',
+      en: 'As the creator of Teen G, I wanted to take my idea to the internet in a professional way. I met Next Era, an ecommerce prototype developed by MyNext, and I really liked the design and the image it transmitted. Musa helped me from the beginning, answering questions, providing ideas and understanding what I wanted to achieve with my project. The treatment was close and he was always willing to help when I needed it. I am very happy with the experience and I recommend MyNext to anyone who needs a professional website for their business or brand.'
     }),
     active: true
   },
   {
     id: 4,
-    client_name: '',
-    role: JSON.stringify({ es: 'Web Gastronómica', en: 'GASTRONOMIC WEB DESIGN' }),
-    company: 'RBARI RESTAURANT',
+    name: 'Juan',
+    client_name: 'Juan',
+    company: 'Cliente Verificado',
+    rating: 5,
+    relative_time: 'Hace 3 semanas',
+    source: 'google',
+    google_review_id: 'g_rev_juan',
     testimonial: JSON.stringify({
-      es: 'Con Rbari Restaurant, cruzamos fronteras para trabajar con un cliente en Birmingham, Reino Unido. Desarrollamos una solución integral que digitaliza la carta y facilita las reservas, combinando un diseño visualmente atractivo con una estructura pensada para convertir visitas online en clientes reales. Es el ejemplo perfecto de cómo una web bien diseñada puede potenciar un negocio local, sin importar la distancia.',
-      en: 'With Rbari Restaurant, we crossed borders to work with a client in Birmingham, United Kingdom. We developed a comprehensive solution that digitizes the menu and facilitates bookings, combining a visually attractive design with a structure designed to convert online visits into real customers. It is the perfect example of how a well-designed website can boost a local business, no matter the distance.'
+      es: 'Gran trabajo en el desarrollo web, rapidez y comunicación impecable.',
+      en: 'Great job in web development, speed and flawless communication.'
     }),
     active: true
   },
   {
     id: 5,
-    client_name: '',
-    role: JSON.stringify({ es: 'Prototipo E-Commerce', en: 'E-Commerce Prototype' }),
-    company: 'NEXT ERA',
+    name: 'Ilyas Etaouriri',
+    client_name: 'Ilyas Etaouriri',
+    company: 'Cliente Verificado',
+    rating: 5,
+    relative_time: 'Hace 4 días',
+    source: 'google',
+    google_review_id: 'g_rev_ilyas',
     testimonial: JSON.stringify({
-      es: 'Este proyecto no es una marca real. Es un prototipo de tienda e-commerce premium que he creado yo mismo! He diseñado esta plantilla para ser totalmente adaptable y funcional para marcas exclusivas. Si te gusta la estética y el flujo, puedes adquirir esta plantilla para tu propia marca. Plantilla disponible. Contáctame si necesitas integrarla o si tienes preguntas.',
-      en: 'This project is not a real brand. It is a premium e-commerce store prototype that I created myself! I designed this template to be fully adaptable and functional for exclusive brands. If you like the aesthetics and flow, you can purchase this template for your own brand. Template available. Contact me if you need to integrate it or if you have any questions.'
+      es: 'Muy buen chico lo recomiendo puntual profesional atiende muy bien se explica muy bien',
+      en: 'Very good guy, I recommend him. Punctual, professional, attends very well, explains himself very well'
     }),
     active: true
   },
   {
     id: 6,
-    client_name: '',
-    role: JSON.stringify({ es: 'Donación · Arquitectura Digital Solidaria', en: 'Donation · Solidary Digital Architecture' }),
-    company: 'Mezquita Arrahma',
+    name: 'John Smith',
+    client_name: 'John Smith',
+    company: 'Cliente Verificado',
+    rating: 5,
+    relative_time: 'Hace 1 mes',
+    source: 'google',
+    google_review_id: 'g_rev_john',
     testimonial: JSON.stringify({
-      es: 'Un proyecto especial y solidario. Donamos nuestra Arquitectura Digital a la Mezquita Arrahma de Palma para modernizar su presencia online. Diseñamos una web con horarios de rezo en tiempo real, consulta al Imán y sistema de donaciones, todo con una estética que respeta la identidad y tradición de la comunidad.',
-      en: 'A special and solidary project. We donated our Digital Architecture to the Arrahma Mosque in Palma to modernize their online presence. We designed a website with real-time prayer schedules, Imam consultation and donation system, all with an aesthetic that respects the identity and tradition of the community.'
+      es: 'Servicio altamente recomendado para negocios en Palma.',
+      en: 'Highly recommended web service for businesses in Palma.'
     }),
     active: true
   }

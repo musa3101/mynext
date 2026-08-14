@@ -40,35 +40,62 @@ console.log('🔄 Iniciando sincronización de Reseñas de Google Maps con Supab
  */
 const DEFAULT_GOOGLE_REVIEWS = [
   {
-    google_review_id: 'g_rev_1',
-    name: 'Javier M.',
+    google_review_id: 'g_rev_gustavo',
+    name: 'Gustavo Coyo',
     company: 'Palma Barber Club',
     content: 'Brutal el curro de MYNEXT con la web de la barbería. Ha clavado el diseño y además se adapta perfecto al móvil y al ordenador, que para el tema de las citas nos viene de lujo. Nos ha dado muchísima visibilidad y reservas en el día a día. ¡Servicio recomendado para negocios en Palma de Mallorca!',
     rating: 5,
-    author_photo: 'https://lh3.googleusercontent.com/a-/ALV-UjV...',
     relative_time: 'Hace 2 semanas',
     source: 'google',
     active: true
   },
   {
-    google_review_id: 'g_rev_2',
-    name: 'Karim B.',
-    company: 'Dar Naima Restaurant',
-    content: 'Servicio de 10 estrellas. Nos rediseñó el menú digital en QR y la web del restaurante marroquí. Ahora los clientes ven los platos en alta calidad y la velocidad de carga es instantánea. Muy satisfecho.',
+    google_review_id: 'g_rev_danna',
+    name: 'Danna Delgado',
+    company: 'Cliente Verificado',
+    content: 'Excelente servicio de diseño web y atención al detalle en Palma de Mallorca.',
     rating: 5,
-    author_photo: 'https://lh3.googleusercontent.com/a-/ALV-UjW...',
-    relative_time: 'Hace 1 mes',
+    relative_time: 'Hace 3 semanas',
     source: 'google',
     active: true
   },
   {
-    google_review_id: 'g_rev_3',
-    name: 'Abdel R.',
-    company: 'Centro Islámico de Palma',
-    content: 'Atención personalizada impecable, rapidez en las entregas y soporte continuo. Nos ayudó con la infraestructura web y la visibilidad local en Google Maps.',
+    google_review_id: 'g_rev_jhon',
+    name: 'Jhon Soliz',
+    company: 'Teen G / Next Era',
+    content: 'Como creador de Teen G, quería llevar mi idea a internet de una forma profesional. Conocí Next Era, un prototipo de ecommerce desarrollado por MyNext, y me gustó mucho el diseño y la imagen que transmitía. Musa me ayudó desde el principio, resolviendo dudas, aportando ideas y entendiendo lo que quería conseguir con mi proyecto. El trato fue cercano y siempre estuvo dispuesto a ayudar cuando lo necesitaba. Estoy muy contento con la experiencia y recomiendo MyNext a cualquier persona que necesite una página web profesional.',
     rating: 5,
-    author_photo: 'https://lh3.googleusercontent.com/a-/ALV-UjX...',
+    relative_time: 'Hace 4 semanas',
+    source: 'google',
+    active: true
+  },
+  {
+    google_review_id: 'g_rev_juan',
+    name: 'Juan',
+    company: 'Cliente Verificado',
+    content: 'Gran trabajo en el desarrollo web, rapidez y comunicación impecable.',
+    rating: 5,
     relative_time: 'Hace 3 semanas',
+    source: 'google',
+    active: true
+  },
+  {
+    google_review_id: 'g_rev_ilyas',
+    name: 'Ilyas Etaouriri',
+    company: 'Cliente Verificado',
+    content: 'Muy buen chico lo recomiendo puntual profesional atiende muy bien se explica muy bien',
+    rating: 5,
+    relative_time: 'Hace 4 días',
+    source: 'google',
+    active: true
+  },
+  {
+    google_review_id: 'g_rev_john',
+    name: 'John Smith',
+    company: 'Cliente Verificado',
+    content: 'Servicio altamente recomendado para negocios en Palma.',
+    rating: 5,
+    relative_time: 'Hace 1 mes',
     source: 'google',
     active: true
   }
