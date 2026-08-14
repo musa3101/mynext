@@ -20,6 +20,7 @@
 - `src/lib/fallbackData.ts`
 - `src/main.ts`
 - `scripts/sync_google_reviews.js`
+- `scripts/seed_supabase_cms.js`
 - `docs/SESSION_LATEST_ES.md`
 - `docs/ROADMAP.md`
 
