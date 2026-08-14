@@ -295,8 +295,8 @@ export const fallbackTestimonials = [
     source: 'google',
     google_review_id: 'g_rev_danna',
     testimonial: JSON.stringify({
-      es: 'Excelente servicio de diseño web, atención personalizada y máxima profesionalidad.',
-      en: 'Excellent web design service, personalized attention and highest professionalism.'
+      es: '',
+      en: ''
     }),
     active: true
   },
@@ -317,21 +317,6 @@ export const fallbackTestimonials = [
   },
   {
     id: 4,
-    name: 'Juan',
-    client_name: 'Juan',
-    company: 'Cliente Verificado',
-    rating: 5,
-    relative_time: 'Hace 3 semanas',
-    source: 'google',
-    google_review_id: 'g_rev_juan',
-    testimonial: JSON.stringify({
-      es: 'Gran trabajo en el desarrollo web, rapidez y comunicación impecable.',
-      en: 'Great job in web development, speed and flawless communication.'
-    }),
-    active: true
-  },
-  {
-    id: 5,
     name: 'Ilyas Etaouriri',
     client_name: 'Ilyas Etaouriri',
     company: 'Cliente Verificado',
@@ -346,7 +331,7 @@ export const fallbackTestimonials = [
     active: true
   },
   {
-    id: 6,
+    id: 5,
     name: 'John Smith',
     client_name: 'John Smith',
     company: 'Cliente Verificado',
@@ -355,8 +340,38 @@ export const fallbackTestimonials = [
     source: 'google',
     google_review_id: 'g_rev_john',
     testimonial: JSON.stringify({
-      es: 'Servicio altamente recomendado para negocios en Palma.',
-      en: 'Highly recommended web service for businesses in Palma.'
+      es: '',
+      en: ''
+    }),
+    active: true
+  },
+  {
+    id: 6,
+    name: 'Goyo J.R.',
+    client_name: 'Goyo J.R.',
+    company: 'Ecuaplac',
+    rating: 5,
+    relative_time: 'Hace 3 días',
+    source: 'google',
+    google_review_id: 'g_rev_goyo',
+    testimonial: JSON.stringify({
+      es: 'Muy contento con el trabajo de MyNext. Musa nos hizo la página web de Ecuaplac desde cero y el resultado ha sido justo lo que buscábamos. Ahora nuestros clientes pueden encontrar toda la información de la empresa de una forma mucho más cómoda y profesional. Además, también diseñó nuestras nuevas tarjetas de visita con el nuevo logo y el código QR que lleva directamente a la web, y preparó el QR para colocarlo en la furgoneta de la empresa. Son pequeños detalles que ayudan a dar una imagen mucho más profesional. Durante todo el proceso la comunicación con Musa ha sido muy buena. Siempre ha respondido rápido, ha escuchado nuestras ideas y ha ido haciendo los cambios que necesitábamos sin ningún problema. Si tienes un negocio y estás pensando en hacer una página web o renovar la imagen de tu empresa, recomiendo contactar con MyNext. En nuestro caso, la experiencia ha sido muy positiva.',
+      en: 'Very happy with MyNext\'s work. Musa made the Ecuaplac website from scratch and the result was exactly what we were looking for. Now our clients can find all the company information in a much more convenient and professional way. In addition, he also designed our new business cards with the new logo and the QR code that leads directly to the web, and prepared the QR code to place on the company van. These are small details that help project a much more professional image. Throughout the process, communication with Musa has been very good. He always responded quickly, listened to our ideas, and made the changes we needed without any issues. If you have a business and are thinking about making a website or renewing your company\'s image, I recommend contacting MyNext. In our case, the experience has been very positive.'
+    }),
+    active: true
+  },
+  {
+    id: 7,
+    name: 'Anuar Zbat',
+    client_name: 'Anuar Zbat',
+    company: 'Cliente Verificado',
+    rating: 5,
+    relative_time: 'Hace 4 días',
+    source: 'google',
+    google_review_id: 'g_rev_anuar',
+    testimonial: JSON.stringify({
+      es: '',
+      en: ''
     }),
     active: true
   }

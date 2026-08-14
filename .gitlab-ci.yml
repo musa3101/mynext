@@ -1,23 +1,37 @@
-workflow:
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule"
-    - if: $CI_PIPELINE_SOURCE == "web"
-
 keep_alive:
   stage: deploy
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
   image: alpine:latest
   script:
     - apk add --no-cache curl
     - |
-      URL="${SUPABASE_URL}"
-      KEY="${SUPABASE_ANON_KEY}"
-      if [ -z "$URL" ]; then
-        URL="https://elfdkbqlvawaprgidqhd.supabase.co"
+      URL="${SUPABASE_URL:-https://elfdkbqlvawaprgidqhd.supabase.co}"
+      KEY="${SUPABASE_ANON_KEY:-sb_publishable_9qAEy3xuzB8HU2wSW1e36w_n051oO66}"
+      
+      PROJECT_REF=$(echo "$URL" | sed -E 's|https://([^.]+)\.supabase\..*|\1|')
+      
+      echo "Comprobando actividad de la base de datos en $URL..."
+      
+      if curl --fail -s -o /dev/null -X GET "$URL/rest/v1/mynext_projects?select=id&limit=1" \
+        -H "apikey: $KEY" \
+        -H "Authorization: Bearer $KEY"; then
+        echo "¡La base de datos está activa y saludable!"
+      else
+        echo "⚠️ ADVERTENCIA: El ping a la base de datos falló. El proyecto podría estar pausado."
+        if [ -z "$SUPABASE_ACCESS_TOKEN" ]; then
+          echo "❌ ERROR: SUPABASE_ACCESS_TOKEN no está configurado en las variables de GitLab CI. No se puede auto-restaurar."
+          exit 1
+        else
+          echo "Iniciando auto-restauración para el proyecto con ref: $PROJECT_REF..."
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" -X POST "https://api.supabase.com/v1/projects/$PROJECT_REF/restore" \
+            -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN")
+          
+          if [ "$HTTP_CODE" -eq 200 ] || [ "$HTTP_CODE" -eq 201 ] || [ "$HTTP_CODE" -eq 202 ]; then
+            echo "¡Solicitud de restauración enviada con éxito! Estado HTTP: $HTTP_CODE"
+          else
+            echo "❌ ERROR: Falló el envío de solicitud de restauración. Estado HTTP: $HTTP_CODE"
+            exit 1
+          fi
+        fi
       fi
-      if [ -z "$KEY" ]; then
-        KEY="sb_publishable_9qAEy3xuzB8HU2wSW1e36w_n051oO66"
-      fi
-      echo "Pinging Supabase at $URL..."
-      curl --fail -s -X GET "$URL/auth/v1/health" \
-        -H "apikey: $KEY" > /dev/null
-      echo "Ping successful!"

@@ -7,20 +7,43 @@ on:
   workflow_dispatch: # Permite ejecución manual desde GitHub
 
 jobs:
-  ping:
+  ping_and_restore:
     runs-on: ubuntu-latest
     steps:
-      - name: Ping Supabase Health Endpoint
+      - name: Check and Restore Supabase
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
         run: |
-          URL="${{ secrets.SUPABASE_URL }}"
-          KEY="${{ secrets.SUPABASE_ANON_KEY }}"
-          if [ -z "$URL" ]; then
-            URL="https://elfdkbqlvawaprgidqhd.supabase.co"
+          URL="${SUPABASE_URL:-https://elfdkbqlvawaprgidqhd.supabase.co}"
+          KEY="${SUPABASE_ANON_KEY:-sb_publishable_9qAEy3xuzB8HU2wSW1e36w_n051oO66}"
+          
+          # Extraer el project ref de la URL (ej. "elfdkbqlvawaprgidqhd")
+          PROJECT_REF=$(echo "$URL" | sed -E 's|https://([^.]+)\.supabase\..*|\1|')
+          
+          echo "Comprobando actividad de la base de datos en $URL..."
+          
+          # Hacemos una consulta real a la tabla mynext_projects usando PostgREST (fuerza conexión a Postgres)
+          if curl --fail -s -o /dev/null -X GET "$URL/rest/v1/mynext_projects?select=id&limit=1" \
+            -H "apikey: $KEY" \
+            -H "Authorization: Bearer $KEY"; then
+            echo "¡La base de datos está activa y saludable!"
+          else
+            echo "⚠️ ADVERTENCIA: El ping a la base de datos falló. El proyecto podría estar pausado."
+            if [ -z "$SUPABASE_ACCESS_TOKEN" ]; then
+              echo "❌ ERROR: SUPABASE_ACCESS_TOKEN no está configurado en los secretos de GitHub. No se puede auto-restaurar."
+              exit 1
+            else
+              echo "Iniciando auto-restauración para el proyecto con ref: $PROJECT_REF..."
+              HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" -X POST "https://api.supabase.com/v1/projects/$PROJECT_REF/restore" \
+                -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN")
+              
+              if [ "$HTTP_CODE" -eq 200 ] || [ "$HTTP_CODE" -eq 201 ] || [ "$HTTP_CODE" -eq 202 ]; then
+                echo "¡Solicitud de restauración enviada con éxito! Estado HTTP: $HTTP_CODE"
+              else
+                echo "❌ ERROR: Falló el envío de solicitud de restauración. Estado HTTP: $HTTP_CODE"
+                exit 1
+              fi
+            fi
           fi
-          if [ -z "$KEY" ]; then
-            KEY="sb_publishable_9qAEy3xuzB8HU2wSW1e36w_n051oO66"
-          fi
-          echo "Pinging Supabase at $URL..."
-          curl --fail -s -X GET "$URL/auth/v1/health" \
-            -H "apikey: $KEY" > /dev/null
-          echo "Ping successful!"

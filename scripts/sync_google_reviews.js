@@ -54,7 +54,7 @@ const DEFAULT_GOOGLE_REVIEWS = [
     google_review_id: 'g_rev_2',
     name: 'Danna Delgado',
     company: 'Cliente Verificado',
-    content: 'Excelente servicio de diseño web, atención personalizada y máxima profesionalidad.',
+    content: '',
     rating: 5,
     author_photo: '',
     relative_time: 'Hace 3 semanas',
@@ -73,17 +73,6 @@ const DEFAULT_GOOGLE_REVIEWS = [
     active: true
   },
   {
-    google_review_id: 'g_rev_4',
-    name: 'Juan',
-    company: 'Cliente Verificado',
-    content: 'Gran trabajo en el desarrollo web, rapidez y comunicación impecable.',
-    rating: 5,
-    author_photo: '',
-    relative_time: 'Hace 3 semanas',
-    source: 'google',
-    active: true
-  },
-  {
     google_review_id: 'g_rev_5',
     name: 'Ilyas Etaouriri',
     company: 'Cliente Verificado',
@@ -98,10 +87,32 @@ const DEFAULT_GOOGLE_REVIEWS = [
     google_review_id: 'g_rev_6',
     name: 'John Smith',
     company: 'Cliente Verificado',
-    content: 'Servicio altamente recomendado para negocios en Palma.',
+    content: '',
     rating: 5,
     author_photo: '',
     relative_time: 'Hace un mes',
+    source: 'google',
+    active: true
+  },
+  {
+    google_review_id: 'g_rev_goyo',
+    name: 'Goyo J.R.',
+    company: 'Ecuaplac',
+    content: 'Muy contento con el trabajo de MyNext. Musa nos hizo la página web de Ecuaplac desde cero y el resultado ha sido justo lo que buscábamos. Ahora nuestros clientes pueden encontrar toda la información de la empresa de una forma mucho más cómoda y profesional. Además, también diseñó nuestras nuevas tarjetas de visita con el nuevo logo y el código QR que lleva directamente a la web, y preparó el QR para colocarlo en la furgoneta de la empresa. Son pequeños detalles que ayudan a dar una imagen mucho más profesional. Durante todo el proceso la comunicación con Musa ha sido muy buena. Siempre ha respondido rápido, ha escuchado nuestras ideas y ha ido haciendo los cambios que necesitábamos sin ningún problema. Si tienes un negocio y estás pensando en hacer una página web o renovar la imagen de tu empresa, recomiendo contactar con MyNext. En nuestro caso, la experiencia ha sido muy positiva.',
+    rating: 5,
+    author_photo: '',
+    relative_time: 'Hace 3 días',
+    source: 'google',
+    active: true
+  },
+  {
+    google_review_id: 'g_rev_anuar',
+    name: 'Anuar Zbat',
+    company: 'Cliente Verificado',
+    content: '',
+    rating: 5,
+    author_photo: '',
+    relative_time: 'Hace 4 días',
     source: 'google',
     active: true
   }
