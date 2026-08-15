@@ -12,12 +12,81 @@ function getTranslation(value: string | null | undefined, language: 'es' | 'en')
   try {
     const parsed = JSON.parse(value);
     if (parsed && typeof parsed === 'object') {
-      return parsed[language] || parsed['es'] || value;
+      return parsed[language] || parsed['es'] || parsed['en'] || value;
     }
   } catch (e) {
     // Return raw string if parsing fails
   }
   return value;
+}
+
+// Resilient helper to resolve fields that can be named field_es, field_en, or JSON string field
+function getFieldTranslation(item: any, fieldBase: string, language: 'es' | 'en'): string {
+  if (!item) return '';
+  // 1. Direct language key (e.g. title_es / title_en)
+  const langKey = `${fieldBase}_${language}`;
+  if (item[langKey] !== undefined && item[langKey] !== null && item[langKey] !== '') {
+    return typeof item[langKey] === 'string' ? item[langKey] : JSON.stringify(item[langKey]);
+  }
+  // 2. Alternate language key fallback
+  const fallbackLangKey = language === 'en' ? `${fieldBase}_es` : `${fieldBase}_en`;
+  if (item[fallbackLangKey] !== undefined && item[fallbackLangKey] !== null && item[fallbackLangKey] !== '') {
+    return typeof item[fallbackLangKey] === 'string' ? item[fallbackLangKey] : JSON.stringify(item[fallbackLangKey]);
+  }
+  // 3. Base field (e.g. title) which might be JSON or plain string
+  const val = item[fieldBase];
+  if (val === undefined || val === null) return '';
+  if (typeof val === 'object') {
+    return val[language] || val['es'] || val['en'] || '';
+  }
+  if (typeof val === 'string') {
+    try {
+      const parsed = JSON.parse(val);
+      if (parsed && typeof parsed === 'object') {
+        return parsed[language] || parsed['es'] || parsed['en'] || val;
+      }
+    } catch {
+      // not json
+    }
+    return val;
+  }
+  return String(val);
+}
+
+// Resilient helper to get features list from service
+function getServiceFeatures(service: any, language: 'es' | 'en'): string[] {
+  // 1. Check features_es / features_en
+  const langFeatures = language === 'en'
+    ? (service.features_en || service.features_es || service.features)
+    : (service.features_es || service.features_en || service.features);
+
+  if (Array.isArray(langFeatures) && langFeatures.length > 0) {
+    return langFeatures.map((f: any) => String(f).trim()).filter(Boolean);
+  }
+
+  if (typeof langFeatures === 'string') {
+    try {
+      const parsed = JSON.parse(langFeatures);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        return parsed.map((f: any) => String(f).trim()).filter(Boolean);
+      }
+      if (parsed && typeof parsed === 'object') {
+        const langArr = parsed[language] || parsed['es'] || parsed['en'];
+        if (Array.isArray(langArr)) return langArr.map((f: any) => String(f).trim()).filter(Boolean);
+        if (typeof langArr === 'string') return langArr.split(',').map((s: string) => s.trim()).filter(Boolean);
+      }
+    } catch {
+      return langFeatures.split(',').map((s: string) => s.trim()).filter(Boolean);
+    }
+  }
+
+  // 2. Fallback to description
+  const desc = getFieldTranslation(service, 'description', language);
+  if (desc) {
+    return desc.split(',').map((s: string) => s.trim()).filter(Boolean);
+  }
+
+  return [];
 }
 
 // Global modal state variables
@@ -38,7 +107,7 @@ let currentPlan = '';
 };
 
 (window as any).openContactOptions = function (planName: string) {
-  const isEnglishLocal = window.location.pathname.includes('-en');
+  const isEnglishLocal = window.location.pathname.includes('-en') || lang === 'en';
   
   const nameLabel = isEnglishLocal ? "Please enter your name:" : "Por favor, ingresa tu nombre:";
   const businessLabel = isEnglishLocal ? "Please enter your business/project name:" : "Por favor, ingresa el nombre de tu negocio/proyecto:";
@@ -56,7 +125,8 @@ let currentPlan = '';
      msg = `Hola, me gustaría solicitar información sobre el plan ${planName} para mi negocio [${businessName}]. Soy [${userName}].`;
   }
   
-  const waUrl = `https://wa.me/34673109486?text=${encodeURIComponent(msg)}`;
+  const phone = (window as any).contactPhone || '34673109486';
+  const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
   window.open(waUrl, '_blank');
 };
 
@@ -168,18 +238,84 @@ function initFaqAccordion() {
   });
 }
 
+// Legal Modals handler
+function initLegalModals() {
+  const modalWrappers = document.querySelectorAll('.modal-wrapper');
+  const modalTriggers = document.querySelectorAll('[data-modal]');
+  const closeButtons = document.querySelectorAll('.modal-close');
+
+  function closeModal(modal: Element) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  modalTriggers.forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      const modalId = trigger.getAttribute('data-modal');
+      if (modalId) {
+        const targetModal = document.getElementById(modalId);
+        if (targetModal) {
+          targetModal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+      }
+    });
+  });
+
+  closeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const modal = btn.closest('.modal-wrapper');
+      if (modal) closeModal(modal);
+    });
+  });
+
+  modalWrappers.forEach(modal => {
+    modal.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).classList.contains('modal-overlay')) {
+        closeModal(modal);
+      }
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const activeModal = document.querySelector('.modal-wrapper.active');
+      if (activeModal) closeModal(activeModal);
+    }
+  });
+}
+
+// Utility to apply dynamic settings from Supabase to HTML elements
+function applyDynamicSettings(settingsMap: Record<string, string>, currentLang: 'es' | 'en') {
+  const elements = document.querySelectorAll<HTMLElement>('[data-sb-content]');
+  elements.forEach(el => {
+    const key = el.getAttribute('data-sb-content');
+    if (key && settingsMap[key]) {
+      const translation = getTranslation(settingsMap[key], currentLang);
+      if (translation) {
+        el.innerHTML = translation;
+      }
+    }
+  });
+}
+
 // Initialize Planes DOM safely
 async function initPlanes() {
   sessionStorage.setItem('from-planes', 'true');
+  initLegalModals();
   let services = fallbackServices;
   let settings: Record<string, string> = fallbackSettings;
 
   // Attempt to fetch from Supabase
   if (supabase) {
     try {
-      const [servicesRes, settingsRes] = await Promise.all([
+      const [servicesRes, settingsRes, contactRes, heroRes, faqRes] = await Promise.all([
         supabase.from('mynext_services').select('*').eq('active', true).order('sort_order', { ascending: true }),
-        supabase.from('mynext_settings').select('*')
+        supabase.from('mynext_settings').select('*'),
+        supabase.from('mynext_contact').select('*').maybeSingle(),
+        supabase.from('mynext_hero').select('*').maybeSingle(),
+        supabase.from('mynext_faq').select('*').eq('active', true).order('sort_order', { ascending: true })
       ]);
 
       if (servicesRes.data && servicesRes.data.length > 0) {
@@ -192,12 +328,52 @@ async function initPlanes() {
         });
         settings = dbSettings;
       }
+
+      // Merge contact table if present
+      if (contactRes && (contactRes as any).data) {
+        const c = (contactRes as any).data;
+        if (c.phone) settings['contact_phone'] = c.phone;
+        if (c.email) settings['contact_email'] = c.email;
+        if (c.whatsapp_message_es || c.whatsapp_message_en) {
+          settings['whatsapp_message_landing'] = JSON.stringify({ es: c.whatsapp_message_es, en: c.whatsapp_message_en });
+        }
+        if (c.site_title_es || c.site_title_en) {
+          settings['site_title'] = JSON.stringify({ es: c.site_title_es, en: c.site_title_en });
+        }
+        if (c.meta_description_es || c.meta_description_en) {
+          settings['site_description'] = JSON.stringify({ es: c.meta_description_es, en: c.meta_description_en });
+        }
+        if (c.footer_text_es || c.footer_text_en) {
+          settings['footer_desc'] = JSON.stringify({ es: c.footer_text_es, en: c.footer_text_en });
+        }
+      }
+
+      // Merge hero table if present
+      if (heroRes && (heroRes as any).data) {
+        const h = (heroRes as any).data;
+        if (h.banner_offer_es || h.banner_offer_en) {
+          settings['launch_banner_text'] = JSON.stringify({ es: h.banner_offer_es, en: h.banner_offer_en });
+        }
+      }
+
+      // Merge faq table if present
+      if (faqRes && (faqRes as any).data && (faqRes as any).data.length > 0) {
+        (faqRes as any).data.forEach((f: any, idx: number) => {
+          const num = f.sort_order || (idx + 1);
+          settings[`faq_q${num}`] = JSON.stringify({ es: f.question_es, en: f.question_en });
+          settings[`faq_a${num}`] = JSON.stringify({ es: f.answer_es, en: f.answer_en });
+        });
+      }
+
+      // Apply any dynamic HTML content automatically to data-sb-content elements
+      applyDynamicSettings(settings, lang as 'es' | 'en');
+
     } catch (err) {
       console.error('Error fetching services from Supabase, using local fallback:', err);
     }
   }
 
-  // Map settings settings keys
+  // Map settings keys
   const settingsMap = new Map<string, string>();
   Object.entries(settings).forEach(([k, v]) => settingsMap.set(k, v));
 
@@ -207,24 +383,11 @@ async function initPlanes() {
   (window as any).contactPhone = phoneVal;
   (window as any).contactEmail = emailVal;
 
-  // Check if current date is on or after August 5, 2026 (15 days from today)
-  const now = new Date();
-  const isOfferOver = now >= new Date('2026-08-05T00:00:00');
-
   // Update banner text
   const launchBannerText = settingsMap.get('launch_banner_text');
   const bannerEl = document.getElementById('launch-banner-text');
-  if (bannerEl) {
-    if (isOfferOver) {
-      const bannerContainer = bannerEl.closest('.bg-gradient-to-r');
-      if (bannerContainer) {
-        bannerContainer.classList.add('hidden');
-      } else {
-        bannerEl.classList.add('hidden');
-      }
-    } else if (launchBannerText) {
-      bannerEl.innerText = getTranslation(launchBannerText, lang);
-    }
+  if (bannerEl && launchBannerText) {
+    bannerEl.innerText = getTranslation(launchBannerText, lang);
   }
 
   // Update contact links on the plans page (if any exist in the markup)
@@ -245,33 +408,49 @@ async function initPlanes() {
   if (servicesContainer) {
     servicesContainer.innerHTML = '';
 
-    services.forEach((service) => {
-      const title = getTranslation(service.title, lang);
-      const description = getTranslation(service.description, lang);
-      
-      // Original price is exactly the price from database (e.g. 300, 400)
-      const originalPrice = Number(service.price);
-      // Offer price (if active) is simply 20 less than the original price
-      const offerPrice = originalPrice - 20;
-
+    services.forEach((service: any) => {
+      const isFeatured = Boolean(service.featured || service.popular);
+      const defaultTitle = isFeatured ? 'BUSINESS' : (isEnglish ? 'BASIC' : 'BÁSICO');
+      const title = getFieldTranslation(service, 'title', lang) || defaultTitle;
+      const featuresList = getServiceFeatures(service, lang);
       const currencySymbol = isEnglish ? '£' : '€';
-      
+
+      // Parse price cleanly
+      let priceNum = 0;
+      if (typeof service.price === 'number') {
+        priceNum = service.price;
+      } else if (typeof service.price === 'string') {
+        const parsed = parseFloat(service.price.replace(/[^0-9.]/g, ''));
+        priceNum = isNaN(parsed) ? 0 : parsed;
+      }
+
+      const formattedPrice = priceNum > 0
+        ? (isEnglish ? `${currencySymbol}${priceNum}` : `${priceNum}${currencySymbol}`)
+        : (service.price ? String(service.price).trim() : 'Consultar');
+
+      // Check for discount badge / offer
+      const badge = getFieldTranslation(service, 'badge', lang);
       let priceHTML = '';
-      if (isOfferOver) {
-        const priceStr = isEnglish ? `${currencySymbol}${originalPrice}` : `${originalPrice}${currencySymbol}`;
-        priceHTML = `<span>${priceStr}</span>`;
-      } else {
-        const origPriceStr = isEnglish ? `${currencySymbol}${originalPrice}` : `${originalPrice}${currencySymbol}`;
-        const offerPriceStr = isEnglish ? `${currencySymbol}${offerPrice}` : `${offerPrice}${currencySymbol}`;
+
+      if (badge && (badge.toLowerCase().includes('ahorra') || badge.toLowerCase().includes('save') || badge.toLowerCase().includes('oferta') || badge.toLowerCase().includes('offer'))) {
+        const discountMatch = badge.match(/\d+/);
+        const discountAmount = discountMatch ? parseInt(discountMatch[0], 10) : 20;
+        const originalPriceNum = priceNum > 0 ? priceNum + discountAmount : 0;
+        const origPriceStr = originalPriceNum > 0
+          ? (isEnglish ? `${currencySymbol}${originalPriceNum}` : `${originalPriceNum}${currencySymbol}`)
+          : '';
+
         priceHTML = `
-          <del class="text-slate-500 text-2xl md:text-3xl font-medium mr-2">${origPriceStr}</del>
-          <span class="${service.featured ? 'text-amber-400' : 'text-cyan-400'}">${offerPriceStr}</span>
+          ${origPriceStr ? `<del class="text-slate-500 text-2xl md:text-3xl font-medium mr-2">${origPriceStr}</del>` : ''}
+          <span class="${isFeatured ? 'text-amber-400' : 'text-cyan-400'}">${formattedPrice}</span>
         `;
+      } else {
+        priceHTML = `<span class="${isFeatured ? 'text-amber-400' : 'text-cyan-400'}">${formattedPrice}</span>`;
       }
 
       // Process description list items
-      const items = description.split(',').map((item) => {
-        let text = item.trim();
+      const items = featuresList.map((itemText: string) => {
+        let text = itemText.trim();
         // Replace *number with the styled superscript tag
         text = text.replace(/\*(\d+)/g, (_, num) => {
           return `<span class="text-cyan-400 font-bold ml-0.5">*<sup class="text-[10px]">${num}</sup></span>`;
@@ -281,7 +460,7 @@ async function initPlanes() {
 
       // Build card container div with flip logic
       const card = document.createElement('div');
-      card.className = service.featured
+      card.className = isFeatured
         ? 'flip-container group mx-auto w-full max-w-[24rem] lg:scale-105 hover:-translate-y-2 transition-all duration-400 hover:shadow-[0_20px_50px_rgba(245,158,11,0.3)]'
         : 'flip-container mx-auto w-full max-w-[22rem] lg:scale-95 hover:-translate-y-2 transition-all duration-400 hover:shadow-[0_20px_45px_rgba(6,182,212,0.25)]';
 
@@ -291,8 +470,8 @@ async function initPlanes() {
         card.classList.toggle('flipped');
       };
 
-      if (service.featured) {
-        // Plan ÉLITE / Featured Plan
+      if (isFeatured) {
+        // Plan BUSINESS / Featured Plan
         card.innerHTML = `
           <div class="flip-card-inner">
             <!-- FRONT -->
@@ -366,7 +545,7 @@ async function initPlanes() {
           </div>
         `;
       } else {
-        // Plan ESENCIAL / Non-featured Plan
+        // Plan BÁSICO / Non-featured Plan
         card.innerHTML = `
           <div class="flip-card-inner">
             <!-- FRONT -->

@@ -461,10 +461,14 @@ async function initMain() {
   // Attempt to fetch from Supabase
   if (supabase) {
     try {
-      const [projectsRes, testimonialsRes, settingsRes] = await Promise.all([
+      const [projectsRes, testimonialsRes, settingsRes, contactRes, heroRes, aboutRes, faqRes] = await Promise.all([
         supabase.from('mynext_projects').select('*').eq('active', true).order('sort_order', { ascending: true }),
         supabase.from('mynext_testimonials').select('*').eq('active', true),
-        supabase.from('mynext_settings').select('*')
+        supabase.from('mynext_settings').select('*'),
+        supabase.from('mynext_contact').select('*').maybeSingle(),
+        supabase.from('mynext_hero').select('*').maybeSingle(),
+        supabase.from('mynext_about').select('*').maybeSingle(),
+        supabase.from('mynext_faq').select('*').eq('active', true).order('sort_order', { ascending: true })
       ]);
 
       if (projectsRes.data && projectsRes.data.length > 0) {
@@ -472,21 +476,8 @@ async function initMain() {
         const merged: any[] = [...dbProjects];
 
         fallbackProjects.forEach(localProj => {
-          const match = merged.find(p => p.title.toLowerCase().trim() === localProj.title.toLowerCase().trim() || p.id === localProj.id);
-          if (match) {
-            // Override with local image paths if the local fallback has updated versions
-            if (localProj.image_url.includes('porfolio2-v3') || localProj.image_url.includes('porfolio6')) {
-              match.image_url = localProj.image_url;
-            }
-            // Override Ecuaplac project URL
-            if (localProj.title.toLowerCase() === 'ecuaplac') {
-              match.project_url = localProj.project_url;
-            }
-            // Override NEXT ERA description to keep it in sync with local file updates
-            if (localProj.title.toLowerCase() === 'next era') {
-              match.description = localProj.description;
-            }
-          } else {
+          const match = merged.find(p => (p.slug && localProj.slug && p.slug === localProj.slug) || p.title.toLowerCase().trim() === localProj.title.toLowerCase().trim() || p.id === localProj.id);
+          if (!match) {
             // Append locally added projects that are missing in the database
             merged.push(localProj);
           }
@@ -495,6 +486,7 @@ async function initMain() {
         merged.sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
         projects = merged;
       }
+
       if (testimonialsRes.data && testimonialsRes.data.length > 0) {
         testimonials = testimonialsRes.data;
         // Render only verified Google Maps reviews
@@ -503,12 +495,58 @@ async function initMain() {
           renderDynamicGoogleReviews(googleReviews);
         }
       }
+
       if (settingsRes.data && settingsRes.data.length > 0) {
         const dbSettings: Record<string, string> = {};
         settingsRes.data.forEach((s: any) => {
           dbSettings[s.key] = s.value;
         });
         settings = dbSettings;
+      }
+
+      // Merge contact table if present
+      if (contactRes && (contactRes as any).data) {
+        const c = (contactRes as any).data;
+        if (c.phone) settings['contact_phone'] = c.phone;
+        if (c.email) settings['contact_email'] = c.email;
+        if (c.whatsapp_message_es || c.whatsapp_message_en) {
+          settings['whatsapp_message_landing'] = JSON.stringify({ es: c.whatsapp_message_es, en: c.whatsapp_message_en });
+        }
+        if (c.site_title_es || c.site_title_en) {
+          settings['site_title'] = JSON.stringify({ es: c.site_title_es, en: c.site_title_en });
+        }
+        if (c.meta_description_es || c.meta_description_en) {
+          settings['site_description'] = JSON.stringify({ es: c.meta_description_es, en: c.meta_description_en });
+        }
+        if (c.footer_text_es || c.footer_text_en) {
+          settings['footer_desc'] = JSON.stringify({ es: c.footer_text_es, en: c.footer_text_en });
+        }
+      }
+
+      // Merge hero table if present
+      if (heroRes && (heroRes as any).data) {
+        const h = (heroRes as any).data;
+        if (h.banner_offer_es || h.banner_offer_en) {
+          settings['launch_banner_text'] = JSON.stringify({ es: h.banner_offer_es, en: h.banner_offer_en });
+        }
+      }
+
+      // Merge about table if present
+      if (aboutRes && (aboutRes as any).data) {
+        const a = (aboutRes as any).data;
+        if (a.bio_p1_es || a.bio_p1_en) settings['about_bio1'] = JSON.stringify({ es: a.bio_p1_es, en: a.bio_p1_en });
+        if (a.bio_p2_es || a.bio_p2_en) settings['about_bio2'] = JSON.stringify({ es: a.bio_p2_es, en: a.bio_p2_en });
+        if (a.stat_experience) settings['stat_experience'] = a.stat_experience;
+        if (a.stat_projects) settings['stat_projects'] = a.stat_projects;
+      }
+
+      // Merge faq table if present
+      if (faqRes && (faqRes as any).data && (faqRes as any).data.length > 0) {
+        (faqRes as any).data.forEach((f: any, idx: number) => {
+          const num = f.sort_order || (idx + 1);
+          settings[`faq_q${num}`] = JSON.stringify({ es: f.question_es, en: f.question_en });
+          settings[`faq_a${num}`] = JSON.stringify({ es: f.answer_es, en: f.answer_en });
+        });
       }
 
       // Apply any dynamic HTML content automatically
@@ -559,17 +597,22 @@ async function initMain() {
 
     // Render projects 4 times to create a dense, filled, infinite portfolio showcase
     const infiniteProjects = [...projects, ...projects, ...projects, ...projects];
-    infiniteProjects.forEach((proj) => {
+    infiniteProjects.forEach((proj, idx) => {
       // Assemble card elements
       const article = document.createElement('article');
       article.className = 'flex-none w-[80vw] md:w-[45vw] lg:w-[35vw] xl:w-[30vw] snap-center flex flex-col gap-6 transition-transform duration-500';
+      article.style.contentVisibility = 'auto';
+      article.style.containIntrinsicSize = '380px 280px';
 
       const projectSlug = proj.slug || proj.title.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
       const projectUrl = `project.html?slug=${projectSlug}`;
       const btnText = lang === 'en' ? 'More Info →' : 'Más Info →';
 
-      // Determine category label for the project
+      // Determine category label for the project dynamically from Supabase
       const getCategoryLabel = (p: any, l: string) => {
+        const langCategory = l === 'en' ? (p.category_en || p.category_es || p.category) : (p.category_es || p.category_en || p.category);
+        if (langCategory) return getTranslation(langCategory, l as 'es' | 'en');
+
         const t = (p.title || '').toLowerCase().trim();
         const s = (p.slug || '').toLowerCase().trim();
         if (t.includes('blessed') || s.includes('blessed')) return l === 'en' ? 'High-End Barbershop' : 'Barbería de Alta Gama';
@@ -583,11 +626,12 @@ async function initMain() {
       };
 
       const categoryText = getCategoryLabel(proj, lang);
+      const isPriority = idx < 2;
 
       article.innerHTML = `
         <div class="group relative aspect-[16/10] rounded-3xl overflow-hidden glass-panel border border-white/10 transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-[0_0_50px_rgba(0,242,255,0.2)]">
           <div class="absolute inset-0 bg-[#06060c] overflow-hidden flex items-center justify-center cursor-pointer" onclick="window.location.href='${projectUrl}'">
-            <img src="${proj.image_url}" alt="${lang === 'en' ? `Premium web design in Mallorca - Preview of ${proj.title}` : `Diseño web premium en Mallorca - Vista previa de ${proj.title}`}" loading="lazy"
+            <img src="${proj.image_url}" alt="${lang === 'en' ? `Premium web design in Mallorca - Preview of ${proj.title}` : `Diseño web premium en Mallorca - Vista previa de ${proj.title}`}" loading="${isPriority ? 'eager' : 'lazy'}" decoding="async" fetchpriority="${isPriority ? 'high' : 'low'}"
               class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.05]">
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity duration-500"></div>
             <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center z-20 backdrop-blur-sm">

@@ -1,0 +1,807 @@
+{
+  "timestamp": "2026-08-15T19:39:29.747Z",
+  "pages": [
+    {
+      "page": "Home-ES",
+      "url": "/",
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "failedRequests": [],
+      "performance": {
+        "navLoadTimeMs": 1712,
+        "fcpMs": 304,
+        "domInteractiveMs": 234,
+        "domCompleteMs": 446,
+        "resourceCount": 26,
+        "totalTransferKb": 2557,
+        "scrollSmoothness": {
+          "totalFrames": 93,
+          "jankFrames": 0,
+          "smoothnessScore": 100
+        }
+      },
+      "overflowIssues": [
+        {
+          "viewport": "Desktop-1440p",
+          "elements": [
+            {
+              "tag": "article",
+              "id": null,
+              "className": "flex-none w-[80vw] md:w-[45vw] lg:w-[35vw] xl:w-[3",
+              "overflowPx": 424
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "group relative aspect-[16/10] rounded-3xl overflow",
+              "overflowPx": 424
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "absolute inset-0 bg-[#06060c] overflow-hidden flex",
+              "overflowPx": 423
+            },
+            {
+              "tag": "img",
+              "id": null,
+              "className": "w-full h-full object-cover transition-transform du",
+              "overflowPx": 423
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "absolute inset-0 bg-gradient-to-t from-black/60 vi",
+              "overflowPx": 423
+            }
+          ]
+        },
+        {
+          "viewport": "Tablet-iPad-768p",
+          "elements": [
+            {
+              "tag": "div",
+              "id": "nav-right",
+              "className": "hidden md:flex items-center gap-2 sm:gap-6 md:gap-",
+              "overflowPx": 249
+            },
+            {
+              "tag": "a",
+              "id": null,
+              "className": "relative py-2 text-[8px] sm:text-xs md:text-[13px]",
+              "overflowPx": 94
+            },
+            {
+              "tag": "span",
+              "id": null,
+              "className": "absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 ",
+              "overflowPx": 55
+            },
+            {
+              "tag": "a",
+              "id": null,
+              "className": "relative py-2 text-[8px] sm:text-xs md:text-[13px]",
+              "overflowPx": 249
+            },
+            {
+              "tag": "span",
+              "id": null,
+              "className": "absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 ",
+              "overflowPx": 196
+            }
+          ]
+        },
+        {
+          "viewport": "Mobile-iPhone-393p",
+          "elements": [
+            {
+              "tag": "div",
+              "id": "nav-controls",
+              "className": "flex items-center gap-2 md:gap-4 ease-in-out trans",
+              "overflowPx": 96
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "flex items-center gap-2.5 px-3 font-headline text-",
+              "overflowPx": 88
+            },
+            {
+              "tag": "a",
+              "id": null,
+              "className": "text-[#e82728] hover:opacity-100 transition-all du",
+              "overflowPx": 39
+            },
+            {
+              "tag": "span",
+              "id": null,
+              "className": "text-white/20 font-light",
+              "overflowPx": 54
+            },
+            {
+              "tag": "a",
+              "id": null,
+              "className": "text-white/40 hover:text-white transition-all dura",
+              "overflowPx": 81
+            }
+          ]
+        },
+        {
+          "viewport": "Mobile-Small-360p",
+          "elements": [
+            {
+              "tag": "article",
+              "id": null,
+              "className": "flex-none w-[80vw] md:w-[45vw] lg:w-[35vw] xl:w-[3",
+              "overflowPx": 306
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "group relative aspect-[16/10] rounded-3xl overflow",
+              "overflowPx": 306
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "absolute inset-0 bg-[#06060c] overflow-hidden flex",
+              "overflowPx": 305
+            },
+            {
+              "tag": "img",
+              "id": null,
+              "className": "w-full h-full object-cover transition-transform du",
+              "overflowPx": 305
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "absolute inset-0 bg-gradient-to-t from-black/60 vi",
+              "overflowPx": 305
+            }
+          ]
+        }
+      ],
+      "interactionTests": {
+        "faqAccordion": {
+          "found": true,
+          "clicked": true,
+          "heightDelta": 185
+        },
+        "mobileMenu": {
+          "found": true,
+          "opened": false
+        }
+      },
+      "screenshots": [
+        {
+          "viewport": "Desktop-1440p",
+          "file": "Home-ES_Desktop-1440p.webp"
+        },
+        {
+          "viewport": "Tablet-iPad-768p",
+          "file": "Home-ES_Tablet-iPad-768p.webp"
+        },
+        {
+          "viewport": "Mobile-iPhone-393p",
+          "file": "Home-ES_Mobile-iPhone-393p.webp"
+        },
+        {
+          "viewport": "Mobile-Small-360p",
+          "file": "Home-ES_Mobile-Small-360p.webp"
+        }
+      ]
+    },
+    {
+      "page": "Home-EN",
+      "url": "/index-en.html",
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "failedRequests": [],
+      "performance": {
+        "navLoadTimeMs": 1588,
+        "fcpMs": 144,
+        "domInteractiveMs": 89,
+        "domCompleteMs": 139,
+        "resourceCount": 25,
+        "totalTransferKb": 272,
+        "scrollSmoothness": {
+          "totalFrames": 89,
+          "jankFrames": 9,
+          "smoothnessScore": 90
+        }
+      },
+      "overflowIssues": [
+        {
+          "viewport": "Desktop-1440p",
+          "elements": [
+            {
+              "tag": "article",
+              "id": null,
+              "className": "flex-none w-[80vw] md:w-[45vw] lg:w-[35vw] xl:w-[3",
+              "overflowPx": 424
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "group relative aspect-[16/10] rounded-3xl overflow",
+              "overflowPx": 424
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "absolute inset-0 bg-[#06060c] overflow-hidden flex",
+              "overflowPx": 423
+            },
+            {
+              "tag": "img",
+              "id": null,
+              "className": "w-full h-full object-cover transition-transform du",
+              "overflowPx": 423
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "absolute inset-0 bg-gradient-to-t from-black/60 vi",
+              "overflowPx": 423
+            }
+          ]
+        },
+        {
+          "viewport": "Tablet-iPad-768p",
+          "elements": [
+            {
+              "tag": "div",
+              "id": "nav-right",
+              "className": "hidden md:flex items-center gap-2 sm:gap-6 md:gap-",
+              "overflowPx": 197
+            },
+            {
+              "tag": "a",
+              "id": null,
+              "className": "relative py-2 text-[8px] sm:text-xs md:text-[13px]",
+              "overflowPx": 56
+            },
+            {
+              "tag": "span",
+              "id": null,
+              "className": "absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 ",
+              "overflowPx": 24
+            },
+            {
+              "tag": "a",
+              "id": null,
+              "className": "relative py-2 text-[8px] sm:text-xs md:text-[13px]",
+              "overflowPx": 197
+            },
+            {
+              "tag": "span",
+              "id": null,
+              "className": "absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 ",
+              "overflowPx": 151
+            }
+          ]
+        },
+        {
+          "viewport": "Mobile-iPhone-393p",
+          "elements": [
+            {
+              "tag": "article",
+              "id": null,
+              "className": "flex-none w-[80vw] md:w-[45vw] lg:w-[35vw] xl:w-[3",
+              "overflowPx": 24
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "group relative aspect-[16/10] rounded-3xl overflow",
+              "overflowPx": 24
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "absolute inset-0 bg-[#06060c] overflow-hidden flex",
+              "overflowPx": 23
+            },
+            {
+              "tag": "img",
+              "id": null,
+              "className": "w-full h-full object-cover transition-transform du",
+              "overflowPx": 23
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "absolute inset-0 bg-gradient-to-t from-black/60 vi",
+              "overflowPx": 23
+            }
+          ]
+        },
+        {
+          "viewport": "Mobile-Small-360p",
+          "elements": [
+            {
+              "tag": "article",
+              "id": null,
+              "className": "flex-none w-[80vw] md:w-[45vw] lg:w-[35vw] xl:w-[3",
+              "overflowPx": 306
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "group relative aspect-[16/10] rounded-3xl overflow",
+              "overflowPx": 306
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "absolute inset-0 bg-[#06060c] overflow-hidden flex",
+              "overflowPx": 305
+            },
+            {
+              "tag": "img",
+              "id": null,
+              "className": "w-full h-full object-cover transition-transform du",
+              "overflowPx": 305
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "absolute inset-0 bg-gradient-to-t from-black/60 vi",
+              "overflowPx": 305
+            }
+          ]
+        }
+      ],
+      "interactionTests": {
+        "faqAccordion": {
+          "found": true,
+          "clicked": true,
+          "heightDelta": 185
+        },
+        "mobileMenu": {
+          "found": true,
+          "opened": false
+        }
+      },
+      "screenshots": [
+        {
+          "viewport": "Desktop-1440p",
+          "file": "Home-EN_Desktop-1440p.webp"
+        },
+        {
+          "viewport": "Tablet-iPad-768p",
+          "file": "Home-EN_Tablet-iPad-768p.webp"
+        },
+        {
+          "viewport": "Mobile-iPhone-393p",
+          "file": "Home-EN_Mobile-iPhone-393p.webp"
+        },
+        {
+          "viewport": "Mobile-Small-360p",
+          "file": "Home-EN_Mobile-Small-360p.webp"
+        }
+      ]
+    },
+    {
+      "page": "Planes-ES",
+      "url": "/planes/index.html",
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "failedRequests": [],
+      "performance": {
+        "navLoadTimeMs": 807,
+        "fcpMs": 132,
+        "domInteractiveMs": 87,
+        "domCompleteMs": 127,
+        "resourceCount": 15,
+        "totalTransferKb": 83,
+        "scrollSmoothness": {
+          "totalFrames": 45,
+          "jankFrames": 0,
+          "smoothnessScore": 100
+        }
+      },
+      "overflowIssues": [
+        {
+          "viewport": "Desktop-1440p",
+          "elements": [
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud2",
+              "overflowPx": 190
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud3",
+              "overflowPx": 550
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud5",
+              "overflowPx": 88
+            },
+            {
+              "tag": "span",
+              "id": null,
+              "className": null,
+              "overflowPx": 447
+            },
+            {
+              "tag": "span",
+              "id": null,
+              "className": null,
+              "overflowPx": 575
+            }
+          ]
+        },
+        {
+          "viewport": "Tablet-iPad-768p",
+          "elements": [
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud1",
+              "overflowPx": 668
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud2",
+              "overflowPx": 940
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud3",
+              "overflowPx": 1280
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud4",
+              "overflowPx": 395
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud5",
+              "overflowPx": 852
+            }
+          ]
+        },
+        {
+          "viewport": "Mobile-iPhone-393p",
+          "elements": [
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud1",
+              "overflowPx": 956
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud2",
+              "overflowPx": 1256
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud3",
+              "overflowPx": 1611
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud4",
+              "overflowPx": 720
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud5",
+              "overflowPx": 1158
+            }
+          ]
+        },
+        {
+          "viewport": "Mobile-Small-360p",
+          "elements": [
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud1",
+              "overflowPx": 907
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud2",
+              "overflowPx": 1235
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud3",
+              "overflowPx": 1603
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud4",
+              "overflowPx": 705
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud5",
+              "overflowPx": 1127
+            }
+          ]
+        }
+      ],
+      "interactionTests": {},
+      "screenshots": [
+        {
+          "viewport": "Desktop-1440p",
+          "file": "Planes-ES_Desktop-1440p.webp"
+        },
+        {
+          "viewport": "Tablet-iPad-768p",
+          "file": "Planes-ES_Tablet-iPad-768p.webp"
+        },
+        {
+          "viewport": "Mobile-iPhone-393p",
+          "file": "Planes-ES_Mobile-iPhone-393p.webp"
+        },
+        {
+          "viewport": "Mobile-Small-360p",
+          "file": "Planes-ES_Mobile-Small-360p.webp"
+        }
+      ]
+    },
+    {
+      "page": "Planes-EN",
+      "url": "/planes/index-en.html",
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "failedRequests": [],
+      "performance": {
+        "navLoadTimeMs": 779,
+        "fcpMs": 84,
+        "domInteractiveMs": 29,
+        "domCompleteMs": 65,
+        "resourceCount": 15,
+        "totalTransferKb": 2,
+        "scrollSmoothness": {
+          "totalFrames": 47,
+          "jankFrames": 0,
+          "smoothnessScore": 100
+        }
+      },
+      "overflowIssues": [
+        {
+          "viewport": "Desktop-1440p",
+          "elements": [
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud2",
+              "overflowPx": 190
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud3",
+              "overflowPx": 550
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud5",
+              "overflowPx": 88
+            },
+            {
+              "tag": "span",
+              "id": null,
+              "className": null,
+              "overflowPx": 449
+            },
+            {
+              "tag": "span",
+              "id": null,
+              "className": null,
+              "overflowPx": 577
+            }
+          ]
+        },
+        {
+          "viewport": "Tablet-iPad-768p",
+          "elements": [
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud1",
+              "overflowPx": 666
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud2",
+              "overflowPx": 938
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud3",
+              "overflowPx": 1279
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud4",
+              "overflowPx": 394
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud5",
+              "overflowPx": 850
+            }
+          ]
+        },
+        {
+          "viewport": "Mobile-iPhone-393p",
+          "elements": [
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud1",
+              "overflowPx": 956
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud2",
+              "overflowPx": 1256
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud3",
+              "overflowPx": 1611
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud4",
+              "overflowPx": 719
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud5",
+              "overflowPx": 1158
+            }
+          ]
+        },
+        {
+          "viewport": "Mobile-Small-360p",
+          "elements": [
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud1",
+              "overflowPx": 909
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud2",
+              "overflowPx": 1236
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud3",
+              "overflowPx": 1605
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud4",
+              "overflowPx": 706
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud5",
+              "overflowPx": 1129
+            }
+          ]
+        }
+      ],
+      "interactionTests": {},
+      "screenshots": [
+        {
+          "viewport": "Desktop-1440p",
+          "file": "Planes-EN_Desktop-1440p.webp"
+        },
+        {
+          "viewport": "Tablet-iPad-768p",
+          "file": "Planes-EN_Tablet-iPad-768p.webp"
+        },
+        {
+          "viewport": "Mobile-iPhone-393p",
+          "file": "Planes-EN_Mobile-iPhone-393p.webp"
+        },
+        {
+          "viewport": "Mobile-Small-360p",
+          "file": "Planes-EN_Mobile-Small-360p.webp"
+        }
+      ]
+    },
+    {
+      "page": "Project-ES",
+      "url": "/project.html?id=coche-rent",
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "failedRequests": [],
+      "performance": {
+        "navLoadTimeMs": 966,
+        "fcpMs": 124,
+        "domInteractiveMs": 27,
+        "domCompleteMs": 97,
+        "resourceCount": 13,
+        "totalTransferKb": 33,
+        "scrollSmoothness": {
+          "totalFrames": 16,
+          "jankFrames": 0,
+          "smoothnessScore": 100
+        }
+      },
+      "overflowIssues": [
+        {
+          "viewport": "Tablet-iPad-768p",
+          "elements": [
+            {
+              "tag": "div",
+              "id": null,
+              "className": "shrink-0 flex flex-col gap-6 w-full md:w-auto stic",
+              "overflowPx": 15
+            },
+            {
+              "tag": "a",
+              "id": "project-link",
+              "className": "px-10 py-5 bg-[#00f2ff] text-[#080810] font-headli",
+              "overflowPx": 15
+            }
+          ]
+        }
+      ],
+      "interactionTests": {},
+      "screenshots": [
+        {
+          "viewport": "Desktop-1440p",
+          "file": "Project-ES_Desktop-1440p.webp"
+        },
+        {
+          "viewport": "Tablet-iPad-768p",
+          "file": "Project-ES_Tablet-iPad-768p.webp"
+        },
+        {
+          "viewport": "Mobile-iPhone-393p",
+          "file": "Project-ES_Mobile-iPhone-393p.webp"
+        },
+        {
+          "viewport": "Mobile-Small-360p",
+          "file": "Project-ES_Mobile-Small-360p.webp"
+        }
+      ]
+    }
+  ]
+}

@@ -9,8 +9,12 @@
     <title>Planes de Diseño Web en Palma de Mallorca | Tarifas MYNEXT</title>
     <meta name="description" content="Precios y planes transparentes para el diseño de tu página web en Palma de Mallorca. Soluciones profesionales, rápidas y totalmente a medida. Infórmate aquí.">
     
-    <!-- Favicon -->
+    <!-- Favicon & Touch Icons (Google & Mobile Standards) -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
 
     <!-- Google Search Console Verification -->
     <meta name="google-site-verification" content="google-site-verification-token" />
@@ -75,7 +79,9 @@
     }
     </script>
 
-    <!-- Google Fonts: Outfit para títulos, Inter para lectura -->
+    <!-- Google Fonts Preconnect & Optimizations -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
 
@@ -1366,24 +1372,403 @@
         </section>
 
         <!-- Footer -->
-        <footer class="w-full bg-[#000] relative z-50 pt-2 mt-16">
-            <!-- Custom Elegant Divider Line -->
-            <div class="w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent relative mb-8">
-                <div class="absolute left-1/2 -translate-x-1/2 -top-[1.5px] w-24 h-[3px] bg-cyan-400 shadow-[0_0_20px_#00F2FF] rounded-full"></div>
+        <footer
+            class="py-16 px-6 md:px-12 bg-gradient-to-b from-void-black to-[#020205] border-t border-electric-cyan/10 shadow-[0_-20px_50px_rgba(0,242,255,0.06)] relative z-40 overflow-hidden mt-16">
+            <!-- Radial Glow behind footer -->
+            <div
+                class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[300px] h-[300px] bg-blue-600/5 blur-[100px] rounded-full pointer-events-none">
             </div>
-            
-            <div class="pb-8 pt-2 text-center flex flex-col items-center gap-2">
-                <p class="logo-font text-[10px] md:text-[11px] uppercase flex flex-col md:flex-row items-center justify-center gap-3 md:gap-6 opacity-85">
-                    <span class="text-white font-black tracking-[0.5em]">MYNEXT</span>
-                    <span class="hidden md:block text-cyan-500 scale-125">•</span>
-                    <span class="text-slate-400 font-light tracking-[0.8em]">DESDE 2026</span>
-                </p>
-                <div class="text-[9px] md:text-[10px] text-slate-500 font-semibold tracking-widest uppercase mt-2">
-                    Made by <a href="https://mynextbymusa.com" class="text-white hover:text-cyan-400 transition-colors" target="_blank" rel="noopener noreferrer">Musa</a>
+
+            <div class="max-w-6xl mx-auto flex flex-col gap-12 relative z-10">
+                <!-- Custom Elegant Divider Line -->
+                <div
+                    class="w-full h-[1.5px] bg-gradient-to-r from-transparent via-electric-cyan/40 to-transparent relative mb-6">
+                    <div
+                        class="absolute left-1/2 -translate-x-1/2 -top-[2px] w-20 h-1 bg-electric-cyan shadow-[0_0_20px_#00f2ff] rounded-full">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 items-center md:items-start gap-8">
+                    <!-- Legal Links (stacked vertically on the left) -->
+                    <div
+                        class="flex flex-col items-center md:items-start gap-4 text-[13px] font-medium tracking-wide text-slate-300 order-2 md:order-1 font-body">
+                        <a href="#" data-modal="aviso-legal"
+                            class="hover:text-white transition-colors duration-300 cursor-pointer">Aviso Legal</a>
+                        <a href="#" data-modal="privacidad"
+                            class="hover:text-white transition-colors duration-300 cursor-pointer">Política de
+                            Privacidad</a>
+                        <a href="#" data-modal="cookies"
+                            class="hover:text-white transition-colors duration-300 cursor-pointer">Política de Cookies</a>
+                        <a href="#" data-modal="terminos" data-sb-content="footer_link_terms"
+                            class="hover:text-white transition-colors duration-300 cursor-pointer">Términos y
+                            Condiciones</a>
+                        <a href="#" data-modal="gestion-tecnica"
+                            class="hover:text-white transition-colors duration-300 cursor-pointer">Gestión Técnica</a>
+                    </div>
+
+                    <!-- Branding (centered in the middle) -->
+                    <div class="flex flex-col items-center text-center gap-4 order-1 md:order-2">
+                        <a href="../index.html" title="Volver al inicio" aria-label="MYNEXT Home" class="footer-logo-ring">
+                            <img src="../assets/img/logos/logo-mn-transparent-white.png" alt="MYNEXT - Agencia de Diseño Web en Palma"
+                                class="footer-logo w-[70px] sm:w-[85px] h-auto object-contain opacity-95 hover:opacity-100 hover:scale-105 transition-all duration-500"
+                                loading="lazy" width="85" height="85">
+                        </a>
+                        <div class="space-y-1">
+                            <span
+                                class="text-[10px] font-headline text-electric-cyan tracking-[0.3em] uppercase font-semibold">Arquitectura
+                                Digital</span>
+                            <p data-sb-content="footer_desc"
+                                class="text-[11px] md:text-[12px] text-white/50 max-w-[14rem] mx-auto leading-relaxed font-body">
+                                Diseño web elegante y funcional con presencia premium en cada proyecto.</p>
+                        </div>
+                    </div>
+
+                    <!-- Social & Navigation (on the right) -->
+                    <div class="flex flex-col items-center md:items-end gap-6 order-3 font-body">
+                        <ul class="social-buttons-wrapper">
+                            <!-- Twitter / X -->
+                            <li class="icon twitter">
+                                <span class="tooltip">X</span>
+                                <a href="https://x.com/mynextbymusa?s=11" target="_blank" rel="noopener noreferrer"
+                                    class="w-full h-full flex items-center justify-center" style="color: inherit;"
+                                    aria-label="X (Twitter)">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" style="height: 1.2em;"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <!-- Instagram -->
+                            <li class="icon instagram">
+                                <span class="tooltip">Instagram</span>
+                                <a href="https://www.instagram.com/mynextbymusa?igsh=MWx6d29jcW1peHV6NA%3D%3D&utm_source=qr"
+                                    target="_blank" rel="noopener noreferrer"
+                                    class="w-full h-full flex items-center justify-center" style="color: inherit;"
+                                    aria-label="Instagram">
+                                    <svg viewBox="0 0 16 16" fill="currentColor" style="height: 1.2em;"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <!-- Google Maps -->
+                            <li class="icon google-maps">
+                                <span class="tooltip">Maps</span>
+                                <a href="https://maps.app.goo.gl/VE5ZqxShZFKaAs8M6" target="_blank"
+                                    rel="noopener noreferrer" class="w-full h-full flex items-center justify-center"
+                                    style="color: inherit;" aria-label="Google Maps">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" style="height: 1.2em;"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                                    </svg>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <!-- Compact Navigation Bar -->
+                        <nav
+                            class="flex flex-col items-center md:items-end gap-3 text-[14px] font-medium tracking-wide text-slate-300">
+                            <a href="../index.html#nosotros" class="hover:text-white transition-colors duration-300">Sobre Mí</a>
+                            <a href="../index.html#portfolio" class="hover:text-white transition-colors duration-300">Portfolio</a>
+                            <a href="index.html" class="hover:text-white transition-colors duration-300 text-electric-cyan font-semibold">Planes</a>
+                            <a href="../index.html#contacto" class="hover:text-white transition-colors duration-300">Contacto</a>
+                        </nav>
+                    </div>
+                </div>
+                <div
+                    class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left text-slate-400 text-[11px] font-medium uppercase tracking-widest font-body">
+                    <div data-sb-content="footer_copyright">© 2026 MYNEXT. Todos los derechos reservados.</div>
+                    <p data-sb-content="footer_madeby" class="text-[10px] tracking-widest">
+                        Made by <a href="https://mynextbymusa.com" class="text-white hover:text-cyan-400 transition-colors"
+                            target="_blank" rel="noopener noreferrer">Musa</a>
+                    </p>
                 </div>
             </div>
         </footer>
 
+    </div>
+
+    <!-- LEGAL MODALS -->
+    <!-- Aviso Legal -->
+    <div id="aviso-legal" class="modal-wrapper">
+        <div class="modal-overlay"></div>
+        <div class="modal-container border border-electric-cyan/20 bg-[#060608]/95 max-w-2xl">
+            <button
+                class="modal-close absolute top-6 right-6 text-white/40 hover:text-electric-cyan hover:rotate-90 transition-all duration-300"
+                aria-label="Close modal">
+                <span class="material-symbols-outlined text-2xl">close</span>
+            </button>
+            <h3 data-sb-content="modal_legal_title"
+                class="text-2xl font-headline font-bold text-gradient-cyan uppercase tracking-widest mb-8 border-b border-white/5 pb-4">
+                Aviso Legal</h3>
+            <div class="space-y-8 text-sm text-white/70 font-body leading-[1.7] tracking-wide">
+
+                <div class="border-l-2 border-electric-cyan/30 pl-4 space-y-2">
+                    <h4 data-sb-content="modal_legal_p1_title"
+                        class="font-headline font-bold text-white uppercase tracking-wider text-xs md:text-sm">1.
+                        Información General</h4>
+                    <p data-sb-content="modal_legal_p1_text" class="text-white/60">En cumplimiento del deber de
+                        información establecido en la legislación vigente, a continuación se detallan los datos de
+                        información general de este sitio web:</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-2 text-white/50 text-xs">
+                        <li><strong data-sb-content="modal_legal_owner">Titular:</strong> MYNEXT</li>
+                        <li><strong data-sb-content="modal_legal_contact">Contacto:</strong> <a
+                                href="mailto:mynextbymusa@gmail.com"
+                                class="text-electric-cyan hover:underline">mynextbymusa@gmail.com</a></li>
+                        <li><strong data-sb-content="modal_legal_activity">Actividad:</strong> <span
+                                data-sb-content="modal_legal_activity_desc">Servicios de diseño y arquitectura digital
+                                premium.</span></li>
+                    </ul>
+                </div>
+
+                <div class="border-l-2 border-electric-cyan/30 pl-4 space-y-2">
+                    <h4 data-sb-content="modal_legal_p2_title"
+                        class="font-headline font-bold text-white uppercase tracking-wider text-xs md:text-sm">2.
+                        Propiedad Intelectual</h4>
+                    <p data-sb-content="modal_legal_p2_text" class="text-white/60">Todos los derechos de propiedad
+                        intelectual del contenido de este sitio web, su diseño gráfico, código fuente y logotipos son
+                        propiedad exclusiva de MYNEXT. Queda prohibida cualquier reproducción, distribución o
+                        comunicación pública sin autorización expresa.</p>
+                </div>
+
+                <div class="border-l-2 border-electric-cyan/30 pl-4 space-y-2">
+                    <h4 data-sb-content="modal_legal_p3_title"
+                        class="font-headline font-bold text-white uppercase tracking-wider text-xs md:text-sm">3.
+                        Limitación de Responsabilidad</h4>
+                    <p data-sb-content="modal_legal_p3_text" class="text-white/60">El titular no se hace responsable de
+                        los daños y perjuicios de cualquier naturaleza que pudieran ocasionar errores u omisiones en los
+                        contenidos, o la falta de disponibilidad del portal web.</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Política de Privacidad -->
+    <div id="privacidad" class="modal-wrapper">
+        <div class="modal-overlay"></div>
+        <div class="modal-container border border-electric-cyan/20 bg-[#060608]/95 max-w-2xl">
+            <button
+                class="modal-close absolute top-6 right-6 text-white/40 hover:text-electric-cyan hover:rotate-90 transition-all duration-300"
+                aria-label="Close modal">
+                <span class="material-symbols-outlined text-2xl">close</span>
+            </button>
+            <h3 data-sb-content="modal_privacy_title"
+                class="text-2xl font-headline font-bold text-gradient-cyan uppercase tracking-widest mb-8 border-b border-white/5 pb-4">
+                Política de Privacidad</h3>
+            <div class="space-y-8 text-sm text-white/70 font-body leading-[1.7] tracking-wide">
+
+                <div class="border-l-2 border-electric-cyan/30 pl-4 space-y-2">
+                    <h4 data-sb-content="modal_privacy_p1_title"
+                        class="font-headline font-bold text-white uppercase tracking-wider text-xs md:text-sm">1.
+                        Responsable del Tratamiento</h4>
+                    <p class="text-white/60"><span data-sb-content="modal_privacy_p1_text">El responsable del
+                            tratamiento de los datos personales recogidos en este sitio web es MYNEXT, con correo de
+                            contacto</span> <a href="mailto:mynextbymusa@gmail.com"
+                            class="text-electric-cyan hover:underline">mynextbymusa@gmail.com</a>.</p>
+                </div>
+
+                <div class="border-l-2 border-electric-cyan/30 pl-4 space-y-2">
+                    <h4 data-sb-content="modal_privacy_p2_title"
+                        class="font-headline font-bold text-white uppercase tracking-wider text-xs md:text-sm">2.
+                        Finalidad del Tratamiento</h4>
+                    <p data-sb-content="modal_privacy_p2_text" class="text-white/60">Los datos personales facilitados
+                        (principalmente correo electrónico y nombre a través de consultas directas) serán utilizados
+                        exclusivamente para dar respuesta a las consultas y solicitudes enviadas por los usuarios.</p>
+                </div>
+
+                <div class="border-l-2 border-electric-cyan/30 pl-4 space-y-2">
+                    <h4 data-sb-content="modal_privacy_p3_title"
+                        class="font-headline font-bold text-white uppercase tracking-wider text-xs md:text-sm">3.
+                        Conservación de los Datos</h4>
+                    <p data-sb-content="modal_privacy_p3_text" class="text-white/60">Los datos personales se conservarán
+                        durante el tiempo estrictamente necesario para cumplir con la finalidad para la que fueron
+                        recabados, o hasta que el usuario solicite su supresión.</p>
+                </div>
+
+                <div class="border-l-2 border-electric-cyan/30 pl-4 space-y-2">
+                    <h4 data-sb-content="modal_privacy_p4_title"
+                        class="font-headline font-bold text-white uppercase tracking-wider text-xs md:text-sm">4.
+                        Derechos del Usuario</h4>
+                    <p class="text-white/60"><span data-sb-content="modal_privacy_p4_text">Los usuarios pueden ejercer
+                            sus derechos de acceso, rectificación, supresión y limitación del tratamiento enviando un
+                            correo electrónico a</span> <a href="mailto:mynextbymusa@gmail.com"
+                            class="text-electric-cyan hover:underline">mynextbymusa@gmail.com</a>.</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Política de Cookies -->
+    <div id="cookies" class="modal-wrapper">
+        <div class="modal-overlay"></div>
+        <div class="modal-container border border-electric-cyan/20 bg-[#060608]/95 max-w-2xl">
+            <button
+                class="modal-close absolute top-6 right-6 text-white/40 hover:text-electric-cyan hover:rotate-90 transition-all duration-300"
+                aria-label="Close modal">
+                <span class="material-symbols-outlined text-2xl">close</span>
+            </button>
+            <h3 data-sb-content="modal_cookies_title"
+                class="text-2xl font-headline font-bold text-gradient-cyan uppercase tracking-widest mb-8 border-b border-white/5 pb-4">
+                Política de Cookies</h3>
+            <div class="space-y-8 text-sm text-white/70 font-body leading-[1.7] tracking-wide">
+
+                <div class="border-l-2 border-electric-cyan/30 pl-4 space-y-2">
+                    <h4 data-sb-content="modal_cookies_p1_title"
+                        class="font-headline font-bold text-white uppercase tracking-wider text-xs md:text-sm">1. ¿Qué
+                        son las cookies?</h4>
+                    <p data-sb-content="modal_cookies_p1_text" class="text-white/60">Una cookie es un pequeño archivo de
+                        texto que se almacena en su navegador al visitar casi cualquier página web. Su utilidad es
+                        permitir que la web recuerde su visita cuando vuelva a navegar por esa página.</p>
+                </div>
+
+                <div class="border-l-2 border-electric-cyan/30 pl-4 space-y-2">
+                    <h4 data-sb-content="modal_cookies_p2_title"
+                        class="font-headline font-bold text-white uppercase tracking-wider text-xs md:text-sm">2.
+                        Cookies utilizadas en este sitio web</h4>
+                    <p data-sb-content="modal_cookies_p2_text" class="text-white/60">Utilizamos los siguientes tipos de
+                        cookies para garantizar una experiencia de navegación premium:</p>
+                    <ul class="list-disc pl-5 space-y-2 mt-2 text-white/50 text-xs">
+                        <li><strong data-sb-content="modal_cookies_tech">Cookies Técnicas:</strong> <span
+                                data-sb-content="modal_cookies_tech_desc">Necesarias para el correcto funcionamiento del
+                                sitio, como la cookie que recuerda sus preferencias de privacidad.</span></li>
+                        <li><strong data-sb-content="modal_cookies_perso">Cookies de Personalización:</strong> <span
+                                data-sb-content="modal_cookies_perso_desc">Permiten recordar el idioma preferido del
+                                usuario.</span></li>
+                    </ul>
+                </div>
+
+                <div class="border-l-2 border-electric-cyan/30 pl-4 space-y-2">
+                    <h4 data-sb-content="modal_cookies_p3_title"
+                        class="font-headline font-bold text-white uppercase tracking-wider text-xs md:text-sm">3. Cómo
+                        desactivar las cookies</h4>
+                    <p data-sb-content="modal_cookies_p3_text" class="text-white/60">En cualquier momento puede ejercer
+                        su derecho a desactivar o eliminar las cookies de este sitio web a través de la configuración de
+                        su navegador web.</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Términos y Condiciones -->
+    <div id="terminos" class="modal-wrapper">
+        <div class="modal-overlay"></div>
+        <div class="modal-container border border-electric-cyan/20 bg-[#060608]/95 max-w-2xl">
+            <button
+                class="modal-close absolute top-6 right-6 text-white/40 hover:text-electric-cyan hover:rotate-90 transition-all duration-300"
+                aria-label="Close modal">
+                <span class="material-symbols-outlined text-2xl">close</span>
+            </button>
+            <h3 data-sb-content="modal_terms_title"
+                class="text-2xl font-headline font-bold text-gradient-cyan uppercase tracking-widest mb-8 border-b border-white/5 pb-4">
+                Términos y Condiciones</h3>
+            <div class="space-y-8 text-sm text-white/70 font-body leading-[1.7] tracking-wide">
+
+                <div class="border-l-2 border-electric-cyan/30 pl-4 space-y-2">
+                    <h4 data-sb-content="modal_terms_p1_title"
+                        class="font-headline font-bold text-white uppercase tracking-wider text-xs md:text-sm">1.
+                        Propiedad Intelectual</h4>
+                    <p data-sb-content="modal_terms_p1_text" class="text-white/60">Todo el contenido, código fuente,
+                        estructura de arquitectura digital, procesos creativos y activos visuales son propiedad
+                        exclusiva de MYNEXT. La entrega al cliente otorga una licencia de uso perpetua y exclusiva sobre
+                        el producto final, pero no transfiere la propiedad intelectual sobre las herramientas,
+                        metodología, código base o plantillas de diseño desarrolladas por MYNEXT.</p>
+                </div>
+
+                <div class="border-l-2 border-electric-cyan/30 pl-4 space-y-2">
+                    <h4 data-sb-content="modal_terms_p2_title"
+                        class="font-headline font-bold text-white uppercase tracking-wider text-xs md:text-sm">2.
+                        Protección de Activos</h4>
+                    <p data-sb-content="modal_terms_p2_text" class="text-white/60">Queda estrictamente prohibida la
+                        ingeniería inversa, extracción de código o replicación de sistemas de navegación. Nuestros
+                        métodos, animaciones y flujos de trabajo premium están protegidos por derechos de autor.
+                        Cualquier uso no autorizado constituye una infracción a nuestra propiedad intelectual.</p>
+                </div>
+
+                <div class="border-l-2 border-electric-cyan/30 pl-4 space-y-2">
+                    <h4 data-sb-content="modal_terms_p3_title"
+                        class="font-headline font-bold text-white uppercase tracking-wider text-xs md:text-sm">3.
+                        Gestión Técnica</h4>
+                    <p data-sb-content="modal_terms_p3_text" class="text-white/60 text-xs md:text-sm">La infraestructura
+                        técnica, hosting y configuración son gestionados bajo la supervisión de MYNEXT para garantizar
+                        la excelencia y seguridad. La integridad operativa es responsabilidad exclusiva de MYNEXT.</p>
+                    <button data-sb-content="modal_terms_btn" data-modal="gestion-tecnica"
+                        class="mt-4 px-4 py-2 border border-electric-cyan/30 text-electric-cyan hover:bg-electric-cyan/10 transition-colors duration-300 text-[10px] md:text-xs uppercase tracking-wider font-headline rounded-lg cursor-pointer">Inspeccionar
+                        Gestión Técnica</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Gestión Técnica Modal -->
+    <div id="gestion-tecnica" class="modal-wrapper">
+        <div class="modal-overlay"></div>
+        <div class="modal-container border border-electric-cyan/20 bg-[#060608]/95 max-w-4xl">
+            <button
+                class="modal-close absolute top-6 right-6 text-white/40 hover:text-electric-cyan hover:rotate-90 transition-all duration-300"
+                aria-label="Close modal">
+                <span class="material-symbols-outlined text-2xl">close</span>
+            </button>
+            <h3 data-sb-content="modal_tech_title"
+                class="text-2xl font-headline font-bold text-gradient-cyan uppercase tracking-widest mb-8 border-b border-white/5 pb-4">
+                Gestión Técnica</h3>
+
+            <p data-sb-content="modal_tech_desc" class="text-sm text-white/60 mb-8 font-body leading-relaxed">
+                La infraestructura técnica, hosting y configuración son gestionados bajo la supervisión de MYNEXT para
+                garantizar la excelencia y seguridad. Pasa el cursor sobre cada elemento para inspeccionar las métricas
+                operativas:
+            </p>
+
+            <div class="flex flex-wrap gap-8 justify-center py-6">
+                <!-- Card 1: Infraestructura -->
+                <div class="tech-card">
+                    <div class="tech-card-align">
+                        <span class="tech-card-red"></span>
+                        <span class="tech-card-yellow"></span>
+                        <span class="tech-card-green"></span>
+                    </div>
+                    <h4 data-sb-content="modal_tech_card1_title">Infraestructura</h4>
+                    <p data-sb-content="modal_tech_card1_text">
+                        Servidores cloud de alto rendimiento, redes CDN distribuidas globalmente y almacenamiento en
+                        caché perimetral optimizado para tiempos de carga ultra rápidos.
+                    </p>
+                </div>
+
+                <!-- Card 2: Security -->
+                <div class="tech-card">
+                    <div class="tech-card-align">
+                        <span class="tech-card-red"></span>
+                        <span class="tech-card-yellow"></span>
+                        <span class="tech-card-green"></span>
+                    </div>
+                    <h4 data-sb-content="modal_tech_card2_title">Seguridad & SSL</h4>
+                    <p data-sb-content="modal_tech_card2_text">
+                        Monitoreo continuo de amenazas, renovación automática de certificados SSL, firewalls seguros y
+                        protocolos de encriptación de datos para proteger tus activos digitales.
+                    </p>
+                </div>
+
+                <!-- Card 3: Integrity -->
+                <div class="tech-card">
+                    <div class="tech-card-align">
+                        <span class="tech-card-red"></span>
+                        <span class="tech-card-yellow"></span>
+                        <span class="tech-card-green"></span>
+                    </div>
+                    <h4 data-sb-content="modal_tech_card3_title">Mantenimiento</h4>
+                    <p data-sb-content="modal_tech_card3_text">
+                        Supervisión operativa constante, copias de seguridad periódicas de bases de datos, monitoreo de
+                        tiempo de actividad y parches de seguridad del sistema gestionados por MYNEXT.
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- SELECTOR DE PLANES / CONTACTO INTEGRADO -->

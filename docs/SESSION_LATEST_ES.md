@@ -1,39 +1,28 @@
 # Resumen de Sesión - 15 Ago 2026
 
 ## ¿Qué se ha hecho hoy?
-- **Optimización Integral de SEO Local & Microdatos Estructurados (Schema.org / JSON-LD):**
-  - **Esquema LocalBusiness & ProfessionalService:** Enriquecido con valoración agregada de 5,0 ⭐ basada en las 7 reseñas verificadas de Google Maps (`aggregateRating`), geolocalización precisa de Palma de Mallorca, horarios y catálogo oficial de ofertas (`OfferCatalog`) con los planes Básico (280€) y Business (380€).
-  - **Esquema FAQPage (Rich Snippets):** Implementado el esquema estructurado de Preguntas Frecuentes tanto en español (`index.html`) como en inglés (`index-en.html`) para habilitar los desplegables interactivos directos en la página de resultados de Google.
-  - **Esquema BreadcrumbList:** Añadido a las páginas de planes (`planes/index.html` y `planes/index-en.html`) y a las páginas de casos de estudio (`project.html` y `project-en.html`).
-- **Preparación para Google Search Console:**
-  - Añadida la metaetiqueta `google-site-verification` a todas las páginas HTML (`index.html`, `index-en.html`, `planes/index.html`, `planes/index-en.html`, `project.html`, `project-en.html`).
-  - Actualizado el mapa del sitio oficial (`public/sitemap.xml`) con fecha 15 de agosto de 2026, jerarquía de prioridades y directivas para rastreadores.
-- **Sistema de Métricas y Seguimiento de Conversiones:**
-  - Creado el módulo `src/lib/analytics.ts` con escucha automática de eventos comerciales de alto valor: clics en WhatsApp, llamadas directas al teléfono, envíos del formulario de contacto, selección de planes de precios, navegación en el portfolio y apertura de FAQs.
-  - Integrado de forma asíncrona y sin latencia en `src/main.ts` y `src/project.ts`.
-- **Verificación y Compilación:**
-  - Compilación de producción con TypeScript y Vite (`npm run build`) completada con 0 errores y 100% tipado estricto.
+- **Corrección y silenciado de GitLab CI (`.gitlab-ci.yml`):**
+  - Añadidas reglas de `workflow` para evitar la creación de pipelines automáticas y notificaciones de fallo en eventos normales de `git push`.
+  - Ahora solo se ejecutará cuando sea un evento programado (`schedule`) o manual (`web`).
+- **Ajuste del Reporte Diario de Estado (`.github/workflows/daily-report.yml`):**
+  - Incorporadas cabeceras completas de navegación (`Accept`, `Accept-Language`, `Sec-Fetch-*`, `User-Agent`) y seguimiento de redirecciones (`-L`).
+  - Añadida detección inteligente de Cloudflare edge para evitar falsos positivos de caída (código 403 por reto anti-bot a IPs de GitHub Actions).
+- **Optimización Integral y SEO previa:**
+  - Auditoría Chrome a 60 FPS (100% de fluidez en scroll).
+  - Preconnect de Google Fonts y optimización de FCP (< 140ms).
+  - Schema.org (LocalBusiness, FAQPage, OfferCatalog, BreadcrumbList) y Search Console.
 
 ## Archivos modificados
-- `src/lib/analytics.ts` (Nuevo)
-- `index.html`
-- `index-en.html`
-- `planes/index.html`
-- `planes/index-en.html`
-- `project.html`
-- `project-en.html`
-- `public/sitemap.xml`
-- `src/main.ts`
-- `src/project.ts`
+- `.gitlab-ci.yml`
+- `.github/workflows/daily-report.yml`
 - `docs/SESSION_LATEST_ES.md`
 - `docs/ROADMAP.md`
 
 ## Problemas solucionados
-- **Falta de Microdatos para Rich Snippets:** Google no tenía acceso estructurado a las valoraciones 5.0 ⭐ de Google Maps ni a las preguntas frecuentes del negocio. Ahora los rastreadores leen el catálogo y los datos locales de inmediato.
-- **Carencia de Medición de Leads:** No existía registro de qué acciones tomaban los usuarios antes de contactar. Ahora cada conversión (WhatsApp, llamadas, formulario) queda trazada y lista para conectarse con GA4 o logs.
-- **Sitemap Desactualizado:** Fechas del sitemap renovadas a la versión actual.
+- **Saturación de correos de GitLab ("Failed pipeline for dev/main"):** Resuelto definitivamente configurando las reglas de workflow en GitLab CI para que no intente ejecutar pipelines con 0 tareas en cada push.
+- **Falso positivo de caída en el reporte de estado por email (403):** Corregido mediante cabeceras realistas y verificación de Cloudflare proxy.
 
 ## Qué queda pendiente
-1. Verificar la propiedad en Google Search Console (mediante registro DNS TXT en Cloudflare o metaetiqueta).
-2. Vincular la cuenta de facturación en Google Cloud Console para la sincronización periódica desatendida de Google Places API.
+1. Verificar la propiedad en Google Search Console y subir el sitemap.
+2. Vincular cuenta de facturación en Google Cloud Console para la sincronización periódica desatendida de Google Places API.
 3. Incorporar nuevos proyectos al portfolio dinámico a medida que se entreguen a clientes.

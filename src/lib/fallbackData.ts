@@ -2,24 +2,62 @@ export const fallbackServices = [
   {
     id: 1,
     title: JSON.stringify({ es: 'BÁSICO', en: 'BASIC' }),
+    title_es: 'BÁSICO',
+    title_en: 'BASIC',
+    badge_es: 'AHORRA 20€',
+    badge_en: 'SAVE 20€',
     description: JSON.stringify({
       es: 'Diseño web profesional (2-3 secciones), Vinculación con Google Maps, Dominio & Hosting básico incluido, Optimización de SEO Local Básico',
       en: 'Professional web design (2-3 sections), Google Maps Integration, Domain & Basic Hosting Included, Basic Local SEO Optimization'
     }),
-    price: '300',
+    description_es: 'Diseño web profesional (2-3 secciones), Vinculación con Google Maps, Dominio & Hosting básico incluido, Optimización de SEO Local Básico',
+    description_en: 'Professional web design (2-3 sections), Google Maps Integration, Domain & Basic Hosting Included, Basic Local SEO Optimization',
+    features_es: [
+      'Web diseñada a tu medida (2-3 secciones)',
+      'Vinculación con Google Maps',
+      'Dominio & Hosting básico incluido',
+      'Posicionamiento local en Google (SEO básico)'
+    ],
+    features_en: [
+      'Web designed to your measure (2-3 sections)',
+      'Linked with Google Maps',
+      'Domain & Basic hosting included',
+      'Local positioning in Google (Basic SEO)'
+    ],
+    price: '280€',
     featured: false,
+    popular: false,
     active: true,
     sort_order: 1
   },
   {
     id: 2,
     title: JSON.stringify({ es: 'BUSINESS', en: 'BUSINESS' }),
+    title_es: 'BUSINESS',
+    title_en: 'BUSINESS',
+    badge_es: 'RECOMENDADO',
+    badge_en: 'RECOMMENDED',
     description: JSON.stringify({
       es: 'Todo lo incluido en el Plan Esencial, Estrategia de Perfil Profesional *3, Gestión integral de Dominio *1, Soporte Técnico Prioritario 24/7',
       en: 'Everything included in the Essential Plan, Professional Profile Strategy *3, Comprehensive Domain Management *1, Priority Technical Support 24/7'
     }),
-    price: '400',
+    description_es: 'Todo lo incluido en el Plan Esencial, Estrategia de Perfil Profesional *3, Gestión integral de Dominio *1, Soporte Técnico Prioritario 24/7',
+    description_en: 'Everything included in the Essential Plan, Professional Profile Strategy *3, Comprehensive Domain Management *1, Priority Technical Support 24/7',
+    features_es: [
+      'Todo lo del plan Básico, potenciado',
+      'Estrategia de marca y diseño a medida',
+      'Gestión total de tu dominio',
+      'Soporte prioritario cuando lo necesites'
+    ],
+    features_en: [
+      'Everything in the Basic plan, boosted',
+      'Brand strategy and custom design',
+      'Total management of your domain',
+      'Priority support when you need it'
+    ],
+    price: '380€',
     featured: true,
+    popular: true,
     active: true,
     sort_order: 2
   }
