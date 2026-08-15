@@ -1,103 +1,113 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- Página Principal (Español) -->
   <url>
     <loc>https://mynextbymusa.com/</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://mynextbymusa.com/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://mynextbymusa.com/index-en.html" />
-    <lastmod>2026-07-30</lastmod>
-    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mynextbymusa.com/" />
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <!-- Página Principal (English) -->
   <url>
     <loc>https://mynextbymusa.com/index-en.html</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://mynextbymusa.com/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://mynextbymusa.com/index-en.html" />
-    <lastmod>2026-07-30</lastmod>
-    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mynextbymusa.com/" />
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+
+  <!-- Tarifas y Planes (Español) -->
   <url>
     <loc>https://mynextbymusa.com/planes/index.html</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://mynextbymusa.com/planes/index.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://mynextbymusa.com/planes/index-en.html" />
-    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mynextbymusa.com/planes/index.html" />
+    <lastmod>2026-08-15</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
+
+  <!-- Tarifas y Planes (English) -->
   <url>
     <loc>https://mynextbymusa.com/planes/index-en.html</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://mynextbymusa.com/planes/index.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://mynextbymusa.com/planes/index-en.html" />
-    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mynextbymusa.com/planes/index.html" />
+    <lastmod>2026-08-15</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
-  <!-- Páginas de detalle de proyecto -->
+
+  <!-- Casos de Estudio y Detalle de Proyectos -->
   <url>
     <loc>https://mynextbymusa.com/project.html?slug=blessed-barber-studio</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://mynextbymusa.com/project.html?slug=blessed-barber-studio" />
     <xhtml:link rel="alternate" hreflang="en" href="https://mynextbymusa.com/project-en.html?slug=blessed-barber-studio" />
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-08-15</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://mynextbymusa.com/project.html?slug=bar-cafeteria-luna-llena</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://mynextbymusa.com/project.html?slug=bar-cafeteria-luna-llena" />
     <xhtml:link rel="alternate" hreflang="en" href="https://mynextbymusa.com/project-en.html?slug=bar-cafeteria-luna-llena" />
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-08-15</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://mynextbymusa.com/project.html?slug=ecuaplac</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://mynextbymusa.com/project.html?slug=ecuaplac" />
     <xhtml:link rel="alternate" hreflang="en" href="https://mynextbymusa.com/project-en.html?slug=ecuaplac" />
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-08-15</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://mynextbymusa.com/project.html?slug=rbari-restaurant</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://mynextbymusa.com/project.html?slug=rbari-restaurant" />
     <xhtml:link rel="alternate" hreflang="en" href="https://mynextbymusa.com/project-en.html?slug=rbari-restaurant" />
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-08-15</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://mynextbymusa.com/project.html?slug=next-era</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://mynextbymusa.com/project.html?slug=next-era" />
     <xhtml:link rel="alternate" hreflang="en" href="https://mynextbymusa.com/project-en.html?slug=next-era" />
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-08-15</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://mynextbymusa.com/project.html?slug=mezquita-arrahma</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://mynextbymusa.com/project.html?slug=mezquita-arrahma" />
     <xhtml:link rel="alternate" hreflang="en" href="https://mynextbymusa.com/project-en.html?slug=mezquita-arrahma" />
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-08-15</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://mynextbymusa.com/project.html?slug=gran-marrakech</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://mynextbymusa.com/project.html?slug=gran-marrakech" />
     <xhtml:link rel="alternate" hreflang="en" href="https://mynextbymusa.com/project-en.html?slug=gran-marrakech" />
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-08-15</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://mynextbymusa.com/project.html?slug=tacos-marrakech</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://mynextbymusa.com/project.html?slug=tacos-marrakech" />
     <xhtml:link rel="alternate" hreflang="en" href="https://mynextbymusa.com/project-en.html?slug=tacos-marrakech" />
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-08-15</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
 </urlset>
-

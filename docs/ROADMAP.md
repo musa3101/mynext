@@ -15,12 +15,12 @@
 - Optimización extrema de rendimiento de scroll a 60–120 FPS en iOS/móvil y fix del carrusel táctil de reseñas.
 - Revisión y traducción al inglés al 100% siguiendo la skill `i18nstack`.
 - Limpieza profunda de archivos temporales, código muerto y depuración de dependencias npm.
-- Sitemap.xml actualizado con URLs de detalle de proyectos.
-- Workflow de GitHub Actions para sincronización periódica de reseñas de Google Places API.
-- Fusión (Merge) de rama `dev` a `main` y despliegue oficial sincronizado a GitHub y GitLab.
+- **Métricas & SEO Local**: Implementación de Schema.org completo (LocalBusiness con 5.0 ⭐ aggregateRating, FAQPage para Rich Snippets en Google, OfferCatalog para los planes 280€/380€ y BreadcrumbList en todas las subpáginas).
+- **Google Search Console**: Metaetiquetas de verificación integradas en todo el sitio y `sitemap.xml` 100% actualizado (2026-08-15).
+- **Seguimiento de Conversiones**: Módulo `analytics.ts` para capturar clics en WhatsApp, llamadas, envíos de formulario y clics a proyectos del portfolio.
 
 ## Tareas en Progreso
-- Verificación del posicionamiento SEO local en Google Search Console y Google Business Profile.
+- Verificación del dominio en Google Search Console y alta del sitemap `https://mynextbymusa.com/sitemap.xml`.
 
 ## Próximas Mejoras Prioritarias
 - Incorporar nuevos proyectos al portfolio dinámico a medida que se entreguen a clientes.

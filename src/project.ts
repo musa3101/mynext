@@ -1,7 +1,11 @@
 import './style.css';
 import { fallbackProjects } from './lib/fallbackData';
+import { initAnalyticsListeners } from './lib/analytics';
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Inicializar seguimiento de conversiones
+    initAnalyticsListeners();
+
     // Determine language from HTML element
     const lang = document.documentElement.lang === 'en' ? 'en' : 'es';
 

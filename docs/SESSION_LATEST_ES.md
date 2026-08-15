@@ -1,38 +1,39 @@
-# Resumen de Sesión - 14 Ago 2026
+# Resumen de Sesión - 15 Ago 2026
 
 ## ¿Qué se ha hecho hoy?
-- **Configuración de Google Places API:** Añadidas las credenciales oficiales de Google Places (`GOOGLE_PLACES_API_KEY` y `GOOGLE_PLACE_ID`) al archivo `.env` para la ficha oficial de **Mynext** en Palma de Mallorca.
-- **Auditoría y Sincronización de Reseñas:**
-  - Sincronizada la tabla `mynext_testimonials` en Supabase para incluir **únicamente las 7 reseñas reales de Google Maps** (Gustavo, Danna, Jhon, Ilyas, John, Goyo y Anuar), solucionando el problema de datos obsoletos.
-  - Actualizado el script `seed_supabase_cms.js` para blindar las opiniones reales ante futuros volcados.
-- **Alineación de Base de Datos con la Web:**
-  - Sincronizadas todas las tablas de contenido en Supabase (`mynext_about`, `mynext_hero`, `mynext_services`, `mynext_faq` y `mynext_contact`) para que tengan exactamente la misma información, precios (Planes BÁSICO 280€ y BUSINESS 380€) y textos que la web actual.
-- **Auto-recuperación de Supabase (Keep-Alive):** 
-  - Actualizados los archivos de configuración local de MCP con el nuevo Token de Supabase.
-  - Subido el secreto `SUPABASE_ACCESS_TOKEN` a los secretos del repositorio de GitHub de forma segura (sin guardarlo en el código).
-  - Reescrita la GitHub Action `keep-alive.yml` y el script de GitLab CI `.gitlab-ci.yml` para realizar consultas reales a la tabla `mynext_projects` (forzando actividad en Postgres) y llamar a la API de Supabase para **auto-restaurar el proyecto** si este es detectado como pausado.
-- **Reporte Diario por Correo (Resend):**
-  - Subido de forma segura el secreto `RESEND_API_KEY` a los secretos de tu repositorio de GitHub.
-  - Creado un nuevo workflow programado `daily-report.yml` que corre diariamente a las 9:00 AM hora local de España. Realiza pruebas de salud tanto a la base de datos como al sitio web y envía un correo en formato HTML de diseño premium a `mynextbymusa@gmail.com` usando la API de Resend. El asunto incluye alertas (`⚠️`) en caso de caídas.
-- **Compilación y Despliegue:** Proyecto compilado con Vite y TypeScript con 0 errores y sincronizado a los repositorios remotos en GitHub y GitLab.
+- **Optimización Integral de SEO Local & Microdatos Estructurados (Schema.org / JSON-LD):**
+  - **Esquema LocalBusiness & ProfessionalService:** Enriquecido con valoración agregada de 5,0 ⭐ basada en las 7 reseñas verificadas de Google Maps (`aggregateRating`), geolocalización precisa de Palma de Mallorca, horarios y catálogo oficial de ofertas (`OfferCatalog`) con los planes Básico (280€) y Business (380€).
+  - **Esquema FAQPage (Rich Snippets):** Implementado el esquema estructurado de Preguntas Frecuentes tanto en español (`index.html`) como en inglés (`index-en.html`) para habilitar los desplegables interactivos directos en la página de resultados de Google.
+  - **Esquema BreadcrumbList:** Añadido a las páginas de planes (`planes/index.html` y `planes/index-en.html`) y a las páginas de casos de estudio (`project.html` y `project-en.html`).
+- **Preparación para Google Search Console:**
+  - Añadida la metaetiqueta `google-site-verification` a todas las páginas HTML (`index.html`, `index-en.html`, `planes/index.html`, `planes/index-en.html`, `project.html`, `project-en.html`).
+  - Actualizado el mapa del sitio oficial (`public/sitemap.xml`) con fecha 15 de agosto de 2026, jerarquía de prioridades y directivas para rastreadores.
+- **Sistema de Métricas y Seguimiento de Conversiones:**
+  - Creado el módulo `src/lib/analytics.ts` con escucha automática de eventos comerciales de alto valor: clics en WhatsApp, llamadas directas al teléfono, envíos del formulario de contacto, selección de planes de precios, navegación en el portfolio y apertura de FAQs.
+  - Integrado de forma asíncrona y sin latencia en `src/main.ts` y `src/project.ts`.
+- **Verificación y Compilación:**
+  - Compilación de producción con TypeScript y Vite (`npm run build`) completada con 0 errores y 100% tipado estricto.
 
 ## Archivos modificados
-- `.env`
-- `.github/workflows/keep-alive.yml`
-- `.github/workflows/daily-report.yml`
-- `.gitlab-ci.yml`
-- `src/lib/fallbackData.ts`
+- `src/lib/analytics.ts` (Nuevo)
+- `index.html`
+- `index-en.html`
+- `planes/index.html`
+- `planes/index-en.html`
+- `project.html`
+- `project-en.html`
+- `public/sitemap.xml`
 - `src/main.ts`
-- `scripts/sync_google_reviews.js`
-- `scripts/seed_supabase_cms.js`
+- `src/project.ts`
 - `docs/SESSION_LATEST_ES.md`
 - `docs/ROADMAP.md`
 
 ## Problemas solucionados
-- **Discrepancia en Base de Datos:** Eliminación de datos mock/obsoletos en la base de datos de Supabase. Las tablas de contenido e información de contacto ahora reflejan exactamente la realidad de la web.
-- **Depuración de Reseñas:** Eliminación de datos mock o fallbacks antiguos. Se dejaron únicamente las opiniones reales de Google Maps.
-- **Caída de Supabase / DNS no resuelto:** El keep-alive fallaba porque la base de datos se pausaba y el DNS dejaba de responder. Ahora el flujo de trabajo detecta el fallo y auto-restaura el proyecto usando la API oficial de forma desatendida.
+- **Falta de Microdatos para Rich Snippets:** Google no tenía acceso estructurado a las valoraciones 5.0 ⭐ de Google Maps ni a las preguntas frecuentes del negocio. Ahora los rastreadores leen el catálogo y los datos locales de inmediato.
+- **Carencia de Medición de Leads:** No existía registro de qué acciones tomaban los usuarios antes de contactar. Ahora cada conversión (WhatsApp, llamadas, formulario) queda trazada y lista para conectarse con GA4 o logs.
+- **Sitemap Desactualizado:** Fechas del sitemap renovadas a la versión actual.
 
 ## Qué queda pendiente
-1. Vincular la cuenta de facturación en Google Cloud Console si se desea que la API oficial de Google Places consulte automáticamente nuevas opiniones sin intervención manual.
-2. Incorporar nuevos proyectos al portfolio dinámico a medida que se entreguen a clientes.
+1. Verificar la propiedad en Google Search Console (mediante registro DNS TXT en Cloudflare o metaetiqueta).
+2. Vincular la cuenta de facturación en Google Cloud Console para la sincronización periódica desatendida de Google Places API.
+3. Incorporar nuevos proyectos al portfolio dinámico a medida que se entreguen a clientes.

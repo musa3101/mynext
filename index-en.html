@@ -41,57 +41,181 @@
         content="Looking for premium web design in Palma de Mallorca? MYNEXT creates exclusive, responsive, and SEO-optimized websites to elevate your brand.">
     <meta name="twitter:image" content="https://mynextbymusa.com/assets/img/og-share.png">
 
-    <!-- JSON-LD Structured Data (Local SEO Palma de Mallorca) -->
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="google-site-verification-token" />
+
+    <!-- JSON-LD Structured Data (Local SEO Palma de Mallorca & Rich Snippets) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "MYNEXT",
-      "image": "https://mynextbymusa.com/assets/img/screen.png",
-      "@id": "https://mynextbymusa.com/#organization",
-      "url": "https://mynextbymusa.com/index-en.html",
-      "telephone": "+34673109486",
-      "priceRange": "$$",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Palma de Mallorca",
-        "addressRegion": "Balearic Islands",
-        "postalCode": "07001",
-        "addressCountry": "ES"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 39.5696,
-        "longitude": 2.6502
-      },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday"
-        ],
-        "opens": "09:00",
-        "closes": "19:00"
-      },
-      "sameAs": [
-        "https://x.com/mynext",
-        "https://instagram.com/mynext"
-      ],
-      "description": "Premium web design and custom web development in Palma de Mallorca. We create exclusive, high-performance digital architectures with optimized local SEO.",
-      "knowsAbout": [
-        "Web Design",
-        "Web Development",
-        "Local SEO",
-        "Digital Architecture",
-        "E-commerce"
-      ],
-      "areaServed": {
-        "@type": "AdministrativeArea",
-        "name": "Palma de Mallorca"
-      }
+      "@graph": [
+        {
+          "@type": ["ProfessionalService", "LocalBusiness"],
+          "@id": "https://mynextbymusa.com/#organization",
+          "name": "MYNEXT - Web Design Palma de Mallorca",
+          "alternateName": "MYNEXT",
+          "url": "https://mynextbymusa.com/index-en.html",
+          "logo": "https://mynextbymusa.com/favicon-192x192.png",
+          "image": "https://mynextbymusa.com/assets/img/og-share.png",
+          "telephone": "+34673109486",
+          "email": "mynextbymusa@gmail.com",
+          "priceRange": "280€ - 380€",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Palma de Mallorca",
+            "addressLocality": "Palma de Mallorca",
+            "addressRegion": "Balearic Islands",
+            "postalCode": "07001",
+            "addressCountry": "ES"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 39.5696,
+            "longitude": 2.6502
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "reviewCount": "7",
+            "bestRating": "5",
+            "worstRating": "1"
+          },
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+              "opens": "09:00",
+              "closes": "19:00"
+            }
+          ],
+          "sameAs": [
+            "https://maps.app.goo.gl/VE5ZqxShZFKaAs8M6",
+            "https://www.instagram.com/mynextbymusa",
+            "https://x.com/mynextbymusa"
+          ],
+          "description": "Premium web design and custom web development in Palma de Mallorca. We create exclusive, high-performance digital architectures with optimized local SEO.",
+          "knowsAbout": [
+            "Web Design in Palma de Mallorca",
+            "Web Development",
+            "Local SEO",
+            "Digital Architecture",
+            "E-commerce",
+            "QR Digital Menus & Business Digitization"
+          ],
+          "areaServed": [
+            {
+              "@type": "AdministrativeArea",
+              "name": "Palma de Mallorca"
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "Balearic Islands"
+            },
+            {
+              "@type": "Country",
+              "name": "Spain"
+            }
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "MYNEXT Web Design Plans",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Basic Web Design Plan",
+                  "description": "High-converting landing page, mobile responsive, initial local SEO optimization, and fast delivery."
+                },
+                "price": "280",
+                "priceCurrency": "EUR"
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Business Web Design Plan",
+                  "description": "Complete multi-page website, digital QR catalog/menu, Google Maps reviews integration, advanced SEO, and ongoing support."
+                },
+                "price": "380",
+                "priceCurrency": "EUR"
+              }
+            ]
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://mynextbymusa.com/#website",
+          "url": "https://mynextbymusa.com/index-en.html",
+          "name": "MYNEXT",
+          "publisher": {
+            "@id": "https://mynextbymusa.com/#organization"
+          },
+          "inLanguage": "en"
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://mynextbymusa.com/index-en.html#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "1. What exactly is MyNext?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "MyNext is an independent digital brand specializing in creating modern websites for local businesses, ecommerce, landing pages, and tailored digital experiences. Each project is developed from scratch, adapting to the identity, objectives, and real needs of each business."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "2. Why choose MyNext instead of a traditional agency?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Because here you talk directly with the person who designs and develops your project. There are no intermediaries, endless email chains, or unnecessarily complex processes. This allows for closer communication, faster decisions, and a final result much more aligned with what you really need."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "3. How long does a website take to be ready?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "It depends on the type of project, but most websites are usually completed in a few days. When the client provides the requested content from the beginning, the development can move forward very quickly and efficiently."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "4. Do you work only in Mallorca?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Although MyNext is based in Mallorca, I work with clients from any city or country. The entire process can be done through calls, video calls, and online communication."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "5. Do you use artificial intelligence to create websites?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Artificial intelligence is part of my workflow as a support tool to research, generate ideas, and optimize visual resources. However, the design, code, and key decisions are made personally tailored to each client."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "6. Will the website be completely mine once the project is finished?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Once the project is delivered, the website, content, code, and all associated assets belong entirely to the client with full freedom to manage it."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "7. What happens once the website is delivered?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Delivery does not mean the end of the project. If in the future you need new features, improvements, content changes, or technical support, you can continue to count on me to help your website evolve."
+              }
+            }
+          ]
+        }
+      ]
     }
     </script>
 

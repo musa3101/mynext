@@ -5,10 +5,14 @@ import {
   fallbackTestimonials,
   fallbackSettings
 } from './lib/fallbackData';
+import { initAnalyticsListeners } from './lib/analytics';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
+
+// Inicializar seguimiento de conversiones y métricas
+initAnalyticsListeners();
 
 // Determine language based on html lang attribute
 const lang = (document.documentElement.lang === 'en' || window.location.pathname.includes('-en')) ? 'en' : 'es';

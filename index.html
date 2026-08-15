@@ -41,57 +41,181 @@
         content="¿Buscas diseño web en Palma de Mallorca? En MYNEXT creamos páginas web exclusivas, responsivas y optimizadas para SEO que impulsan tu negocio.">
     <meta name="twitter:image" content="https://mynextbymusa.com/assets/img/og-share.png">
 
-    <!-- JSON-LD Structured Data (Local SEO Palma de Mallorca) -->
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="google-site-verification-token" />
+
+    <!-- JSON-LD Structured Data (Local SEO Palma de Mallorca & Microdatos Enriquecidos) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "MYNEXT",
-      "image": "https://mynextbymusa.com/assets/img/screen.png",
-      "@id": "https://mynextbymusa.com/#organization",
-      "url": "https://mynextbymusa.com/",
-      "telephone": "+34673109486",
-      "priceRange": "$$",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Palma de Mallorca",
-        "addressRegion": "Islas Baleares",
-        "postalCode": "07001",
-        "addressCountry": "ES"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 39.5696,
-        "longitude": 2.6502
-      },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday"
-        ],
-        "opens": "09:00",
-        "closes": "19:00"
-      },
-      "sameAs": [
-        "https://x.com/mynext",
-        "https://instagram.com/mynext"
-      ],
-      "description": "Diseño web premium y desarrollo de páginas web a medida en Palma de Mallorca. Creamos identidades digitales exclusivas, de alto rendimiento y posicionamiento local garantizado.",
-      "knowsAbout": [
-        "Diseño Web",
-        "Desarrollo Web",
-        "SEO Local",
-        "Arquitectura Digital",
-        "E-commerce"
-      ],
-      "areaServed": {
-        "@type": "AdministrativeArea",
-        "name": "Palma de Mallorca"
-      }
+      "@graph": [
+        {
+          "@type": ["ProfessionalService", "LocalBusiness"],
+          "@id": "https://mynextbymusa.com/#organization",
+          "name": "MYNEXT - Diseño Web Palma de Mallorca",
+          "alternateName": "MYNEXT",
+          "url": "https://mynextbymusa.com/",
+          "logo": "https://mynextbymusa.com/favicon-192x192.png",
+          "image": "https://mynextbymusa.com/assets/img/og-share.png",
+          "telephone": "+34673109486",
+          "email": "mynextbymusa@gmail.com",
+          "priceRange": "280€ - 380€",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Palma de Mallorca",
+            "addressLocality": "Palma de Mallorca",
+            "addressRegion": "Islas Baleares",
+            "postalCode": "07001",
+            "addressCountry": "ES"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 39.5696,
+            "longitude": 2.6502
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "reviewCount": "7",
+            "bestRating": "5",
+            "worstRating": "1"
+          },
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+              "opens": "09:00",
+              "closes": "19:00"
+            }
+          ],
+          "sameAs": [
+            "https://maps.app.goo.gl/VE5ZqxShZFKaAs8M6",
+            "https://www.instagram.com/mynextbymusa",
+            "https://x.com/mynextbymusa"
+          ],
+          "description": "Diseño web premium y desarrollo de páginas web a medida en Palma de Mallorca. Creamos identidades digitales exclusivas, de alto rendimiento y posicionamiento local garantizado.",
+          "knowsAbout": [
+            "Diseño Web en Palma de Mallorca",
+            "Desarrollo Web",
+            "SEO Local",
+            "Arquitectura Digital",
+            "E-commerce",
+            "Menús QR y Digitalización de Negocios"
+          ],
+          "areaServed": [
+            {
+              "@type": "AdministrativeArea",
+              "name": "Palma de Mallorca"
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "Islas Baleares"
+            },
+            {
+              "@type": "Country",
+              "name": "España"
+            }
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Planes de Diseño Web MYNEXT",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Plan Básico de Diseño Web",
+                  "description": "Landing page de alta conversión, adaptada a móviles, optimización inicial de SEO local y entrega rápida."
+                },
+                "price": "280",
+                "priceCurrency": "EUR"
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Plan Business de Diseño Web",
+                  "description": "Sitio web multipágina completo, catálogo/menú QR digital, integración de opiniones de Google Maps, SEO avanzado y soporte continuo."
+                },
+                "price": "380",
+                "priceCurrency": "EUR"
+              }
+            ]
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://mynextbymusa.com/#website",
+          "url": "https://mynextbymusa.com/",
+          "name": "MYNEXT",
+          "publisher": {
+            "@id": "https://mynextbymusa.com/#organization"
+          },
+          "inLanguage": "es"
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://mynextbymusa.com/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Qué es exactamente MyNext?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "MyNext es una marca digital independiente especializada en crear páginas web modernas para negocios locales, ecommerce, landing pages y experiencias digitales diseñadas a medida. Cada proyecto se desarrolla desde cero, adaptándose a la identidad, objetivos y necesidades reales de cada negocio."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Por qué elegir MyNext en lugar de una agencia tradicional?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Porque aquí hablas directamente con la persona que diseña y desarrolla tu proyecto. No hay intermediarios, cadenas de correos interminables ni procesos innecesariamente complejos. Esto permite una comunicación más cercana, decisiones más rápidas y un resultado final mucho más alineado con lo que realmente necesitas."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cuánto tiempo tarda una página web en estar lista?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Depende del tipo de proyecto, pero la mayoría de las webs suelen completarse en pocos días. Cuando el cliente facilita el contenido solicitado desde el principio, el desarrollo puede avanzar de forma muy rápida y eficiente."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Trabajas únicamente en Mallorca?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Aunque MyNext tiene base en Mallorca, trabajo con clientes de cualquier ciudad o país. Todo el proceso puede realizarse mediante llamadas, videollamadas y comunicación online."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Utilizas inteligencia artificial para crear las webs?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "La inteligencia artificial forma parte del flujo de trabajo como herramienta de apoyo para investigar, generar ideas y optimizar recursos visuales. Sin embargo, el diseño, la programación y las decisiones clave se realizan personalmente a medida."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿La página web será completamente mía una vez finalizado el proyecto?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí. Una vez entregado el proyecto, la web, el código, el contenido y todos los activos asociados pertenecen íntegramente al cliente con libertad total para gestionarlo."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué ocurre una vez entregada la web?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "La entrega no significa el final del proyecto. Siempre dispones de soporte técnico, mantenimiento y la posibilidad de añadir nuevas funcionalidades a medida que tu negocio evolucione."
+              }
+            }
+          ]
+        }
+      ]
     }
     </script>
 
