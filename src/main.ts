@@ -134,6 +134,34 @@ function initRevealAnimations() {
       }
     );
   });
+
+  // Dynamic Spotlight Mouse Tracker (uipro-max & gpt-taste)
+  initCardSpotlight();
+}
+
+// Dynamic Interactive Spotlight Mouse Tracker (uipro-max & gpt-taste)
+function initCardSpotlight() {
+  const cards = document.querySelectorAll<HTMLElement>(
+    '.spotlight-card, .process-card, .service-card, .review-card, [data-spotlight], .group\\/bento, .card-lit, #reviews [class*="rounded-[2.5rem]"], article'
+  );
+
+  cards.forEach(card => {
+    if ((card as any).__spotlightInit) return;
+    (card as any).__spotlightInit = true;
+
+    card.addEventListener('mousemove', (e: MouseEvent) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    }, { passive: true });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.setProperty('--mouse-x', `-999px`);
+      card.style.setProperty('--mouse-y', `-999px`);
+    }, { passive: true });
+  });
 }
 
 // FAQ Accordion Logic
@@ -200,7 +228,7 @@ if (!isFromPlanes && !window.location.hash) {
   window.scrollTo(0, 0);
 }
 
-// --- Render Dynamic Google Reviews ---
+// --- Render Dynamic Google Reviews (21st.dev Inspired Architecture) ---
 function renderDynamicGoogleReviews(reviewsList: any[]) {
   if (!reviewsList || reviewsList.length === 0) return;
   const marqueeTracks = document.querySelectorAll('.reviews-slider-container .animate-marquee');
@@ -209,78 +237,67 @@ function renderDynamicGoogleReviews(reviewsList: any[]) {
   const buildCardHtml = (r: any) => {
     const name = r.name || r.client_name || 'Cliente Verificado';
     const rawContent = (lang === 'en' ? (r.content_en || r.content_es || r.content || r.testimonial) : (r.content_es || r.content || r.testimonial)) || '';
-    const content = getTranslation(rawContent, lang as 'es' | 'en');
-    const rawCompany = r.company || r.position || r.relative_time || 'Cliente MYNEXT';
+    const hasText = Boolean(rawContent && rawContent.trim().length > 0);
+    const content = hasText ? getTranslation(rawContent, lang as 'es' | 'en') : '';
+    const rawCompany = r.company || r.position || r.relative_time || (lang === 'en' ? 'Verified Client' : 'Cliente Verificado');
     const company = getTranslation(rawCompany, lang as 'es' | 'en');
     const ratingStars = '★'.repeat(r.rating || 5);
     const photo = r.author_photo || r.image_url;
 
     const avatarHtml = (photo && photo.startsWith('http'))
       ? `<img src="${photo}" alt="${name}" class="w-full h-full object-cover rounded-full" />`
-      : (name ? name.charAt(0).toUpperCase() : 'G');
+      : `<span class="text-electric-cyan font-bold font-headline text-sm">${name ? name.charAt(0).toUpperCase() : 'G'}</span>`;
 
-    if (!content) {
-      return `
-        <div class="relative w-[280px] md:w-[320px] shrink-0 p-8 flex flex-col justify-center items-center text-center rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/5 backdrop-blur-xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500">
-            <div class="absolute inset-0 bg-gradient-to-t from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <div class="relative z-10 flex flex-col items-center">
-                <div class="mb-5 flex items-center justify-center w-10 h-10 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm shadow-lg">
-                    <svg width="16" height="16" viewBox="0 0 24 24">
-                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-                    </svg>
-                </div>
-                <div class="flex text-yellow-400 text-xl drop-shadow-[0_0_12px_rgba(250,204,21,0.6)] mb-6">${ratingStars}</div>
-                <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-cyan-500/20 to-purple-500/20 border border-electric-cyan/30 flex items-center justify-center text-electric-cyan font-bold font-headline text-lg overflow-hidden mb-4">
-                    ${avatarHtml}
-                </div>
-                <span class="text-white font-headline text-[15px] font-semibold tracking-wide">${name}</span>
-                <span class="text-slate-500 text-[10px] uppercase tracking-widest font-medium mt-2">${company}</span>
-            </div>
-        </div>
-      `;
-    }
+    const bodyHtml = hasText
+      ? `<p class="relative z-10 text-[14px] md:text-[15px] text-white/85 font-light leading-relaxed italic my-auto line-clamp-4">
+            "${content}"
+         </p>`
+      : `<div class="relative z-10 my-auto flex flex-col items-center justify-center py-6 text-center">
+            <div class="flex text-amber-400 text-2xl drop-shadow-[0_0_12px_rgba(251,191,36,0.7)] tracking-widest">${ratingStars}</div>
+         </div>`;
 
     return `
-      <div class="relative w-[360px] md:w-[450px] shrink-0 p-8 md:p-10 rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/10 backdrop-blur-2xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500">
-          <div class="absolute inset-0 bg-gradient-to-br from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          <svg class="absolute top-6 right-6 w-12 h-12 text-white/3 group-hover:text-electric-cyan/10 transition-colors duration-500" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+      <div class="spotlight-card review-card relative w-[340px] sm:w-[380px] md:w-[420px] shrink-0 p-7 md:p-8 flex flex-col justify-between rounded-[2rem] bg-[#0c0c16]/75 border border-white/10 backdrop-blur-2xl overflow-hidden group hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(0,242,255,0.12)] hover:border-electric-cyan/40 transition-all duration-500 min-h-[290px]">
+          <div class="absolute inset-0 bg-gradient-to-br from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+          
+          <!-- Watermark Quote Icon -->
+          <svg class="absolute top-5 right-5 w-10 h-10 text-white/[0.03] group-hover:text-electric-cyan/10 transition-colors duration-500 pointer-events-none" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
               <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
           </svg>
-          <div class="relative z-10">
-              <div class="flex items-center justify-between mb-6">
-                  <div class="flex flex-col gap-1">
-                      <div class="flex text-yellow-400 text-lg drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]">${ratingStars}</div>
-                      <span class="text-[9px] text-emerald-400 font-headline uppercase tracking-widest font-bold flex items-center gap-1">
-                          <svg class="w-3.5 h-3.5 fill-emerald-400" viewBox="0 0 20 20">
-                              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                          </svg>
-                          Reseña Verificada
-                      </span>
-                  </div>
-                  <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
-                      <svg width="12" height="12" viewBox="0 0 24 24">
-                          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+
+          <!-- Top Meta Row -->
+          <div class="relative z-10 flex items-center justify-between gap-2 mb-4">
+              <div class="flex items-center gap-2">
+                  <div class="flex text-amber-400 text-sm tracking-wider drop-shadow-[0_0_8px_rgba(251,191,36,0.6)]">${ratingStars}</div>
+                  <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[9px] text-emerald-400 font-headline uppercase tracking-widest font-semibold">
+                      <svg class="w-3 h-3 fill-emerald-400 shrink-0" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                       </svg>
-                      <span class="text-white/60 text-[9px] uppercase tracking-widest font-semibold font-headline">Google</span>
-                  </div>
+                      ${lang === 'en' ? 'Verified' : 'Verificada'}
+                  </span>
               </div>
-              <p class="text-[15px] md:text-[16px] text-slate-200 font-light mb-8 leading-relaxed italic">
-                  "${content}"
-              </p>
-              <div class="flex items-center gap-4 border-t border-white/5 pt-6">
-                  <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-cyan-500/20 to-purple-500/20 border border-electric-cyan/30 flex items-center justify-center text-electric-cyan font-bold font-headline text-sm overflow-hidden shrink-0">
-                      ${avatarHtml}
-                  </div>
-                  <div>
-                      <h4 class="text-white font-headline font-bold text-sm tracking-wide">${name}</h4>
-                      <p class="text-xs text-slate-400 font-headline uppercase tracking-wider">${company}</p>
-                  </div>
+              <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-sm shadow-sm shrink-0">
+                  <svg width="12" height="12" viewBox="0 0 24 24" class="shrink-0">
+                      <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                      <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                      <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                      <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                  </svg>
+                  <span class="text-white/60 text-[9px] uppercase tracking-widest font-semibold font-headline">Google</span>
+              </div>
+          </div>
+
+          <!-- Review Body (or Star-only clean display) -->
+          ${bodyHtml}
+
+          <!-- Author Bottom Row -->
+          <div class="relative z-10 flex items-center gap-3.5 border-t border-white/5 pt-4 mt-4">
+              <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-cyan-500/20 to-purple-500/20 border border-electric-cyan/30 flex items-center justify-center overflow-hidden shrink-0 shadow-[0_0_12px_rgba(0,242,255,0.15)]">
+                  ${avatarHtml}
+              </div>
+              <div class="min-w-0 flex-1">
+                  <h4 class="text-white font-headline font-bold text-[14px] tracking-wide truncate">${name}</h4>
+                  <p class="text-[11px] text-slate-400 font-headline uppercase tracking-wider truncate">${company}</p>
               </div>
           </div>
       </div>
@@ -293,21 +310,35 @@ function renderDynamicGoogleReviews(reviewsList: any[]) {
   marqueeTracks.forEach(track => {
     track.innerHTML = fullHtml;
   });
+
+  // Attach spotlight listeners to freshly rendered review cards
+  initCardSpotlight();
 }
 
-// --- Draggable Marquee ---
+// --- Draggable & Touch Smooth Marquee ---
 function initDraggableMarquee() {
   const containers = document.querySelectorAll('.reviews-slider-container');
   containers.forEach((container: any) => {
+    if (container.dataset.marqueeInit === 'true') return;
+    container.dataset.marqueeInit = 'true';
+
     const slider = container.querySelector('.animate-marquee');
     if (!slider) return;
 
-    let isDown = false;
+    let isDragging = false;
+    let isInteracting = false;
     let startX = 0;
-    let scrollLeft = 0;
-    let scrollSpeed = 0.5; // pixels per frame
+    let startY = 0;
+    let lastX = 0;
+    let lastTime = 0;
+    let velocityX = 0;
+    let totalDrag = 0;
+    let directionLocked: 'horizontal' | 'vertical' | null = null;
+    let momentumId = 0;
     let animationId = 0;
-    let isPaused = false;
+    let resumeTimer: any = null;
+
+    const baseAutoSpeed = 0.5; // Smooth ambient scroll
 
     let isVisible = true;
     const observer = new IntersectionObserver((entries) => {
@@ -317,148 +348,211 @@ function initDraggableMarquee() {
     }, { threshold: 0.05 });
     observer.observe(container);
 
-    // Reset loop when reaching the end (duplicate content creates seamless loop)
-    function autoScroll() {
-      if (!isPaused && !isDown && isVisible) {
-        container.scrollLeft += scrollSpeed;
-        if (container.scrollLeft >= slider.scrollWidth / 2) {
-          container.scrollLeft = 0;
-        }
+    // Infinite wrap helper without any jump
+    const wrapScroll = () => {
+      const halfWidth = slider.scrollWidth / 2;
+      if (halfWidth <= 0) return;
+      if (container.scrollLeft >= halfWidth) {
+        container.scrollLeft -= halfWidth;
+      } else if (container.scrollLeft < 0) {
+        container.scrollLeft += halfWidth;
+      }
+    };
+
+    // Auto-scroll loop
+    const autoScroll = () => {
+      if (!isInteracting && !isDragging && isVisible && document.visibilityState === 'visible') {
+        container.scrollLeft += baseAutoSpeed;
+        wrapScroll();
       }
       animationId = requestAnimationFrame(autoScroll);
-    }
+    };
 
-    // Start auto-scroll
     animationId = requestAnimationFrame(autoScroll);
 
-    // Mouse events for drag
-    container.addEventListener('mousedown', (e: MouseEvent) => {
-      isDown = true;
-      isPaused = true;
+    // Smooth momentum glide after swipe release
+    const startMomentum = (initV: number) => {
+      cancelAnimationFrame(momentumId);
+      let v = initV;
+      const friction = 0.94;
+
+      const stepMomentum = () => {
+        if (Math.abs(v) > 0.05 && !isDragging) {
+          container.scrollLeft -= v;
+          wrapScroll();
+          v *= friction;
+          momentumId = requestAnimationFrame(stepMomentum);
+        } else {
+          scheduleAutoplayResume(800);
+        }
+      };
+
+      momentumId = requestAnimationFrame(stepMomentum);
+    };
+
+    const scheduleAutoplayResume = (delay = 1200) => {
+      clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(() => {
+        if (!isDragging) {
+          isInteracting = false;
+        }
+      }, delay);
+    };
+
+    // Gesture Handlers
+    const handleStart = (clientX: number, clientY: number) => {
+      cancelAnimationFrame(momentumId);
+      clearTimeout(resumeTimer);
+      isDragging = true;
+      isInteracting = true;
+      startX = clientX;
+      startY = clientY;
+      lastX = clientX;
+      lastTime = performance.now();
+      velocityX = 0;
+      totalDrag = 0;
+      directionLocked = null;
       container.classList.add('active-dragging');
-      startX = e.pageX - container.offsetLeft;
-      scrollLeft = container.scrollLeft;
-      container.style.scrollBehavior = 'auto'; // Disable smooth scroll while dragging
-    });
-
-    container.addEventListener('mouseleave', () => {
-      if (isDown) {
-        isDown = false;
-        isPaused = false;
-        container.classList.remove('active-dragging');
-      }
-    });
-
-    container.addEventListener('mouseup', () => {
-      if (isDown) {
-        isDown = false;
-        isPaused = false;
-        container.classList.remove('active-dragging');
-      }
-    });
-
-    container.addEventListener('mousemove', (e: MouseEvent) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - container.offsetLeft;
-      const walk = (x - startX) * 1.5; // Scroll speed multiplier
-      container.scrollLeft = scrollLeft - walk;
-      
-      // Wrap around scrolling
-      if (container.scrollLeft >= slider.scrollWidth / 2) {
-        container.scrollLeft = 0;
-        startX = e.pageX - container.offsetLeft;
-        scrollLeft = 0;
-      } else if (container.scrollLeft <= 0) {
-        container.scrollLeft = slider.scrollWidth / 2;
-        startX = e.pageX - container.offsetLeft;
-        scrollLeft = slider.scrollWidth / 2;
-      }
-    });
-
-    // Touch events for mobile swipe (direction-lock for iOS Safari)
-    let touchStartY = 0;
-    let directionLocked: 'horizontal' | 'vertical' | null = null;
-
-    container.addEventListener('touchstart', (e: TouchEvent) => {
-      isDown = true;
-      isPaused = true;
-      startX = e.touches[0].pageX - container.offsetLeft;
-      touchStartY = e.touches[0].pageY;
-      scrollLeft = container.scrollLeft;
-      directionLocked = null;
       container.style.scrollBehavior = 'auto';
-    }, { passive: true });
+    };
 
-    container.addEventListener('touchend', () => {
-      isDown = false;
-      isPaused = false;
-      directionLocked = null;
-    });
+    const handleMove = (clientX: number, clientY: number, e?: Event) => {
+      if (!isDragging) return;
 
-    container.addEventListener('touchmove', (e: TouchEvent) => {
-      if (!isDown) return;
+      const now = performance.now();
+      const dt = Math.max(1, now - lastTime);
+      const deltaX = clientX - lastX;
+      const totalDx = Math.abs(clientX - startX);
+      const totalDy = Math.abs(clientY - startY);
 
-      const currentX = e.touches[0].pageX;
-      const currentY = e.touches[0].pageY;
-
-      // Direction lock: decide once whether the gesture is horizontal or vertical
-      if (!directionLocked) {
-        const dx = Math.abs(currentX - (startX + container.offsetLeft));
-        const dy = Math.abs(currentY - touchStartY);
-        if (dx + dy > 10) { // threshold to decide
-          directionLocked = dx > dy ? 'horizontal' : 'vertical';
+      // Lock direction on touch gesture
+      if (!directionLocked && (totalDx > 6 || totalDy > 6)) {
+        if (totalDy > totalDx * 1.1) {
+          directionLocked = 'vertical';
+          isDragging = false;
+          container.classList.remove('active-dragging');
+          scheduleAutoplayResume(400);
+          return;
+        } else {
+          directionLocked = 'horizontal';
         }
       }
 
-      // If vertical, let the page scroll naturally
       if (directionLocked === 'vertical') return;
 
-      // Horizontal: prevent page scroll and move the carousel
-      if (directionLocked === 'horizontal') {
+      if (directionLocked === 'horizontal' && e && e.cancelable) {
         e.preventDefault();
       }
 
-      const x = currentX - container.offsetLeft;
-      const walk = (x - startX) * 1.5;
-      container.scrollLeft = scrollLeft - walk;
-      
-      if (container.scrollLeft >= slider.scrollWidth / 2) {
-        container.scrollLeft = 0;
-        startX = e.touches[0].pageX - container.offsetLeft;
-        scrollLeft = 0;
-      } else if (container.scrollLeft <= 0) {
-        container.scrollLeft = slider.scrollWidth / 2;
-        startX = e.touches[0].pageX - container.offsetLeft;
-        scrollLeft = slider.scrollWidth / 2;
+      totalDrag += Math.abs(deltaX);
+      velocityX = (deltaX / dt) * 14;
+
+      container.scrollLeft -= deltaX;
+      wrapScroll();
+
+      lastX = clientX;
+      lastTime = now;
+    };
+
+    const handleEnd = () => {
+      if (!isDragging) return;
+      isDragging = false;
+      container.classList.remove('active-dragging');
+
+      if (Math.abs(velocityX) > 0.4) {
+        startMomentum(velocityX);
+      } else {
+        scheduleAutoplayResume(1000);
+      }
+    };
+
+    const handleCancel = () => {
+      isDragging = false;
+      container.classList.remove('active-dragging');
+      scheduleAutoplayResume(400);
+    };
+
+    // Mobile Touch Events
+    container.addEventListener('touchstart', (e: TouchEvent) => {
+      if (e.touches.length === 1) {
+        handleStart(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    }, { passive: true });
+
+    container.addEventListener('touchmove', (e: TouchEvent) => {
+      if (e.touches.length === 1) {
+        handleMove(e.touches[0].clientX, e.touches[0].clientY, e);
       }
     }, { passive: false });
 
-    // Hover events to pause auto scroll
+    container.addEventListener('touchend', handleEnd, { passive: true });
+    container.addEventListener('touchcancel', handleCancel, { passive: true });
+
+    // Desktop Mouse Drag Events
+    container.addEventListener('mousedown', (e: MouseEvent) => {
+      if (e.button !== 0) return;
+      handleStart(e.clientX, e.clientY);
+    });
+
+    window.addEventListener('mousemove', (e: MouseEvent) => {
+      if (isDragging) {
+        handleMove(e.clientX, e.clientY, e);
+      }
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (isDragging) {
+        handleEnd();
+      }
+    });
+
+    // Hover pauses auto-scroll on desktop
     container.addEventListener('mouseenter', () => {
-      isPaused = true;
+      if (!isDragging) isInteracting = true;
     });
 
     container.addEventListener('mouseleave', () => {
-      if (!isDown) {
-        isPaused = false;
-      }
+      if (!isDragging) scheduleAutoplayResume(400);
     });
+
+    // Prevent clicking link during drag gesture
+    container.addEventListener('click', (e: MouseEvent) => {
+      if (totalDrag > 8) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
   });
 }
 
 // Initialize all DOM contents safely
 async function initMain() {
-  // --- A. Dynamic Data Fetch & Render ---
-  let projects = fallbackProjects;
-  let testimonials = fallbackTestimonials;
-  let settings: Record<string, string> = fallbackSettings;
+  // --- A. Dynamic Data Fetch & Render with Session Caching ---
+  const CACHE_KEY = 'mynext_cms_cache_v3';
+  const CACHE_TTL = 10 * 60 * 1000; // 10 minutes TTL
 
-  // Render fallback reviews immediately by default (will be overwritten if Supabase succeeds)
-  const initialGoogleReviews = fallbackTestimonials.filter((t: any) => t.source === 'google' || t.google_review_id);
+  let cachedData: any = null;
+  try {
+    const raw = sessionStorage.getItem(CACHE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Date.now() - parsed.timestamp < CACHE_TTL) {
+        cachedData = parsed.data;
+      }
+    }
+  } catch (e) {
+    // sessionStorage disabled or unavailable
+  }
+
+  let projects = cachedData?.projects || fallbackProjects;
+  let testimonials = cachedData?.testimonials || fallbackTestimonials;
+  let settings: Record<string, string> = cachedData?.settings || fallbackSettings;
+
+  // Render initial reviews immediately by default (cached or fallback)
+  const initialGoogleReviews = testimonials.filter((t: any) => t.source === 'google' || t.google_review_id);
   renderDynamicGoogleReviews(initialGoogleReviews);
 
-  // Attempt to fetch from Supabase
+  // Attempt to fetch fresh data from Supabase
   if (supabase) {
     try {
       const [projectsRes, testimonialsRes, settingsRes, contactRes, heroRes, aboutRes, faqRes] = await Promise.all([
@@ -552,6 +646,16 @@ async function initMain() {
       // Apply any dynamic HTML content automatically
       applyDynamicSettings(settings, lang as 'es' | 'en');
 
+      // Cache successful response in sessionStorage for instant subsequent loads
+      try {
+        sessionStorage.setItem(CACHE_KEY, JSON.stringify({
+          timestamp: Date.now(),
+          data: { projects, testimonials, settings }
+        }));
+      } catch (e) {
+        // quota exceeded or private browsing mode
+      }
+
     } catch (err) {
       console.error('Error fetching Supabase data, using local fallback:', err);
     }
@@ -605,8 +709,13 @@ async function initMain() {
       article.style.containIntrinsicSize = '380px 280px';
 
       const projectSlug = proj.slug || proj.title.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-      const projectUrl = `project.html?slug=${projectSlug}`;
+      const projectUrl = lang === 'en' ? `project-en.html?slug=${projectSlug}` : `project.html?slug=${projectSlug}`;
       const btnText = lang === 'en' ? 'More Info →' : 'Más Info →';
+
+      let projImageUrl = proj.image_url || '';
+      if (projImageUrl.includes('/portfolio/') && projImageUrl.endsWith('.png')) {
+        projImageUrl = projImageUrl.replace('.png', '.webp');
+      }
 
       // Determine category label for the project dynamically from Supabase
       const getCategoryLabel = (p: any, l: string) => {
@@ -629,9 +738,9 @@ async function initMain() {
       const isPriority = idx < 2;
 
       article.innerHTML = `
-        <div class="group relative aspect-[16/10] rounded-3xl overflow-hidden glass-panel border border-white/10 transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-[0_0_50px_rgba(0,242,255,0.2)]">
+        <div class="group spotlight-card relative aspect-[16/10] rounded-3xl overflow-hidden glass-panel border border-white/10 transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-[0_0_50px_rgba(0,242,255,0.2)]">
           <div class="absolute inset-0 bg-[#06060c] overflow-hidden flex items-center justify-center cursor-pointer" onclick="window.location.href='${projectUrl}'">
-            <img src="${proj.image_url}" alt="${lang === 'en' ? `Premium web design in Mallorca - Preview of ${proj.title}` : `Diseño web premium en Mallorca - Vista previa de ${proj.title}`}" loading="${isPriority ? 'eager' : 'lazy'}" decoding="async" fetchpriority="${isPriority ? 'high' : 'low'}"
+            <img src="${projImageUrl}" alt="${lang === 'en' ? `Premium web design in Mallorca - Preview of ${proj.title}` : `Diseño web premium en Mallorca - Vista previa de ${proj.title}`}" loading="${isPriority ? 'eager' : 'lazy'}" decoding="async" fetchpriority="${isPriority ? 'high' : 'low'}"
               class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.05]">
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity duration-500"></div>
             <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center z-20 backdrop-blur-sm">
@@ -1382,15 +1491,16 @@ if (document.readyState === 'loading') {
   initMain();
 }
 
-// --- Scroll position navigation compact control ---
-let lastScrollY = window.scrollY;
+// --- Scroll position navigation compact control (Throttled with state checks) ---
 const navBar = document.getElementById('nav-container');
 const navL = document.getElementById('nav-left');
 const navC = document.getElementById('nav-logo');
 const navR = document.getElementById('nav-right');
+let isNavCompact = false;
 
 function setNavAtTop() {
-  if (!navBar || !navL || !navC || !navR) return;
+  if (!navBar || !navL || !navC || !navR || !isNavCompact) return;
+  isNavCompact = false;
   navBar.classList.remove('opacity-0', 'nav-compact');
   navBar.classList.add('nav-at-top');
   navL.classList.replace('-translate-x-[150%]', 'translate-x-0');
@@ -1401,7 +1511,8 @@ function setNavAtTop() {
 }
 
 function setNavCompact() {
-  if (!navBar || !navL || !navC || !navR) return;
+  if (!navBar || !navL || !navC || !navR || isNavCompact) return;
+  isNavCompact = true;
   navBar.classList.remove('opacity-0', 'nav-at-top');
   navBar.classList.add('nav-compact');
   navL.classList.replace('-translate-x-[150%]', 'translate-x-0');
@@ -1409,34 +1520,51 @@ function setNavCompact() {
   navR.classList.replace('translate-x-[150%]', 'translate-x-0');
 }
 
-window.addEventListener('scroll', () => {
-  const currentScrollY = window.scrollY;
-  if (currentScrollY < 80) {
-    setNavAtTop();
-  } else {
-    setNavCompact();
-  }
-  lastScrollY = currentScrollY;
-}, { passive: true });
-
-// --- Neon Frame active on top only ---
-const neonFrame = document.getElementById('neon-frame');
-if (neonFrame) {
-  setTimeout(() => {
-    if (window.scrollY < 50) {
-      neonFrame.classList.add('neon-frame-active');
-    }
-  }, 1000);
-
-  window.addEventListener('scroll', () => {
-    const isAtTop = window.scrollY < 50;
-    if (isAtTop) {
-      neonFrame.classList.add('neon-frame-active');
-    } else {
-      neonFrame.classList.remove('neon-frame-active');
-    }
-  }, { passive: true });
+// Initial state check
+if (window.scrollY >= 80) {
+  isNavCompact = false; // force transition
+  setNavCompact();
 }
+
+let scrollTicking = false;
+const neonFrame = document.getElementById('neon-frame');
+let isNeonActive = false;
+
+if (neonFrame && window.scrollY < 50) {
+  isNeonActive = true;
+  neonFrame.classList.add('neon-frame-active');
+}
+
+window.addEventListener('scroll', () => {
+  if (!scrollTicking) {
+    window.requestAnimationFrame(() => {
+      const scrollY = window.scrollY;
+
+      // Nav bar compact toggle (only when crossing 80px boundary)
+      if (scrollY < 80) {
+        setNavAtTop();
+      } else {
+        setNavCompact();
+      }
+
+      // Neon frame toggle (only when crossing 50px boundary)
+      if (neonFrame) {
+        const shouldBeActive = scrollY < 50;
+        if (shouldBeActive !== isNeonActive) {
+          isNeonActive = shouldBeActive;
+          if (shouldBeActive) {
+            neonFrame.classList.add('neon-frame-active');
+          } else {
+            neonFrame.classList.remove('neon-frame-active');
+          }
+        }
+      }
+
+      scrollTicking = false;
+    });
+    scrollTicking = true;
+  }
+}, { passive: true });
 
 // --- K. Liquid Vanilla JS Cursor (desktop only — skip on touch devices) ---
 const liquidCursor = document.getElementById('liquid-cursor');

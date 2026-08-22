@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-08-15T19:39:29.747Z",
+  "timestamp": "2026-08-22T18:35:53.533Z",
   "pages": [
     {
       "page": "Home-ES",
@@ -8,16 +8,16 @@
       "consoleWarnings": [],
       "failedRequests": [],
       "performance": {
-        "navLoadTimeMs": 1712,
-        "fcpMs": 304,
-        "domInteractiveMs": 234,
-        "domCompleteMs": 446,
-        "resourceCount": 26,
-        "totalTransferKb": 2557,
+        "navLoadTimeMs": 2206,
+        "fcpMs": 428,
+        "domInteractiveMs": 365,
+        "domCompleteMs": 735,
+        "resourceCount": 28,
+        "totalTransferKb": 2085,
         "scrollSmoothness": {
-          "totalFrames": 93,
-          "jankFrames": 0,
-          "smoothnessScore": 100
+          "totalFrames": 67,
+          "jankFrames": 9,
+          "smoothnessScore": 87
         }
       },
       "overflowIssues": [
@@ -166,7 +166,7 @@
         "faqAccordion": {
           "found": true,
           "clicked": true,
-          "heightDelta": 185
+          "heightDelta": 312
         },
         "mobileMenu": {
           "found": true,
@@ -199,16 +199,16 @@
       "consoleWarnings": [],
       "failedRequests": [],
       "performance": {
-        "navLoadTimeMs": 1588,
+        "navLoadTimeMs": 1352,
         "fcpMs": 144,
-        "domInteractiveMs": 89,
-        "domCompleteMs": 139,
-        "resourceCount": 25,
-        "totalTransferKb": 272,
+        "domInteractiveMs": 95,
+        "domCompleteMs": 132,
+        "resourceCount": 27,
+        "totalTransferKb": 273,
         "scrollSmoothness": {
-          "totalFrames": 89,
-          "jankFrames": 9,
-          "smoothnessScore": 90
+          "totalFrames": 77,
+          "jankFrames": 1,
+          "smoothnessScore": 99
         }
       },
       "overflowIssues": [
@@ -289,31 +289,31 @@
               "tag": "article",
               "id": null,
               "className": "flex-none w-[80vw] md:w-[45vw] lg:w-[35vw] xl:w-[3",
-              "overflowPx": 24
+              "overflowPx": 23
             },
             {
               "tag": "div",
               "id": null,
               "className": "group relative aspect-[16/10] rounded-3xl overflow",
-              "overflowPx": 24
+              "overflowPx": 23
             },
             {
               "tag": "div",
               "id": null,
               "className": "absolute inset-0 bg-[#06060c] overflow-hidden flex",
-              "overflowPx": 23
+              "overflowPx": 22
             },
             {
               "tag": "img",
               "id": null,
               "className": "w-full h-full object-cover transition-transform du",
-              "overflowPx": 23
+              "overflowPx": 22
             },
             {
               "tag": "div",
               "id": null,
               "className": "absolute inset-0 bg-gradient-to-t from-black/60 vi",
-              "overflowPx": 23
+              "overflowPx": 22
             }
           ]
         },
@@ -324,31 +324,31 @@
               "tag": "article",
               "id": null,
               "className": "flex-none w-[80vw] md:w-[45vw] lg:w-[35vw] xl:w-[3",
-              "overflowPx": 306
+              "overflowPx": 268
             },
             {
               "tag": "div",
               "id": null,
               "className": "group relative aspect-[16/10] rounded-3xl overflow",
-              "overflowPx": 306
+              "overflowPx": 268
             },
             {
               "tag": "div",
               "id": null,
               "className": "absolute inset-0 bg-[#06060c] overflow-hidden flex",
-              "overflowPx": 305
+              "overflowPx": 267
             },
             {
               "tag": "img",
               "id": null,
               "className": "w-full h-full object-cover transition-transform du",
-              "overflowPx": 305
+              "overflowPx": 267
             },
             {
               "tag": "div",
               "id": null,
               "className": "absolute inset-0 bg-gradient-to-t from-black/60 vi",
-              "overflowPx": 305
+              "overflowPx": 267
             }
           ]
         }
@@ -357,7 +357,7 @@
         "faqAccordion": {
           "found": true,
           "clicked": true,
-          "heightDelta": 185
+          "heightDelta": 332
         },
         "mobileMenu": {
           "found": true,
@@ -390,16 +390,16 @@
       "consoleWarnings": [],
       "failedRequests": [],
       "performance": {
-        "navLoadTimeMs": 807,
-        "fcpMs": 132,
-        "domInteractiveMs": 87,
-        "domCompleteMs": 127,
-        "resourceCount": 15,
+        "navLoadTimeMs": 870,
+        "fcpMs": 144,
+        "domInteractiveMs": 97,
+        "domCompleteMs": 141,
+        "resourceCount": 17,
         "totalTransferKb": 83,
         "scrollSmoothness": {
-          "totalFrames": 45,
-          "jankFrames": 0,
-          "smoothnessScore": 100
+          "totalFrames": 42,
+          "jankFrames": 1,
+          "smoothnessScore": 98
         }
       },
       "overflowIssues": [
@@ -410,31 +410,19 @@
               "tag": "div",
               "id": null,
               "className": "cloud cloud2",
-              "overflowPx": 190
+              "overflowPx": 183
             },
             {
               "tag": "div",
               "id": null,
               "className": "cloud cloud3",
-              "overflowPx": 550
+              "overflowPx": 545
             },
             {
               "tag": "div",
               "id": null,
               "className": "cloud cloud5",
-              "overflowPx": 88
-            },
-            {
-              "tag": "span",
-              "id": null,
-              "className": null,
-              "overflowPx": 447
-            },
-            {
-              "tag": "span",
-              "id": null,
-              "className": null,
-              "overflowPx": 575
+              "overflowPx": 80
             }
           ]
         },
@@ -480,31 +468,31 @@
               "tag": "div",
               "id": null,
               "className": "cloud cloud1",
-              "overflowPx": 956
+              "overflowPx": 959
             },
             {
               "tag": "div",
               "id": null,
               "className": "cloud cloud2",
-              "overflowPx": 1256
+              "overflowPx": 1258
             },
             {
               "tag": "div",
               "id": null,
               "className": "cloud cloud3",
-              "overflowPx": 1611
+              "overflowPx": 1613
             },
             {
               "tag": "div",
               "id": null,
               "className": "cloud cloud4",
-              "overflowPx": 720
+              "overflowPx": 721
             },
             {
               "tag": "div",
               "id": null,
               "className": "cloud cloud5",
-              "overflowPx": 1158
+              "overflowPx": 1160
             }
           ]
         },
@@ -515,31 +503,31 @@
               "tag": "div",
               "id": null,
               "className": "cloud cloud1",
-              "overflowPx": 907
+              "overflowPx": 915
             },
             {
               "tag": "div",
               "id": null,
               "className": "cloud cloud2",
-              "overflowPx": 1235
+              "overflowPx": 1240
             },
             {
               "tag": "div",
               "id": null,
               "className": "cloud cloud3",
-              "overflowPx": 1603
+              "overflowPx": 1607
             },
             {
               "tag": "div",
               "id": null,
               "className": "cloud cloud4",
-              "overflowPx": 705
+              "overflowPx": 710
             },
             {
               "tag": "div",
               "id": null,
               "className": "cloud cloud5",
-              "overflowPx": 1127
+              "overflowPx": 1133
             }
           ]
         }
@@ -571,14 +559,14 @@
       "consoleWarnings": [],
       "failedRequests": [],
       "performance": {
-        "navLoadTimeMs": 779,
-        "fcpMs": 84,
-        "domInteractiveMs": 29,
-        "domCompleteMs": 65,
-        "resourceCount": 15,
-        "totalTransferKb": 2,
+        "navLoadTimeMs": 804,
+        "fcpMs": 76,
+        "domInteractiveMs": 43,
+        "domCompleteMs": 71,
+        "resourceCount": 17,
+        "totalTransferKb": 3,
         "scrollSmoothness": {
-          "totalFrames": 47,
+          "totalFrames": 48,
           "jankFrames": 0,
           "smoothnessScore": 100
         }
@@ -591,31 +579,31 @@
               "tag": "div",
               "id": null,
               "className": "cloud cloud2",
-              "overflowPx": 190
+              "overflowPx": 186
             },
             {
               "tag": "div",
               "id": null,
               "className": "cloud cloud3",
-              "overflowPx": 550
+              "overflowPx": 547
             },
             {
               "tag": "div",
               "id": null,
               "className": "cloud cloud5",
-              "overflowPx": 88
+              "overflowPx": 84
             },
             {
               "tag": "span",
               "id": null,
               "className": null,
-              "overflowPx": 449
+              "overflowPx": 128
             },
             {
               "tag": "span",
               "id": null,
               "className": null,
-              "overflowPx": 577
+              "overflowPx": 288
             }
           ]
         },
@@ -626,31 +614,31 @@
               "tag": "div",
               "id": null,
               "className": "cloud cloud1",
-              "overflowPx": 666
+              "overflowPx": 671
             },
             {
               "tag": "div",
               "id": null,
               "className": "cloud cloud2",
-              "overflowPx": 938
+              "overflowPx": 941
             },
             {
               "tag": "div",
               "id": null,
               "className": "cloud cloud3",
-              "overflowPx": 1279
+              "overflowPx": 1282
             },
             {
               "tag": "div",
               "id": null,
               "className": "cloud cloud4",
-              "overflowPx": 394
+              "overflowPx": 397
             },
             {
               "tag": "div",
               "id": null,
               "className": "cloud cloud5",
-              "overflowPx": 850
+              "overflowPx": 854
             }
           ]
         },
@@ -661,13 +649,48 @@
               "tag": "div",
               "id": null,
               "className": "cloud cloud1",
-              "overflowPx": 956
+              "overflowPx": 964
             },
             {
               "tag": "div",
               "id": null,
               "className": "cloud cloud2",
-              "overflowPx": 1256
+              "overflowPx": 1262
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud3",
+              "overflowPx": 1615
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud4",
+              "overflowPx": 724
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud5",
+              "overflowPx": 1165
+            }
+          ]
+        },
+        {
+          "viewport": "Mobile-Small-360p",
+          "elements": [
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud1",
+              "overflowPx": 923
+            },
+            {
+              "tag": "div",
+              "id": null,
+              "className": "cloud cloud2",
+              "overflowPx": 1245
             },
             {
               "tag": "div",
@@ -679,48 +702,13 @@
               "tag": "div",
               "id": null,
               "className": "cloud cloud4",
-              "overflowPx": 719
+              "overflowPx": 714
             },
             {
               "tag": "div",
               "id": null,
               "className": "cloud cloud5",
-              "overflowPx": 1158
-            }
-          ]
-        },
-        {
-          "viewport": "Mobile-Small-360p",
-          "elements": [
-            {
-              "tag": "div",
-              "id": null,
-              "className": "cloud cloud1",
-              "overflowPx": 909
-            },
-            {
-              "tag": "div",
-              "id": null,
-              "className": "cloud cloud2",
-              "overflowPx": 1236
-            },
-            {
-              "tag": "div",
-              "id": null,
-              "className": "cloud cloud3",
-              "overflowPx": 1605
-            },
-            {
-              "tag": "div",
-              "id": null,
-              "className": "cloud cloud4",
-              "overflowPx": 706
-            },
-            {
-              "tag": "div",
-              "id": null,
-              "className": "cloud cloud5",
-              "overflowPx": 1129
+              "overflowPx": 1139
             }
           ]
         }
@@ -752,11 +740,11 @@
       "consoleWarnings": [],
       "failedRequests": [],
       "performance": {
-        "navLoadTimeMs": 966,
-        "fcpMs": 124,
-        "domInteractiveMs": 27,
-        "domCompleteMs": 97,
-        "resourceCount": 13,
+        "navLoadTimeMs": 962,
+        "fcpMs": 152,
+        "domInteractiveMs": 36,
+        "domCompleteMs": 121,
+        "resourceCount": 15,
         "totalTransferKb": 33,
         "scrollSmoothness": {
           "totalFrames": 16,

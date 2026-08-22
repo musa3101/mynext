@@ -41,7 +41,7 @@ const projectsToSync = [
       es: 'Para Blessed Barber Studio desarrollamos una solución digital e impresa integral que eleva la experiencia del cliente dentro y fuera del local. Diseñamos un expositor de horario comercial exterior equipado con código QR de acceso rápido: al escanearlo, el cliente accede directamente a la web interactiva para elegir su barbero, seleccionar el tipo de corte y gestionar su cita al instante (vía Booksy o WhatsApp). Además, creamos soportes físicos de reseñas de Google Maps para incentivar las opiniones positivas y maximizar la reputación local de la barbería.',
       en: 'For Blessed Barber Studio we developed a comprehensive digital and print solution that elevates the customer experience both inside and outside the shop. We designed an exterior business hours display equipped with a quick QR access code: upon scanning, customers go directly to the interactive website to choose their barber, select their haircut, and book instantly (via Booksy or WhatsApp). Additionally, we created physical Google Maps review displays to drive positive feedback and boost local reputation.'
     }),
-    image_url: './assets/img/portfolio/porfolio1.png',
+    image_url: './assets/img/portfolio/porfolio1.webp',
     project_url: 'https://blessedstudio.pages.dev/',
     technologies: 'HTML, CSS, JS, Tailwind',
     featured: true,
@@ -57,14 +57,14 @@ const projectsToSync = [
     }),
     gallery: [
       {
-        url: './assets/img/portfolio/blessed-horario.png',
+        url: './assets/img/portfolio/blessed-horario.webp',
         title: JSON.stringify({
           es: 'Cartel de Horarios Exterior con QR de Reserva Directa (Booksy & WhatsApp)',
           en: 'Exterior Business Hours Display with Direct Booking QR Code'
         })
       },
       {
-        url: './assets/img/portfolio/blessed-resena.png',
+        url: './assets/img/portfolio/blessed-resena.webp',
         title: JSON.stringify({
           es: 'Expositor Físico con Código QR para Reseñas en Google Maps',
           en: 'Physical Google Maps Review Display with QR Code'
@@ -84,7 +84,7 @@ const projectsToSync = [
       es: 'Con Luna Llena, el objetivo fue acercar su cocina al entorno digital. Integramos su carta de forma interactiva y un sistema de reservas ágil para que los clientes tengan toda la información a mano y puedan asegurar su mesa en un segundo. Una web útil, moderna y fácil de usar.',
       en: 'With Luna Llena, the goal was to bring their cuisine to the digital environment. We integrated their menu interactively and an agile booking system so that customers have all the information at hand and can secure their table in a second. A useful, modern, and easy-to-use website.'
     }),
-    image_url: './assets/img/portfolio/porfolio2-v3.png',
+    image_url: './assets/img/portfolio/porfolio2-v3.webp',
     project_url: 'https://barlunallena.pages.dev',
     technologies: 'HTML, CSS, JS, Tailwind',
     featured: true,
@@ -103,7 +103,7 @@ const projectsToSync = [
       es: 'Para Ecuaplac desarrollamos un ecosistema de marca completo que integra el diseño web corporativo con la presencia física de la empresa. Renovamos la identidad visual con el nuevo logotipo corporativo e implementamos nuevos materiales impresos: tarjetas de visita corporativas premium con código QR dinámico y un diseño especial de vinilado con QR para las furgonetas de la flota de la empresa. Al escanear el vinilo en carretera o la tarjeta de visita, los clientes acceden instantáneamente al catálogo digital y formulario de presupuestos.',
       en: 'For Ecuaplac we developed a complete brand ecosystem integrating corporate web design with physical company branding. We revamped the visual identity with a new corporate logo and created print materials: premium business cards with dynamic QR code access and custom vehicle vinyl designs with QR codes for the company fleet. Scanning the vehicle vinyl or business card gives clients instant access to the digital catalog and quote requests.'
     }),
-    image_url: './assets/img/portfolio/porfolio3.png',
+    image_url: './assets/img/portfolio/porfolio3.webp',
     project_url: 'https://ecuapv2.pages.dev/',
     technologies: 'HTML, CSS, JS, Tailwind',
     featured: false,
@@ -119,28 +119,28 @@ const projectsToSync = [
     }),
     gallery: [
       {
-        url: './assets/img/portfolio/ecuaplac-van-qr.png',
+        url: './assets/img/portfolio/ecuaplac-van-qr.webp',
         title: JSON.stringify({
           es: 'Diseño de Vinilado para Furgoneta de Flota con Código QR de Acceso Web Directo',
           en: 'Fleet Vehicle Vinyl Design with Direct Web Access QR Code'
         })
       },
       {
-        url: './assets/img/portfolio/ecuaplac-card-layout.png',
+        url: './assets/img/portfolio/ecuaplac-card-layout.webp',
         title: JSON.stringify({
           es: 'Diseño de Tarjetas de Visita Corporativas con Nuevo Logotipo e Integración QR',
           en: 'Corporate Business Card Design with New Logo & QR Integration'
         })
       },
       {
-        url: './assets/img/portfolio/ecuaplac-card-hand.png',
+        url: './assets/img/portfolio/ecuaplac-card-hand.webp',
         title: JSON.stringify({
           es: 'Mockup de Tarjetas de Visita Físicas en Mano',
           en: 'In-Hand Physical Business Cards Display'
         })
       },
       {
-        url: './assets/img/portfolio/ecuaplac-card-desk.jpg',
+        url: './assets/img/portfolio/ecuaplac-card-desk.webp',
         title: JSON.stringify({
           es: 'Presentación Corporativa de Tarjetas sobre Escritorio',
           en: 'Desktop Corporate Business Cards Presentation'
@@ -153,14 +153,14 @@ const projectsToSync = [
     slug: 'rbari-restaurant',
     title: 'RBARI RESTAURANT',
     description: JSON.stringify({
-      es: 'Experiencia inmersiva y menú digital para restaurante gastronómico.',
-      en: 'Immersive experience and digital menu for gastronomic restaurant.'
+      es: 'Web informativa y carta digital para restaurante de gastronomía de Bangladesh en Birmingham, Inglaterra.',
+      en: 'Informative website and digital menu for authentic Bangladeshi cuisine restaurant in Birmingham, England.'
     }),
     full_description: JSON.stringify({
-      es: 'Para RBARI, creamos una experiencia inmersiva que traduce la esencia de su gastronomía al mundo digital. Incorpora menú interactivo, fotografías de alta calidad y un sistema de reservas que optimiza la gestión del restaurante.',
-      en: 'For RBARI, we created an immersive experience that translates the essence of their gastronomy to the digital world. It incorporates an interactive menu, high-quality photography, and a booking system that optimizes restaurant management.'
+      es: 'Sitio web informativo desarrollado para RBARI (Rajbari Kitchen), restaurante especializado en gastronomía tradicional de Bangladesh en Birmingham, Inglaterra. La plataforma está diseñada para dar a conocer el restaurante y su atmósfera, albergar la carta digital completa directamente en la web para una consulta ágil e intuitiva, y facilitar reservas directas mediante llamada telefónica inmediata.',
+      en: 'Informative website developed for RBARI (Rajbari Kitchen), a traditional Bangladeshi cuisine restaurant in Birmingham, England. The platform is designed to showcase the restaurant and its ambience, host the full digital menu directly within the website for fast, intuitive browsing, and enable direct table reservations via immediate phone calls.'
     }),
-    image_url: './assets/img/portfolio/porfolio4.png',
+    image_url: './assets/img/portfolio/porfolio4.webp',
     project_url: 'https://rbari-v1.pages.dev',
     technologies: 'HTML, CSS, JS, Tailwind',
     featured: false,
@@ -179,7 +179,7 @@ const projectsToSync = [
       es: 'NEXT ERA es un concepto e-commerce de alto rendimiento. Desarrollado con una estética minimalista y tiempos de carga ultrarrápidos, está pensado para maximizar la conversión en marcas de moda o productos exclusivos.',
       en: 'NEXT ERA is a high-performance e-commerce concept. Developed with a minimalist aesthetic and ultra-fast loading times, it is designed to maximize conversion for fashion brands or exclusive products.'
     }),
-    image_url: './assets/img/portfolio/porfolio5.png',
+    image_url: './assets/img/portfolio/porfolio5.webp',
     project_url: 'https://nexterabymusa.pages.dev',
     technologies: 'HTML, CSS, JS, Tailwind',
     featured: false,
@@ -198,7 +198,7 @@ const projectsToSync = [
       es: 'Un proyecto solidario donde rediseñamos la presencia online de la Mezquita Arrahma. Una plataforma accesible e informativa para mantener a la comunidad conectada con horarios, eventos y donaciones.',
       en: 'A solidary project where we redesigned the online presence of the Arrahma Mosque. An accessible and informative platform to keep the community connected with schedules, events, and donations.'
     }),
-    image_url: './assets/img/portfolio/porfolio6.png',
+    image_url: './assets/img/portfolio/porfolio6.webp',
     project_url: 'https://mezquita-arrahma.pages.dev',
     technologies: 'HTML, CSS, JS, Tailwind',
     featured: false,
@@ -217,7 +217,7 @@ const projectsToSync = [
       es: 'Para Gran Marrakech, diseñamos una presencia online que captura la esencia y la rica cultura de la gastronomía marroquí. La web cuenta con un diseño inmersivo, integración de menú interactivo y un flujo de reservas optimizado para potenciar su negocio local en Palma de Mallorca.',
       en: 'For Gran Marrakech, we designed an online presence that captures the essence and rich culture of Moroccan gastronomy. The website features an immersive design, interactive menu integration, and an optimized booking flow to boost their local business in Palma de Mallorca.'
     }),
-    image_url: './assets/img/portfolio/porfolio7.png',
+    image_url: './assets/img/portfolio/porfolio7.webp',
     project_url: 'https://granmarrakech.pages.dev',
     technologies: 'HTML, CSS, JS, Tailwind',
     featured: true,
@@ -236,7 +236,7 @@ const projectsToSync = [
       es: 'Para Tacos Marrakech desarrollamos una experiencia digital moderna centrada en ofrecer una carta online intuitiva, un diseño totalmente responsive y un acceso rápido mediante códigos QR. Además, el proyecto incluye versiones del menú en varios idiomas para mejorar la experiencia de clientes locales y turistas.',
       en: 'For Tacos Marrakech we developed a modern digital experience focused on offering an intuitive online menu, a fully responsive design, and quick access via QR codes. In addition, the project includes multi-language menu versions to enhance the experience for both local customers and tourists.'
     }),
-    image_url: './assets/img/portfolio/porfolio8.png',
+    image_url: './assets/img/portfolio/porfolio8.webp',
     project_url: 'https://tacosmarrakech.pages.dev',
     technologies: 'HTML, CSS, JS, Tailwind',
     featured: true,
@@ -252,19 +252,19 @@ const projectsToSync = [
     }),
     gallery: [
       {
-        url: './assets/img/portfolio/tacos-qr-1.png',
+        url: './assets/img/portfolio/tacos-qr-1.webp',
         title: JSON.stringify({ es: 'Soporte con Código QR de Reseñas de Google', en: 'Google Reviews QR Display' })
       },
       {
-        url: './assets/img/portfolio/tacos-qr-2.png',
+        url: './assets/img/portfolio/tacos-qr-2.webp',
         title: JSON.stringify({ es: 'Expositor de Menú QR para Mesas', en: 'Table QR Menu Display' })
       },
       {
-        url: './assets/img/portfolio/tacos-qr-3.png',
+        url: './assets/img/portfolio/tacos-qr-3.webp',
         title: JSON.stringify({ es: 'Diseño e Impresión del Menú Digital', en: 'Digital Menu Print & Design' })
       },
       {
-        url: './assets/img/portfolio/tacos-qr-4.png',
+        url: './assets/img/portfolio/tacos-qr-4.webp',
         title: JSON.stringify({ es: 'Presentación del Menú QR en Local', en: 'In-Store QR Display' })
       }
     ]

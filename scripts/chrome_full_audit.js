@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 
 const CHROME_PATH = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-const BASE_URL = 'http://localhost:5174';
+const BASE_URL = process.env.BASE_URL || 'http://localhost:5173';
 const SCREENSHOT_DIR = path.resolve('docs/audit_screenshots');
 
 if (!fs.existsSync(SCREENSHOT_DIR)) {

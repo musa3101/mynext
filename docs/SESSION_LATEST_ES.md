@@ -1,30 +1,32 @@
-# Resumen de Sesión - 15 Ago 2026
+# Resumen de Sesión - 22 Ago 2026
 
 ## ¿Qué se ha hecho hoy?
-- **Corrección y silenciado de GitLab CI (`.gitlab-ci.yml`):**
-  - Añadidas reglas de `workflow` para evitar la creación de pipelines automáticas y notificaciones de fallo en eventos normales de `git push`.
-  - Ahora solo se ejecutará cuando sea un evento programado (`schedule`) o manual (`web`).
-- **Ajuste del Reporte Diario de Estado (`.github/workflows/daily-report.yml`):**
-  - Incorporadas cabeceras completas de navegación (`Accept`, `Accept-Language`, `Sec-Fetch-*`, `User-Agent`) y seguimiento de redirecciones (`-L`).
-  - Añadida detección inteligente de Cloudflare edge para evitar falsos positivos de caída (código 403 por reto anti-bot a IPs de GitHub Actions).
-- **Diagnóstico con TestSprite & Suite de Estrés E2E Nativa:**
-  - Se vinculó el proyecto en TestSprite en la nube comprobando la efectividad del escudo anti-bot de Cloudflare.
-  - Se implementó y ejecutó una batería de pruebas de estrés en Google Chrome nativo (`scripts/hard_e2e_stress_test.js`) con 52 pruebas en 6 páginas y 4 dispositivos, alcanzando una tasa de éxito del 100% (0 errores de consola, 0 peticiones 404).
+- **Actualización de Textos de RBARI RESTAURANT:**
+  - Redefinidas las descripciones (en español e inglés) para comunicar con precisión la identidad del restaurante de gastronomía tradicional de Bangladesh en Birmingham (Inglaterra), su carta digital integrada en la web y el sistema de reservas telefónicas directas.
+- **Sección Interactiva de Contacto & CTA en Proyectos:**
+  - Creada e integrada una nueva sección de captación antes del footer en `project.html` y `project-en.html` con tarjeta flotante de alto impacto y accesos directos (WhatsApp y Email).
+  - Implementado el modal interactivo con formulario de propuesta y envío AJAX en tiempo real vía FormSubmit con confirmación en vivo.
+- **Corrección de Imágenes del Portfolio:**
+  - Corregidas las rutas de imágenes en Supabase (`.webp` en lugar de `.png`), restaurando la visualización correcta de todas las tarjetas del portfolio.
+  - Implementado un normalizador defensivo en el frontend para evitar futuras discrepancias de extensión.
 
 ## Archivos modificados
-- `.gitlab-ci.yml`
-- `.github/workflows/daily-report.yml`
-- `.gitignore`
-- `scripts/hard_e2e_stress_test.js`
+- `src/lib/fallbackData.ts`
+- `scripts/seed_supabase_cms.js`
+- `scripts/sync_projects_to_supabase.js`
+- `project.html`
+- `project-en.html`
+- `src/project.ts`
+- `src/main.ts`
+- `src/style.css`
 - `docs/SESSION_LATEST_ES.md`
 - `docs/ROADMAP.md`
 
 ## Problemas solucionados
-- **Saturación de correos de GitLab ("Failed pipeline for dev/main"):** Resuelto definitivamente configurando las reglas de workflow en GitLab CI para que no intente ejecutar pipelines con 0 tareas en cada push.
-- **Falso positivo de caída en el reporte de estado por email (403):** Corregido mediante cabeceras realistas y verificación de Cloudflare proxy.
-- **Verificación Integral E2E:** 100% de éxito en carga, interactividad de menús, carrusel de 14 reseñas de Google Maps 5.0 ⭐, precios y FAQ en todos los viewports.
+- **Imágenes en negro / 404 en el portfolio:** Resuelto corrigiendo las extensiones de imagen en la base de datos Supabase y normalizando en cliente.
+- **Falta de canal de conversión en páginas de caso de estudio:** Solucionado con la nueva tarjeta CTA y el modal de propuesta interactiva con envío directo.
 
 ## Qué queda pendiente
-1. Verificar la propiedad en Google Search Console y subir el sitemap.
-2. Vincular cuenta de facturación en Google Cloud Console para la sincronización periódica desatendida de Google Places API.
-3. Incorporar nuevos proyectos al portfolio dinámico a medida que se entreguen a clientes.
+1. Monitorear el refresco del nuevo favicon en los resultados de búsqueda de Google Search Console (proceso en curso por parte de Google).
+2. Evaluar el desarrollo del Bot Bidireccional con IA (Telegram / WhatsApp) cuando se requiera.
+3. Incorporar nuevos proyectos al portfolio dinámico conforme se vayan completando.

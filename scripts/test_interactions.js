@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer-core';
 
 const CHROME_PATH = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-const BASE_URL = 'http://localhost:5174';
+const BASE_URL = process.env.BASE_URL || 'http://localhost:5173';
 
 async function testInteractions() {
   console.log('🧪 Iniciando Test Detallado de Interacciones UI...\n');

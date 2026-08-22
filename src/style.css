@@ -58,10 +58,16 @@ html, body {
 
 .reviews-slider-container {
   overflow-x: auto;
+  overflow-y: hidden;
   scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
   cursor: grab;
   user-select: none;
   -webkit-user-select: none;
+  touch-action: pan-y; /* Allows vertical page scroll, captures horizontal swipes */
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+  width: 100%;
 }
 
 .reviews-slider-container::-webkit-scrollbar {
@@ -75,7 +81,15 @@ html, body {
 .animate-marquee {
   display: flex;
   width: max-content;
-  will-change: transform;
+  will-change: scroll-position;
+  pointer-events: auto;
+}
+
+.animate-marquee > div {
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 main {
@@ -580,6 +594,148 @@ footer a,
     opacity: 1 !important;
     transform: translateY(0) !important;
   }
+}
+
+/* =============================================
+   FORM & CTA COMPONENT STYLES
+   ============================================= */
+.form-container {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-sizing: border-box;
+    border-radius: 20px;
+}
+
+.form-container button:active {
+    transform: scale(0.97);
+}
+
+.form-container .form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-container .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: left;
+}
+
+.form-container .form-group label {
+    display: block;
+    color: rgba(255, 255, 255, 0.7);
+    font-family: var(--font-headline);
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: left;
+}
+
+.form-container .form-group input,
+.form-container .form-group select {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 15px;
+    background-color: rgba(12, 16, 28, 0.95) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    touch-action: manipulation;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.form-container .form-group select {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300f2ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 16px;
+    padding-right: 40px;
+    cursor: pointer;
+}
+
+.form-container .form-group select option {
+    background-color: #0c101c;
+    color: #ffffff;
+    padding: 12px;
+}
+
+.form-container .form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    resize: none;
+    color: #fff;
+    height: 110px;
+    font-size: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    background-color: rgba(12, 16, 28, 0.95) !important;
+    font-family: var(--font-body);
+    transition: border-color 0.3s, box-shadow 0.3s;
+    touch-action: manipulation;
+}
+
+.form-container .form-group input::placeholder,
+.form-container .form-group textarea::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.form-container .form-group input:focus,
+.form-container .form-group textarea:focus,
+.form-container .form-group select:focus {
+    outline: none;
+    border-color: rgba(0, 242, 255, 0.5) !important;
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.15);
+}
+
+.form-container .form-submit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-headline);
+    color: #080810;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    width: 100%;
+    background: #00f2ff;
+    border: none;
+    padding: 14px 20px;
+    min-height: 48px;
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 9999px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 25px rgba(0, 242, 255, 0.3);
+    touch-action: manipulation;
+}
+
+.form-container .form-submit-btn:hover {
+    background-color: #ffffff;
+    color: #080810;
+    box-shadow: 0 4px 30px rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.form-container .form-submit-btn:disabled {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: rgba(255, 255, 255, 0.3) !important;
+    cursor: not-allowed;
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+/* Modal Wide variant for Contact Proposal Modal */
+.modal-container-wide {
+    max-width: min(100%, 58rem) !important;
 }
 
 /* Premium Uiverse-inspired Socials Footer Card */
@@ -2035,42 +2191,184 @@ body.mobile-menu-open {
 
 
 /* ========================================================
-   MOBILE PERFORMANCE — GPU & SCROLL OPTIMIZATION (iOS)
-   Disable expensive backdrop-blur and reduce box-shadow
-   complexity on mobile to maintain 60fps scroll.
+   MOBILE PERFORMANCE — GPU & SCROLL OPTIMIZATION (iOS/Android)
+   Eliminate expensive multi-pass backdrop-filters, isolate GPU
+   layers, and optimize offscreen rendering for 60-120fps scroll.
    ======================================================== */
-@media (max-width: 767px) {
-  /* Review cards: kill backdrop-blur (biggest jank source on iOS) */
-  #reviews .backdrop-blur-2xl,
-  #reviews .backdrop-blur-xl,
-  #reviews .backdrop-blur-sm,
-  #reviews [class*="backdrop-blur"] {
+
+/* Content visibility on major sections to skip off-screen rendering */
+#process,
+#portfolio,
+#reviews,
+#planes-banner,
+#faq,
+#contact {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 750px;
+}
+
+@media (max-width: 768px) {
+  /* Disable heavy multi-pass backdrop-blur on cards and panels (major jank cause on mobile) */
+  .process-card,
+  .faq-item,
+  .glass-panel,
+  #reviews [class*="backdrop-blur"],
+  [class*="backdrop-blur-2xl"],
+  [class*="backdrop-blur-xl"],
+  [class*="backdrop-blur-lg"],
+  [class*="backdrop-blur-md"],
+  [class*="backdrop-blur-sm"] {
     -webkit-backdrop-filter: none !important;
     backdrop-filter: none !important;
-    background: rgba(12, 12, 22, 0.85) !important;
   }
 
-  /* Glass panels: simplify blur on scroll */
-  .glass-panel {
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
+  /* Solid premium dark glass appearance without GPU penalty */
+  .process-card {
+    background: rgba(6, 6, 12, 0.92) !important;
   }
 
-  /* Review cards: contain layout to avoid repaints spilling */
-  #reviews .shrink-0 {
+  .faq-item {
+    background: rgba(8, 8, 16, 0.88) !important;
+  }
+
+  #reviews .shrink-0 > div,
+  #reviews [class*="rounded-[2.5rem]"] {
+    background: rgba(12, 12, 22, 0.95) !important;
     contain: content;
   }
 
-  /* Reduce heavy multi-layer box-shadows on cards */
+  /* Reduce heavy box-shadow spreads on mobile */
   .process-card,
-  .card-lit {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+  .card-lit,
+  .faq-item,
+  #reviews [class*="rounded-[2.5rem]"] {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
   }
 
-  /* Particles containers: limit compositing layers */
+  /* Optimize heavy background blur lights */
+  .blur-\[150px\],
+  .blur-\[120px\],
+  .blur-\[100px\] {
+    filter: blur(35px) !important;
+    will-change: transform;
+    transform: translateZ(0);
+    pointer-events: none;
+  }
+
+  /* Isolate section repaints */
+  section {
+    contain: layout style;
+  }
+
+  /* Disable cursor and particles canvas overhead on mobile */
+  #liquid-cursor,
+  #cursor-dot {
+    display: none !important;
+  }
+
   #particles-js-inicio canvas,
   #particles-js-nosotros canvas {
     will-change: auto !important;
   }
 }
+
+/* =========================================================
+   UI/UX SPOTLIGHT & GLOW EFFECTS (uipro-max & gpt-taste)
+   ========================================================= */
+.spotlight-card,
+.process-card,
+.service-card,
+.review-card,
+[data-spotlight] {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.spotlight-card::before,
+.process-card::before,
+.service-card::before,
+.review-card::before,
+[data-spotlight]::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    650px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
+    rgba(0, 242, 255, 0.09),
+    transparent 45%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.spotlight-card:hover::before,
+.process-card:hover::before,
+.service-card:hover::before,
+.review-card:hover::before,
+[data-spotlight]:hover::before {
+  opacity: 1;
+}
+
+.spotlight-card::after,
+.process-card::after,
+.service-card::after,
+.review-card::after,
+[data-spotlight]::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: radial-gradient(
+    500px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
+    rgba(0, 242, 255, 0.35),
+    transparent 35%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  z-index: 1;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 1px;
+}
+
+.spotlight-card:hover::after,
+.process-card:hover::after,
+.service-card:hover::after,
+.review-card:hover::after,
+[data-spotlight]:hover::after {
+  opacity: 1;
+}
+
+/* Subtle pulse badge */
+.badge-live-pulse {
+  position: relative;
+}
+.badge-live-pulse::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 9999px;
+  background: rgba(0, 242, 255, 0.4);
+  animation: pulseBadge 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  z-index: -1;
+}
+
+@keyframes pulseBadge {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(0.96);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.08);
+  }
+}
+
+
 

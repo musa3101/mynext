@@ -133,7 +133,7 @@ async function main() {
       category_en: 'High-End Barbershop',
       description_es: 'Diseño y desarrollo web premium para Barbería de Alta Gama con cartel exterior de horarios y QR de reserva directa.',
       description_en: 'Premium web design and development for High-End Barbershop with exterior QR booking poster.',
-      image_url: './assets/img/portfolio/porfolio1.png',
+      image_url: './assets/img/portfolio/porfolio1.webp',
       project_url: 'https://blessedstudio.pages.dev/',
       sort_order: 1,
       active: true
@@ -146,7 +146,7 @@ async function main() {
       category_en: 'Specialty Coffee & Bar',
       description_es: 'Carta digital interactiva y presencia web premium para bar-cafetería de especialidad.',
       description_en: 'Interactive digital menu and premium web presence for specialty coffee shop & bar.',
-      image_url: './assets/img/portfolio/porfolio2-v3.png',
+      image_url: './assets/img/portfolio/porfolio2-v3.webp',
       project_url: 'https://barlunallena.pages.dev',
       sort_order: 2,
       active: true
@@ -159,7 +159,7 @@ async function main() {
       category_en: 'Luxury Renovations',
       description_es: 'Diseño web corporativo, tarjetas de visita con QR y vinilado para furgonetas de flota.',
       description_en: 'Corporate web design, business cards with QR, and fleet vehicle QR vinyl design.',
-      image_url: './assets/img/portfolio/porfolio3.png',
+      image_url: './assets/img/portfolio/porfolio3.webp',
       project_url: 'https://ecuapv2.pages.dev/',
       sort_order: 3,
       active: true
@@ -170,9 +170,9 @@ async function main() {
       title: 'RBARI RESTAURANT',
       category_es: 'Restaurante Gastronómico',
       category_en: 'Gastronomic Restaurant',
-      description_es: 'Experiencia inmersiva y menú digital para restaurante gastronómico en Birmingham.',
-      description_en: 'Immersive experience and digital menu for gastronomic restaurant in Birmingham.',
-      image_url: './assets/img/portfolio/porfolio4.png',
+      description_es: 'Web informativa y carta digital para restaurante de gastronomía de Bangladesh en Birmingham, Inglaterra.',
+      description_en: 'Informative website and digital menu for authentic Bangladeshi cuisine restaurant in Birmingham, England.',
+      image_url: './assets/img/portfolio/porfolio4.webp',
       project_url: 'https://rbari-v1.pages.dev',
       sort_order: 4,
       active: true
@@ -185,7 +185,7 @@ async function main() {
       category_en: 'E-Commerce Store',
       description_es: 'Prototipo de tienda e-commerce premium adaptable para marcas exclusivas.',
       description_en: 'Premium e-commerce store prototype adaptable for exclusive brands.',
-      image_url: './assets/img/portfolio/porfolio5.png',
+      image_url: './assets/img/portfolio/porfolio5.webp',
       project_url: 'https://nexterabymusa.pages.dev',
       sort_order: 5,
       active: true
@@ -198,7 +198,7 @@ async function main() {
       category_en: 'Islamic Center',
       description_es: 'Arquitectura Digital solidaria con horarios de rezo en tiempo real y donaciones.',
       description_en: 'Solidary Digital Architecture with real-time prayer schedules and donations.',
-      image_url: './assets/img/portfolio/porfolio6.png',
+      image_url: './assets/img/portfolio/porfolio6.webp',
       project_url: 'https://mezquita-arrahma.pages.dev',
       sort_order: 6,
       active: true
@@ -211,7 +211,7 @@ async function main() {
       category_en: 'Moroccan Restaurant',
       description_es: 'Presencia online inmersiva y carta digital para restaurante marroquí en Palma.',
       description_en: 'Immersive online presence and digital menu for Moroccan Restaurant in Palma.',
-      image_url: './assets/img/portfolio/porfolio7.png',
+      image_url: './assets/img/portfolio/porfolio7.webp',
       project_url: 'https://granmarrakech.pages.dev',
       sort_order: 7,
       active: true
@@ -224,7 +224,7 @@ async function main() {
       category_en: 'Moroccan Restaurant',
       description_es: 'Experiencia digital con carta online intuitiva, soportes QR en mesa y reseñas.',
       description_en: 'Digital experience featuring intuitive online menu, table QR displays, and reviews.',
-      image_url: './assets/img/portfolio/porfolio8.png',
+      image_url: './assets/img/portfolio/porfolio8.webp',
       project_url: 'https://tacosmarrakech.pages.dev',
       sort_order: 8,
       active: true

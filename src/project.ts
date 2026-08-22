@@ -80,16 +80,161 @@ function applyDynamicSettings(settingsMap: Record<string, string>, currentLang: 
   });
 }
 
+// Utility to handle proposal contact form submissions in project page
+function initContactForm(lang: 'es' | 'en') {
+  const contactForm = document.getElementById('email-contact-form') as HTMLFormElement | null;
+  if (!contactForm) return;
+
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const nameInput = contactForm.querySelector('input[name="name"]') as HTMLInputElement | null;
+    const emailInput = contactForm.querySelector('input[name="email"]') as HTMLInputElement | null;
+    const phoneInput = contactForm.querySelector('input[name="phone"]') as HTMLInputElement | null;
+    const projectTypeSelect = contactForm.querySelector('select[name="project_type"]') as HTMLSelectElement | null;
+    const budgetSelect = contactForm.querySelector('select[name="budget"]') as HTMLSelectElement | null;
+    const messageInput = contactForm.querySelector('textarea[name="message"]') as HTMLTextAreaElement | null;
+    const submitBtn = contactForm.querySelector('.form-submit-btn') as HTMLButtonElement | null;
+
+    if (!emailInput || !submitBtn || !emailInput.value) return;
+
+    const btnText = submitBtn.querySelector('.btn-text');
+    const originalText = btnText ? btnText.textContent : submitBtn.textContent;
+
+    const allInputs = contactForm.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('input, select, textarea');
+    allInputs.forEach(input => input.disabled = true);
+    submitBtn.disabled = true;
+
+    const isEs = lang === 'es';
+    const statusText = isEs ? 'Enviando Propuesta...' : 'Sending Proposal...';
+    if (btnText) {
+      btnText.textContent = statusText;
+    } else {
+      submitBtn.textContent = statusText;
+    }
+
+    const clientName = nameInput?.value || (isEs ? 'Cliente / Negocio' : 'Client / Business');
+    const clientEmail = emailInput.value;
+    const clientPhone = phoneInput?.value || (isEs ? 'No especificado' : 'Not specified');
+    const projectType = projectTypeSelect?.value || (isEs ? 'General' : 'General');
+    const budget = budgetSelect?.value || (isEs ? 'No especificado' : 'Not specified');
+    const messageDetails = messageInput?.value || '';
+
+    const subject = isEs
+      ? `🚀 Nueva Solicitud de Proyecto Web (Portfolio): ${clientName} (${projectType})`
+      : `🚀 New Web Project Request (Portfolio): ${clientName} (${projectType})`;
+
+    const autorespondVal = isEs
+      ? `¡Hola ${clientName}!
+
+Muchas gracias por contactar con MYNEXT. Hemos recibido correctamente los detalles de tu consulta para tu proyecto web:
+
+• Tipo de Proyecto: ${projectType}
+• Plan de Interés: ${budget}
+
+He revisado tu solicitud y en breve me pondré en contacto contigo directamente por correo o WhatsApp para agendar una breve llamada o enviarte la propuesta personalizada sin compromiso.
+
+Un saludo,
+Musa — MYNEXT Arquitectura Digital
+https://mynextbymusa.com`
+      : `Hello ${clientName}!
+
+Thank you very much for contacting MYNEXT. We have successfully received your inquiry details for your web project:
+
+• Project Type: ${projectType}
+• Plan of Interest: ${budget}
+
+I have reviewed your request and will contact you directly via email or WhatsApp shortly to schedule a brief call or send you a custom proposal with no obligation.
+
+Best regards,
+Musa — MYNEXT Digital Architecture
+https://mynextbymusa.com`;
+
+    fetch(contactForm.action, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        _subject: subject,
+        _template: 'table',
+        _captcha: 'false',
+        _autorespond: autorespondVal,
+        "Cliente / Negocio": clientName,
+        "Email de Contacto": clientEmail,
+        "Teléfono / WhatsApp": clientPhone,
+        "Tipo de Proyecto": projectType,
+        "Plan de Interés": budget,
+        "Detalles / Idea del Proyecto": messageDetails
+      })
+    })
+      .then(response => {
+        if (response.ok) {
+          const successText = isEs ? '¡Solicitud Enviada! ✓' : 'Proposal Sent! ✓';
+          if (btnText) {
+            btnText.textContent = successText;
+          } else {
+            submitBtn.textContent = successText;
+          }
+          submitBtn.style.backgroundColor = '#00F2FF';
+          submitBtn.style.boxShadow = '0 0 25px #00F2FF';
+
+          const formElement = contactForm;
+          formElement.style.transition = 'all 0.5s ease';
+          formElement.style.opacity = '0';
+          formElement.style.transform = 'scale(0.95)';
+          setTimeout(() => {
+            formElement.style.display = 'none';
+            const successMsg = document.createElement('div');
+            successMsg.className = 'text-electric-cyan font-headline text-sm md:text-base tracking-wider font-semibold animate-pulse mt-4 text-center px-4 leading-relaxed';
+            successMsg.style.textShadow = '0 0 12px rgba(0, 242, 255, 0.5)';
+            successMsg.innerHTML = isEs
+              ? `¡Gracias, ${clientName}! Hemos recibido tu propuesta.<br><span class="text-xs text-white/70 font-normal">Te hemos enviado un correo de confirmación a <strong>${clientEmail}</strong>. Nos pondremos en contacto contigo muy pronto.</span>`
+              : `Thank you, ${clientName}! We received your proposal.<br><span class="text-xs text-white/70 font-normal">We sent a confirmation email to <strong>${clientEmail}</strong>. We will get in touch with you very soon.</span>`;
+
+            const formParent = formElement.parentElement;
+            if (formParent) formParent.appendChild(successMsg);
+          }, 500);
+        } else {
+          showErrorState();
+        }
+      })
+      .catch(() => {
+        showErrorState();
+      });
+
+    function showErrorState() {
+      if (btnText) {
+        btnText.textContent = isEs ? 'Error al enviar' : 'Error sending';
+      } else if (submitBtn) {
+        submitBtn.textContent = isEs ? 'Error al enviar' : 'Error sending';
+      }
+      setTimeout(() => {
+        if (btnText) {
+          btnText.textContent = originalText;
+        } else if (submitBtn) {
+          submitBtn.textContent = originalText;
+        }
+        submitBtn!.disabled = false;
+        allInputs.forEach(input => input.disabled = false);
+      }, 3000);
+    }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   // Inicializar seguimiento de conversiones
   initAnalyticsListeners();
 
-  // Inicializar modales legales del footer
+  // Inicializar modales legales del footer y modal de contacto
   initLegalModals();
 
   // Determine language from HTML element
   const lang = (document.documentElement.lang === 'en' || window.location.pathname.includes('-en')) ? 'en' : 'es';
   const isEnglish = lang === 'en';
+
+  // Inicializar formulario de propuesta en la página de proyecto
+  initContactForm(lang as 'es' | 'en');
 
   // Helper to get nested translation or field translation
   const getFieldTranslation = (item: any, fieldBase: string, language: 'es' | 'en'): string => {
@@ -140,7 +285,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       ]);
 
       if (projectRes && (projectRes as any).data) {
-        project = (projectRes as any).data;
+        const dbData = (projectRes as any).data;
+        const localProj = fallbackProjects.find(p => p.slug === slug || String(p.id) === slug);
+        project = { ...localProj, ...dbData };
+        if (!dbData.full_description && !dbData.full_description_es && localProj?.full_description) {
+          project.full_description = localProj.full_description;
+        }
       }
 
       if (settingsRes && settingsRes.data && settingsRes.data.length > 0) {
@@ -203,7 +353,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   if (imageEl && project.image_url) {
-    imageEl.src = project.image_url;
+    let imgUrl = project.image_url;
+    if (imgUrl.includes('/portfolio/') && imgUrl.endsWith('.png')) {
+      imgUrl = imgUrl.replace('.png', '.webp');
+    }
+    imageEl.src = imgUrl;
     imageEl.alt = projectTitle;
   }
 
