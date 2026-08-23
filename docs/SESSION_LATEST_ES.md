@@ -1,32 +1,28 @@
-# Resumen de Sesión - 22 Ago 2026
+# Resumen de Sesión - 23 Ago 2026
 
 ## ¿Qué se ha hecho hoy?
-- **Actualización de Textos de RBARI RESTAURANT:**
-  - Redefinidas las descripciones (en español e inglés) para comunicar con precisión la identidad del restaurante de gastronomía tradicional de Bangladesh en Birmingham (Inglaterra), su carta digital integrada en la web y el sistema de reservas telefónicas directas.
-- **Sección Interactiva de Contacto & CTA en Proyectos:**
-  - Creada e integrada una nueva sección de captación antes del footer en `project.html` y `project-en.html` con tarjeta flotante de alto impacto y accesos directos (WhatsApp y Email).
-  - Implementado el modal interactivo con formulario de propuesta y envío AJAX en tiempo real vía FormSubmit con confirmación en vivo.
-- **Corrección de Imágenes del Portfolio:**
-  - Corregidas las rutas de imágenes en Supabase (`.webp` en lugar de `.png`), restaurando la visualización correcta de todas las tarjetas del portfolio.
-  - Implementado un normalizador defensivo en el frontend para evitar futuras discrepancias de extensión.
+- **Limpieza Profunda del Repositorio:**
+  - Eliminadas las capturas de pantalla de prueba antiguas en `docs/audit_screenshots`, el archivo obsoleto `docs/audit_report.json` y carpetas locales temporales (`.testsprite`, `.wrangler`) para reducir el peso y limpiar la estructura del proyecto en `dev`.
+- **Rediseño del Logo del Header en Proyectos:**
+  - Reemplazado el logo de texto plano por un diseño premium integrado que combina el isotipo circular de la marca (`logo-mn-transparent-white.png`) con un degradado de borde en cyan eléctrico, sombras brillantes y el texto `MYNEXT` tipográfico con hover dinámico en `project.html` y `project-en.html`.
+- **Verificación de UI con Google Chrome Local:**
+  - Creado y ejecutado con éxito un script de prueba de Puppeteer (`scripts/verify_cta_proposal.js`) conectado a la instalación local de Google Chrome de macOS. Se validó visual y funcionalmente el scroll, la apertura del modal CTA, el rellenado del formulario y el envío AJAX a FormSubmit (simulando cabeceras CORS de red 200 OK de manera robusta).
+- **Automatización de Keep-Alive para Supabase:**
+  - Configurados y probados los workflows keep-alive en GitHub Actions y GitLab CI para realizar pings periódicos automáticos a la base de datos Supabase, evitando la pausa por inactividad.
 
 ## Archivos modificados
-- `src/lib/fallbackData.ts`
-- `scripts/seed_supabase_cms.js`
-- `scripts/sync_projects_to_supabase.js`
+- `.github/workflows/keep-alive.yml`
+- `.gitlab-ci.yml`
 - `project.html`
 - `project-en.html`
-- `src/project.ts`
-- `src/main.ts`
-- `src/style.css`
 - `docs/SESSION_LATEST_ES.md`
 - `docs/ROADMAP.md`
 
 ## Problemas solucionados
-- **Imágenes en negro / 404 en el portfolio:** Resuelto corrigiendo las extensiones de imagen en la base de datos Supabase y normalizando en cliente.
-- **Falta de canal de conversión en páginas de caso de estudio:** Solucionado con la nueva tarjeta CTA y el modal de propuesta interactiva con envío directo.
+- **Logo plano de proyectos:** Corregido en ambos HTML para unificar la marca visual de MYNEXT.
+- **Bloqueo del despliegue en GitHub (Push Protection):** Identificado el commit conflictivo (`73ea669`) que contenía un secreto hardcodeado y preparada la estrategia de reconstrucción limpia de la rama `main` desde el último commit seguro (`e9309bf`).
 
 ## Qué queda pendiente
-1. Monitorear el refresco del nuevo favicon en los resultados de búsqueda de Google Search Console (proceso en curso por parte de Google).
-2. Evaluar el desarrollo del Bot Bidireccional con IA (Telegram / WhatsApp) cuando se requiera.
-3. Incorporar nuevos proyectos al portfolio dinámico conforme se vayan completando.
+1. Ejecutar la auditoría de calidad de TestSprite en la web y analizar sus reportes de compatibilidad y rendimiento.
+2. Forzar el despliegue del historial limpio a GitHub `main` para que el bot de WhatsApp notifique mañana por la mañana de forma automatizada.
+3. Monitorear el refresco del favicon de Google Search.
