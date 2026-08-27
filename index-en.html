@@ -63,6 +63,39 @@
       "@context": "https://schema.org",
       "@graph": [
         {
+          "@type": "Person",
+          "@id": "https://mynextbymusa.com/#musa",
+          "name": "Musa",
+          "alternateName": "Musa - Web Designer & Developer",
+          "jobTitle": "Freelance Web Designer & Developer",
+          "worksFor": {
+            "@id": "https://mynextbymusa.com/#organization"
+          },
+          "url": "https://mynextbymusa.com/index-en.html",
+          "image": "https://mynextbymusa.com/favicon-192x192.png",
+          "email": "mynextbymusa@gmail.com",
+          "telephone": "+34673109486",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Palma de Mallorca",
+            "addressRegion": "Balearic Islands",
+            "addressCountry": "ES"
+          },
+          "knowsAbout": [
+            "Freelance Web Design in Palma de Mallorca",
+            "Frontend Development",
+            "Local SEO & AEO",
+            "Digital Architecture",
+            "QR Digital Menus",
+            "E-Commerce Online Stores"
+          ],
+          "sameAs": [
+            "https://maps.app.goo.gl/VE5ZqxShZFKaAs8M6",
+            "https://www.instagram.com/mynextbymusa",
+            "https://x.com/mynextbymusa"
+          ]
+        },
+        {
           "@type": ["ProfessionalService", "LocalBusiness"],
           "@id": "https://mynextbymusa.com/#organization",
           "name": "MYNEXT - Web Design Palma de Mallorca",
@@ -72,7 +105,13 @@
           "image": "https://mynextbymusa.com/assets/img/og-share.png",
           "telephone": "+34673109486",
           "email": "mynextbymusa@gmail.com",
+          "founder": {
+            "@id": "https://mynextbymusa.com/#musa"
+          },
           "priceRange": "280€ - 380€",
+          "currenciesAccepted": "EUR",
+          "paymentAccepted": "Cash, Bizum, Bank Transfer, Credit Card",
+          "hasMap": "https://maps.app.goo.gl/VE5ZqxShZFKaAs8M6",
           "address": {
             "@type": "PostalAddress",
             "streetAddress": "Palma de Mallorca",
@@ -106,11 +145,11 @@
             "https://www.instagram.com/mynextbymusa",
             "https://x.com/mynextbymusa"
           ],
-          "description": "Premium web design and custom web development in Palma de Mallorca. We create exclusive, high-performance digital architectures with optimized local SEO.",
+          "description": "Premium web design and custom web development in Palma de Mallorca. Created by Musa, designed by MYNEXT. Modern, fast, and optimized for local SEO.",
           "knowsAbout": [
             "Web Design in Palma de Mallorca",
-            "Web Development",
-            "Local SEO",
+            "Freelance Web Development",
+            "Local SEO & Google Search Ranking",
             "Digital Architecture",
             "E-commerce",
             "QR Digital Menus & Business Digitization"
@@ -2936,7 +2975,127 @@
                 <!-- Carousel Container -->
                 <div id="portfolio-carousel"
                     class="flex overflow-x-auto snap-x snap-mandatory gap-4 md:gap-8 pb-12 hide-scrollbar scroll-smooth w-full px-[10vw] md:px-[25vw] lg:px-[35vw]">
-                    <!-- Dynamic content injected by JS -->
+                    <!-- Pre-rendered Static Projects for AI Crawlers & SEO -->
+                    <article class="flex-none w-[80vw] md:w-[45vw] lg:w-[35vw] xl:w-[30vw] snap-center flex flex-col gap-6 transition-transform duration-500">
+                        <div class="group spotlight-card relative aspect-[16/10] rounded-3xl overflow-hidden glass-panel border border-white/10 transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-[0_0_50px_rgba(0,242,255,0.2)]">
+                            <div class="absolute inset-0 bg-[#06060c] overflow-hidden flex items-center justify-center cursor-pointer" onclick="window.location.href='project-en.html?slug=blessed-barber-studio'">
+                                <img src="./assets/img/portfolio/porfolio1.webp" alt="Premium web design in Mallorca - Preview of Blessed Barber Studio" loading="eager" decoding="async" fetchpriority="high" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.05]">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity duration-500"></div>
+                                <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center z-20 backdrop-blur-sm">
+                                    <a href="project-en.html?slug=blessed-barber-studio" class="px-8 py-4 bg-white text-black font-headline font-bold text-xs tracking-[0.3em] uppercase rounded-full hover:bg-electric-cyan transition-all duration-500 shadow-2xl scale-90 group-hover:scale-100">More Info →</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-2 px-2 mt-4 text-center md:text-left">
+                            <h3 class="text-3xl md:text-4xl font-bold text-white font-headline tracking-tight">Blessed Barber Studio</h3>
+                            <p class="text-sm font-headline font-semibold uppercase tracking-[0.25em] text-[#00f2ff] opacity-90">High-End Barbershop</p>
+                        </div>
+                    </article>
+                    <article class="flex-none w-[80vw] md:w-[45vw] lg:w-[35vw] xl:w-[30vw] snap-center flex flex-col gap-6 transition-transform duration-500">
+                        <div class="group spotlight-card relative aspect-[16/10] rounded-3xl overflow-hidden glass-panel border border-white/10 transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-[0_0_50px_rgba(0,242,255,0.2)]">
+                            <div class="absolute inset-0 bg-[#06060c] overflow-hidden flex items-center justify-center cursor-pointer" onclick="window.location.href='project-en.html?slug=bar-cafeteria-luna-llena'">
+                                <img src="./assets/img/portfolio/porfolio2-v3.webp" alt="Premium web design in Mallorca - Preview of Bar Cafetería Luna Llena" loading="eager" decoding="async" fetchpriority="high" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.05]">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity duration-500"></div>
+                                <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center z-20 backdrop-blur-sm">
+                                    <a href="project-en.html?slug=bar-cafeteria-luna-llena" class="px-8 py-4 bg-white text-black font-headline font-bold text-xs tracking-[0.3em] uppercase rounded-full hover:bg-electric-cyan transition-all duration-500 shadow-2xl scale-90 group-hover:scale-100">More Info →</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-2 px-2 mt-4 text-center md:text-left">
+                            <h3 class="text-3xl md:text-4xl font-bold text-white font-headline tracking-tight">Bar Cafetería Luna Llena</h3>
+                            <p class="text-sm font-headline font-semibold uppercase tracking-[0.25em] text-[#00f2ff] opacity-90">Specialty Coffee & Bar</p>
+                        </div>
+                    </article>
+                    <article class="flex-none w-[80vw] md:w-[45vw] lg:w-[35vw] xl:w-[30vw] snap-center flex flex-col gap-6 transition-transform duration-500">
+                        <div class="group spotlight-card relative aspect-[16/10] rounded-3xl overflow-hidden glass-panel border border-white/10 transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-[0_0_50px_rgba(0,242,255,0.2)]">
+                            <div class="absolute inset-0 bg-[#06060c] overflow-hidden flex items-center justify-center cursor-pointer" onclick="window.location.href='project-en.html?slug=ecuaplac'">
+                                <img src="./assets/img/portfolio/porfolio3.webp" alt="Premium web design in Mallorca - Preview of Ecuaplac" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.05]">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity duration-500"></div>
+                                <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center z-20 backdrop-blur-sm">
+                                    <a href="project-en.html?slug=ecuaplac" class="px-8 py-4 bg-white text-black font-headline font-bold text-xs tracking-[0.3em] uppercase rounded-full hover:bg-electric-cyan transition-all duration-500 shadow-2xl scale-90 group-hover:scale-100">More Info →</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-2 px-2 mt-4 text-center md:text-left">
+                            <h3 class="text-3xl md:text-4xl font-bold text-white font-headline tracking-tight">Ecuaplac</h3>
+                            <p class="text-sm font-headline font-semibold uppercase tracking-[0.25em] text-[#00f2ff] opacity-90">Luxury Renovations</p>
+                        </div>
+                    </article>
+                    <article class="flex-none w-[80vw] md:w-[45vw] lg:w-[35vw] xl:w-[30vw] snap-center flex flex-col gap-6 transition-transform duration-500">
+                        <div class="group spotlight-card relative aspect-[16/10] rounded-3xl overflow-hidden glass-panel border border-white/10 transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-[0_0_50px_rgba(0,242,255,0.2)]">
+                            <div class="absolute inset-0 bg-[#06060c] overflow-hidden flex items-center justify-center cursor-pointer" onclick="window.location.href='project-en.html?slug=rbari-restaurant'">
+                                <img src="./assets/img/portfolio/porfolio4.webp" alt="Premium web design in Mallorca - Preview of RBARI RESTAURANT" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.05]">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity duration-500"></div>
+                                <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center z-20 backdrop-blur-sm">
+                                    <a href="project-en.html?slug=rbari-restaurant" class="px-8 py-4 bg-white text-black font-headline font-bold text-xs tracking-[0.3em] uppercase rounded-full hover:bg-electric-cyan transition-all duration-500 shadow-2xl scale-90 group-hover:scale-100">More Info →</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-2 px-2 mt-4 text-center md:text-left">
+                            <h3 class="text-3xl md:text-4xl font-bold text-white font-headline tracking-tight">RBARI RESTAURANT</h3>
+                            <p class="text-sm font-headline font-semibold uppercase tracking-[0.25em] text-[#00f2ff] opacity-90">Gastronomic Restaurant</p>
+                        </div>
+                    </article>
+                    <article class="flex-none w-[80vw] md:w-[45vw] lg:w-[35vw] xl:w-[30vw] snap-center flex flex-col gap-6 transition-transform duration-500">
+                        <div class="group spotlight-card relative aspect-[16/10] rounded-3xl overflow-hidden glass-panel border border-white/10 transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-[0_0_50px_rgba(0,242,255,0.2)]">
+                            <div class="absolute inset-0 bg-[#06060c] overflow-hidden flex items-center justify-center cursor-pointer" onclick="window.location.href='project-en.html?slug=next-era'">
+                                <img src="./assets/img/portfolio/porfolio5.webp" alt="Premium web design in Mallorca - Preview of NEXT ERA" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.05]">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity duration-500"></div>
+                                <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center z-20 backdrop-blur-sm">
+                                    <a href="project-en.html?slug=next-era" class="px-8 py-4 bg-white text-black font-headline font-bold text-xs tracking-[0.3em] uppercase rounded-full hover:bg-electric-cyan transition-all duration-500 shadow-2xl scale-90 group-hover:scale-100">More Info →</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-2 px-2 mt-4 text-center md:text-left">
+                            <h3 class="text-3xl md:text-4xl font-bold text-white font-headline tracking-tight">NEXT ERA</h3>
+                            <p class="text-sm font-headline font-semibold uppercase tracking-[0.25em] text-[#00f2ff] opacity-90">E-Commerce Store</p>
+                        </div>
+                    </article>
+                    <article class="flex-none w-[80vw] md:w-[45vw] lg:w-[35vw] xl:w-[30vw] snap-center flex flex-col gap-6 transition-transform duration-500">
+                        <div class="group spotlight-card relative aspect-[16/10] rounded-3xl overflow-hidden glass-panel border border-white/10 transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-[0_0_50px_rgba(0,242,255,0.2)]">
+                            <div class="absolute inset-0 bg-[#06060c] overflow-hidden flex items-center justify-center cursor-pointer" onclick="window.location.href='project-en.html?slug=mezquita-arrahma'">
+                                <img src="./assets/img/portfolio/porfolio6.webp" alt="Premium web design in Mallorca - Preview of Mezquita Arrahma" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.05]">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity duration-500"></div>
+                                <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center z-20 backdrop-blur-sm">
+                                    <a href="project-en.html?slug=mezquita-arrahma" class="px-8 py-4 bg-white text-black font-headline font-bold text-xs tracking-[0.3em] uppercase rounded-full hover:bg-electric-cyan transition-all duration-500 shadow-2xl scale-90 group-hover:scale-100">More Info →</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-2 px-2 mt-4 text-center md:text-left">
+                            <h3 class="text-3xl md:text-4xl font-bold text-white font-headline tracking-tight">Mezquita Arrahma</h3>
+                            <p class="text-sm font-headline font-semibold uppercase tracking-[0.25em] text-[#00f2ff] opacity-90">Islamic Center</p>
+                        </div>
+                    </article>
+                    <article class="flex-none w-[80vw] md:w-[45vw] lg:w-[35vw] xl:w-[30vw] snap-center flex flex-col gap-6 transition-transform duration-500">
+                        <div class="group spotlight-card relative aspect-[16/10] rounded-3xl overflow-hidden glass-panel border border-white/10 transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-[0_0_50px_rgba(0,242,255,0.2)]">
+                            <div class="absolute inset-0 bg-[#06060c] overflow-hidden flex items-center justify-center cursor-pointer" onclick="window.location.href='project-en.html?slug=gran-marrakech'">
+                                <img src="./assets/img/portfolio/porfolio7.webp" alt="Premium web design in Mallorca - Preview of Gran Marrakech" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.05]">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity duration-500"></div>
+                                <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center z-20 backdrop-blur-sm">
+                                    <a href="project-en.html?slug=gran-marrakech" class="px-8 py-4 bg-white text-black font-headline font-bold text-xs tracking-[0.3em] uppercase rounded-full hover:bg-electric-cyan transition-all duration-500 shadow-2xl scale-90 group-hover:scale-100">More Info →</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-2 px-2 mt-4 text-center md:text-left">
+                            <h3 class="text-3xl md:text-4xl font-bold text-white font-headline tracking-tight">Gran Marrakech</h3>
+                            <p class="text-sm font-headline font-semibold uppercase tracking-[0.25em] text-[#00f2ff] opacity-90">Moroccan Restaurant</p>
+                        </div>
+                    </article>
+                    <article class="flex-none w-[80vw] md:w-[45vw] lg:w-[35vw] xl:w-[30vw] snap-center flex flex-col gap-6 transition-transform duration-500">
+                        <div class="group spotlight-card relative aspect-[16/10] rounded-3xl overflow-hidden glass-panel border border-white/10 transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-[0_0_50px_rgba(0,242,255,0.2)]">
+                            <div class="absolute inset-0 bg-[#06060c] overflow-hidden flex items-center justify-center cursor-pointer" onclick="window.location.href='project-en.html?slug=tacos-marrakech'">
+                                <img src="./assets/img/portfolio/porfolio8.webp" alt="Premium web design in Mallorca - Preview of Tacos Marrakech" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.05]">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity duration-500"></div>
+                                <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center z-20 backdrop-blur-sm">
+                                    <a href="project-en.html?slug=tacos-marrakech" class="px-8 py-4 bg-white text-black font-headline font-bold text-xs tracking-[0.3em] uppercase rounded-full hover:bg-electric-cyan transition-all duration-500 shadow-2xl scale-90 group-hover:scale-100">More Info →</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-2 px-2 mt-4 text-center md:text-left">
+                            <h3 class="text-3xl md:text-4xl font-bold text-white font-headline tracking-tight">Tacos Marrakech</h3>
+                            <p class="text-sm font-headline font-semibold uppercase tracking-[0.25em] text-[#00f2ff] opacity-90">Moroccan Restaurant</p>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>

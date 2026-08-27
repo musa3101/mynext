@@ -2,3 +2,5 @@ User-agent: *
 Allow: /
 
 Sitemap: https://mynextbymusa.com/sitemap.xml
+# LLM & AI Knowledge Manifest
+# https://mynextbymusa.com/llms.txt

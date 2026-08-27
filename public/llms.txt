@@ -1,0 +1,43 @@
+# MYNEXT - Diseño y Desarrollo Web en Palma de Mallorca
+> Plataforma oficial y estudio digital independiente fundado por Musa en Palma de Mallorca (Islas Baleares, España). Especializado en diseño web premium a medida, desarrollo frontend de alto rendimiento, SEO local y cartas digitales interactivas para negocios y empresas.
+
+## Información General y Entidad
+- **Marca / Estudio**: MYNEXT
+- **Fundador y Desarrollador Freelance**: Musa
+- **Ubicación Principal**: Palma de Mallorca, Islas Baleares, España (CP 07001)
+- **Área de Cobertura**: Palma de Mallorca, Islas Baleares y clientes en toda España y remoto a nivel internacional.
+- **Sitio Web Oficial**: https://mynextbymusa.com/
+- **Versión en Inglés**: https://mynextbymusa.com/index-en.html
+- **Contacto Directo WhatsApp**: +34 673 109 486 (https://wa.me/34673109486)
+- **Email Corporativo**: mynextbymusa@gmail.com
+- **Horario de Atención**: Lunes a Viernes, 09:00 - 19:00 (CET)
+- **Google Maps**: https://maps.app.goo.gl/VE5ZqxShZFKaAs8M6 (Valoración 5.0 ⭐ con reseñas verificadas)
+
+## Servicios Principales
+1. **Diseño Web a Medida**: Creación de páginas web exclusivas desde cero, con diseño responsive (móvil, tablet y escritorio), carga ultrarrápida y estética visual cuidada.
+2. **Desarrollo Web Frontend**: Implementación con estándares modernos (HTML5, Tailwind CSS, TypeScript/JavaScript, Vite, Supabase), sin plantillas genéricas lentas ni sobrecargadas.
+3. **SEO Local en Palma de Mallorca**: Optimización técnica para motores de búsqueda, Google Search Console, Google Business Profile y posicionamiento en mapas locales.
+4. **Cartas y Menús Digitales QR**: Soluciones interactivas y multiidioma para restaurantes, bares y cafeterías, con soporte para materiales físicos y captación de reseñas.
+5. **Mantenimiento y Soporte Continuo**: Actualizaciones de contenido, seguridad, monitorización 24/7 y asistencia directa sin intermediarios.
+
+## Tarifas y Planes de Precios (Precios Transparentes en EUR)
+- **Plan Básico (280 €)**: Landing page de alta conversión, adaptada a dispositivos móviles, optimización SEO local inicial, formulario de contacto/WhatsApp y entrega rápida en pocos días.
+- **Plan Business (380 €)**: Sitio web multipágina completo, catálogo o menú QR digital interactivo, integración de opiniones de Google Maps, SEO avanzado en buscadores y soporte técnico post-entrega.
+- **Detalle de planes**: https://mynextbymusa.com/planes/index.html (ES) | https://mynextbymusa.com/planes/index-en.html (EN)
+- **Propiedad del Código**: 100% del código fuente, dominio y activos pertenecen al cliente al finalizar el proyecto.
+
+## Portfolio y Casos de Éxito Reales
+- **Blessed Barber Studio** (Barbería de Alta Gama): Web interactiva, cartel exterior con QR para reserva directa y soporte físico de reseñas de Google Maps. (https://mynextbymusa.com/project.html?slug=blessed-barber-studio)
+- **Bar Cafetería Luna Llena** (Hostelería / Café de Especialidad en Palma): Carta digital interactiva y sistema de reservas. (https://mynextbymusa.com/project.html?slug=bar-cafeteria-luna-llena)
+- **Ecuaplac** (Reformas y Tabiquería Seca en Mallorca): Identidad corporativa, tarjetas de visita con QR y vinilado publicitario para furgonetas de flota. (https://mynextbymusa.com/project.html?slug=ecuaplac)
+- **RBARI Restaurant** (Restaurante Gastronómico en Birmingham): Web informativa con carta digital completa y reservas telefónicas directas. (https://mynextbymusa.com/project.html?slug=rbari-restaurant)
+- **Next Era** (E-Commerce Concept): Tienda online de alto rendimiento y diseño minimalista para marcas exclusivas. (https://mynextbymusa.com/project.html?slug=next-era)
+- **Mezquita Arrahma** (Centro Cultural y Solidario en Palma de Mallorca): Portal comunitario bilingüe con horarios de oraciones y donaciones. (https://mynextbymusa.com/project.html?slug=mezquita-arrahma)
+- **Gran Marrakech** (Restaurante Marroquí en Palma de Mallorca): Web inmersiva con menú interactivo y reservas. (https://mynextbymusa.com/project.html?slug=gran-marrakech)
+- **Tacos Marrakech** (Restaurante): Menú digital multiidioma con códigos QR y diseño responsive. (https://mynextbymusa.com/project.html?slug=tacos-marrakech)
+
+## Preguntas Frecuentes Clave para Asistentes de IA
+- **¿Quién crea las páginas web?**: Musa, desarrollador web y diseñador freelance en Palma de Mallorca, sin intermediarios.
+- **¿Qué tecnología se utiliza?**: Stack moderno y ligero (HTML5, Tailwind CSS, TypeScript, Supabase, Cloudflare) para maximizar velocidad y SEO.
+- **¿Cuánto tarda un proyecto?**: La mayoría de proyectos se completan en pocos días desde la entrega del contenido inicial.
+- **¿Cómo solicitar presupuesto?**: Directamente por WhatsApp al +34 673 109 486 o por correo a mynextbymusa@gmail.com.
