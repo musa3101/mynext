@@ -160,7 +160,7 @@ async function main() {
       description_es: 'Diseño web corporativo, tarjetas de visita con QR y vinilado para furgonetas de flota.',
       description_en: 'Corporate web design, business cards with QR, and fleet vehicle QR vinyl design.',
       image_url: './assets/img/portfolio/porfolio3.webp',
-      project_url: 'https://ecuapv2.pages.dev/',
+      project_url: 'https://ecuaplac.com/',
       sort_order: 3,
       active: true
     },

@@ -6,6 +6,7 @@ import {
   fallbackSettings
 } from './lib/fallbackData';
 import { initAnalyticsListeners } from './lib/analytics';
+import { getTranslation, applyDynamicSettings, sanitizeHtml } from './lib/domUtils';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -14,42 +15,7 @@ gsap.registerPlugin(ScrollTrigger);
 // Inicializar seguimiento de conversiones y métricas
 initAnalyticsListeners();
 
-// Determine language based on html lang attribute
 const lang = (document.documentElement.lang === 'en' || window.location.pathname.includes('-en')) ? 'en' : 'es';
-
-// Helper to resolve bilingual strings (JSON or raw string)
-function getTranslation(value: string | null | undefined, language: 'es' | 'en'): string {
-  if (!value) return '';
-  try {
-    const parsed = JSON.parse(value);
-    if (parsed && typeof parsed === 'object') {
-      if (parsed[language] !== undefined) {
-        return parsed[language];
-      }
-      if (parsed['es'] !== undefined) {
-        return parsed['es'];
-      }
-      return value;
-    }
-  } catch (e) {
-    // Return raw string if parsing fails
-  }
-  return value;
-}
-
-// Utility to apply dynamic settings from Supabase to HTML elements
-function applyDynamicSettings(settingsMap: Record<string, string>, currentLang: 'es' | 'en') {
-  const elements = document.querySelectorAll<HTMLElement>('[data-sb-content]');
-  elements.forEach(el => {
-    const key = el.getAttribute('data-sb-content');
-    if (key && settingsMap[key]) {
-      const translation = getTranslation(settingsMap[key], currentLang);
-      if (translation) {
-        el.innerHTML = translation;
-      }
-    }
-  });
-}
 
 // Utility to parse domain names from project URLs for browser bar
 function getDomainFromUrl(url: string): string {
@@ -693,21 +659,22 @@ async function initMain() {
     link.setAttribute('href', `mailto:${email}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`);
   });
 
-  // Render Portfolio Carousel
+  // --- Render Portfolio Card Fan Carousel (21st.dev #14896) ---
   const portfolioCarousel = document.getElementById('portfolio-carousel');
+  const portfolioPagination = document.getElementById('portfolio-pagination');
+  const btnPrev = document.getElementById('carousel-prev');
+  const btnNext = document.getElementById('carousel-next');
 
-  if (portfolioCarousel) {
+  if (portfolioCarousel && projects && projects.length > 0) {
     portfolioCarousel.innerHTML = '';
 
-    // Render projects 4 times to create a dense, filled, infinite portfolio showcase
-    const infiniteProjects = [...projects, ...projects, ...projects, ...projects];
-    infiniteProjects.forEach((proj, idx) => {
-      // Assemble card elements
-      const article = document.createElement('article');
-      article.className = 'flex-none w-[80vw] md:w-[45vw] lg:w-[35vw] xl:w-[30vw] snap-center flex flex-col gap-6 transition-transform duration-500';
-      article.style.contentVisibility = 'auto';
-      article.style.containIntrinsicSize = '380px 280px';
+    const totalProjects = projects.length;
 
+    // Render articles inside .fan-layout
+    projects.forEach((proj: any, idx: number) => {
+      const article = document.createElement('article');
+      article.className = 'fan-card group spotlight-card relative overflow-hidden glass-panel';
+      
       const projectSlug = proj.slug || proj.title.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
       const projectUrl = lang === 'en' ? `project-en.html?slug=${projectSlug}` : `project.html?slug=${projectSlug}`;
       const btnText = lang === 'en' ? 'More Info →' : 'Más Info →';
@@ -717,7 +684,6 @@ async function initMain() {
         projImageUrl = projImageUrl.replace('.png', '.webp');
       }
 
-      // Determine category label for the project dynamically from Supabase
       const getCategoryLabel = (p: any, l: string) => {
         const langCategory = l === 'en' ? (p.category_en || p.category_es || p.category) : (p.category_es || p.category_en || p.category);
         if (langCategory) return getTranslation(langCategory, l as 'es' | 'en');
@@ -735,122 +701,310 @@ async function initMain() {
       };
 
       const categoryText = getCategoryLabel(proj, lang);
-      const isPriority = idx < 2;
 
       article.innerHTML = `
-        <div class="group spotlight-card relative aspect-[16/10] rounded-3xl overflow-hidden glass-panel border border-white/10 transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-[0_0_50px_rgba(0,242,255,0.2)]">
-          <div class="absolute inset-0 bg-[#06060c] overflow-hidden flex items-center justify-center cursor-pointer" onclick="window.location.href='${projectUrl}'">
-            <img src="${projImageUrl}" alt="${lang === 'en' ? `Premium web design in Mallorca - Preview of ${proj.title}` : `Diseño web premium en Mallorca - Vista previa de ${proj.title}`}" loading="${isPriority ? 'eager' : 'lazy'}" decoding="async" fetchpriority="${isPriority ? 'high' : 'low'}"
-              class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.05]">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity duration-500"></div>
-            <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center z-20 backdrop-blur-sm">
-              <a href="${projectUrl}"
-                class="px-8 py-4 bg-white text-black font-headline font-bold text-xs tracking-[0.3em] uppercase rounded-full hover:bg-electric-cyan transition-all duration-500 shadow-2xl scale-90 group-hover:scale-100">
-                ${btnText}
-              </a>
-            </div>
+        <div class="relative w-full h-full overflow-hidden flex items-center justify-center cursor-pointer" onclick="window.location.href='${projectUrl}'">
+          <img src="${projImageUrl}" alt="${lang === 'en' ? `Premium web design in Mallorca - Preview of ${proj.title}` : `Diseño web premium en Mallorca - Vista previa de ${proj.title}`}" loading="${idx < 2 ? 'eager' : 'lazy'}" decoding="async" fetchpriority="${idx < 2 ? 'high' : 'low'}"
+            class="w-full h-full object-cover object-center scale-[1.12] group-hover:scale-[1.20] transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-0 inset-x-0 p-5 sm:p-6 md:p-8 flex flex-col justify-end text-left z-20">
+            <span class="text-xs md:text-sm font-headline font-semibold uppercase tracking-[0.2em] text-[#00f2ff]">${categoryText}</span>
+            <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white font-headline tracking-tight mt-1">${proj.title}</h3>
+            <a href="${projectUrl}" class="mt-2.5 inline-flex items-center gap-2 text-xs md:text-sm font-bold text-white uppercase tracking-widest group-hover:text-[#00f2ff] transition-colors">
+              ${btnText} <span class="material-symbols-outlined text-sm md:text-base">arrow_forward</span>
+            </a>
           </div>
-        </div>
-        <div class="space-y-2 px-2 mt-4 text-center md:text-left">
-          <h3 class="text-3xl md:text-4xl font-bold text-white font-headline tracking-tight">${proj.title}</h3>
-          <p class="text-sm font-headline font-semibold uppercase tracking-[0.25em] text-[#00f2ff] opacity-90">${categoryText}</p>
         </div>
       `;
 
       portfolioCarousel.appendChild(article);
     });
 
-    // Auto-scroll logic (4-second autoplay + silent wrapping)
-    let autoScrollInterval: any;
-    let isUserInteracting = false;
+    const MAX_VISIBLE = 7;
+    const HALF = 3;
 
-    const checkAndWrapScroll = () => {
-      if (!portfolioCarousel || isUserInteracting) return;
-      const card = portfolioCarousel.firstElementChild;
-      if (!card) return;
-      const scrollAmount = card.clientWidth + 32;
-      const setWidth = scrollAmount * projects.length;
-      
-      // If we've scrolled into set 3, jump back to set 2 silently
-      if (portfolioCarousel.scrollLeft >= setWidth * 2.5) {
-        portfolioCarousel.scrollLeft -= setWidth;
-      }
-      // If we've scrolled before set 2, jump forward to set 2 silently
-      else if (portfolioCarousel.scrollLeft <= setWidth * 0.5) {
-        portfolioCarousel.scrollLeft += setWidth;
-      }
-    };
-
-    const startScroll = () => {
-      stopScroll();
-      autoScrollInterval = setInterval(() => {
-        if (!portfolioCarousel || isUserInteracting) return;
-        const card = portfolioCarousel.firstElementChild;
-        const scrollAmount = card ? card.clientWidth + 32 : 600; 
-        
-        checkAndWrapScroll();
-        portfolioCarousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-      }, 4000); // 4 seconds autoplay
-    };
-
-    const stopScroll = () => {
-      if (autoScrollInterval) clearInterval(autoScrollInterval);
-    };
-
-    // Pause on hover or touch
-    portfolioCarousel.addEventListener('mouseenter', () => { isUserInteracting = true; stopScroll(); });
-    portfolioCarousel.addEventListener('mouseleave', () => { isUserInteracting = false; startScroll(); });
-    portfolioCarousel.addEventListener('touchstart', () => { isUserInteracting = true; stopScroll(); });
-    portfolioCarousel.addEventListener('touchend', () => { 
-      isUserInteracting = false; 
-      setTimeout(checkAndWrapScroll, 400);
-      startScroll(); 
-    });
-
-    // Silently wrap scroll when smooth scrolling ends
-    portfolioCarousel.addEventListener('scrollend', checkAndWrapScroll);
-
-    // Arrow controls
-    const btnPrev = document.getElementById('carousel-prev');
-    const btnNext = document.getElementById('carousel-next');
-
-    if (btnPrev && btnNext) {
-      btnPrev.addEventListener('click', () => {
-        stopScroll();
-        checkAndWrapScroll();
-        const card = portfolioCarousel.firstElementChild;
-        const scrollAmount = card ? card.clientWidth + 32 : 600;
-        portfolioCarousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-        startScroll();
-      });
-
-      btnNext.addEventListener('click', () => {
-        stopScroll();
-        checkAndWrapScroll();
-        const card = portfolioCarousel.firstElementChild;
-        const scrollAmount = card ? card.clientWidth + 32 : 600;
-        portfolioCarousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-        startScroll();
-      });
-
-      btnPrev.addEventListener('mouseenter', stopScroll);
-      btnPrev.addEventListener('mouseleave', startScroll);
-      btnNext.addEventListener('mouseenter', stopScroll);
-      btnNext.addEventListener('mouseleave', startScroll);
+    function getResponsiveMultiplier(w: number) {
+      if (w < 480) return 0.35;
+      if (w < 640) return 0.48;
+      if (w < 768) return 0.65;
+      if (w < 1024) return 0.95;
+      return 1.25;
     }
 
-    // Center Set 2 on load so the carousel starts 100% FULL on both sides
-    setTimeout(() => {
-      if (portfolioCarousel && portfolioCarousel.children.length > projects.length) {
-        const card = portfolioCarousel.children[projects.length] as HTMLElement;
-        if (card) {
-          const containerCenter = portfolioCarousel.clientWidth / 2;
-          const cardCenter = card.offsetLeft + (card.clientWidth / 2);
-          portfolioCarousel.scrollTo({ left: cardCenter - containerCenter, behavior: 'auto' });
-        }
+    function getHeightMultiplier(w: number) {
+      let idealPx: number;
+      if (w < 480) idealPx = 380;
+      else if (w < 640) idealPx = 450;
+      else if (w < 768) idealPx = 520;
+      else if (w < 1024) idealPx = 640;
+      else idealPx = 720;
+      const available = window.innerHeight * 0.75;
+      if (available >= idealPx) return 1;
+      return available / idealPx;
+    }
+
+    // Carousel State Variables
+    let centerIndex = Math.min(3, Math.floor(totalProjects / 2));
+    let isAnimating = false;
+    let autoPlayTimer: any = null;
+    let isDragging = false;
+    let startX = 0;
+    let currentDragDelta = 0;
+
+    const cardElements = Array.from(portfolioCarousel.querySelectorAll<HTMLElement>('.fan-card'));
+
+    const getSlotConfig = (slot: number) => {
+      const center = HALF;
+      const distance = slot - center;
+      const absDistance = Math.abs(distance);
+      return {
+        rot: distance * 7,
+        scale: 1.0 - 0.08 * absDistance,
+        x: distance * 11,
+        y: absDistance * absDistance * 1.3,
+        zIndex: 10 - absDistance,
+      };
+    };
+
+    const getVisibleMap = (center: number) => {
+      const map = new Map<number, number>();
+      for (let slot = 0; slot < MAX_VISIBLE; slot++) {
+        const cardIdx = ((center + slot - HALF) % totalProjects + totalProjects) % totalProjects;
+        map.set(cardIdx, slot);
       }
-      startScroll();
-    }, 150);
+      return map;
+    };
+
+    const updateCardPositions = (animated = true, dragOffset = 0) => {
+      if (!cardElements.length) return;
+      const visibleMap = getVisibleMap(centerIndex);
+      const mult = getResponsiveMultiplier(window.innerWidth);
+      const hMult = getHeightMultiplier(window.innerWidth);
+      const dragShiftRem = dragOffset / 16;
+
+      cardElements.forEach((card, cardIndex) => {
+        const slot = visibleMap.get(cardIndex);
+
+        if (slot !== undefined) {
+          const config = getSlotConfig(slot);
+          const target = {
+            x: `${config.x * mult + dragShiftRem}rem`,
+            y: `${config.y * hMult}rem`,
+            rotation: config.rot + dragShiftRem * 1.5,
+            scale: config.scale,
+            opacity: 1,
+            zIndex: config.zIndex,
+            pointerEvents: 'auto' as const,
+          };
+
+          if (animated) {
+            gsap.to(card, {
+              ...target,
+              duration: 0.6,
+              ease: 'power2.out',
+              overwrite: 'auto',
+              onComplete: () => { isAnimating = false; },
+            });
+          } else {
+            gsap.set(card, target);
+          }
+        } else {
+          gsap.to(card, {
+            opacity: 0,
+            scale: 0.3,
+            duration: 0.4,
+            ease: 'power2.in',
+            pointerEvents: 'none',
+            zIndex: 0,
+          });
+        }
+      });
+
+      updatePaginationDots();
+    };
+
+    // Render Pagination Dots
+    if (portfolioPagination) {
+      portfolioPagination.innerHTML = '';
+      for (let i = 0; i < totalProjects; i++) {
+        const dot = document.createElement('button');
+        dot.ariaLabel = `Project ${i + 1}`;
+        dot.className = `h-2.5 rounded-full transition-all duration-300 cursor-pointer ${i === centerIndex ? 'w-8 bg-[#00f2ff] shadow-[0_0_12px_rgba(0,242,255,0.6)]' : 'w-2.5 bg-white/20 hover:bg-white/40'}`;
+        dot.addEventListener('click', () => {
+          if (isAnimating) return;
+          isAnimating = true;
+          centerIndex = i;
+          updateCardPositions(true);
+          resetAutoPlay();
+        });
+        portfolioPagination.appendChild(dot);
+      }
+    }
+
+    const updatePaginationDots = () => {
+      if (!portfolioPagination) return;
+      const dots = portfolioPagination.querySelectorAll('button');
+      dots.forEach((dot, idx) => {
+        if (idx === centerIndex) {
+          dot.className = 'h-2.5 w-8 rounded-full bg-[#00f2ff] shadow-[0_0_12px_rgba(0,242,255,0.6)] transition-all duration-300';
+        } else {
+          dot.className = 'h-2.5 w-2.5 rounded-full bg-white/20 hover:bg-white/40 transition-all duration-300';
+        }
+      });
+    };
+
+    const cycle = (direction: 'left' | 'right') => {
+      if (isAnimating) return;
+      isAnimating = true;
+      centerIndex = direction === 'right'
+        ? (centerIndex + 1) % totalProjects
+        : (centerIndex - 1 + totalProjects) % totalProjects;
+      updateCardPositions(true);
+    };
+
+    // Control buttons
+    if (btnPrev && btnNext) {
+      btnPrev.onclick = () => { cycle('left'); resetAutoPlay(); };
+      btnNext.onclick = () => { cycle('right'); resetAutoPlay(); };
+    }
+
+    // Touch & Mouse Real-Time Drag/Swipe Handlers
+    const handleDragStart = (clientX: number) => {
+      isDragging = true;
+      startX = clientX;
+      currentDragDelta = 0;
+      stopAutoPlay();
+    };
+
+    const handleDragMove = (clientX: number) => {
+      if (!isDragging) return;
+      currentDragDelta = clientX - startX;
+      updateCardPositions(false, currentDragDelta);
+    };
+
+    const handleDragEnd = () => {
+      if (!isDragging) return;
+      isDragging = false;
+      if (Math.abs(currentDragDelta) > 35) {
+        if (currentDragDelta < 0) {
+          cycle('right');
+        } else {
+          cycle('left');
+        }
+      } else {
+        updateCardPositions(true, 0);
+      }
+      currentDragDelta = 0;
+      resetAutoPlay();
+    };
+
+    // Touch events for Mobile / Tablet
+    portfolioCarousel.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1) {
+        handleDragStart(e.touches[0].clientX);
+      }
+    }, { passive: true });
+
+    portfolioCarousel.addEventListener('touchmove', (e) => {
+      if (e.touches.length === 1) {
+        handleDragMove(e.touches[0].clientX);
+      }
+    }, { passive: true });
+
+    portfolioCarousel.addEventListener('touchend', handleDragEnd, { passive: true });
+    portfolioCarousel.addEventListener('touchcancel', handleDragEnd, { passive: true });
+
+    // Mouse drag events for Desktop
+    portfolioCarousel.addEventListener('mousedown', (e) => {
+      handleDragStart(e.clientX);
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (isDragging) handleDragMove(e.clientX);
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (isDragging) handleDragEnd();
+    });
+
+    // Hover Expansion Effect
+    let activeHoverSlot: number | null = null;
+    let leaveTimer: any = null;
+
+    cardElements.forEach((card, index) => {
+      card.addEventListener('mouseenter', () => {
+        if (isAnimating) return;
+        if (leaveTimer) clearTimeout(leaveTimer);
+        const visibleMap = getVisibleMap(centerIndex);
+        const slot = visibleMap.get(index);
+        if (slot !== undefined) {
+          activeHoverSlot = slot;
+          const mult = getResponsiveMultiplier(window.innerWidth);
+          const hM = getHeightMultiplier(window.innerWidth);
+
+          cardElements.forEach((el, cardIdx) => {
+            const cardSlot = visibleMap.get(cardIdx);
+            if (cardSlot === undefined) return;
+            const base = getSlotConfig(cardSlot);
+            let targetX = base.x * mult;
+            let targetY = base.y * hM;
+            let targetRot = base.rot;
+            let targetScale = base.scale;
+
+            if (cardSlot === slot) {
+              targetY -= 2.2 * hM;
+              targetScale *= 1.08;
+            } else if (cardSlot < slot) {
+              targetX -= 4 * mult;
+              targetRot -= 3;
+            } else {
+              targetX += 4 * mult;
+              targetRot += 3;
+            }
+
+            gsap.to(el, {
+              x: `${targetX}rem`,
+              y: `${targetY}rem`,
+              rotation: targetRot,
+              scale: targetScale,
+              duration: 0.4,
+              ease: 'elastic.out(1, 0.75)',
+              overwrite: 'auto',
+            });
+          });
+        }
+      });
+    });
+
+    portfolioCarousel.addEventListener('mouseleave', () => {
+      if (leaveTimer) clearTimeout(leaveTimer);
+      leaveTimer = setTimeout(() => {
+        updateCardPositions(true);
+      }, 80);
+    });
+
+    const startAutoPlay = () => {
+      stopAutoPlay();
+      autoPlayTimer = setInterval(() => { cycle('right'); }, 4000);
+    };
+
+    const stopAutoPlay = () => {
+      if (autoPlayTimer) clearInterval(autoPlayTimer);
+    };
+
+    const resetAutoPlay = () => {
+      stopAutoPlay();
+      startAutoPlay();
+    };
+
+    // Responsive resize handler
+    window.addEventListener('resize', () => {
+      updateCardPositions(false);
+    });
+
+    // Initial render
+    updateCardPositions(false);
+    startAutoPlay();
   }
 
   // Trigger animations now that elements are rendered in DOM

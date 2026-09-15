@@ -7,10 +7,10 @@
 
     <!-- Microsoft Clarity -->
     <script type="text/javascript">
-        (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        (function (c, l, a, r, i, t, y) {
+            c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+            t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+            y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
         })(window, document, "clarity", "script", "y6vet6c96a");
     </script>
 
@@ -2485,8 +2485,8 @@
                                 <!-- Nuevo Logo de Máxima Calidad -->
                                 <img alt="MYNEXT - Premium Web Design Studio in Palma de Mallorca"
                                     class="w-full h-full object-contain p-1 group-hover/logo:scale-110 transition-transform duration-700"
-                                    src="./assets/img/logos/logo-mn-transparent-white.png" fetchpriority="high" width="56"
-                                    height="56">
+                                    src="./assets/img/logos/logo-mn-transparent-white.png" fetchpriority="high"
+                                    width="56" height="56">
                             </div>
                         </div>
                     </a>
@@ -2509,12 +2509,16 @@
                     style="transition: transform 2400ms cubic-bezier(0.16, 1, 0.3, 1);" id="nav-controls">
                     <!-- Language Selector -->
                     <div
-                        class="flex items-center gap-2.5 px-3 font-headline text-[10px] tracking-[0.2em] font-extrabold uppercase select-none mr-2">
+                        class="flex items-center gap-2 font-headline text-xs tracking-[0.15em] font-extrabold uppercase select-none mr-2">
                         <a href="index.html" aria-label="Switch language to Spanish"
-                            class="text-white/40 hover:text-white transition-all duration-300 hover:scale-110">ES</a>
-                        <span class="text-white/20 font-light">/</span>
+                            class="text-white/50 hover:text-white transition-colors">
+                            ES
+                        </a>
+                        <span class="text-white/30 font-normal">/</span>
                         <a href="index-en.html" aria-label="Switch language to English"
-                            class="text-[#e82728] hover:opacity-100 transition-all duration-300 hover:scale-110">EN</a>
+                            class="text-[#e82728] transition-colors">
+                            EN
+                        </a>
                     </div>
                 </div>
             </nav>
@@ -2655,9 +2659,14 @@
                         class="font-body font-light text-white/90 max-w-[800px] mx-auto text-base md:text-xl leading-loose px-4 flex flex-col items-center">
                         <p class="text-center w-full text-xl md:text-2xl font-medium">Hi! I'm Musa, creator of <span
                                 class="text-electric-cyan font-medium">MYNEXT</span>.</p>
-                        <p class="text-center w-full mt-4">I help local businesses and companies boost their online presence with modern, fast, and fully responsive websites.</p>
-                        <p class="text-center w-full mt-4">I work directly with you — no middlemen, no invisible teams. I listen to what your business needs and handle the entire process: design, development, launch, and maintenance, so you can focus on growing your company.</p>
-                        <p class="text-center w-full mt-4">Every project is crafted to deliver a professional image, make it easy for your customers to reach you, and turn more visits into real opportunities.</p>
+                        <p class="text-center w-full mt-4">I help local businesses and companies boost their online
+                            presence with modern, fast, and fully responsive websites.</p>
+                        <p class="text-center w-full mt-4">I work directly with you — no middlemen, no invisible teams.
+                            I listen to what your business needs and handle the entire process: design, development,
+                            launch, and maintenance, so you can focus on growing your company.</p>
+                        <p class="text-center w-full mt-4">Every project is crafted to deliver a professional image,
+                            make it easy for your customers to reach you, and turn more visits into real opportunities.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -2939,7 +2948,7 @@
             </a>
         </section>
 
-        <section class="min-h-screen py-32 pb-48 md:pb-60 bg-void-black relative overflow-hidden" id="portfolio">
+        <section class="py-16 md:py-24 pb-24 md:pb-36 bg-void-black relative overflow-hidden" id="portfolio">
             <!-- Stars Background -->
             <div class="stars-container">
                 <div id="stars"></div>
@@ -2949,7 +2958,7 @@
 
             <!-- Title Area -->
             <div class="max-w-container-max mx-auto relative z-10 px-5 sm:px-8 md:px-16 lg:px-24">
-                <div class="text-center mb-24 md:mb-32 reveal">
+                <div class="text-center mb-10 md:mb-16 reveal">
                     <h2 class="font-puffy font-puffy-lg tracking-normal normal-case">My Work: Premium Web Design</h2>
                     <p class="text-h4 mt-6 mx-auto max-w-3xl text-center">
                         I have designed and developed websites for various <strong>local businesses in Palma de
@@ -2960,142 +2969,218 @@
                 </div>
             </div>
 
-            <!-- PORTFOLIO CAROUSEL (Full Bleed) -->
-            <div class="relative w-full overflow-hidden mt-12 group/carousel z-10" id="portfolio-carousel-wrapper">
+            <!-- PORTFOLIO CARD FAN CAROUSEL (3D Arc Layout) -->
+            <div class="relative w-full overflow-hidden mt-6 z-10 fan-layout-container" id="portfolio-carousel-wrapper">
                 <!-- Carousel Controls -->
-                <button id="carousel-prev"
-                    class="absolute left-2 md:left-12 top-[35%] -translate-y-1/2 w-10 h-10 md:w-14 md:h-14 bg-black/50 backdrop-blur-md border border-white/10 rounded-full hidden md:flex items-center justify-center z-40 text-white hover:bg-[#00f2ff] hover:text-black hover:scale-110 transition-all opacity-0 group-hover/carousel:opacity-100 shadow-xl cursor-pointer">
-                    <span class="material-symbols-outlined text-lg md:text-2xl ml-[-2px]">arrow_back_ios_new</span>
+                <button id="carousel-prev" aria-label="Previous Project"
+                    class="absolute left-3 md:left-12 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 bg-black/60 backdrop-blur-md border border-white/15 rounded-full flex items-center justify-center z-40 text-white hover:bg-[#00f2ff] hover:text-black hover:scale-110 active:scale-95 transition-all shadow-[0_0_20px_rgba(0,0,0,0.5)] cursor-pointer">
+                    <span class="material-symbols-outlined text-xl md:text-2xl ml-[-2px]">arrow_back_ios_new</span>
                 </button>
-                <button id="carousel-next"
-                    class="absolute right-2 md:right-12 top-[35%] -translate-y-1/2 w-10 h-10 md:w-14 md:h-14 bg-black/50 backdrop-blur-md border border-white/10 rounded-full hidden md:flex items-center justify-center z-40 text-white hover:bg-[#00f2ff] hover:text-black hover:scale-110 transition-all opacity-0 group-hover/carousel:opacity-100 shadow-xl cursor-pointer">
-                    <span class="material-symbols-outlined text-lg md:text-2xl ml-[2px]">arrow_forward_ios</span>
+                <button id="carousel-next" aria-label="Next Project"
+                    class="absolute right-3 md:right-12 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 bg-black/60 backdrop-blur-md border border-white/15 rounded-full flex items-center justify-center z-40 text-white hover:bg-[#00f2ff] hover:text-black hover:scale-110 active:scale-95 transition-all shadow-[0_0_20px_rgba(0,0,0,0.5)] cursor-pointer">
+                    <span class="material-symbols-outlined text-xl md:text-2xl ml-[2px]">arrow_forward_ios</span>
                 </button>
 
-                <!-- Carousel Container -->
-                <div id="portfolio-carousel"
-                    class="flex overflow-x-auto snap-x snap-mandatory gap-4 md:gap-8 pb-12 hide-scrollbar scroll-smooth w-full px-[10vw] md:px-[25vw] lg:px-[35vw]">
+                <!-- Fan Layout Container -->
+                <div id="portfolio-carousel" class="fan-layout">
                     <!-- Pre-rendered Static Projects for AI Crawlers & SEO -->
-                    <article class="flex-none w-[80vw] md:w-[45vw] lg:w-[35vw] xl:w-[30vw] snap-center flex flex-col gap-6 transition-transform duration-500">
-                        <div class="group spotlight-card relative aspect-[16/10] rounded-3xl overflow-hidden glass-panel border border-white/10 transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-[0_0_50px_rgba(0,242,255,0.2)]">
-                            <div class="absolute inset-0 bg-[#06060c] overflow-hidden flex items-center justify-center cursor-pointer" onclick="window.location.href='project-en.html?slug=blessed-barber-studio'">
-                                <img src="./assets/img/portfolio/porfolio1.webp" alt="Premium web design in Mallorca - Preview of Blessed Barber Studio" loading="eager" decoding="async" fetchpriority="high" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.05]">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity duration-500"></div>
-                                <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center z-20 backdrop-blur-sm">
-                                    <a href="project-en.html?slug=blessed-barber-studio" class="px-8 py-4 bg-white text-black font-headline font-bold text-xs tracking-[0.3em] uppercase rounded-full hover:bg-electric-cyan transition-all duration-500 shadow-2xl scale-90 group-hover:scale-100">More Info →</a>
-                                </div>
+                    <article class="fan-card group spotlight-card relative overflow-hidden glass-panel">
+                        <div class="relative w-full h-full overflow-hidden flex items-center justify-center cursor-pointer"
+                            onclick="window.location.href='project-en.html?slug=blessed-barber-studio'">
+                            <img src="./assets/img/portfolio/porfolio1.webp"
+                                alt="Premium web design in Mallorca - Preview of Blessed Barber Studio" loading="eager"
+                                decoding="async" fetchpriority="high"
+                                class="w-full h-full object-cover object-center scale-[1.12] group-hover:scale-[1.20] transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent">
+                            </div>
+                            <div
+                                class="absolute bottom-0 inset-x-0 p-4 md:p-5 flex flex-col justify-end text-left z-20">
+                                <span
+                                    class="text-[10px] md:text-xs font-headline font-semibold uppercase tracking-[0.2em] text-[#00f2ff]">High-End
+                                    Barbershop</span>
+                                <h3
+                                    class="text-lg md:text-2xl font-bold text-white font-headline tracking-tight mt-0.5">
+                                    Blessed Barber Studio</h3>
+                                <a href="project-en.html?slug=blessed-barber-studio"
+                                    class="mt-2 inline-flex items-center gap-1.5 text-xs font-bold text-white uppercase tracking-widest group-hover:text-[#00f2ff] transition-colors">
+                                    More Info <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                </a>
                             </div>
                         </div>
-                        <div class="space-y-2 px-2 mt-4 text-center md:text-left">
-                            <h3 class="text-3xl md:text-4xl font-bold text-white font-headline tracking-tight">Blessed Barber Studio</h3>
-                            <p class="text-sm font-headline font-semibold uppercase tracking-[0.25em] text-[#00f2ff] opacity-90">High-End Barbershop</p>
-                        </div>
                     </article>
-                    <article class="flex-none w-[80vw] md:w-[45vw] lg:w-[35vw] xl:w-[30vw] snap-center flex flex-col gap-6 transition-transform duration-500">
-                        <div class="group spotlight-card relative aspect-[16/10] rounded-3xl overflow-hidden glass-panel border border-white/10 transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-[0_0_50px_rgba(0,242,255,0.2)]">
-                            <div class="absolute inset-0 bg-[#06060c] overflow-hidden flex items-center justify-center cursor-pointer" onclick="window.location.href='project-en.html?slug=bar-cafeteria-luna-llena'">
-                                <img src="./assets/img/portfolio/porfolio2-v3.webp" alt="Premium web design in Mallorca - Preview of Bar Cafetería Luna Llena" loading="eager" decoding="async" fetchpriority="high" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.05]">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity duration-500"></div>
-                                <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center z-20 backdrop-blur-sm">
-                                    <a href="project-en.html?slug=bar-cafeteria-luna-llena" class="px-8 py-4 bg-white text-black font-headline font-bold text-xs tracking-[0.3em] uppercase rounded-full hover:bg-electric-cyan transition-all duration-500 shadow-2xl scale-90 group-hover:scale-100">More Info →</a>
-                                </div>
+                    <article class="fan-card group spotlight-card relative overflow-hidden glass-panel">
+                        <div class="relative w-full h-full overflow-hidden flex items-center justify-center cursor-pointer"
+                            onclick="window.location.href='project-en.html?slug=bar-cafeteria-luna-llena'">
+                            <img src="./assets/img/portfolio/porfolio2-v3.webp"
+                                alt="Premium web design in Mallorca - Preview of Bar Cafetería Luna Llena"
+                                loading="eager" decoding="async" fetchpriority="high"
+                                class="w-full h-full object-cover object-center scale-[1.12] group-hover:scale-[1.20] transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent">
+                            </div>
+                            <div
+                                class="absolute bottom-0 inset-x-0 p-4 md:p-5 flex flex-col justify-end text-left z-20">
+                                <span
+                                    class="text-[10px] md:text-xs font-headline font-semibold uppercase tracking-[0.2em] text-[#00f2ff]">Specialty
+                                    Coffee & Bar</span>
+                                <h3
+                                    class="text-lg md:text-2xl font-bold text-white font-headline tracking-tight mt-0.5">
+                                    Bar Cafetería Luna Llena</h3>
+                                <a href="project-en.html?slug=bar-cafeteria-luna-llena"
+                                    class="mt-2 inline-flex items-center gap-1.5 text-xs font-bold text-white uppercase tracking-widest group-hover:text-[#00f2ff] transition-colors">
+                                    More Info <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                </a>
                             </div>
                         </div>
-                        <div class="space-y-2 px-2 mt-4 text-center md:text-left">
-                            <h3 class="text-3xl md:text-4xl font-bold text-white font-headline tracking-tight">Bar Cafetería Luna Llena</h3>
-                            <p class="text-sm font-headline font-semibold uppercase tracking-[0.25em] text-[#00f2ff] opacity-90">Specialty Coffee & Bar</p>
-                        </div>
                     </article>
-                    <article class="flex-none w-[80vw] md:w-[45vw] lg:w-[35vw] xl:w-[30vw] snap-center flex flex-col gap-6 transition-transform duration-500">
-                        <div class="group spotlight-card relative aspect-[16/10] rounded-3xl overflow-hidden glass-panel border border-white/10 transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-[0_0_50px_rgba(0,242,255,0.2)]">
-                            <div class="absolute inset-0 bg-[#06060c] overflow-hidden flex items-center justify-center cursor-pointer" onclick="window.location.href='project-en.html?slug=ecuaplac'">
-                                <img src="./assets/img/portfolio/porfolio3.webp" alt="Premium web design in Mallorca - Preview of Ecuaplac" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.05]">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity duration-500"></div>
-                                <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center z-20 backdrop-blur-sm">
-                                    <a href="project-en.html?slug=ecuaplac" class="px-8 py-4 bg-white text-black font-headline font-bold text-xs tracking-[0.3em] uppercase rounded-full hover:bg-electric-cyan transition-all duration-500 shadow-2xl scale-90 group-hover:scale-100">More Info →</a>
-                                </div>
+                    <article class="fan-card group spotlight-card relative overflow-hidden glass-panel">
+                        <div class="relative w-full h-full overflow-hidden flex items-center justify-center cursor-pointer"
+                            onclick="window.location.href='project-en.html?slug=ecuaplac'">
+                            <img src="./assets/img/portfolio/porfolio3.webp"
+                                alt="Premium web design in Mallorca - Preview of Ecuaplac" loading="lazy"
+                                decoding="async"
+                                class="w-full h-full object-cover object-center scale-[1.12] group-hover:scale-[1.20] transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent">
+                            </div>
+                            <div
+                                class="absolute bottom-0 inset-x-0 p-4 md:p-5 flex flex-col justify-end text-left z-20">
+                                <span
+                                    class="text-[10px] md:text-xs font-headline font-semibold uppercase tracking-[0.2em] text-[#00f2ff]">Luxury
+                                    Renovations</span>
+                                <h3
+                                    class="text-lg md:text-2xl font-bold text-white font-headline tracking-tight mt-0.5">
+                                    Ecuaplac</h3>
+                                <a href="project-en.html?slug=ecuaplac"
+                                    class="mt-2 inline-flex items-center gap-1.5 text-xs font-bold text-white uppercase tracking-widest group-hover:text-[#00f2ff] transition-colors">
+                                    More Info <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                </a>
                             </div>
                         </div>
-                        <div class="space-y-2 px-2 mt-4 text-center md:text-left">
-                            <h3 class="text-3xl md:text-4xl font-bold text-white font-headline tracking-tight">Ecuaplac</h3>
-                            <p class="text-sm font-headline font-semibold uppercase tracking-[0.25em] text-[#00f2ff] opacity-90">Luxury Renovations</p>
-                        </div>
                     </article>
-                    <article class="flex-none w-[80vw] md:w-[45vw] lg:w-[35vw] xl:w-[30vw] snap-center flex flex-col gap-6 transition-transform duration-500">
-                        <div class="group spotlight-card relative aspect-[16/10] rounded-3xl overflow-hidden glass-panel border border-white/10 transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-[0_0_50px_rgba(0,242,255,0.2)]">
-                            <div class="absolute inset-0 bg-[#06060c] overflow-hidden flex items-center justify-center cursor-pointer" onclick="window.location.href='project-en.html?slug=rbari-restaurant'">
-                                <img src="./assets/img/portfolio/porfolio4.webp" alt="Premium web design in Mallorca - Preview of RBARI RESTAURANT" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.05]">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity duration-500"></div>
-                                <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center z-20 backdrop-blur-sm">
-                                    <a href="project-en.html?slug=rbari-restaurant" class="px-8 py-4 bg-white text-black font-headline font-bold text-xs tracking-[0.3em] uppercase rounded-full hover:bg-electric-cyan transition-all duration-500 shadow-2xl scale-90 group-hover:scale-100">More Info →</a>
-                                </div>
+                    <article class="fan-card group spotlight-card relative overflow-hidden glass-panel">
+                        <div class="relative w-full h-full overflow-hidden flex items-center justify-center cursor-pointer"
+                            onclick="window.location.href='project-en.html?slug=rbari-restaurant'">
+                            <img src="./assets/img/portfolio/porfolio4.webp"
+                                alt="Premium web design in Mallorca - Preview of RBARI RESTAURANT" loading="lazy"
+                                decoding="async"
+                                class="w-full h-full object-cover object-center scale-[1.12] group-hover:scale-[1.20] transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent">
+                            </div>
+                            <div
+                                class="absolute bottom-0 inset-x-0 p-4 md:p-5 flex flex-col justify-end text-left z-20">
+                                <span
+                                    class="text-[10px] md:text-xs font-headline font-semibold uppercase tracking-[0.2em] text-[#00f2ff]">Gastronomic
+                                    Restaurant</span>
+                                <h3
+                                    class="text-lg md:text-2xl font-bold text-white font-headline tracking-tight mt-0.5">
+                                    RBARI RESTAURANT</h3>
+                                <a href="project-en.html?slug=rbari-restaurant"
+                                    class="mt-2 inline-flex items-center gap-1.5 text-xs font-bold text-white uppercase tracking-widest group-hover:text-[#00f2ff] transition-colors">
+                                    More Info <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                </a>
                             </div>
                         </div>
-                        <div class="space-y-2 px-2 mt-4 text-center md:text-left">
-                            <h3 class="text-3xl md:text-4xl font-bold text-white font-headline tracking-tight">RBARI RESTAURANT</h3>
-                            <p class="text-sm font-headline font-semibold uppercase tracking-[0.25em] text-[#00f2ff] opacity-90">Gastronomic Restaurant</p>
-                        </div>
                     </article>
-                    <article class="flex-none w-[80vw] md:w-[45vw] lg:w-[35vw] xl:w-[30vw] snap-center flex flex-col gap-6 transition-transform duration-500">
-                        <div class="group spotlight-card relative aspect-[16/10] rounded-3xl overflow-hidden glass-panel border border-white/10 transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-[0_0_50px_rgba(0,242,255,0.2)]">
-                            <div class="absolute inset-0 bg-[#06060c] overflow-hidden flex items-center justify-center cursor-pointer" onclick="window.location.href='project-en.html?slug=next-era'">
-                                <img src="./assets/img/portfolio/porfolio5.webp" alt="Premium web design in Mallorca - Preview of NEXT ERA" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.05]">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity duration-500"></div>
-                                <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center z-20 backdrop-blur-sm">
-                                    <a href="project-en.html?slug=next-era" class="px-8 py-4 bg-white text-black font-headline font-bold text-xs tracking-[0.3em] uppercase rounded-full hover:bg-electric-cyan transition-all duration-500 shadow-2xl scale-90 group-hover:scale-100">More Info →</a>
-                                </div>
+                    <article class="fan-card group spotlight-card relative overflow-hidden glass-panel">
+                        <div class="relative w-full h-full overflow-hidden flex items-center justify-center cursor-pointer"
+                            onclick="window.location.href='project-en.html?slug=next-era'">
+                            <img src="./assets/img/portfolio/porfolio5.webp"
+                                alt="Premium web design in Mallorca - Preview of NEXT ERA" loading="lazy"
+                                decoding="async"
+                                class="w-full h-full object-cover object-center scale-[1.12] group-hover:scale-[1.20] transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent">
+                            </div>
+                            <div
+                                class="absolute bottom-0 inset-x-0 p-4 md:p-5 flex flex-col justify-end text-left z-20">
+                                <span
+                                    class="text-[10px] md:text-xs font-headline font-semibold uppercase tracking-[0.2em] text-[#00f2ff]">E-Commerce
+                                    Store</span>
+                                <h3
+                                    class="text-lg md:text-2xl font-bold text-white font-headline tracking-tight mt-0.5">
+                                    NEXT ERA</h3>
+                                <a href="project-en.html?slug=next-era"
+                                    class="mt-2 inline-flex items-center gap-1.5 text-xs font-bold text-white uppercase tracking-widest group-hover:text-[#00f2ff] transition-colors">
+                                    More Info <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                </a>
                             </div>
                         </div>
-                        <div class="space-y-2 px-2 mt-4 text-center md:text-left">
-                            <h3 class="text-3xl md:text-4xl font-bold text-white font-headline tracking-tight">NEXT ERA</h3>
-                            <p class="text-sm font-headline font-semibold uppercase tracking-[0.25em] text-[#00f2ff] opacity-90">E-Commerce Store</p>
-                        </div>
                     </article>
-                    <article class="flex-none w-[80vw] md:w-[45vw] lg:w-[35vw] xl:w-[30vw] snap-center flex flex-col gap-6 transition-transform duration-500">
-                        <div class="group spotlight-card relative aspect-[16/10] rounded-3xl overflow-hidden glass-panel border border-white/10 transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-[0_0_50px_rgba(0,242,255,0.2)]">
-                            <div class="absolute inset-0 bg-[#06060c] overflow-hidden flex items-center justify-center cursor-pointer" onclick="window.location.href='project-en.html?slug=mezquita-arrahma'">
-                                <img src="./assets/img/portfolio/porfolio6.webp" alt="Premium web design in Mallorca - Preview of Mezquita Arrahma" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.05]">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity duration-500"></div>
-                                <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center z-20 backdrop-blur-sm">
-                                    <a href="project-en.html?slug=mezquita-arrahma" class="px-8 py-4 bg-white text-black font-headline font-bold text-xs tracking-[0.3em] uppercase rounded-full hover:bg-electric-cyan transition-all duration-500 shadow-2xl scale-90 group-hover:scale-100">More Info →</a>
-                                </div>
+                    <article class="fan-card group spotlight-card relative overflow-hidden glass-panel">
+                        <div class="relative w-full h-full overflow-hidden flex items-center justify-center cursor-pointer"
+                            onclick="window.location.href='project-en.html?slug=mezquita-arrahma'">
+                            <img src="./assets/img/portfolio/porfolio6.webp"
+                                alt="Premium web design in Mallorca - Preview of Mezquita Arrahma" loading="lazy"
+                                decoding="async"
+                                class="w-full h-full object-cover object-center scale-[1.12] group-hover:scale-[1.20] transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent">
+                            </div>
+                            <div
+                                class="absolute bottom-0 inset-x-0 p-4 md:p-5 flex flex-col justify-end text-left z-20">
+                                <span
+                                    class="text-[10px] md:text-xs font-headline font-semibold uppercase tracking-[0.2em] text-[#00f2ff]">Islamic
+                                    Center</span>
+                                <h3
+                                    class="text-lg md:text-2xl font-bold text-white font-headline tracking-tight mt-0.5">
+                                    Mezquita Arrahma</h3>
+                                <a href="project-en.html?slug=mezquita-arrahma"
+                                    class="mt-2 inline-flex items-center gap-1.5 text-xs font-bold text-white uppercase tracking-widest group-hover:text-[#00f2ff] transition-colors">
+                                    More Info <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                </a>
                             </div>
                         </div>
-                        <div class="space-y-2 px-2 mt-4 text-center md:text-left">
-                            <h3 class="text-3xl md:text-4xl font-bold text-white font-headline tracking-tight">Mezquita Arrahma</h3>
-                            <p class="text-sm font-headline font-semibold uppercase tracking-[0.25em] text-[#00f2ff] opacity-90">Islamic Center</p>
-                        </div>
                     </article>
-                    <article class="flex-none w-[80vw] md:w-[45vw] lg:w-[35vw] xl:w-[30vw] snap-center flex flex-col gap-6 transition-transform duration-500">
-                        <div class="group spotlight-card relative aspect-[16/10] rounded-3xl overflow-hidden glass-panel border border-white/10 transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-[0_0_50px_rgba(0,242,255,0.2)]">
-                            <div class="absolute inset-0 bg-[#06060c] overflow-hidden flex items-center justify-center cursor-pointer" onclick="window.location.href='project-en.html?slug=gran-marrakech'">
-                                <img src="./assets/img/portfolio/porfolio7.webp" alt="Premium web design in Mallorca - Preview of Gran Marrakech" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.05]">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity duration-500"></div>
-                                <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center z-20 backdrop-blur-sm">
-                                    <a href="project-en.html?slug=gran-marrakech" class="px-8 py-4 bg-white text-black font-headline font-bold text-xs tracking-[0.3em] uppercase rounded-full hover:bg-electric-cyan transition-all duration-500 shadow-2xl scale-90 group-hover:scale-100">More Info →</a>
-                                </div>
+                    <article class="fan-card group spotlight-card relative overflow-hidden glass-panel">
+                        <div class="relative w-full h-full overflow-hidden flex items-center justify-center cursor-pointer"
+                            onclick="window.location.href='project-en.html?slug=gran-marrakech'">
+                            <img src="./assets/img/portfolio/porfolio7.webp"
+                                alt="Premium web design in Mallorca - Preview of Gran Marrakech" loading="lazy"
+                                decoding="async"
+                                class="w-full h-full object-cover object-center scale-[1.12] group-hover:scale-[1.20] transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent">
+                            </div>
+                            <div
+                                class="absolute bottom-0 inset-x-0 p-4 md:p-5 flex flex-col justify-end text-left z-20">
+                                <span
+                                    class="text-[10px] md:text-xs font-headline font-semibold uppercase tracking-[0.2em] text-[#00f2ff]">Moroccan
+                                    Restaurant</span>
+                                <h3
+                                    class="text-lg md:text-2xl font-bold text-white font-headline tracking-tight mt-0.5">
+                                    Gran Marrakech</h3>
+                                <a href="project-en.html?slug=gran-marrakech"
+                                    class="mt-2 inline-flex items-center gap-1.5 text-xs font-bold text-white uppercase tracking-widest group-hover:text-[#00f2ff] transition-colors">
+                                    More Info <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                </a>
                             </div>
                         </div>
-                        <div class="space-y-2 px-2 mt-4 text-center md:text-left">
-                            <h3 class="text-3xl md:text-4xl font-bold text-white font-headline tracking-tight">Gran Marrakech</h3>
-                            <p class="text-sm font-headline font-semibold uppercase tracking-[0.25em] text-[#00f2ff] opacity-90">Moroccan Restaurant</p>
-                        </div>
                     </article>
-                    <article class="flex-none w-[80vw] md:w-[45vw] lg:w-[35vw] xl:w-[30vw] snap-center flex flex-col gap-6 transition-transform duration-500">
-                        <div class="group spotlight-card relative aspect-[16/10] rounded-3xl overflow-hidden glass-panel border border-white/10 transition-all duration-500 hover:border-electric-cyan/40 hover:shadow-[0_0_50px_rgba(0,242,255,0.2)]">
-                            <div class="absolute inset-0 bg-[#06060c] overflow-hidden flex items-center justify-center cursor-pointer" onclick="window.location.href='project-en.html?slug=tacos-marrakech'">
-                                <img src="./assets/img/portfolio/porfolio8.webp" alt="Premium web design in Mallorca - Preview of Tacos Marrakech" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.05]">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity duration-500"></div>
-                                <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center z-20 backdrop-blur-sm">
-                                    <a href="project-en.html?slug=tacos-marrakech" class="px-8 py-4 bg-white text-black font-headline font-bold text-xs tracking-[0.3em] uppercase rounded-full hover:bg-electric-cyan transition-all duration-500 shadow-2xl scale-90 group-hover:scale-100">More Info →</a>
-                                </div>
+                    <article class="fan-card group spotlight-card relative overflow-hidden glass-panel">
+                        <div class="relative w-full h-full overflow-hidden flex items-center justify-center cursor-pointer"
+                            onclick="window.location.href='project-en.html?slug=tacos-marrakech'">
+                            <img src="./assets/img/portfolio/porfolio8.webp"
+                                alt="Premium web design in Mallorca - Preview of Tacos Marrakech" loading="lazy"
+                                decoding="async"
+                                class="w-full h-full object-cover object-center scale-[1.12] group-hover:scale-[1.20] transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent">
+                            </div>
+                            <div
+                                class="absolute bottom-0 inset-x-0 p-4 md:p-5 flex flex-col justify-end text-left z-20">
+                                <span
+                                    class="text-[10px] md:text-xs font-headline font-semibold uppercase tracking-[0.2em] text-[#00f2ff]">Moroccan
+                                    Restaurant</span>
+                                <h3
+                                    class="text-lg md:text-2xl font-bold text-white font-headline tracking-tight mt-0.5">
+                                    Tacos Marrakech</h3>
+                                <a href="project-en.html?slug=tacos-marrakech"
+                                    class="mt-2 inline-flex items-center gap-1.5 text-xs font-bold text-white uppercase tracking-widest group-hover:text-[#00f2ff] transition-colors">
+                                    More Info <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                </a>
                             </div>
                         </div>
-                        <div class="space-y-2 px-2 mt-4 text-center md:text-left">
-                            <h3 class="text-3xl md:text-4xl font-bold text-white font-headline tracking-tight">Tacos Marrakech</h3>
-                            <p class="text-sm font-headline font-semibold uppercase tracking-[0.25em] text-[#00f2ff] opacity-90">Moroccan Restaurant</p>
-                        </div>
                     </article>
+                </div>
+
+                <!-- Dynamic Portfolio Indicators -->
+                <div id="portfolio-pagination" class="flex items-center justify-center gap-3 mt-8 z-30 relative">
+                    <!-- Dots generated dynamically -->
                 </div>
             </div>
         </section>
@@ -3250,7 +3335,9 @@
                                     </div>
                                 </div>
                                 <div class="my-auto flex flex-col items-center justify-center py-6 text-center">
-                                    <div class="flex text-amber-400 text-2xl drop-shadow-[0_0_12px_rgba(251,191,36,0.7)] tracking-widest">★★★★★</div>
+                                    <div
+                                        class="flex text-amber-400 text-2xl drop-shadow-[0_0_12px_rgba(251,191,36,0.7)] tracking-widest">
+                                        ★★★★★</div>
                                 </div>
                                 <div class="flex items-center gap-4 pt-6 border-t border-white/5">
                                     <div
@@ -3980,11 +4067,13 @@
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <div class="form-group">
                                         <label for="name">Your Name / Business</label>
-                                        <input type="text" id="name" name="name" placeholder="e.g. John / Barber Studio" required>
+                                        <input type="text" id="name" name="name" placeholder="e.g. John / Barber Studio"
+                                            required>
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Contact Email</label>
-                                        <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                                        <input type="email" id="email" name="email" placeholder="your@email.com"
+                                            required>
                                     </div>
                                 </div>
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -3995,8 +4084,10 @@
                                     <div class="form-group">
                                         <label for="project_type">Web Project Type</label>
                                         <select id="project_type" name="project_type">
-                                            <option value="Landing Page / Launch Web">Landing Page / Launch Page</option>
-                                            <option value="Corporate Web / Local Business">Corporate Web / Local Business</option>
+                                            <option value="Landing Page / Launch Web">Landing Page / Launch Page
+                                            </option>
+                                            <option value="Corporate Web / Local Business">Corporate Web / Local
+                                                Business</option>
                                             <option value="Online Store (E-Commerce)">Online Store (E-Commerce)</option>
                                             <option value="Redesign / Maintenance">Redesign / Maintenance</option>
                                             <option value="Custom Project / Web App">100% Custom Web App</option>
@@ -4015,7 +4106,8 @@
                                 <div class="form-group">
                                     <label for="textarea">Project Details / Idea</label>
                                     <textarea name="message" id="textarea"
-                                        placeholder="Tell us briefly about your business, your goals, or any references you like..." required></textarea>
+                                        placeholder="Tell us briefly about your business, your goals, or any references you like..."
+                                        required></textarea>
                                 </div>
                                 <button class="form-submit-btn" type="submit">
                                     <span class="btn-text">Request Free Proposal →</span>
@@ -4311,52 +4403,80 @@
 
     <!-- 5. FOOTER -->
     <footer
-        class="py-20 px-6 md:px-margin-desktop bg-gradient-to-b from-void-black to-[#020205] border-t border-electric-cyan/10 shadow-[0_-20px_50px_rgba(0,242,255,0.06)] relative z-40 overflow-hidden">
-        <!-- Radial Glow behind footer -->
+        class="py-20 px-6 md:px-margin-desktop bg-gradient-to-b from-[#0c0f1d] via-[#070914] to-[#04050a] border-t border-cyan-500/20 shadow-[0_-25px_60px_rgba(0,242,255,0.12)] relative z-40 overflow-hidden">
+        <!-- Dual Radial Ambient Glows -->
         <div
-            class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[300px] h-[300px] bg-blue-600/5 blur-[100px] rounded-full pointer-events-none">
+            class="absolute -top-24 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-cyan-500/10 blur-[130px] rounded-full pointer-events-none">
+        </div>
+        <div
+            class="absolute -bottom-24 right-10 w-[450px] h-[300px] bg-purple-600/10 blur-[140px] rounded-full pointer-events-none">
         </div>
 
-        <div class="max-w-container-max mx-auto flex flex-col gap-12 relative z-10">
-            <!-- Custom Elegant Divider Line -->
+        <div class="max-w-container-max mx-auto flex flex-col gap-10 relative z-10">
+            <!-- Luminous Divider Line -->
             <div
-                class="w-full h-[1.5px] bg-gradient-to-r from-transparent via-electric-cyan/40 to-transparent relative mb-6">
+                class="w-full h-[2px] bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent relative mb-4 shadow-[0_0_15px_rgba(0,242,255,0.5)]">
                 <div
-                    class="absolute left-1/2 -translate-x-1/2 -top-[2px] w-20 h-1 bg-electric-cyan shadow-[0_0_20px_#00f2ff] rounded-full">
+                    class="absolute left-1/2 -translate-x-1/2 -top-[3px] w-28 h-1.5 bg-cyan-400 shadow-[0_0_20px_#00f2ff] rounded-full">
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 items-center md:items-start gap-8">
-                <!-- Legal Links (stacked vertically on the left) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 items-center md:items-start gap-10">
+                <!-- Legal Links (left column) -->
                 <div
-                    class="flex flex-col items-center md:items-start gap-4 text-[13px] font-medium tracking-wide text-slate-300 order-2 md:order-1">
+                    class="flex flex-col items-center md:items-start gap-3 order-2 md:order-1 font-headline">
+                    <span class="text-[11px] font-headline text-cyan-400 uppercase tracking-[0.25em] font-bold mb-2 flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#00f2ff]"></span> LEGAL & TERMS
+                    </span>
                     <a href="#" data-modal="aviso-legal" data-sb-content="footer_link_legal"
-                        class="hover:text-white transition-colors duration-300 cursor-pointer">Legal Notice</a>
+                        class="text-[13px] font-medium tracking-wider text-slate-300 hover:text-cyan-300 hover:translate-x-1 transition-all duration-300 cursor-pointer flex items-center gap-2 group">
+                        <span class="w-1 h-1 rounded-full bg-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                        Legal Notice
+                    </a>
                     <a href="#" data-modal="privacidad" data-sb-content="footer_link_privacy"
-                        class="hover:text-white transition-colors duration-300 cursor-pointer">Privacy Policy</a>
+                        class="text-[13px] font-medium tracking-wider text-slate-300 hover:text-cyan-300 hover:translate-x-1 transition-all duration-300 cursor-pointer flex items-center gap-2 group">
+                        <span class="w-1 h-1 rounded-full bg-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                        Privacy Policy
+                    </a>
                     <a href="#" data-modal="cookies" data-sb-content="footer_link_cookies"
-                        class="hover:text-white transition-colors duration-300 cursor-pointer">Cookie Policy</a>
+                        class="text-[13px] font-medium tracking-wider text-slate-300 hover:text-cyan-300 hover:translate-x-1 transition-all duration-300 cursor-pointer flex items-center gap-2 group">
+                        <span class="w-1 h-1 rounded-full bg-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                        Cookie Policy
+                    </a>
                     <a href="#" data-modal="terminos" data-sb-content="footer_link_terms"
-                        class="hover:text-white transition-colors duration-300 cursor-pointer">Terms & Conditions</a>
+                        class="text-[13px] font-medium tracking-wider text-slate-300 hover:text-cyan-300 hover:translate-x-1 transition-all duration-300 cursor-pointer flex items-center gap-2 group">
+                        <span class="w-1 h-1 rounded-full bg-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                        Terms & Conditions
+                    </a>
                     <a href="#" data-modal="gestion-tecnica" data-sb-content="footer_link_tech"
-                        class="hover:text-white transition-colors duration-300 cursor-pointer">Technical Management</a>
+                        class="text-[13px] font-medium tracking-wider text-slate-300 hover:text-cyan-300 hover:translate-x-1 transition-all duration-300 cursor-pointer flex items-center gap-2 group">
+                        <span class="w-1 h-1 rounded-full bg-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                        Technical Management
+                    </a>
                 </div>
 
-                <!-- Branding (centered in the middle) -->
-                <div class="flex flex-col items-center text-center gap-2 order-1 md:order-2">
-                    <a href="index-en.html" title="Back to home" aria-label="MYNEXT Home" class="footer-logo-ring">
-                        <img src="./assets/img/logos/logo-mn-transparent-white.png" alt="MYNEXT - Digital Architecture in Palma"
-                            class="footer-logo w-[70px] sm:w-[85px] h-auto object-contain opacity-95 hover:opacity-100 hover:scale-105 transition-all duration-500"
+                <!-- Branding (centered column) -->
+                <div class="flex flex-col items-center text-center gap-4 order-1 md:order-2">
+                    <a href="index-en.html" title="Back to home" aria-label="MYNEXT Home" class="footer-logo-ring hover:scale-105 transition-transform duration-500 shadow-[0_0_50px_rgba(0,242,255,0.3)]">
+                        <img src="./assets/img/logos/logo-mn-transparent-white.png"
+                            alt="MYNEXT - Digital Architecture in Palma"
+                            class="footer-logo w-[70px] sm:w-[85px] h-auto object-contain opacity-95 hover:opacity-100 transition-all duration-500"
                             loading="lazy" width="85" height="85">
                     </a>
-                    <span data-sb-content="footer_branding"
-                        class="text-[10px] font-headline text-electric-cyan tracking-[0.3em] uppercase font-semibold">Digital
-                        Architecture</span>
+                    <div class="space-y-1.5">
+                        <span data-sb-content="footer_branding"
+                            class="text-[11px] font-headline text-cyan-400 tracking-[0.35em] uppercase font-bold block">Digital Architecture</span>
+                        <p data-sb-content="footer_desc"
+                            class="text-xs md:text-[13px] text-slate-300/80 max-w-[16rem] mx-auto leading-relaxed font-body">
+                            Elegant and functional web design with a premium presence in every project.</p>
+                    </div>
                 </div>
 
-                <!-- Social & Navigation (on the right) -->
-                <div class="flex flex-col items-center md:items-end gap-6 order-3">
-
+                <!-- Social & Navigation (right column) -->
+                <div class="flex flex-col items-center md:items-end gap-6 order-3 font-headline">
+                    <span class="text-[11px] font-headline text-cyan-400 uppercase tracking-[0.25em] font-bold mb-1 hidden md:block">
+                        CONNECT & NAVIGATE
+                    </span>
                     <ul class="social-buttons-wrapper">
                         <!-- Twitter / X -->
                         <li class="icon twitter">
@@ -4414,25 +4534,30 @@
 
                     <!-- Compact Navigation Bar -->
                     <nav
-                        class="flex flex-col items-center md:items-end gap-3 text-[14px] font-medium tracking-wide text-slate-300">
+                        class="flex flex-col items-center md:items-end gap-2.5 text-[13px] font-headline font-medium tracking-wider text-slate-300">
                         <a href="#nosotros" data-sb-content="nav_about"
-                            class="hover:text-white transition-colors duration-300">About Me</a>
+                            class="hover:text-cyan-300 hover:-translate-x-1 transition-all duration-300">About Me</a>
                         <a href="#portfolio" data-sb-content="nav_portfolio"
-                            class="hover:text-white transition-colors duration-300">Portfolio</a>
+                            class="hover:text-cyan-300 hover:-translate-x-1 transition-all duration-300">Portfolio</a>
                         <a href="planes/index-en.html" data-sb-content="nav_plans"
-                            class="hover:text-white transition-colors duration-300">Plans</a>
+                            class="hover:text-cyan-300 hover:-translate-x-1 transition-all duration-300">Plans</a>
                         <a href="#contacto" data-sb-content="nav_contact"
-                            class="hover:text-white transition-colors duration-300">Contact</a>
+                            class="hover:text-cyan-300 hover:-translate-x-1 transition-all duration-300">Contact</a>
                     </nav>
                 </div>
             </div>
+
+            <!-- Bottom Copyright Bar -->
             <div
-                class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left text-slate-400 text-[11px] font-medium uppercase tracking-widest">
+                class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left text-slate-400 text-[11px] font-headline tracking-[0.18em] uppercase font-medium">
                 <div data-sb-content="footer_copyright">© 2026 MYNEXT. All rights reserved.</div>
-                <p data-sb-content="footer_madeby" class="text-[10px] tracking-widest">
-                    Made by <a href="https://mynextbymusa.com" class="text-white hover:text-cyan-400 transition-colors"
-                        target="_blank" rel="noopener noreferrer">Musa</a>
-                </p>
+                <div data-sb-content="footer_madeby">
+                    <a href="https://mynextbymusa.com" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-white font-headline text-[10px] tracking-widest uppercase hover:bg-cyan-500/20 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(0,242,255,0.3)] transition-all duration-300">
+                        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_#00f2ff]"></span>
+                        HANDMADE BY MUSA
+                    </a>
+                </div>
             </div>
         </div>
     </footer>
@@ -4491,11 +4616,11 @@
 
             <div class="flex flex-col sm:flex-row w-full gap-3 justify-center">
                 <button id="cookie-reject" data-sb-content="cookie_btn_reject"
-                    class="flex-1 py-2 text-[10px] text-white/50 hover:text-white transition-colors duration-300 font-headline uppercase tracking-wider text-center">
+                    class="flex-1 py-2.5 text-[10px] text-electric-cyan border border-electric-cyan/40 hover:bg-electric-cyan hover:text-black font-headline font-bold uppercase tracking-wider rounded-lg transition-all duration-300 shadow-[0_0_15px_rgba(0,242,255,0.25)] text-center">
                     Reject
                 </button>
                 <button id="cookie-configure" data-sb-content="cookie_btn_config"
-                    class="flex-1 py-2.5 text-[10px] text-electric-cyan border border-electric-cyan/20 hover:bg-electric-cyan/10 transition-colors duration-300 font-headline uppercase tracking-wider rounded-lg text-center">
+                    class="flex-1 py-2.5 text-[10px] text-white/70 border border-white/10 hover:border-white/30 hover:bg-white/5 transition-all duration-300 font-headline uppercase tracking-wider rounded-lg text-center">
                     More Options
                 </button>
                 <button id="cookie-accept-all" data-sb-content="cookie_btn_accept"
@@ -4583,7 +4708,8 @@
                     <p class="text-white/60"><span data-sb-content="modal_privacy_p1_text">The controller for the
                             processing of personal data collected on this website is MYNEXT, with contact email</span>
                         <a href="mailto:mynextbymusa@gmail.com"
-                            class="text-electric-cyan hover:underline">mynextbymusa@gmail.com</a>.</p>
+                            class="text-electric-cyan hover:underline">mynextbymusa@gmail.com</a>.
+                    </p>
                 </div>
 
                 <div class="border-l-2 border-electric-cyan/30 pl-4 space-y-2">

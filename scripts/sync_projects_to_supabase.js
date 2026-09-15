@@ -104,7 +104,7 @@ const projectsToSync = [
       en: 'For Ecuaplac we developed a complete brand ecosystem integrating corporate web design with physical company branding. We revamped the visual identity with a new corporate logo and created print materials: premium business cards with dynamic QR code access and custom vehicle vinyl designs with QR codes for the company fleet. Scanning the vehicle vinyl or business card gives clients instant access to the digital catalog and quote requests.'
     }),
     image_url: './assets/img/portfolio/porfolio3.webp',
-    project_url: 'https://ecuapv2.pages.dev/',
+    project_url: 'https://ecuaplac.com/',
     technologies: 'HTML, CSS, JS, Tailwind',
     featured: false,
     active: true,

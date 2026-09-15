@@ -2,6 +2,7 @@ import './style.css';
 import { supabase } from './lib/supabase';
 import { fallbackProjects, fallbackSettings } from './lib/fallbackData';
 import { initAnalyticsListeners } from './lib/analytics';
+import { getTranslation, applyDynamicSettings, sanitizeHtml } from './lib/domUtils';
 
 // Legal Modals handler
 function initLegalModals() {
@@ -51,34 +52,7 @@ function initLegalModals() {
   });
 }
 
-// Utility to apply dynamic settings from Supabase to HTML elements
-function applyDynamicSettings(settingsMap: Record<string, string>, currentLang: 'es' | 'en') {
-  const getTranslation = (value: string | null | undefined, language: 'es' | 'en'): string => {
-    if (!value) return '';
-    try {
-      const parsed = JSON.parse(value);
-      if (parsed && typeof parsed === 'object') {
-        if (parsed[language] !== undefined) return parsed[language];
-        if (parsed['es'] !== undefined) return parsed['es'];
-        return value;
-      }
-    } catch {
-      // not JSON
-    }
-    return value;
-  };
 
-  const elements = document.querySelectorAll<HTMLElement>('[data-sb-content]');
-  elements.forEach(el => {
-    const key = el.getAttribute('data-sb-content');
-    if (key && settingsMap[key]) {
-      const translation = getTranslation(settingsMap[key], currentLang);
-      if (translation) {
-        el.innerHTML = translation;
-      }
-    }
-  });
-}
 
 // Utility to handle proposal contact form submissions in project page
 function initContactForm(lang: 'es' | 'en') {
@@ -269,9 +243,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Settings initialization with fallback
   let settings: Record<string, string> = fallbackSettings;
 
-  // Parse URL parameter
+  // Parse URL parameter (supports both ?slug= and ?id=)
   const urlParams = new URLSearchParams(window.location.search);
-  const slug = urlParams.get('slug');
+  const slug = urlParams.get('slug') || urlParams.get('id');
 
   let project: any = null;
 

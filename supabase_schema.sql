@@ -67,11 +67,15 @@ ALTER TABLE mynext_testimonials ENABLE ROW LEVEL SECURITY;
 ALTER TABLE mynext_settings ENABLE ROW LEVEL SECURITY;
 ALTER TABLE mynext_services ENABLE ROW LEVEL SECURITY;
 
--- Permitir lectura e inserción pública/sincronizada a las tablas activas
+-- Permitir lectura pública estricta para visitantes y crawlers
 CREATE POLICY "Lectura pública de proyectos" ON mynext_projects FOR SELECT USING (true);
-CREATE POLICY "Inserción y edición de proyectos" ON mynext_projects FOR ALL USING (true) WITH CHECK (true);
 CREATE POLICY "Lectura pública de testimonios" ON mynext_testimonials FOR SELECT USING (true);
-CREATE POLICY "Inserción de testimonios" ON mynext_testimonials FOR INSERT WITH CHECK (true);
-CREATE POLICY "Actualización de testimonios" ON mynext_testimonials FOR UPDATE USING (true);
 CREATE POLICY "Lectura pública de configuración" ON mynext_settings FOR SELECT USING (true);
 CREATE POLICY "Lectura pública de servicios" ON mynext_services FOR SELECT USING (true);
+
+-- Restringir inserción, edición y borrado a usuarios autenticados / service_role
+CREATE POLICY "Gestión administrativa de proyectos" ON mynext_projects FOR ALL TO authenticated USING (true) WITH CHECK (true);
+CREATE POLICY "Gestión administrativa de testimonios" ON mynext_testimonials FOR ALL TO authenticated USING (true) WITH CHECK (true);
+CREATE POLICY "Gestión administrativa de configuración" ON mynext_settings FOR ALL TO authenticated USING (true) WITH CHECK (true);
+CREATE POLICY "Gestión administrativa de servicios" ON mynext_services FOR ALL TO authenticated USING (true) WITH CHECK (true);
+

@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "sitemap": "node scripts/generate_sitemap.js",
+    "build": "node scripts/generate_sitemap.js && tsc && vite build",
     "preview": "vite preview",
     "sync-reviews": "node scripts/sync_google_reviews.js",
     "add-review": "node scripts/add_google_review.js",

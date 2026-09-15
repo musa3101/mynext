@@ -1,24 +1,11 @@
 import './style.css';
 import { supabase } from './lib/supabase';
 import { fallbackServices, fallbackSettings } from './lib/fallbackData';
+import { getTranslation, applyDynamicSettings, sanitizeHtml } from './lib/domUtils';
 
 // Determine language
 const lang = (document.documentElement.lang === 'en' || window.location.pathname.includes('-en')) ? 'en' : 'es';
 const isEnglish = lang === 'en';
-
-// Helper to resolve bilingual strings (JSON or raw string)
-function getTranslation(value: string | null | undefined, language: 'es' | 'en'): string {
-  if (!value) return '';
-  try {
-    const parsed = JSON.parse(value);
-    if (parsed && typeof parsed === 'object') {
-      return parsed[language] || parsed['es'] || parsed['en'] || value;
-    }
-  } catch (e) {
-    // Return raw string if parsing fails
-  }
-  return value;
-}
 
 // Resilient helper to resolve fields that can be named field_es, field_en, or JSON string field
 function getFieldTranslation(item: any, fieldBase: string, language: 'es' | 'en'): string {
@@ -287,18 +274,7 @@ function initLegalModals() {
 }
 
 // Utility to apply dynamic settings from Supabase to HTML elements
-function applyDynamicSettings(settingsMap: Record<string, string>, currentLang: 'es' | 'en') {
-  const elements = document.querySelectorAll<HTMLElement>('[data-sb-content]');
-  elements.forEach(el => {
-    const key = el.getAttribute('data-sb-content');
-    if (key && settingsMap[key]) {
-      const translation = getTranslation(settingsMap[key], currentLang);
-      if (translation) {
-        el.innerHTML = translation;
-      }
-    }
-  });
-}
+
 
 // Initialize Planes DOM safely
 async function initPlanes() {
