@@ -151,6 +151,42 @@ export interface Database {
         Insert: Partial<Database['public']['Tables']['mynext_contact']['Row']>;
         Update: Partial<Database['public']['Tables']['mynext_contact']['Row']>;
       };
+      mynext_cookie_consents: {
+        Row: {
+          id?: number;
+          visitor_id: string;
+          consent_status: 'accepted-all' | 'rejected-non-essential' | 'custom';
+          analytics_allowed: boolean;
+          marketing_allowed: boolean;
+          page_url?: string;
+          language: 'es' | 'en';
+          user_agent?: string;
+          screen_resolution?: string;
+          referrer?: string;
+          created_at?: string;
+        };
+        Insert: Omit<Database['public']['Tables']['mynext_cookie_consents']['Row'], 'id' | 'created_at'>;
+        Update: Partial<Database['public']['Tables']['mynext_cookie_consents']['Row']>;
+      };
+      mynext_client_emails: {
+        Row: {
+          id?: number;
+          client_name: string;
+          client_email: string;
+          client_phone?: string;
+          project_type: string;
+          budget_plan?: string;
+          message?: string;
+          source_page?: string;
+          language: 'es' | 'en';
+          cookie_consent?: string;
+          status?: 'new' | 'read' | 'replied' | 'archived';
+          user_agent?: string;
+          created_at?: string;
+        };
+        Insert: Omit<Database['public']['Tables']['mynext_client_emails']['Row'], 'id' | 'created_at'>;
+        Update: Partial<Database['public']['Tables']['mynext_client_emails']['Row']>;
+      };
     };
   };
 }

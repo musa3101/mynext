@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 
 Sitemap: https://mynextbymusa.com/sitemap.xml
+Agentmap: https://mynextbymusa.com/.well-known/ai-catalog.json
 # LLM & AI Knowledge Manifest
 # https://mynextbymusa.com/llms.txt

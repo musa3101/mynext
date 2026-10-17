@@ -9,16 +9,16 @@
     "preview": "vite preview",
     "sync-reviews": "node scripts/sync_google_reviews.js",
     "add-review": "node scripts/add_google_review.js",
-    "sync-projects": "node scripts/sync_projects_to_supabase.js"
+    "sync-projects": "node scripts/sync_projects_to_supabase.js",
+    "test:perf": "playwright test tests/performance-fluidity.spec.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.8",
     "gsap": "^3.15.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.64.1",
     "@tailwindcss/vite": "^4.3.1",
-    "autoprefixer": "^10.5.0",
-    "postcss": "^8.5.15",
     "puppeteer-core": "^25.7.0",
     "tailwindcss": "^4.3.1",
     "typescript": "^5.2.2",

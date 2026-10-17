@@ -53,7 +53,10 @@ export function applyDynamicSettings(settingsMap: Record<string, string>, curren
     if (key && settingsMap[key]) {
       const translation = getTranslation(settingsMap[key], currentLang);
       if (translation) {
-        el.innerHTML = sanitizeHtml(translation);
+        const sanitized = sanitizeHtml(translation);
+        if (el.innerHTML.trim() !== sanitized.trim()) {
+          el.innerHTML = sanitized;
+        }
       }
     }
   });

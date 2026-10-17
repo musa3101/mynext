@@ -1,28 +1,19 @@
 # Roadmap MYNEXT
 
 ## Tareas Completadas
-- **Reporte Diario Dual Optimizado (WhatsApp + Email)**: Solucionado el problema de falsos positivos en caídas web con reintento automático y User-Agent estándar (10/10 webs activas). Resuelto el reporte de visitas Cloudflare RUM con credenciales de respaldo y rediseño completo de la plantilla HTML con tema Dark/Light Hybrid ultra-legible.
-- **Rediseño Estético del Footer**: Eliminación de la sección de Instagram debajo del footer en las 6 páginas de la web; nuevo acabado dark glass midnight (`#0c0f1d` -> `#04050a`) con acentos cian y píldora "Made by Musa".
-- **Optimización Integral de AI SEO, AEO y GEO**: Pre-renderizado estático de proyectos para crawlers sin JS, integración de la entidad `Person` ("Musa") en Schema.org, creación de `llms.txt`, etiquetas canónicas y hreflang en todas las páginas.
-- **Desbloqueo de Crawlers de IA en Cloudflare Edge**: Regla de WAF personalizada y Bot Management adaptados para autorizar a `GPTBot`, `PerplexityBot`, `ClaudeBot` y `Google-Extended` con respuesta `200 OK`, manteniendo blindaje contra escáneres maliciosos.
-- **Auditoría Dual de Calidad (`unit-testing-test-generate` + `e2e-testing-patterns`)**: Cobertura del 100% en pruebas unitarias (71/71) y flujos críticos de usuario E2E (15/15) con Chrome nativo y Puppeteer.
-- **Auditoría Cloud con TestSprite (`testsprite.com`)**: Validación de recorridos de captación de propuestas con veredicto **`PASSED`**.
-- **Rediseño del Logo en Header de Proyectos**: Reemplazado el logo plano de "MYNEXT" por el isotipo circular MN enmarcado en degradado cyan brillante y efectos hover interactivos en `project.html` y `project-en.html`.
-- **Despliegue y Desbloqueo Limpio en GitHub (`main`)**: Reconstrucción limpia de la historia de commits sin claves hardcodeadas, reactivando GitHub Actions para el bot de WhatsApp.
-- **Sección CTA & Modal de Contacto en Páginas de Proyecto**: Formulario interactivo con envío AJAX, tarjeta de alta conversión y botones directos (WhatsApp y Email) antes del footer en `project.html` y `project-en.html`.
-- **Actualización de Caso de Estudio RBARI Restaurant**: Textos bilingües optimizados (ES/EN) con carta digital y reservas telefónicas integradas.
-- **Sincronización y Normalización de Imágenes (.webp)**: 100% de proyectos con imágenes optimizadas y funcionando en Supabase y cliente local.
-- **Seguridad Cloudflare Completa**: TLS 1.2 Mínimo, DNSSEC activo con registro DS en Cloudflare Registrar, HSTS precargado, Hotlink Protection, WAF Custom y Rate Limiting.
-- **Indexación Google Search & Search Console**: WAF configurado para acceso de rastreadores oficiales, sitemap sincronizado y metaetiquetas bilingües.
-- **Favicons de Alto Contraste**: Set completo en Cyan Eléctrico (`#00F2FF`) sobre fondo oscuro verificado en servidores de Google.
-- **Backend & CMS Supabase**: Tablas de proyectos, testimonios 5.0 ⭐ de Google Maps, hero, about, services y settings sincronizadas.
-- **Keep-Alive & Resiliencia**: Monitor anti-pausa y auto-recuperación en GitHub Actions y GitLab CI.
-- **Traducción Bilingüe 100% (ES/EN)**: Arquitectura con `i18nstack` y URLs canónicas hreflang.
+- **Auditoría y Optimización de Rendimiento y Fluidez (`Playwright` + `Chrome DevTools CDP` + `TestSprite Cloud`)**: Scroll a **60 FPS constantes (100% fluidez)** en Desktop y Móvil (`CPU 4× + 4G Lenta`), reducción del **73% en animaciones infinitas en segundo plano** (`134 → 36`), reducción del **39% en memoria JS Heap** (`6.17 MB`), `LCP` de `56 ms–128 ms` en Desktop y `2.48 s` en Móvil 4G Lento, y `6/6` tests de Playwright + `84/84` tests unitarios aprobados.
+- **Persistencia en Supabase de Cookies y Leads de Contacto**: Tablas `mynext_cookie_consents` y `mynext_client_emails` con RLS y seguimiento automático en `src/lib/leadTracker.ts`.
+- **SEO Técnico, AEO, GEO y Descubrimiento para Agentes IA**: Implementación de `/.well-known/api-catalog`, `/ai-catalog.json`, `/llms.txt`, cabeceras `Link` en `public/_headers` y JSON-LD `@graph` completo en las 6 páginas bilingües.
+- **Reporte Diario Dual Optimizado (WhatsApp + Email)**: Monitor con reintento automático (`10/10` webs operativas), métricas Cloudflare RUM y plantilla HTML Dark/Light Hybrid.
+- **Rediseño Estético del Footer**: Acabado dark glass midnight (`#0c0f1d` → `#04050a`) con acentos cian y píldora "Made by Musa".
+- **Desbloqueo de Crawlers de IA en Cloudflare Edge**: Reglas WAF para autorizar `GPTBot`, `PerplexityBot`, `ClaudeBot` y `Google-Extended` con `200 OK`.
+- **Seguridad Cloudflare Completa**: TLS 1.2 Mínimo, DNSSEC activo, HSTS precargado, Hotlink Protection, WAF Custom y Rate Limiting.
+- **Traducción Bilingüe 100% (ES/EN)**: Arquitectura con URLs canónicas y `hreflang` simétrico en las 20 URLs del `sitemap.xml`.
 
 ## Tareas en Progreso
-- Propagación visual de la miniatura de favicon en las SERPs de Google Search (solicitud enviada en Search Console).
+- **Google Search Console**: Configuración, envío de sitemaps/inspección de URLs y verificación de indexación en Google Search Console.
 
 ## Próximas Mejoras Prioritarias
-- **Bot Interactivo con Meta Cloud API**: Integrar webhook bidireccional si se desea consultar comandos en vivo como `/mynext` o `/flota` dentro de WhatsApp.
-- **Google Places API**: Vincular cuenta de facturación en Google Cloud para sincronización periódica de reseñas.
-- **Nuevos Proyectos en Portfolio**: Incorporar nuevos proyectos al portfolio dinámico a medida que se entreguen a clientes.
+1. **Completar Ajustes en Google Search Console**: Verificar cobertura de las 20 URLs bilingües y estado de indexación/favicons.
+2. **Bot Interactivo con Meta Cloud API**: Integrar webhook bidireccional para consultar comandos en vivo desde WhatsApp.
+3. **Nuevos Proyectos en Portfolio**: Incorporar nuevos casos de estudio al catálogo dinámico a medida que se entreguen a clientes.

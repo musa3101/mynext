@@ -1,0 +1,16 @@
+{
+  "specVersion": "1.0",
+  "entries": [
+    {
+      "identifier": "urn:air:mynextbymusa.com:docs:llms-txt",
+      "displayName": "MYNEXT Official AI Documentation Index (/llms.txt)",
+      "type": "text/markdown",
+      "url": "https://mynextbymusa.com/llms.txt",
+      "representativeQueries": [
+        "¿Cuánto cuesta diseñar una página web en Palma de Mallorca con MYNEXT?",
+        "¿Qué servicios de diseño web, SEO local y cartas QR ofrece Musa en MYNEXT?",
+        "What web design plans, pricing, and portfolio projects does MYNEXT offer in Mallorca?"
+      ]
+    }
+  ]
+}

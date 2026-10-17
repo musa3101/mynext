@@ -45,10 +45,10 @@ let xml = `<?xml version="1.0" encoding="UTF-8"?>
 
   <!-- Tarifas y Planes (Español) -->
   <url>
-    <loc>https://mynextbymusa.com/planes/index.html</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://mynextbymusa.com/planes/index.html" />
+    <loc>https://mynextbymusa.com/planes/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mynextbymusa.com/planes/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://mynextbymusa.com/planes/index-en.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://mynextbymusa.com/planes/index.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mynextbymusa.com/planes/" />
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -57,9 +57,9 @@ let xml = `<?xml version="1.0" encoding="UTF-8"?>
   <!-- Tarifas y Planes (English) -->
   <url>
     <loc>https://mynextbymusa.com/planes/index-en.html</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://mynextbymusa.com/planes/index.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://mynextbymusa.com/planes/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://mynextbymusa.com/planes/index-en.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://mynextbymusa.com/planes/index.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mynextbymusa.com/planes/" />
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

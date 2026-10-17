@@ -3,6 +3,7 @@ import { supabase } from './lib/supabase';
 import { fallbackProjects, fallbackSettings } from './lib/fallbackData';
 import { initAnalyticsListeners } from './lib/analytics';
 import { getTranslation, applyDynamicSettings, sanitizeHtml } from './lib/domUtils';
+import { recordClientEmail } from './lib/leadTracker';
 
 // Legal Modals handler
 function initLegalModals() {
@@ -92,6 +93,18 @@ function initContactForm(lang: 'es' | 'en') {
     const projectType = projectTypeSelect?.value || (isEs ? 'General' : 'General');
     const budget = budgetSelect?.value || (isEs ? 'No especificado' : 'Not specified');
     const messageDetails = messageInput?.value || '';
+
+    // Guardar registro del email en Supabase (tabla mynext_client_emails) en paralelo
+    void recordClientEmail({
+      clientName,
+      clientEmail,
+      clientPhone,
+      projectType,
+      budgetPlan: budget,
+      message: messageDetails,
+      sourcePage: window.location.href,
+      language: lang,
+    });
 
     const subject = isEs
       ? `🚀 Nueva Solicitud de Proyecto Web (Portfolio): ${clientName} (${projectType})`
@@ -240,6 +253,191 @@ document.addEventListener('DOMContentLoaded', async () => {
     return String(val);
   };
 
+  // Helper to update SEO, Canonical, Hreflang, Open Graph, and JSON-LD tags
+  const updateProjectSEO = (proj: any, explicitSlug: string | null) => {
+    if (!proj) return;
+    const projectTitle = proj.title || 'Proyecto MYNEXT';
+    const shortDesc = getFieldTranslation(proj, 'description', lang) || getFieldTranslation(proj, 'full_description', lang);
+    const cleanDesc = shortDesc.replace(/<[^>]*>/g, '').slice(0, 160);
+    const pageTitle = isEnglish
+      ? `${projectTitle} - Web Design Case Study | MYNEXT`
+      : `${projectTitle} - Caso de Estudio Diseño Web | MYNEXT`;
+
+    if (explicitSlug) {
+      document.title = pageTitle;
+    }
+
+    const activeSlug = proj.slug || explicitSlug;
+    const esUrl = explicitSlug && activeSlug
+      ? `https://mynextbymusa.com/project.html?slug=${encodeURIComponent(activeSlug)}`
+      : 'https://mynextbymusa.com/project.html';
+    const enUrl = explicitSlug && activeSlug
+      ? `https://mynextbymusa.com/project-en.html?slug=${encodeURIComponent(activeSlug)}`
+      : 'https://mynextbymusa.com/project-en.html';
+    const canonicalUrl = isEnglish ? enUrl : esUrl;
+
+    let absImg = 'https://mynextbymusa.com/assets/img/og-share.png';
+    if (proj.image_url) {
+      const cleanImgPath = proj.image_url.replace(/^\.\//, '/').replace(/\.png$/, '.webp');
+      absImg = cleanImgPath.startsWith('http') ? cleanImgPath : `https://mynextbymusa.com${cleanImgPath}`;
+    }
+
+    const setElAttr = (id: string, attr: string, val: string) => {
+      const el = document.getElementById(id);
+      if (el) el.setAttribute(attr, val);
+    };
+
+    setElAttr('canonical-link', 'href', canonicalUrl);
+    setElAttr('hreflang-es', 'href', esUrl);
+    setElAttr('hreflang-en', 'href', enUrl);
+    setElAttr('hreflang-default', 'href', esUrl);
+
+    if (explicitSlug && cleanDesc) {
+      setElAttr('meta-description', 'content', cleanDesc);
+      setElAttr('og-title', 'content', pageTitle);
+      setElAttr('og-description', 'content', cleanDesc);
+      setElAttr('og-url', 'content', canonicalUrl);
+      setElAttr('og-image', 'content', absImg);
+      setElAttr('twitter-title', 'content', pageTitle);
+      setElAttr('twitter-description', 'content', cleanDesc);
+      setElAttr('twitter-image', 'content', absImg);
+
+      const schemaEl = document.getElementById('project-schema');
+      if (schemaEl) {
+        schemaEl.textContent = JSON.stringify({
+          '@context': 'https://schema.org',
+          '@graph': [
+            {
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                {
+                  '@type': 'ListItem',
+                  position: 1,
+                  name: isEnglish ? 'Home' : 'Inicio',
+                  item: isEnglish ? 'https://mynextbymusa.com/index-en.html' : 'https://mynextbymusa.com/'
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 2,
+                  name: 'Portfolio',
+                  item: isEnglish ? 'https://mynextbymusa.com/index-en.html#portfolio' : 'https://mynextbymusa.com/#portfolio'
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 3,
+                  name: projectTitle,
+                  item: canonicalUrl
+                }
+              ]
+            },
+            {
+              '@type': 'CreativeWork',
+              '@id': `${canonicalUrl}#case-study`,
+              name: pageTitle,
+              headline: projectTitle,
+              description: cleanDesc,
+              image: absImg,
+              url: canonicalUrl,
+              inLanguage: lang,
+              author: { '@id': 'https://mynextbymusa.com/#musa' },
+              creator: { '@id': 'https://mynextbymusa.com/#organization' },
+              publisher: { '@id': 'https://mynextbymusa.com/#organization' }
+            }
+          ]
+        });
+      }
+    }
+  };
+
+  // Helper to populate project details in DOM
+  const renderProjectDetails = (proj: any, explicitSlug: string | null) => {
+    if (!proj) return;
+
+    updateProjectSEO(proj, explicitSlug);
+
+    const titleEl = document.getElementById('project-title');
+    const descEl = document.getElementById('project-description');
+    const imageEl = document.getElementById('project-image') as HTMLImageElement;
+    const linkEl = document.getElementById('project-link') as HTMLAnchorElement;
+
+    const projectTitle = proj.title || 'Proyecto MYNEXT';
+    if (titleEl) titleEl.textContent = projectTitle;
+
+    const fullDesc = getFieldTranslation(proj, 'full_description', lang) || getFieldTranslation(proj, 'description', lang);
+    if (descEl) {
+      descEl.innerHTML = fullDesc;
+    }
+
+    if (imageEl && proj.image_url) {
+      let imgUrl = proj.image_url;
+      if (imgUrl.includes('/portfolio/') && imgUrl.endsWith('.png')) {
+        imgUrl = imgUrl.replace('.png', '.webp');
+      }
+      imageEl.src = imgUrl;
+      imageEl.alt = projectTitle;
+    }
+
+    if (linkEl) {
+      if (proj.project_url) {
+        linkEl.href = proj.project_url;
+        linkEl.classList.remove('hidden');
+      } else {
+        linkEl.classList.add('hidden');
+      }
+    }
+
+    const galleryEl = document.getElementById('project-gallery');
+    let galleryItems = proj.gallery;
+    if (typeof galleryItems === 'string') {
+      try {
+        galleryItems = JSON.parse(galleryItems);
+      } catch {
+        galleryItems = [];
+      }
+    }
+
+    if (galleryEl && Array.isArray(galleryItems) && galleryItems.length > 0) {
+      galleryEl.classList.remove('hidden');
+      const defaultTitle = isEnglish ? 'PRINT MATERIALS & BRANDING' : 'MATERIALES IMPRESOS & BRANDING';
+      const defaultSubtitle = isEnglish ? 'Custom print materials & physical QR integration' : 'Materiales impresos y soportes de marca con código QR';
+
+      const sectionTitle = getFieldTranslation(proj, 'gallery_title', lang) || defaultTitle;
+      const sectionSubtitle = getFieldTranslation(proj, 'gallery_subtitle', lang) || defaultSubtitle;
+
+      const itemsHtml = galleryItems.map((item: any) => {
+        const itemTitle = getFieldTranslation(item, 'title', lang);
+        const badgeText = isEnglish ? 'Print & Branding' : 'Impresión & Branding';
+        return `
+          <div class="relative group rounded-[2rem] overflow-hidden bg-[#0c0c16]/70 border border-white/10 p-2 hover:border-[#00f2ff]/40 transition-all duration-500 shadow-xl hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,242,255,0.1)]">
+            <div class="w-full aspect-[4/5] rounded-[1.5rem] overflow-hidden bg-black/40 relative">
+              <img src="${item.url}" alt="${itemTitle}" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-85 group-hover:opacity-95 transition-opacity"></div>
+              <div class="absolute bottom-5 left-5 right-5 z-10">
+                <span class="text-[10px] text-[#00f2ff] font-headline uppercase tracking-widest block mb-1 font-bold">${badgeText}</span>
+                <h3 class="text-sm font-headline font-semibold text-white leading-snug">${itemTitle}</h3>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      galleryEl.innerHTML = `
+        <div class="border-t border-white/10 pt-16">
+          <div class="mb-10 text-left">
+            <span class="text-[#00f2ff] font-headline text-xs tracking-[0.3em] uppercase mb-2 block font-semibold">${sectionTitle}</span>
+            <h2 class="text-2xl md:text-4xl font-headline font-bold text-white tracking-tight">${sectionSubtitle}</h2>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            ${itemsHtml}
+          </div>
+        </div>
+      `;
+    } else if (galleryEl) {
+      galleryEl.classList.add('hidden');
+      galleryEl.innerHTML = '';
+    }
+  };
+
   // Settings initialization with fallback
   let settings: Record<string, string> = fallbackSettings;
 
@@ -247,24 +445,32 @@ document.addEventListener('DOMContentLoaded', async () => {
   const urlParams = new URLSearchParams(window.location.search);
   const slug = urlParams.get('slug') || urlParams.get('id');
 
-  let project: any = null;
+  // 1. Render local fallback IMMEDIATELY at 0ms (prevents render delay & Soft 404 for Googlebot)
+  const localMatch = slug
+    ? fallbackProjects.find(p => p.slug === slug || String(p.id) === slug)
+    : fallbackProjects[0];
+  let project: any = localMatch || fallbackProjects[0];
 
-  // 1. Try to fetch from Supabase
+  renderProjectDetails(project, localMatch && slug ? project.slug : null);
+
+  // 2. Try to fetch updated data from Supabase asynchronously
   if (supabase) {
     try {
+      const targetSlug = project?.slug || slug;
       const [projectRes, settingsRes, contactRes] = await Promise.all([
-        slug ? supabase.from('mynext_projects').select('*').eq('slug', slug).eq('active', true).maybeSingle() : Promise.resolve({ data: null, error: null }),
+        targetSlug ? supabase.from('mynext_projects').select('*').eq('slug', targetSlug).eq('active', true).maybeSingle() : Promise.resolve({ data: null, error: null }),
         supabase.from('mynext_settings').select('*'),
         supabase.from('mynext_contact').select('*').maybeSingle()
       ]);
 
       if (projectRes && (projectRes as any).data) {
         const dbData = (projectRes as any).data;
-        const localProj = fallbackProjects.find(p => p.slug === slug || String(p.id) === slug);
+        const localProj = fallbackProjects.find(p => p.slug === targetSlug || String(p.id) === targetSlug);
         project = { ...localProj, ...dbData };
         if (!dbData.full_description && !dbData.full_description_es && localProj?.full_description) {
           project.full_description = localProj.full_description;
         }
+        renderProjectDetails(project, localMatch && slug ? project.slug : null);
       }
 
       if (settingsRes && settingsRes.data && settingsRes.data.length > 0) {
@@ -288,108 +494,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       applyDynamicSettings(settings, lang as 'es' | 'en');
 
     } catch (err) {
-      console.warn('Error fetching Supabase data, checking local fallback:', err);
+      console.warn('Error fetching Supabase data, using local fallback:', err);
     }
-  }
-
-  // 2. Fallback to local data
-  if (!project && slug) {
-    project = fallbackProjects.find(p => p.slug === slug || String(p.id) === slug);
-  }
-
-  // If still not found by slug, handle not found
-  if (!project) {
-    const titleEl = document.getElementById('project-title');
-    if (titleEl) {
-      titleEl.textContent = isEnglish ? 'Project Not Found' : 'Proyecto No Encontrado';
-    }
-    const descEl = document.getElementById('project-description');
-    if (descEl) {
-      descEl.textContent = isEnglish ? 'The requested project could not be found.' : 'El proyecto solicitado no ha sido encontrado.';
-    }
-    return;
-  }
-
-  // Populate project details
-  const titleEl = document.getElementById('project-title');
-  const descEl = document.getElementById('project-description');
-  const imageEl = document.getElementById('project-image') as HTMLImageElement;
-  const linkEl = document.getElementById('project-link') as HTMLAnchorElement;
-
-  const projectTitle = project.title || 'Proyecto MYNEXT';
-  if (titleEl) titleEl.textContent = projectTitle;
-  document.title = `${projectTitle} | MYNEXT Portfolio`;
-
-  // Merge full_description with description
-  const fullDesc = getFieldTranslation(project, 'full_description', lang) || getFieldTranslation(project, 'description', lang);
-  if (descEl) {
-    descEl.innerHTML = fullDesc;
-  }
-
-  if (imageEl && project.image_url) {
-    let imgUrl = project.image_url;
-    if (imgUrl.includes('/portfolio/') && imgUrl.endsWith('.png')) {
-      imgUrl = imgUrl.replace('.png', '.webp');
-    }
-    imageEl.src = imgUrl;
-    imageEl.alt = projectTitle;
-  }
-
-  if (linkEl) {
-    if (project.project_url) {
-      linkEl.href = project.project_url;
-      linkEl.classList.remove('hidden');
-    } else {
-      linkEl.classList.add('hidden');
-    }
-  }
-
-  // Populate gallery
-  const galleryEl = document.getElementById('project-gallery');
-  let galleryItems = project.gallery;
-  if (typeof galleryItems === 'string') {
-    try {
-      galleryItems = JSON.parse(galleryItems);
-    } catch {
-      galleryItems = [];
-    }
-  }
-
-  if (galleryEl && Array.isArray(galleryItems) && galleryItems.length > 0) {
-    galleryEl.classList.remove('hidden');
-    const defaultTitle = isEnglish ? 'PRINT MATERIALS & BRANDING' : 'MATERIALES IMPRESOS & BRANDING';
-    const defaultSubtitle = isEnglish ? 'Custom print materials & physical QR integration' : 'Materiales impresos y soportes de marca con código QR';
-
-    const sectionTitle = getFieldTranslation(project, 'gallery_title', lang) || defaultTitle;
-    const sectionSubtitle = getFieldTranslation(project, 'gallery_subtitle', lang) || defaultSubtitle;
-
-    const itemsHtml = galleryItems.map((item: any) => {
-      const itemTitle = getFieldTranslation(item, 'title', lang);
-      const badgeText = isEnglish ? 'Print & Branding' : 'Impresión & Branding';
-      return `
-        <div class="relative group rounded-[2rem] overflow-hidden bg-[#0c0c16]/70 border border-white/10 p-2 hover:border-[#00f2ff]/40 transition-all duration-500 shadow-xl hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,242,255,0.1)]">
-          <div class="w-full aspect-[4/5] rounded-[1.5rem] overflow-hidden bg-black/40 relative">
-            <img src="${item.url}" alt="${itemTitle}" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-85 group-hover:opacity-95 transition-opacity"></div>
-            <div class="absolute bottom-5 left-5 right-5 z-10">
-              <span class="text-[10px] text-[#00f2ff] font-headline uppercase tracking-widest block mb-1 font-bold">${badgeText}</span>
-              <h3 class="text-sm font-headline font-semibold text-white leading-snug">${itemTitle}</h3>
-            </div>
-          </div>
-        </div>
-      `;
-    }).join('');
-
-    galleryEl.innerHTML = `
-      <div class="border-t border-white/10 pt-16">
-        <div class="mb-10 text-left">
-          <span class="text-[#00f2ff] font-headline text-xs tracking-[0.3em] uppercase mb-2 block font-semibold">${sectionTitle}</span>
-          <h2 class="text-2xl md:text-4xl font-headline font-bold text-white tracking-tight">${sectionSubtitle}</h2>
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          ${itemsHtml}
-        </div>
-      </div>
-    `;
   }
 });

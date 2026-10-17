@@ -1,4 +1,7 @@
 import { fallbackProjects, fallbackSettings, fallbackTestimonials, fallbackServices } from '../src/lib/fallbackData.ts';
+import { buildCookieConsentPayload, buildClientEmailPayload } from '../src/lib/leadTracker.ts';
+import fs from 'fs';
+import path from 'path';
 
 let passed = 0;
 let failed = 0;
@@ -120,6 +123,49 @@ function runUnitTests() {
   assert(getFieldTranslation(sampleObject, 'title', 'es') === 'Obj ES', 'Parseo de objeto nativo en Español');
   assert(getFieldTranslation(sampleFallback, 'title', 'en') === 'Solo Texto', 'Fallback a string plano si no es bilingüe');
   assert(getFieldTranslation(null, 'title', 'es') === '', 'Manejo defensivo de valores null');
+
+  // --- 5. Test Suite: Tablas Supabase (mynext_cookie_consents & mynext_client_emails) ---
+  console.log('\n🗄️ 5. Test Suite: Supabase Cookies & Mails de Clientes (supabase-postgres-best-practices)');
+  const cookieAccepted = buildCookieConsentPayload('accepted-all', {
+    visitorId: 'vis_test_123',
+    pageUrl: 'https://mynextbymusa.com/',
+    language: 'es',
+    userAgent: 'TestAgent/1.0',
+    screenResolution: '1440x900',
+    referrer: 'direct'
+  });
+  assert(cookieAccepted.consent_status === 'accepted-all', 'Payload de cookies aceptadas tiene consent_status accepted-all');
+  assert(cookieAccepted.analytics_allowed === true && cookieAccepted.marketing_allowed === true, 'Cookies aceptadas activan analytics y marketing');
+  assert(cookieAccepted.visitor_id === 'vis_test_123', 'Payload de cookies conserva visitor_id único');
+
+  const cookieRejected = buildCookieConsentPayload('rejected-non-essential', {
+    visitorId: 'vis_test_456',
+    language: 'en'
+  });
+  assert(cookieRejected.consent_status === 'rejected-non-essential', 'Payload de cookies rechazadas tiene consent_status rejected-non-essential');
+  assert(cookieRejected.analytics_allowed === false && cookieRejected.marketing_allowed === false, 'Cookies rechazadas desactivan analytics y marketing');
+
+  const emailPayload = buildClientEmailPayload({
+    clientName: '  Empresa Mallorca SL ',
+    clientEmail: '  CONTACTO@EmpresaMallorca.com ',
+    clientPhone: '+34 600 123 456',
+    projectType: 'E-Commerce',
+    budgetPlan: 'Plan Business',
+    message: 'Necesitamos tienda online bilingüe',
+    sourcePage: 'https://mynextbymusa.com/index.html',
+    language: 'es',
+    cookieConsent: 'accepted-all'
+  });
+  assert(emailPayload.client_name === 'Empresa Mallorca SL', 'Payload de email limpia espacios en client_name');
+  assert(emailPayload.client_email === 'contacto@empresamallorca.com', 'Payload de email normaliza client_email en minúsculas');
+  assert(emailPayload.status === 'new', 'Nuevo email de cliente se inicializa con status = new');
+
+  const schemaSql = fs.readFileSync(path.resolve(process.cwd(), 'supabase_schema.sql'), 'utf-8');
+  assert(schemaSql.includes('CREATE TABLE IF NOT EXISTS public.mynext_cookie_consents'), 'supabase_schema.sql define la tabla mynext_cookie_consents');
+  assert(schemaSql.includes('CREATE TABLE IF NOT EXISTS public.mynext_client_emails'), 'supabase_schema.sql define la tabla mynext_client_emails');
+  assert(schemaSql.includes('GENERATED ALWAYS AS IDENTITY PRIMARY KEY'), 'Tablas usan BIGINT GENERATED ALWAYS AS IDENTITY (schema-primary-keys)');
+  assert(schemaSql.includes('ALTER TABLE public.mynext_cookie_consents ENABLE ROW LEVEL SECURITY'), 'RLS habilitado en mynext_cookie_consents (security-rls-basics)');
+  assert(schemaSql.includes('ALTER TABLE public.mynext_client_emails ENABLE ROW LEVEL SECURITY'), 'RLS habilitado en mynext_client_emails (security-rls-basics)');
 
   // --- Resumen de Resultados ---
   console.log('\n📊 ========================================================');

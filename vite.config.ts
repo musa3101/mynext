@@ -1,14 +1,8 @@
 import { defineConfig } from 'vite';
 import tailwindcss from '@tailwindcss/vite';
-// @ts-ignore
-import path from 'path';
-// @ts-ignore
-import { fileURLToPath } from 'url';
 
-// @ts-ignore
-const __filename = fileURLToPath(import.meta.url);
-// @ts-ignore
-const __dirname = path.dirname(__filename);
+const resolveHtml = (relPath: string) =>
+  decodeURIComponent(new URL(relPath, import.meta.url).pathname);
 
 export default defineConfig({
   plugins: [tailwindcss()],
@@ -16,14 +10,15 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        main: path.resolve(__dirname, 'index.html'),
-        en: path.resolve(__dirname, 'index-en.html'),
-        planes: path.resolve(__dirname, 'planes/index.html'),
-        'planes-en': path.resolve(__dirname, 'planes/index-en.html'),
-        project: path.resolve(__dirname, 'project.html'),
-        'project-en': path.resolve(__dirname, 'project-en.html'),
+        main: resolveHtml('./index.html'),
+        en: resolveHtml('./index-en.html'),
+        planes: resolveHtml('./planes/index.html'),
+        'planes-en': resolveHtml('./planes/index-en.html'),
+        project: resolveHtml('./project.html'),
+        'project-en': resolveHtml('./project-en.html'),
       }
     }
   }
 });
+
 

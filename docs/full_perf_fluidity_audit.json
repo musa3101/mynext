@@ -1,0 +1,529 @@
+{
+  "timestamp": "2026-10-17T18:25:58.612Z",
+  "results": [
+    {
+      "pageName": "Home-ES",
+      "url": "/",
+      "viewport": "Desktop 1440x900",
+      "cwv": {
+        "ttfbMs": 5,
+        "fcpMs": 128,
+        "lcpMs": 640,
+        "cls": 0.0284,
+        "domInteractiveMs": 84,
+        "domCompleteMs": 589,
+        "loadEventMs": 600,
+        "overlayDismissMs": 609
+      },
+      "lcpBreakdown": {
+        "element": "P",
+        "id": null,
+        "className": "w-full mb-6 text-xs text-center text-white/60 leading-relaxed font-body",
+        "url": null,
+        "size": 25718,
+        "ttfbMs": 5,
+        "ttfbPct": 1,
+        "resourceLoadDelayMs": 0,
+        "resourceLoadDelayPct": 0,
+        "resourceLoadDurationMs": 0,
+        "resourceLoadDurationPct": 0,
+        "elementRenderDelayMs": 635,
+        "elementRenderDelayPct": 99
+      },
+      "longTasks": {
+        "count": 0,
+        "totalBlockingTimeMs": 0,
+        "maxTaskDurationMs": 0,
+        "tasks": []
+      },
+      "network": {
+        "totalRequests": 16,
+        "totalTransferKb": 311,
+        "slowestResources": [
+          {
+            "url": "https://i.clarity.ms/collect",
+            "initiatorType": "xmlhttprequest",
+            "durationMs": 532,
+            "transferKb": 0
+          },
+          {
+            "url": "https://fonts.googleapis.com/css2?family=Modak&family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap",
+            "initiatorType": "link",
+            "durationMs": 155,
+            "transferKb": 1
+          },
+          {
+            "url": "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap",
+            "initiatorType": "link",
+            "durationMs": 155,
+            "transferKb": 1
+          },
+          {
+            "url": "https://www.clarity.ms/tag/y6vet6c96a",
+            "initiatorType": "script",
+            "durationMs": 153,
+            "transferKb": 0
+          },
+          {
+            "url": "https://scripts.clarity.ms/0.8.72-beta/clarity.js",
+            "initiatorType": "script",
+            "durationMs": 144,
+            "transferKb": 0
+          },
+          {
+            "url": "https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js",
+            "initiatorType": "script",
+            "durationMs": 112,
+            "transferKb": 6
+          },
+          {
+            "url": "/assets/img/logos/logo-hero-v2.svg?v=3",
+            "initiatorType": "img",
+            "durationMs": 18,
+            "transferKb": 114
+          },
+          {
+            "url": "/assets/main-BPpk3aAZ.js",
+            "initiatorType": "script",
+            "durationMs": 14,
+            "transferKb": 57
+          }
+        ],
+        "renderBlockingInHead": [],
+        "failedRequests": []
+      },
+      "domAndAnimations": {
+        "domNodes": 1147,
+        "activeAnimationsTotal": 74,
+        "infiniteAnimationsCount": 36,
+        "infiniteAnimationsSample": [
+          "floatPremium on <div.relative>",
+          "sweep on <div.w-1/2>",
+          "scanner on <div.w-full>",
+          "svgg on <img.mnx-svg>",
+          "scroll-bounce on <span.material-symbols-outlined>",
+          "textShine on <h2.text-h2>",
+          "scroll-bounce on <div.flex>",
+          "processLoadingBar on <div.absolute>",
+          "processCheck1 on <div.w-7>",
+          "processCheck2 on <div.w-7>",
+          "processCheck3 on <div.w-7>",
+          "floatSubtle on <div.w-16>",
+          "pulse on <div.flex>",
+          "pulse on <div.absolute>",
+          "swapOut on <div.flex>"
+        ],
+        "lcpDomIssues": []
+      },
+      "scrollFluidity": {
+        "totalFrames": 47,
+        "avgFps": 60,
+        "p95FrameMs": 16.8,
+        "maxFrameMs": 16.8,
+        "jankFramesOver28ms": 0,
+        "jankFramesOver33ms": 0,
+        "smoothnessScorePct": 100,
+        "cdpLayoutCountDelta": 60,
+        "cdpRecalcStyleCountDelta": 115,
+        "cdpScriptDurationMsDelta": 52,
+        "cdpTaskDurationMsDelta": 187,
+        "jsHeapUsedMb": 6.17
+      },
+      "consoleErrors": []
+    },
+    {
+      "pageName": "Home-EN",
+      "url": "/index-en.html",
+      "viewport": "Desktop 1440x900",
+      "cwv": {
+        "ttfbMs": 2,
+        "fcpMs": 72,
+        "lcpMs": 72,
+        "cls": 0.028,
+        "domInteractiveMs": 53,
+        "domCompleteMs": 445,
+        "loadEventMs": 455,
+        "overlayDismissMs": 461
+      },
+      "lcpBreakdown": {
+        "element": "SPAN",
+        "id": null,
+        "className": "font-headline text-[9px] md:text-[10px] tracking-[0.4em] uppercase text-white/75 group-hover:text-white transition-color",
+        "url": null,
+        "size": 4077,
+        "ttfbMs": 2,
+        "ttfbPct": 3,
+        "resourceLoadDelayMs": 0,
+        "resourceLoadDelayPct": 0,
+        "resourceLoadDurationMs": 0,
+        "resourceLoadDurationPct": 0,
+        "elementRenderDelayMs": 70,
+        "elementRenderDelayPct": 97
+      },
+      "longTasks": {
+        "count": 0,
+        "totalBlockingTimeMs": 0,
+        "maxTaskDurationMs": 0,
+        "tasks": []
+      },
+      "network": {
+        "totalRequests": 15,
+        "totalTransferKb": 311,
+        "slowestResources": [
+          {
+            "url": "https://www.clarity.ms/tag/y6vet6c96a",
+            "initiatorType": "script",
+            "durationMs": 195,
+            "transferKb": 0
+          },
+          {
+            "url": "https://fonts.googleapis.com/css2?family=Modak&family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap",
+            "initiatorType": "link",
+            "durationMs": 194,
+            "transferKb": 1
+          },
+          {
+            "url": "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap",
+            "initiatorType": "link",
+            "durationMs": 194,
+            "transferKb": 1
+          },
+          {
+            "url": "https://scripts.clarity.ms/0.8.72-beta/clarity.js",
+            "initiatorType": "script",
+            "durationMs": 155,
+            "transferKb": 0
+          },
+          {
+            "url": "https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js",
+            "initiatorType": "script",
+            "durationMs": 87,
+            "transferKb": 6
+          },
+          {
+            "url": "/assets/img/logos/logo-hero-v2.svg?v=3",
+            "initiatorType": "img",
+            "durationMs": 14,
+            "transferKb": 114
+          },
+          {
+            "url": "/assets/main-BPpk3aAZ.js",
+            "initiatorType": "script",
+            "durationMs": 12,
+            "transferKb": 57
+          },
+          {
+            "url": "/assets/domUtils-kbo_RF1y.css",
+            "initiatorType": "link",
+            "durationMs": 11,
+            "transferKb": 32
+          }
+        ],
+        "renderBlockingInHead": [],
+        "failedRequests": []
+      },
+      "domAndAnimations": {
+        "domNodes": 1145,
+        "activeAnimationsTotal": 75,
+        "infiniteAnimationsCount": 36,
+        "infiniteAnimationsSample": [
+          "floatPremium on <div.relative>",
+          "sweep on <div.w-1/2>",
+          "scanner on <div.w-full>",
+          "svgg on <img.mnx-svg>",
+          "scroll-bounce on <span.material-symbols-outlined>",
+          "textShine on <h2.text-3xl>",
+          "scroll-bounce on <div.flex>",
+          "processLoadingBar on <div.absolute>",
+          "processCheck1 on <div.w-7>",
+          "processCheck2 on <div.w-7>",
+          "processCheck3 on <div.w-7>",
+          "floatSubtle on <div.w-16>",
+          "pulse on <div.flex>",
+          "pulse on <div.absolute>",
+          "swapOut on <div.flex>"
+        ],
+        "lcpDomIssues": []
+      },
+      "scrollFluidity": {
+        "totalFrames": 46,
+        "avgFps": 60,
+        "p95FrameMs": 16.7,
+        "maxFrameMs": 16.8,
+        "jankFramesOver28ms": 0,
+        "jankFramesOver33ms": 0,
+        "smoothnessScorePct": 100,
+        "cdpLayoutCountDelta": 58,
+        "cdpRecalcStyleCountDelta": 119,
+        "cdpScriptDurationMsDelta": 53,
+        "cdpTaskDurationMsDelta": 197,
+        "jsHeapUsedMb": 9.08
+      },
+      "consoleErrors": []
+    },
+    {
+      "pageName": "Planes-ES",
+      "url": "/planes/index.html",
+      "viewport": "Desktop 1440x900",
+      "cwv": {
+        "ttfbMs": 2,
+        "fcpMs": 80,
+        "lcpMs": 80,
+        "cls": 0.0079,
+        "domInteractiveMs": 43,
+        "domCompleteMs": 679,
+        "loadEventMs": 679,
+        "overlayDismissMs": 0
+      },
+      "lcpBreakdown": {
+        "element": "SPAN",
+        "id": null,
+        "className": "block text-h1 text-white mb-3",
+        "url": null,
+        "size": 226500,
+        "ttfbMs": 2,
+        "ttfbPct": 3,
+        "resourceLoadDelayMs": 0,
+        "resourceLoadDelayPct": 0,
+        "resourceLoadDurationMs": 0,
+        "resourceLoadDurationPct": 0,
+        "elementRenderDelayMs": 78,
+        "elementRenderDelayPct": 98
+      },
+      "longTasks": {
+        "count": 0,
+        "totalBlockingTimeMs": 0,
+        "maxTaskDurationMs": 0,
+        "tasks": []
+      },
+      "network": {
+        "totalRequests": 16,
+        "totalTransferKb": 76,
+        "slowestResources": [
+          {
+            "url": "https://elfdkbqlvawaprgidqhd.supabase.co/rest/v1/mynext_services?select=*&active=eq.true&order=sort_order.asc",
+            "initiatorType": "fetch",
+            "durationMs": 780,
+            "transferKb": 0
+          },
+          {
+            "url": "https://elfdkbqlvawaprgidqhd.supabase.co/rest/v1/mynext_settings?select=*",
+            "initiatorType": "fetch",
+            "durationMs": 429,
+            "transferKb": 0
+          },
+          {
+            "url": "https://elfdkbqlvawaprgidqhd.supabase.co/rest/v1/mynext_contact?select=*&limit=1",
+            "initiatorType": "fetch",
+            "durationMs": 429,
+            "transferKb": 0
+          },
+          {
+            "url": "https://elfdkbqlvawaprgidqhd.supabase.co/rest/v1/mynext_hero?select=*&limit=1",
+            "initiatorType": "fetch",
+            "durationMs": 423,
+            "transferKb": 0
+          },
+          {
+            "url": "https://elfdkbqlvawaprgidqhd.supabase.co/rest/v1/mynext_faq?select=*&active=eq.true&order=sort_order.asc",
+            "initiatorType": "fetch",
+            "durationMs": 423,
+            "transferKb": 0
+          },
+          {
+            "url": "https://j.clarity.ms/collect",
+            "initiatorType": "xmlhttprequest",
+            "durationMs": 401,
+            "transferKb": 0
+          },
+          {
+            "url": "https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;900&display=swap",
+            "initiatorType": "link",
+            "durationMs": 219,
+            "transferKb": 1
+          },
+          {
+            "url": "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap",
+            "initiatorType": "link",
+            "durationMs": 219,
+            "transferKb": 1
+          }
+        ],
+        "renderBlockingInHead": [],
+        "failedRequests": []
+      },
+      "domAndAnimations": {
+        "domNodes": 537,
+        "activeAnimationsTotal": 27,
+        "infiniteAnimationsCount": 19,
+        "infiniteAnimationsSample": [
+          "moveClouds on <div.cloud>",
+          "speeder on <div.loader>",
+          "fazer1 on <span>",
+          "fazer2 on <span>",
+          "fazer3 on <span>",
+          "fazer4 on <span>",
+          "lf on <span>",
+          "lf2 on <span>",
+          "lf3 on <span>",
+          "lf4 on <span>",
+          "spidey-swing on <div.spidey-rope>",
+          "pulse on <span.text-[10px]>",
+          "softGlow on <div#contacto.w-full>",
+          "slowDrift on <div#contacto.w-full>"
+        ],
+        "lcpDomIssues": []
+      },
+      "scrollFluidity": {
+        "totalFrames": 45,
+        "avgFps": 60,
+        "p95FrameMs": 16.7,
+        "maxFrameMs": 16.8,
+        "jankFramesOver28ms": 0,
+        "jankFramesOver33ms": 0,
+        "smoothnessScorePct": 100,
+        "cdpLayoutCountDelta": 46,
+        "cdpRecalcStyleCountDelta": 46,
+        "cdpScriptDurationMsDelta": 9,
+        "cdpTaskDurationMsDelta": 62,
+        "jsHeapUsedMb": 4.88
+      },
+      "consoleErrors": []
+    },
+    {
+      "pageName": "Project-Detail-ES",
+      "url": "/project.html?slug=blessed-barber-studio",
+      "viewport": "Desktop 1440x900",
+      "cwv": {
+        "ttfbMs": 3,
+        "fcpMs": 56,
+        "lcpMs": 56,
+        "cls": 0.0002,
+        "domInteractiveMs": 10,
+        "domCompleteMs": 660,
+        "loadEventMs": 660,
+        "overlayDismissMs": 0
+      },
+      "lcpBreakdown": {
+        "element": "IMG",
+        "id": "project-image",
+        "className": "w-full h-full object-cover opacity-90 transition-opacity duration-500 group-hover:opacity-100",
+        "url": "http://localhost:5173/assets/img/portfolio/porfolio1.webp",
+        "size": 427418,
+        "ttfbMs": 3,
+        "ttfbPct": 5,
+        "resourceLoadDelayMs": 4,
+        "resourceLoadDelayPct": 7,
+        "resourceLoadDurationMs": 7,
+        "resourceLoadDurationPct": 13,
+        "elementRenderDelayMs": 42,
+        "elementRenderDelayPct": 75
+      },
+      "longTasks": {
+        "count": 0,
+        "totalBlockingTimeMs": 0,
+        "maxTaskDurationMs": 0,
+        "tasks": []
+      },
+      "network": {
+        "totalRequests": 18,
+        "totalTransferKb": 427,
+        "slowestResources": [
+          {
+            "url": "https://y.clarity.ms/collect",
+            "initiatorType": "xmlhttprequest",
+            "durationMs": 419,
+            "transferKb": 0
+          },
+          {
+            "url": "https://elfdkbqlvawaprgidqhd.supabase.co/rest/v1/mynext_projects?select=*&slug=eq.blessed-barber-studio&active=eq.true&limit=1",
+            "initiatorType": "fetch",
+            "durationMs": 305,
+            "transferKb": 0
+          },
+          {
+            "url": "https://elfdkbqlvawaprgidqhd.supabase.co/rest/v1/mynext_settings?select=*",
+            "initiatorType": "fetch",
+            "durationMs": 277,
+            "transferKb": 0
+          },
+          {
+            "url": "https://elfdkbqlvawaprgidqhd.supabase.co/rest/v1/mynext_contact?select=*&limit=1",
+            "initiatorType": "fetch",
+            "durationMs": 201,
+            "transferKb": 0
+          },
+          {
+            "url": "https://www.clarity.ms/tag/y6vet6c96a",
+            "initiatorType": "script",
+            "durationMs": 177,
+            "transferKb": 0
+          },
+          {
+            "url": "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap",
+            "initiatorType": "link",
+            "durationMs": 171,
+            "transferKb": 1
+          },
+          {
+            "url": "https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap",
+            "initiatorType": "link",
+            "durationMs": 168,
+            "transferKb": 1
+          },
+          {
+            "url": "https://scripts.clarity.ms/0.8.72-beta/clarity.js",
+            "initiatorType": "script",
+            "durationMs": 125,
+            "transferKb": 0
+          }
+        ],
+        "renderBlockingInHead": [],
+        "failedRequests": []
+      },
+      "domAndAnimations": {
+        "domNodes": 359,
+        "activeAnimationsTotal": 1,
+        "infiniteAnimationsCount": 1,
+        "infiniteAnimationsSample": [
+          "ping on <span.w-2>"
+        ],
+        "lcpDomIssues": []
+      },
+      "scrollFluidity": {
+        "totalFrames": 46,
+        "avgFps": 60,
+        "p95FrameMs": 16.7,
+        "maxFrameMs": 16.8,
+        "jankFramesOver28ms": 0,
+        "jankFramesOver33ms": 0,
+        "smoothnessScorePct": 100,
+        "cdpLayoutCountDelta": 0,
+        "cdpRecalcStyleCountDelta": 47,
+        "cdpScriptDurationMsDelta": 6,
+        "cdpTaskDurationMsDelta": 30,
+        "jsHeapUsedMb": 4.27
+      },
+      "consoleErrors": []
+    }
+  ],
+  "throttledMobileHome": {
+    "ttfbMs": 3,
+    "fcpMs": 1304,
+    "lcp": {
+      "startTime": 2480,
+      "element": "IMG",
+      "url": "http://localhost:5173/assets/img/logos/logo-hero-v2.svg?v=3"
+    },
+    "domCompleteMs": 7712,
+    "loadEventMs": 7743,
+    "longTasksCount": 2,
+    "totalBlockingTimeMs": 74,
+    "scrollUnderThrottling": {
+      "avgFps": 60,
+      "jankFramesOver33ms": 0,
+      "totalFrames": 28,
+      "maxFrameMs": 17
+    }
+  }
+}

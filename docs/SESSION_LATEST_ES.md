@@ -1,34 +1,32 @@
 # Resumen de Sesión - MYNEXT
 
 ## ¿Qué se ha hecho hoy?
-1. **Eliminación Completa de la Sección Instagram**:
-   - Eliminada la sección emergente `#instagram-reveal` y sus estilos en todas las páginas web ([index.html](file:///Users/musa/Downloads/PROJ%20recientes/webs/mynext-V3%E2%9C%94%EF%B8%8F/index.html), [index-en.html](file:///Users/musa/Downloads/PROJ%20recientes/webs/mynext-V3%E2%9C%94%EF%B8%8F/index-en.html), [project.html](file:///Users/musa/Downloads/PROJ%20recientes/webs/mynext-V3%E2%9C%94%EF%B8%8F/project.html), [project-en.html](file:///Users/musa/Downloads/PROJ%20recientes/webs/mynext-V3%E2%9C%94%EF%B8%8F/project-en.html), [planes/index.html](file:///Users/musa/Downloads/PROJ%20recientes/webs/mynext-V3%E2%9C%94%EF%B8%8F/planes/index.html) y [planes/index-en.html](file:///Users/musa/Downloads/PROJ%20recientes/webs/mynext-V3%E2%9C%94%EF%B8%8F/planes/index-en.html)).
-   - Eliminado el asset correspondiente del almacenamiento local.
-2. **Rediseño Premium del Footer en toda la Web**:
-   - Sustituido el fondo plano negro por un degradado midnight glass (`#0c0f1d` a `#04050a`).
-   - Añadida línea divisoria superior con resplandor cian sutil y nueva jerarquía tipográfica moderna para enlaces y títulos de sección.
-   - Incorporado badge tipo píldora de cristal para el crédito de autoría ("Made by Musa").
-3. **Corrección Integral del Monitor y Reportes Automatizados (Email & WhatsApp)**:
-   - **Solución a falsas caídas (🔴 Caída)**: El antiguo User-Agent activaba la protección anti-bots de Cloudflare en dominios personalizados (`mynextbymusa.com`, `ecuaplac.com`, `rajbarikitchen.com`). Se actualizó a firma de navegador estándar y se añadió un reintento automático de 1.5s, logrando **10/10 webs activas en verde**.
-   - **Recuperación de métricas reales de Cloudflare RUM**: Añadido fallback de clave de API en el script y en el flujo `.github/workflows/daily-report.yml` para evitar reportes con 0 visitas.
-   - **Rediseño visual del Email**: Nueva plantilla Dark/Light Hybrid ultra-legible, con tarjetas bento contrastadas, indicadores de estado vivos y compatibilidad total con Gmail, Apple Mail y Outlook.
-   - **Mejora del Formato WhatsApp**: Mensaje estructurado, limpio y profesional con totales de la flota (`10/10 webs operativas`). Verificado y recibido con éxito.
-4. **Validación de Tests y Build**:
-   - 71/71 tests unitarios superados al 100% (`node scripts/run_unit_tests.js`).
-   - Compilación de producción con Vite exitosa en 704ms.
+1. **Instalación y Configuración de `@playwright/test`**:
+   - Instalado `@playwright/test` en [package.json](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/package.json) y configurado [playwright.config.ts](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/playwright.config.ts) con Google Chrome local y servidor de previsualización de producción (`npx vite preview --port 5173`).
+   - Creada la suite de auditoría automatizada en [tests/performance-fluidity.spec.ts](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/tests/performance-fluidity.spec.ts) (`npm run test:perf`).
+2. **Auditoría Triple de Rendimiento y Fluidez (`Playwright` + `Chrome DevTools CDP` + `TestSprite Cloud`)**:
+   - Medición de Core Web Vitals (TTFB, FCP, LCP con 4 subpartes, CLS, TBT), cascada de red, conteo de animaciones (`document.getAnimations()`), métricas CDP (`LayoutCount`, `RecalcStyleCount`, `JSHeapUsedSize`) y emulación móvil severa (`CPU 4× + Red 4G Lenta`).
+   - Ejecución de pruebas E2E en la nube de **TestSprite** a través de túnel TLS (`7` flujos evaluados) e identificación de condiciones de carrera en `TC003` y `TC006`.
+3. **Optimización de Fluidez (60 FPS Constantes) y Accesibilidad de Modales**:
+   - **Pausa de animaciones 3D ocultas**: Se añadió `visibility: hidden` y `animation: none !important` a `#page-transition-overlay` y `#plans-transition-overlay` cuando están inactivos en [src/style.css](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/src/style.css), reduciendo las animaciones infinitas en segundo plano un **73%** (`134 → 36`).
+   - **Fluidez de Scroll al 100% (`60 FPS`)**: `Home-ES` pasó de `44 FPS` (`90.9%`) a **`60 FPS` (`100%` fluidez, `0` tirones)** en Desktop y **`60 FPS`** en Móvil bajo `CPU 4× throttling`, con una reducción del **39% en memoria JS Heap** (`10.17 MB → 6.17 MB`).
+   - **Cero mutaciones DOM innecesarias**: En [src/lib/domUtils.ts](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/src/lib/domUtils.ts) (`applyDynamicSettings`) y [src/main.ts](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/src/main.ts) (`fetchCmsInBackground`), se evitaron re-renderizados redundantes de `innerHTML` y se pospuso la sincronización en segundo plano mediante `requestIdleCallback`.
+   - **Reutilización de nodos en `typeWord()`**: En [index.html](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/index.html) e [index-en.html](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/index-en.html) se implementó un pool fijo de 10 nodos `<span class="b-char">` para evitar destruir y recrear nodos cada `1.9s`.
+   - **Corrección de modales y Cookie Banner (`TC003` y `TC006`)**: Se añadió `visibility: hidden` a `.modal-wrapper`, `.cookie-banner` y `#cart-modal` cerrados, y se corrigió una etiqueta `</div>` faltante en `#gestion-tecnica` en [index-en.html](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/index-en.html).
+   - **Prioridad LCP en Proyectos**: Añadido `fetchpriority="high" decoding="async"` a `#project-image` en [project.html](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/project.html) y [project-en.html](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/project-en.html) (`LCP: 56 ms`).
 
 ## Archivos Modificados
-- [scripts/generate_daily_report.js](file:///Users/musa/Downloads/PROJ%20recientes/webs/mynext-V3%E2%9C%94%EF%B8%8F/scripts/generate_daily_report.js): Motor de monitorización con fetch nativo, reintentos y plantillas rediseñadas.
-- [.github/workflows/daily-report.yml](file:///Users/musa/Downloads/PROJ%20recientes/webs/mynext-V3%E2%9C%94%EF%B8%8F/.github/workflows/daily-report.yml): Fallback de API Key de Cloudflare para ejecución automática diaria.
-- [index.html](file:///Users/musa/Downloads/PROJ%20recientes/webs/mynext-V3%E2%9C%94%EF%B8%8F/index.html) e [index-en.html](file:///Users/musa/Downloads/PROJ%20recientes/webs/mynext-V3%E2%9C%94%EF%B8%8F/index-en.html): Eliminación de Instagram y footer rediseñado.
-- [project.html](file:///Users/musa/Downloads/PROJ%20recientes/webs/mynext-V3%E2%9C%94%EF%B8%8F/project.html) y [project-en.html](file:///Users/musa/Downloads/PROJ%20recientes/webs/mynext-V3%E2%9C%94%EF%B8%8F/project-en.html): Footer rediseñado sin Instagram.
-- [planes/index.html](file:///Users/musa/Downloads/PROJ%20recientes/webs/mynext-V3%E2%9C%94%EF%B8%8F/planes/index.html) y [planes/index-en.html](file:///Users/musa/Downloads/PROJ%20recientes/webs/mynext-V3%E2%9C%94%EF%B8%8F/planes/index-en.html): Footer rediseñado sin Instagram.
-- [docs/SESSION_LATEST_ES.md](file:///Users/musa/Downloads/PROJ%20recientes/webs/mynext-V3%E2%9C%94%EF%B8%8F/docs/SESSION_LATEST_ES.md) y [docs/ROADMAP.md](file:///Users/musa/Downloads/PROJ%20recientes/webs/mynext-V3%E2%9C%94%EF%B8%8F/docs/ROADMAP.md).
+- [src/style.css](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/src/style.css): Aislamiento `visibility: hidden` en modales/banners inactivos y desactivación de animaciones 3D en overlays cerrados.
+- [src/main.ts](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/src/main.ts): Sincronización de `#cookie-banner` con el loader inicial, `requestIdleCallback` para CMS y ocultación de `#cart-modal`.
+- [src/lib/domUtils.ts](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/src/lib/domUtils.ts): Prevención de escritura redundante de `innerHTML` en `applyDynamicSettings`.
+- [index.html](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/index.html) e [index-en.html](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/index-en.html): Pool de nodos en `typeWord()`, limpieza de listeners vacíos y cierre de `#gestion-tecnica`.
+- [project.html](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/project.html) y [project-en.html](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/project-en.html): `fetchpriority="high"` en `#project-image`.
+- [playwright.config.ts](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/playwright.config.ts) y [tests/performance-fluidity.spec.ts](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/tests/performance-fluidity.spec.ts): Suite completa de auditoría (`6/6 PASSED`).
 
 ## Problemas Solucionados
-- Solucionadas las falsas alertas de caídas en el portfolio y webs de clientes.
-- Solucionada la falta de contraste visual en los correos de reporte diario.
-- Eliminado el bloque residual y foto de Instagram bajo el footer.
+- Eliminada la caída puntual a `44 FPS` durante el primer scroll de `Home-ES` (ahora `60 FPS` / `100%` fluidez).
+- Eliminadas 98 animaciones 3D infinitas que seguían ejecutándose ocultas tras cerrarse el loader inicial.
+- Solucionada la exposición de botones `.modal-close` de modales cerrados y la condición de carrera en `#cookie-banner` (`TC003` y `TC006`).
 
-## Pendiente
-1. Opcional: Implementar integración bidireccional de comandos para WhatsApp con Meta Cloud API si se requiere consultar el estado por chat bajo demanda.
+## Qué Queda Pendiente
+1. **Google Search Console**: Revisión e indexación pendiente en Google Search Console (próxima tarea inmediata).

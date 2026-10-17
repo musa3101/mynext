@@ -12,5 +12,8 @@ dist/
 *.mov
 *.webm
 
-# TestSprite artifacts
+# TestSprite & Playwright artifacts
 .testsprite/
+testsprite_tests/
+test-results/
+playwright-report/

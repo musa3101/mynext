@@ -7,6 +7,7 @@ import {
 } from './lib/fallbackData';
 import { initAnalyticsListeners } from './lib/analytics';
 import { getTranslation, applyDynamicSettings, sanitizeHtml } from './lib/domUtils';
+import { recordCookieConsent, recordClientEmail } from './lib/leadTracker';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -40,6 +41,17 @@ function getDomainFromUrl(url: string): string {
 
 // Global reveal animations trigger — GSAP-powered blur-reveal + stagger
 function initRevealAnimations() {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (prefersReducedMotion) {
+    document.querySelectorAll<HTMLElement>('.reveal, .stagger-item, .blur-reveal').forEach(el => {
+      el.classList.add('active');
+      gsap.set(el, { opacity: 1, y: 0, clearProps: 'transform' });
+    });
+    initCardSpotlight();
+    return;
+  }
+
   // Classic reveals (keep class toggle for CSS-only fallback)
   const reveals = document.querySelectorAll('.reveal');
   reveals.forEach(reveal => {
@@ -101,6 +113,9 @@ function initRevealAnimations() {
     );
   });
 
+  // Refresh ScrollTrigger measurements after dynamic CMS DOM injection
+  ScrollTrigger.refresh();
+
   // Dynamic Spotlight Mouse Tracker (uipro-max & gpt-taste)
   initCardSpotlight();
 }
@@ -140,10 +155,10 @@ function initFaqAccordion() {
 
     if (!trigger || !content) return;
 
-    // Set initial heights based on data-open attribute
+    // Set initial heights based on data-open attribute without forcing synchronous layout reflow
     const isOpen = item.getAttribute('data-open') === 'true';
     if (isOpen) {
-      content.style.maxHeight = content.scrollHeight + 'px';
+      content.style.maxHeight = '600px';
       content.style.opacity = '1';
       if (icon) icon.classList.add('rotate-180');
       trigger.setAttribute('aria-expanded', 'true');
@@ -182,7 +197,7 @@ function initFaqAccordion() {
         content.style.maxHeight = content.scrollHeight + 'px';
       }
     });
-  });
+  }, { passive: true });
 }
 
 // 0. Scroll restoration logic
@@ -211,7 +226,7 @@ function renderDynamicGoogleReviews(reviewsList: any[]) {
     const photo = r.author_photo || r.image_url;
 
     const avatarHtml = (photo && photo.startsWith('http'))
-      ? `<img src="${photo}" alt="${name}" class="w-full h-full object-cover rounded-full" />`
+      ? `<img src="${photo}" alt="${name}" class="w-full h-full object-cover rounded-full" loading="lazy" width="40" height="40" />`
       : `<span class="text-electric-cyan font-bold font-headline text-sm">${name ? name.charAt(0).toUpperCase() : 'G'}</span>`;
 
     const bodyHtml = hasText
@@ -223,7 +238,7 @@ function renderDynamicGoogleReviews(reviewsList: any[]) {
          </div>`;
 
     return `
-      <div class="spotlight-card review-card relative w-[340px] sm:w-[380px] md:w-[420px] shrink-0 p-7 md:p-8 flex flex-col justify-between rounded-[2rem] bg-[#0c0c16]/75 border border-white/10 backdrop-blur-2xl overflow-hidden group hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(0,242,255,0.12)] hover:border-electric-cyan/40 transition-all duration-500 min-h-[290px]">
+      <div class="spotlight-card review-card relative w-[290px] sm:w-[360px] md:w-[420px] shrink-0 p-6 md:p-8 flex flex-col justify-between rounded-[2rem] bg-[#0c0c16]/75 border border-white/10 backdrop-blur-2xl overflow-hidden group hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(0,242,255,0.12)] hover:border-electric-cyan/40 transition-all duration-500 min-h-[255px] md:min-h-[290px]">
           <div class="absolute inset-0 bg-gradient-to-br from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
           
           <!-- Watermark Quote Icon -->
@@ -273,90 +288,140 @@ function renderDynamicGoogleReviews(reviewsList: any[]) {
   const cardsHtml = reviewsList.map(buildCardHtml).join('');
   const fullHtml = cardsHtml + cardsHtml;
 
-  marqueeTracks.forEach(track => {
+  marqueeTracks.forEach((track: any) => {
     track.innerHTML = fullHtml;
+    if (typeof track.__refreshMarqueeWidth === 'function') {
+      track.__refreshMarqueeWidth();
+    }
   });
 
   // Attach spotlight listeners to freshly rendered review cards
   initCardSpotlight();
 }
 
-// --- Draggable & Touch Smooth Marquee ---
+// --- Draggable & Touch Smooth Marquee (GPU Transform Engine for iOS Safari & Desktop) ---
 function initDraggableMarquee() {
   const containers = document.querySelectorAll('.reviews-slider-container');
   containers.forEach((container: any) => {
     if (container.dataset.marqueeInit === 'true') return;
     container.dataset.marqueeInit = 'true';
 
-    const slider = container.querySelector('.animate-marquee');
+    const slider = container.querySelector('.animate-marquee') as HTMLElement | null;
     if (!slider) return;
 
+    let isPointerDown = false;
     let isDragging = false;
     let isInteracting = false;
     let startX = 0;
     let startY = 0;
     let lastX = 0;
     let lastTime = 0;
+    let lastAutoFrameTime = 0;
     let velocityX = 0;
     let totalDrag = 0;
     let directionLocked: 'horizontal' | 'vertical' | null = null;
     let momentumId = 0;
     let animationId = 0;
     let resumeTimer: any = null;
+    let cachedHalfWidth = 0;
+    let currentScrollPos = 0;
 
-    const baseAutoSpeed = 0.5; // Smooth ambient scroll
+    // 55 px per second (0.055 px/ms) — clearly visible, silky smooth on 60Hz & 120Hz iPhones
+    const speedPxPerMs = 0.055;
 
     let isVisible = true;
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        isVisible = entry.isIntersecting;
-      });
-    }, { threshold: 0.05 });
-    observer.observe(container);
 
-    // Infinite wrap helper without any jump
-    const wrapScroll = () => {
-      const halfWidth = slider.scrollWidth / 2;
-      if (halfWidth <= 0) return;
-      if (container.scrollLeft >= halfWidth) {
-        container.scrollLeft -= halfWidth;
-      } else if (container.scrollLeft < 0) {
-        container.scrollLeft += halfWidth;
+    const applyTransform = () => {
+      slider.style.transform = `translate3d(${-currentScrollPos}px, 0, 0)`;
+    };
+
+    const updateHalfWidth = () => {
+      const w = slider.scrollWidth / 2;
+      if (w > 0) {
+        cachedHalfWidth = w;
       }
     };
 
-    // Auto-scroll loop
-    const autoScroll = () => {
-      if (!isInteracting && !isDragging && isVisible && document.visibilityState === 'visible') {
-        container.scrollLeft += baseAutoSpeed;
+    (slider as any).__refreshMarqueeWidth = updateHalfWidth;
+
+    const wrapScroll = () => {
+      if (cachedHalfWidth <= 0) updateHalfWidth();
+      if (cachedHalfWidth <= 0) return;
+      if (currentScrollPos >= cachedHalfWidth) {
+        currentScrollPos %= cachedHalfWidth;
+      } else if (currentScrollPos < 0) {
+        currentScrollPos = (currentScrollPos % cachedHalfWidth) + cachedHalfWidth;
+      }
+    };
+
+    // Auto-scroll loop driven by deltaTime and GPU translate3d
+    const autoScroll = (now: number) => {
+      if (!isVisible) {
+        animationId = 0;
+        lastAutoFrameTime = 0;
+        return;
+      }
+      if (!lastAutoFrameTime) lastAutoFrameTime = now;
+      const dt = Math.min(50, Math.max(1, now - lastAutoFrameTime));
+      lastAutoFrameTime = now;
+
+      if (!isInteracting && !isDragging && document.visibilityState === 'visible') {
+        currentScrollPos += speedPxPerMs * dt;
         wrapScroll();
+        applyTransform();
       }
       animationId = requestAnimationFrame(autoScroll);
     };
 
-    animationId = requestAnimationFrame(autoScroll);
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) {
+          updateHalfWidth();
+          if (!animationId) {
+            lastAutoFrameTime = 0;
+            animationId = requestAnimationFrame(autoScroll);
+          }
+        } else if (animationId) {
+          cancelAnimationFrame(animationId);
+          animationId = 0;
+          lastAutoFrameTime = 0;
+        }
+      });
+    }, { threshold: 0.01 });
+    observer.observe(container);
+    window.addEventListener('resize', updateHalfWidth, { passive: true });
 
-    // Smooth momentum glide after swipe release
+    // Start immediately after layout settles
+    requestAnimationFrame((ts) => {
+      updateHalfWidth();
+      if (isVisible && !animationId) {
+        animationId = requestAnimationFrame(autoScroll);
+      }
+    });
+
+    // Smooth momentum glide after horizontal swipe release
     const startMomentum = (initV: number) => {
       cancelAnimationFrame(momentumId);
       let v = initV;
       const friction = 0.94;
 
       const stepMomentum = () => {
-        if (Math.abs(v) > 0.05 && !isDragging) {
-          container.scrollLeft -= v;
+        if (Math.abs(v) > 0.08 && !isDragging) {
+          currentScrollPos -= v;
           wrapScroll();
+          applyTransform();
           v *= friction;
           momentumId = requestAnimationFrame(stepMomentum);
         } else {
-          scheduleAutoplayResume(800);
+          scheduleAutoplayResume(500);
         }
       };
 
       momentumId = requestAnimationFrame(stepMomentum);
     };
 
-    const scheduleAutoplayResume = (delay = 1200) => {
+    const scheduleAutoplayResume = (delay = 600) => {
       clearTimeout(resumeTimer);
       resumeTimer = setTimeout(() => {
         if (!isDragging) {
@@ -365,25 +430,27 @@ function initDraggableMarquee() {
       }, delay);
     };
 
-    // Gesture Handlers
-    const handleStart = (clientX: number, clientY: number) => {
+    // Gesture Handlers — only pause autoplay when horizontal drag is confirmed!
+    const handleStart = (clientX: number, clientY: number, isMouse = false) => {
       cancelAnimationFrame(momentumId);
       clearTimeout(resumeTimer);
-      isDragging = true;
-      isInteracting = true;
+      isPointerDown = true;
       startX = clientX;
       startY = clientY;
       lastX = clientX;
       lastTime = performance.now();
       velocityX = 0;
       totalDrag = 0;
-      directionLocked = null;
-      container.classList.add('active-dragging');
-      container.style.scrollBehavior = 'auto';
+      directionLocked = isMouse ? 'horizontal' : null;
+      if (isMouse) {
+        isDragging = true;
+        isInteracting = true;
+        container.classList.add('active-dragging');
+      }
     };
 
     const handleMove = (clientX: number, clientY: number, e?: Event) => {
-      if (!isDragging) return;
+      if (!isPointerDown) return;
 
       const now = performance.now();
       const dt = Math.max(1, now - lastTime);
@@ -392,19 +459,24 @@ function initDraggableMarquee() {
       const totalDy = Math.abs(clientY - startY);
 
       // Lock direction on touch gesture
-      if (!directionLocked && (totalDx > 6 || totalDy > 6)) {
-        if (totalDy > totalDx * 1.1) {
+      if (!directionLocked) {
+        if (totalDx < 6 && totalDy < 6) return;
+        if (totalDy > totalDx) {
+          // Vertical page scroll — do not interrupt marquee autoplay at all!
           directionLocked = 'vertical';
+          isPointerDown = false;
           isDragging = false;
           container.classList.remove('active-dragging');
-          scheduleAutoplayResume(400);
           return;
         } else {
           directionLocked = 'horizontal';
+          isDragging = true;
+          isInteracting = true;
+          container.classList.add('active-dragging');
         }
       }
 
-      if (directionLocked === 'vertical') return;
+      if (directionLocked === 'vertical' || !isDragging) return;
 
       if (directionLocked === 'horizontal' && e && e.cancelable) {
         e.preventDefault();
@@ -413,14 +485,16 @@ function initDraggableMarquee() {
       totalDrag += Math.abs(deltaX);
       velocityX = (deltaX / dt) * 14;
 
-      container.scrollLeft -= deltaX;
+      currentScrollPos -= deltaX;
       wrapScroll();
+      applyTransform();
 
       lastX = clientX;
       lastTime = now;
     };
 
     const handleEnd = () => {
+      isPointerDown = false;
       if (!isDragging) return;
       isDragging = false;
       container.classList.remove('active-dragging');
@@ -428,20 +502,21 @@ function initDraggableMarquee() {
       if (Math.abs(velocityX) > 0.4) {
         startMomentum(velocityX);
       } else {
-        scheduleAutoplayResume(1000);
+        scheduleAutoplayResume(600);
       }
     };
 
     const handleCancel = () => {
+      isPointerDown = false;
       isDragging = false;
       container.classList.remove('active-dragging');
-      scheduleAutoplayResume(400);
+      scheduleAutoplayResume(300);
     };
 
     // Mobile Touch Events
     container.addEventListener('touchstart', (e: TouchEvent) => {
       if (e.touches.length === 1) {
-        handleStart(e.touches[0].clientX, e.touches[0].clientY);
+        handleStart(e.touches[0].clientX, e.touches[0].clientY, false);
       }
     }, { passive: true });
 
@@ -457,7 +532,7 @@ function initDraggableMarquee() {
     // Desktop Mouse Drag Events
     container.addEventListener('mousedown', (e: MouseEvent) => {
       if (e.button !== 0) return;
-      handleStart(e.clientX, e.clientY);
+      handleStart(e.clientX, e.clientY, true);
     });
 
     window.addEventListener('mousemove', (e: MouseEvent) => {
@@ -467,19 +542,21 @@ function initDraggableMarquee() {
     });
 
     window.addEventListener('mouseup', () => {
-      if (isDragging) {
+      if (isPointerDown || isDragging) {
         handleEnd();
       }
     });
 
-    // Hover pauses auto-scroll on desktop
-    container.addEventListener('mouseenter', () => {
-      if (!isDragging) isInteracting = true;
-    });
+    // Hover pauses auto-scroll on desktop mouse devices only
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      container.addEventListener('mouseenter', () => {
+        if (!isDragging) isInteracting = true;
+      });
 
-    container.addEventListener('mouseleave', () => {
-      if (!isDragging) scheduleAutoplayResume(400);
-    });
+      container.addEventListener('mouseleave', () => {
+        if (!isDragging) scheduleAutoplayResume(400);
+      });
+    }
 
     // Prevent clicking link during drag gesture
     container.addEventListener('click', (e: MouseEvent) => {
@@ -492,7 +569,7 @@ function initDraggableMarquee() {
 }
 
 // Initialize all DOM contents safely
-async function initMain() {
+function initMain() {
   // --- A. Dynamic Data Fetch & Render with Session Caching ---
   const CACHE_KEY = 'mynext_cms_cache_v3';
   const CACHE_TTL = 10 * 60 * 1000; // 10 minutes TTL
@@ -518,146 +595,153 @@ async function initMain() {
   const initialGoogleReviews = testimonials.filter((t: any) => t.source === 'google' || t.google_review_id);
   renderDynamicGoogleReviews(initialGoogleReviews);
 
-  // Attempt to fetch fresh data from Supabase
-  if (supabase) {
-    try {
-      const [projectsRes, testimonialsRes, settingsRes, contactRes, heroRes, aboutRes, faqRes] = await Promise.all([
-        supabase.from('mynext_projects').select('*').eq('active', true).order('sort_order', { ascending: true }),
-        supabase.from('mynext_testimonials').select('*').eq('active', true),
-        supabase.from('mynext_settings').select('*'),
-        supabase.from('mynext_contact').select('*').maybeSingle(),
-        supabase.from('mynext_hero').select('*').maybeSingle(),
-        supabase.from('mynext_about').select('*').maybeSingle(),
-        supabase.from('mynext_faq').select('*').eq('active', true).order('sort_order', { ascending: true })
-      ]);
+  const applySettingsToDom = (currentSettings: Record<string, string>) => {
+    const settingsMap = new Map<string, string>();
+    Object.entries(currentSettings).forEach(([k, v]) => settingsMap.set(k, v));
 
-      if (projectsRes.data && projectsRes.data.length > 0) {
-        const dbProjects = projectsRes.data;
-        const merged: any[] = [...dbProjects];
-
-        fallbackProjects.forEach(localProj => {
-          const match = merged.find(p => (p.slug && localProj.slug && p.slug === localProj.slug) || p.title.toLowerCase().trim() === localProj.title.toLowerCase().trim() || p.id === localProj.id);
-          if (!match) {
-            // Append locally added projects that are missing in the database
-            merged.push(localProj);
-          }
-        });
-
-        merged.sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
-        projects = merged;
+    const siteTitle = settingsMap.get('site_title');
+    if (siteTitle) {
+      document.title = getTranslation(siteTitle, lang);
+    }
+    const siteDesc = settingsMap.get('site_description');
+    if (siteDesc) {
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) {
+        metaDesc.setAttribute('content', getTranslation(siteDesc, lang));
       }
+    }
 
-      if (testimonialsRes.data && testimonialsRes.data.length > 0) {
-        testimonials = testimonialsRes.data;
-        // Render only verified Google Maps reviews
-        const googleReviews = testimonials.filter((t: any) => t.source === 'google' || t.google_review_id);
-        if (googleReviews.length > 0) {
-          renderDynamicGoogleReviews(googleReviews);
-        }
-      }
+    const phone = settingsMap.get('contact_phone') || '34673109486';
+    const email = settingsMap.get('contact_email') || 'mynextbymusa@gmail.com';
+    const whatsappMsg = getTranslation(settingsMap.get('whatsapp_message_landing'), lang);
+    const emailSubject = getTranslation(settingsMap.get('email_subject_landing'), lang);
+    const emailBody = getTranslation(settingsMap.get('email_body_landing'), lang);
 
-      if (settingsRes.data && settingsRes.data.length > 0) {
-        const dbSettings: Record<string, string> = {};
-        settingsRes.data.forEach((s: any) => {
-          dbSettings[s.key] = s.value;
-        });
-        settings = dbSettings;
-      }
+    document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
+      link.setAttribute('href', `https://wa.me/${phone}?text=${encodeURIComponent(whatsappMsg)}`);
+    });
 
-      // Merge contact table if present
-      if (contactRes && (contactRes as any).data) {
-        const c = (contactRes as any).data;
-        if (c.phone) settings['contact_phone'] = c.phone;
-        if (c.email) settings['contact_email'] = c.email;
-        if (c.whatsapp_message_es || c.whatsapp_message_en) {
-          settings['whatsapp_message_landing'] = JSON.stringify({ es: c.whatsapp_message_es, en: c.whatsapp_message_en });
-        }
-        if (c.site_title_es || c.site_title_en) {
-          settings['site_title'] = JSON.stringify({ es: c.site_title_es, en: c.site_title_en });
-        }
-        if (c.meta_description_es || c.meta_description_en) {
-          settings['site_description'] = JSON.stringify({ es: c.meta_description_es, en: c.meta_description_en });
-        }
-        if (c.footer_text_es || c.footer_text_en) {
-          settings['footer_desc'] = JSON.stringify({ es: c.footer_text_es, en: c.footer_text_en });
-        }
-      }
+    document.querySelectorAll('a[href*="mailto:"]').forEach(link => {
+      link.setAttribute('href', `mailto:${email}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`);
+    });
+  };
 
-      // Merge hero table if present
-      if (heroRes && (heroRes as any).data) {
-        const h = (heroRes as any).data;
-        if (h.banner_offer_es || h.banner_offer_en) {
-          settings['launch_banner_text'] = JSON.stringify({ es: h.banner_offer_es, en: h.banner_offer_en });
-        }
-      }
+  // Apply initial settings immediately without waiting for network
+  applySettingsToDom(settings);
 
-      // Merge about table if present
-      if (aboutRes && (aboutRes as any).data) {
-        const a = (aboutRes as any).data;
-        if (a.bio_p1_es || a.bio_p1_en) settings['about_bio1'] = JSON.stringify({ es: a.bio_p1_es, en: a.bio_p1_en });
-        if (a.bio_p2_es || a.bio_p2_en) settings['about_bio2'] = JSON.stringify({ es: a.bio_p2_es, en: a.bio_p2_en });
-        if (a.stat_experience) settings['stat_experience'] = a.stat_experience;
-        if (a.stat_projects) settings['stat_projects'] = a.stat_projects;
-      }
-
-      // Merge faq table if present
-      if (faqRes && (faqRes as any).data && (faqRes as any).data.length > 0) {
-        (faqRes as any).data.forEach((f: any, idx: number) => {
-          const num = f.sort_order || (idx + 1);
-          settings[`faq_q${num}`] = JSON.stringify({ es: f.question_es, en: f.question_en });
-          settings[`faq_a${num}`] = JSON.stringify({ es: f.answer_es, en: f.answer_en });
-        });
-      }
-
-      // Apply any dynamic HTML content automatically
-      applyDynamicSettings(settings, lang as 'es' | 'en');
-
-      // Cache successful response in sessionStorage for instant subsequent loads
+  // Fetch fresh data from Supabase asynchronously in background without blocking initial paint or LCP
+  if (supabase && !cachedData) {
+    const sb = supabase;
+    const fetchCmsInBackground = async () => {
       try {
-        sessionStorage.setItem(CACHE_KEY, JSON.stringify({
-          timestamp: Date.now(),
-          data: { projects, testimonials, settings }
-        }));
-      } catch (e) {
-        // quota exceeded or private browsing mode
+        const [projectsRes, testimonialsRes, settingsRes, contactRes, heroRes, aboutRes, faqRes] = await Promise.all([
+          sb.from('mynext_projects').select('*').eq('active', true).order('sort_order', { ascending: true }),
+          sb.from('mynext_testimonials').select('*').eq('active', true),
+          sb.from('mynext_settings').select('*'),
+          sb.from('mynext_contact').select('*').maybeSingle(),
+          sb.from('mynext_hero').select('*').maybeSingle(),
+          sb.from('mynext_about').select('*').maybeSingle(),
+          sb.from('mynext_faq').select('*').eq('active', true).order('sort_order', { ascending: true })
+        ]);
+
+        if (projectsRes.data && projectsRes.data.length > 0) {
+          const dbProjects = projectsRes.data;
+          const merged: any[] = [...dbProjects];
+
+          fallbackProjects.forEach(localProj => {
+            const match = merged.find(p => (p.slug && localProj.slug && p.slug === localProj.slug) || p.title.toLowerCase().trim() === localProj.title.toLowerCase().trim() || p.id === localProj.id);
+            if (!match) {
+              merged.push(localProj);
+            }
+          });
+
+          merged.sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+          projects = merged;
+        }
+
+        if (testimonialsRes.data && testimonialsRes.data.length > 0) {
+          testimonials = testimonialsRes.data;
+          const googleReviews = testimonials.filter((t: any) => t.source === 'google' || t.google_review_id);
+          const initialIds = initialGoogleReviews.map((r: any) => r.id || r.author_name).join('|');
+          const fetchedIds = googleReviews.map((r: any) => r.id || r.author_name).join('|');
+          if (googleReviews.length > 0 && fetchedIds !== initialIds) {
+            renderDynamicGoogleReviews(googleReviews);
+          }
+        }
+
+        if (settingsRes.data && settingsRes.data.length > 0) {
+          const dbSettings: Record<string, string> = {};
+          settingsRes.data.forEach((s: any) => {
+            dbSettings[s.key] = s.value;
+          });
+          settings = dbSettings;
+        }
+
+        if (contactRes && (contactRes as any).data) {
+          const c = (contactRes as any).data;
+          if (c.phone) settings['contact_phone'] = c.phone;
+          if (c.email) settings['contact_email'] = c.email;
+          if (c.whatsapp_message_es || c.whatsapp_message_en) {
+            settings['whatsapp_message_landing'] = JSON.stringify({ es: c.whatsapp_message_es, en: c.whatsapp_message_en });
+          }
+          if (c.site_title_es || c.site_title_en) {
+            settings['site_title'] = JSON.stringify({ es: c.site_title_es, en: c.site_title_en });
+          }
+          if (c.meta_description_es || c.meta_description_en) {
+            settings['site_description'] = JSON.stringify({ es: c.meta_description_es, en: c.meta_description_en });
+          }
+          if (c.footer_text_es || c.footer_text_en) {
+            settings['footer_desc'] = JSON.stringify({ es: c.footer_text_es, en: c.footer_text_en });
+          }
+        }
+
+        if (heroRes && (heroRes as any).data) {
+          const h = (heroRes as any).data;
+          if (h.banner_offer_es || h.banner_offer_en) {
+            settings['launch_banner_text'] = JSON.stringify({ es: h.banner_offer_es, en: h.banner_offer_en });
+          }
+        }
+
+        if (aboutRes && (aboutRes as any).data) {
+          const a = (aboutRes as any).data;
+          if (a.bio_p1_es || a.bio_p1_en) settings['about_bio1'] = JSON.stringify({ es: a.bio_p1_es, en: a.bio_p1_en });
+          if (a.bio_p2_es || a.bio_p2_en) settings['about_bio2'] = JSON.stringify({ es: a.bio_p2_es, en: a.bio_p2_en });
+          if (a.stat_experience) settings['stat_experience'] = a.stat_experience;
+          if (a.stat_projects) settings['stat_projects'] = a.stat_projects;
+        }
+
+        if (faqRes && (faqRes as any).data && (faqRes as any).data.length > 0) {
+          (faqRes as any).data.forEach((f: any, idx: number) => {
+            const num = f.sort_order || (idx + 1);
+            settings[`faq_q${num}`] = JSON.stringify({ es: f.question_es, en: f.question_en });
+            settings[`faq_a${num}`] = JSON.stringify({ es: f.answer_es, en: f.answer_en });
+          });
+        }
+
+        applyDynamicSettings(settings, lang as 'es' | 'en');
+        applySettingsToDom(settings);
+
+        try {
+          sessionStorage.setItem(CACHE_KEY, JSON.stringify({
+            timestamp: Date.now(),
+            data: { projects, testimonials, settings }
+          }));
+        } catch (e) {
+          // quota exceeded or private browsing mode
+        }
+      } catch (err) {
+        console.error('Error fetching Supabase data, using local fallback:', err);
       }
+    };
 
-    } catch (err) {
-      console.error('Error fetching Supabase data, using local fallback:', err);
-    }
+    setTimeout(() => {
+      if ('requestIdleCallback' in window) {
+        (window as any).requestIdleCallback(fetchCmsInBackground, { timeout: 2000 });
+      } else {
+        void fetchCmsInBackground();
+      }
+    }, 2500);
   }
-
-  // Map settings settings keys into Map
-  const settingsMap = new Map<string, string>();
-  Object.entries(settings).forEach(([k, v]) => settingsMap.set(k, v));
-
-  // Render Page Title & Description if configured
-  const siteTitle = settingsMap.get('site_title');
-  if (siteTitle) {
-    document.title = getTranslation(siteTitle, lang);
-  }
-  const siteDesc = settingsMap.get('site_description');
-  if (siteDesc) {
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute('content', getTranslation(siteDesc, lang));
-    }
-  }
-
-  // Update contact information dynamically (WhatsApp and Email)
-  const phone = settingsMap.get('contact_phone') || '34673109486';
-  const email = settingsMap.get('contact_email') || 'mynextbymusa@gmail.com';
-  const whatsappMsg = getTranslation(settingsMap.get('whatsapp_message_landing'), lang);
-  const emailSubject = getTranslation(settingsMap.get('email_subject_landing'), lang);
-  const emailBody = getTranslation(settingsMap.get('email_body_landing'), lang);
-
-  document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
-    link.setAttribute('href', `https://wa.me/${phone}?text=${encodeURIComponent(whatsappMsg)}`);
-  });
-
-  document.querySelectorAll('a[href*="mailto:"]').forEach(link => {
-    link.setAttribute('href', `mailto:${email}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`);
-  });
 
   // --- Render Portfolio Card Fan Carousel (21st.dev #14896) ---
   const portfolioCarousel = document.getElementById('portfolio-carousel');
@@ -677,7 +761,7 @@ async function initMain() {
       
       const projectSlug = proj.slug || proj.title.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
       const projectUrl = lang === 'en' ? `project-en.html?slug=${projectSlug}` : `project.html?slug=${projectSlug}`;
-      const btnText = lang === 'en' ? 'More Info →' : 'Más Info →';
+      const btnText = lang === 'en' ? 'More Info' : 'Más Info';
 
       let projImageUrl = proj.image_url || '';
       if (projImageUrl.includes('/portfolio/') && projImageUrl.endsWith('.png')) {
@@ -703,14 +787,15 @@ async function initMain() {
       const categoryText = getCategoryLabel(proj, lang);
 
       article.innerHTML = `
-        <div class="relative w-full h-full overflow-hidden flex items-center justify-center cursor-pointer" onclick="window.location.href='${projectUrl}'">
-          <img src="${projImageUrl}" alt="${lang === 'en' ? `Premium web design in Mallorca - Preview of ${proj.title}` : `Diseño web premium en Mallorca - Vista previa de ${proj.title}`}" loading="${idx < 2 ? 'eager' : 'lazy'}" decoding="async" fetchpriority="${idx < 2 ? 'high' : 'low'}"
-            class="w-full h-full object-cover object-center scale-[1.12] group-hover:scale-[1.20] transition-transform duration-700">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
-          <div class="absolute bottom-0 inset-x-0 p-5 sm:p-6 md:p-8 flex flex-col justify-end text-left z-20">
-            <span class="text-xs md:text-sm font-headline font-semibold uppercase tracking-[0.2em] text-[#00f2ff]">${categoryText}</span>
-            <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white font-headline tracking-tight mt-1">${proj.title}</h3>
-            <a href="${projectUrl}" class="mt-2.5 inline-flex items-center gap-2 text-xs md:text-sm font-bold text-white uppercase tracking-widest group-hover:text-[#00f2ff] transition-colors">
+        <div class="relative w-full h-full overflow-hidden flex flex-col justify-between cursor-pointer bg-[#070811]" onclick="window.location.href='${projectUrl}'">
+          <div class="relative w-full h-[64%] sm:h-[68%] overflow-hidden flex items-center justify-center px-3 pt-3 pb-1 bg-gradient-to-b from-[#0d1222]/70 via-[#080a14]/50 to-transparent">
+            <img src="${projImageUrl}" alt="${lang === 'en' ? `Premium web design in Mallorca - Preview of ${proj.title}` : `Diseño web premium en Mallorca - Vista previa de ${proj.title}`}" loading="lazy" decoding="async" width="480" height="360"
+              class="w-full h-full object-contain object-center group-hover:scale-[1.06] transition-transform duration-700 drop-shadow-[0_12px_24px_rgba(0,0,0,0.75)]">
+          </div>
+          <div class="relative w-full h-[36%] sm:h-[32%] px-5 pb-4 pt-2 sm:px-6 sm:pb-5 md:px-8 md:pb-6 flex flex-col justify-end text-left z-20 bg-gradient-to-t from-[#05050a] via-[#070812]/95 to-[#070812]/70 border-t border-white/[0.06]">
+            <span class="text-[10px] sm:text-xs md:text-sm font-headline font-semibold uppercase tracking-[0.18em] text-[#00f2ff] truncate">${categoryText}</span>
+            <h3 class="text-lg sm:text-2xl md:text-3xl font-bold text-white font-headline tracking-tight mt-0.5 truncate">${proj.title}</h3>
+            <a href="${projectUrl}" class="mt-1.5 sm:mt-2 inline-flex items-center gap-1.5 text-[11px] sm:text-xs md:text-sm font-bold text-white/90 uppercase tracking-widest group-hover:text-[#00f2ff] transition-colors">
               ${btnText} <span class="material-symbols-outlined text-sm md:text-base">arrow_forward</span>
             </a>
           </div>
@@ -724,8 +809,8 @@ async function initMain() {
     const HALF = 3;
 
     function getResponsiveMultiplier(w: number) {
-      if (w < 480) return 0.35;
-      if (w < 640) return 0.48;
+      if (w < 480) return 0.28;
+      if (w < 640) return 0.42;
       if (w < 768) return 0.65;
       if (w < 1024) return 0.95;
       return 1.25;
@@ -757,12 +842,14 @@ async function initMain() {
       const center = HALF;
       const distance = slot - center;
       const absDistance = Math.abs(distance);
+      const isSmallScreen = window.innerWidth < 640;
       return {
-        rot: distance * 7,
-        scale: 1.0 - 0.08 * absDistance,
+        rot: isSmallScreen ? distance * 4.5 : distance * 7,
+        scale: isSmallScreen ? 1.0 - 0.09 * absDistance : 1.0 - 0.08 * absDistance,
         x: distance * 11,
-        y: absDistance * absDistance * 1.3,
+        y: isSmallScreen ? absDistance * 0.45 : absDistance * absDistance * 1.3,
         zIndex: 10 - absDistance,
+        absDistance,
       };
     };
 
@@ -778,6 +865,7 @@ async function initMain() {
     const updateCardPositions = (animated = true, dragOffset = 0) => {
       if (!cardElements.length) return;
       const visibleMap = getVisibleMap(centerIndex);
+      const isSmallScreen = window.innerWidth < 640;
       const mult = getResponsiveMultiplier(window.innerWidth);
       const hMult = getHeightMultiplier(window.innerWidth);
       const dragShiftRem = dragOffset / 16;
@@ -787,14 +875,15 @@ async function initMain() {
 
         if (slot !== undefined) {
           const config = getSlotConfig(slot);
+          const hideFarMobileCard = isSmallScreen && config.absDistance > 1;
           const target = {
             x: `${config.x * mult + dragShiftRem}rem`,
             y: `${config.y * hMult}rem`,
             rotation: config.rot + dragShiftRem * 1.5,
-            scale: config.scale,
-            opacity: 1,
+            scale: hideFarMobileCard ? 0.78 : config.scale,
+            opacity: hideFarMobileCard ? 0 : (isSmallScreen && config.absDistance === 1 ? 0.55 : 1),
             zIndex: config.zIndex,
-            pointerEvents: 'auto' as const,
+            pointerEvents: hideFarMobileCard ? ('none' as const) : ('auto' as const),
           };
 
           if (animated) {
@@ -823,13 +912,17 @@ async function initMain() {
       updatePaginationDots();
     };
 
-    // Render Pagination Dots
+    // Render Pagination Dots (with >=28x28px accessible touch targets)
     if (portfolioPagination) {
       portfolioPagination.innerHTML = '';
       for (let i = 0; i < totalProjects; i++) {
         const dot = document.createElement('button');
+        dot.type = 'button';
         dot.ariaLabel = `Project ${i + 1}`;
-        dot.className = `h-2.5 rounded-full transition-all duration-300 cursor-pointer ${i === centerIndex ? 'w-8 bg-[#00f2ff] shadow-[0_0_12px_rgba(0,242,255,0.6)]' : 'w-2.5 bg-white/20 hover:bg-white/40'}`;
+        dot.className = 'min-w-[28px] min-h-[28px] p-2 flex items-center justify-center cursor-pointer group focus:outline-none';
+        const pill = document.createElement('span');
+        pill.className = `dot-pill block h-2.5 rounded-full transition-all duration-300 ${i === centerIndex ? 'w-8 bg-[#00f2ff] shadow-[0_0_12px_rgba(0,242,255,0.6)]' : 'w-2.5 bg-white/20 group-hover:bg-white/40'}`;
+        dot.appendChild(pill);
         dot.addEventListener('click', () => {
           if (isAnimating) return;
           isAnimating = true;
@@ -845,10 +938,13 @@ async function initMain() {
       if (!portfolioPagination) return;
       const dots = portfolioPagination.querySelectorAll('button');
       dots.forEach((dot, idx) => {
-        if (idx === centerIndex) {
-          dot.className = 'h-2.5 w-8 rounded-full bg-[#00f2ff] shadow-[0_0_12px_rgba(0,242,255,0.6)] transition-all duration-300';
-        } else {
-          dot.className = 'h-2.5 w-2.5 rounded-full bg-white/20 hover:bg-white/40 transition-all duration-300';
+        const pill = dot.querySelector('.dot-pill');
+        if (pill) {
+          if (idx === centerIndex) {
+            pill.className = 'dot-pill block h-2.5 w-8 rounded-full bg-[#00f2ff] shadow-[0_0_12px_rgba(0,242,255,0.6)] transition-all duration-300';
+          } else {
+            pill.className = 'dot-pill block h-2.5 w-2.5 rounded-full bg-white/20 group-hover:bg-white/40 transition-all duration-300';
+          }
         }
       });
     };
@@ -1192,11 +1288,12 @@ async function initMain() {
   if (cookieBanner && !localStorage.getItem('cookie-preference')) {
     setTimeout(() => {
       cookieBanner.classList.add('active');
-    }, 2000);
+    }, 350);
   }
 
   function saveCookiePreference(pref: string) {
     localStorage.setItem('cookie-preference', pref);
+    void recordCookieConsent(pref);
     if (cookieBanner) {
       cookieBanner.classList.add('slide-down');
       setTimeout(() => {
@@ -1304,6 +1401,18 @@ async function initMain() {
       const projectType = projectTypeSelect?.value || (isEs ? 'General' : 'General');
       const budget = budgetSelect?.value || (isEs ? 'No especificado' : 'Not specified');
       const messageDetails = messageInput?.value || '';
+
+      // Guardar registro del email en Supabase (tabla mynext_client_emails) en paralelo
+      void recordClientEmail({
+        clientName,
+        clientEmail,
+        clientPhone,
+        projectType,
+        budgetPlan: budget,
+        message: messageDetails,
+        sourcePage: window.location.href,
+        language: lang,
+      });
 
       const subject = isEs
         ? `🚀 Nueva Solicitud de Proyecto Web: ${clientName} (${projectType})`
@@ -1419,9 +1528,9 @@ https://mynextbymusa.com`;
       transitionOverlay.setAttribute('aria-hidden', 'true');
     };
 
-    // Intelligent loader: min 1.2s (so the 3D cubes are seen), max 2.5s
-    const LOADER_MIN_MS = 1200;
-    const LOADER_MAX_MS = 2500;
+    // Intelligent loader: min 350ms (so the 3D cubes are seen without delaying LCP), max 700ms
+    const LOADER_MIN_MS = 350;
+    const LOADER_MAX_MS = 700;
     const loaderStart = Date.now();
     let pageLoaded = document.readyState === 'complete';
 
@@ -1582,8 +1691,9 @@ https://mynextbymusa.com`;
   const cartConfirmBtn = document.getElementById('cart-confirm-btn');
 
   if (cartBtn && cartModal && cartModalCard) {
+    cartModal.classList.add('invisible');
     function openCartModal() {
-      cartModal!.classList.remove('pointer-events-none', 'opacity-0');
+      cartModal!.classList.remove('pointer-events-none', 'opacity-0', 'invisible');
       cartModal!.classList.add('opacity-100');
       cartModalCard!.classList.remove('scale-95', 'opacity-0');
       cartModalCard!.classList.add('scale-100', 'opacity-100');
@@ -1591,7 +1701,7 @@ https://mynextbymusa.com`;
     }
 
     function closeCartModal() {
-      cartModal!.classList.add('pointer-events-none', 'opacity-0');
+      cartModal!.classList.add('pointer-events-none', 'opacity-0', 'invisible');
       cartModal!.classList.remove('opacity-100');
       cartModalCard!.classList.add('scale-95', 'opacity-0');
       cartModalCard!.classList.remove('scale-100', 'opacity-100');
@@ -1728,20 +1838,30 @@ if (liquidCursor && cursorDot && window.matchMedia('(pointer: fine)').matches) {
   const pos = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
   const mouse = { x: pos.x, y: pos.y };
   const speed = 0.15;
+  let cursorRafActive = false;
+
+  function renderCursor() {
+    const dx = mouse.x - pos.x;
+    const dy = mouse.y - pos.y;
+    pos.x += dx * speed;
+    pos.y += dy * speed;
+    liquidCursor!.style.transform = `translate3d(calc(${pos.x}px - 50%), calc(${pos.y}px - 50%), 0)`;
+    if (Math.abs(dx) > 0.15 || Math.abs(dy) > 0.15) {
+      requestAnimationFrame(renderCursor);
+    } else {
+      cursorRafActive = false;
+    }
+  }
 
   window.addEventListener("mousemove", (e: MouseEvent) => {
     mouse.x = e.clientX;
     mouse.y = e.clientY;
     cursorDot.style.transform = `translate3d(calc(${mouse.x}px - 50%), calc(${mouse.y}px - 50%), 0)`;
-  });
-
-  function renderCursor() {
-    pos.x += (mouse.x - pos.x) * speed;
-    pos.y += (mouse.y - pos.y) * speed;
-    liquidCursor!.style.transform = `translate3d(calc(${pos.x}px - 50%), calc(${pos.y}px - 50%), 0)`;
-    requestAnimationFrame(renderCursor);
-  }
-  requestAnimationFrame(renderCursor);
+    if (!cursorRafActive) {
+      cursorRafActive = true;
+      requestAnimationFrame(renderCursor);
+    }
+  }, { passive: true });
 
   // Hover effects on interactable elements
   const interactables = document.querySelectorAll('a, button, input, textarea, [role="button"], [data-modal], .group, .interactive-hover');
