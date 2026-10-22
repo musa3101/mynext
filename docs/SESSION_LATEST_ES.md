@@ -1,34 +1,25 @@
 # Resumen de Sesión - MYNEXT
 
 ## ¿Qué se ha hecho hoy?
-1. **Blindaje Antispam Multicapa con Cloudflare Turnstile y Honeypot**:
-   - Implementado el widget oficial de Cloudflare Turnstile con tema oscuro (`dark`) en los 4 formularios bilingües ([index.html](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/index.html), [index-en.html](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/index-en.html), [project.html](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/project.html), [project-en.html](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/project-en.html)).
-   - Creado campo trampa Honeypot accesible (`_honey`) fuera de pantalla para atrapar y neutralizar bots automáticamente.
-2. **Creación de Cloudflare Pages Function en el Edge**:
-   - Desarrollado el endpoint serverless [functions/api/contact.ts](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/functions/api/contact.ts) con validación obligatoria contra `siteverify` de Cloudflare, límite de payload a 20 KB y sanitización estricta.
-   - Ocultada la dirección de Gmail del código HTML público.
-3. **Protección de Supabase y Entrega en Gmail**:
-   - Trasladada la inserción en la tabla `mynext_client_emails` al servidor tras superar las comprobaciones antispam, evitando que los bots inyecten leads basura.
-   - Reenvío seguro a FormSubmit.co para entrega garantizada en Gmail.
-4. **Configuración en Cloudflare Pages y Pruebas**:
-   - Inyectadas por API en Cloudflare Pages las 5 variables de entorno (`TURNSTILE_SECRET_KEY` encriptada, `VITE_TURNSTILE_SITE_KEY`, `FORMSUBMIT_TARGET_EMAIL`, etc.).
-   - Creada suite de validación [scripts/test_antispam_suite.js](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/scripts/test_antispam_suite.js) con 51/51 tests pasados y 84/84 tests unitarios aprobados.
+1. **Arreglo urgente: la web se quedaba atascada en el loading**:
+   - **Causa**: la caché de Cloudflare tenía guardado el HTML de la home en lugar del archivo `analytics-B8HeLEeM.js` (solo para navegadores). El JS principal no arrancaba y el overlay de carga nunca se quitaba.
+   - **Origen probable**: durante un deploy, Cloudflare pidió el archivo antes de que existiera; Pages devolvió la home y la regla `/assets/*` (immutable, 1 año) la dejó guardada.
+2. **Solución aplicada**:
+   - Nombres nuevos para los assets (sufijo `-r2`) para saltar la entrada mala de la caché.
+   - Seguro de emergencia inline en las home ES/EN: el loader se quita como máximo a los 4 s aunque falle el JS.
+   - Verificado en producción: loader desaparece en ES y EN, sin errores de módulo.
 
 ## Archivos Modificados y Creados
-- `[NEW]` [functions/api/contact.ts](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/functions/api/contact.ts): Pages Function de validación y reenvío seguro.
-- `[NEW]` [scripts/test_antispam_suite.js](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/scripts/test_antispam_suite.js): Suite de pruebas antispam.
-- [index.html](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/index.html), [index-en.html](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/index-en.html): Turnstile, honeypot y endpoint protegido.
-- [project.html](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/project.html), [project-en.html](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/project-en.html): Turnstile, honeypot y endpoint protegido.
-- [src/main.ts](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/src/main.ts), [src/project.ts](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/src/project.ts): Controladores frontend de envío y reseteo.
-- [vite.config.ts](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/vite.config.ts): Middleware local de desarrollo para `/api/contact`.
-- [.env.example](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/.env.example): Documentación de variables.
-- [docs/SESSION_LATEST_ES.md](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/docs/SESSION_LATEST_ES.md) y [docs/ROADMAP.md](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/docs/ROADMAP.md).
+- [vite.config.ts](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/vite.config.ts): nombres de salida con sufijo `-r2`.
+- [index.html](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/index.html), [index-en.html](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/index-en.html): script failsafe del loader.
+- `[NEW]` [scripts/debug_loader.mjs](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/scripts/debug_loader.mjs): script de diagnóstico (errores JS y estado del loader en la web real).
+- Commit `afffa0f` subido a `main` y `dev`.
 
 ## Problemas Solucionados
-- Bloqueado el spam automatizado que saturaba la bandeja de Gmail y la tabla de Supabase.
-- Eliminada la exposición pública del correo electrónico de contacto en el código fuente de los formularios.
-- Eliminada la dependencia de `_captcha: "false"`.
+- Web bloqueada en la pantalla de carga para todos los visitantes.
 
 ## Qué Queda Pendiente
-- Monitorear en Cloudflare Analytics las peticiones bloqueadas por Turnstile en las próximas 48 horas.
-- Solicitar indexación del nuevo favicon en Google Search Console para acelerar su refresco visual.
+- **Purgar caché de Cloudflare**: Panel → Caching → Configuration → botón **"Purgar todo"** (no "Invalidar Todo"). No es urgente.
+- Opcional: añadir permiso **Zone → Cache Purge → Purge** al token del MCP para que el agente pueda purgar solo.
+- Decidir si se borra `scripts/debug_loader.mjs` del repo.
+- Monitorear Turnstile en Cloudflare Analytics y refresco del favicon en Search Console.

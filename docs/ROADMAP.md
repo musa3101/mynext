@@ -1,6 +1,7 @@
 # Roadmap MYNEXT
 
 ## Tareas Completadas
+- **Arreglo del loader bloqueado (caché envenenada de Cloudflare)**: assets con sufijo `-r2` y failsafe inline que quita el overlay en ≤4 s aunque falle el JS.
 - **Blindaje Antispam Definitivo (Cloudflare Turnstile + Honeypot + Pages Functions + Supabase)**:
   - Implementación del widget Cloudflare Turnstile con tema oscuro (`dark`) en los 4 formularios bilingües.
   - Creación de la Cloudflare Pages Function `/api/contact` con validación server-side contra `siteverify`, límite de 20 KB y sanitización estricta.
@@ -19,6 +20,7 @@
 - **Traducción Bilingüe 100% (ES/EN)**: Arquitectura con `hreflang` simétrico en las 20 URLs.
 
 ## Tareas en Progreso
+- **Purgar caché de Cloudflare** ("Purgar todo" en Caching → Configuration) y dar permiso *Cache Purge* al token del MCP.
 - **Propagación en Google Search**: Rastreo progresivo por parte de Googlebot y refresco del nuevo favicon por `Googlebot-Image`.
 - **Monitoreo de Eficacia Antispam**: Seguimiento de métricas de bloqueo en el widget de Turnstile en Cloudflare Dashboard.
 
