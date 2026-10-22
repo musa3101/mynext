@@ -1,32 +1,31 @@
 # Resumen de Sesión - MYNEXT
 
 ## ¿Qué se ha hecho hoy?
-1. **Instalación y Configuración de `@playwright/test`**:
-   - Instalado `@playwright/test` en [package.json](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/package.json) y configurado [playwright.config.ts](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/playwright.config.ts) con Google Chrome local y servidor de previsualización de producción (`npx vite preview --port 5173`).
-   - Creada la suite de auditoría automatizada en [tests/performance-fluidity.spec.ts](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/tests/performance-fluidity.spec.ts) (`npm run test:perf`).
-2. **Auditoría Triple de Rendimiento y Fluidez (`Playwright` + `Chrome DevTools CDP` + `TestSprite Cloud`)**:
-   - Medición de Core Web Vitals (TTFB, FCP, LCP con 4 subpartes, CLS, TBT), cascada de red, conteo de animaciones (`document.getAnimations()`), métricas CDP (`LayoutCount`, `RecalcStyleCount`, `JSHeapUsedSize`) y emulación móvil severa (`CPU 4× + Red 4G Lenta`).
-   - Ejecución de pruebas E2E en la nube de **TestSprite** a través de túnel TLS (`7` flujos evaluados) e identificación de condiciones de carrera en `TC003` y `TC006`.
-3. **Optimización de Fluidez (60 FPS Constantes) y Accesibilidad de Modales**:
-   - **Pausa de animaciones 3D ocultas**: Se añadió `visibility: hidden` y `animation: none !important` a `#page-transition-overlay` y `#plans-transition-overlay` cuando están inactivos en [src/style.css](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/src/style.css), reduciendo las animaciones infinitas en segundo plano un **73%** (`134 → 36`).
-   - **Fluidez de Scroll al 100% (`60 FPS`)**: `Home-ES` pasó de `44 FPS` (`90.9%`) a **`60 FPS` (`100%` fluidez, `0` tirones)** en Desktop y **`60 FPS`** en Móvil bajo `CPU 4× throttling`, con una reducción del **39% en memoria JS Heap** (`10.17 MB → 6.17 MB`).
-   - **Cero mutaciones DOM innecesarias**: En [src/lib/domUtils.ts](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/src/lib/domUtils.ts) (`applyDynamicSettings`) y [src/main.ts](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/src/main.ts) (`fetchCmsInBackground`), se evitaron re-renderizados redundantes de `innerHTML` y se pospuso la sincronización en segundo plano mediante `requestIdleCallback`.
-   - **Reutilización de nodos en `typeWord()`**: En [index.html](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/index.html) e [index-en.html](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/index-en.html) se implementó un pool fijo de 10 nodos `<span class="b-char">` para evitar destruir y recrear nodos cada `1.9s`.
-   - **Corrección de modales y Cookie Banner (`TC003` y `TC006`)**: Se añadió `visibility: hidden` a `.modal-wrapper`, `.cookie-banner` y `#cart-modal` cerrados, y se corrigió una etiqueta `</div>` faltante en `#gestion-tecnica` en [index-en.html](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/index-en.html).
-   - **Prioridad LCP en Proyectos**: Añadido `fetchpriority="high" decoding="async"` a `#project-image` en [project.html](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/project.html) y [project-en.html](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/project-en.html) (`LCP: 56 ms`).
+1. **Caso de estudio y rediseño completo del Favicon**:
+   - Analizada la imagen [og-share.png](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/public/assets/img/og-share.png) y evaluado su comportamiento en pantallas reales (Google Search móvil/desktop y pestañas de navegador).
+   - Generadas simulaciones fotográficas realistas y comparativas jugando con 6 tratamientos de fondo y contraste.
+2. **Diagnóstico y limpieza del master con Canva MCP y herramientas locales**:
+   - Inspeccionado el diseño original en Canva (`MYNEXT`, `DAHWU5tSLnw`) descubriendo que tenía incrustada una sombra difusa (*drop shadow*) que ensuciaba las líneas finas de la "M" al reducirse.
+   - Eliminado el 100% de la sombra residual y vectorizado el isotipo a 2048×2048 px con cortes geométricos limpios.
+3. **Afinado Maxi-M (Opción B.1 Marfil Editorial)**:
+   - Escalado del isotipo al 88% (+35% de tamaño útil) para que la "M" llene casi todo el círculo de Google Search sin cortarse.
+   - Fondo Crema Marfil Cálido (`#FAF5EB`) con el isotipo en Negro Ónix Puro (`#0A0A0C`), logrando nitidez absoluta y máxima elegancia.
+4. **Generación del lote completo de producción y verificación de build**:
+   - Exportados todos los tamaños requeridos por Google, Apple y navegadores modernos.
+   - Verificada la compilación exitosa con `npm run build` (`dist/` sincronizado sin errores).
 
 ## Archivos Modificados
-- [src/style.css](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/src/style.css): Aislamiento `visibility: hidden` en modales/banners inactivos y desactivación de animaciones 3D en overlays cerrados.
-- [src/main.ts](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/src/main.ts): Sincronización de `#cookie-banner` con el loader inicial, `requestIdleCallback` para CMS y ocultación de `#cart-modal`.
-- [src/lib/domUtils.ts](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/src/lib/domUtils.ts): Prevención de escritura redundante de `innerHTML` en `applyDynamicSettings`.
-- [index.html](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/index.html) e [index-en.html](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/index-en.html): Pool de nodos en `typeWord()`, limpieza de listeners vacíos y cierre de `#gestion-tecnica`.
-- [project.html](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/project.html) y [project-en.html](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/project-en.html): `fetchpriority="high"` en `#project-image`.
-- [playwright.config.ts](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/playwright.config.ts) y [tests/performance-fluidity.spec.ts](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/tests/performance-fluidity.spec.ts): Suite completa de auditoría (`6/6 PASSED`).
+- [public/favicon-48x48.png](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/public/favicon-48x48.png): Favicon estándar prioritario para Google Search.
+- [public/favicon.ico](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/public/favicon.ico): Icono multi-resolución (16px, 32px y 48px) para navegadores.
+- [public/favicon-192x192.png](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/public/favicon-192x192.png) y [public/favicon-512x512.png](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/public/favicon-512x512.png): Iconos de alta resolución para PWA y Android.
+- [public/apple-touch-icon.png](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/public/apple-touch-icon.png): Icono para pantallas retina iOS.
+- [public/favicon.png](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/public/favicon.png) y [public/assets/img/logos/favicon.png](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/public/assets/img/logos/favicon.png): Masters a 1024×1024 y 512×512 px.
+- [docs/SESSION_LATEST_ES.md](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/docs/SESSION_LATEST_ES.md) y [docs/ROADMAP.md](file:///Users/musa/Documents/PROJ%20recientes/webs/mynext/docs/ROADMAP.md).
 
 ## Problemas Solucionados
-- Eliminada la caída puntual a `44 FPS` durante el primer scroll de `Home-ES` (ahora `60 FPS` / `100%` fluidez).
-- Eliminadas 98 animaciones 3D infinitas que seguían ejecutándose ocultas tras cerrarse el loader inicial.
-- Solucionada la exposición de botones `.modal-close` de modales cerrados y la condición de carrera en `#cookie-banner` (`TC003` y `TC006`).
+- Solucionada la pérdida de calidad, desenfoque y reducción de tamaño del favicon al cambiar desde la imagen con marco.
+- Eliminado el halo grisáceo de la sombra en miniatura; la "M" ahora es 100% nítida y visible de inmediato.
 
 ## Qué Queda Pendiente
-1. **Google Search Console**: Revisión e indexación pendiente en Google Search Console (próxima tarea inmediata).
+1. Subir los cambios a Git (`dev` / `main`) para desplegar en Cloudflare Pages.
+2. Solicitar indexación de `https://mynextbymusa.com/` en Google Search Console para acelerar el refresco del icono en Google.
