@@ -83,6 +83,12 @@ export default defineConfig({
         'planes-en': resolveHtml('./planes/index-en.html'),
         project: resolveHtml('./project.html'),
         'project-en': resolveHtml('./project-en.html'),
+      },
+      // Sufijo "-r2": fuerza nombres nuevos para saltar una entrada envenenada en la caché edge de Cloudflare
+      output: {
+        entryFileNames: 'assets/[name]-[hash]-r2.js',
+        chunkFileNames: 'assets/[name]-[hash]-r2.js',
+        assetFileNames: 'assets/[name]-[hash]-r2[extname]',
       }
     }
   }

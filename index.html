@@ -348,6 +348,7 @@
 
 
     <style>#page-transition-overlay.active{position:fixed;inset:0;z-index:99999;background:#080810;display:flex;align-items:center;justify-content:center}</style>
+    <script>/* Failsafe: oculta el loader aunque falle el JS principal */(function(){function h(){var o=document.getElementById('page-transition-overlay');if(o){o.classList.remove('active');o.setAttribute('aria-hidden','true');}}window.addEventListener('load',function(){setTimeout(h,1500);});setTimeout(h,4000);})();</script>
 
     <!-- Animaciones Premium Hero -->
     
