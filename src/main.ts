@@ -1365,7 +1365,7 @@ function initMain() {
     }, 4000);
   }
 
-  // --- G. AJAX Email Form Submission ---
+  // --- G. Protected AJAX Email Form Submission (Cloudflare Turnstile + Honeypot + /api/contact) ---
   const contactForm = document.getElementById('email-contact-form') as HTMLFormElement | null;
   if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
@@ -1377,17 +1377,43 @@ function initMain() {
       const budgetSelect = contactForm.querySelector('select[name="budget"]') as HTMLSelectElement | null;
       const messageInput = contactForm.querySelector('textarea[name="message"]') as HTMLTextAreaElement | null;
       const submitBtn = contactForm.querySelector('.form-submit-btn') as HTMLButtonElement | null;
+      const honeyInput = contactForm.querySelector('input[name="_honey"]') as HTMLInputElement | null;
+      const turnstileInput = contactForm.querySelector('input[name="cf-turnstile-response"]') as HTMLInputElement | null;
 
       if (!emailInput || !submitBtn || !emailInput.value) return;
 
       const btnText = submitBtn.querySelector('.btn-text');
       const originalText = btnText ? btnText.textContent : submitBtn.textContent;
+      const isEs = lang === 'es';
+
+      // 1. Detección Honeypot en Cliente (Descarte silencioso para bots)
+      const honeyVal = honeyInput?.value?.trim() || '';
+      if (honeyVal.length > 0) {
+        // Simular éxito ante el bot para no delatar la trampa, sin gastar cuota de correo ni Supabase
+        if (btnText) btnText.textContent = isEs ? '¡Solicitud Enviada! ✓' : 'Proposal Sent! ✓';
+        submitBtn.style.backgroundColor = '#00F2FF';
+        contactForm.style.opacity = '0';
+        setTimeout(() => { contactForm.style.display = 'none'; }, 500);
+        return;
+      }
+
+      // 2. Comprobación de Turnstile Token en Cliente
+      const turnstileToken = turnstileInput?.value?.trim() || '';
+      if (!turnstileToken) {
+        const warnText = isEs ? 'Verificación de seguridad requerida' : 'Security check required';
+        if (btnText) btnText.textContent = warnText;
+        else submitBtn.textContent = warnText;
+        setTimeout(() => {
+          if (btnText) btnText.textContent = originalText;
+          else submitBtn.textContent = originalText;
+        }, 3000);
+        return;
+      }
 
       const allInputs = contactForm.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('input, select, textarea');
       allInputs.forEach(input => input.disabled = true);
       submitBtn.disabled = true;
 
-      const isEs = lang === 'es';
       const statusText = isEs ? 'Enviando Propuesta...' : 'Sending Proposal...';
       if (btnText) {
         btnText.textContent = statusText;
@@ -1402,69 +1428,30 @@ function initMain() {
       const budget = budgetSelect?.value || (isEs ? 'No especificado' : 'Not specified');
       const messageDetails = messageInput?.value || '';
 
-      // Guardar registro del email en Supabase (tabla mynext_client_emails) en paralelo
-      void recordClientEmail({
-        clientName,
-        clientEmail,
-        clientPhone,
-        projectType,
-        budgetPlan: budget,
-        message: messageDetails,
-        sourcePage: window.location.href,
-        language: lang,
-      });
+      const targetEndpoint = contactForm.getAttribute('action') || '/api/contact';
 
-      const subject = isEs
-        ? `🚀 Nueva Solicitud de Proyecto Web: ${clientName} (${projectType})`
-        : `🚀 New Web Project Request: ${clientName} (${projectType})`;
-
-      const autorespondVal = isEs
-        ? `¡Hola ${clientName}!
-
-Muchas gracias por contactar con MYNEXT. Hemos recibido correctamente los detalles de tu consulta para tu proyecto web:
-
-• Tipo de Proyecto: ${projectType}
-• Plan de Interés: ${budget}
-
-He revisado tu solicitud y en breve me pondré en contacto contigo directamente por correo o WhatsApp para agendar una breve llamada o enviarte la propuesta personalizada sin compromiso.
-
-Un saludo,
-Musa — MYNEXT Arquitectura Digital
-https://mynextbymusa.com`
-        : `Hello ${clientName}!
-
-Thank you very much for contacting MYNEXT. We have successfully received your inquiry details for your web project:
-
-• Project Type: ${projectType}
-• Plan of Interest: ${budget}
-
-I have reviewed your request and will contact you directly via email or WhatsApp shortly to schedule a brief call or send you a custom proposal with no obligation.
-
-Best regards,
-Musa — MYNEXT Digital Architecture
-https://mynextbymusa.com`;
-
-      fetch(contactForm.action, {
+      fetch(targetEndpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
         body: JSON.stringify({
-          _subject: subject,
-          _template: 'table',
-          _captcha: 'false',
-          _autorespond: autorespondVal,
-          "Cliente / Negocio": clientName,
-          "Email de Contacto": clientEmail,
-          "Teléfono / WhatsApp": clientPhone,
-          "Tipo de Proyecto": projectType,
-          "Plan de Interés": budget,
-          "Detalles / Idea del Proyecto": messageDetails
+          name: clientName,
+          email: clientEmail,
+          phone: clientPhone,
+          project_type: projectType,
+          budget: budget,
+          message: messageDetails,
+          source_page: window.location.href,
+          language: lang,
+          _honey: honeyVal,
+          'cf-turnstile-response': turnstileToken
         })
       })
-        .then(response => {
-          if (response.ok) {
+        .then(async response => {
+          const resData = await response.json().catch(() => ({}));
+          if (response.ok && resData.success !== false) {
             const successText = isEs ? '¡Solicitud Enviada! ✓' : 'Proposal Sent! ✓';
             if (btnText) {
               btnText.textContent = successText;
@@ -1491,18 +1478,30 @@ https://mynextbymusa.com`;
               if (formParent) formParent.appendChild(successMsg);
             }, 500);
           } else {
-            showErrorState();
+            showErrorState(resData.error);
           }
         })
         .catch(() => {
           showErrorState();
         });
 
-      function showErrorState() {
+      function showErrorState(customMsg?: string) {
+        // Reset Turnstile widget si está disponible en la ventana
+        try {
+          if (typeof (window as any).turnstile !== 'undefined') {
+            (window as any).turnstile.reset();
+          }
+        } catch {
+          // ignore
+        }
+
+        const fallbackError = isEs ? 'Error al enviar' : 'Error sending';
+        const displayError = customMsg ? (customMsg.length > 35 ? fallbackError : customMsg) : fallbackError;
+
         if (btnText) {
-          btnText.textContent = isEs ? 'Error al enviar' : 'Error sending';
+          btnText.textContent = displayError;
         } else if (submitBtn) {
-          submitBtn.textContent = isEs ? 'Error al enviar' : 'Error sending';
+          submitBtn.textContent = displayError;
         }
         setTimeout(() => {
           if (btnText) {
@@ -1512,7 +1511,7 @@ https://mynextbymusa.com`;
           }
           submitBtn!.disabled = false;
           allInputs.forEach(input => input.disabled = false);
-        }, 3000);
+        }, 3500);
       }
     });
   }

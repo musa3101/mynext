@@ -315,6 +315,8 @@
 
     <!-- Typography System -->
 
+    <!-- Cloudflare Turnstile API -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 
 <body
@@ -1962,8 +1964,13 @@
                     <!-- Columna Derecha: Formulario / Uiverse Component -->
                     <div class="reveal flex justify-center lg:justify-end w-full">
                         <div class="form-container w-full max-w-full md:max-w-[500px]">
-                            <form id="email-contact-form" action="https://formsubmit.co/ajax/mynextbymusa@gmail.com"
+                            <form id="email-contact-form" action="/api/contact"
                                 method="POST" class="form">
+                                <!-- Antispam Honeypot (Accessible & Camouflaged) -->
+                                <div class="hp-field" aria-hidden="true" style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; opacity: 0; pointer-events: none;" tabindex="-1">
+                                    <label for="website_url_hp_en" tabindex="-1">Do not fill this field</label>
+                                    <input type="text" id="website_url_hp_en" name="_honey" tabindex="-1" autocomplete="new-password" value="">
+                                </div>
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <div class="form-group">
                                         <label for="name">Your Name / Business</label>
@@ -2008,6 +2015,10 @@
                                     <textarea name="message" id="textarea"
                                         placeholder="Tell us briefly about your business, your goals, or any references you like..."
                                         required></textarea>
+                                </div>
+                                <!-- Cloudflare Turnstile Verification -->
+                                <div class="cf-turnstile-container mb-4 flex justify-center">
+                                    <div class="cf-turnstile" data-sitekey="0x4AAAAAAFg5e4t-qwrc7bZt" data-theme="dark" data-size="flexible"></div>
                                 </div>
                                 <button class="form-submit-btn" type="submit">
                                     <span class="btn-text">Request Free Proposal →</span>

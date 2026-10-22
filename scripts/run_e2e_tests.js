@@ -29,10 +29,10 @@ async function runE2ESuite() {
 
   const page = await browser.newPage();
 
-  // Interceptar llamadas AJAX a FormSubmit para simular respuestas de backend sin enviar emails reales
+  // Interceptar llamadas AJAX a FormSubmit y /api/contact para simular respuestas de backend sin enviar emails reales
   await page.setRequestInterception(true);
   page.on('request', req => {
-    if (req.url().includes('formsubmit.co/ajax')) {
+    if (req.url().includes('formsubmit.co/ajax') || req.url().includes('/api/contact')) {
       if (req.method() === 'OPTIONS') {
         req.respond({
           status: 200,
@@ -47,7 +47,7 @@ async function runE2ESuite() {
           status: 200,
           contentType: 'application/json',
           headers: { 'Access-Control-Allow-Origin': '*' },
-          body: JSON.stringify({ success: "true", message: "Form submitted" })
+          body: JSON.stringify({ success: true, message: "Form submitted" })
         });
       }
     } else {
@@ -163,6 +163,21 @@ async function runE2ESuite() {
       await page.type('#email', 'e2e@mynextbymusa.com');
       await page.type('#phone', '+34 600 111 222');
       await page.type('#message', 'Test automatizado de extremo a extremo.');
+
+      // Simular resolución de Cloudflare Turnstile token
+      await page.evaluate(() => {
+        let input = document.querySelector('input[name="cf-turnstile-response"]') as HTMLInputElement | null;
+        if (!input) {
+          const form = document.getElementById('email-contact-form');
+          if (form) {
+            input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'cf-turnstile-response';
+            form.appendChild(input);
+          }
+        }
+        if (input) input.value = 'dummy_turnstile_test_token';
+      });
 
       const submitBtn = await page.$('.form-submit-btn');
       if (submitBtn) {
