@@ -1,6 +1,7 @@
 # Roadmap MYNEXT
 
 ## Tareas Completadas
+- **Auditoría y Test de la Skill `ai-design-skills`**: evaluada en rama aislada y descartada de inmediato para salvaguardar los 60 FPS estables de la web.
 - **Arreglo del loader bloqueado (caché envenenada de Cloudflare)**: assets con sufijo `-r2` y failsafe inline que quita el overlay en ≤4 s aunque falle el JS.
 - **Blindaje Antispam Definitivo (Cloudflare Turnstile + Honeypot + Pages Functions + Supabase)**:
   - Implementación del widget Cloudflare Turnstile con tema oscuro (`dark`) en los 4 formularios bilingües.
