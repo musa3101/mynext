@@ -572,7 +572,7 @@ function initDraggableMarquee() {
 // Initialize all DOM contents safely
 function initMain() {
   // --- A. Dynamic Data Fetch & Render with Session Caching ---
-  const CACHE_KEY = 'mynext_cms_cache_v3';
+  const CACHE_KEY = 'mynext_cms_cache_v4';
   const CACHE_TTL = 10 * 60 * 1000; // 10 minutes TTL
 
   let cachedData: any = null;
@@ -588,8 +588,27 @@ function initMain() {
     // sessionStorage disabled or unavailable
   }
 
+  // Deduplicate and merge testimonials safely (ensures newly added fallback reviews always appear)
+  const mergeTestimonialsList = (primary: any[], fallback: any[]): any[] => {
+    const merged: any[] = [...primary];
+    fallback.forEach(localItem => {
+      const match = merged.find(t =>
+        (t.id && localItem.id && t.id === localItem.id) ||
+        (t.google_review_id && localItem.google_review_id && t.google_review_id === localItem.google_review_id) ||
+        ((t.client_name || t.name) && (localItem.client_name || localItem.name) &&
+         (t.client_name || t.name).toLowerCase().trim() === (localItem.client_name || localItem.name).toLowerCase().trim())
+      );
+      if (!match) {
+        merged.push(localItem);
+      }
+    });
+    return merged;
+  };
+
   let projects = cachedData?.projects || fallbackProjects;
-  let testimonials = cachedData?.testimonials || fallbackTestimonials;
+  let testimonials = cachedData?.testimonials
+    ? mergeTestimonialsList(cachedData.testimonials, fallbackTestimonials)
+    : fallbackTestimonials;
   let settings: Record<string, string> = cachedData?.settings || fallbackSettings;
 
   // Render initial reviews immediately by default (cached or fallback)
@@ -661,10 +680,10 @@ function initMain() {
         }
 
         if (testimonialsRes.data && testimonialsRes.data.length > 0) {
-          testimonials = testimonialsRes.data;
+          testimonials = mergeTestimonialsList(testimonialsRes.data, fallbackTestimonials);
           const googleReviews = testimonials.filter((t: any) => t.source === 'google' || t.google_review_id);
-          const initialIds = initialGoogleReviews.map((r: any) => r.id || r.author_name).join('|');
-          const fetchedIds = googleReviews.map((r: any) => r.id || r.author_name).join('|');
+          const initialIds = initialGoogleReviews.map((r: any) => r.id || r.author_name || r.name).join('|');
+          const fetchedIds = googleReviews.map((r: any) => r.id || r.author_name || r.name).join('|');
           if (googleReviews.length > 0 && fetchedIds !== initialIds) {
             renderDynamicGoogleReviews(googleReviews);
           }

@@ -1,6 +1,10 @@
 # Roadmap MYNEXT
 
 ## Tareas Completadas
+- **Sincronización y Fusión de Reseñas de Google (Gurpreet Singh - Buon Appetito)**:
+  - Implementada fusión inteligente (`mergeTestimonialsList`) para garantizar que cualquier reseña nueva añadida localmente se sume de forma permanente al catálogo remoto de Supabase.
+  - Actualización de clave de caché a `mynext_cms_cache_v4` para invalidación inmediata de datos antiguos.
+  - Inclusión de la tarjeta estática en `index.html` e `index-en.html` en el carrusel marquee.
 - **Header Inteligente con Auto-Ocultado (Smart Auto-Hide Header)**:
   - Estático y visible al inicio de la página (`scrollY <= 60`).
   - Ocultado suave hacia arriba (`translateY(-120%)`) al hacer scroll hacia abajo para liberar la pantalla móvil.
