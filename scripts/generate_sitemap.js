@@ -16,6 +16,8 @@ const projects = [
   { slug: 'mezquita-arrahma' },
   { slug: 'gran-marrakech' },
   { slug: 'tacos-marrakech' },
+  { slug: 'tacos-french-pere-garau' },
+  { slug: 'buon-appetito' },
 ];
 
 let xml = `<?xml version="1.0" encoding="UTF-8"?>
@@ -25,7 +27,7 @@ let xml = `<?xml version="1.0" encoding="UTF-8"?>
   <url>
     <loc>https://mynextbymusa.com/</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://mynextbymusa.com/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://mynextbymusa.com/index-en.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://mynextbymusa.com/index-en" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://mynextbymusa.com/" />
     <lastmod>${today}</lastmod>
     <changefreq>weekly</changefreq>
@@ -34,9 +36,9 @@ let xml = `<?xml version="1.0" encoding="UTF-8"?>
 
   <!-- Página Principal (English) -->
   <url>
-    <loc>https://mynextbymusa.com/index-en.html</loc>
+    <loc>https://mynextbymusa.com/index-en</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://mynextbymusa.com/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://mynextbymusa.com/index-en.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://mynextbymusa.com/index-en" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://mynextbymusa.com/" />
     <lastmod>${today}</lastmod>
     <changefreq>weekly</changefreq>
@@ -47,7 +49,7 @@ let xml = `<?xml version="1.0" encoding="UTF-8"?>
   <url>
     <loc>https://mynextbymusa.com/planes/</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://mynextbymusa.com/planes/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://mynextbymusa.com/planes/index-en.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://mynextbymusa.com/planes/index-en" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://mynextbymusa.com/planes/" />
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
@@ -56,9 +58,9 @@ let xml = `<?xml version="1.0" encoding="UTF-8"?>
 
   <!-- Tarifas y Planes (English) -->
   <url>
-    <loc>https://mynextbymusa.com/planes/index-en.html</loc>
+    <loc>https://mynextbymusa.com/planes/index-en</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://mynextbymusa.com/planes/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://mynextbymusa.com/planes/index-en.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://mynextbymusa.com/planes/index-en" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://mynextbymusa.com/planes/" />
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
@@ -71,10 +73,10 @@ let xml = `<?xml version="1.0" encoding="UTF-8"?>
 for (const p of projects) {
   // Spanish version
   xml += `  <url>
-    <loc>https://mynextbymusa.com/project.html?slug=${p.slug}</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://mynextbymusa.com/project.html?slug=${p.slug}" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://mynextbymusa.com/project-en.html?slug=${p.slug}" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://mynextbymusa.com/project.html?slug=${p.slug}" />
+    <loc>https://mynextbymusa.com/project?slug=${p.slug}</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mynextbymusa.com/project?slug=${p.slug}" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://mynextbymusa.com/project-en?slug=${p.slug}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mynextbymusa.com/project?slug=${p.slug}" />
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -82,10 +84,10 @@ for (const p of projects) {
 `;
   // English version
   xml += `  <url>
-    <loc>https://mynextbymusa.com/project-en.html?slug=${p.slug}</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://mynextbymusa.com/project.html?slug=${p.slug}" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://mynextbymusa.com/project-en.html?slug=${p.slug}" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://mynextbymusa.com/project.html?slug=${p.slug}" />
+    <loc>https://mynextbymusa.com/project-en?slug=${p.slug}</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mynextbymusa.com/project?slug=${p.slug}" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://mynextbymusa.com/project-en?slug=${p.slug}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mynextbymusa.com/project?slug=${p.slug}" />
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

@@ -228,6 +228,32 @@ async function main() {
       project_url: 'https://tacosmarrakech.pages.dev',
       sort_order: 8,
       active: true
+    },
+    {
+      id: 9,
+      slug: 'tacos-french-pere-garau',
+      title: 'TACOS FRENCH - PERE G.',
+      category_es: 'Tacos & Comida Rápida',
+      category_en: 'Tacos & Fast Food',
+      description_es: 'Carta digital ultrarrápida y menú interactivo para el local de Pere Garau.',
+      description_en: 'Ultra-fast digital menu and interactive dining for Pere Garau location.',
+      image_url: './assets/img/portfolio/porfolio9.webp',
+      project_url: 'https://tacosmarrakech.pages.dev/peregarau/',
+      sort_order: 9,
+      active: true
+    },
+    {
+      id: 10,
+      slug: 'buon-appetito',
+      title: 'Restaurante Buon Appetito',
+      category_es: 'Restaurante Italiano & Mediterráneo',
+      category_en: 'Italian & Mediterranean Restaurant',
+      description_es: 'Diseño web exclusivo, carta interactiva y reservas en Port d\'Andratx.',
+      description_en: 'Exclusive web design, interactive menu, and bookings in Port d\'Andratx.',
+      image_url: './assets/img/portfolio/porfolio10.webp',
+      project_url: 'https://restaurantebuonappetito.com',
+      sort_order: 10,
+      active: true
     }
   ];
 
@@ -318,6 +344,18 @@ async function main() {
       rating: 5,
       author_photo: '',
       relative_time: 'Hace 4 días',
+      source: 'google',
+      active: true
+    },
+    {
+      id: 8,
+      name: 'Gurpreet Singh',
+      company: 'Restaurante Buon Appetito',
+      content_es: 'Estoy muy contento con el trabajo de MyNext. Desde el principio Musa entendió lo que necesitábamos para nuestro restaurante y nos ayudó a darle forma.\n\nNos ha hecho la página web y también una aplicación propia para que podamos modificar la carta de nuestra web nosotros mismos, además de un sistema de reservas personalizado para nuestro restaurante, sin tener que depender de otras plataformas ni pagar suscripciones adicionales. La verdad es que nos ha facilitado bastante las cosas.\n\nEl trato con Musa ha sido muy bueno. Siempre ha estado atento y dispuesto a ayudarnos con los cambios y los detalles que iban surgiendo, tanto en la aplicación de la carta como en el sistema de reservas.\n\nEstamos muy satisfechos con el resultado y recomendamos su trabajo sin duda.\n\n— Gary, de Buon Appétito',
+      content_en: 'I am very happy with MyNext\'s work. From the beginning Musa understood what we needed for our restaurant and helped us shape it.\n\nHe made the website for us and also a custom application so that we can modify our own menu ourselves, plus a personalized reservation system for our restaurant without having to depend on other platforms or pay extra subscriptions. Honestly, it has made things much easier for us.\n\nDealing with Musa has been great. He was always attentive and willing to help us with changes and details as they came up, both in the menu app and in the booking system.\n\nWe are very satisfied with the result and definitely recommend his work.\n\n— Gary, from Buon Appétito',
+      rating: 5,
+      author_photo: '',
+      relative_time: 'Hace unas horas',
       source: 'google',
       active: true
     }

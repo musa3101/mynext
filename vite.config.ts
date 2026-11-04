@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import tailwindcss from '@tailwindcss/vite';
+import { onRequestPost } from './functions/api/contact.ts';
 
 const resolveHtml = (relPath: string) =>
   decodeURIComponent(new URL(relPath, import.meta.url).pathname);
@@ -22,44 +23,31 @@ function localContactApiPlugin() {
         });
         req.on('end', async () => {
           try {
-            const data = JSON.parse(body || '{}');
-            const isEs = data.language !== 'en';
-
-            // Honeypot check
-            if (data._honey && data._honey.trim().length > 0) {
-              res.statusCode = 200;
-              res.setHeader('Content-Type', 'application/json');
-              res.end(JSON.stringify({ success: true, message: 'Filtered by honeypot', filtered: true }));
-              return;
-            }
-
-            // Validations
-            if (!data.name || !data.email) {
-              res.statusCode = 400;
-              res.setHeader('Content-Type', 'application/json');
-              res.end(JSON.stringify({ success: false, error: isEs ? 'Nombre y email requeridos' : 'Name and email required' }));
-              return;
-            }
-
-            // Turnstile token check
-            const token = data['cf-turnstile-response'];
-            if (!token) {
-              res.statusCode = 400;
-              res.setHeader('Content-Type', 'application/json');
-              res.end(JSON.stringify({ success: false, error: isEs ? 'Verificación de seguridad requerida' : 'Security check required' }));
-              return;
-            }
-
-            res.statusCode = 200;
+            const host = req.headers.host || 'localhost:5173';
+            const webReq = new Request(`http://${host}/api/contact`, {
+              method: 'POST',
+              headers: {
+                'content-type': 'application/json',
+                ...req.headers,
+              },
+              body: body,
+            });
+            const mockContext: any = {
+              request: webReq,
+              functionPath: '/api/contact',
+              waitUntil: (p: Promise<any>) => { void p; },
+              next: async () => new Response(''),
+              env: {
+                TURNSTILE_SECRET_KEY: '1x0000000000000000000000000000000AA',
+              },
+              params: {},
+              data: {},
+            };
+            const cfRes = await onRequestPost(mockContext);
+            res.statusCode = cfRes.status;
             res.setHeader('Content-Type', 'application/json');
-            res.end(
-              JSON.stringify({
-                success: true,
-                message: isEs
-                  ? '¡Gracias! Hemos recibido tu propuesta (Modo Dev local).'
-                  : 'Thank you! We received your proposal (Local Dev Mode).',
-              })
-            );
+            const resJson = await cfRes.text();
+            res.end(resJson);
           } catch (e: any) {
             res.statusCode = 500;
             res.setHeader('Content-Type', 'application/json');

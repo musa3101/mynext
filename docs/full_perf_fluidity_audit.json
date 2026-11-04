@@ -1,101 +1,112 @@
 {
-  "timestamp": "2026-10-17T18:25:58.612Z",
+  "timestamp": "2026-11-04T20:40:51.360Z",
   "results": [
     {
       "pageName": "Home-ES",
       "url": "/",
       "viewport": "Desktop 1440x900",
       "cwv": {
-        "ttfbMs": 5,
-        "fcpMs": 128,
-        "lcpMs": 640,
-        "cls": 0.0284,
-        "domInteractiveMs": 84,
-        "domCompleteMs": 589,
-        "loadEventMs": 600,
-        "overlayDismissMs": 609
+        "ttfbMs": 30,
+        "fcpMs": 100,
+        "lcpMs": 328,
+        "cls": 0.1618,
+        "domInteractiveMs": 47,
+        "domCompleteMs": 814,
+        "loadEventMs": 828,
+        "overlayDismissMs": 845
       },
       "lcpBreakdown": {
         "element": "P",
         "id": null,
-        "className": "w-full mb-6 text-xs text-center text-white/60 leading-relaxed font-body",
+        "className": "text-white/60 text-xs md:text-sm font-light leading-relaxed max-w-sm",
         "url": null,
-        "size": 25718,
-        "ttfbMs": 5,
-        "ttfbPct": 1,
+        "size": 23560,
+        "ttfbMs": 30,
+        "ttfbPct": 9,
         "resourceLoadDelayMs": 0,
         "resourceLoadDelayPct": 0,
         "resourceLoadDurationMs": 0,
         "resourceLoadDurationPct": 0,
-        "elementRenderDelayMs": 635,
-        "elementRenderDelayPct": 99
+        "elementRenderDelayMs": 298,
+        "elementRenderDelayPct": 91
       },
       "longTasks": {
-        "count": 0,
-        "totalBlockingTimeMs": 0,
-        "maxTaskDurationMs": 0,
-        "tasks": []
+        "count": 2,
+        "totalBlockingTimeMs": 46,
+        "maxTaskDurationMs": 88,
+        "tasks": [
+          {
+            "duration": 88,
+            "startTime": 171,
+            "name": "self"
+          },
+          {
+            "duration": 58,
+            "startTime": 500,
+            "name": "self"
+          }
+        ]
       },
       "network": {
-        "totalRequests": 16,
-        "totalTransferKb": 311,
+        "totalRequests": 32,
+        "totalTransferKb": 2861,
         "slowestResources": [
           {
-            "url": "https://i.clarity.ms/collect",
+            "url": "https://l.clarity.ms/collect",
             "initiatorType": "xmlhttprequest",
-            "durationMs": 532,
+            "durationMs": 492,
             "transferKb": 0
           },
           {
             "url": "https://fonts.googleapis.com/css2?family=Modak&family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap",
             "initiatorType": "link",
-            "durationMs": 155,
+            "durationMs": 292,
             "transferKb": 1
           },
           {
             "url": "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap",
             "initiatorType": "link",
-            "durationMs": 155,
+            "durationMs": 291,
             "transferKb": 1
           },
           {
             "url": "https://www.clarity.ms/tag/y6vet6c96a",
             "initiatorType": "script",
-            "durationMs": 153,
+            "durationMs": 226,
             "transferKb": 0
           },
           {
-            "url": "https://scripts.clarity.ms/0.8.72-beta/clarity.js",
+            "url": "https://scripts.clarity.ms/0.8.77-beta/clarity.js",
             "initiatorType": "script",
-            "durationMs": 144,
+            "durationMs": 151,
+            "transferKb": 0
+          },
+          {
+            "url": "https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/g/turnstile/f/av0/rch/a0dvl/0x4AAAAAAFg5e4t-qwrc7bZt/dark/fbE/new/flexible?lang=auto",
+            "initiatorType": "iframe",
+            "durationMs": 148,
+            "transferKb": 0
+          },
+          {
+            "url": "https://challenges.cloudflare.com/turnstile/v0/api.js",
+            "initiatorType": "script",
+            "durationMs": 138,
             "transferKb": 0
           },
           {
             "url": "https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js",
             "initiatorType": "script",
-            "durationMs": 112,
+            "durationMs": 132,
             "transferKb": 6
-          },
-          {
-            "url": "/assets/img/logos/logo-hero-v2.svg?v=3",
-            "initiatorType": "img",
-            "durationMs": 18,
-            "transferKb": 114
-          },
-          {
-            "url": "/assets/main-BPpk3aAZ.js",
-            "initiatorType": "script",
-            "durationMs": 14,
-            "transferKb": 57
           }
         ],
         "renderBlockingInHead": [],
         "failedRequests": []
       },
       "domAndAnimations": {
-        "domNodes": 1147,
-        "activeAnimationsTotal": 74,
-        "infiniteAnimationsCount": 36,
+        "domNodes": 1470,
+        "activeAnimationsTotal": 574,
+        "infiniteAnimationsCount": 48,
         "infiniteAnimationsSample": [
           "floatPremium on <div.relative>",
           "sweep on <div.w-1/2>",
@@ -118,114 +129,123 @@
       "scrollFluidity": {
         "totalFrames": 47,
         "avgFps": 60,
-        "p95FrameMs": 16.8,
+        "p95FrameMs": 16.7,
         "maxFrameMs": 16.8,
         "jankFramesOver28ms": 0,
         "jankFramesOver33ms": 0,
         "smoothnessScorePct": 100,
-        "cdpLayoutCountDelta": 60,
-        "cdpRecalcStyleCountDelta": 115,
+        "cdpLayoutCountDelta": 61,
+        "cdpRecalcStyleCountDelta": 117,
         "cdpScriptDurationMsDelta": 52,
-        "cdpTaskDurationMsDelta": 187,
-        "jsHeapUsedMb": 6.17
+        "cdpTaskDurationMsDelta": 233,
+        "jsHeapUsedMb": 14.35
       },
-      "consoleErrors": []
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 400 ()",
+        "[Cloudflare Turnstile] Error: 110200."
+      ]
     },
     {
       "pageName": "Home-EN",
       "url": "/index-en.html",
       "viewport": "Desktop 1440x900",
       "cwv": {
-        "ttfbMs": 2,
-        "fcpMs": 72,
-        "lcpMs": 72,
-        "cls": 0.028,
-        "domInteractiveMs": 53,
-        "domCompleteMs": 445,
-        "loadEventMs": 455,
-        "overlayDismissMs": 461
+        "ttfbMs": 21,
+        "fcpMs": 56,
+        "lcpMs": 304,
+        "cls": 0.1568,
+        "domInteractiveMs": 29,
+        "domCompleteMs": 911,
+        "loadEventMs": 929,
+        "overlayDismissMs": 950
       },
       "lcpBreakdown": {
-        "element": "SPAN",
+        "element": "P",
         "id": null,
-        "className": "font-headline text-[9px] md:text-[10px] tracking-[0.4em] uppercase text-white/75 group-hover:text-white transition-color",
+        "className": "text-white/60 text-xs md:text-sm font-light leading-relaxed max-w-sm",
         "url": null,
-        "size": 4077,
-        "ttfbMs": 2,
-        "ttfbPct": 3,
+        "size": 23312,
+        "ttfbMs": 21,
+        "ttfbPct": 7,
         "resourceLoadDelayMs": 0,
         "resourceLoadDelayPct": 0,
         "resourceLoadDurationMs": 0,
         "resourceLoadDurationPct": 0,
-        "elementRenderDelayMs": 70,
-        "elementRenderDelayPct": 97
+        "elementRenderDelayMs": 283,
+        "elementRenderDelayPct": 93
       },
       "longTasks": {
-        "count": 0,
-        "totalBlockingTimeMs": 0,
-        "maxTaskDurationMs": 0,
-        "tasks": []
+        "count": 1,
+        "totalBlockingTimeMs": 23,
+        "maxTaskDurationMs": 73,
+        "tasks": [
+          {
+            "duration": 73,
+            "startTime": 194,
+            "name": "self"
+          }
+        ]
       },
       "network": {
-        "totalRequests": 15,
-        "totalTransferKb": 311,
+        "totalRequests": 32,
+        "totalTransferKb": 2860,
         "slowestResources": [
           {
-            "url": "https://www.clarity.ms/tag/y6vet6c96a",
-            "initiatorType": "script",
-            "durationMs": 195,
+            "url": "https://h.clarity.ms/collect",
+            "initiatorType": "xmlhttprequest",
+            "durationMs": 677,
             "transferKb": 0
           },
           {
             "url": "https://fonts.googleapis.com/css2?family=Modak&family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap",
             "initiatorType": "link",
-            "durationMs": 194,
+            "durationMs": 231,
             "transferKb": 1
+          },
+          {
+            "url": "https://www.clarity.ms/tag/y6vet6c96a",
+            "initiatorType": "script",
+            "durationMs": 220,
+            "transferKb": 0
           },
           {
             "url": "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap",
             "initiatorType": "link",
-            "durationMs": 194,
+            "durationMs": 216,
             "transferKb": 1
           },
           {
-            "url": "https://scripts.clarity.ms/0.8.72-beta/clarity.js",
+            "url": "https://challenges.cloudflare.com/turnstile/v0/api.js",
             "initiatorType": "script",
-            "durationMs": 155,
+            "durationMs": 169,
             "transferKb": 0
           },
           {
             "url": "https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js",
             "initiatorType": "script",
-            "durationMs": 87,
+            "durationMs": 168,
             "transferKb": 6
           },
           {
-            "url": "/assets/img/logos/logo-hero-v2.svg?v=3",
-            "initiatorType": "img",
-            "durationMs": 14,
-            "transferKb": 114
+            "url": "https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/g/turnstile/f/av0/rch/fwova/0x4AAAAAAFg5e4t-qwrc7bZt/dark/fbE/new/flexible?lang=auto",
+            "initiatorType": "iframe",
+            "durationMs": 165,
+            "transferKb": 0
           },
           {
-            "url": "/assets/main-BPpk3aAZ.js",
+            "url": "https://scripts.clarity.ms/0.8.77-beta/clarity.js",
             "initiatorType": "script",
-            "durationMs": 12,
-            "transferKb": 57
-          },
-          {
-            "url": "/assets/domUtils-kbo_RF1y.css",
-            "initiatorType": "link",
-            "durationMs": 11,
-            "transferKb": 32
+            "durationMs": 100,
+            "transferKb": 0
           }
         ],
         "renderBlockingInHead": [],
         "failedRequests": []
       },
       "domAndAnimations": {
-        "domNodes": 1145,
-        "activeAnimationsTotal": 75,
-        "infiniteAnimationsCount": 36,
+        "domNodes": 1468,
+        "activeAnimationsTotal": 537,
+        "infiniteAnimationsCount": 48,
         "infiniteAnimationsSample": [
           "floatPremium on <div.relative>",
           "sweep on <div.w-1/2>",
@@ -246,7 +266,7 @@
         "lcpDomIssues": []
       },
       "scrollFluidity": {
-        "totalFrames": 46,
+        "totalFrames": 45,
         "avgFps": 60,
         "p95FrameMs": 16.7,
         "maxFrameMs": 16.8,
@@ -254,25 +274,28 @@
         "jankFramesOver33ms": 0,
         "smoothnessScorePct": 100,
         "cdpLayoutCountDelta": 58,
-        "cdpRecalcStyleCountDelta": 119,
-        "cdpScriptDurationMsDelta": 53,
-        "cdpTaskDurationMsDelta": 197,
-        "jsHeapUsedMb": 9.08
+        "cdpRecalcStyleCountDelta": 116,
+        "cdpScriptDurationMsDelta": 44,
+        "cdpTaskDurationMsDelta": 210,
+        "jsHeapUsedMb": 18.67
       },
-      "consoleErrors": []
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 400 ()",
+        "[Cloudflare Turnstile] Error: 110200."
+      ]
     },
     {
       "pageName": "Planes-ES",
       "url": "/planes/index.html",
       "viewport": "Desktop 1440x900",
       "cwv": {
-        "ttfbMs": 2,
-        "fcpMs": 80,
-        "lcpMs": 80,
-        "cls": 0.0079,
-        "domInteractiveMs": 43,
-        "domCompleteMs": 679,
-        "loadEventMs": 679,
+        "ttfbMs": 10,
+        "fcpMs": 56,
+        "lcpMs": 100,
+        "cls": 0.152,
+        "domInteractiveMs": 17,
+        "domCompleteMs": 791,
+        "loadEventMs": 791,
         "overlayDismissMs": 0
       },
       "lcpBreakdown": {
@@ -281,14 +304,14 @@
         "className": "block text-h1 text-white mb-3",
         "url": null,
         "size": 226500,
-        "ttfbMs": 2,
-        "ttfbPct": 3,
+        "ttfbMs": 10,
+        "ttfbPct": 10,
         "resourceLoadDelayMs": 0,
         "resourceLoadDelayPct": 0,
         "resourceLoadDurationMs": 0,
         "resourceLoadDurationPct": 0,
-        "elementRenderDelayMs": 78,
-        "elementRenderDelayPct": 98
+        "elementRenderDelayMs": 90,
+        "elementRenderDelayPct": 90
       },
       "longTasks": {
         "count": 0,
@@ -297,55 +320,55 @@
         "tasks": []
       },
       "network": {
-        "totalRequests": 16,
-        "totalTransferKb": 76,
+        "totalRequests": 19,
+        "totalTransferKb": 681,
         "slowestResources": [
           {
-            "url": "https://elfdkbqlvawaprgidqhd.supabase.co/rest/v1/mynext_services?select=*&active=eq.true&order=sort_order.asc",
+            "url": "https://elfdkbqlvawaprgidqhd.supabase.co/rest/v1/mynext_hero?select=*&limit=1",
             "initiatorType": "fetch",
-            "durationMs": 780,
-            "transferKb": 0
-          },
-          {
-            "url": "https://elfdkbqlvawaprgidqhd.supabase.co/rest/v1/mynext_settings?select=*",
-            "initiatorType": "fetch",
-            "durationMs": 429,
+            "durationMs": 326,
             "transferKb": 0
           },
           {
             "url": "https://elfdkbqlvawaprgidqhd.supabase.co/rest/v1/mynext_contact?select=*&limit=1",
             "initiatorType": "fetch",
-            "durationMs": 429,
+            "durationMs": 312,
             "transferKb": 0
           },
           {
-            "url": "https://elfdkbqlvawaprgidqhd.supabase.co/rest/v1/mynext_hero?select=*&limit=1",
+            "url": "https://elfdkbqlvawaprgidqhd.supabase.co/rest/v1/mynext_services?select=*&active=eq.true&order=sort_order.asc",
             "initiatorType": "fetch",
-            "durationMs": 423,
+            "durationMs": 306,
+            "transferKb": 0
+          },
+          {
+            "url": "https://elfdkbqlvawaprgidqhd.supabase.co/rest/v1/mynext_settings?select=*",
+            "initiatorType": "fetch",
+            "durationMs": 243,
             "transferKb": 0
           },
           {
             "url": "https://elfdkbqlvawaprgidqhd.supabase.co/rest/v1/mynext_faq?select=*&active=eq.true&order=sort_order.asc",
             "initiatorType": "fetch",
-            "durationMs": 423,
+            "durationMs": 243,
             "transferKb": 0
           },
           {
-            "url": "https://j.clarity.ms/collect",
-            "initiatorType": "xmlhttprequest",
-            "durationMs": 401,
+            "url": "https://www.clarity.ms/tag/y6vet6c96a",
+            "initiatorType": "script",
+            "durationMs": 200,
             "transferKb": 0
           },
           {
             "url": "https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;900&display=swap",
             "initiatorType": "link",
-            "durationMs": 219,
+            "durationMs": 187,
             "transferKb": 1
           },
           {
             "url": "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap",
             "initiatorType": "link",
-            "durationMs": 219,
+            "durationMs": 187,
             "transferKb": 1
           }
         ],
@@ -354,7 +377,7 @@
       },
       "domAndAnimations": {
         "domNodes": 537,
-        "activeAnimationsTotal": 27,
+        "activeAnimationsTotal": 19,
         "infiniteAnimationsCount": 19,
         "infiniteAnimationsSample": [
           "moveClouds on <div.cloud>",
@@ -377,7 +400,7 @@
       "scrollFluidity": {
         "totalFrames": 45,
         "avgFps": 60,
-        "p95FrameMs": 16.7,
+        "p95FrameMs": 16.8,
         "maxFrameMs": 16.8,
         "jankFramesOver28ms": 0,
         "jankFramesOver33ms": 0,
@@ -385,8 +408,8 @@
         "cdpLayoutCountDelta": 46,
         "cdpRecalcStyleCountDelta": 46,
         "cdpScriptDurationMsDelta": 9,
-        "cdpTaskDurationMsDelta": 62,
-        "jsHeapUsedMb": 4.88
+        "cdpTaskDurationMsDelta": 58,
+        "jsHeapUsedMb": 9.08
       },
       "consoleErrors": []
     },
@@ -395,13 +418,13 @@
       "url": "/project.html?slug=blessed-barber-studio",
       "viewport": "Desktop 1440x900",
       "cwv": {
-        "ttfbMs": 3,
-        "fcpMs": 56,
-        "lcpMs": 56,
-        "cls": 0.0002,
-        "domInteractiveMs": 10,
-        "domCompleteMs": 660,
-        "loadEventMs": 660,
+        "ttfbMs": 6,
+        "fcpMs": 44,
+        "lcpMs": 76,
+        "cls": 0.4793,
+        "domInteractiveMs": 13,
+        "domCompleteMs": 860,
+        "loadEventMs": 860,
         "overlayDismissMs": 0
       },
       "lcpBreakdown": {
@@ -410,14 +433,14 @@
         "className": "w-full h-full object-cover opacity-90 transition-opacity duration-500 group-hover:opacity-100",
         "url": "http://localhost:5173/assets/img/portfolio/porfolio1.webp",
         "size": 427418,
-        "ttfbMs": 3,
-        "ttfbPct": 5,
-        "resourceLoadDelayMs": 4,
-        "resourceLoadDelayPct": 7,
-        "resourceLoadDurationMs": 7,
-        "resourceLoadDurationPct": 13,
-        "elementRenderDelayMs": 42,
-        "elementRenderDelayPct": 75
+        "ttfbMs": 6,
+        "ttfbPct": 8,
+        "resourceLoadDelayMs": 3,
+        "resourceLoadDelayPct": 4,
+        "resourceLoadDurationMs": 6,
+        "resourceLoadDurationPct": 8,
+        "elementRenderDelayMs": 61,
+        "elementRenderDelayPct": 80
       },
       "longTasks": {
         "count": 0,
@@ -426,63 +449,63 @@
         "tasks": []
       },
       "network": {
-        "totalRequests": 18,
-        "totalTransferKb": 427,
+        "totalRequests": 24,
+        "totalTransferKb": 985,
         "slowestResources": [
           {
-            "url": "https://y.clarity.ms/collect",
+            "url": "https://u.clarity.ms/collect",
             "initiatorType": "xmlhttprequest",
-            "durationMs": 419,
-            "transferKb": 0
-          },
-          {
-            "url": "https://elfdkbqlvawaprgidqhd.supabase.co/rest/v1/mynext_projects?select=*&slug=eq.blessed-barber-studio&active=eq.true&limit=1",
-            "initiatorType": "fetch",
-            "durationMs": 305,
-            "transferKb": 0
-          },
-          {
-            "url": "https://elfdkbqlvawaprgidqhd.supabase.co/rest/v1/mynext_settings?select=*",
-            "initiatorType": "fetch",
-            "durationMs": 277,
+            "durationMs": 635,
             "transferKb": 0
           },
           {
             "url": "https://elfdkbqlvawaprgidqhd.supabase.co/rest/v1/mynext_contact?select=*&limit=1",
             "initiatorType": "fetch",
-            "durationMs": 201,
+            "durationMs": 232,
             "transferKb": 0
           },
           {
             "url": "https://www.clarity.ms/tag/y6vet6c96a",
             "initiatorType": "script",
-            "durationMs": 177,
+            "durationMs": 208,
             "transferKb": 0
           },
           {
-            "url": "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap",
-            "initiatorType": "link",
-            "durationMs": 171,
-            "transferKb": 1
+            "url": "https://elfdkbqlvawaprgidqhd.supabase.co/rest/v1/mynext_projects?select=*&slug=eq.blessed-barber-studio&active=eq.true&limit=1",
+            "initiatorType": "fetch",
+            "durationMs": 206,
+            "transferKb": 0
+          },
+          {
+            "url": "https://elfdkbqlvawaprgidqhd.supabase.co/rest/v1/mynext_settings?select=*",
+            "initiatorType": "fetch",
+            "durationMs": 206,
+            "transferKb": 0
+          },
+          {
+            "url": "https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/g/turnstile/f/av0/rch/fxkht/0x4AAAAAAFg5e4t-qwrc7bZt/dark/fbE/new/flexible?lang=auto",
+            "initiatorType": "iframe",
+            "durationMs": 185,
+            "transferKb": 0
           },
           {
             "url": "https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap",
             "initiatorType": "link",
-            "durationMs": 168,
+            "durationMs": 158,
             "transferKb": 1
           },
           {
-            "url": "https://scripts.clarity.ms/0.8.72-beta/clarity.js",
-            "initiatorType": "script",
-            "durationMs": 125,
-            "transferKb": 0
+            "url": "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap",
+            "initiatorType": "link",
+            "durationMs": 158,
+            "transferKb": 1
           }
         ],
         "renderBlockingInHead": [],
         "failedRequests": []
       },
       "domAndAnimations": {
-        "domNodes": 359,
+        "domNodes": 367,
         "activeAnimationsTotal": 1,
         "infiniteAnimationsCount": 1,
         "infiniteAnimationsSample": [
@@ -491,34 +514,37 @@
         "lcpDomIssues": []
       },
       "scrollFluidity": {
-        "totalFrames": 46,
+        "totalFrames": 45,
         "avgFps": 60,
-        "p95FrameMs": 16.7,
+        "p95FrameMs": 16.8,
         "maxFrameMs": 16.8,
         "jankFramesOver28ms": 0,
         "jankFramesOver33ms": 0,
         "smoothnessScorePct": 100,
         "cdpLayoutCountDelta": 0,
-        "cdpRecalcStyleCountDelta": 47,
-        "cdpScriptDurationMsDelta": 6,
-        "cdpTaskDurationMsDelta": 30,
-        "jsHeapUsedMb": 4.27
+        "cdpRecalcStyleCountDelta": 46,
+        "cdpScriptDurationMsDelta": 5,
+        "cdpTaskDurationMsDelta": 23,
+        "jsHeapUsedMb": 6.89
       },
-      "consoleErrors": []
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 400 ()",
+        "[Cloudflare Turnstile] Error: 110200."
+      ]
     }
   ],
   "throttledMobileHome": {
-    "ttfbMs": 3,
-    "fcpMs": 1304,
+    "ttfbMs": 19,
+    "fcpMs": 268,
     "lcp": {
-      "startTime": 2480,
-      "element": "IMG",
-      "url": "http://localhost:5173/assets/img/logos/logo-hero-v2.svg?v=3"
+      "startTime": 336,
+      "element": "H1",
+      "url": null
     },
-    "domCompleteMs": 7712,
-    "loadEventMs": 7743,
-    "longTasksCount": 2,
-    "totalBlockingTimeMs": 74,
+    "domCompleteMs": 21738,
+    "loadEventMs": 21777,
+    "longTasksCount": 3,
+    "totalBlockingTimeMs": 365,
     "scrollUnderThrottling": {
       "avgFps": 60,
       "jankFramesOver33ms": 0,

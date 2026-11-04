@@ -268,6 +268,46 @@ const projectsToSync = [
         title: JSON.stringify({ es: 'Presentación del Menú QR en Local', en: 'In-Store QR Display' })
       }
     ]
+  },
+  {
+    id: 9,
+    slug: 'tacos-french-pere-garau',
+    title: 'TACOS FRENCH - PERE G.',
+    category: 'TACOS & COMIDA RÁPIDA',
+    description: JSON.stringify({
+      es: 'Carta digital de alta velocidad y menú interactivo para Tacos Marrakech en Plaza Pere Garau (Palma).',
+      en: 'High-speed digital menu and interactive dining experience for Tacos Marrakech at Plaza Pere Garau (Palma).'
+    }),
+    full_description: JSON.stringify({
+      es: 'Para el local de Tacos Marrakech en Plaza de Pere Garau, desarrollamos una experiencia web ultrarrápida optimizada para dispositivos móviles. Incluye su carta completa de Tacos XXL, Burgers Halal y especialidades, con navegación fluida por categorías, precios actualizados y acceso inmediato mediante códigos QR en sala.',
+      en: 'For the Tacos Marrakech location at Plaza de Pere Garau, we developed an ultra-fast mobile-optimized web experience. It includes their full menu of XXL Tacos, Halal Burgers and specialties, with smooth category navigation, updated pricing, and direct in-store QR code access.'
+    }),
+    image_url: './assets/img/portfolio/porfolio9.webp',
+    project_url: 'https://tacosmarrakech.pages.dev/peregarau/',
+    technologies: 'HTML, CSS, JS, Tailwind',
+    featured: true,
+    active: true,
+    sort_order: 9
+  },
+  {
+    id: 10,
+    slug: 'buon-appetito',
+    title: 'Restaurante Buon Appetito',
+    category: 'RESTAURANTE ITALIANO & MEDITERRÁNEO',
+    description: JSON.stringify({
+      es: 'Diseño web exclusivo, carta digital y sistema de reservas para pizzería artesanal y cocina mediterránea en Port d\'Andratx.',
+      en: 'Exclusive web design, digital menu, and reservation system for artisanal pizzeria and Mediterranean cuisine in Port d\'Andratx.'
+    }),
+    full_description: JSON.stringify({
+      es: 'Desarrollamos la arquitectura digital de Restaurante Buon Appetito frente al puerto deportivo de Port d\'Andratx (Mallorca). La plataforma combina una estética editorial mediterránea de alta gama con carta interactiva en varios idiomas, fotografías de producto en alta resolución y un flujo directo de reservas online y telefónicas.',
+      en: 'We developed the digital architecture for Restaurante Buon Appetito facing the Port d\'Andratx marina (Mallorca). The platform blends high-end Mediterranean editorial aesthetics with a multi-language interactive menu, high-resolution food photography, and direct online and phone booking flows.'
+    }),
+    image_url: './assets/img/portfolio/porfolio10.webp',
+    project_url: 'https://restaurantebuonappetito.com',
+    technologies: 'HTML, CSS, JS, Tailwind',
+    featured: true,
+    active: true,
+    sort_order: 10
   }
 ];
 

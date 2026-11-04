@@ -15,7 +15,7 @@
     </script>
 
     <!-- SEO & Metadata -->
-    <title>Diseño Web en Palma de Mallorca | Musa · MYNEXT</title>
+    <title>Diseño Web en Palma de Mallorca | Musa · MyNext</title>
     <meta name="description"
         content="Diseño y desarrollo web profesional en Palma de Mallorca. Páginas web modernas, ultra rápidas y optimizadas para conseguir clientes.">
     <meta name="author" content="Musa">
@@ -31,11 +31,11 @@
     <!-- Canonical and Hreflang Multi-language Tags -->
     <link rel="canonical" href="https://mynextbymusa.com/" />
     <link rel="alternate" hreflang="es" href="https://mynextbymusa.com/" />
-    <link rel="alternate" hreflang="en" href="https://mynextbymusa.com/index-en.html" />
+    <link rel="alternate" hreflang="en" href="https://mynextbymusa.com/index-en" />
     <link rel="alternate" hreflang="x-default" href="https://mynextbymusa.com/" />
 
     <!-- Open Graph / Facebook / WhatsApp -->
-    <meta property="og:title" content="Diseño Web en Palma de Mallorca | Musa · MYNEXT">
+    <meta property="og:title" content="Diseño Web en Palma de Mallorca | Musa · MyNext">
     <meta property="og:description"
         content="Diseño y desarrollo web profesional en Palma de Mallorca. Páginas web modernas, ultra rápidas y optimizadas para conseguir clientes.">
     <meta property="og:type" content="website">
@@ -45,11 +45,11 @@
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="512">
     <meta property="og:image:height" content="512">
-    <meta property="og:site_name" content="MYNEXT">
+    <meta property="og:site_name" content="MyNext">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Diseño Web en Palma de Mallorca | Musa · MYNEXT">
+    <meta name="twitter:title" content="Diseño Web en Palma de Mallorca | Musa · MyNext">
     <meta name="twitter:description"
         content="Diseño y desarrollo web profesional en Palma de Mallorca. Páginas web modernas, ultra rápidas y optimizadas para conseguir clientes.">
     <meta name="twitter:image" content="https://mynextbymusa.com/assets/img/og-share.png">
@@ -99,7 +99,7 @@
           "@type": ["ProfessionalService", "LocalBusiness"],
           "@id": "https://mynextbymusa.com/#organization",
           "name": "MYNEXT - Diseño Web Palma de Mallorca",
-          "alternateName": "MYNEXT",
+          "alternateName": ["MyNext", "MYNEXT", "MyNext by Musa"],
           "url": "https://mynextbymusa.com/",
           "logo": "https://mynextbymusa.com/favicon-192x192.png",
           "image": "https://mynextbymusa.com/assets/img/og-share.png",
@@ -199,7 +199,13 @@
           "@type": "WebSite",
           "@id": "https://mynextbymusa.com/#website",
           "url": "https://mynextbymusa.com/",
-          "name": "MYNEXT",
+          "name": "MyNext",
+          "alternateName": [
+            "MYNEXT",
+            "MyNext by Musa",
+            "mynextbymusa",
+            "mynextbymusa.com"
+          ],
           "publisher": {
             "@id": "https://mynextbymusa.com/#organization"
           },
@@ -321,6 +327,18 @@
               "position": 8,
               "name": "Tacos Marrakech",
               "url": "https://mynextbymusa.com/project.html?slug=tacos-marrakech"
+            },
+            {
+              "@type": "ListItem",
+              "position": 9,
+              "name": "TACOS FRENCH - PERE G.",
+              "url": "https://mynextbymusa.com/project.html?slug=tacos-french-pere-garau"
+            },
+            {
+              "@type": "ListItem",
+              "position": 10,
+              "name": "Restaurante Buon Appetito",
+              "url": "https://mynextbymusa.com/project.html?slug=buon-appetito"
             }
           ]
         }
@@ -348,7 +366,7 @@
 
 
     <style>#page-transition-overlay.active{position:fixed;inset:0;z-index:99999;background:#080810;display:flex;align-items:center;justify-content:center}</style>
-    <script>/* Failsafe: oculta el loader aunque falle el JS principal */(function(){function h(){var o=document.getElementById('page-transition-overlay');if(o){o.classList.remove('active');o.setAttribute('aria-hidden','true');}}window.addEventListener('load',function(){setTimeout(h,1500);});setTimeout(h,4000);})();</script>
+    <script>/* Failsafe: oculta el loader ultra-rápido (<200ms) */(function(){function h(){var o=document.getElementById('page-transition-overlay');if(o){o.classList.remove('active');o.setAttribute('aria-hidden','true');}}if(document.readyState==='complete'){h();}else{window.addEventListener('load',function(){setTimeout(h,100);});setTimeout(h,1200);}})();</script>
 
     <!-- Animaciones Premium Hero -->
     
@@ -550,7 +568,7 @@
                             ES
                         </a>
                         <span class="text-white/30 font-normal">/</span>
-                        <a href="index-en.html" aria-label="Switch language to English"
+                        <a href="/index-en" aria-label="Switch language to English"
                             class="text-white/50 hover:text-white transition-colors">
                             EN
                         </a>
@@ -969,7 +987,7 @@
                                     <span class="block text-[9px] sm:text-[10px] md:text-xs font-headline font-semibold uppercase tracking-[0.18em] text-[#00f2ff] truncate">Barbería de Alta Gama</span>
                                     <h3 class="text-[15px] sm:text-lg md:text-xl font-bold text-white font-headline tracking-tight mt-0.5 leading-snug truncate">Blessed Barber Studio</h3>
                                 </div>
-                                <a href="project.html?slug=blessed-barber-studio"
+                                <a href="project?slug=blessed-barber-studio"
                                     class="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-bold text-white/90 uppercase tracking-widest group-hover:text-[#00f2ff] transition-colors pointer-events-auto w-fit">
                                     Más Info <span class="material-symbols-outlined text-sm transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
                                 </a>
@@ -990,7 +1008,7 @@
                                     <span class="block text-[9px] sm:text-[10px] md:text-xs font-headline font-semibold uppercase tracking-[0.18em] text-[#00f2ff] truncate">Bar & Cafetería de Especialidad</span>
                                     <h3 class="text-[15px] sm:text-lg md:text-xl font-bold text-white font-headline tracking-tight mt-0.5 leading-snug truncate">Bar Cafetería Luna Llena</h3>
                                 </div>
-                                <a href="project.html?slug=bar-cafeteria-luna-llena"
+                                <a href="project?slug=bar-cafeteria-luna-llena"
                                     class="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-bold text-white/90 uppercase tracking-widest group-hover:text-[#00f2ff] transition-colors pointer-events-auto w-fit">
                                     Más Info <span class="material-symbols-outlined text-sm transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
                                 </a>
@@ -1011,7 +1029,7 @@
                                     <span class="block text-[9px] sm:text-[10px] md:text-xs font-headline font-semibold uppercase tracking-[0.18em] text-[#00f2ff] truncate">Reformas & Tabiquería</span>
                                     <h3 class="text-[15px] sm:text-lg md:text-xl font-bold text-white font-headline tracking-tight mt-0.5 leading-snug truncate">Ecuaplac</h3>
                                 </div>
-                                <a href="project.html?slug=ecuaplac"
+                                <a href="project?slug=ecuaplac"
                                     class="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-bold text-white/90 uppercase tracking-widest group-hover:text-[#00f2ff] transition-colors pointer-events-auto w-fit">
                                     Más Info <span class="material-symbols-outlined text-sm transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
                                 </a>
@@ -1032,7 +1050,7 @@
                                     <span class="block text-[9px] sm:text-[10px] md:text-xs font-headline font-semibold uppercase tracking-[0.18em] text-[#00f2ff] truncate">Restaurante Gastronómico</span>
                                     <h3 class="text-[15px] sm:text-lg md:text-xl font-bold text-white font-headline tracking-tight mt-0.5 leading-snug truncate">RBARI RESTAURANT</h3>
                                 </div>
-                                <a href="project.html?slug=rbari-restaurant"
+                                <a href="project?slug=rbari-restaurant"
                                     class="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-bold text-white/90 uppercase tracking-widest group-hover:text-[#00f2ff] transition-colors pointer-events-auto w-fit">
                                     Más Info <span class="material-symbols-outlined text-sm transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
                                 </a>
@@ -1053,7 +1071,7 @@
                                     <span class="block text-[9px] sm:text-[10px] md:text-xs font-headline font-semibold uppercase tracking-[0.18em] text-[#00f2ff] truncate">Tienda Online / E-Commerce</span>
                                     <h3 class="text-[15px] sm:text-lg md:text-xl font-bold text-white font-headline tracking-tight mt-0.5 leading-snug truncate">NEXT ERA</h3>
                                 </div>
-                                <a href="project.html?slug=next-era"
+                                <a href="project?slug=next-era"
                                     class="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-bold text-white/90 uppercase tracking-widest group-hover:text-[#00f2ff] transition-colors pointer-events-auto w-fit">
                                     Más Info <span class="material-symbols-outlined text-sm transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
                                 </a>
@@ -1074,7 +1092,7 @@
                                     <span class="block text-[9px] sm:text-[10px] md:text-xs font-headline font-semibold uppercase tracking-[0.18em] text-[#00f2ff] truncate">Centro Islámico</span>
                                     <h3 class="text-[15px] sm:text-lg md:text-xl font-bold text-white font-headline tracking-tight mt-0.5 leading-snug truncate">Mezquita Arrahma</h3>
                                 </div>
-                                <a href="project.html?slug=mezquita-arrahma"
+                                <a href="project?slug=mezquita-arrahma"
                                     class="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-bold text-white/90 uppercase tracking-widest group-hover:text-[#00f2ff] transition-colors pointer-events-auto w-fit">
                                     Más Info <span class="material-symbols-outlined text-sm transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
                                 </a>
@@ -1095,7 +1113,7 @@
                                     <span class="block text-[9px] sm:text-[10px] md:text-xs font-headline font-semibold uppercase tracking-[0.18em] text-[#00f2ff] truncate">Restaurante Marroquí</span>
                                     <h3 class="text-[15px] sm:text-lg md:text-xl font-bold text-white font-headline tracking-tight mt-0.5 leading-snug truncate">Gran Marrakech</h3>
                                 </div>
-                                <a href="project.html?slug=gran-marrakech"
+                                <a href="project?slug=gran-marrakech"
                                     class="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-bold text-white/90 uppercase tracking-widest group-hover:text-[#00f2ff] transition-colors pointer-events-auto w-fit">
                                     Más Info <span class="material-symbols-outlined text-sm transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
                                 </a>
@@ -1116,7 +1134,49 @@
                                     <span class="block text-[9px] sm:text-[10px] md:text-xs font-headline font-semibold uppercase tracking-[0.18em] text-[#00f2ff] truncate">Restaurante Marroquí</span>
                                     <h3 class="text-[15px] sm:text-lg md:text-xl font-bold text-white font-headline tracking-tight mt-0.5 leading-snug truncate">Tacos Marrakech</h3>
                                 </div>
-                                <a href="project.html?slug=tacos-marrakech"
+                                <a href="project?slug=tacos-marrakech"
+                                    class="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-bold text-white/90 uppercase tracking-widest group-hover:text-[#00f2ff] transition-colors pointer-events-auto w-fit">
+                                    Más Info <span class="material-symbols-outlined text-sm transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="fan-card group spotlight-card relative overflow-hidden glass-panel">
+                        <div class="relative w-full h-full overflow-hidden flex flex-col justify-between bg-[#080912]">
+                            <div class="relative w-full h-[64%] sm:h-[68%] overflow-hidden flex items-center justify-center bg-[#06070f]">
+                                <img src="./assets/img/portfolio/porfolio9.webp"
+                                    alt="Diseño web premium en Mallorca - Vista previa de TACOS FRENCH - PERE G." loading="lazy"
+                                    decoding="async"
+                                    class="w-full h-full object-cover object-center scale-[1.04] sm:scale-[1.08] group-hover:scale-[1.14] transition-transform duration-700 pointer-events-none select-none">
+                                <div class="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-[#080912] to-transparent pointer-events-none"></div>
+                            </div>
+                            <div class="relative w-full h-[36%] sm:h-[32%] px-4 py-2.5 sm:px-5 sm:py-3.5 bg-[#080912] border-t border-white/[0.07] flex flex-col justify-between text-left z-20">
+                                <div class="min-w-0">
+                                    <span class="block text-[9px] sm:text-[10px] md:text-xs font-headline font-semibold uppercase tracking-[0.18em] text-[#00f2ff] truncate">Tacos & Comida Rápida</span>
+                                    <h3 class="text-[15px] sm:text-lg md:text-xl font-bold text-white font-headline tracking-tight mt-0.5 leading-snug truncate">TACOS FRENCH - PERE G.</h3>
+                                </div>
+                                <a href="project?slug=tacos-french-pere-garau"
+                                    class="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-bold text-white/90 uppercase tracking-widest group-hover:text-[#00f2ff] transition-colors pointer-events-auto w-fit">
+                                    Más Info <span class="material-symbols-outlined text-sm transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="fan-card group spotlight-card relative overflow-hidden glass-panel">
+                        <div class="relative w-full h-full overflow-hidden flex flex-col justify-between bg-[#080912]">
+                            <div class="relative w-full h-[64%] sm:h-[68%] overflow-hidden flex items-center justify-center bg-[#06070f]">
+                                <img src="./assets/img/portfolio/porfolio10.webp"
+                                    alt="Diseño web premium en Mallorca - Vista previa de Restaurante Buon Appetito" loading="lazy"
+                                    decoding="async"
+                                    class="w-full h-full object-cover object-center scale-[1.04] sm:scale-[1.08] group-hover:scale-[1.14] transition-transform duration-700 pointer-events-none select-none">
+                                <div class="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-[#080912] to-transparent pointer-events-none"></div>
+                            </div>
+                            <div class="relative w-full h-[36%] sm:h-[32%] px-4 py-2.5 sm:px-5 sm:py-3.5 bg-[#080912] border-t border-white/[0.07] flex flex-col justify-between text-left z-20">
+                                <div class="min-w-0">
+                                    <span class="block text-[9px] sm:text-[10px] md:text-xs font-headline font-semibold uppercase tracking-[0.18em] text-[#00f2ff] truncate">Restaurante Italiano & Mediterráneo</span>
+                                    <h3 class="text-[15px] sm:text-lg md:text-xl font-bold text-white font-headline tracking-tight mt-0.5 leading-snug truncate">Restaurante Buon Appetito</h3>
+                                </div>
+                                <a href="project?slug=buon-appetito"
                                     class="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-bold text-white/90 uppercase tracking-widest group-hover:text-[#00f2ff] transition-colors pointer-events-auto w-fit">
                                     Más Info <span class="material-symbols-outlined text-sm transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
                                 </a>
@@ -1820,7 +1880,7 @@
 
             <!-- Glowing Radial Background Elements -->
             <div
-                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-electric-cyan/10 blur-[150px] rounded-full pointer-events-none">
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] md:w-[800px] md:h-[800px] bg-electric-cyan/10 blur-[60px] md:blur-[150px] rounded-full pointer-events-none">
             </div>
 
             <!-- Floating Tech Badges (Decorative) -->
@@ -1841,14 +1901,14 @@
             </div>
 
             <div
-                class="max-w-4xl mx-auto text-center reveal relative z-10 p-10 md:p-16 rounded-[2.5rem] bg-gradient-to-b from-slate-900/80 to-black/80 border border-white/10 shadow-[0_0_100px_rgba(0,242,255,0.05)] backdrop-blur-xl group hover:border-cyan-500/30 transition-all duration-700 hover:shadow-[0_0_120px_rgba(0,242,255,0.15)]">
+                class="max-w-4xl mx-auto text-center reveal relative z-10 p-10 md:p-16 rounded-[2.5rem] bg-gradient-to-b from-slate-900/80 to-black/80 border border-white/10 shadow-[0_0_100px_rgba(0,242,255,0.05)] backdrop-blur-none md:backdrop-blur-xl group hover:border-cyan-500/30 transition-all duration-700 hover:shadow-[0_0_120px_rgba(0,242,255,0.15)]">
                 <!-- Inner Animated Glow on Hover -->
                 <div
                     class="absolute inset-0 rounded-[2.5rem] bg-gradient-to-b from-cyan-500/0 to-cyan-500/0 group-hover:from-cyan-500/5 group-hover:to-transparent transition-all duration-700 pointer-events-none">
                 </div>
 
                 <div
-                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] bg-electric-cyan/10 blur-[100px] rounded-full pointer-events-none -z-10 group-hover:bg-electric-cyan/20 transition-all duration-700">
+                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] bg-electric-cyan/10 blur-[40px] md:blur-[100px] rounded-full pointer-events-none -z-10 group-hover:bg-electric-cyan/20 transition-all duration-700">
                 </div>
 
                 <div class="space-y-8 md:space-y-10 relative">
@@ -2065,6 +2125,14 @@
                                 <!-- Cloudflare Turnstile Verification -->
                                 <div class="cf-turnstile-container mb-4 flex justify-center">
                                     <div class="cf-turnstile" data-sitekey="0x4AAAAAAFg5e4t-qwrc7bZt" data-theme="dark" data-size="flexible"></div>
+                                    <script>
+                                        (function(){
+                                            var el = document.currentScript.previousElementSibling;
+                                            if (el && /^(localhost|127\.0\.0\.1|192\.168\.|10\.|172\.)/.test(location.hostname)) {
+                                                el.setAttribute('data-sitekey', '1x00000000000000000000AA');
+                                            }
+                                        })();
+                                    </script>
                                 </div>
                                 <button class="form-submit-btn" type="submit">
                                     <span class="btn-text">Solicitar Propuesta Gratuita →</span>
@@ -2499,16 +2567,15 @@
                 </div>
             </div>
 
+            <!-- Doodle Crew Animated Stage "BY MUSA" (21st.dev) -->
+            <div id="doodle-crew-root" class="w-full relative z-20 my-4 overflow-hidden pointer-events-auto"></div>
+
             <!-- Bottom Copyright Bar -->
             <div
                 class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left text-slate-400 text-[11px] font-headline tracking-[0.18em] uppercase font-medium">
                 <div data-sb-content="footer_copyright">© 2026 MYNEXT. Todos los derechos reservados.</div>
-                <div data-sb-content="footer_madeby">
-                    <a href="https://mynextbymusa.com" target="_blank" rel="noopener noreferrer"
-                        class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-white font-headline text-[10px] tracking-widest uppercase hover:bg-cyan-500/20 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(0,242,255,0.3)] transition-all duration-300">
-                        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_#00f2ff]"></span>
-                        HECHO A MANO POR MUSA
-                    </a>
+                <div data-sb-content="footer_madeby" class="text-slate-400 text-[11px] font-headline tracking-[0.18em] uppercase font-medium">
+                    <span class="hover:text-cyan-400 transition-colors">Hecho con mucho amor ❤️</span>
                 </div>
             </div>
         </div>

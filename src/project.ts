@@ -4,6 +4,7 @@ import { fallbackProjects, fallbackSettings } from './lib/fallbackData';
 import { initAnalyticsListeners } from './lib/analytics';
 import { getTranslation, applyDynamicSettings, sanitizeHtml } from './lib/domUtils';
 import { recordClientEmail } from './lib/leadTracker';
+import { initDoodleCrewFooter } from './lib/initDoodleCrew';
 
 // Legal Modals handler
 function initLegalModals() {
@@ -88,8 +89,20 @@ function initContactForm(lang: 'es' | 'en') {
       return;
     }
 
-    // 2. Comprobación de Turnstile Token en Cliente
-    const turnstileToken = turnstileInput?.value?.trim() || '';
+    const isLocal =
+      window.location.hostname === 'localhost' ||
+      window.location.hostname === '127.0.0.1' ||
+      window.location.hostname.startsWith('192.168.');
+
+    // 2. Comprobación de Turnstile Token en Cliente (input DOM, API en memoria o token de pruebas en local)
+    const turnstileToken =
+      turnstileInput?.value?.trim() ||
+      (typeof (window as any).turnstile !== 'undefined' && typeof (window as any).turnstile.getResponse === 'function'
+        ? ((window as any).turnstile.getResponse() || '').trim()
+        : '') ||
+      (isLocal ? '1x00000000000000000000AA' : '') ||
+      '';
+
     if (!turnstileToken) {
       const warnText = isEs ? 'Verificación de seguridad requerida' : 'Security check required';
       if (btnText) btnText.textContent = warnText;
@@ -138,7 +151,8 @@ function initContactForm(lang: 'es' | 'en') {
         language: lang,
         _honey: honeyVal,
         'cf-turnstile-response': turnstileToken
-      })
+      }),
+      signal: AbortSignal.timeout(10000)
     })
       .then(async response => {
         const resData = await response.json().catch(() => ({}));
@@ -214,6 +228,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Inicializar modales legales del footer y modal de contacto
   initLegalModals();
 
+  // Inicializar animación Doodle Crew Footer ("BY MUSA" 21st.dev)
+  initDoodleCrewFooter();
+
   // Determine language from HTML element
   const lang = (document.documentElement.lang === 'en' || window.location.pathname.includes('-en')) ? 'en' : 'es';
   const isEnglish = lang === 'en';
@@ -267,11 +284,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const activeSlug = proj.slug || explicitSlug;
     const esUrl = explicitSlug && activeSlug
-      ? `https://mynextbymusa.com/project.html?slug=${encodeURIComponent(activeSlug)}`
-      : 'https://mynextbymusa.com/project.html';
+      ? `https://mynextbymusa.com/project?slug=${encodeURIComponent(activeSlug)}`
+      : 'https://mynextbymusa.com/project';
     const enUrl = explicitSlug && activeSlug
-      ? `https://mynextbymusa.com/project-en.html?slug=${encodeURIComponent(activeSlug)}`
-      : 'https://mynextbymusa.com/project-en.html';
+      ? `https://mynextbymusa.com/project-en?slug=${encodeURIComponent(activeSlug)}`
+      : 'https://mynextbymusa.com/project-en';
     const canonicalUrl = isEnglish ? enUrl : esUrl;
 
     let absImg = 'https://mynextbymusa.com/assets/img/og-share.png';

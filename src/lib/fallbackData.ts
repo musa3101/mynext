@@ -304,6 +304,46 @@ export const fallbackProjects = [
         title: JSON.stringify({ es: 'Presentación del Menú QR en Local', en: 'In-Store QR Display' })
       }
     ]
+  },
+  {
+    id: 9,
+    slug: 'tacos-french-pere-garau',
+    title: 'TACOS FRENCH - PERE G.',
+    category: 'TACOS & COMIDA RÁPIDA',
+    description: JSON.stringify({
+      es: 'Carta digital de alta velocidad y menú interactivo para Tacos Marrakech en Plaza Pere Garau (Palma).',
+      en: 'High-speed digital menu and interactive dining experience for Tacos Marrakech at Plaza Pere Garau (Palma).'
+    }),
+    full_description: JSON.stringify({
+      es: 'Para el local de Tacos Marrakech en Plaza de Pere Garau, desarrollamos una experiencia web ultrarrápida optimizada para dispositivos móviles. Incluye su carta completa de Tacos XXL, Burgers Halal y especialidades, con navegación fluida por categorías, precios actualizados y acceso inmediato mediante códigos QR en sala.',
+      en: 'For the Tacos Marrakech location at Plaza de Pere Garau, we developed an ultra-fast mobile-optimized web experience. It includes their full menu of XXL Tacos, Halal Burgers and specialties, with smooth category navigation, updated pricing, and direct in-store QR code access.'
+    }),
+    image_url: './assets/img/portfolio/porfolio9.webp',
+    project_url: 'https://tacosmarrakech.pages.dev/peregarau/',
+    technologies: 'HTML, CSS, JS, Tailwind',
+    featured: true,
+    active: true,
+    sort_order: 9
+  },
+  {
+    id: 10,
+    slug: 'buon-appetito',
+    title: 'Restaurante Buon Appetito',
+    category: 'RESTAURANTE ITALIANO & MEDITERRÁNEO',
+    description: JSON.stringify({
+      es: 'Diseño web exclusivo, carta digital y sistema de reservas para pizzería artesanal y cocina mediterránea en Port d\'Andratx.',
+      en: 'Exclusive web design, digital menu, and reservation system for artisanal pizzeria and Mediterranean cuisine in Port d\'Andratx.'
+    }),
+    full_description: JSON.stringify({
+      es: 'Desarrollamos la arquitectura digital de Restaurante Buon Appetito frente al puerto deportivo de Port d\'Andratx (Mallorca). La plataforma combina una estética editorial mediterránea de alta gama con carta interactiva en varios idiomas, fotografías de producto en alta resolución y un flujo directo de reservas online y telefónicas.',
+      en: 'We developed the digital architecture for Restaurante Buon Appetito facing the Port d\'Andratx marina (Mallorca). The platform blends high-end Mediterranean editorial aesthetics with a multi-language interactive menu, high-resolution food photography, and direct online and phone booking flows.'
+    }),
+    image_url: './assets/img/portfolio/porfolio10.webp',
+    project_url: 'https://restaurantebuonappetito.com',
+    technologies: 'HTML, CSS, JS, Tailwind',
+    featured: true,
+    active: true,
+    sort_order: 10
   }
 ];
 
@@ -410,6 +450,21 @@ export const fallbackTestimonials = [
     testimonial: JSON.stringify({
       es: '',
       en: ''
+    }),
+    active: true
+  },
+  {
+    id: 8,
+    name: 'Gurpreet Singh',
+    client_name: 'Gurpreet Singh',
+    company: 'Restaurante Buon Appetito',
+    rating: 5,
+    relative_time: 'Hace unas horas',
+    source: 'google',
+    google_review_id: 'g_rev_gurpreet',
+    testimonial: JSON.stringify({
+      es: 'Estoy muy contento con el trabajo de MyNext. Desde el principio Musa entendió lo que necesitábamos para nuestro restaurante y nos ayudó a darle forma.\n\nNos ha hecho la página web y también una aplicación propia para que podamos modificar la carta de nuestra web nosotros mismos, además de un sistema de reservas personalizado para nuestro restaurante, sin tener que depender de otras plataformas ni pagar suscripciones adicionales. La verdad es que nos ha facilitado bastante las cosas.\n\nEl trato con Musa ha sido muy bueno. Siempre ha estado atento y dispuesto a ayudarnos con los cambios y los detalles que iban surgiendo, tanto en la aplicación de la carta como en el sistema de reservas.\n\nEstamos muy satisfechos con el resultado y recomendamos su trabajo sin duda.\n\n— Gary, de Buon Appétito',
+      en: 'I am very happy with MyNext\'s work. From the beginning Musa understood what we needed for our restaurant and helped us shape it.\n\nHe made the website for us and also a custom application so that we can modify our own menu ourselves, plus a personalized reservation system for our restaurant without having to depend on other platforms or pay extra subscriptions. Honestly, it has made things much easier for us.\n\nDealing with Musa has been great. He was always attentive and willing to help us with changes and details as they came up, both in the menu app and in the booking system.\n\nWe are very satisfied with the result and definitely recommend his work.\n\n— Gary, from Buon Appétito'
     }),
     active: true
   }

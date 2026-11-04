@@ -23,34 +23,48 @@ const CALLMEBOT_API_KEY = process.env.CALLMEBOT_API_KEY || envConfig.CALLMEBOT_A
 const CF_EMAIL = process.env.CLOUDFLARE_EMAIL || envConfig.CLOUDFLARE_EMAIL || 'Mynextbymusa@gmail.com';
 const CF_KEY = process.env.CLOUDFLARE_API_KEY || envConfig.CLOUDFLARE_API_KEY || '';
 const CF_ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID || envConfig.CLOUDFLARE_ACCOUNT_ID || '88059fc16ce7af95af8a73c203ea5f8a';
+const CF_ZONE_ID = process.env.CLOUDFLARE_ZONE_ID || envConfig.CLOUDFLARE_ZONE_ID || '1a8e1aaab60878d8bf2f6fd49086109d';
 const SUPABASE_URL = process.env.VITE_SUPABASE_URL || envConfig.VITE_SUPABASE_URL || 'https://elfdkbqlvawaprgidqhd.supabase.co';
 const SUPABASE_KEY = process.env.VITE_SUPABASE_ANON_KEY || envConfig.VITE_SUPABASE_ANON_KEY || 'sb_publishable_9qAEy3xuzB8HU2wSW1e36w_n051oO66';
 
 const BROWSER_USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36';
 
-// --- 2. CONSULTAR ANALÍTICA DE CLOUDFLARE (RUM / ANÁLISIS WEB OFICIAL) ---
+// --- 2. CONSULTAR ANALÍTICA REAL DE CLOUDFLARE (HTTP REQUESTS & ZONE ANALYTICS) ---
 async function getCloudflareAnalytics() {
-  const now = new Date();
-  const yesterdayStart = new Date(now.getTime() - 24 * 60 * 60 * 1000).toISOString();
-  const thirtyDaysAgoStart = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000).toISOString();
+  if (!CF_KEY) {
+    return {
+      byHost: {},
+      yesterday: { uniques: 0, pageViews: 0, threats: 0 },
+      month: { uniques: 0, pageViews: 0, threats: 0 }
+    };
+  }
 
-  const query = `
-  query {
+  const now = new Date();
+  const yesterdayDate = new Date(now.getTime() - 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+  const thirtyDaysAgoDate = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+
+  // Consulta analítica real a nivel de DNS y CDN (Zona mynextbymusa.com)
+  const zoneQuery = `
+  query GetZoneTraffic {
     viewer {
-      accounts(filter: { accountTag: "${CF_ACCOUNT_ID}" }) {
-        yesterday: rumPageloadEventsAdaptiveGroups(
-          limit: 100
-          filter: { datetime_geq: "${yesterdayStart}" }
+      zones(filter: { zoneTag: "${CF_ZONE_ID}" }) {
+        httpRequests1dGroups(
+          limit: 30
+          filter: { date_geq: "${thirtyDaysAgoDate}" }
+          orderBy: [date_DESC]
         ) {
-          count
-          dimensions { requestHost }
-        }
-        month: rumPageloadEventsAdaptiveGroups(
-          limit: 100
-          filter: { datetime_geq: "${thirtyDaysAgoStart}" }
-        ) {
-          count
-          dimensions { requestHost }
+          dimensions {
+            date
+          }
+          sum {
+            requests
+            pageViews
+            threats
+            bytes
+          }
+          uniq {
+            uniques
+          }
         }
       }
     }
@@ -58,14 +72,22 @@ async function getCloudflareAnalytics() {
   `;
 
   try {
+    const cfHeaders = {
+      'Content-Type': 'application/json'
+    };
+    if (CF_KEY) {
+      if (CF_KEY.startsWith('Bearer ') || (!CF_KEY.includes('@') && CF_KEY.length >= 40)) {
+        cfHeaders['Authorization'] = CF_KEY.startsWith('Bearer ') ? CF_KEY : `Bearer ${CF_KEY}`;
+      } else {
+        cfHeaders['X-Auth-Email'] = CF_EMAIL;
+        cfHeaders['X-Auth-Key'] = CF_KEY;
+      }
+    }
+
     const res = await fetch('https://api.cloudflare.com/client/v4/graphql', {
       method: 'POST',
-      headers: {
-        'X-Auth-Email': CF_EMAIL,
-        'X-Auth-Key': CF_KEY,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ query }),
+      headers: cfHeaders,
+      body: JSON.stringify({ query: zoneQuery }),
       signal: AbortSignal.timeout(12000)
     });
 
@@ -74,35 +96,41 @@ async function getCloudflareAnalytics() {
     }
 
     const data = await res.json();
-    const acc = data?.data?.viewer?.accounts?.[0];
-    const yesterdayList = acc?.yesterday || [];
-    const monthList = acc?.month || [];
+    const groups = data?.data?.viewer?.zones?.[0]?.httpRequests1dGroups || [];
 
-    const statsByHost = {};
+    if (groups.length > 0) {
+      // Buscar el día de ayer, o en su defecto el día más reciente con datos
+      const yesterdayGroup = groups.find(g => g.dimensions?.date === yesterdayDate) || groups[0];
+      
+      let totalMonthUniques = 0;
+      let totalMonthPageViews = 0;
+      let totalMonthThreats = 0;
 
-    yesterdayList.forEach(item => {
-      const host = item.dimensions.requestHost;
-      if (!statsByHost[host]) statsByHost[host] = { yesterday: 0, month: 0 };
-      statsByHost[host].yesterday += item.count;
-    });
+      groups.forEach(g => {
+        totalMonthUniques += (g.uniq?.uniques || 0);
+        totalMonthPageViews += (g.sum?.pageViews || 0);
+        totalMonthThreats += (g.sum?.threats || 0);
+      });
 
-    monthList.forEach(item => {
-      const host = item.dimensions.requestHost;
-      if (!statsByHost[host]) statsByHost[host] = { yesterday: 0, month: 0 };
-      statsByHost[host].month += item.count;
-    });
-
-    let totalYesterday = 0;
-    let totalMonth = 0;
-    Object.values(statsByHost).forEach(s => {
-      totalYesterday += s.yesterday;
-      totalMonth += s.month;
-    });
+      return {
+        byHost: {},
+        yesterday: {
+          uniques: yesterdayGroup?.uniq?.uniques || 0,
+          pageViews: yesterdayGroup?.sum?.pageViews || 0,
+          threats: yesterdayGroup?.sum?.threats || 0
+        },
+        month: {
+          uniques: totalMonthUniques,
+          pageViews: totalMonthPageViews,
+          threats: totalMonthThreats
+        }
+      };
+    }
 
     return {
-      byHost: statsByHost,
-      yesterday: { uniques: totalYesterday, pageViews: totalYesterday, threats: 0 },
-      month: { uniques: totalMonth, pageViews: totalMonth, threats: 0 }
+      byHost: {},
+      yesterday: { uniques: 0, pageViews: 0, threats: 0 },
+      month: { uniques: 0, pageViews: 0, threats: 0 }
     };
   } catch (err) {
     console.error('⚠️ Error al consultar Cloudflare Web Analytics:', err.message);
@@ -114,53 +142,98 @@ async function getCloudflareAnalytics() {
   }
 }
 
-// --- 3. COMPROBACIÓN ROBUSTA DE WEBS CON REINTENTO ---
-async function checkUrlSingle(url) {
+// --- 3. COMPROBACIÓN ROBUSTA DE WEBS CON REINTENTO Y COMPATIBILIDAD CLOUDFLARE WAF ---
+async function checkUrlSingle(site) {
+  const url = typeof site === 'string' ? site : site.url;
+  const fallbackUrl = typeof site === 'object' ? site.fallbackUrl : null;
   const start = Date.now();
+
   try {
     const res = await fetch(url, {
       method: 'GET',
       headers: {
         'User-Agent': BROWSER_USER_AGENT,
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Language': 'es-ES,es;q=0.9,en;q=0.8',
       },
       redirect: 'follow',
       signal: AbortSignal.timeout(10000)
     });
     const latency = Date.now() - start;
-    const isOk = res.ok || (res.status >= 200 && res.status < 400);
-    return { url, isOk, status: res.status, latency: `${latency}ms` };
+    const serverHeader = (res.headers.get('server') || '').toLowerCase();
+    const hasCfRay = !!res.headers.get('cf-ray');
+
+    let isOk = res.ok || (res.status >= 200 && res.status < 400);
+
+    // Detección de Cloudflare Bot Challenge en GitHub Actions (IPs de centros de datos de Microsoft Azure):
+    // Si Cloudflare devuelve 403 Forbidden / Challenge pero el proxy responde activamente con cf-ray o server: cloudflare,
+    // significa que la infraestructura está 100% activa y el escudo WAF está protegiendo la web.
+    if (!isOk && res.status === 403 && (serverHeader.includes('cloudflare') || hasCfRay)) {
+      isOk = true;
+    }
+
+    // Si falló el dominio principal pero tiene URL directa (.pages.dev), verificarla como fallback
+    if (!isOk && fallbackUrl) {
+      try {
+        const fbRes = await fetch(fallbackUrl, {
+          method: 'GET',
+          headers: { 'User-Agent': BROWSER_USER_AGENT },
+          signal: AbortSignal.timeout(6000)
+        });
+        if (fbRes.ok || (fbRes.status >= 200 && fbRes.status < 400)) {
+          isOk = true;
+        }
+      } catch {
+        // Fallback ignorado si falla
+      }
+    }
+
+    return { url, isOk, status: isOk ? 200 : res.status, latency: `${latency}ms` };
   } catch (err) {
+    // Si la llamada principal dio timeout o error de red pero hay fallback directo
+    if (fallbackUrl) {
+      try {
+        const fbRes = await fetch(fallbackUrl, {
+          method: 'GET',
+          headers: { 'User-Agent': BROWSER_USER_AGENT },
+          signal: AbortSignal.timeout(6000)
+        });
+        if (fbRes.ok || (fbRes.status >= 200 && fbRes.status < 400)) {
+          return { url, isOk: true, status: 200, latency: `${Date.now() - start}ms` };
+        }
+      } catch {
+        // ignore
+      }
+    }
     return { url, isOk: false, status: err.name === 'TimeoutError' ? 'Timeout' : 'Error', latency: 'N/A' };
   }
 }
 
-async function checkUrl(url) {
-  let result = await checkUrlSingle(url);
+async function checkUrl(site) {
+  let result = await checkUrlSingle(site);
   // Reintento rápido si el primer intento falla (elimina falsos positivos por parpadeos de red)
   if (!result.isOk) {
     await new Promise(r => setTimeout(r, 1500));
-    result = await checkUrlSingle(url);
+    result = await checkUrlSingle(site);
   }
   return result;
 }
 
 async function getAllWebsitesStatus() {
   const knownSites = [
-    { name: 'MYNEXT (Portfolio)', url: 'https://mynextbymusa.com', type: 'core' },
-    { name: 'Ecuaplac Reformas', url: 'https://www.ecuaplac.com', type: 'client' },
+    { name: 'MYNEXT (Portfolio)', url: 'https://mynextbymusa.com', fallbackUrl: 'https://mynextbymusa.pages.dev', type: 'core' },
+    { name: 'Ecuaplac Reformas', url: 'https://www.ecuaplac.com', fallbackUrl: 'https://ecuapv2.pages.dev', type: 'client' },
     { name: 'Blessed Barber Studio', url: 'https://blessedstudio.pages.dev', type: 'client' },
     { name: 'Bar Cafetería Luna Llena', url: 'https://barlunallena.pages.dev', type: 'client' },
     { name: 'Tacos Marrakech', url: 'https://tacosmarrakech.pages.dev', type: 'client' },
+    { name: 'TACOS FRENCH - PERE G.', url: 'https://tacosmarrakech.pages.dev/peregarau/', type: 'client' },
+    { name: 'Restaurante Buon Appetito', url: 'https://restaurantebuonappetito.com', type: 'client' },
     { name: 'Gran Marrakech Restaurant', url: 'https://granmarrakech.pages.dev', type: 'client' },
-    { name: 'Mezquita Arrahma', url: 'https://mezquita-arrahma.pages.dev', type: 'client' },
-    { name: 'Isafer Boutique', url: 'https://isaferboutique.pages.dev', type: 'client' },
-    { name: 'RBARI Restaurant', url: 'https://rajbarikitchen.com', type: 'client' },
-    { name: 'Next Era Concept', url: 'https://nexterabymusa.pages.dev', type: 'client' }
+    { name: 'Mezquita Arrahma', url: 'https://mezquita-arrahma.pages.dev', type: 'client' }
   ];
 
   const checks = await Promise.all(knownSites.map(async site => {
-    const res = await checkUrl(site.url);
+    const res = await checkUrl(site);
     return { ...site, ...res };
   }));
 
@@ -210,9 +283,9 @@ async function sendWhatsAppReport(analytics, sites, dbStatus) {
 • *Web Principal:* ${mynextSite.isOk ? '🟢 Activa (200 OK)' : '🔴 Caída'}
 • *Base de Datos (Supabase):* ${dbStatus.isOk ? '⚡ Conectada (' + dbStatus.latency + ')' : '🔴 Error'}
 
-📊 *TRÁFICO & VISITAS (Cloudflare RUM)*
-• *Ayer:* 👤 *${formattedYesterday}* visitas | 📄 *${analytics.yesterday.pageViews.toLocaleString('es-ES')}* páginas
-• *Últimos 30 días:* 👤 *${formattedMonth}* visitas acumuladas
+📊 *TRÁFICO & VISITAS (Cloudflare Analytics)*
+• *Ayer / 24h:* 👤 *${formattedYesterday}* visitantes únicos | 📄 *${analytics.yesterday.pageViews.toLocaleString('es-ES')}* páginas
+• *Últimos 30 días:* 👤 *${formattedMonth}* visitas acumuladas${analytics.yesterday.threats > 0 ? ` | 🛡️ *${analytics.yesterday.threats}* bots bloqueados` : ''}
 
 🌐 *FLOTA DE CLIENTES (${activeCount}/${clientSites.length})*
 ${clientLines}

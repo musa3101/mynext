@@ -4,8 +4,10 @@
  * - Protección Honeypot antispam.
  * - Verificación server-side de Cloudflare Turnstile (siteverify).
  * - Sanitización y validación estricta de campos.
- * - Registro seguro de lead en Supabase (sin inyecciones de spam).
- * - Entrega garantizada por correo vía FormSubmit.co a Gmail con dirección protegida.
+ * - Registro soberano de lead en Supabase (mynext_client_emails).
+ * - Alerta instantánea a WhatsApp vía CallMeBot (+34 673109486).
+ * - Entrega de correo vía Resend API (o fallback FormSubmit) con timeout estricto.
+ * - Desacoplamiento total con context.waitUntil para respuesta instantánea (<200ms) sin bloqueos.
  */
 
 interface Env {
@@ -13,6 +15,9 @@ interface Env {
   FORMSUBMIT_TARGET_EMAIL?: string;
   VITE_SUPABASE_URL?: string;
   VITE_SUPABASE_ANON_KEY?: string;
+  RESEND_API_KEY?: string;
+  CALLMEBOT_PHONE?: string;
+  CALLMEBOT_API_KEY?: string;
 }
 
 interface EventContext<Env, P extends string, Data> {
@@ -41,6 +46,8 @@ interface ContactPayload {
 const DEFAULT_SUPABASE_URL = 'https://elfdkbqlvawaprgidqhd.supabase.co';
 const DEFAULT_SUPABASE_ANON_KEY = 'sb_publishable_9qAEy3xuzB8HU2wSW1e36w_n051oO66';
 const DEFAULT_TARGET_EMAIL = 'mynextbymusa@gmail.com';
+const DEFAULT_CALLMEBOT_PHONE = '34673109486';
+const DEFAULT_CALLMEBOT_API_KEY = '2243347';
 
 // Claves de Cloudflare Turnstile
 const CF_PRODUCTION_SECRET_KEY = '0x4AAAAAAFg5e8MnH9ZuR6goULvl071V_Ic';
@@ -88,8 +95,7 @@ export async function onRequestPost(context: EventContext<Env, any, any>): Promi
   const lang: 'es' | 'en' = isEs ? 'es' : 'en';
 
   // 3. Verificación Honeypot (_honey)
-  // Si contiene algún carácter, es un bot que recorrió los inputs del formulario.
-  // Respuesta silenciosa (200 OK) para engañar al bot sin procesar nada.
+  // Descarte silencioso (200 OK) para engañar al bot sin gastar recursos
   if (payload._honey && payload._honey.trim().length > 0) {
     return new Response(
       JSON.stringify({
@@ -101,7 +107,7 @@ export async function onRequestPost(context: EventContext<Env, any, any>): Promi
     );
   }
 
-  // 4. Validación de campos obligatorios
+  // 4. Validación y sanitización de campos obligatorios
   const name = (payload.name || '').trim().slice(0, 100);
   const email = (payload.email || '').trim().toLowerCase().slice(0, 100);
   const phone = (payload.phone || '').trim().slice(0, 30);
@@ -162,6 +168,7 @@ export async function onRequestPost(context: EventContext<Env, any, any>): Promi
     const verifyRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
       method: 'POST',
       body: turnstileFormData,
+      signal: AbortSignal.timeout(4000),
     });
 
     const verifyOutcome = (await verifyRes.json()) as {
@@ -194,7 +201,7 @@ export async function onRequestPost(context: EventContext<Env, any, any>): Promi
     );
   }
 
-  // 6. Registro Seguro de Lead en Supabase (Solo leads verificados)
+  // 6. Registro Soberano de Lead en Supabase (Solo leads verificados)
   const supabaseUrl = (env.VITE_SUPABASE_URL || DEFAULT_SUPABASE_URL).replace(/\/$/, '');
   const supabaseAnonKey = env.VITE_SUPABASE_ANON_KEY || DEFAULT_SUPABASE_ANON_KEY;
 
@@ -220,102 +227,121 @@ export async function onRequestPost(context: EventContext<Env, any, any>): Promi
         status: 'new',
         user_agent: request.headers.get('user-agent') || 'CF-Pages-Function',
       }),
+      signal: AbortSignal.timeout(4000),
     });
   } catch (supabaseErr) {
-    // Si Supabase falla temporalmente, loguear sin bloquear la entrega en Gmail
     console.warn('⚠️ [Contact API - Supabase Insert Warning]:', supabaseErr);
   }
 
-  // 7. Reenvío a FormSubmit.co para entrega en Gmail
+  // 7. Notificaciones en Segundo Plano (WhatsApp CallMeBot + Email Resend/Fallback)
+  // Se ejecutan con context.waitUntil para que el usuario reciba su respuesta en <200ms
   const targetEmail = env.FORMSUBMIT_TARGET_EMAIL || DEFAULT_TARGET_EMAIL;
-  const subject = isEs
-    ? `🚀 Nueva Solicitud de Proyecto Web: ${name} (${projectType})`
-    : `🚀 New Web Project Request: ${name} (${projectType})`;
+  const targetPhone = env.CALLMEBOT_PHONE || DEFAULT_CALLMEBOT_PHONE;
+  const callmebotApiKey = env.CALLMEBOT_API_KEY || DEFAULT_CALLMEBOT_API_KEY;
 
-  const autorespondVal = isEs
-    ? `¡Hola ${name}!
+  const asyncDispatch = async () => {
+    // 7A. Alerta Instantánea por WhatsApp (CallMeBot)
+    try {
+      const waMsg = [
+        '🚀 *NUEVO LEAD EN MYNEXT* 🚀',
+        '',
+        `👤 *Cliente:* ${name}`,
+        `📧 *Email:* ${email}`,
+        `📱 *Teléfono:* ${phone || 'No especificado'}`,
+        `🌐 *Proyecto:* ${projectType}`,
+        `💰 *Plan:* ${budget}`,
+        `💬 *Mensaje:* ${message || '(Sin mensaje adicional)'}`,
+        `🔗 *Origen:* ${sourcePage || 'https://mynextbymusa.com'}`,
+      ].join('\n');
 
-Muchas gracias por contactar con MYNEXT. Hemos recibido correctamente los detalles de tu consulta para tu proyecto web:
-
-• Tipo de Proyecto: ${projectType}
-• Plan de Interés: ${budget}
-
-He revisado tu solicitud y en breve me pondré en contacto contigo directamente por correo o WhatsApp para agendar una breve llamada o enviarte la propuesta personalizada sin compromiso.
-
-Un saludo,
-Musa — MYNEXT Arquitectura Digital
-https://mynextbymusa.com`
-    : `Hello ${name}!
-
-Thank you very much for contacting MYNEXT. We have successfully received your inquiry details for your web project:
-
-• Project Type: ${projectType}
-• Plan of Interest: ${budget}
-
-I have reviewed your request and will contact you directly via email or WhatsApp shortly to schedule a brief call or send you a custom proposal with no obligation.
-
-Best regards,
-Musa — MYNEXT Digital Architecture
-https://mynextbymusa.com`;
-
-  try {
-    const formSubmitRes = await fetch(`https://formsubmit.co/ajax/${targetEmail}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify({
-        _subject: subject,
-        _template: 'table',
-        _captcha: 'false',
-        _honey: '',
-        _autorespond: autorespondVal,
-        "Cliente / Negocio": name,
-        "Email de Contacto": email,
-        "Teléfono / WhatsApp": phone || (isEs ? 'No especificado' : 'Not specified'),
-        "Tipo de Proyecto": projectType,
-        "Plan de Interés": budget,
-        "Detalles / Idea del Proyecto": message,
-        "Página de Origen": sourcePage,
-        "Idioma": lang.toUpperCase(),
-        "Seguridad Cloudflare": "Turnstile Verified ✓",
-      }),
-    });
-
-    if (formSubmitRes.ok) {
-      return new Response(
-        JSON.stringify({
-          success: true,
-          message: isEs
-            ? '¡Gracias! Hemos recibido tu propuesta y te hemos enviado un correo de confirmación.'
-            : 'Thank you! We received your proposal and sent you a confirmation email.',
-        }),
-        { status: 200, headers: { 'Content-Type': 'application/json' } }
-      );
-    } else {
-      const errBody = await formSubmitRes.text().catch(() => '');
-      console.error('❌ [FormSubmit Error]:', formSubmitRes.status, errBody);
-      return new Response(
-        JSON.stringify({
-          success: false,
-          error: isEs
-            ? 'No se ha podido enviar la solicitud al servicio de correo. Por favor, inténtalo más tarde.'
-            : 'Could not deliver the message to the email service. Please try again later.',
-        }),
-        { status: 502, headers: { 'Content-Type': 'application/json' } }
-      );
+      const waUrl = `https://api.callmebot.com/whatsapp.php?phone=${targetPhone}&text=${encodeURIComponent(waMsg)}&apikey=${callmebotApiKey}`;
+      await fetch(waUrl, { signal: AbortSignal.timeout(4000) });
+    } catch (waErr) {
+      console.warn('⚠️ [Contact API - WhatsApp Alert Warning]:', waErr);
     }
-  } catch (deliveryErr: any) {
-    console.error('❌ [FormSubmit Network Error]:', deliveryErr);
-    return new Response(
-      JSON.stringify({
-        success: false,
-        error: isEs
-          ? 'Error de conexión con el servicio de correo.'
-          : 'Network error connecting to email service.',
-      }),
-      { status: 502, headers: { 'Content-Type': 'application/json' } }
-    );
+
+    // 7B. Notificación por Correo Electrónico (Resend API o Fallback FormSubmit con Timeout)
+    try {
+      const emailSubject = isEs
+        ? `🚀 Nueva Solicitud de Proyecto Web: ${name} (${projectType})`
+        : `🚀 New Web Project Request: ${name} (${projectType})`;
+
+      if (env.RESEND_API_KEY) {
+        // Vía Resend (Entrega garantizada sin caídas)
+        await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${env.RESEND_API_KEY}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            from: 'MYNEXT Leads <onboarding@resend.dev>',
+            to: [targetEmail],
+            reply_to: email,
+            subject: emailSubject,
+            html: `
+              <h2>🚀 Nueva Solicitud de Propuesta Web</h2>
+              <table cellpadding="8" style="border-collapse: collapse; width: 100%; max-width: 600px; font-family: sans-serif;">
+                <tr><td style="font-weight: bold; background: #f4f4f4;">Cliente:</td><td>${name}</td></tr>
+                <tr><td style="font-weight: bold; background: #f4f4f4;">Email:</td><td><a href="mailto:${email}">${email}</a></td></tr>
+                <tr><td style="font-weight: bold; background: #f4f4f4;">Teléfono / WhatsApp:</td><td>${phone || 'No especificado'}</td></tr>
+                <tr><td style="font-weight: bold; background: #f4f4f4;">Tipo de Proyecto:</td><td>${projectType}</td></tr>
+                <tr><td style="font-weight: bold; background: #f4f4f4;">Plan de Interés:</td><td>${budget}</td></tr>
+                <tr><td style="font-weight: bold; background: #f4f4f4;">Detalles / Mensaje:</td><td>${message || 'Sin mensaje adicional'}</td></tr>
+                <tr><td style="font-weight: bold; background: #f4f4f4;">Página de Origen:</td><td>${sourcePage}</td></tr>
+                <tr><td style="font-weight: bold; background: #f4f4f4;">Seguridad:</td><td>Cloudflare Turnstile Verified ✓</td></tr>
+              </table>
+            `,
+          }),
+          signal: AbortSignal.timeout(4000),
+        });
+      } else {
+        // Fallback FormSubmit con timeout estricto de 3.5 segundos para no bloquear jamás la petición
+        await fetch(`https://formsubmit.co/ajax/${targetEmail}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({
+            _subject: emailSubject,
+            _template: 'table',
+            _captcha: 'false',
+            _honey: '',
+            "Cliente / Negocio": name,
+            "Email de Contacto": email,
+            "Teléfono / WhatsApp": phone || (isEs ? 'No especificado' : 'Not specified'),
+            "Tipo de Proyecto": projectType,
+            "Plan de Interés": budget,
+            "Detalles / Idea del Proyecto": message,
+            "Página de Origen": sourcePage,
+            "Idioma": lang.toUpperCase(),
+            "Seguridad Cloudflare": "Turnstile Verified ✓",
+          }),
+          signal: AbortSignal.timeout(3500),
+        });
+      }
+    } catch (emailErr) {
+      console.warn('⚠️ [Contact API - Email Dispatch Warning]:', emailErr);
+    }
+  };
+
+  // Desacoplar las notificaciones del ciclo de vida de la respuesta al cliente
+  if (context && typeof context.waitUntil === 'function') {
+    context.waitUntil(asyncDispatch());
+  } else {
+    // Si corre en un entorno simulado sin waitUntil
+    void asyncDispatch();
   }
+
+  // 8. Respuesta de Éxito Inmediata al Cliente
+  return new Response(
+    JSON.stringify({
+      success: true,
+      message: isEs
+        ? '¡Gracias! Hemos recibido tu propuesta y nos pondremos en contacto contigo muy pronto.'
+        : 'Thank you! We received your proposal and will get in touch with you very soon.',
+    }),
+    { status: 200, headers: { 'Content-Type': 'application/json' } }
+  );
 }

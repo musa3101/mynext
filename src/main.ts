@@ -8,6 +8,7 @@ import {
 import { initAnalyticsListeners } from './lib/analytics';
 import { getTranslation, applyDynamicSettings, sanitizeHtml } from './lib/domUtils';
 import { recordCookieConsent, recordClientEmail } from './lib/leadTracker';
+import { initDoodleCrewFooter } from './lib/initDoodleCrew';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -1397,8 +1398,20 @@ function initMain() {
         return;
       }
 
-      // 2. Comprobación de Turnstile Token en Cliente
-      const turnstileToken = turnstileInput?.value?.trim() || '';
+      const isLocal =
+        window.location.hostname === 'localhost' ||
+        window.location.hostname === '127.0.0.1' ||
+        window.location.hostname.startsWith('192.168.');
+
+      // 2. Comprobación de Turnstile Token en Cliente (input DOM, API en memoria o token de pruebas en local)
+      const turnstileToken =
+        turnstileInput?.value?.trim() ||
+        (typeof (window as any).turnstile !== 'undefined' && typeof (window as any).turnstile.getResponse === 'function'
+          ? ((window as any).turnstile.getResponse() || '').trim()
+          : '') ||
+        (isLocal ? '1x00000000000000000000AA' : '') ||
+        '';
+
       if (!turnstileToken) {
         const warnText = isEs ? 'Verificación de seguridad requerida' : 'Security check required';
         if (btnText) btnText.textContent = warnText;
@@ -1447,7 +1460,8 @@ function initMain() {
           language: lang,
           _honey: honeyVal,
           'cf-turnstile-response': turnstileToken
-        })
+        }),
+        signal: AbortSignal.timeout(10000)
       })
         .then(async response => {
           const resData = await response.json().catch(() => ({}));
@@ -1527,9 +1541,12 @@ function initMain() {
       transitionOverlay.setAttribute('aria-hidden', 'true');
     };
 
-    // Intelligent loader: min 350ms (so the 3D cubes are seen without delaying LCP), max 700ms
-    const LOADER_MIN_MS = 350;
-    const LOADER_MAX_MS = 700;
+    // Intelligent loader: ultra-rápido en móviles y recargas de sesión
+    const hasVisited = sessionStorage.getItem('mnx_loaded') === '1';
+    const isMobile = window.innerWidth < 768;
+    const LOADER_MIN_MS = hasVisited ? 0 : (isMobile ? 120 : 250);
+    const LOADER_MAX_MS = hasVisited ? 100 : (isMobile ? 350 : 500);
+    sessionStorage.setItem('mnx_loaded', '1');
     const loaderStart = Date.now();
     let pageLoaded = document.readyState === 'complete';
 
@@ -1601,6 +1618,7 @@ function initMain() {
 
   function openMobileMenu() {
     if (!mobileDropdown || !mobileMenuBtn) return;
+    document.getElementById('main-header')?.classList.remove('header-hidden');
     mobileDropdown.classList.add('is-open');
     mobileNavShell?.classList.add('menu-open');
     mobileMenuBtn.classList.add('is-active');
@@ -1613,7 +1631,7 @@ function initMain() {
     document.body.classList.add('mobile-menu-open');
   }
 
-  function closeMobileMenu() {
+  function closeMobileMenu(skipScrollRestore = false) {
     if (!mobileDropdown || !mobileMenuBtn) return;
     mobileDropdown.classList.remove('is-open');
     mobileNavShell?.classList.remove('menu-open');
@@ -1626,7 +1644,9 @@ function initMain() {
     document.body.style.top = '';
     document.body.style.width = '';
     document.body.classList.remove('mobile-menu-open');
-    window.scrollTo(0, parseInt(scrollY || '0') * -1);
+    if (!skipScrollRestore) {
+      window.scrollTo(0, parseInt(scrollY || '0') * -1);
+    }
 
     // Reset contact trigger and options when mobile menu closes
     if (mobileContactOptions) mobileContactOptions.classList.remove('is-active');
@@ -1652,7 +1672,41 @@ function initMain() {
     }
 
     mobileDropdown.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', closeMobileMenu);
+      link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href') || '';
+        if (href.startsWith('#') && href.length > 1) {
+          e.preventDefault();
+          const targetEl = document.getElementById(href.substring(1));
+          closeMobileMenu(true);
+          if (targetEl) {
+            requestAnimationFrame(() => {
+              const headerOffset = 70;
+              const top = targetEl.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+              window.scrollTo({ top, behavior: 'smooth' });
+              history.pushState(null, '', href);
+            });
+          }
+        } else {
+          closeMobileMenu(false);
+        }
+      });
+    });
+
+    // In-page anchor smooth scroll for main nav links
+    document.querySelectorAll('#nav-container a[href^="#"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href') || '';
+        if (href.startsWith('#') && href.length > 1) {
+          const targetEl = document.getElementById(href.substring(1));
+          if (targetEl) {
+            e.preventDefault();
+            const headerOffset = 70;
+            const top = targetEl.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+            window.scrollTo({ top, behavior: 'smooth' });
+            history.pushState(null, '', href);
+          }
+        }
+      });
     });
 
     if (mobileContactTrigger && mobileContactOptions) {
@@ -1746,6 +1800,9 @@ function initMain() {
 
   // Initialize Draggable Marquee Reviews
   initDraggableMarquee();
+
+  // Lazy load Doodle Crew Footer ("BY MUSA" 21st.dev) so initial page load stays ultra-fast
+  initDoodleCrewFooter();
 }
 
 if (document.readyState === 'loading') {
@@ -1789,6 +1846,8 @@ if (window.scrollY >= 80) {
   setNavCompact();
 }
 
+const mainHeader = document.getElementById('main-header');
+let lastScrollY = Math.max(0, window.scrollY);
 let scrollTicking = false;
 const neonFrame = document.getElementById('neon-frame');
 let isNeonActive = false;
@@ -1801,16 +1860,35 @@ if (neonFrame && window.scrollY < 50) {
 window.addEventListener('scroll', () => {
   if (!scrollTicking) {
     window.requestAnimationFrame(() => {
-      const scrollY = window.scrollY;
+      const scrollY = Math.max(0, window.scrollY);
+      const isMenuOpen = document.getElementById('mobile-dropdown')?.classList.contains('is-open');
 
-      // Nav bar compact toggle (only when crossing 80px boundary)
-      if (scrollY < 80) {
+      // 1. Smart Header Auto-Hide on Scroll Down / Reveal on Scroll Up
+      if (scrollY <= 60) {
+        // Al inicio: estático / visible en la parte superior
+        mainHeader?.classList.remove('header-hidden');
         setNavAtTop();
       } else {
-        setNavCompact();
+        const delta = scrollY - lastScrollY;
+        if (!isMenuOpen) {
+          // Scroll hacia abajo: ocultar header para dar espacio a la pantalla
+          if (delta > 6 && scrollY > 100) {
+            mainHeader?.classList.add('header-hidden');
+          } 
+          // Scroll hacia arriba: reactivar y mostrar header
+          else if (delta < -6) {
+            mainHeader?.classList.remove('header-hidden');
+            setNavCompact();
+          }
+        }
+        if (scrollY > 80 && !mainHeader?.classList.contains('header-hidden')) {
+          setNavCompact();
+        }
       }
 
-      // Neon frame toggle (only when crossing 50px boundary)
+      lastScrollY = scrollY;
+
+      // 2. Neon frame toggle (only when crossing 50px boundary)
       if (neonFrame) {
         const shouldBeActive = scrollY < 50;
         if (shouldBeActive !== isNeonActive) {

@@ -2,6 +2,7 @@ import './style.css';
 import { supabase } from './lib/supabase';
 import { fallbackServices, fallbackSettings } from './lib/fallbackData';
 import { getTranslation, applyDynamicSettings, sanitizeHtml } from './lib/domUtils';
+import { initDoodleCrewFooter } from './lib/initDoodleCrew';
 
 // Determine language
 const lang = (document.documentElement.lang === 'en' || window.location.pathname.includes('-en')) ? 'en' : 'es';
@@ -596,6 +597,9 @@ async function initPlanes() {
 
   // Initialize local FAQ accordion
   initFaqAccordion();
+
+  // Lazy load Doodle Crew Footer ("BY MUSA" 21st.dev)
+  initDoodleCrewFooter();
 }
 
 if (document.readyState === 'loading') {

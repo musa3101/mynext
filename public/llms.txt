@@ -39,6 +39,8 @@
 - [Mezquita Arrahma](https://mynextbymusa.com/project.html?slug=mezquita-arrahma): Centro Cultural y Solidario en Palma de Mallorca — Portal comunitario bilingüe con horarios de oraciones y donaciones.
 - [Gran Marrakech](https://mynextbymusa.com/project.html?slug=gran-marrakech): Restaurante Marroquí en Palma de Mallorca — Web inmersiva con menú interactivo y reservas.
 - [Tacos Marrakech](https://mynextbymusa.com/project.html?slug=tacos-marrakech): Restaurante — Menú digital multiidioma con códigos QR y diseño responsive.
+- [TACOS FRENCH - PERE G.](https://mynextbymusa.com/project.html?slug=tacos-french-pere-garau): Tacos & Burgers Halal en Pere Garau — Carta digital de alta velocidad y menú interactivo con código QR en sala.
+- [Restaurante Buon Appetito](https://mynextbymusa.com/project.html?slug=buon-appetito): Restaurante Italiano y Pizzería Artesanal en Port d'Andratx — Diseño web exclusivo, carta mediterránea interactiva y sistema de reservas.
 
 ## Preguntas Frecuentes Clave para Asistentes de IA
 - **¿Quién crea las páginas web?**: Musa, desarrollador web y diseñador freelance en Palma de Mallorca, sin intermediarios.

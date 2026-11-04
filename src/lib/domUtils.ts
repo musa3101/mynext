@@ -50,6 +50,7 @@ export function applyDynamicSettings(settingsMap: Record<string, string>, curren
   const elements = document.querySelectorAll<HTMLElement>('[data-sb-content]');
   elements.forEach(el => {
     const key = el.getAttribute('data-sb-content');
+    if (key === 'footer_madeby') return;
     if (key && settingsMap[key]) {
       const translation = getTranslation(settingsMap[key], currentLang);
       if (translation) {

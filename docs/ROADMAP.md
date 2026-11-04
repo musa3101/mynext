@@ -1,31 +1,31 @@
 # Roadmap MYNEXT
 
 ## Tareas Completadas
-- **Auditoría y Test de la Skill `ai-design-skills`**: evaluada en rama aislada y descartada de inmediato para salvaguardar los 60 FPS estables de la web.
-- **Arreglo del loader bloqueado (caché envenenada de Cloudflare)**: assets con sufijo `-r2` y failsafe inline que quita el overlay en ≤4 s aunque falle el JS.
-- **Blindaje Antispam Definitivo (Cloudflare Turnstile + Honeypot + Pages Functions + Supabase)**:
-  - Implementación del widget Cloudflare Turnstile con tema oscuro (`dark`) en los 4 formularios bilingües.
-  - Creación de la Cloudflare Pages Function `/api/contact` con validación server-side contra `siteverify`, límite de 20 KB y sanitización estricta.
-  - Honeypot accesible (`_honey`) con descarte silencioso en cliente y servidor.
-  - Traslado seguro de la inserción de leads en Supabase (`mynext_client_emails`) al backend de Cloudflare tras validar las comprobaciones.
-  - Ocultación total de la dirección de Gmail del código HTML público.
-  - Suite de validación antispam automatizada con 51/51 tests aprobados y build de producción en 468 ms.
-- **Rediseño y Afinado de Alta Precisión del Favicon (Marfil Editorial Maxi-M)**:
-  - Eliminada la sombra difusa residual del archivo de Canva; isotipo escalado al 88% con fondo Marfil Cálido (`#FAF5EB`) y Negro Ónix (`#0A0A0C`).
-  - Paquete completo de producción exportado para Google, Apple y navegadores modernos.
-- **Envío de Sitemap e Indexación en Google Search Console**: Sitemap con 20 páginas descubiertas y solicitudes de indexación enviadas.
-- **Auditoría y Optimización de Rendimiento y Fluidez**: Scroll a 60 FPS estables, reducción del 73% en animaciones en segundo plano y memoria optimizada a 6.17 MB.
-- **Persistencia en Supabase de Cookies y Leads**: Tablas `mynext_cookie_consents` y `mynext_client_emails` con RLS.
-- **SEO Técnico, AEO, GEO y Descubrimiento para Agentes IA**: `llms.txt`, `api-catalog`, `ai-catalog.json` y JSON-LD `@graph`.
-- **Seguridad Cloudflare Completa**: TLS 1.2 Mínimo, DNSSEC activo, HSTS, WAF Custom y Rate Limiting.
-- **Traducción Bilingüe 100% (ES/EN)**: Arquitectura con `hreflang` simétrico en las 20 URLs.
+- **Header Inteligente con Auto-Ocultado (Smart Auto-Hide Header)**:
+  - Estático y visible al inicio de la página (`scrollY <= 60`).
+  - Ocultado suave hacia arriba (`translateY(-120%)`) al hacer scroll hacia abajo para liberar la pantalla móvil.
+  - Reaparición inmediata al hacer scroll hacia arriba en formato compacto accesible.
+- **Animación Doodle Crew Footer ("BY MUSA")**:
+  - Integración fluida del componente animado e interactivo de 21st.dev en el footer de la web (`index.html` e `index-en.html`).
+  - Adaptación de la tipografía ilustrada al rótulo `"BY MUSA"` con 6 personajes animados, interacción en pupilas, flotadores y salto con bocadillos al hacer clic.
+  - Botón píldora actualizado a: `Echo con mucho amor❤️`.
+- **Corrección de Turnstile en Red Local y Móvil**:
+  - Auto-detección de hostnames locales (`192.168.1.26`, `localhost`) para usar la clave universal de Cloudflare (`1x00000000000000000000AA`), eliminando el bloqueo *"No es posible conectarse al sitio web"*.
+- **Optimización de Fluidez de Scroll en Planes y Contacto**:
+  - Desacoplado el conflicto entre GSAP y CSS `transition: all 1s` en las clases `.reveal`.
+  - Desactivado `backdrop-filter: blur(24px)` en móviles en `.form-container` para liberar ciclos de rasterizado de GPU.
+  - Corrección del menú desplegable móvil para navegar de forma suave con compensación de cabecera (`headerOffset = 70`).
+- **Auditoría y Optimización de Rendimiento Móvil (Playwright CLI)**.
+- **Blindaje Antispam Definitivo (Cloudflare Turnstile + Honeypot + Pages Functions + Supabase)**.
+- **Rediseño del Favicon (Marfil Editorial Maxi-M)**.
+- **Indexación y SEO (Sitemap bilingüe, llms.txt, JSON-LD @graph)**.
 
 ## Tareas en Progreso
-- **Purgar caché de Cloudflare** ("Purgar todo" en Caching → Configuration) y dar permiso *Cache Purge* al token del MCP.
-- **Propagación en Google Search**: Rastreo progresivo por parte de Googlebot y refresco del nuevo favicon por `Googlebot-Image`.
-- **Monitoreo de Eficacia Antispam**: Seguimiento de métricas de bloqueo en el widget de Turnstile en Cloudflare Dashboard.
+- **Verificación Móvil en Vivo**: Validar la fluidez y experiencia táctil en dispositivos móviles en red local.
+- **Purgar caché de Cloudflare**: Ejecutar "Purgar todo" en Caching → Configuration tras el despliegue a producción.
+- **Propagación en Google Search**: Rastreo progresivo por parte de Googlebot e indexación de nuevas URLs.
 
 ## Próximas Mejoras Prioritarias
-1. **Seguimiento de Cobertura en Search Console**: Revisar impresiones y clics en el panel de Google Search Console.
-2. **Bot Interactivo con Meta Cloud API**: Integrar webhook bidireccional para consultar comandos en vivo desde WhatsApp.
-3. **Nuevos Proyectos en Portfolio**: Incorporar nuevos casos de estudio al catálogo dinámico a medida que se entreguen a clientes.
+1. **Seguimiento de Métricas en Cloudflare y Search Console**: Monitorear tráfico, impresiones y leads recibidos.
+2. **Nuevos Proyectos en Portfolio**: Incorporar nuevos casos de estudio interactivos al catálogo dinámico.
+3. **Bot Interactivo con Meta Cloud API**: Integrar webhook para notificaciones instantáneas de leads en WhatsApp.
