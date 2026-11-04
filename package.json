@@ -14,11 +14,15 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.8",
-    "gsap": "^3.15.0"
+    "gsap": "^3.15.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.64.1",
     "@tailwindcss/vite": "^4.3.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "puppeteer-core": "^25.7.0",
     "tailwindcss": "^4.3.1",
     "typescript": "^5.2.2",
