@@ -2,7 +2,7 @@ import './style.css';
 import { supabase } from './lib/supabase';
 import { fallbackProjects, fallbackSettings } from './lib/fallbackData';
 import { initAnalyticsListeners } from './lib/analytics';
-import { getTranslation, applyDynamicSettings, sanitizeHtml } from './lib/domUtils';
+import { getTranslation, applyDynamicSettings, sanitizeHtml, escapeHtml } from './lib/domUtils';
 import { recordClientEmail } from './lib/leadTracker';
 import { initDoodleCrewFooter } from './lib/initDoodleCrew';
 
@@ -175,9 +175,11 @@ function initContactForm(lang: 'es' | 'en') {
             const successMsg = document.createElement('div');
             successMsg.className = 'text-electric-cyan font-headline text-sm md:text-base tracking-wider font-semibold animate-pulse mt-4 text-center px-4 leading-relaxed';
             successMsg.style.textShadow = '0 0 12px rgba(0, 242, 255, 0.5)';
+            const safeClientName = escapeHtml(clientName);
+            const safeClientEmail = escapeHtml(clientEmail);
             successMsg.innerHTML = isEs
-              ? `¡Gracias, ${clientName}! Hemos recibido tu propuesta.<br><span class="text-xs text-white/70 font-normal">Te hemos enviado un correo de confirmación a <strong>${clientEmail}</strong>. Nos pondremos en contacto contigo muy pronto.</span>`
-              : `Thank you, ${clientName}! We received your proposal.<br><span class="text-xs text-white/70 font-normal">We sent a confirmation email to <strong>${clientEmail}</strong>. We will get in touch with you very soon.</span>`;
+              ? `¡Gracias, ${safeClientName}! Hemos recibido tu propuesta.<br><span class="text-xs text-white/70 font-normal">Te hemos enviado un correo de confirmación a <strong>${safeClientEmail}</strong>. Nos pondremos en contacto contigo muy pronto.</span>`
+              : `Thank you, ${safeClientName}! We received your proposal.<br><span class="text-xs text-white/70 font-normal">We sent a confirmation email to <strong>${safeClientEmail}</strong>. We will get in touch with you very soon.</span>`;
 
             const formParent = formElement.parentElement;
             if (formParent) formParent.appendChild(successMsg);

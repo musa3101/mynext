@@ -1,37 +1,52 @@
 # Resumen de Sesión - MYNEXT
 
 ## ¿Qué se ha hecho hoy?
-1. **Selector de Contacto Inteligente (Formulario vs Cal.com)**:
-   - Configurado el **formulario de propuesta a medida como vista por defecto**.
-   - Integrado **Cal.com** (`https://cal.com/mynextbymusa/primera-consulta-mynext`) como segunda opción mediante pestañas fluidas en tema oscuro, sin solapamientos ni descuadres visuales.
-2. **Corrección de Zoom en Móviles (iOS Safari en iPhone)**:
-   - Eliminado el zoom forzado al escribir en el formulario en iOS fijando `font-size: 16px !important` en todos los inputs, selects y textareas.
-3. **Botón "Agendar Cita" en Todos los Proyectos**:
-   - Añadido un botón de alta conversión en la sección final de cada proyecto (`project.html` y `project-en.html`), con diseño de cristal oscuro y borde cian, que redirige directamente a `/#contacto?tab=cal` abriendo la agenda al instante.
-4. **Enlace en el Footer**:
-   - Añadido el acceso **"Agendar Cita ↗"** en la navegación del pie de página en todas las páginas (español e inglés).
-5. **Auditoría Integral y Eliminación de Tirones**:
-   - **Google Lighthouse**: Logrado **100 / 100 en SEO**, **100 / 100 en Accesibilidad** y **100 / 100 en Buenas Prácticas**, con **88 en Rendimiento Desktop**.
-   - **Estabilidad Visual (CLS)**: Reducido el desplazamiento de layout en un **95%** (de 0.731 a 0.039).
-   - **Fluidez**: Reducida la transición de la navbar de 2400ms a 350ms, aceleración por GPU del láser del hero y **60 FPS estables** medidos en scroll móvil.
-   - **TestSprite MCP**: 3 de 3 pruebas E2E aprobadas con éxito (100%).
-   - **Playwright CLI**: 0 píxeles de desbordamiento horizontal en iPhone 14, iPhone SE, iPad y ordenador.
+1. **Actualización e Instalación del Setup 2.0 de Musa**:
+   - Descargado e instalado el núcleo oficial de `setup-musa/` desde `https://github.com/musa3101/MNX-Setup-Musa`.
+   - Incorporados los scripts `session-start.sh`, `mini-merge.sh` (con soporte para 2 ventanas vía worktree temporal) y `session-end.sh`.
+   - Garantía de sesión en rama `dev` desde el segundo cero y exclusión en Git de `.musa/`.
+2. **Auditoría de Ciberseguridad Cloudflare (`cloudflare-security`)**:
+   - Ejecutada auditoría integral en Full Audit Mode coordinando 4 subagentes paralelos sobre la superficie de ataque web, API y cabeceras.
+   - Generados los artefactos formales del estándar (`coverage-ledger.json`, `findings.json`, `architecture.md`, `REPORT.md`, `FINDINGS-DETAIL.md`).
+3. **Remediación de Vulnerabilidades y Endurecimiento**:
+   - **XSS en DOM Frontend**: Enriquecida la función `sanitizeHtml()` en `src/lib/domUtils.ts` bloqueando etiquetas críticas (`script`, `iframe`, `object`, `embed`, `svg`, `base`, `meta`, `link`) y protocolos peligrosos; aplicados `escapeHtml()` en `src/main.ts` y `src/project.ts` para renderizar el nombre y correo del cliente de forma 100% segura.
+   - **Prevención de Fuga de PII en WhatsApp**: Modificada la alerta CallMeBot en `functions/api/contact.ts` para no enviar números de teléfono, correos ni mensajes completos por parámetros GET URL, preservando la notificación instantánea y derivando la lectura detallada al CRM / correo seguro.
+   - **HTML Injection en Notificaciones por Correo**: Escapados rigurosamente todos los campos del cliente dentro de la plantilla HTML enviada por Resend API en `functions/api/contact.ts`.
+   - **Cabeceras de Seguridad HTTP Globales**: Incorporado bloque `/*` en `public/_headers` con `X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy`, `Strict-Transport-Security` y una `Content-Security-Policy (CSP)` estricta para Cloudflare Pages.
+4. **Persistencia Híbrida de Cookies (365 Días - Resiliente a Safari iOS)**:
+   - Creado módulo `src/lib/cookieConsent.ts` con almacenamiento redundante: Cookie real de 1ª parte (`max-age=31536000`, `SameSite=Lax`, `Secure`, comodín de dominio `.mynextbymusa.com`) y `localStorage` sincronizado.
+   - Auto-reparación bidireccional (Self-healing): si Safari purga `localStorage` por ITP, se restaura desde la cookie evitando que el banner vuelva a aparecer; si la cookie expiró, se renueva desde `localStorage`.
+   - Sincronización del identificador anónimo de visitante `mynext_visitor_id` en `src/lib/leadTracker.ts` para evitar UUIDs duplicados en Supabase.
+   - Actualizado `src/main.ts` con comprobación instantánea `hasUserConsented()`.
+5. **Verificación y Pruebas**:
+   - Compilación completa de TypeScript y Vite `npm run build` en 662ms sin errores.
+   - 114/114 tests unitarios aprobados (`run_unit_tests.js`) con 16 nuevos tests para el gestor de cookies.
+   - 51/51 tests de antispam y Turnstile aprobados (`test_antispam_suite.js`).
+   - 6/6 tests E2E Playwright aprobados (`tests/performance-fluidity.spec.ts`).
 
 ## Archivos Modificados
-- `index.html` e `index-en.html`: selector de pestañas contacto/Cal.com, enlaces en footer, navbar a 350ms y modales limpios.
-- `project.html` y `project-en.html`: botón "Agendar Cita" y enlace en footer.
-- `planes/index.html` y `planes/index-en.html`: enlace de navegación "Agendar Cita" en footer.
-- `src/main.ts`: lógica de pestañas, deep linking con `?tab=cal` y modales.
-- `src/style.css`: fijado `font-size: 16px` para móviles iOS, clases de visibilidad `.contact-panel-*` y aceleración GPU del láser.
-- `public/robots.txt`: corrección de sintaxis para puntuación SEO 100/100.
-- `functions/api/contact.ts`: verificación de Cloudflare Turnstile y Resend API.
-- `scripts/test_cta_and_cal_flow.js`: suite de pruebas automatizadas con Playwright.
+- `src/lib/cookieConsent.ts`: nuevo gestor de persistencia híbrida 365 días y auto-reparación.
+- `src/lib/leadTracker.ts`: persistencia redundante para visitor ID y lectura robusta de consentimiento.
+- `src/main.ts`: integración de `hasUserConsented()` y persistencia de 1 año en el banner.
+- `scripts/run_unit_tests.js`: suite 6 con 16 tests de cookies y parsing de cabeceras.
+- `tests/performance-fluidity.spec.ts`: limpieza de contexto en TC006 para pruebas E2E.
+- `functions/api/contact.ts`: minimización de PII en GET de CallMeBot y `escapeHtml` en la plantilla de Resend.
+- `public/_headers`: cabeceras HTTP de seguridad global y política CSP.
+- `src/lib/domUtils.ts`: limpieza reforzada de etiquetas y atributos peligrosos.
+- `src/project.ts`: renderizado protegido de variables de cliente con `escapeHtml`.
+- `setup.sh`: sincronizado con el flujo oficial de Setup 2.0.
+- `scripts/`: scripts de gestión de sesiones y mini-merges de Setup 2.0 (`session-start.sh`, `mini-merge.sh`, `session-end.sh`).
+- `docs/SESSION_LATEST_ES.md` y `docs/ROADMAP.md`: documentación de sesión actualizada.
 
 ## Problemas Solucionados
-- **Zoom molesto en iPhone**: Solucionado con inputs a 16px en media queries móviles.
-- **Cal.com empujando el diseño**: Solucionado con clases de visibilidad estrictas que ocultan el formulario al abrir el calendario.
-- **Tirones y lentitud al hacer scroll**: Solucionado optimizando la duración de la barra de navegación y animando el escaneo láser con GPU `translate3d`.
-- **Falta de llamadas a la acción en proyectos**: Añadido botón directo para agendar reunión de 15 minutos en Google Meet.
+- **Pérdida recurrente del consentimiento de cookies en Safari/iPhone**: Solucionado mediante persistencia híbrida (Cookie 365 días + LocalStorage) que neutraliza la purga ITP de WebKit y el cambio de subdominios (`www.` vs raíz).
+- **Vulnerabilidad de inyección DOM**: Eliminado cualquier riesgo de XSS en mensajes de éxito en el cliente.
+- **Exposición de datos personales (PII) en peticiones GET**: Protegidos teléfono, email y mensaje en peticiones externas.
+- **Ausencia de cabeceras de protección en navegador**: Bloqueados ataques de clickjacking, MIME sniffing y ejecución no autorizada con CSP.
 
 ## Qué Queda Pendiente
-- Probar la reserva de una cita real a través de Cal.com para comprobar la sincronización con Google Meet.
+- Comprobar la recepción de alertas de leads en el entorno en vivo tras el próximo despliegue.
+
+## Qué se Recomienda Hacer en la Próxima Sesión
+- Revisar el rendimiento de la CSP en producción tras el despliegue para monitorizar posibles directivas adicionales.
+- Continuar con el enriquecimiento del catálogo de proyectos en el portfolio.

@@ -1,6 +1,19 @@
 # Roadmap MYNEXT
 
 ## Tareas Completadas
+- **Instalación de Setup 2.0 de Musa**:
+  - Scripts de sesión y mini-merge con git worktree (`scripts/session-start.sh`, `scripts/mini-merge.sh`, `scripts/session-end.sh`).
+  - Protección estricta de rama `dev` y exclusión de `.musa/`.
+- **Auditoría y Endurecimiento de Seguridad Cloudflare (`cloudflare-security`)**:
+  - Auditoría integral multi-agente en Full Audit Mode.
+  - Saneamiento y escapado estricto contra DOM XSS en `src/lib/domUtils.ts`, `src/main.ts` y `src/project.ts`.
+  - Protección de privacidad PII en llamadas GET de WhatsApp CallMeBot en `functions/api/contact.ts`.
+  - Escapado HTML riguroso en notificaciones enviadas vía Resend API.
+  - Inyección de cabeceras HTTP de seguridad global y política Content-Security-Policy (CSP) en `public/_headers`.
+- **Persistencia Híbrida de Cookies (365 Días - Resiliente a Safari iOS)**:
+  - Doble capa de persistencia: Cookie real de 1ª parte (`max-age=31536000`, `SameSite=Lax`, `Secure`, comodín de dominio `.mynextbymusa.com`) y `localStorage`.
+  - Mecanismo de auto-reparación bidireccional (Self-healing) que neutraliza la purga ITP de Apple y mantiene sincronizado `mynext_visitor_id`.
+  - Verificado con 16 nuevos tests unitarios (114/114 total) y 6/6 tests Playwright E2E.
 - **Selector de Contacto Inteligente (Formulario Nativo por Defecto + Cal.com)**:
   - Formulario de propuesta propio activo por defecto.
   - Cal.com (`https://cal.com/mynextbymusa/primera-consulta-mynext`) accesible mediante pestañas sin solapes.

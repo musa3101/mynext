@@ -538,7 +538,12 @@ test.describe('Auditoría Completa de Rendimiento y Fluidez (Playwright + Chrome
     await enHeroDiscover.click();
 
     // --- TC006: Immediate Hero Use After Initial Loading Overlay on Home-ES ---
-    await page.evaluate(() => localStorage.clear());
+    await page.evaluate(() => {
+      localStorage.clear();
+      document.cookie = 'cookie-preference=; Max-Age=0; path=/;';
+      document.cookie = 'mynext_visitor_id=; Max-Age=0; path=/;';
+    });
+    await page.context().clearCookies();
     await page.goto('/', { waitUntil: 'domcontentloaded' });
 
     // Wait for intelligent loader to dismiss (< 800ms)
