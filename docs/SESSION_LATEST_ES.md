@@ -44,6 +44,9 @@
 - **Exposición de datos personales (PII) en peticiones GET**: Protegidos teléfono, email y mensaje en peticiones externas.
 - **Ausencia de cabeceras de protección en navegador**: Bloqueados ataques de clickjacking, MIME sniffing y ejecución no autorizada con CSP.
 
+## Mini-merges y Despliegues de la Sesión
+- `2026-11-05T21:14:47` | `merge completo dev -> main` | `all` | `push=1` (Despliegue automático a Cloudflare Pages completado con éxito).
+
 ## Qué Queda Pendiente
 - Comprobar la recepción de alertas de leads en el entorno en vivo tras el próximo despliegue.
 
