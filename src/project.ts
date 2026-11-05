@@ -104,7 +104,7 @@ function initContactForm(lang: 'es' | 'en') {
       '';
 
     if (!turnstileToken) {
-      const warnText = isEs ? 'Verificación de seguridad requerida' : 'Security check required';
+      const warnText = isEs ? 'Verifica el captcha antes de enviar' : 'Please verify captcha first';
       if (btnText) btnText.textContent = warnText;
       else submitBtn.textContent = warnText;
       setTimeout(() => {
