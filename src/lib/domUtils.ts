@@ -16,12 +16,12 @@ export function escapeHtml(str: string): string {
 // Sanitize HTML string allowing safe basic markup (e.g. <span>, <br>, <strong>, <em>, <a>)
 export function sanitizeHtml(html: string): string {
   if (!html) return '';
-  // Strip inline event handlers (e.g. onerror=, onclick=) and script tags
+  // Strip dangerous tags (pairs or self-closing), inline event handlers (quoted and unquoted), and pseudo-protocols
   let clean = html
-    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
-    .replace(/on\w+="[^"]*"/gi, '')
-    .replace(/on\w+='[^']*'/gi, '')
-    .replace(/javascript:/gi, '');
+    .replace(/<\s*(script|iframe|object|embed|svg|base|meta|link)\b[^>]*>[\s\S]*?<\/\s*\1\s*>/gi, '')
+    .replace(/<\s*(?:script|iframe|object|embed|svg|base|meta|link)\b[^>]*\/?>/gi, '')
+    .replace(/\bon\w+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi, '')
+    .replace(/(?:javascript|vbscript|data):/gi, 'blocked:');
   return clean;
 }
 

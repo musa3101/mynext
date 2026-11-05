@@ -56,6 +56,20 @@ const DEFAULT_RESEND_API_KEY = '';
 const CF_PRODUCTION_SECRET_KEY = '0x4AAAAAAFg5e8MnH9ZuR6goULvlO71V_Ic';
 const CF_TEST_SECRET_KEY = '1x0000000000000000000000000000000AA';
 
+// Helper para escapar entidades HTML y prevenir inyección de contenido en emails
+function escapeHtml(str: string): string {
+  return String(str || '').replace(/[&<>'"]/g, (tag) => {
+    const chars: Record<string, string> = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      "'": '&#39;',
+      '"': '&quot;',
+    };
+    return chars[tag] || tag;
+  });
+}
+
 export async function onRequestPost(context: EventContext<Env, any, any>): Promise<Response> {
   const { request, env } = context;
 
@@ -246,17 +260,17 @@ export async function onRequestPost(context: EventContext<Env, any, any>): Promi
 
   const asyncDispatch = async () => {
     // 7A. Alerta Instantánea por WhatsApp (CallMeBot)
+    // Minimización de PII: no enviamos datos de contacto sensibles ni mensaje completo por GET URL
     try {
       const waMsg = [
         '🚀 *NUEVO LEAD EN MYNEXT* 🚀',
         '',
         `👤 *Cliente:* ${name}`,
-        `📧 *Email:* ${email}`,
-        `📱 *Teléfono:* ${phone || 'No especificado'}`,
         `🌐 *Proyecto:* ${projectType}`,
         `💰 *Plan:* ${budget}`,
-        `💬 *Mensaje:* ${message || '(Sin mensaje adicional)'}`,
         `🔗 *Origen:* ${sourcePage || 'https://mynextbymusa.com'}`,
+        '',
+        '🔒 *Detalles completos (Email/Teléfono/Mensaje):* Revisa tu correo o Supabase CRM.',
       ].join('\n');
 
       const waUrl = `https://api.callmebot.com/whatsapp.php?phone=${targetPhone}&text=${encodeURIComponent(waMsg)}&apikey=${callmebotApiKey}`;
@@ -312,13 +326,13 @@ export async function onRequestPost(context: EventContext<Env, any, any>): Promi
             html: `
               <h2>🚀 Nueva Solicitud de Propuesta Web</h2>
               <table cellpadding="8" style="border-collapse: collapse; width: 100%; max-width: 600px; font-family: sans-serif;">
-                <tr><td style="font-weight: bold; background: #f4f4f4;">Cliente:</td><td>${name}</td></tr>
-                <tr><td style="font-weight: bold; background: #f4f4f4;">Email:</td><td><a href="mailto:${email}">${email}</a></td></tr>
-                <tr><td style="font-weight: bold; background: #f4f4f4;">Teléfono / WhatsApp:</td><td>${phone || 'No especificado'}</td></tr>
-                <tr><td style="font-weight: bold; background: #f4f4f4;">Tipo de Proyecto:</td><td>${projectType}</td></tr>
-                <tr><td style="font-weight: bold; background: #f4f4f4;">Plan de Interés:</td><td>${budget}</td></tr>
-                <tr><td style="font-weight: bold; background: #f4f4f4;">Detalles / Mensaje:</td><td>${message || 'Sin mensaje adicional'}</td></tr>
-                <tr><td style="font-weight: bold; background: #f4f4f4;">Página de Origen:</td><td>${sourcePage}</td></tr>
+                <tr><td style="font-weight: bold; background: #f4f4f4;">Cliente:</td><td>${escapeHtml(name)}</td></tr>
+                <tr><td style="font-weight: bold; background: #f4f4f4;">Email:</td><td><a href="mailto:${encodeURIComponent(email)}">${escapeHtml(email)}</a></td></tr>
+                <tr><td style="font-weight: bold; background: #f4f4f4;">Teléfono / WhatsApp:</td><td>${escapeHtml(phone || 'No especificado')}</td></tr>
+                <tr><td style="font-weight: bold; background: #f4f4f4;">Tipo de Proyecto:</td><td>${escapeHtml(projectType)}</td></tr>
+                <tr><td style="font-weight: bold; background: #f4f4f4;">Plan de Interés:</td><td>${escapeHtml(budget)}</td></tr>
+                <tr><td style="font-weight: bold; background: #f4f4f4;">Detalles / Mensaje:</td><td>${escapeHtml(message || 'Sin mensaje adicional').replace(/\n/g, '<br>')}</td></tr>
+                <tr><td style="font-weight: bold; background: #f4f4f4;">Página de Origen:</td><td>${escapeHtml(sourcePage)}</td></tr>
                 <tr><td style="font-weight: bold; background: #f4f4f4;">Seguridad:</td><td>Cloudflare Turnstile Verified ✓</td></tr>
               </table>
             `,

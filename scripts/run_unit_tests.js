@@ -1,5 +1,12 @@
 import { fallbackProjects, fallbackSettings, fallbackTestimonials, fallbackServices } from '../src/lib/fallbackData.ts';
 import { buildCookieConsentPayload, buildClientEmailPayload } from '../src/lib/leadTracker.ts';
+import {
+  resolveCookieDomain,
+  parseCookieValue,
+  buildCookieString,
+  ONE_YEAR_SECONDS,
+  COOKIE_PREFERENCE_KEY
+} from '../src/lib/cookieConsent.ts';
 import fs from 'fs';
 import path from 'path';
 
@@ -166,6 +173,34 @@ function runUnitTests() {
   assert(schemaSql.includes('GENERATED ALWAYS AS IDENTITY PRIMARY KEY'), 'Tablas usan BIGINT GENERATED ALWAYS AS IDENTITY (schema-primary-keys)');
   assert(schemaSql.includes('ALTER TABLE public.mynext_cookie_consents ENABLE ROW LEVEL SECURITY'), 'RLS habilitado en mynext_cookie_consents (security-rls-basics)');
   assert(schemaSql.includes('ALTER TABLE public.mynext_client_emails ENABLE ROW LEVEL SECURITY'), 'RLS habilitado en mynext_client_emails (security-rls-basics)');
+
+  // --- 6. Test Suite: Persistencia Híbrida de Cookies (Safari ITP Resiliente - 365 Días) ---
+  console.log('\n🍪 6. Test Suite: Persistencia Híbrida de Cookies (cookieConsent)');
+  assert(resolveCookieDomain('localhost') === '', 'Host localhost no genera dominio de cookie (host-only)');
+  assert(resolveCookieDomain('127.0.0.1') === '', 'IP 127.0.0.1 no genera dominio de cookie');
+  assert(resolveCookieDomain('mynextbymusa.pages.dev') === '', 'Dominio .pages.dev no asigna dominio compartido para evitar colisiones');
+  assert(resolveCookieDomain('mynextbymusa.com') === '.mynextbymusa.com', 'Dominio mynextbymusa.com genera comodín .mynextbymusa.com');
+  assert(resolveCookieDomain('www.mynextbymusa.com') === '.mynextbymusa.com', 'Subdominio www genera comodín .mynextbymusa.com para compartir cookies');
+
+  const cookieStr = buildCookieString(COOKIE_PREFERENCE_KEY, 'accepted-all', {
+    domain: '.mynextbymusa.com',
+    secure: true,
+    sameSite: 'Lax',
+    maxAge: ONE_YEAR_SECONDS
+  });
+  assert(cookieStr.includes('cookie-preference=accepted-all'), 'buildCookieString codifica clave y valor correctamente');
+  assert(cookieStr.includes(`Max-Age=${ONE_YEAR_SECONDS}`), 'Cookie tiene vigencia de 1 año (31536000 segundos)');
+  assert(cookieStr.includes('Path=/'), 'Cookie es válida para toda la ruta');
+  assert(cookieStr.includes('Domain=.mynextbymusa.com'), 'Cookie incluye comodín de subdominios');
+  assert(cookieStr.includes('SameSite=Lax'), 'Cookie usa SameSite=Lax');
+  assert(cookieStr.includes('Secure;'), 'Cookie activa bandera Secure en HTTPS');
+
+  const rawHeader = 'theme=dark; cookie-preference=accepted-all; mynext_visitor_id=vis_abc123';
+  assert(parseCookieValue(rawHeader, 'cookie-preference') === 'accepted-all', 'parseCookieValue extrae cookie intermedia');
+  assert(parseCookieValue(rawHeader, 'theme') === 'dark', 'parseCookieValue extrae cookie inicial');
+  assert(parseCookieValue(rawHeader, 'mynext_visitor_id') === 'vis_abc123', 'parseCookieValue extrae cookie final');
+  assert(parseCookieValue(rawHeader, 'inexistente') === null, 'parseCookieValue retorna null para cookie inexistente');
+  assert(parseCookieValue('', 'cookie-preference') === null, 'parseCookieValue maneja cadena vacía defensivamente');
 
   // --- Resumen de Resultados ---
   console.log('\n📊 ========================================================');

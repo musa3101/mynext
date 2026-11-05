@@ -6,8 +6,9 @@ import {
   fallbackSettings
 } from './lib/fallbackData';
 import { initAnalyticsListeners } from './lib/analytics';
-import { getTranslation, applyDynamicSettings, sanitizeHtml } from './lib/domUtils';
+import { getTranslation, applyDynamicSettings, sanitizeHtml, escapeHtml } from './lib/domUtils';
 import { recordCookieConsent, recordClientEmail } from './lib/leadTracker';
+import { getCookiePreference, setCookiePreference, hasUserConsented } from './lib/cookieConsent';
 import { initDoodleCrewFooter } from './lib/initDoodleCrew';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -1450,20 +1451,22 @@ function initMain() {
     }
   });
 
-  // --- E. Cookie Banner Logic ---
+  // --- E. Cookie Banner Logic (Persistencia Híbrida 365 Días) ---
   const cookieBanner = document.getElementById('cookie-banner');
   const acceptAllBtn = document.getElementById('cookie-accept-all');
   const rejectBtn = document.getElementById('cookie-reject');
   const configureBtn = document.getElementById('cookie-configure');
 
-  if (cookieBanner && !localStorage.getItem('cookie-preference')) {
+  if (cookieBanner && !hasUserConsented()) {
     setTimeout(() => {
-      cookieBanner.classList.add('active');
+      if (!hasUserConsented()) {
+        cookieBanner.classList.add('active');
+      }
     }, 350);
   }
 
   function saveCookiePreference(pref: string) {
-    localStorage.setItem('cookie-preference', pref);
+    setCookiePreference(pref);
     void recordCookieConsent(pref);
     if (cookieBanner) {
       cookieBanner.classList.add('slide-down');
@@ -1746,9 +1749,11 @@ function initMain() {
               const successMsg = document.createElement('div');
               successMsg.className = 'text-electric-cyan font-headline text-sm md:text-base tracking-wider font-semibold animate-pulse mt-4 text-center px-4 leading-relaxed';
               successMsg.style.textShadow = '0 0 12px rgba(0, 242, 255, 0.5)';
+              const safeClientName = escapeHtml(clientName);
+              const safeClientEmail = escapeHtml(clientEmail);
               successMsg.innerHTML = isEs
-                ? `¡Gracias, ${clientName}! Hemos recibido tu propuesta.<br><span class="text-xs text-white/70 font-normal">Te hemos enviado un correo de confirmación a <strong>${clientEmail}</strong>. Nos pondremos en contacto contigo muy pronto.</span>`
-                : `Thank you, ${clientName}! We received your proposal.<br><span class="text-xs text-white/70 font-normal">We sent a confirmation email to <strong>${clientEmail}</strong>. We will get in touch with you very soon.</span>`;
+                ? `¡Gracias, ${safeClientName}! Hemos recibido tu propuesta.<br><span class="text-xs text-white/70 font-normal">Te hemos enviado un correo de confirmación a <strong>${safeClientEmail}</strong>. Nos pondremos en contacto contigo muy pronto.</span>`
+                : `Thank you, ${safeClientName}! We received your proposal.<br><span class="text-xs text-white/70 font-normal">We sent a confirmation email to <strong>${safeClientEmail}</strong>. We will get in touch with you very soon.</span>`;
 
               const formParent = formElement.parentElement;
               if (formParent) formParent.appendChild(successMsg);

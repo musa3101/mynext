@@ -1,32 +1,72 @@
 import { supabase } from './supabase.ts';
 import type { Database } from '../types/database.ts';
+import {
+  getCookiePreference,
+  parseCookieValue,
+  buildCookieString,
+  resolveCookieDomain,
+  ONE_YEAR_SECONDS,
+  VISITOR_ID_KEY,
+} from './cookieConsent.ts';
 
 export type CookieConsentRow = Database['public']['Tables']['mynext_cookie_consents']['Insert'];
 export type ClientEmailRow = Database['public']['Tables']['mynext_client_emails']['Insert'];
 
-const VISITOR_STORAGE_KEY = 'mynext_visitor_id';
-
 /**
  * Obtiene o genera un identificador anónimo único para el visitante (cumplimiento RGPD).
+ * Emplea persistencia híbrida (Cookie 1 año + LocalStorage) para evitar IDs duplicados
+ * causados por la purga de ITP en Safari iOS.
  */
 export function getOrCreateVisitorId(): string {
+  let existing: string | null = null;
   try {
     if (typeof localStorage !== 'undefined') {
-      const existing = localStorage.getItem(VISITOR_STORAGE_KEY);
-      if (existing && existing.trim().length > 0) {
-        return existing;
-      }
-      const generated =
-        typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function'
-          ? crypto.randomUUID()
-          : `vis_${Date.now()}_${Math.random().toString(36).substring(2, 10)}`;
-      localStorage.setItem(VISITOR_STORAGE_KEY, generated);
-      return generated;
+      existing = localStorage.getItem(VISITOR_ID_KEY);
     }
   } catch {
     // Fallback si el navegador bloquea localStorage
   }
-  return `vis_${Date.now()}_${Math.random().toString(36).substring(2, 10)}`;
+
+  if (!existing && typeof document !== 'undefined') {
+    existing = parseCookieValue(document.cookie, VISITOR_ID_KEY);
+  }
+
+  if (existing && existing.trim().length > 0) {
+    try {
+      if (typeof localStorage !== 'undefined' && !localStorage.getItem(VISITOR_ID_KEY)) {
+        localStorage.setItem(VISITOR_ID_KEY, existing);
+      }
+    } catch {
+      // Ignorar si localStorage bloqueado
+    }
+    return existing;
+  }
+
+  const generated =
+    typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function'
+      ? crypto.randomUUID()
+      : `vis_${Date.now()}_${Math.random().toString(36).substring(2, 10)}`;
+
+  try {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem(VISITOR_ID_KEY, generated);
+    }
+    if (typeof document !== 'undefined') {
+      const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+      const isHttps = typeof window !== 'undefined' && window.location.protocol === 'https:';
+      const domain = resolveCookieDomain(hostname);
+      document.cookie = buildCookieString(VISITOR_ID_KEY, generated, {
+        maxAge: ONE_YEAR_SECONDS,
+        path: '/',
+        domain,
+        secure: isHttps,
+        sameSite: 'Lax',
+      });
+    }
+  } catch {
+    // Fallback si el navegador bloquea cookies/storage
+  }
+  return generated;
 }
 
 /**
@@ -101,9 +141,8 @@ export function buildClientEmailPayload(input: {
 }): ClientEmailRow {
   const cookieConsent =
     input.cookieConsent ??
-    (typeof localStorage !== 'undefined'
-      ? localStorage.getItem('cookie-preference') || 'not-set'
-      : 'not-set');
+    getCookiePreference() ??
+    'not-set';
 
   return {
     client_name: (input.clientName || 'Cliente / Negocio').trim(),
