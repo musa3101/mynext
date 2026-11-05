@@ -52,7 +52,7 @@ const DEFAULT_CALLMEBOT_PHONE = '34673109486';
 const DEFAULT_CALLMEBOT_API_KEY = '2243347';
 
 // Claves de Cloudflare Turnstile
-const CF_PRODUCTION_SECRET_KEY = '0x4AAAAAAFg5e8MnH9ZuR6goULvl071V_Ic';
+const CF_PRODUCTION_SECRET_KEY = '0x4AAAAAAFg5e8MnH9ZuR6goULvlO71V_Ic';
 const CF_TEST_SECRET_KEY = '1x0000000000000000000000000000000AA';
 
 export async function onRequestPost(context: EventContext<Env, any, any>): Promise<Response> {

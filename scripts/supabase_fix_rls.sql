@@ -28,3 +28,4 @@ USING (true);
 
 -- Notificación de éxito
 COMMENT ON TABLE mynext_client_emails IS 'Tabla de leads recibidos desde el formulario web de MYNEXT con blindaje RLS';
+
