@@ -166,7 +166,7 @@ async function runE2ESuite() {
 
       // Simular resolución de Cloudflare Turnstile token
       await page.evaluate(() => {
-        let input = document.querySelector('input[name="cf-turnstile-response"]') as HTMLInputElement | null;
+        let input = document.querySelector('input[name="cf-turnstile-response"]');
         if (!input) {
           const form = document.getElementById('email-contact-form');
           if (form) {

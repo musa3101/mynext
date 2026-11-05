@@ -216,6 +216,47 @@ function renderDynamicGoogleReviews(reviewsList: any[]) {
   const marqueeTracks = document.querySelectorAll('.reviews-slider-container .animate-marquee');
   if (!marqueeTracks || marqueeTracks.length === 0) return;
 
+  const formatRelativeTime = (timeVal: any, l: 'es' | 'en'): string => {
+    if (!timeVal) return l === 'en' ? 'Verified' : 'Verificada';
+    let t = '';
+    if (typeof timeVal === 'object') {
+      t = timeVal[l] || timeVal.es || timeVal.en || '';
+    } else if (typeof timeVal === 'string') {
+      try {
+        const parsed = JSON.parse(timeVal);
+        if (parsed && typeof parsed === 'object') {
+          t = parsed[l] || parsed.es || parsed.en || timeVal;
+        } else {
+          t = timeVal;
+        }
+      } catch {
+        t = timeVal;
+      }
+    }
+    if (!t) return l === 'en' ? 'Verified' : 'Verificada';
+
+    if (l === 'en') {
+      return t
+        .replace(/Hace (\d+) horas?/i, '$1 hours ago')
+        .replace(/Hace 1 día/i, '1 day ago')
+        .replace(/Hace (\d+) días?/i, '$1 days ago')
+        .replace(/Hace 1 semana/i, '1 week ago')
+        .replace(/Hace (\d+) semanas?/i, '$1 weeks ago')
+        .replace(/Hace un mes/i, '1 month ago')
+        .replace(/Hace 1 mes/i, '1 month ago')
+        .replace(/Hace (\d+) meses/i, '$1 months ago');
+    } else {
+      return t
+        .replace(/(\d+) hours? ago/i, 'Hace $1 horas')
+        .replace(/1 day ago/i, 'Hace 1 día')
+        .replace(/(\d+) days? ago/i, 'Hace $1 días')
+        .replace(/1 week ago/i, 'Hace 1 semana')
+        .replace(/(\d+) weeks? ago/i, 'Hace $1 semanas')
+        .replace(/1 month ago/i, 'Hace un mes')
+        .replace(/(\d+) months? ago/i, 'Hace $1 meses');
+    }
+  };
+
   const buildCardHtml = (r: any) => {
     const name = r.name || r.client_name || 'Cliente Verificado';
     const rawContent = (lang === 'en' ? (r.content_en || r.content_es || r.content || r.testimonial) : (r.content_es || r.content || r.testimonial)) || '';
@@ -225,15 +266,31 @@ function renderDynamicGoogleReviews(reviewsList: any[]) {
     const company = getTranslation(rawCompany, lang as 'es' | 'en');
     const ratingStars = '★'.repeat(r.rating || 5);
     const photo = r.author_photo || r.image_url;
+    const relativeTime = formatRelativeTime(r.relative_time, lang as 'es' | 'en');
 
     const avatarHtml = (photo && photo.startsWith('http'))
       ? `<img src="${photo}" alt="${name}" class="w-full h-full object-cover rounded-full" loading="lazy" width="40" height="40" />`
       : `<span class="text-electric-cyan font-bold font-headline text-sm">${name ? name.charAt(0).toUpperCase() : 'G'}</span>`;
 
+    const hasLongText = hasText && (content.length > 170 || content.includes('\n'));
+
     const bodyHtml = hasText
-      ? `<p class="relative z-10 text-[14px] md:text-[15px] text-white/85 font-light leading-relaxed italic my-auto line-clamp-4">
-            "${content}"
-         </p>`
+      ? `<div class="relative z-10 my-auto flex flex-col justify-center">
+            <p class="text-[14px] md:text-[15px] text-white/85 font-light leading-relaxed italic line-clamp-4">
+              "${content}"
+            </p>
+            ${hasLongText ? `
+              <button type="button" class="open-review-modal-btn inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-semibold text-electric-cyan hover:text-white transition-colors mt-2 text-left self-start cursor-pointer pointer-events-auto"
+                data-name="${name.replace(/"/g, '&quot;')}"
+                data-company="${company.replace(/"/g, '&quot;')}"
+                data-stars="${ratingStars}"
+                data-time="${relativeTime.replace(/"/g, '&quot;')}"
+                data-text="${encodeURIComponent(content)}">
+                <span>${lang === 'en' ? 'Read full review' : 'Leer reseña completa'}</span>
+                <span class="text-xs transition-transform group-hover:translate-x-1">→</span>
+              </button>
+            ` : ''}
+         </div>`
       : `<div class="relative z-10 my-auto flex flex-col items-center justify-center py-6 text-center">
             <div class="flex text-amber-400 text-2xl drop-shadow-[0_0_12px_rgba(251,191,36,0.7)] tracking-widest">${ratingStars}</div>
          </div>`;
@@ -559,6 +616,32 @@ function initDraggableMarquee() {
       });
     }
 
+    // Connect desktop navigation controls if present
+    const prevBtn = document.getElementById('reviews-prev');
+    const nextBtn = document.getElementById('reviews-next');
+    if (prevBtn && !(prevBtn as any).__bound) {
+      (prevBtn as any).__bound = true;
+      prevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        isInteracting = true;
+        currentScrollPos -= 450;
+        wrapScroll();
+        applyTransform();
+        scheduleAutoplayResume(2000);
+      });
+    }
+    if (nextBtn && !(nextBtn as any).__bound) {
+      (nextBtn as any).__bound = true;
+      nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        isInteracting = true;
+        currentScrollPos += 450;
+        wrapScroll();
+        applyTransform();
+        scheduleAutoplayResume(2000);
+      });
+    }
+
     // Prevent clicking link during drag gesture
     container.addEventListener('click', (e: MouseEvent) => {
       if (totalDrag > 8) {
@@ -569,10 +652,77 @@ function initDraggableMarquee() {
   });
 }
 
+// --- Review Full Detail Modal Engine ---
+function initReviewModal() {
+  const modal = document.getElementById('review-detail-modal');
+  if (!modal) return;
+  const card = document.getElementById('review-detail-card');
+  const modalText = document.getElementById('modal-review-text');
+  const modalName = document.getElementById('modal-review-name');
+  const modalCompany = document.getElementById('modal-review-company');
+  const modalStars = document.getElementById('modal-review-stars');
+  const modalTime = document.getElementById('modal-review-time');
+  const modalAvatar = document.getElementById('modal-review-avatar');
+
+  const closeModal = () => {
+    modal.classList.add('opacity-0', 'pointer-events-none');
+    modal.classList.remove('opacity-100', 'pointer-events-auto');
+    if (card) {
+      card.classList.remove('scale-100');
+      card.classList.add('scale-95');
+    }
+    document.body.style.overflow = '';
+  };
+
+  const openModal = (data: { name: string; company: string; stars: string; time: string; text: string }) => {
+    if (modalText) modalText.textContent = data.text;
+    if (modalName) modalName.textContent = data.name;
+    if (modalCompany) modalCompany.textContent = data.company;
+    if (modalStars) modalStars.textContent = data.stars;
+    if (modalTime) modalTime.textContent = data.time || (lang === 'en' ? 'Verified' : 'Verificada');
+    if (modalAvatar) {
+      modalAvatar.innerHTML = `<span class="text-electric-cyan font-bold font-headline text-base">${(data.name || 'G').charAt(0).toUpperCase()}</span>`;
+    }
+
+    modal.classList.remove('opacity-0', 'pointer-events-none');
+    modal.classList.add('opacity-100', 'pointer-events-auto');
+    if (card) {
+      card.classList.remove('scale-95');
+      card.classList.add('scale-100');
+    }
+    document.body.style.overflow = 'hidden';
+  };
+
+  document.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest('.open-review-modal-btn') as HTMLElement | null;
+    if (btn) {
+      e.preventDefault();
+      e.stopPropagation();
+      const text = decodeURIComponent(btn.dataset.text || '');
+      const name = btn.dataset.name || '';
+      const company = btn.dataset.company || '';
+      const stars = btn.dataset.stars || '★★★★★';
+      const time = btn.dataset.time || '';
+      openModal({ name, company, stars, time, text });
+      return;
+    }
+
+    if (e.target === modal || (e.target as HTMLElement).closest('#close-review-modal-btn')) {
+      closeModal();
+    }
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.classList.contains('pointer-events-none')) {
+      closeModal();
+    }
+  });
+}
+
 // Initialize all DOM contents safely
 function initMain() {
   // --- A. Dynamic Data Fetch & Render with Session Caching ---
-  const CACHE_KEY = 'mynext_cms_cache_v4';
+  const CACHE_KEY = 'mynext_cms_cache_v5';
   const CACHE_TTL = 10 * 60 * 1000; // 10 minutes TTL
 
   let cachedData: any = null;
@@ -588,18 +738,18 @@ function initMain() {
     // sessionStorage disabled or unavailable
   }
 
-  // Deduplicate and merge testimonials safely (ensures newly added fallback reviews always appear)
+  // Deduplicate and merge testimonials safely (ensures newly added fallback reviews always appear first)
   const mergeTestimonialsList = (primary: any[], fallback: any[]): any[] => {
-    const merged: any[] = [...primary];
-    fallback.forEach(localItem => {
+    const merged: any[] = [...fallback];
+    primary.forEach(remoteItem => {
       const match = merged.find(t =>
-        (t.id && localItem.id && t.id === localItem.id) ||
-        (t.google_review_id && localItem.google_review_id && t.google_review_id === localItem.google_review_id) ||
-        ((t.client_name || t.name) && (localItem.client_name || localItem.name) &&
-         (t.client_name || t.name).toLowerCase().trim() === (localItem.client_name || localItem.name).toLowerCase().trim())
+        (t.id && remoteItem.id && t.id === remoteItem.id) ||
+        (t.google_review_id && remoteItem.google_review_id && t.google_review_id === remoteItem.google_review_id) ||
+        ((t.client_name || t.name) && (remoteItem.client_name || remoteItem.name) &&
+         (t.client_name || t.name).toLowerCase().trim() === (remoteItem.client_name || remoteItem.name).toLowerCase().trim())
       );
       if (!match) {
-        merged.push(localItem);
+        merged.push(remoteItem);
       }
     });
     return merged;
@@ -614,6 +764,7 @@ function initMain() {
   // Render initial reviews immediately by default (cached or fallback)
   const initialGoogleReviews = testimonials.filter((t: any) => t.source === 'google' || t.google_review_id);
   renderDynamicGoogleReviews(initialGoogleReviews);
+  initReviewModal();
 
   const applySettingsToDom = (currentSettings: Record<string, string>) => {
     const settingsMap = new Map<string, string>();
@@ -1385,7 +1536,99 @@ function initMain() {
     }, 4000);
   }
 
-  // --- G. Protected AJAX Email Form Submission (Cloudflare Turnstile + Honeypot + /api/contact) ---
+  // --- G1. Cal.com & Contact Form Tab Switcher (Zero Popups & Zero Lag) ---
+  const tabBtnForm = document.getElementById('tab-btn-form');
+  const tabBtnCal = document.getElementById('tab-btn-cal');
+  const contactFormEl = document.getElementById('email-contact-form');
+  const calPanelEl = document.getElementById('cal-booking-panel');
+  const calIframe = document.getElementById('cal-embed-iframe') as HTMLIFrameElement | null;
+  const calLoader = document.getElementById('cal-loader');
+
+  if (tabBtnForm && tabBtnCal && contactFormEl && calPanelEl) {
+    const activateForm = () => {
+      // Activar estilos botón Formulario
+      tabBtnForm.classList.add('text-black', 'bg-electric-cyan', 'shadow-[0_0_12px_rgba(0,242,255,0.4)]', 'font-bold');
+      tabBtnForm.classList.remove('text-white/70');
+      tabBtnForm.setAttribute('aria-selected', 'true');
+
+      // Desactivar botón Cal
+      tabBtnCal.classList.remove('text-black', 'bg-electric-cyan', 'shadow-[0_0_12px_rgba(0,242,255,0.4)]', 'font-bold');
+      tabBtnCal.classList.add('text-white/70');
+      tabBtnCal.setAttribute('aria-selected', 'false');
+
+      // Ocultar Cal.com y Mostrar Formulario sin colisiones de layout
+      calPanelEl.classList.remove('contact-panel-active');
+      calPanelEl.classList.add('contact-panel-hidden');
+
+      contactFormEl.classList.remove('contact-panel-hidden');
+      contactFormEl.classList.add('contact-panel-active');
+    };
+
+    const activateCal = () => {
+      // Activar estilos botón Cal
+      tabBtnCal.classList.add('text-black', 'bg-electric-cyan', 'shadow-[0_0_12px_rgba(0,242,255,0.4)]', 'font-bold');
+      tabBtnCal.classList.remove('text-white/70');
+      tabBtnCal.setAttribute('aria-selected', 'true');
+
+      // Desactivar botón Formulario
+      tabBtnForm.classList.remove('text-black', 'bg-electric-cyan', 'shadow-[0_0_12px_rgba(0,242,255,0.4)]', 'font-bold');
+      tabBtnForm.classList.add('text-white/70');
+      tabBtnForm.setAttribute('aria-selected', 'false');
+
+      // Ocultar Formulario y Mostrar Cal.com sin colisiones de layout
+      contactFormEl.classList.remove('contact-panel-active');
+      contactFormEl.classList.add('contact-panel-hidden');
+
+      calPanelEl.classList.remove('contact-panel-hidden');
+      calPanelEl.classList.add('contact-panel-active');
+
+      // Carga perezosa del iframe al pulsar la pestaña por primera vez
+      if (calIframe && (!calIframe.src || calIframe.src === 'about:blank' || !calIframe.src.includes('cal.com'))) {
+        const targetSrc = calIframe.getAttribute('data-src');
+        if (targetSrc) {
+          calIframe.src = targetSrc;
+        }
+      }
+    };
+
+    tabBtnForm.addEventListener('click', activateForm);
+    tabBtnCal.addEventListener('click', activateCal);
+
+    // Detección automática por URL o Hash (?tab=cal o #contacto?tab=cal)
+    const checkTabParam = () => {
+      try {
+        const hash = window.location.hash || '';
+        const search = window.location.search || '';
+        const isCal = search.includes('tab=cal') || hash.includes('tab=cal');
+        if (isCal) {
+          activateCal();
+          const contactSec = document.getElementById('contacto');
+          if (contactSec) {
+            setTimeout(() => {
+              contactSec.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+          }
+        }
+      } catch (e) {
+        console.warn('Error reading tab parameter:', e);
+      }
+    };
+
+    checkTabParam();
+    window.addEventListener('hashchange', checkTabParam);
+
+    // Ocultar el loader de Cal.com cuando cargue el iframe
+    if (calIframe && calLoader) {
+      calIframe.addEventListener('load', () => {
+        calLoader.classList.add('opacity-0', 'pointer-events-none');
+        setTimeout(() => {
+          calLoader.style.display = 'none';
+        }, 400);
+      });
+    }
+  }
+
+  // --- G2. Protected AJAX Email Form Submission (Cloudflare Turnstile + Honeypot + /api/contact) ---
   const contactForm = document.getElementById('email-contact-form') as HTMLFormElement | null;
   if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
@@ -1763,9 +2006,9 @@ function initMain() {
   const cartConfirmBtn = document.getElementById('cart-confirm-btn');
 
   if (cartBtn && cartModal && cartModalCard) {
-    cartModal.classList.add('invisible');
+    cartModal.classList.add('hidden', 'invisible');
     function openCartModal() {
-      cartModal!.classList.remove('pointer-events-none', 'opacity-0', 'invisible');
+      cartModal!.classList.remove('hidden', 'pointer-events-none', 'opacity-0', 'invisible');
       cartModal!.classList.add('opacity-100');
       cartModalCard!.classList.remove('scale-95', 'opacity-0');
       cartModalCard!.classList.add('scale-100', 'opacity-100');
@@ -1778,6 +2021,11 @@ function initMain() {
       cartModalCard!.classList.add('scale-95', 'opacity-0');
       cartModalCard!.classList.remove('scale-100', 'opacity-100');
       document.body.style.overflow = '';
+      setTimeout(() => {
+        if (cartModal!.classList.contains('pointer-events-none')) {
+          cartModal!.classList.add('hidden');
+        }
+      }, 500);
     }
 
     cartBtn.addEventListener('click', (e) => {

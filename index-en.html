@@ -371,7 +371,7 @@
     </div>
 
     <!-- PAGE TRANSITION OVERLAY -->
-    <div id="page-transition-overlay" class="active" aria-hidden="false">
+    <div id="page-transition-overlay" class="" aria-hidden="true">
         <div class="wrapper-grid">
             <div class="cube">
                 <div class="face face-front">M</div>
@@ -448,7 +448,7 @@
 
                 <!-- Mobile Menu Toggle -->
                 <button id="mobile-menu-btn" class="mobile-menu-toggle md:hidden" type="button" aria-expanded="false"
-                    aria-controls="mobile-dropdown" title="Menú">
+                    aria-controls="mobile-dropdown" title="Menu">
                     <span class="mobile-menu-toggle__box" aria-hidden="true">
                         <span class="mobile-menu-toggle__line"></span>
                         <span class="mobile-menu-toggle__line"></span>
@@ -1136,7 +1136,7 @@
             </div>
         </section>
 
-        <!-- REVIEWS SECTION (Marquee) -->
+                <!-- REVIEWS SECTION (Marquee) -->
         <section id="reviews" class="py-20 md:py-28 bg-[#06060c] border-y border-white/5 relative overflow-hidden">
             <!-- Glowing radial light -->
             <div
@@ -1148,11 +1148,23 @@
 
             <div class="max-w-6xl mx-auto px-5 mb-10 text-center reveal">
                 <span
-                    class="text-electric-cyan text-[11px] md:text-[13px] tracking-[0.5em] uppercase font-headline font-semibold block mb-4">Real
-                    Google Maps Reviews</span>
+                    class="text-electric-cyan text-[11px] md:text-[13px] tracking-[0.5em] uppercase font-headline font-semibold block mb-4">Authentic Google Maps Reviews</span>
                 <h3 class="text-3xl md:text-5xl font-headline font-black text-white uppercase tracking-tight">
-                    What <span class="text-gradient-cyan">my clients</span> say
+                    What my <span class="text-gradient-cyan">clients say</span>
                 </h3>
+
+                <!-- Desktop Nav Controls -->
+                <div class="hidden md:flex items-center justify-center gap-3 mt-6">
+                    <button id="reviews-prev" type="button" aria-label="Previous review"
+                        class="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center text-white/70 hover:text-white transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-lg backdrop-blur-sm">
+                        <span class="material-symbols-outlined text-base">arrow_back</span>
+                    </button>
+                    <span class="text-xs uppercase tracking-widest text-slate-500 font-headline font-medium px-2">Slide or drag</span>
+                    <button id="reviews-next" type="button" aria-label="Next review"
+                        class="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center text-white/70 hover:text-white transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-lg backdrop-blur-sm">
+                        <span class="material-symbols-outlined text-base">arrow_forward</span>
+                    </button>
+                </div>
             </div>
 
             <div class="relative w-full mt-12 overflow-hidden group">
@@ -1168,776 +1180,824 @@
                 <div class="reviews-slider-container w-full overflow-hidden hide-scrollbar py-6">
                     <!-- The scrolling container track -->
                     <div class="animate-marquee flex items-center gap-8 px-6">
-                        <!-- We duplicate the set of 6 cards so it scrolls seamlessly -->
-
                         <!-- ================= SET 1 ================= -->
-                        <!-- Review 1 -->
-                        <div
-                            class="relative w-[360px] md:w-[450px] shrink-0 p-8 md:p-10 rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/10 backdrop-blur-2xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500">
-                            <div
-                                class="absolute inset-0 bg-gradient-to-br from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                            </div>
-                            <svg class="absolute top-6 right-6 w-12 h-12 text-white/3 group-hover:text-electric-cyan/10 transition-colors duration-500"
-                                fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
-                                <path
-                                    d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+
+                        <!-- Review 1 (Samira) -->
+                        <div class="relative w-[360px] md:w-[450px] shrink-0 p-8 md:p-10 rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/10 backdrop-blur-2xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500 flex flex-col justify-between">
+                            <div class="absolute inset-0 bg-gradient-to-br from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                            <svg class="absolute top-6 right-6 w-12 h-12 text-white/3 group-hover:text-electric-cyan/10 transition-colors duration-500 pointer-events-none" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+                                <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
                             </svg>
 
-                            <div class="relative z-10">
-                                <div class="flex items-center justify-between mb-6">
-                                    <div class="flex flex-col gap-1">
-                                        <div
-                                            class="flex text-yellow-400 text-lg drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]">
-                                            ★★★★★</div>
-                                        <span
-                                            class="text-[9px] text-emerald-400 font-headline uppercase tracking-widest font-bold flex items-center gap-1">
-                                            <svg class="w-3.5 h-3.5 fill-emerald-400" viewBox="0 0 20 20">
-                                                <path fill-rule="evenodd"
-                                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                                    clip-rule="evenodd" />
+                            <div class="relative z-10 flex flex-col justify-between h-full">
+                                <div>
+                                    <div class="flex items-center justify-between mb-6">
+                                        <div class="flex flex-col gap-1">
+                                            <div class="flex text-yellow-400 text-lg drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]">★★★★★</div>
+                                            <span class="text-[9px] text-emerald-400 font-headline uppercase tracking-widest font-bold flex items-center gap-1">
+                                                <svg class="w-3.5 h-3.5 fill-emerald-400" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                                </svg>
+                                                Verified
+                                            </span>
+                                        </div>
+                                        <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+                                            <svg width="12" height="12" viewBox="0 0 24 24">
+                                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
                                             </svg>
-                                            Verified Review
-                                        </span>
+                                            <span class="text-white/60 text-[9px] uppercase tracking-widest font-semibold font-headline">Google</span>
+                                        </div>
                                     </div>
-                                    <div
-                                        class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
-                                        <svg width="12" height="12" viewBox="0 0 24 24">
-                                            <path fill="#4285F4"
-                                                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                                            <path fill="#34A853"
-                                                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                                            <path fill="#FBBC05"
-                                                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                                            <path fill="#EA4335"
-                                                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-                                        </svg>
-                                        <span
-                                            class="text-white/60 text-[9px] uppercase tracking-widest font-semibold font-headline">Google</span>
-                                    </div>
+                                    <p class="text-[15px] md:text-[16px] text-slate-200 font-light mb-2 leading-relaxed italic line-clamp-4">
+                                        "I had been wanting to have a website for my business for a while, and seeing the prices agencies charge, I decided to contact Musa. He is a wonderful guy, very polite and kind, who helped and guided us step by step at all times, something I greatly appreciate as I do not know much about these topics.
+
+We had a basic menu and he helped us design the menu completely and translate it into 3 languages. In addition, he took care of designing the QR codes for the tables, both for the menu and for the reviews.
+
+Now we have a website with our own identity and a direct booking system for customers that is completely free, which has allowed us to eliminate the expense and commissions of other payment platforms.
+
+Very grateful for MyNext work.
+Fully recommended!
+— Samira, owner of Bar Luna Llena"
+                                    </p>
+                                    
+                                    <button type="button" class="open-review-modal-btn inline-flex items-center gap-1.5 text-xs font-semibold text-electric-cyan hover:text-white transition-colors mb-4 text-left cursor-pointer pointer-events-auto"
+                                        data-name="Samira"
+                                        data-company="Bar Cafetería Luna Llena"
+                                        data-stars="★★★★★"
+                                        data-time="15 hours ago"
+                                        data-text="I%20had%20been%20wanting%20to%20have%20a%20website%20for%20my%20business%20for%20a%20while%2C%20and%20seeing%20the%20prices%20agencies%20charge%2C%20I%20decided%20to%20contact%20Musa.%20He%20is%20a%20wonderful%20guy%2C%20very%20polite%20and%20kind%2C%20who%20helped%20and%20guided%20us%20step%20by%20step%20at%20all%20times%2C%20something%20I%20greatly%20appreciate%20as%20I%20do%20not%20know%20much%20about%20these%20topics.%0A%0AWe%20had%20a%20basic%20menu%20and%20he%20helped%20us%20design%20the%20menu%20completely%20and%20translate%20it%20into%203%20languages.%20In%20addition%2C%20he%20took%20care%20of%20designing%20the%20QR%20codes%20for%20the%20tables%2C%20both%20for%20the%20menu%20and%20for%20the%20reviews.%0A%0ANow%20we%20have%20a%20website%20with%20our%20own%20identity%20and%20a%20direct%20booking%20system%20for%20customers%20that%20is%20completely%20free%2C%20which%20has%20allowed%20us%20to%20eliminate%20the%20expense%20and%20commissions%20of%20other%20payment%20platforms.%0A%0AVery%20grateful%20for%20MyNext%20work.%0AFully%20recommended!%0A%E2%80%94%20Samira%2C%20owner%20of%20Bar%20Luna%20Llena">
+                                        <span>Read full review</span>
+                                        <span class="text-xs transition-transform group-hover:translate-x-1">→</span>
+                                    </button>
+                                    
                                 </div>
-                                <p
-                                    class="text-[15px] md:text-[16px] text-slate-200 font-light mb-8 leading-relaxed italic">
-                                    "Brutal work by MYNEXT on the barbershop's website. He nailed the design and it's
-                                    also great because it adapts perfectly to mobile and desktop, which is fantastic for
-                                    booking appointments. It has given us a lot of visibility and reservations on a
-                                    daily basis. If you want to take your business to another level, talk to him as he
-                                    advises you on everything and is brilliant. Highly recommended service for
-                                    businesses in Palma de Mallorca!"
-                                </p>
-                                <div class="flex items-center gap-4 pt-6 border-t border-white/5">
-                                    <div
-                                        class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500/20 to-blue-600/20 flex items-center justify-center text-blue-400 font-bold text-lg border border-blue-500/30 shadow-[0_0_15px_rgba(59,130,246,0.2)]">
-                                        G</div>
+                                <div class="flex items-center gap-4 pt-4 border-t border-white/5 mt-auto">
+                                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-amber-500/20 to-orange-600/20 text-amber-400 border-amber-500/30 shadow-[0_0_15px_rgba(245,158,11,0.2)] flex items-center justify-center font-bold text-lg border">S</div>
                                     <div class="flex flex-col">
-                                        <span
-                                            class="text-white font-headline text-base font-semibold tracking-wide">Gustavo
-                                            Coyo</span>
-                                        <span
-                                            class="text-slate-500 text-[11px] uppercase tracking-widest font-medium mt-1">2
-                                            weeks ago</span>
+                                        <span class="text-white font-headline text-base font-semibold tracking-wide">Samira</span>
+                                        <span class="text-slate-500 text-[11px] uppercase tracking-widest font-medium mt-1">Bar Cafetería Luna Llena</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Stars Only 1 -->
-                        <!-- Review 2 (Danna Delgado) -->
-                        <div
-                            class="relative w-[360px] md:w-[450px] shrink-0 p-8 md:p-10 rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/10 backdrop-blur-2xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500">
-                            <div
-                                class="absolute inset-0 bg-gradient-to-br from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                            </div>
-                            <svg class="absolute top-6 right-6 w-12 h-12 text-white/3 group-hover:text-electric-cyan/10 transition-colors duration-500"
-                                fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
-                                <path
-                                    d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+                        <!-- Review 2 (Gurpreet Singh) -->
+                        <div class="relative w-[360px] md:w-[450px] shrink-0 p-8 md:p-10 rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/10 backdrop-blur-2xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500 flex flex-col justify-between">
+                            <div class="absolute inset-0 bg-gradient-to-br from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                            <svg class="absolute top-6 right-6 w-12 h-12 text-white/3 group-hover:text-electric-cyan/10 transition-colors duration-500 pointer-events-none" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+                                <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
                             </svg>
 
-                            <div class="relative z-10">
-                                <div class="flex items-center justify-between mb-6">
-                                    <div class="flex flex-col gap-1">
-                                        <div
-                                            class="flex text-yellow-400 text-lg drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]">
-                                            ★★★★★</div>
-                                        <span
-                                            class="text-[9px] text-emerald-400 font-headline uppercase tracking-widest font-bold flex items-center gap-1">
-                                            <svg class="w-3.5 h-3.5 fill-emerald-400" viewBox="0 0 20 20">
-                                                <path fill-rule="evenodd"
-                                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                                    clip-rule="evenodd" />
+                            <div class="relative z-10 flex flex-col justify-between h-full">
+                                <div>
+                                    <div class="flex items-center justify-between mb-6">
+                                        <div class="flex flex-col gap-1">
+                                            <div class="flex text-yellow-400 text-lg drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]">★★★★★</div>
+                                            <span class="text-[9px] text-emerald-400 font-headline uppercase tracking-widest font-bold flex items-center gap-1">
+                                                <svg class="w-3.5 h-3.5 fill-emerald-400" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                                </svg>
+                                                Verified
+                                            </span>
+                                        </div>
+                                        <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+                                            <svg width="12" height="12" viewBox="0 0 24 24">
+                                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
                                             </svg>
-                                            Verified Review
-                                        </span>
+                                            <span class="text-white/60 text-[9px] uppercase tracking-widest font-semibold font-headline">Google</span>
+                                        </div>
                                     </div>
-                                    <div
-                                        class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
-                                        <svg width="12" height="12" viewBox="0 0 24 24">
-                                            <path fill="#4285F4"
-                                                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                                            <path fill="#34A853"
-                                                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                                            <path fill="#FBBC05"
-                                                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                                            <path fill="#EA4335"
-                                                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-                                        </svg>
-                                        <span
-                                            class="text-white/60 text-[9px] uppercase tracking-widest font-semibold font-headline">Google</span>
-                                    </div>
+                                    <p class="text-[15px] md:text-[16px] text-slate-200 font-light mb-2 leading-relaxed italic line-clamp-4">
+                                        "I am very happy with MyNext work. From the beginning Musa understood what we needed for our restaurant and helped us shape it.
+
+He made the website for us and also a custom application so that we can modify our own menu ourselves, plus a personalized reservation system for our restaurant without having to depend on other platforms or pay extra subscriptions. Honestly, it has made things much easier for us.
+
+Dealing with Musa has been great. He was always attentive and willing to help us with changes and details as they came up, both in the menu app and in the booking system.
+
+We are very satisfied with the result and definitely recommend his work.
+
+— Gary, from Buon Appétito"
+                                    </p>
+                                    
+                                    <button type="button" class="open-review-modal-btn inline-flex items-center gap-1.5 text-xs font-semibold text-electric-cyan hover:text-white transition-colors mb-4 text-left cursor-pointer pointer-events-auto"
+                                        data-name="Gurpreet Singh"
+                                        data-company="Restaurante Buon Appetito"
+                                        data-stars="★★★★★"
+                                        data-time="1 day ago"
+                                        data-text="I%20am%20very%20happy%20with%20MyNext%20work.%20From%20the%20beginning%20Musa%20understood%20what%20we%20needed%20for%20our%20restaurant%20and%20helped%20us%20shape%20it.%0A%0AHe%20made%20the%20website%20for%20us%20and%20also%20a%20custom%20application%20so%20that%20we%20can%20modify%20our%20own%20menu%20ourselves%2C%20plus%20a%20personalized%20reservation%20system%20for%20our%20restaurant%20without%20having%20to%20depend%20on%20other%20platforms%20or%20pay%20extra%20subscriptions.%20Honestly%2C%20it%20has%20made%20things%20much%20easier%20for%20us.%0A%0ADealing%20with%20Musa%20has%20been%20great.%20He%20was%20always%20attentive%20and%20willing%20to%20help%20us%20with%20changes%20and%20details%20as%20they%20came%20up%2C%20both%20in%20the%20menu%20app%20and%20in%20the%20booking%20system.%0A%0AWe%20are%20very%20satisfied%20with%20the%20result%20and%20definitely%20recommend%20his%20work.%0A%0A%E2%80%94%20Gary%2C%20from%20Buon%20App%C3%A9tito">
+                                        <span>Read full review</span>
+                                        <span class="text-xs transition-transform group-hover:translate-x-1">→</span>
+                                    </button>
+                                    
                                 </div>
-                                <div class="my-auto flex flex-col items-center justify-center py-6 text-center">
-                                    <div
-                                        class="flex text-amber-400 text-2xl drop-shadow-[0_0_12px_rgba(251,191,36,0.7)] tracking-widest">
-                                        ★★★★★</div>
-                                </div>
-                                <div class="flex items-center gap-4 pt-6 border-t border-white/5">
-                                    <div
-                                        class="w-12 h-12 rounded-full bg-gradient-to-br from-pink-500/20 to-rose-500/20 flex items-center justify-center text-pink-400 font-bold text-lg border border-pink-500/30 shadow-[0_0_15px_rgba(244,63,94,0.2)]">
-                                        D</div>
+                                <div class="flex items-center gap-4 pt-4 border-t border-white/5 mt-auto">
+                                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-600/20 text-electric-cyan border-cyan-500/30 shadow-[0_0_15px_rgba(0,242,255,0.2)] flex items-center justify-center font-bold text-lg border">G</div>
                                     <div class="flex flex-col">
-                                        <span
-                                            class="text-white font-headline text-base font-semibold tracking-wide">Danna
-                                            Delgado</span>
-                                        <span
-                                            class="text-slate-500 text-[11px] uppercase tracking-widest font-medium mt-1">3
-                                            weeks ago</span>
+                                        <span class="text-white font-headline text-base font-semibold tracking-wide">Gurpreet Singh</span>
+                                        <span class="text-slate-500 text-[11px] uppercase tracking-widest font-medium mt-1">Restaurante Buon Appetito</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Review 2 -->
-                        <div
-                            class="relative w-[360px] md:w-[450px] shrink-0 p-8 md:p-10 rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/10 backdrop-blur-2xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500">
-                            <div
-                                class="absolute inset-0 bg-gradient-to-br from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                            </div>
-                            <svg class="absolute top-6 right-6 w-12 h-12 text-white/3 group-hover:text-electric-cyan/10 transition-colors duration-500"
-                                fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
-                                <path
-                                    d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+                        <!-- Review 3 (Goyo J.R.) -->
+                        <div class="relative w-[360px] md:w-[450px] shrink-0 p-8 md:p-10 rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/10 backdrop-blur-2xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500 flex flex-col justify-between">
+                            <div class="absolute inset-0 bg-gradient-to-br from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                            <svg class="absolute top-6 right-6 w-12 h-12 text-white/3 group-hover:text-electric-cyan/10 transition-colors duration-500 pointer-events-none" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+                                <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
                             </svg>
 
-                            <div class="relative z-10">
-                                <div class="flex items-center justify-between mb-6">
-                                    <div class="flex flex-col gap-1">
-                                        <div
-                                            class="flex text-yellow-400 text-lg drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]">
-                                            ★★★★★</div>
-                                        <span
-                                            class="text-[9px] text-emerald-400 font-headline uppercase tracking-widest font-bold flex items-center gap-1">
-                                            <svg class="w-3.5 h-3.5 fill-emerald-400" viewBox="0 0 20 20">
-                                                <path fill-rule="evenodd"
-                                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                                    clip-rule="evenodd" />
+                            <div class="relative z-10 flex flex-col justify-between h-full">
+                                <div>
+                                    <div class="flex items-center justify-between mb-6">
+                                        <div class="flex flex-col gap-1">
+                                            <div class="flex text-yellow-400 text-lg drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]">★★★★★</div>
+                                            <span class="text-[9px] text-emerald-400 font-headline uppercase tracking-widest font-bold flex items-center gap-1">
+                                                <svg class="w-3.5 h-3.5 fill-emerald-400" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                                </svg>
+                                                Verified
+                                            </span>
+                                        </div>
+                                        <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+                                            <svg width="12" height="12" viewBox="0 0 24 24">
+                                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
                                             </svg>
-                                            Verified Review
-                                        </span>
+                                            <span class="text-white/60 text-[9px] uppercase tracking-widest font-semibold font-headline">Google</span>
+                                        </div>
                                     </div>
-                                    <div
-                                        class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
-                                        <svg width="12" height="12" viewBox="0 0 24 24">
-                                            <path fill="#4285F4"
-                                                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                                            <path fill="#34A853"
-                                                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                                            <path fill="#FBBC05"
-                                                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                                            <path fill="#EA4335"
-                                                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-                                        </svg>
-                                        <span
-                                            class="text-white/60 text-[9px] uppercase tracking-widest font-semibold font-headline">Google</span>
-                                    </div>
+                                    <p class="text-[15px] md:text-[16px] text-slate-200 font-light mb-2 leading-relaxed italic line-clamp-4">
+                                        "Very happy with MyNext work. Musa made the Ecuaplac website from scratch and the result was exactly what we were looking for. Now our clients can find all the company information in a much more convenient and professional way. In addition, he also designed our new business cards with the new logo and the QR code that leads directly to the web, and prepared the QR code to place on the company van. These are small details that help project a much more professional image. Throughout the process, communication with Musa has been very good. He always responded quickly, listened to our ideas, and made the changes we needed without any issues. If you have a business and are thinking about making a website or renewing your company image, I recommend contacting MyNext. In our case, the experience has been very positive."
+                                    </p>
+                                    
+                                    <button type="button" class="open-review-modal-btn inline-flex items-center gap-1.5 text-xs font-semibold text-electric-cyan hover:text-white transition-colors mb-4 text-left cursor-pointer pointer-events-auto"
+                                        data-name="Goyo J.R."
+                                        data-company="Ecuaplac"
+                                        data-stars="★★★★★"
+                                        data-time="3 days ago"
+                                        data-text="Very%20happy%20with%20MyNext%20work.%20Musa%20made%20the%20Ecuaplac%20website%20from%20scratch%20and%20the%20result%20was%20exactly%20what%20we%20were%20looking%20for.%20Now%20our%20clients%20can%20find%20all%20the%20company%20information%20in%20a%20much%20more%20convenient%20and%20professional%20way.%20In%20addition%2C%20he%20also%20designed%20our%20new%20business%20cards%20with%20the%20new%20logo%20and%20the%20QR%20code%20that%20leads%20directly%20to%20the%20web%2C%20and%20prepared%20the%20QR%20code%20to%20place%20on%20the%20company%20van.%20These%20are%20small%20details%20that%20help%20project%20a%20much%20more%20professional%20image.%20Throughout%20the%20process%2C%20communication%20with%20Musa%20has%20been%20very%20good.%20He%20always%20responded%20quickly%2C%20listened%20to%20our%20ideas%2C%20and%20made%20the%20changes%20we%20needed%20without%20any%20issues.%20If%20you%20have%20a%20business%20and%20are%20thinking%20about%20making%20a%20website%20or%20renewing%20your%20company%20image%2C%20I%20recommend%20contacting%20MyNext.%20In%20our%20case%2C%20the%20experience%20has%20been%20very%20positive.">
+                                        <span>Read full review</span>
+                                        <span class="text-xs transition-transform group-hover:translate-x-1">→</span>
+                                    </button>
+                                    
                                 </div>
-                                <p
-                                    class="text-[15px] md:text-[16px] text-slate-200 font-light mb-8 leading-relaxed italic">
-                                    "As the creator of Teen G, I wanted to take my idea to the internet in a
-                                    professional way. I met Next Era, an ecommerce prototype developed by MyNext, and I
-                                    really liked the design and the image it transmitted. Musa helped me from the
-                                    beginning, answering questions, providing ideas and understanding what I wanted to
-                                    achieve with my project. The treatment was close and he was always willing to help
-                                    when I needed it. I am very happy with the experience and I recommend MyNext to
-                                    anyone who needs a professional website for their business or brand."
-                                </p>
-                                <div class="flex items-center gap-4 pt-6 border-t border-white/5">
-                                    <div
-                                        class="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500/20 to-purple-500/20 flex items-center justify-center text-indigo-400 font-bold text-lg border border-indigo-500/30 shadow-[0_0_15px_rgba(99,102,241,0.2)]">
-                                        J</div>
+                                <div class="flex items-center gap-4 pt-4 border-t border-white/5 mt-auto">
+                                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-500/20 to-teal-600/20 text-emerald-400 border-emerald-500/30 shadow-[0_0_15px_rgba(16,185,129,0.2)] flex items-center justify-center font-bold text-lg border">G</div>
                                     <div class="flex flex-col">
-                                        <span
-                                            class="text-white font-headline text-base font-semibold tracking-wide">Jhon
-                                            Soliz</span>
-                                        <span
-                                            class="text-slate-500 text-[11px] uppercase tracking-widest font-medium mt-1">4
-                                            weeks ago</span>
+                                        <span class="text-white font-headline text-base font-semibold tracking-wide">Goyo J.R.</span>
+                                        <span class="text-slate-500 text-[11px] uppercase tracking-widest font-medium mt-1">Ecuaplac</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Stars Only 2 -->
-                        <div
-                            class="relative w-[280px] md:w-[320px] shrink-0 p-8 flex flex-col justify-center items-center text-center rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/5 backdrop-blur-xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500">
-                            <div
-                                class="absolute inset-0 bg-gradient-to-t from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <!-- Review 4 (Gustavo Coyo) -->
+                        <div class="relative w-[360px] md:w-[450px] shrink-0 p-8 md:p-10 rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/10 backdrop-blur-2xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500 flex flex-col justify-between">
+                            <div class="absolute inset-0 bg-gradient-to-br from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                            <svg class="absolute top-6 right-6 w-12 h-12 text-white/3 group-hover:text-electric-cyan/10 transition-colors duration-500 pointer-events-none" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+                                <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+                            </svg>
+
+                            <div class="relative z-10 flex flex-col justify-between h-full">
+                                <div>
+                                    <div class="flex items-center justify-between mb-6">
+                                        <div class="flex flex-col gap-1">
+                                            <div class="flex text-yellow-400 text-lg drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]">★★★★★</div>
+                                            <span class="text-[9px] text-emerald-400 font-headline uppercase tracking-widest font-bold flex items-center gap-1">
+                                                <svg class="w-3.5 h-3.5 fill-emerald-400" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                                </svg>
+                                                Verified
+                                            </span>
+                                        </div>
+                                        <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+                                            <svg width="12" height="12" viewBox="0 0 24 24">
+                                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                                            </svg>
+                                            <span class="text-white/60 text-[9px] uppercase tracking-widest font-semibold font-headline">Google</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-[15px] md:text-[16px] text-slate-200 font-light mb-2 leading-relaxed italic line-clamp-4">
+                                        "Brutal work by MYNEXT on the barbershop website. He nailed the design and it is also great because it adapts perfectly to mobile and desktop, which is fantastic for booking appointments. It has given us a lot of visibility and reservations on a daily basis. If you want to take your business to another level, talk to him as he advises you on everything and is brilliant. Highly recommended service for businesses in Palma de Mallorca!"
+                                    </p>
+                                    
+                                    <button type="button" class="open-review-modal-btn inline-flex items-center gap-1.5 text-xs font-semibold text-electric-cyan hover:text-white transition-colors mb-4 text-left cursor-pointer pointer-events-auto"
+                                        data-name="Gustavo Coyo"
+                                        data-company="Palma Barber Club"
+                                        data-stars="★★★★★"
+                                        data-time="2 weeks ago"
+                                        data-text="Brutal%20work%20by%20MYNEXT%20on%20the%20barbershop%20website.%20He%20nailed%20the%20design%20and%20it%20is%20also%20great%20because%20it%20adapts%20perfectly%20to%20mobile%20and%20desktop%2C%20which%20is%20fantastic%20for%20booking%20appointments.%20It%20has%20given%20us%20a%20lot%20of%20visibility%20and%20reservations%20on%20a%20daily%20basis.%20If%20you%20want%20to%20take%20your%20business%20to%20another%20level%2C%20talk%20to%20him%20as%20he%20advises%20you%20on%20everything%20and%20is%20brilliant.%20Highly%20recommended%20service%20for%20businesses%20in%20Palma%20de%20Mallorca!">
+                                        <span>Read full review</span>
+                                        <span class="text-xs transition-transform group-hover:translate-x-1">→</span>
+                                    </button>
+                                    
+                                </div>
+                                <div class="flex items-center gap-4 pt-4 border-t border-white/5 mt-auto">
+                                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500/20 to-blue-600/20 text-blue-400 border-blue-500/30 shadow-[0_0_15px_rgba(59,130,246,0.2)] flex items-center justify-center font-bold text-lg border">G</div>
+                                    <div class="flex flex-col">
+                                        <span class="text-white font-headline text-base font-semibold tracking-wide">Gustavo Coyo</span>
+                                        <span class="text-slate-500 text-[11px] uppercase tracking-widest font-medium mt-1">Palma Barber Club</span>
+                                    </div>
+                                </div>
                             </div>
+                        </div>
+
+                        <!-- Review 5 (Jhon Soliz) -->
+                        <div class="relative w-[360px] md:w-[450px] shrink-0 p-8 md:p-10 rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/10 backdrop-blur-2xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500 flex flex-col justify-between">
+                            <div class="absolute inset-0 bg-gradient-to-br from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                            <svg class="absolute top-6 right-6 w-12 h-12 text-white/3 group-hover:text-electric-cyan/10 transition-colors duration-500 pointer-events-none" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+                                <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+                            </svg>
+
+                            <div class="relative z-10 flex flex-col justify-between h-full">
+                                <div>
+                                    <div class="flex items-center justify-between mb-6">
+                                        <div class="flex flex-col gap-1">
+                                            <div class="flex text-yellow-400 text-lg drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]">★★★★★</div>
+                                            <span class="text-[9px] text-emerald-400 font-headline uppercase tracking-widest font-bold flex items-center gap-1">
+                                                <svg class="w-3.5 h-3.5 fill-emerald-400" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                                </svg>
+                                                Verified
+                                            </span>
+                                        </div>
+                                        <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+                                            <svg width="12" height="12" viewBox="0 0 24 24">
+                                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                                            </svg>
+                                            <span class="text-white/60 text-[9px] uppercase tracking-widest font-semibold font-headline">Google</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-[15px] md:text-[16px] text-slate-200 font-light mb-2 leading-relaxed italic line-clamp-4">
+                                        "As the creator of Teen G, I wanted to take my idea to the internet in a professional way. I met Next Era, an ecommerce prototype developed by MyNext, and I really liked the design and the image it transmitted. Musa helped me from the beginning, answering questions, providing ideas and understanding what I wanted to achieve with my project. The treatment was close and he was always willing to help when I needed it. I am very happy with the experience and I recommend MyNext to anyone who needs a professional website for their business or brand."
+                                    </p>
+                                    
+                                    <button type="button" class="open-review-modal-btn inline-flex items-center gap-1.5 text-xs font-semibold text-electric-cyan hover:text-white transition-colors mb-4 text-left cursor-pointer pointer-events-auto"
+                                        data-name="Jhon Soliz"
+                                        data-company="Teen G / Next Era"
+                                        data-stars="★★★★★"
+                                        data-time="4 weeks ago"
+                                        data-text="As%20the%20creator%20of%20Teen%20G%2C%20I%20wanted%20to%20take%20my%20idea%20to%20the%20internet%20in%20a%20professional%20way.%20I%20met%20Next%20Era%2C%20an%20ecommerce%20prototype%20developed%20by%20MyNext%2C%20and%20I%20really%20liked%20the%20design%20and%20the%20image%20it%20transmitted.%20Musa%20helped%20me%20from%20the%20beginning%2C%20answering%20questions%2C%20providing%20ideas%20and%20understanding%20what%20I%20wanted%20to%20achieve%20with%20my%20project.%20The%20treatment%20was%20close%20and%20he%20was%20always%20willing%20to%20help%20when%20I%20needed%20it.%20I%20am%20very%20happy%20with%20the%20experience%20and%20I%20recommend%20MyNext%20to%20anyone%20who%20needs%20a%20professional%20website%20for%20their%20business%20or%20brand.">
+                                        <span>Read full review</span>
+                                        <span class="text-xs transition-transform group-hover:translate-x-1">→</span>
+                                    </button>
+                                    
+                                </div>
+                                <div class="flex items-center gap-4 pt-4 border-t border-white/5 mt-auto">
+                                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500/20 to-purple-500/20 text-indigo-400 border-indigo-500/30 shadow-[0_0_15px_rgba(99,102,241,0.2)] flex items-center justify-center font-bold text-lg border">J</div>
+                                    <div class="flex flex-col">
+                                        <span class="text-white font-headline text-base font-semibold tracking-wide">Jhon Soliz</span>
+                                        <span class="text-slate-500 text-[11px] uppercase tracking-widest font-medium mt-1">Teen G / Next Era</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Review 6 (Ilyas Etaouriri) -->
+                        <div class="relative w-[360px] md:w-[450px] shrink-0 p-8 md:p-10 rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/10 backdrop-blur-2xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500 flex flex-col justify-between">
+                            <div class="absolute inset-0 bg-gradient-to-br from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                            <svg class="absolute top-6 right-6 w-12 h-12 text-white/3 group-hover:text-electric-cyan/10 transition-colors duration-500 pointer-events-none" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+                                <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+                            </svg>
+
+                            <div class="relative z-10 flex flex-col justify-between h-full">
+                                <div>
+                                    <div class="flex items-center justify-between mb-6">
+                                        <div class="flex flex-col gap-1">
+                                            <div class="flex text-yellow-400 text-lg drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]">★★★★★</div>
+                                            <span class="text-[9px] text-emerald-400 font-headline uppercase tracking-widest font-bold flex items-center gap-1">
+                                                <svg class="w-3.5 h-3.5 fill-emerald-400" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                                </svg>
+                                                Verified
+                                            </span>
+                                        </div>
+                                        <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+                                            <svg width="12" height="12" viewBox="0 0 24 24">
+                                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                                            </svg>
+                                            <span class="text-white/60 text-[9px] uppercase tracking-widest font-semibold font-headline">Google</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-[15px] md:text-[16px] text-slate-200 font-light mb-2 leading-relaxed italic line-clamp-4">
+                                        "Very good guy, I recommend him. Punctual, professional, attends very well, explains himself very well"
+                                    </p>
+                                    
+                                </div>
+                                <div class="flex items-center gap-4 pt-4 border-t border-white/5 mt-auto">
+                                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-orange-500/20 to-red-500/20 text-orange-400 border-orange-500/30 shadow-[0_0_15px_rgba(249,115,22,0.2)] flex items-center justify-center font-bold text-lg border">I</div>
+                                    <div class="flex flex-col">
+                                        <span class="text-white font-headline text-base font-semibold tracking-wide">Ilyas Etaouriri</span>
+                                        <span class="text-slate-500 text-[11px] uppercase tracking-widest font-medium mt-1">Verified Client</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Stars Only (Danna Delgado) -->
+                        <div class="relative w-[280px] md:w-[320px] shrink-0 p-8 flex flex-col justify-center items-center text-center rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/5 backdrop-blur-xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                             <div class="relative z-10 flex flex-col items-center">
-                                <div
-                                    class="mb-5 flex items-center justify-center w-10 h-10 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm shadow-lg">
+                                <div class="mb-5 flex items-center justify-center w-10 h-10 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm shadow-lg">
                                     <svg width="16" height="16" viewBox="0 0 24 24">
-                                        <path fill="#4285F4"
-                                            d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                                        <path fill="#34A853"
-                                            d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                                        <path fill="#FBBC05"
-                                            d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                                        <path fill="#EA4335"
-                                            d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
                                     </svg>
                                 </div>
-                                <div
-                                    class="flex text-yellow-400 text-xl drop-shadow-[0_0_12px_rgba(250,204,21,0.6)] mb-6">
-                                    ★★★★★</div>
-                                <div
-                                    class="w-14 h-14 rounded-full bg-gradient-to-br from-teal-500/20 to-emerald-500/20 flex items-center justify-center text-teal-400 font-bold text-xl border border-teal-500/30 shadow-[0_0_15px_rgba(20,184,166,0.2)] mb-4">
-                                    J</div>
-                                <span
-                                    class="text-white font-headline text-[15px] font-semibold tracking-wide">Juan</span>
-                                <span class="text-slate-500 text-[10px] uppercase tracking-widest font-medium mt-2">3
-                                    weeks ago</span>
+                                <div class="flex text-yellow-400 text-xl drop-shadow-[0_0_12px_rgba(250,204,21,0.6)] mb-6">★★★★★</div>
+                                <div class="w-14 h-14 rounded-full bg-gradient-to-br from-pink-500/20 to-rose-500/20 text-pink-400 border-pink-500/30 shadow-[0_0_15px_rgba(244,63,94,0.2)] flex items-center justify-center font-bold text-xl border mb-4">D</div>
+                                <span class="text-white font-headline text-[15px] font-semibold tracking-wide">Danna Delgado</span>
+                                <span class="text-slate-500 text-[10px] uppercase tracking-widest font-medium mt-2">3 weeks ago</span>
                             </div>
                         </div>
 
-                        <!-- Review 3 -->
-                        <div
-                            class="relative w-[360px] md:w-[450px] shrink-0 p-8 md:p-10 rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/10 backdrop-blur-2xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500">
-                            <div
-                                class="absolute inset-0 bg-gradient-to-br from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                            </div>
-                            <svg class="absolute top-6 right-6 w-12 h-12 text-white/3 group-hover:text-electric-cyan/10 transition-colors duration-500"
-                                fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
-                                <path
-                                    d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
-                            </svg>
-
-                            <div class="relative z-10">
-                                <div class="flex items-center justify-between mb-6">
-                                    <div class="flex flex-col gap-1">
-                                        <div
-                                            class="flex text-yellow-400 text-lg drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]">
-                                            ★★★★★</div>
-                                        <span
-                                            class="text-[9px] text-emerald-400 font-headline uppercase tracking-widest font-bold flex items-center gap-1">
-                                            <svg class="w-3.5 h-3.5 fill-emerald-400" viewBox="0 0 20 20">
-                                                <path fill-rule="evenodd"
-                                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                            Verified Review
-                                        </span>
-                                    </div>
-                                    <div
-                                        class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
-                                        <svg width="12" height="12" viewBox="0 0 24 24">
-                                            <path fill="#4285F4"
-                                                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                                            <path fill="#34A853"
-                                                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                                            <path fill="#FBBC05"
-                                                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                                            <path fill="#EA4335"
-                                                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-                                        </svg>
-                                        <span
-                                            class="text-white/60 text-[9px] uppercase tracking-widest font-semibold font-headline">Google</span>
-                                    </div>
-                                </div>
-                                <p
-                                    class="text-[15px] md:text-[16px] text-slate-200 font-light mb-8 leading-relaxed italic">
-                                    "Very good guy, I recommend him. Punctual, professional, attends very well, explains
-                                    himself very well"
-                                </p>
-                                <div class="flex items-center gap-4 pt-6 border-t border-white/5">
-                                    <div
-                                        class="w-12 h-12 rounded-full bg-gradient-to-br from-orange-500/20 to-red-500/20 flex items-center justify-center text-orange-400 font-bold text-lg border border-orange-500/30 shadow-[0_0_15px_rgba(249,115,22,0.2)]">
-                                        I</div>
-                                    <div class="flex flex-col">
-                                        <span
-                                            class="text-white font-headline text-base font-semibold tracking-wide">Ilyas
-                                            Etaouriri</span>
-                                        <span
-                                            class="text-slate-500 text-[11px] uppercase tracking-widest font-medium mt-1">4
-                                            days ago</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Stars Only 3 -->
-                        <div
-                            class="relative w-[280px] md:w-[320px] shrink-0 p-8 flex flex-col justify-center items-center text-center rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/5 backdrop-blur-xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500">
-                            <div
-                                class="absolute inset-0 bg-gradient-to-t from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                            </div>
+                        <!-- Stars Only (John smith) -->
+                        <div class="relative w-[280px] md:w-[320px] shrink-0 p-8 flex flex-col justify-center items-center text-center rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/5 backdrop-blur-xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                             <div class="relative z-10 flex flex-col items-center">
-                                <div
-                                    class="mb-5 flex items-center justify-center w-10 h-10 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm shadow-lg">
+                                <div class="mb-5 flex items-center justify-center w-10 h-10 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm shadow-lg">
                                     <svg width="16" height="16" viewBox="0 0 24 24">
-                                        <path fill="#4285F4"
-                                            d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                                        <path fill="#34A853"
-                                            d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                                        <path fill="#FBBC05"
-                                            d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                                        <path fill="#EA4335"
-                                            d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
                                     </svg>
                                 </div>
-                                <div
-                                    class="flex text-yellow-400 text-xl drop-shadow-[0_0_12px_rgba(250,204,21,0.6)] mb-6">
-                                    ★★★★★</div>
-                                <div
-                                    class="w-14 h-14 rounded-full bg-gradient-to-br from-slate-500/20 to-gray-500/20 flex items-center justify-center text-slate-400 font-bold text-xl border border-slate-500/30 shadow-[0_0_15px_rgba(100,116,139,0.2)] mb-4">
-                                    J</div>
-                                <span class="text-white font-headline text-[15px] font-semibold tracking-wide">John
-                                    smith</span>
-                                <span class="text-slate-500 text-[10px] uppercase tracking-widest font-medium mt-2">1
-                                    month ago</span>
+                                <div class="flex text-yellow-400 text-xl drop-shadow-[0_0_12px_rgba(250,204,21,0.6)] mb-6">★★★★★</div>
+                                <div class="w-14 h-14 rounded-full bg-gradient-to-br from-slate-500/20 to-gray-500/20 text-slate-400 border-slate-500/30 shadow-[0_0_15px_rgba(100,116,139,0.2)] flex items-center justify-center font-bold text-xl border mb-4">J</div>
+                                <span class="text-white font-headline text-[15px] font-semibold tracking-wide">John smith</span>
+                                <span class="text-slate-500 text-[10px] uppercase tracking-widest font-medium mt-2">1 month ago</span>
                             </div>
                         </div>
 
-                        <!-- Review Gurpreet Singh -->
-                        <div
-                            class="relative w-[360px] md:w-[450px] shrink-0 p-8 md:p-10 rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/10 backdrop-blur-2xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500">
-                            <div
-                                class="absolute inset-0 bg-gradient-to-br from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                            </div>
-                            <svg class="absolute top-6 right-6 w-12 h-12 text-white/3 group-hover:text-electric-cyan/10 transition-colors duration-500"
-                                fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
-                                <path
-                                    d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
-                            </svg>
-
-                            <div class="relative z-10">
-                                <div class="flex items-center justify-between mb-6">
-                                    <div class="flex flex-col gap-1">
-                                        <div
-                                            class="flex text-yellow-400 text-lg drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]">
-                                            ★★★★★</div>
-                                        <span
-                                            class="text-[9px] text-emerald-400 font-headline uppercase tracking-widest font-bold flex items-center gap-1">
-                                            <svg class="w-3.5 h-3.5 fill-emerald-400" viewBox="0 0 20 20">
-                                                <path fill-rule="evenodd"
-                                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                            Verified Review
-                                        </span>
-                                    </div>
-                                    <div
-                                        class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
-                                        <svg width="12" height="12" viewBox="0 0 24 24">
-                                            <path fill="#4285F4"
-                                                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                                            <path fill="#34A853"
-                                                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                                            <path fill="#FBBC05"
-                                                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                                            <path fill="#EA4335"
-                                                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-                                        </svg>
-                                        <span
-                                            class="text-white/60 text-[9px] uppercase tracking-widest font-semibold font-headline">Google</span>
-                                    </div>
+                        <!-- Stars Only (Anuar Zbat) -->
+                        <div class="relative w-[280px] md:w-[320px] shrink-0 p-8 flex flex-col justify-center items-center text-center rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/5 backdrop-blur-xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="relative z-10 flex flex-col items-center">
+                                <div class="mb-5 flex items-center justify-center w-10 h-10 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm shadow-lg">
+                                    <svg width="16" height="16" viewBox="0 0 24 24">
+                                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                                    </svg>
                                 </div>
-                                <p
-                                    class="text-[15px] md:text-[16px] text-slate-200 font-light mb-8 leading-relaxed italic line-clamp-4">
-                                    "I am very happy with MyNext's work. From the beginning Musa understood what we needed for our restaurant and helped us shape it. He made the website and a custom app to manage the menu, plus a direct booking system without extra subscriptions. We are very satisfied!"
-                                </p>
-                                <div class="flex items-center gap-4 pt-6 border-t border-white/5">
-                                    <div
-                                        class="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-600/20 flex items-center justify-center text-electric-cyan font-bold text-lg border border-cyan-500/30 shadow-[0_0_15px_rgba(0,242,255,0.2)]">
-                                        G</div>
-                                    <div class="flex flex-col">
-                                        <span
-                                            class="text-white font-headline text-base font-semibold tracking-wide">Gurpreet Singh</span>
-                                        <span
-                                            class="text-slate-500 text-[11px] uppercase tracking-widest font-medium mt-1">Restaurante Buon Appetito</span>
-                                    </div>
-                                </div>
+                                <div class="flex text-yellow-400 text-xl drop-shadow-[0_0_12px_rgba(250,204,21,0.6)] mb-6">★★★★★</div>
+                                <div class="w-14 h-14 rounded-full bg-gradient-to-br from-teal-500/20 to-cyan-500/20 text-teal-400 border-teal-500/30 shadow-[0_0_15px_rgba(20,184,166,0.2)] flex items-center justify-center font-bold text-xl border mb-4">A</div>
+                                <span class="text-white font-headline text-[15px] font-semibold tracking-wide">Anuar Zbat</span>
+                                <span class="text-slate-500 text-[10px] uppercase tracking-widest font-medium mt-2">4 days ago</span>
                             </div>
                         </div>
 
                         <!-- ================= SET 2 (Identical for seamless scroll) ================= -->
-                        <!-- Review 1 -->
-                        <div
-                            class="relative w-[360px] md:w-[450px] shrink-0 p-8 md:p-10 rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/10 backdrop-blur-2xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500">
-                            <div
-                                class="absolute inset-0 bg-gradient-to-br from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                            </div>
-                            <svg class="absolute top-6 right-6 w-12 h-12 text-white/3 group-hover:text-electric-cyan/10 transition-colors duration-500"
-                                fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
-                                <path
-                                    d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+
+                        <!-- Review 1 (Samira) -->
+                        <div class="relative w-[360px] md:w-[450px] shrink-0 p-8 md:p-10 rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/10 backdrop-blur-2xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500 flex flex-col justify-between">
+                            <div class="absolute inset-0 bg-gradient-to-br from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                            <svg class="absolute top-6 right-6 w-12 h-12 text-white/3 group-hover:text-electric-cyan/10 transition-colors duration-500 pointer-events-none" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+                                <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
                             </svg>
 
-                            <div class="relative z-10">
-                                <div class="flex items-center justify-between mb-6">
-                                    <div class="flex flex-col gap-1">
-                                        <div
-                                            class="flex text-yellow-400 text-lg drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]">
-                                            ★★★★★</div>
-                                        <span
-                                            class="text-[9px] text-emerald-400 font-headline uppercase tracking-widest font-bold flex items-center gap-1">
-                                            <svg class="w-3.5 h-3.5 fill-emerald-400" viewBox="0 0 20 20">
-                                                <path fill-rule="evenodd"
-                                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                                    clip-rule="evenodd" />
+                            <div class="relative z-10 flex flex-col justify-between h-full">
+                                <div>
+                                    <div class="flex items-center justify-between mb-6">
+                                        <div class="flex flex-col gap-1">
+                                            <div class="flex text-yellow-400 text-lg drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]">★★★★★</div>
+                                            <span class="text-[9px] text-emerald-400 font-headline uppercase tracking-widest font-bold flex items-center gap-1">
+                                                <svg class="w-3.5 h-3.5 fill-emerald-400" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                                </svg>
+                                                Verified
+                                            </span>
+                                        </div>
+                                        <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+                                            <svg width="12" height="12" viewBox="0 0 24 24">
+                                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
                                             </svg>
-                                            Verified Review
-                                        </span>
+                                            <span class="text-white/60 text-[9px] uppercase tracking-widest font-semibold font-headline">Google</span>
+                                        </div>
                                     </div>
-                                    <div
-                                        class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
-                                        <svg width="12" height="12" viewBox="0 0 24 24">
-                                            <path fill="#4285F4"
-                                                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                                            <path fill="#34A853"
-                                                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                                            <path fill="#FBBC05"
-                                                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                                            <path fill="#EA4335"
-                                                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-                                        </svg>
-                                        <span
-                                            class="text-white/60 text-[9px] uppercase tracking-widest font-semibold font-headline">Google</span>
-                                    </div>
+                                    <p class="text-[15px] md:text-[16px] text-slate-200 font-light mb-2 leading-relaxed italic line-clamp-4">
+                                        "I had been wanting to have a website for my business for a while, and seeing the prices agencies charge, I decided to contact Musa. He is a wonderful guy, very polite and kind, who helped and guided us step by step at all times, something I greatly appreciate as I do not know much about these topics.
+
+We had a basic menu and he helped us design the menu completely and translate it into 3 languages. In addition, he took care of designing the QR codes for the tables, both for the menu and for the reviews.
+
+Now we have a website with our own identity and a direct booking system for customers that is completely free, which has allowed us to eliminate the expense and commissions of other payment platforms.
+
+Very grateful for MyNext work.
+Fully recommended!
+— Samira, owner of Bar Luna Llena"
+                                    </p>
+                                    
+                                    <button type="button" class="open-review-modal-btn inline-flex items-center gap-1.5 text-xs font-semibold text-electric-cyan hover:text-white transition-colors mb-4 text-left cursor-pointer pointer-events-auto"
+                                        data-name="Samira"
+                                        data-company="Bar Cafetería Luna Llena"
+                                        data-stars="★★★★★"
+                                        data-time="15 hours ago"
+                                        data-text="I%20had%20been%20wanting%20to%20have%20a%20website%20for%20my%20business%20for%20a%20while%2C%20and%20seeing%20the%20prices%20agencies%20charge%2C%20I%20decided%20to%20contact%20Musa.%20He%20is%20a%20wonderful%20guy%2C%20very%20polite%20and%20kind%2C%20who%20helped%20and%20guided%20us%20step%20by%20step%20at%20all%20times%2C%20something%20I%20greatly%20appreciate%20as%20I%20do%20not%20know%20much%20about%20these%20topics.%0A%0AWe%20had%20a%20basic%20menu%20and%20he%20helped%20us%20design%20the%20menu%20completely%20and%20translate%20it%20into%203%20languages.%20In%20addition%2C%20he%20took%20care%20of%20designing%20the%20QR%20codes%20for%20the%20tables%2C%20both%20for%20the%20menu%20and%20for%20the%20reviews.%0A%0ANow%20we%20have%20a%20website%20with%20our%20own%20identity%20and%20a%20direct%20booking%20system%20for%20customers%20that%20is%20completely%20free%2C%20which%20has%20allowed%20us%20to%20eliminate%20the%20expense%20and%20commissions%20of%20other%20payment%20platforms.%0A%0AVery%20grateful%20for%20MyNext%20work.%0AFully%20recommended!%0A%E2%80%94%20Samira%2C%20owner%20of%20Bar%20Luna%20Llena">
+                                        <span>Read full review</span>
+                                        <span class="text-xs transition-transform group-hover:translate-x-1">→</span>
+                                    </button>
+                                    
                                 </div>
-                                <p
-                                    class="text-[15px] md:text-[16px] text-slate-200 font-light mb-8 leading-relaxed italic">
-                                    "Brutal work by MYNEXT on the barbershop's website. He nailed the design and it's
-                                    also great because it adapts perfectly to mobile and desktop, which is fantastic for
-                                    booking appointments. It has given us a lot of visibility and reservations on a
-                                    daily basis. If you want to take your business to another level, talk to him as he
-                                    advises you on everything and is brilliant. Highly recommended service for
-                                    businesses in Palma de Mallorca!"
-                                </p>
-                                <div class="flex items-center gap-4 pt-6 border-t border-white/5">
-                                    <div
-                                        class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500/20 to-blue-600/20 flex items-center justify-center text-blue-400 font-bold text-lg border border-blue-500/30 shadow-[0_0_15px_rgba(59,130,246,0.2)]">
-                                        G</div>
+                                <div class="flex items-center gap-4 pt-4 border-t border-white/5 mt-auto">
+                                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-amber-500/20 to-orange-600/20 text-amber-400 border-amber-500/30 shadow-[0_0_15px_rgba(245,158,11,0.2)] flex items-center justify-center font-bold text-lg border">S</div>
                                     <div class="flex flex-col">
-                                        <span
-                                            class="text-white font-headline text-base font-semibold tracking-wide">Gustavo
-                                            Coyo</span>
-                                        <span
-                                            class="text-slate-500 text-[11px] uppercase tracking-widest font-medium mt-1">2
-                                            weeks ago</span>
+                                        <span class="text-white font-headline text-base font-semibold tracking-wide">Samira</span>
+                                        <span class="text-slate-500 text-[11px] uppercase tracking-widest font-medium mt-1">Bar Cafetería Luna Llena</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Stars Only 1 -->
-                        <div
-                            class="relative w-[280px] md:w-[320px] shrink-0 p-8 flex flex-col justify-center items-center text-center rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/5 backdrop-blur-xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500">
-                            <div
-                                class="absolute inset-0 bg-gradient-to-t from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <!-- Review 2 (Gurpreet Singh) -->
+                        <div class="relative w-[360px] md:w-[450px] shrink-0 p-8 md:p-10 rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/10 backdrop-blur-2xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500 flex flex-col justify-between">
+                            <div class="absolute inset-0 bg-gradient-to-br from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                            <svg class="absolute top-6 right-6 w-12 h-12 text-white/3 group-hover:text-electric-cyan/10 transition-colors duration-500 pointer-events-none" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+                                <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+                            </svg>
+
+                            <div class="relative z-10 flex flex-col justify-between h-full">
+                                <div>
+                                    <div class="flex items-center justify-between mb-6">
+                                        <div class="flex flex-col gap-1">
+                                            <div class="flex text-yellow-400 text-lg drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]">★★★★★</div>
+                                            <span class="text-[9px] text-emerald-400 font-headline uppercase tracking-widest font-bold flex items-center gap-1">
+                                                <svg class="w-3.5 h-3.5 fill-emerald-400" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                                </svg>
+                                                Verified
+                                            </span>
+                                        </div>
+                                        <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+                                            <svg width="12" height="12" viewBox="0 0 24 24">
+                                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                                            </svg>
+                                            <span class="text-white/60 text-[9px] uppercase tracking-widest font-semibold font-headline">Google</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-[15px] md:text-[16px] text-slate-200 font-light mb-2 leading-relaxed italic line-clamp-4">
+                                        "I am very happy with MyNext work. From the beginning Musa understood what we needed for our restaurant and helped us shape it.
+
+He made the website for us and also a custom application so that we can modify our own menu ourselves, plus a personalized reservation system for our restaurant without having to depend on other platforms or pay extra subscriptions. Honestly, it has made things much easier for us.
+
+Dealing with Musa has been great. He was always attentive and willing to help us with changes and details as they came up, both in the menu app and in the booking system.
+
+We are very satisfied with the result and definitely recommend his work.
+
+— Gary, from Buon Appétito"
+                                    </p>
+                                    
+                                    <button type="button" class="open-review-modal-btn inline-flex items-center gap-1.5 text-xs font-semibold text-electric-cyan hover:text-white transition-colors mb-4 text-left cursor-pointer pointer-events-auto"
+                                        data-name="Gurpreet Singh"
+                                        data-company="Restaurante Buon Appetito"
+                                        data-stars="★★★★★"
+                                        data-time="1 day ago"
+                                        data-text="I%20am%20very%20happy%20with%20MyNext%20work.%20From%20the%20beginning%20Musa%20understood%20what%20we%20needed%20for%20our%20restaurant%20and%20helped%20us%20shape%20it.%0A%0AHe%20made%20the%20website%20for%20us%20and%20also%20a%20custom%20application%20so%20that%20we%20can%20modify%20our%20own%20menu%20ourselves%2C%20plus%20a%20personalized%20reservation%20system%20for%20our%20restaurant%20without%20having%20to%20depend%20on%20other%20platforms%20or%20pay%20extra%20subscriptions.%20Honestly%2C%20it%20has%20made%20things%20much%20easier%20for%20us.%0A%0ADealing%20with%20Musa%20has%20been%20great.%20He%20was%20always%20attentive%20and%20willing%20to%20help%20us%20with%20changes%20and%20details%20as%20they%20came%20up%2C%20both%20in%20the%20menu%20app%20and%20in%20the%20booking%20system.%0A%0AWe%20are%20very%20satisfied%20with%20the%20result%20and%20definitely%20recommend%20his%20work.%0A%0A%E2%80%94%20Gary%2C%20from%20Buon%20App%C3%A9tito">
+                                        <span>Read full review</span>
+                                        <span class="text-xs transition-transform group-hover:translate-x-1">→</span>
+                                    </button>
+                                    
+                                </div>
+                                <div class="flex items-center gap-4 pt-4 border-t border-white/5 mt-auto">
+                                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-600/20 text-electric-cyan border-cyan-500/30 shadow-[0_0_15px_rgba(0,242,255,0.2)] flex items-center justify-center font-bold text-lg border">G</div>
+                                    <div class="flex flex-col">
+                                        <span class="text-white font-headline text-base font-semibold tracking-wide">Gurpreet Singh</span>
+                                        <span class="text-slate-500 text-[11px] uppercase tracking-widest font-medium mt-1">Restaurante Buon Appetito</span>
+                                    </div>
+                                </div>
                             </div>
+                        </div>
+
+                        <!-- Review 3 (Goyo J.R.) -->
+                        <div class="relative w-[360px] md:w-[450px] shrink-0 p-8 md:p-10 rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/10 backdrop-blur-2xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500 flex flex-col justify-between">
+                            <div class="absolute inset-0 bg-gradient-to-br from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                            <svg class="absolute top-6 right-6 w-12 h-12 text-white/3 group-hover:text-electric-cyan/10 transition-colors duration-500 pointer-events-none" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+                                <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+                            </svg>
+
+                            <div class="relative z-10 flex flex-col justify-between h-full">
+                                <div>
+                                    <div class="flex items-center justify-between mb-6">
+                                        <div class="flex flex-col gap-1">
+                                            <div class="flex text-yellow-400 text-lg drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]">★★★★★</div>
+                                            <span class="text-[9px] text-emerald-400 font-headline uppercase tracking-widest font-bold flex items-center gap-1">
+                                                <svg class="w-3.5 h-3.5 fill-emerald-400" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                                </svg>
+                                                Verified
+                                            </span>
+                                        </div>
+                                        <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+                                            <svg width="12" height="12" viewBox="0 0 24 24">
+                                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                                            </svg>
+                                            <span class="text-white/60 text-[9px] uppercase tracking-widest font-semibold font-headline">Google</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-[15px] md:text-[16px] text-slate-200 font-light mb-2 leading-relaxed italic line-clamp-4">
+                                        "Very happy with MyNext work. Musa made the Ecuaplac website from scratch and the result was exactly what we were looking for. Now our clients can find all the company information in a much more convenient and professional way. In addition, he also designed our new business cards with the new logo and the QR code that leads directly to the web, and prepared the QR code to place on the company van. These are small details that help project a much more professional image. Throughout the process, communication with Musa has been very good. He always responded quickly, listened to our ideas, and made the changes we needed without any issues. If you have a business and are thinking about making a website or renewing your company image, I recommend contacting MyNext. In our case, the experience has been very positive."
+                                    </p>
+                                    
+                                    <button type="button" class="open-review-modal-btn inline-flex items-center gap-1.5 text-xs font-semibold text-electric-cyan hover:text-white transition-colors mb-4 text-left cursor-pointer pointer-events-auto"
+                                        data-name="Goyo J.R."
+                                        data-company="Ecuaplac"
+                                        data-stars="★★★★★"
+                                        data-time="3 days ago"
+                                        data-text="Very%20happy%20with%20MyNext%20work.%20Musa%20made%20the%20Ecuaplac%20website%20from%20scratch%20and%20the%20result%20was%20exactly%20what%20we%20were%20looking%20for.%20Now%20our%20clients%20can%20find%20all%20the%20company%20information%20in%20a%20much%20more%20convenient%20and%20professional%20way.%20In%20addition%2C%20he%20also%20designed%20our%20new%20business%20cards%20with%20the%20new%20logo%20and%20the%20QR%20code%20that%20leads%20directly%20to%20the%20web%2C%20and%20prepared%20the%20QR%20code%20to%20place%20on%20the%20company%20van.%20These%20are%20small%20details%20that%20help%20project%20a%20much%20more%20professional%20image.%20Throughout%20the%20process%2C%20communication%20with%20Musa%20has%20been%20very%20good.%20He%20always%20responded%20quickly%2C%20listened%20to%20our%20ideas%2C%20and%20made%20the%20changes%20we%20needed%20without%20any%20issues.%20If%20you%20have%20a%20business%20and%20are%20thinking%20about%20making%20a%20website%20or%20renewing%20your%20company%20image%2C%20I%20recommend%20contacting%20MyNext.%20In%20our%20case%2C%20the%20experience%20has%20been%20very%20positive.">
+                                        <span>Read full review</span>
+                                        <span class="text-xs transition-transform group-hover:translate-x-1">→</span>
+                                    </button>
+                                    
+                                </div>
+                                <div class="flex items-center gap-4 pt-4 border-t border-white/5 mt-auto">
+                                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-500/20 to-teal-600/20 text-emerald-400 border-emerald-500/30 shadow-[0_0_15px_rgba(16,185,129,0.2)] flex items-center justify-center font-bold text-lg border">G</div>
+                                    <div class="flex flex-col">
+                                        <span class="text-white font-headline text-base font-semibold tracking-wide">Goyo J.R.</span>
+                                        <span class="text-slate-500 text-[11px] uppercase tracking-widest font-medium mt-1">Ecuaplac</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Review 4 (Gustavo Coyo) -->
+                        <div class="relative w-[360px] md:w-[450px] shrink-0 p-8 md:p-10 rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/10 backdrop-blur-2xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500 flex flex-col justify-between">
+                            <div class="absolute inset-0 bg-gradient-to-br from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                            <svg class="absolute top-6 right-6 w-12 h-12 text-white/3 group-hover:text-electric-cyan/10 transition-colors duration-500 pointer-events-none" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+                                <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+                            </svg>
+
+                            <div class="relative z-10 flex flex-col justify-between h-full">
+                                <div>
+                                    <div class="flex items-center justify-between mb-6">
+                                        <div class="flex flex-col gap-1">
+                                            <div class="flex text-yellow-400 text-lg drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]">★★★★★</div>
+                                            <span class="text-[9px] text-emerald-400 font-headline uppercase tracking-widest font-bold flex items-center gap-1">
+                                                <svg class="w-3.5 h-3.5 fill-emerald-400" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                                </svg>
+                                                Verified
+                                            </span>
+                                        </div>
+                                        <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+                                            <svg width="12" height="12" viewBox="0 0 24 24">
+                                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                                            </svg>
+                                            <span class="text-white/60 text-[9px] uppercase tracking-widest font-semibold font-headline">Google</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-[15px] md:text-[16px] text-slate-200 font-light mb-2 leading-relaxed italic line-clamp-4">
+                                        "Brutal work by MYNEXT on the barbershop website. He nailed the design and it is also great because it adapts perfectly to mobile and desktop, which is fantastic for booking appointments. It has given us a lot of visibility and reservations on a daily basis. If you want to take your business to another level, talk to him as he advises you on everything and is brilliant. Highly recommended service for businesses in Palma de Mallorca!"
+                                    </p>
+                                    
+                                    <button type="button" class="open-review-modal-btn inline-flex items-center gap-1.5 text-xs font-semibold text-electric-cyan hover:text-white transition-colors mb-4 text-left cursor-pointer pointer-events-auto"
+                                        data-name="Gustavo Coyo"
+                                        data-company="Palma Barber Club"
+                                        data-stars="★★★★★"
+                                        data-time="2 weeks ago"
+                                        data-text="Brutal%20work%20by%20MYNEXT%20on%20the%20barbershop%20website.%20He%20nailed%20the%20design%20and%20it%20is%20also%20great%20because%20it%20adapts%20perfectly%20to%20mobile%20and%20desktop%2C%20which%20is%20fantastic%20for%20booking%20appointments.%20It%20has%20given%20us%20a%20lot%20of%20visibility%20and%20reservations%20on%20a%20daily%20basis.%20If%20you%20want%20to%20take%20your%20business%20to%20another%20level%2C%20talk%20to%20him%20as%20he%20advises%20you%20on%20everything%20and%20is%20brilliant.%20Highly%20recommended%20service%20for%20businesses%20in%20Palma%20de%20Mallorca!">
+                                        <span>Read full review</span>
+                                        <span class="text-xs transition-transform group-hover:translate-x-1">→</span>
+                                    </button>
+                                    
+                                </div>
+                                <div class="flex items-center gap-4 pt-4 border-t border-white/5 mt-auto">
+                                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500/20 to-blue-600/20 text-blue-400 border-blue-500/30 shadow-[0_0_15px_rgba(59,130,246,0.2)] flex items-center justify-center font-bold text-lg border">G</div>
+                                    <div class="flex flex-col">
+                                        <span class="text-white font-headline text-base font-semibold tracking-wide">Gustavo Coyo</span>
+                                        <span class="text-slate-500 text-[11px] uppercase tracking-widest font-medium mt-1">Palma Barber Club</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Review 5 (Jhon Soliz) -->
+                        <div class="relative w-[360px] md:w-[450px] shrink-0 p-8 md:p-10 rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/10 backdrop-blur-2xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500 flex flex-col justify-between">
+                            <div class="absolute inset-0 bg-gradient-to-br from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                            <svg class="absolute top-6 right-6 w-12 h-12 text-white/3 group-hover:text-electric-cyan/10 transition-colors duration-500 pointer-events-none" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+                                <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+                            </svg>
+
+                            <div class="relative z-10 flex flex-col justify-between h-full">
+                                <div>
+                                    <div class="flex items-center justify-between mb-6">
+                                        <div class="flex flex-col gap-1">
+                                            <div class="flex text-yellow-400 text-lg drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]">★★★★★</div>
+                                            <span class="text-[9px] text-emerald-400 font-headline uppercase tracking-widest font-bold flex items-center gap-1">
+                                                <svg class="w-3.5 h-3.5 fill-emerald-400" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                                </svg>
+                                                Verified
+                                            </span>
+                                        </div>
+                                        <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+                                            <svg width="12" height="12" viewBox="0 0 24 24">
+                                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                                            </svg>
+                                            <span class="text-white/60 text-[9px] uppercase tracking-widest font-semibold font-headline">Google</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-[15px] md:text-[16px] text-slate-200 font-light mb-2 leading-relaxed italic line-clamp-4">
+                                        "As the creator of Teen G, I wanted to take my idea to the internet in a professional way. I met Next Era, an ecommerce prototype developed by MyNext, and I really liked the design and the image it transmitted. Musa helped me from the beginning, answering questions, providing ideas and understanding what I wanted to achieve with my project. The treatment was close and he was always willing to help when I needed it. I am very happy with the experience and I recommend MyNext to anyone who needs a professional website for their business or brand."
+                                    </p>
+                                    
+                                    <button type="button" class="open-review-modal-btn inline-flex items-center gap-1.5 text-xs font-semibold text-electric-cyan hover:text-white transition-colors mb-4 text-left cursor-pointer pointer-events-auto"
+                                        data-name="Jhon Soliz"
+                                        data-company="Teen G / Next Era"
+                                        data-stars="★★★★★"
+                                        data-time="4 weeks ago"
+                                        data-text="As%20the%20creator%20of%20Teen%20G%2C%20I%20wanted%20to%20take%20my%20idea%20to%20the%20internet%20in%20a%20professional%20way.%20I%20met%20Next%20Era%2C%20an%20ecommerce%20prototype%20developed%20by%20MyNext%2C%20and%20I%20really%20liked%20the%20design%20and%20the%20image%20it%20transmitted.%20Musa%20helped%20me%20from%20the%20beginning%2C%20answering%20questions%2C%20providing%20ideas%20and%20understanding%20what%20I%20wanted%20to%20achieve%20with%20my%20project.%20The%20treatment%20was%20close%20and%20he%20was%20always%20willing%20to%20help%20when%20I%20needed%20it.%20I%20am%20very%20happy%20with%20the%20experience%20and%20I%20recommend%20MyNext%20to%20anyone%20who%20needs%20a%20professional%20website%20for%20their%20business%20or%20brand.">
+                                        <span>Read full review</span>
+                                        <span class="text-xs transition-transform group-hover:translate-x-1">→</span>
+                                    </button>
+                                    
+                                </div>
+                                <div class="flex items-center gap-4 pt-4 border-t border-white/5 mt-auto">
+                                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500/20 to-purple-500/20 text-indigo-400 border-indigo-500/30 shadow-[0_0_15px_rgba(99,102,241,0.2)] flex items-center justify-center font-bold text-lg border">J</div>
+                                    <div class="flex flex-col">
+                                        <span class="text-white font-headline text-base font-semibold tracking-wide">Jhon Soliz</span>
+                                        <span class="text-slate-500 text-[11px] uppercase tracking-widest font-medium mt-1">Teen G / Next Era</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Review 6 (Ilyas Etaouriri) -->
+                        <div class="relative w-[360px] md:w-[450px] shrink-0 p-8 md:p-10 rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/10 backdrop-blur-2xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500 flex flex-col justify-between">
+                            <div class="absolute inset-0 bg-gradient-to-br from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                            <svg class="absolute top-6 right-6 w-12 h-12 text-white/3 group-hover:text-electric-cyan/10 transition-colors duration-500 pointer-events-none" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+                                <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+                            </svg>
+
+                            <div class="relative z-10 flex flex-col justify-between h-full">
+                                <div>
+                                    <div class="flex items-center justify-between mb-6">
+                                        <div class="flex flex-col gap-1">
+                                            <div class="flex text-yellow-400 text-lg drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]">★★★★★</div>
+                                            <span class="text-[9px] text-emerald-400 font-headline uppercase tracking-widest font-bold flex items-center gap-1">
+                                                <svg class="w-3.5 h-3.5 fill-emerald-400" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                                </svg>
+                                                Verified
+                                            </span>
+                                        </div>
+                                        <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+                                            <svg width="12" height="12" viewBox="0 0 24 24">
+                                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                                            </svg>
+                                            <span class="text-white/60 text-[9px] uppercase tracking-widest font-semibold font-headline">Google</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-[15px] md:text-[16px] text-slate-200 font-light mb-2 leading-relaxed italic line-clamp-4">
+                                        "Very good guy, I recommend him. Punctual, professional, attends very well, explains himself very well"
+                                    </p>
+                                    
+                                </div>
+                                <div class="flex items-center gap-4 pt-4 border-t border-white/5 mt-auto">
+                                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-orange-500/20 to-red-500/20 text-orange-400 border-orange-500/30 shadow-[0_0_15px_rgba(249,115,22,0.2)] flex items-center justify-center font-bold text-lg border">I</div>
+                                    <div class="flex flex-col">
+                                        <span class="text-white font-headline text-base font-semibold tracking-wide">Ilyas Etaouriri</span>
+                                        <span class="text-slate-500 text-[11px] uppercase tracking-widest font-medium mt-1">Verified Client</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Stars Only (Danna Delgado) -->
+                        <div class="relative w-[280px] md:w-[320px] shrink-0 p-8 flex flex-col justify-center items-center text-center rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/5 backdrop-blur-xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                             <div class="relative z-10 flex flex-col items-center">
-                                <div
-                                    class="mb-5 flex items-center justify-center w-10 h-10 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm shadow-lg">
+                                <div class="mb-5 flex items-center justify-center w-10 h-10 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm shadow-lg">
                                     <svg width="16" height="16" viewBox="0 0 24 24">
-                                        <path fill="#4285F4"
-                                            d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                                        <path fill="#34A853"
-                                            d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                                        <path fill="#FBBC05"
-                                            d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                                        <path fill="#EA4335"
-                                            d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
                                     </svg>
                                 </div>
-                                <div
-                                    class="flex text-yellow-400 text-xl drop-shadow-[0_0_12px_rgba(250,204,21,0.6)] mb-6">
-                                    ★★★★★</div>
-                                <div
-                                    class="w-14 h-14 rounded-full bg-gradient-to-br from-pink-500/20 to-rose-500/20 flex items-center justify-center text-pink-400 font-bold text-xl border border-pink-500/30 shadow-[0_0_15px_rgba(244,63,94,0.2)] mb-4">
-                                    D</div>
-                                <span class="text-white font-headline text-[15px] font-semibold tracking-wide">Danna
-                                    Delgado</span>
-                                <span class="text-slate-500 text-[10px] uppercase tracking-widest font-medium mt-2">3
-                                    weeks ago</span>
+                                <div class="flex text-yellow-400 text-xl drop-shadow-[0_0_12px_rgba(250,204,21,0.6)] mb-6">★★★★★</div>
+                                <div class="w-14 h-14 rounded-full bg-gradient-to-br from-pink-500/20 to-rose-500/20 text-pink-400 border-pink-500/30 shadow-[0_0_15px_rgba(244,63,94,0.2)] flex items-center justify-center font-bold text-xl border mb-4">D</div>
+                                <span class="text-white font-headline text-[15px] font-semibold tracking-wide">Danna Delgado</span>
+                                <span class="text-slate-500 text-[10px] uppercase tracking-widest font-medium mt-2">3 weeks ago</span>
                             </div>
                         </div>
 
-                        <!-- Review 2 -->
-                        <div
-                            class="relative w-[360px] md:w-[450px] shrink-0 p-8 md:p-10 rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/10 backdrop-blur-2xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500">
-                            <div
-                                class="absolute inset-0 bg-gradient-to-br from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                            </div>
-                            <svg class="absolute top-6 right-6 w-12 h-12 text-white/3 group-hover:text-electric-cyan/10 transition-colors duration-500"
-                                fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
-                                <path
-                                    d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
-                            </svg>
-
-                            <div class="relative z-10">
-                                <div class="flex items-center justify-between mb-6">
-                                    <div class="flex flex-col gap-1">
-                                        <div
-                                            class="flex text-yellow-400 text-lg drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]">
-                                            ★★★★★</div>
-                                        <span
-                                            class="text-[9px] text-emerald-400 font-headline uppercase tracking-widest font-bold flex items-center gap-1">
-                                            <svg class="w-3.5 h-3.5 fill-emerald-400" viewBox="0 0 20 20">
-                                                <path fill-rule="evenodd"
-                                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                            Verified Review
-                                        </span>
-                                    </div>
-                                    <div
-                                        class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
-                                        <svg width="12" height="12" viewBox="0 0 24 24">
-                                            <path fill="#4285F4"
-                                                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                                            <path fill="#34A853"
-                                                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                                            <path fill="#FBBC05"
-                                                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                                            <path fill="#EA4335"
-                                                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-                                        </svg>
-                                        <span
-                                            class="text-white/60 text-[9px] uppercase tracking-widest font-semibold font-headline">Google</span>
-                                    </div>
-                                </div>
-                                <p
-                                    class="text-[15px] md:text-[16px] text-slate-200 font-light mb-8 leading-relaxed italic">
-                                    "As the creator of Teen G, I wanted to take my idea to the internet in a
-                                    professional way. I met Next Era, an ecommerce prototype developed by MyNext, and I
-                                    really liked the design and the image it transmitted. Musa helped me from the
-                                    beginning, answering questions, providing ideas and understanding what I wanted to
-                                    achieve with my project. The treatment was close and he was always willing to help
-                                    when I needed it. I am very happy with the experience and I recommend MyNext to
-                                    anyone who needs a professional website for their business or brand."
-                                </p>
-                                <div class="flex items-center gap-4 pt-6 border-t border-white/5">
-                                    <div
-                                        class="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500/20 to-purple-500/20 flex items-center justify-center text-indigo-400 font-bold text-lg border border-indigo-500/30 shadow-[0_0_15px_rgba(99,102,241,0.2)]">
-                                        J</div>
-                                    <div class="flex flex-col">
-                                        <span
-                                            class="text-white font-headline text-base font-semibold tracking-wide">Jhon
-                                            Soliz</span>
-                                        <span
-                                            class="text-slate-500 text-[11px] uppercase tracking-widest font-medium mt-1">4
-                                            weeks ago</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Stars Only 2 -->
-                        <div
-                            class="relative w-[280px] md:w-[320px] shrink-0 p-8 flex flex-col justify-center items-center text-center rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/5 backdrop-blur-xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500">
-                            <div
-                                class="absolute inset-0 bg-gradient-to-t from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                            </div>
+                        <!-- Stars Only (John smith) -->
+                        <div class="relative w-[280px] md:w-[320px] shrink-0 p-8 flex flex-col justify-center items-center text-center rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/5 backdrop-blur-xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                             <div class="relative z-10 flex flex-col items-center">
-                                <div
-                                    class="mb-5 flex items-center justify-center w-10 h-10 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm shadow-lg">
+                                <div class="mb-5 flex items-center justify-center w-10 h-10 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm shadow-lg">
                                     <svg width="16" height="16" viewBox="0 0 24 24">
-                                        <path fill="#4285F4"
-                                            d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                                        <path fill="#34A853"
-                                            d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                                        <path fill="#FBBC05"
-                                            d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                                        <path fill="#EA4335"
-                                            d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
                                     </svg>
                                 </div>
-                                <div
-                                    class="flex text-yellow-400 text-xl drop-shadow-[0_0_12px_rgba(250,204,21,0.6)] mb-6">
-                                    ★★★★★</div>
-                                <div
-                                    class="w-14 h-14 rounded-full bg-gradient-to-br from-teal-500/20 to-emerald-500/20 flex items-center justify-center text-teal-400 font-bold text-xl border border-teal-500/30 shadow-[0_0_15px_rgba(20,184,166,0.2)] mb-4">
-                                    J</div>
-                                <span
-                                    class="text-white font-headline text-[15px] font-semibold tracking-wide">Juan</span>
-                                <span class="text-slate-500 text-[10px] uppercase tracking-widest font-medium mt-2">3
-                                    weeks ago</span>
+                                <div class="flex text-yellow-400 text-xl drop-shadow-[0_0_12px_rgba(250,204,21,0.6)] mb-6">★★★★★</div>
+                                <div class="w-14 h-14 rounded-full bg-gradient-to-br from-slate-500/20 to-gray-500/20 text-slate-400 border-slate-500/30 shadow-[0_0_15px_rgba(100,116,139,0.2)] flex items-center justify-center font-bold text-xl border mb-4">J</div>
+                                <span class="text-white font-headline text-[15px] font-semibold tracking-wide">John smith</span>
+                                <span class="text-slate-500 text-[10px] uppercase tracking-widest font-medium mt-2">1 month ago</span>
                             </div>
                         </div>
 
-                        <!-- Review 3 -->
-                        <div
-                            class="relative w-[360px] md:w-[450px] shrink-0 p-8 md:p-10 rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/10 backdrop-blur-2xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500">
-                            <div
-                                class="absolute inset-0 bg-gradient-to-br from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                            </div>
-                            <svg class="absolute top-6 right-6 w-12 h-12 text-white/3 group-hover:text-electric-cyan/10 transition-colors duration-500"
-                                fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
-                                <path
-                                    d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
-                            </svg>
-
-                            <div class="relative z-10">
-                                <div class="flex items-center justify-between mb-6">
-                                    <div class="flex flex-col gap-1">
-                                        <div
-                                            class="flex text-yellow-400 text-lg drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]">
-                                            ★★★★★</div>
-                                        <span
-                                            class="text-[9px] text-emerald-400 font-headline uppercase tracking-widest font-bold flex items-center gap-1">
-                                            <svg class="w-3.5 h-3.5 fill-emerald-400" viewBox="0 0 20 20">
-                                                <path fill-rule="evenodd"
-                                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                            Verified Review
-                                        </span>
-                                    </div>
-                                    <div
-                                        class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
-                                        <svg width="12" height="12" viewBox="0 0 24 24">
-                                            <path fill="#4285F4"
-                                                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                                            <path fill="#34A853"
-                                                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                                            <path fill="#FBBC05"
-                                                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                                            <path fill="#EA4335"
-                                                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-                                        </svg>
-                                        <span
-                                            class="text-white/60 text-[9px] uppercase tracking-widest font-semibold font-headline">Google</span>
-                                    </div>
-                                </div>
-                                <p
-                                    class="text-[15px] md:text-[16px] text-slate-200 font-light mb-8 leading-relaxed italic">
-                                    "Very good guy, I recommend him. Punctual, professional, attends very well, explains
-                                    himself very well"
-                                </p>
-                                <div class="flex items-center gap-4 pt-6 border-t border-white/5">
-                                    <div
-                                        class="w-12 h-12 rounded-full bg-gradient-to-br from-orange-500/20 to-red-500/20 flex items-center justify-center text-orange-400 font-bold text-lg border border-orange-500/30 shadow-[0_0_15px_rgba(249,115,22,0.2)]">
-                                        I</div>
-                                    <div class="flex flex-col">
-                                        <span
-                                            class="text-white font-headline text-base font-semibold tracking-wide">Ilyas
-                                            Etaouriri</span>
-                                        <span
-                                            class="text-slate-500 text-[11px] uppercase tracking-widest font-medium mt-1">4
-                                            days ago</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Stars Only 3 -->
-                        <div
-                            class="relative w-[280px] md:w-[320px] shrink-0 p-8 flex flex-col justify-center items-center text-center rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/5 backdrop-blur-xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500">
-                            <div
-                                class="absolute inset-0 bg-gradient-to-t from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                            </div>
+                        <!-- Stars Only (Anuar Zbat) -->
+                        <div class="relative w-[280px] md:w-[320px] shrink-0 p-8 flex flex-col justify-center items-center text-center rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/5 backdrop-blur-xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                             <div class="relative z-10 flex flex-col items-center">
-                                <div
-                                    class="mb-5 flex items-center justify-center w-10 h-10 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm shadow-lg">
+                                <div class="mb-5 flex items-center justify-center w-10 h-10 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm shadow-lg">
                                     <svg width="16" height="16" viewBox="0 0 24 24">
-                                        <path fill="#4285F4"
-                                            d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                                        <path fill="#34A853"
-                                            d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                                        <path fill="#FBBC05"
-                                            d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                                        <path fill="#EA4335"
-                                            d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
                                     </svg>
                                 </div>
-                                <div
-                                    class="flex text-yellow-400 text-xl drop-shadow-[0_0_12px_rgba(250,204,21,0.6)] mb-6">
-                                    ★★★★★</div>
-                                <div
-                                    class="w-14 h-14 rounded-full bg-gradient-to-br from-slate-500/20 to-gray-500/20 flex items-center justify-center text-slate-400 font-bold text-xl border border-slate-500/30 shadow-[0_0_15px_rgba(100,116,139,0.2)] mb-4">
-                                    J</div>
-                                <span class="text-white font-headline text-[15px] font-semibold tracking-wide">John
-                                    smith</span>
-                                <span class="text-slate-500 text-[10px] uppercase tracking-widest font-medium mt-2">1
-                                    month ago</span>
-                            </div>
-                        </div>
-
-                        <!-- Review Gurpreet Singh -->
-                        <div
-                            class="relative w-[360px] md:w-[450px] shrink-0 p-8 md:p-10 rounded-[2.5rem] bg-[#0c0c16]/50 border border-white/10 backdrop-blur-2xl overflow-hidden group hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,242,255,0.08)] hover:border-electric-cyan/30 transition-all duration-500">
-                            <div
-                                class="absolute inset-0 bg-gradient-to-br from-electric-cyan/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                            </div>
-                            <svg class="absolute top-6 right-6 w-12 h-12 text-white/3 group-hover:text-electric-cyan/10 transition-colors duration-500"
-                                fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
-                                <path
-                                    d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
-                            </svg>
-
-                            <div class="relative z-10">
-                                <div class="flex items-center justify-between mb-6">
-                                    <div class="flex flex-col gap-1">
-                                        <div
-                                            class="flex text-yellow-400 text-lg drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]">
-                                            ★★★★★</div>
-                                        <span
-                                            class="text-[9px] text-emerald-400 font-headline uppercase tracking-widest font-bold flex items-center gap-1">
-                                            <svg class="w-3.5 h-3.5 fill-emerald-400" viewBox="0 0 20 20">
-                                                <path fill-rule="evenodd"
-                                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                            Verified Review
-                                        </span>
-                                    </div>
-                                    <div
-                                        class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
-                                        <svg width="12" height="12" viewBox="0 0 24 24">
-                                            <path fill="#4285F4"
-                                                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                                            <path fill="#34A853"
-                                                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                                            <path fill="#FBBC05"
-                                                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                                            <path fill="#EA4335"
-                                                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-                                        </svg>
-                                        <span
-                                            class="text-white/60 text-[9px] uppercase tracking-widest font-semibold font-headline">Google</span>
-                                    </div>
-                                </div>
-                                <p
-                                    class="text-[15px] md:text-[16px] text-slate-200 font-light mb-8 leading-relaxed italic line-clamp-4">
-                                    "I am very happy with MyNext's work. From the beginning Musa understood what we needed for our restaurant and helped us shape it. He made the website and a custom app to manage the menu, plus a direct booking system without extra subscriptions. We are very satisfied!"
-                                </p>
-                                <div class="flex items-center gap-4 pt-6 border-t border-white/5">
-                                    <div
-                                        class="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-600/20 flex items-center justify-center text-electric-cyan font-bold text-lg border border-cyan-500/30 shadow-[0_0_15px_rgba(0,242,255,0.2)]">
-                                        G</div>
-                                    <div class="flex flex-col">
-                                        <span
-                                            class="text-white font-headline text-base font-semibold tracking-wide">Gurpreet Singh</span>
-                                        <span
-                                            class="text-slate-500 text-[11px] uppercase tracking-widest font-medium mt-1">Restaurante Buon Appetito</span>
-                                    </div>
-                                </div>
+                                <div class="flex text-yellow-400 text-xl drop-shadow-[0_0_12px_rgba(250,204,21,0.6)] mb-6">★★★★★</div>
+                                <div class="w-14 h-14 rounded-full bg-gradient-to-br from-teal-500/20 to-cyan-500/20 text-teal-400 border-teal-500/30 shadow-[0_0_15px_rgba(20,184,166,0.2)] flex items-center justify-center font-bold text-xl border mb-4">A</div>
+                                <span class="text-white font-headline text-[15px] font-semibold tracking-wide">Anuar Zbat</span>
+                                <span class="text-slate-500 text-[10px] uppercase tracking-widest font-medium mt-2">4 days ago</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- Review Full Detail Modal -->
+        <div id="review-detail-modal" class="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+            <div id="review-detail-card" class="relative w-full max-w-lg rounded-[2.5rem] bg-[#0c0c16] border border-white/10 p-6 sm:p-8 shadow-[0_25px_60px_rgba(0,0,0,0.8)] border-electric-cyan/20 scale-95 transition-transform duration-300 max-h-[88vh] flex flex-col justify-between overflow-hidden">
+                <button id="close-review-modal-btn" type="button" aria-label="Close review" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 flex items-center justify-center text-white/70 hover:text-white transition-colors cursor-pointer z-20">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+
+                <div class="flex items-center gap-3 mb-4 pr-10">
+                    <div id="modal-review-stars" class="flex text-amber-400 text-lg tracking-wider drop-shadow-[0_0_8px_rgba(251,191,36,0.6)]">★★★★★</div>
+                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[10px] text-emerald-400 font-headline uppercase tracking-widest font-semibold">
+                        <svg class="w-3.5 h-3.5 fill-emerald-400 shrink-0" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                        Verified Google Maps Review
+                    </span>
+                </div>
+
+                <div class="overflow-y-auto pr-1 my-2 max-h-[55vh] hide-scrollbar">
+                    <p id="modal-review-text" class="text-white/90 text-[14px] sm:text-[15px] font-light leading-relaxed whitespace-pre-line italic">
+                    </p>
+                </div>
+
+                <div class="flex items-center gap-3.5 border-t border-white/10 pt-4 mt-3">
+                    <div id="modal-review-avatar" class="w-11 h-11 rounded-full bg-gradient-to-tr from-cyan-500/20 to-purple-500/20 border border-electric-cyan/30 flex items-center justify-center overflow-hidden shrink-0 shadow-[0_0_12px_rgba(0,242,255,0.2)]">
+                        <span class="text-electric-cyan font-bold font-headline text-base">S</span>
+                    </div>
+                    <div class="min-w-0 flex-1">
+                        <h4 id="modal-review-name" class="text-white font-headline font-bold text-base tracking-wide truncate">Samira</h4>
+                        <p id="modal-review-company" class="text-[11px] text-slate-400 font-headline uppercase tracking-wider truncate">Bar Cafetería Luna Llena</p>
+                    </div>
+                    <span id="modal-review-time" class="text-[11px] text-slate-500 font-headline uppercase tracking-widest shrink-0">15 hours ago</span>
+                </div>
+            </div>
+        </div>
 
         <!-- 4. PLANES SECTION/BANNER -->
         <section
@@ -2134,17 +2194,30 @@
                         </div>
                     </div>
 
-                    <!-- Columna Derecha: Formulario / Uiverse Component -->
+                    <!-- Columna Derecha: Formulario / Uiverse Component / Cal.com -->
                     <div class="reveal flex justify-center lg:justify-end w-full">
                         <div class="form-container w-full max-w-full md:max-w-[500px]">
+                            <!-- Mode Switcher: Request Proposal (Default) vs Book a Call -->
+                            <div class="contact-tabs-wrapper flex items-center p-1 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-md mb-2 w-full select-none" role="tablist">
+                                <button type="button" id="tab-btn-form" role="tab" aria-selected="true" class="contact-tab-btn active flex-1 py-2 px-3 rounded-full text-[11px] md:text-xs font-headline font-bold uppercase tracking-wider transition-all duration-300 text-black bg-electric-cyan shadow-[0_0_12px_rgba(0,242,255,0.4)] flex items-center justify-center gap-1.5 cursor-pointer">
+                                    <span class="material-symbols-outlined text-sm leading-none">mail</span>
+                                    <span>Request Proposal</span>
+                                </button>
+                                <button type="button" id="tab-btn-cal" role="tab" aria-selected="false" class="contact-tab-btn flex-1 py-2 px-3 rounded-full text-[11px] md:text-xs font-headline font-semibold uppercase tracking-wider transition-all duration-300 text-white/70 hover:text-white flex items-center justify-center gap-1.5 cursor-pointer">
+                                    <span class="material-symbols-outlined text-sm leading-none">calendar_month</span>
+                                    <span>Book a Call</span>
+                                </button>
+                            </div>
+
+                            <!-- Proposal Form (ACTIVE BY DEFAULT - 100% Branded Design) -->
                             <form id="email-contact-form" action="/api/contact"
-                                method="POST" class="form">
+                                method="POST" class="contact-panel-active form">
                                 <!-- Antispam Honeypot (Accessible & Camouflaged) -->
                                 <div class="hp-field" aria-hidden="true" style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; opacity: 0; pointer-events: none;" tabindex="-1">
                                     <label for="website_url_hp_en" tabindex="-1">Do not fill this field</label>
                                     <input type="text" id="website_url_hp_en" name="_honey" tabindex="-1" autocomplete="new-password" value="">
                                 </div>
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                                     <div class="form-group">
                                         <label for="name">Your Name / Business</label>
                                         <input type="text" id="name" name="name" placeholder="e.g. John / Barber Studio"
@@ -2156,7 +2229,7 @@
                                             required>
                                     </div>
                                 </div>
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                                     <div class="form-group">
                                         <label for="phone">Phone / WhatsApp</label>
                                         <input type="tel" id="phone" name="phone" placeholder="+34 600 00 00 00">
@@ -2190,7 +2263,7 @@
                                         required></textarea>
                                 </div>
                                 <!-- Cloudflare Turnstile Verification -->
-                                <div class="cf-turnstile-container mb-4 flex justify-center">
+                                <div class="cf-turnstile-container mb-3 flex justify-center">
                                     <div class="cf-turnstile" data-sitekey="0x4AAAAAAFg5e4t-qwrc7bZt" data-theme="dark" data-size="flexible"></div>
                                     <script>
                                         (function(){
@@ -2205,6 +2278,30 @@
                                     <span class="btn-text">Request Free Proposal →</span>
                                 </button>
                             </form>
+
+                            <!-- Embedded Cal.com Panel (SECONDARY - Lazy Loaded On Demand) -->
+                            <div id="cal-booking-panel" class="contact-panel-hidden w-full flex-col gap-2 rounded-[1.5rem] bg-white/[0.02] border border-white/10 p-2 sm:p-3 backdrop-blur-2xl">
+                                <div class="w-full h-[570px] sm:h-[610px] rounded-2xl overflow-hidden bg-black/40 relative">
+                                    <div id="cal-loader" class="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black/60 z-10 transition-opacity duration-300 pointer-events-none">
+                                        <div class="w-8 h-8 rounded-full border-2 border-electric-cyan border-t-transparent animate-spin"></div>
+                                        <span class="text-xs font-headline text-white/60 tracking-wider">Loading Musa's calendar...</span>
+                                    </div>
+                                    <iframe 
+                                        id="cal-embed-iframe"
+                                        data-src="https://cal.com/mynextbymusa/primera-consulta-mynext?theme=dark"
+                                        class="w-full h-full border-0 rounded-2xl"
+                                        title="Book a call with Musa on Cal.com"
+                                        loading="lazy">
+                                    </iframe>
+                                </div>
+                                <div class="flex items-center justify-between px-2 pt-0.5 text-[10px] text-white/50">
+                                    <span>15 min meeting via Google Meet</span>
+                                    <a href="https://cal.com/mynextbymusa/primera-consulta-mynext" target="_blank" rel="noopener noreferrer" class="hover:text-electric-cyan underline underline-offset-2 transition-colors flex items-center gap-1">
+                                        Open in Cal.com <span class="material-symbols-outlined text-xs">open_in_new</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -2635,6 +2732,11 @@
                             class="hover:text-cyan-300 hover:-translate-x-1 transition-all duration-300">Plans</a>
                         <a href="#contacto" data-sb-content="nav_contact"
                             class="hover:text-cyan-300 hover:-translate-x-1 transition-all duration-300">Contact</a>
+                        <a href="#contacto?tab=cal"
+                            class="text-cyan-400 hover:text-white hover:-translate-x-1 transition-all duration-300 flex items-center gap-1.5 font-bold">
+                            <span>Book a Call</span>
+                            <span class="text-[10px]">↗</span>
+                        </a>
                     </nav>
                 </div>
             </div>
@@ -3003,7 +3105,7 @@
 
     <!-- CART POPUP MODAL -->
     <div id="cart-modal"
-        class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-void-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-500">
+        class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-void-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-500">
             <!-- Modal Card -->
             <div class="relative w-full max-w-md p-8 md:p-10 rounded-[2.5rem] bg-[#050505]/90 border border-white/10 shadow-[0_0_50px_rgba(0,242,255,0.15)] transform scale-95 opacity-0 transition-all duration-500 ease-out"
                 id="cart-modal-card">

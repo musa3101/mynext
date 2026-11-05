@@ -50,6 +50,7 @@ const DEFAULT_SUPABASE_ANON_KEY = 'sb_publishable_9qAEy3xuzB8HU2wSW1e36w_n051oO6
 const DEFAULT_TARGET_EMAIL = 'mynextbymusa@gmail.com';
 const DEFAULT_CALLMEBOT_PHONE = '34673109486';
 const DEFAULT_CALLMEBOT_API_KEY = '2243347';
+const DEFAULT_RESEND_API_KEY = '';
 
 // Claves de Cloudflare Turnstile
 const CF_PRODUCTION_SECRET_KEY = '0x4AAAAAAFg5e8MnH9ZuR6goULvlO71V_Ic';
@@ -293,12 +294,14 @@ export async function onRequestPost(context: EventContext<Env, any, any>): Promi
         ? `🚀 Nueva Solicitud de Proyecto Web: ${name} (${projectType})`
         : `🚀 New Web Project Request: ${name} (${projectType})`;
 
-      if (env.RESEND_API_KEY) {
+      const resendApiKey = env.RESEND_API_KEY || DEFAULT_RESEND_API_KEY;
+
+      if (resendApiKey) {
         // Vía Resend (Entrega garantizada sin caídas)
         await fetch('https://api.resend.com/emails', {
           method: 'POST',
           headers: {
-            Authorization: `Bearer ${env.RESEND_API_KEY}`,
+            Authorization: `Bearer ${resendApiKey}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({

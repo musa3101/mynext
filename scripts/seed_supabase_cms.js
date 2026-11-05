@@ -358,6 +358,18 @@ async function main() {
       relative_time: 'Hace unas horas',
       source: 'google',
       active: true
+    },
+    {
+      id: 9,
+      name: 'Samira',
+      company: 'Bar Cafetería Luna Llena',
+      content_es: 'Hacía tiempo que quería tener una página web para mi negocio y, viendo los precios que cobran las agencias, decidí contactar con Musa. Es un chico estupendo, muy educado y amable, que nos ayudó y guio paso a paso en todo momento, algo que agradezco muchísimo ya que no me entero mucho de estos temas.\n\nTeníamos un menú básico y nos ayudó a diseñar la carta por completo y a traducirla a 3 idiomas. Además, se encargó de diseñar los códigos QR para las mesas, tanto para la carta como para las reseñas.\n\nAhora tenemos una web con nuestra propia identidad y un sistema de reservas directo para los clientes totalmente gratis, lo que nos ha permitido quitar el gasto y las comisiones de otras plataformas de pago.\n\nMuy agradecida con el trabajo de Mynext.\n¡Totalmente recomendado!\n— Samira, dueña de Bar Luna Llena',
+      content_en: 'I had been wanting to have a website for my business for a while, and seeing the prices agencies charge, I decided to contact Musa. He is a wonderful guy, very polite and kind, who helped and guided us step by step at all times, something I greatly appreciate as I do not know much about these topics.\n\nWe had a basic menu and he helped us design the menu completely and translate it into 3 languages. In addition, he took care of designing the QR codes for the tables, both for the menu and for the reviews.\n\nNow we have a website with our own identity and a direct booking system for customers that is completely free, which has allowed us to eliminate the expense and commissions of other payment platforms.\n\nVery grateful for MyNext\'s work.\nFully recommended!\n— Samira, owner of Bar Luna Llena',
+      rating: 5,
+      author_photo: '',
+      relative_time: 'Hace 15 horas',
+      source: 'google',
+      active: true
     }
   ];
 

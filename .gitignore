@@ -17,3 +17,5 @@ dist/
 testsprite_tests/
 test-results/
 playwright-report/
+testsprite_tests/tmp/
+testsprite_tests/tmp/config.json

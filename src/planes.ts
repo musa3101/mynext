@@ -390,7 +390,7 @@ async function initPlanes() {
       const defaultTitle = isFeatured ? 'BUSINESS' : (isEnglish ? 'BASIC' : 'BÁSICO');
       const title = getFieldTranslation(service, 'title', lang) || defaultTitle;
       const featuresList = getServiceFeatures(service, lang);
-      const currencySymbol = isEnglish ? '£' : '€';
+      const currencySymbol = '€';
 
       // Parse price cleanly
       let priceNum = 0;
@@ -402,8 +402,8 @@ async function initPlanes() {
       }
 
       const formattedPrice = priceNum > 0
-        ? (isEnglish ? `${currencySymbol}${priceNum}` : `${priceNum}${currencySymbol}`)
-        : (service.price ? String(service.price).trim() : 'Consultar');
+        ? `${priceNum}${currencySymbol}`
+        : (service.price ? String(service.price).trim() : (isEnglish ? 'Contact' : 'Consultar'));
 
       // Check for discount badge / offer
       const badge = getFieldTranslation(service, 'badge', lang);

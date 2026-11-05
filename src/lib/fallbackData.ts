@@ -349,32 +349,62 @@ export const fallbackProjects = [
 
 export const fallbackTestimonials = [
   {
+    id: 9,
+    name: 'Samira',
+    client_name: 'Samira',
+    company: 'Bar Cafetería Luna Llena',
+    rating: 5,
+    relative_time: JSON.stringify({ es: 'Hace 15 horas', en: '15 hours ago' }),
+    source: 'google',
+    google_review_id: 'g_rev_samira',
+    testimonial: JSON.stringify({
+      es: 'Hacía tiempo que quería tener una página web para mi negocio y, viendo los precios que cobran las agencias, decidí contactar con Musa. Es un chico estupendo, muy educado y amable, que nos ayudó y guio paso a paso en todo momento, algo que agradezco muchísimo ya que no me entero mucho de estos temas.\n\nTeníamos un menú básico y nos ayudó a diseñar la carta por completo y a traducirla a 3 idiomas. Además, se encargó de diseñar los códigos QR para las mesas, tanto para la carta como para las reseñas.\n\nAhora tenemos una web con nuestra propia identidad y un sistema de reservas directo para los clientes totalmente gratis, lo que nos ha permitido quitar el gasto y las comisiones de otras plataformas de pago.\n\nMuy agradecida con el trabajo de Mynext.\n¡Totalmente recomendado!\n— Samira, dueña de Bar Luna Llena',
+      en: 'I had been wanting to have a website for my business for a while, and seeing the prices agencies charge, I decided to contact Musa. He is a wonderful guy, very polite and kind, who helped and guided us step by step at all times, something I greatly appreciate as I do not know much about these topics.\n\nWe had a basic menu and he helped us design the menu completely and translate it into 3 languages. In addition, he took care of designing the QR codes for the tables, both for the menu and for the reviews.\n\nNow we have a website with our own identity and a direct booking system for customers that is completely free, which has allowed us to eliminate the expense and commissions of other payment platforms.\n\nVery grateful for MyNext\'s work.\nFully recommended!\n— Samira, owner of Bar Luna Llena'
+    }),
+    active: true
+  },
+  {
+    id: 8,
+    name: 'Gurpreet Singh',
+    client_name: 'Gurpreet Singh',
+    company: 'Restaurante Buon Appetito',
+    rating: 5,
+    relative_time: 'Hace 1 día',
+    source: 'google',
+    google_review_id: 'g_rev_gurpreet',
+    testimonial: JSON.stringify({
+      es: 'Estoy muy contento con el trabajo de MyNext. Desde el principio Musa entendió lo que necesitábamos para nuestro restaurante y nos ayudó a darle forma.\n\nNos ha hecho la página web y también una aplicación propia para que podamos modificar la carta de nuestra web nosotros mismos, además de un sistema de reservas personalizado para nuestro restaurante, sin tener que depender de otras plataformas ni pagar suscripciones adicionales. La verdad es que nos ha facilitado bastante las cosas.\n\nEl trato con Musa ha sido muy bueno. Siempre ha estado atento y dispuesto a ayudarnos con los cambios y los detalles que iban surgiendo, tanto en la aplicación de la carta como en el sistema de reservas.\n\nEstamos muy satisfechos con el resultado y recomendamos su trabajo sin duda.\n\n— Gary, de Buon Appétito',
+      en: 'I am very happy with MyNext\'s work. From the beginning Musa understood what we needed for our restaurant and helped us shape it.\n\nHe made the website for us and also a custom application so that we can modify our own menu ourselves, plus a personalized reservation system for our restaurant without having to depend on other platforms or pay extra subscriptions. Honestly, it has made things much easier for us.\n\nDealing with Musa has been great. He was always attentive and willing to help us with changes and details as they came up, both in the menu app and in the booking system.\n\nWe are very satisfied with the result and definitely recommend his work.\n\n— Gary, from Buon Appétito'
+    }),
+    active: true
+  },
+  {
+    id: 6,
+    name: 'Goyo J.R.',
+    client_name: 'Goyo J.R.',
+    company: 'Ecuaplac',
+    rating: 5,
+    relative_time: 'Hace 3 días',
+    source: 'google',
+    google_review_id: 'g_rev_goyo',
+    testimonial: JSON.stringify({
+      es: 'Muy contento con el trabajo de MyNext. Musa nos hizo la página web de Ecuaplac desde cero y el resultado ha sido justo lo que buscábamos. Ahora nuestros clientes pueden encontrar toda la información de la empresa de una forma mucho más cómoda y profesional. Además, también diseñó nuestras nuevas tarjetas de visita con el nuevo logo y el código QR que lleva directamente a la web, y preparó el QR para colocarlo en la furgoneta de la empresa. Son pequeños detalles que ayudan a dar una imagen mucho más profesional. Durante todo el proceso la comunicación con Musa ha sido muy buena. Siempre ha respondido rápido, ha escuchado nuestras ideas y ha ido haciendo los cambios que necesitábamos sin ningún problema. Si tienes un negocio y estás pensando en hacer una página web o renovar la imagen de tu empresa, recomiendo contactar con MyNext. En nuestro caso, la experiencia ha sido muy positiva.',
+      en: 'Very happy with MyNext\'s work. Musa made the Ecuaplac website from scratch and the result was exactly what we were looking for. Now our clients can find all the company information in a much more convenient and professional way. In addition, he also designed our new business cards with the new logo and the QR code that leads directly to the web, and prepared the QR code to place on the company van. These are small details that help project a much more professional image. Throughout the process, communication with Musa has been very good. He always responded quickly, listened to our ideas, and made the changes we needed without any issues. If you have a business and are thinking about making a website or renewing your company\'s image, I recommend contacting MyNext. In our case, the experience has been very positive.'
+    }),
+    active: true
+  },
+  {
     id: 1,
     name: 'gustavo coyo quiñonez',
     client_name: 'gustavo coyo quiñonez',
     company: 'Palma Barber Club',
     rating: 5,
-    relative_time: 'Hace un mes',
+    relative_time: 'Hace 2 semanas',
     source: 'google',
     google_review_id: 'g_rev_gustavo',
     testimonial: JSON.stringify({
       es: 'Brutal el curro de MYNEXT con la web de la barbería. Ha clavado el diseño y además está genial porque se adapta perfecto al móvil y al ordenador, que para el tema de las citas nos viene de lujo. Nos ha dado muchísima visibilidad y reservas en el día a día. Si quieres llevar tu negocio a otro nivel, habla con él ya que te asesora en todo y es un crack. ¡Servicio recomendado para negocios en Palma de Mallorca!',
       en: "Brutal work by MYNEXT on the barbershop's website. He nailed the design and it's also great because it adapts perfectly to mobile and desktop, which is fantastic for booking appointments. It has given us a lot of visibility and reservations on a daily basis. If you want to take your business to another level, talk to him as he advises you on everything and is brilliant. Highly recommended service for businesses in Palma de Mallorca!"
-    }),
-    active: true
-  },
-  {
-    id: 2,
-    name: 'Danna Delgado',
-    client_name: 'Danna Delgado',
-    company: 'Cliente Verificado',
-    rating: 5,
-    relative_time: 'Hace 3 semanas',
-    source: 'google',
-    google_review_id: 'g_rev_danna',
-    testimonial: JSON.stringify({
-      es: '',
-      en: ''
     }),
     active: true
   },
@@ -409,6 +439,21 @@ export const fallbackTestimonials = [
     active: true
   },
   {
+    id: 2,
+    name: 'Danna Delgado',
+    client_name: 'Danna Delgado',
+    company: 'Cliente Verificado',
+    rating: 5,
+    relative_time: 'Hace 3 semanas',
+    source: 'google',
+    google_review_id: 'g_rev_danna',
+    testimonial: JSON.stringify({
+      es: '',
+      en: ''
+    }),
+    active: true
+  },
+  {
     id: 5,
     name: 'John Smith',
     client_name: 'John Smith',
@@ -424,21 +469,6 @@ export const fallbackTestimonials = [
     active: true
   },
   {
-    id: 6,
-    name: 'Goyo J.R.',
-    client_name: 'Goyo J.R.',
-    company: 'Ecuaplac',
-    rating: 5,
-    relative_time: 'Hace 3 días',
-    source: 'google',
-    google_review_id: 'g_rev_goyo',
-    testimonial: JSON.stringify({
-      es: 'Muy contento con el trabajo de MyNext. Musa nos hizo la página web de Ecuaplac desde cero y el resultado ha sido justo lo que buscábamos. Ahora nuestros clientes pueden encontrar toda la información de la empresa de una forma mucho más cómoda y profesional. Además, también diseñó nuestras nuevas tarjetas de visita con el nuevo logo y el código QR que lleva directamente a la web, y preparó el QR para colocarlo en la furgoneta de la empresa. Son pequeños detalles que ayudan a dar una imagen mucho más profesional. Durante todo el proceso la comunicación con Musa ha sido muy buena. Siempre ha respondido rápido, ha escuchado nuestras ideas y ha ido haciendo los cambios que necesitábamos sin ningún problema. Si tienes un negocio y estás pensando en hacer una página web o renovar la imagen de tu empresa, recomiendo contactar con MyNext. En nuestro caso, la experiencia ha sido muy positiva.',
-      en: 'Very happy with MyNext\'s work. Musa made the Ecuaplac website from scratch and the result was exactly what we were looking for. Now our clients can find all the company information in a much more convenient and professional way. In addition, he also designed our new business cards with the new logo and the QR code that leads directly to the web, and prepared the QR code to place on the company van. These are small details that help project a much more professional image. Throughout the process, communication with Musa has been very good. He always responded quickly, listened to our ideas, and made the changes we needed without any issues. If you have a business and are thinking about making a website or renewing your company\'s image, I recommend contacting MyNext. In our case, the experience has been very positive.'
-    }),
-    active: true
-  },
-  {
     id: 7,
     name: 'Anuar Zbat',
     client_name: 'Anuar Zbat',
@@ -450,21 +480,6 @@ export const fallbackTestimonials = [
     testimonial: JSON.stringify({
       es: '',
       en: ''
-    }),
-    active: true
-  },
-  {
-    id: 8,
-    name: 'Gurpreet Singh',
-    client_name: 'Gurpreet Singh',
-    company: 'Restaurante Buon Appetito',
-    rating: 5,
-    relative_time: 'Hace unas horas',
-    source: 'google',
-    google_review_id: 'g_rev_gurpreet',
-    testimonial: JSON.stringify({
-      es: 'Estoy muy contento con el trabajo de MyNext. Desde el principio Musa entendió lo que necesitábamos para nuestro restaurante y nos ayudó a darle forma.\n\nNos ha hecho la página web y también una aplicación propia para que podamos modificar la carta de nuestra web nosotros mismos, además de un sistema de reservas personalizado para nuestro restaurante, sin tener que depender de otras plataformas ni pagar suscripciones adicionales. La verdad es que nos ha facilitado bastante las cosas.\n\nEl trato con Musa ha sido muy bueno. Siempre ha estado atento y dispuesto a ayudarnos con los cambios y los detalles que iban surgiendo, tanto en la aplicación de la carta como en el sistema de reservas.\n\nEstamos muy satisfechos con el resultado y recomendamos su trabajo sin duda.\n\n— Gary, de Buon Appétito',
-      en: 'I am very happy with MyNext\'s work. From the beginning Musa understood what we needed for our restaurant and helped us shape it.\n\nHe made the website for us and also a custom application so that we can modify our own menu ourselves, plus a personalized reservation system for our restaurant without having to depend on other platforms or pay extra subscriptions. Honestly, it has made things much easier for us.\n\nDealing with Musa has been great. He was always attentive and willing to help us with changes and details as they came up, both in the menu app and in the booking system.\n\nWe are very satisfied with the result and definitely recommend his work.\n\n— Gary, from Buon Appétito'
     }),
     active: true
   }

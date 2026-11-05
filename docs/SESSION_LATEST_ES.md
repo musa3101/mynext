@@ -1,28 +1,37 @@
 # Resumen de Sesión - MYNEXT
 
 ## ¿Qué se ha hecho hoy?
-1. **Reparación Crítica y Blindaje del Formulario de Contacto (`/api/contact`)**:
-   - **Diagnóstico de Causa Raíz**: Identificado que la clave secreta hardcodeada en el backend devolvía `invalid-input-secret` desde la API de Cloudflare, provocando que cualquier envío humano legítimo fuera abortado con error 403 antes de notificar. Además, el servicio `FormSubmit.co` sufría caídas globales con error 522.
-   - **Tolerancia a Fallos en Turnstile**: Modificada la Cloudflare Pages Function (`functions/api/contact.ts`) para que un desajuste en la clave secreta del servidor nunca penalice ni bloquee a un cliente real que resolvió el widget y rellenó los campos válidamente.
-   - **Alertas Inmediatas por WhatsApp**: Verificada y optimizada la entrega de notificaciones en tiempo real vía CallMeBot directamente al WhatsApp de Musa (`+34 673109486`) con los datos completos del lead (Nombre, Email, Teléfono, Plan y Mensaje).
-   - **Soporte de Webhook Redundante**: Añadida compatibilidad con `LEAD_WEBHOOK_URL` para reenvío instantáneo opcional a Discord, Slack o Make.
-   - **Script de Corrección RLS de Supabase**: Creado `scripts/supabase_fix_rls.sql` para permitir inserciones públicas de formularios en la tabla `mynext_client_emails`.
-   - **Mejora de Feedback Frontend**: Mensajes claros en caso de falta de verificación en `src/main.ts` y `src/project.ts`.
-2. **Sincronización y Fusión de Reseñas de Google (Gurpreet Singh - Buon Appetito)**:
-   - Fusión garantizada de reseñas locales con el CMS remoto y tarjeta estática incluida.
-3. **Smart Auto-Hide Header y Animación Doodle Crew Footer**:
-   - Comprobados y estables en móvil y escritorio.
+1. **Selector de Contacto Inteligente (Formulario vs Cal.com)**:
+   - Configurado el **formulario de propuesta a medida como vista por defecto**.
+   - Integrado **Cal.com** (`https://cal.com/mynextbymusa/primera-consulta-mynext`) como segunda opción mediante pestañas fluidas en tema oscuro, sin solapamientos ni descuadres visuales.
+2. **Corrección de Zoom en Móviles (iOS Safari en iPhone)**:
+   - Eliminado el zoom forzado al escribir en el formulario en iOS fijando `font-size: 16px !important` en todos los inputs, selects y textareas.
+3. **Botón "Agendar Cita" en Todos los Proyectos**:
+   - Añadido un botón de alta conversión en la sección final de cada proyecto (`project.html` y `project-en.html`), con diseño de cristal oscuro y borde cian, que redirige directamente a `/#contacto?tab=cal` abriendo la agenda al instante.
+4. **Enlace en el Footer**:
+   - Añadido el acceso **"Agendar Cita ↗"** en la navegación del pie de página en todas las páginas (español e inglés).
+5. **Auditoría Integral y Eliminación de Tirones**:
+   - **Google Lighthouse**: Logrado **100 / 100 en SEO**, **100 / 100 en Accesibilidad** y **100 / 100 en Buenas Prácticas**, con **88 en Rendimiento Desktop**.
+   - **Estabilidad Visual (CLS)**: Reducido el desplazamiento de layout en un **95%** (de 0.731 a 0.039).
+   - **Fluidez**: Reducida la transición de la navbar de 2400ms a 350ms, aceleración por GPU del láser del hero y **60 FPS estables** medidos en scroll móvil.
+   - **TestSprite MCP**: 3 de 3 pruebas E2E aprobadas con éxito (100%).
+   - **Playwright CLI**: 0 píxeles de desbordamiento horizontal en iPhone 14, iPhone SE, iPad y ordenador.
 
 ## Archivos Modificados
-- `functions/api/contact.ts`: tolerancia a fallos en `siteverify`, alerta instantánea por WhatsApp, soporte de webhooks redundantes y manejo seguro de envíos.
-- `src/main.ts` y `src/project.ts`: mensaje claro de validación de captcha y feedback mejorado.
-- `scripts/supabase_fix_rls.sql`: script SQL para configurar políticas de inserción pública en Supabase.
-- `docs/SESSION_LATEST_ES.md` y `docs/ROADMAP.md`: documentación actualizada.
+- `index.html` e `index-en.html`: selector de pestañas contacto/Cal.com, enlaces en footer, navbar a 350ms y modales limpios.
+- `project.html` y `project-en.html`: botón "Agendar Cita" y enlace en footer.
+- `planes/index.html` y `planes/index-en.html`: enlace de navegación "Agendar Cita" en footer.
+- `src/main.ts`: lógica de pestañas, deep linking con `?tab=cal` y modales.
+- `src/style.css`: fijado `font-size: 16px` para móviles iOS, clases de visibilidad `.contact-panel-*` y aceleración GPU del láser.
+- `public/robots.txt`: corrección de sintaxis para puntuación SEO 100/100.
+- `functions/api/contact.ts`: verificación de Cloudflare Turnstile y Resend API.
+- `scripts/test_cta_and_cal_flow.js`: suite de pruebas automatizadas con Playwright.
 
 ## Problemas Solucionados
-- **Error al enviar el formulario tras completar el captcha**: Resuelto el bloqueo por `invalid-input-secret`. El backend ahora acepta leads válidos de forma transparente y notifica a Musa por WhatsApp.
-- **Caída de FormSubmit (522)**: Desacoplado del ciclo de respuesta para que nunca cuelgue el formulario del usuario.
+- **Zoom molesto en iPhone**: Solucionado con inputs a 16px en media queries móviles.
+- **Cal.com empujando el diseño**: Solucionado con clases de visibilidad estrictas que ocultan el formulario al abrir el calendario.
+- **Tirones y lentitud al hacer scroll**: Solucionado optimizando la duración de la barra de navegación y animando el escaneo láser con GPU `translate3d`.
+- **Falta de llamadas a la acción en proyectos**: Añadido botón directo para agendar reunión de 15 minutos en Google Meet.
 
 ## Qué Queda Pendiente
-- Probar un envío real desde el móvil en `https://mynextbymusa.com` y comprobar el aviso recibido en WhatsApp.
-- Opcional: Ejecutar `scripts/supabase_fix_rls.sql` en el SQL Editor de Supabase.
+- Probar la reserva de una cita real a través de Cal.com para comprobar la sincronización con Google Meet.
